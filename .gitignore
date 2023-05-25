@@ -14,11 +14,20 @@ captures/
 .cxx/
 *.apk
 output.json
+.idea
+.idea/
+.shelf
+.shelf/
+compiler.xml
+gradle.xml
+kotlinc.xml
+misc.xml
+vcs.xml
+workspace.xml
+
 
 # IntelliJ
 *.iml
-.idea/
-misc.xml
 deploymentTargetDropDown.xml
 render.experimental.xml
 
