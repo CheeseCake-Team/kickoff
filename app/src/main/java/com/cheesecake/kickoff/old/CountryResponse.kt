@@ -1,4 +1,4 @@
-package com.cheesecake.kickoff
+package com.cheesecake.kickoff.old
 
 import com.google.gson.annotations.SerializedName
 
@@ -17,9 +17,4 @@ data class CountryResponse(
     val response: List<Country>
 )
 
-data class Paging(
-    @SerializedName("current")
-    val current: Int,
-    @SerializedName("total")
-    val total: Int
-)
+
