@@ -1,8 +1,9 @@
-package com.cheesecake.kickoff
+package com.cheesecake.kickoff.old
 
 import com.google.gson.annotations.SerializedName
 
-data class LeagueSeasonsResponse(
+
+data class TimeZone(
     @SerializedName("get")
     val get: String,
     @SerializedName("parameters")
@@ -14,5 +15,5 @@ data class LeagueSeasonsResponse(
     @SerializedName("paging")
     val paging: Paging,
     @SerializedName("response")
-    val response: List<Int>
+    val response: List<String>
 )
