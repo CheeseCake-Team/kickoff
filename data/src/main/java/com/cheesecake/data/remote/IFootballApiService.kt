@@ -10,12 +10,12 @@ import retrofit2.http.Query
 
 interface IFootballApiService {
 
-    /*@GET("timezone")
-    suspend fun getAllTimezones():BaseResponse<TimezoneResponse>
+    @GET("timezone")
+    suspend fun getAllTimezones():Response<BaseResponse<TimezoneResponse>>
 
     @GET("countries")
-    suspend fun getAllCountries():BaseResponse<CountriesResponse>
-*/
+    suspend fun getAllCountries():Response<BaseResponse<CountriesResponse>>
+
     @GET("leagues")
     suspend fun getLeagueById(@Query("id") id: Int):Response<BaseResponse<LeagueResponse>>
 
