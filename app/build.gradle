@@ -29,10 +29,6 @@ android {
                 ]
             }
         }
-
-        Properties properties = new Properties()
-        properties.load(project.rootProject.file('keys_properties.properties').newDataInputStream())
-        buildConfigField "String", "my_private_key", "\"${properties.getProperty('my_private_key')}\""
     }
 
     buildTypes {
@@ -116,6 +112,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-process:$lifecycle_version"
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+
 
 }
 

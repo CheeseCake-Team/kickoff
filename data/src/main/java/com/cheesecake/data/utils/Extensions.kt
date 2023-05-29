@@ -1,19 +1,20 @@
 package com.cheesecake.data.utils
 
+import com.cheesecake.data.models.BaseResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
 
 
-fun <T> wrapWithFlow(function: suspend () -> Response<T>): Flow<State<T?>> {
+fun <T> wrapWithFlow(request: suspend () -> Response<BaseResponse<T>>): Flow<DataState<List<T>>> {
     return flow{
-        emit(State.Loading)
+        emit(DataState.Loading)
         try {
-            val result = function()
-            if (result.isSuccessful) emit(State.Success(result.body()))
-            else emit(State.Error(result.message()))
+            val result = request()
+            if (result.isSuccessful) emit(DataState.Success(result.body()!!.response))
+            else emit(DataState.Error(result.message()))
         }catch (e: Exception){
-            emit(State.Error(e.message.toString()))
+            emit(DataState.Error(e.message.toString()))
         }
     }
 }
