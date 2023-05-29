@@ -25,6 +25,7 @@ object NetworkModule {
     //TODO write api service provider injection
 
 
+
     @Singleton
     @Provides
     fun provideRetrofitService(retrofit: Retrofit): IFootballApiService {
