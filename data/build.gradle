@@ -15,6 +15,10 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file('keys_properties.properties').newDataInputStream())
+        buildConfigField "String", "my_private_key", "\"${properties.getProperty('my_private_key')}\""
     }
 
     buildTypes {
