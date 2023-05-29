@@ -1,9 +1,7 @@
 package com.cheesecake.data.di
 
+import com.cheesecake.data.BuildConfig
 import com.cheesecake.data.remote.IFootballApiService
-import com.cheesecake.data.utils.API_HOST_HEADER
-import com.cheesecake.data.utils.API_HOST_VALUE
-import com.cheesecake.data.utils.API_KEY_HEADER
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,6 +19,10 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+
+    const val API_HOST_HEADER = "x-rapidapi-host"
+    const val API_HOST_VALUE = "v3.football.api-sports.io"
+    const val API_KEY_HEADER = "x-rapidapi-key"
 
     //TODO write api service provider injection
 
@@ -58,7 +60,7 @@ object NetworkModule {
                 val original = chain.request()
                 val request = original.newBuilder()
                     .header(API_HOST_HEADER, API_HOST_VALUE)
-                    .header(API_KEY_HEADER,"private_key")
+                    .header(API_KEY_HEADER,BuildConfig.my_private_key)
                     .build()
                 chain.proceed(request)
             })
