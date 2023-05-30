@@ -1,8 +1,10 @@
 package com.cheesecake.data.di
 
 import com.cheesecake.data.BuildConfig
+import com.cheesecake.data.remote.IFixturesApiService
 import com.cheesecake.data.remote.IFootballApiService
 import com.cheesecake.data.remote.IPlayersApiService
+import com.cheesecake.data.remote.ITimeZoneApiService
 import com.cheesecake.data.remote.ITeamsApiService
 import com.cheesecake.data.remote.IVenuesApiService
 import dagger.Module
@@ -41,6 +43,16 @@ object NetworkModule {
     @Provides
     fun providePlayerApiService(retrofit: Retrofit): IPlayersApiService {
         return retrofit.create(IPlayersApiService::class.java)
+    }
+    @Singleton
+    @Provides
+    fun provideFixtureApiService(retrofit: Retrofit): IFixturesApiService {
+        return retrofit.create(IFixturesApiService::class.java)
+    }
+    @Singleton
+    @Provides
+    fun provideTimezoneApiService(retrofit: Retrofit): ITimeZoneApiService {
+        return retrofit.create(ITimeZoneApiService::class.java)
     }
 
     @Singleton
@@ -81,7 +93,7 @@ object NetworkModule {
                 val original = chain.request()
                 val request = original.newBuilder()
                     .header(API_HOST_HEADER, API_HOST_VALUE)
-                    .header(API_KEY_HEADER,BuildConfig.my_private_key)
+                    .header(API_KEY_HEADER, BuildConfig.my_private_key)
                     .build()
                 chain.proceed(request)
             })

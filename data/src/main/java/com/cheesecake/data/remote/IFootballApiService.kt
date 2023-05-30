@@ -38,6 +38,5 @@ interface IFootballApiService {
 
 
     // Timezone
-    @GET("timezone")
-    suspend fun getTimezone(): YourResponseClass
+
 }

@@ -9,6 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface IPlayersApiService {
+
     @GET("players")
     suspend fun getPlayerBySeasonByPlayerId(
         @Query(QueryParameters.SEASON) season: String,
