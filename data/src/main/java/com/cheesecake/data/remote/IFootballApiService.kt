@@ -12,28 +12,6 @@ import retrofit2.http.Query
 interface IFootballApiService {
 
 
-    // Fixtures
-    @GET("fixtures")
-    suspend fun getFixtures(): YourResponseClass
-    @GET("fixtures/rounds")
-    suspend fun getFixtureRounds(): YourResponseClass
-    @GET("fixtures/headtohead")
-    suspend fun getHeadToHead(
-        @Query("team1Id") team1Id: String,
-        @Query("team2Id") team2Id: String
-    ): YourResponseClass
-    @GET("fixtures/statistics")
-    suspend fun getFixtureStatistics(@Query("fixtureId") fixtureId: String): YourResponseClass
-    @GET("fixtures/events")
-    suspend fun getFixtureEvents(@Query("fixtureId") fixtureId: String): YourResponseClass
-    @GET("fixtures/lineups")
-    suspend fun getFixtureLineups(@Query("fixtureId") fixtureId: String): YourResponseClass
-    @GET("fixtures/players")
-    suspend fun getFixturePlayers(@Query("fixtureId") fixtureId: String): YourResponseClass
-
-
-
-
     // Teams
     @GET("teams")
     suspend fun getTeams(): YourResponseClass
