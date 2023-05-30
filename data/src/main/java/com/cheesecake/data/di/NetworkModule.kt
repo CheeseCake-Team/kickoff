@@ -71,7 +71,8 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideTrophiesApiService(retrofit: Retrofit): ITrophiesApiService {
-        return retrofit.create(ITrophiesApiService::class.java)c
+        return retrofit.create(ITrophiesApiService::class.java)
+    }
       
       
     @Singleton
