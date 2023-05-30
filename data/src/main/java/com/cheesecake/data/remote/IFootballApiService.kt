@@ -12,31 +12,10 @@ import retrofit2.http.Query
 interface IFootballApiService {
 
 
-    // Teams
-    @GET("teams")
-    suspend fun getTeams(): YourResponseClass
-    @GET("teams/statistics")
-    suspend fun getTeamStatistics(@Query("teamId") teamId: String): YourResponseClass
-    @GET("teams/seasons")
-    suspend fun getTeamSeasons(@Query("teamId") teamId: String): YourResponseClass
-    @GET("teams/countries")
-    suspend fun getTeamCountries(): YourResponseClass
-
-
-
-    // Leagues
-    @GET("leagues")
-    suspend fun getLeagues(): YourResponseClass
-    @GET("leagues/seasons")
-    suspend fun getLeagueSeasons(@Query("leagueId") leagueId: String): YourResponseClass
-
-
-
     // Countries
     @GET("countries")
     suspend fun getCountries(): YourResponseClass
 
 
-    // Timezone
 
 }
