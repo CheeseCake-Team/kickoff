@@ -3,6 +3,7 @@ package com.cheesecake.data.di
 import com.cheesecake.data.BuildConfig
 import com.cheesecake.data.remote.IFootballApiService
 import com.cheesecake.data.remote.IPlayersApiService
+import com.cheesecake.data.remote.IVenuesApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,6 +40,12 @@ object NetworkModule {
     @Provides
     fun providePlayerApiService(retrofit: Retrofit): IPlayersApiService {
         return retrofit.create(IPlayersApiService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideVenuesApiService(retrofit: Retrofit): IVenuesApiService {
+        return retrofit.create(IVenuesApiService::class.java)
     }
 
     @Singleton
