@@ -1,67 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
+    style="@style/Widget.Material3.CardView.Filled"
     android:layout_width="match_parent"
     android:layout_height="90dp"
-    android:layout_margin="8dp"
-    app:cardBackgroundColor="#EAEDF3"
-    app:cardCornerRadius="8dp">
+    android:layout_margin="@dimen/spacing_tiny"
+    app:cardBackgroundColor="@color/cardSurface"
+    app:cardCornerRadius="@dimen/radius_default">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/image_view_team_icon"
             android:layout_width="@dimen/team_image_size_24dp"
             android:layout_height="@dimen/team_image_size_24dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/spacing_medium"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/textView7"
-            android:layout_width="wrap_content"
+            android:id="@+id/text_view_team_name"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:text="Arsenal"
-            android:fontFamily="@font/lato_medium"
+            android:layout_marginHorizontal="@dimen/spacing_large"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:textAppearance="@style/SubtitleMedium"
             android:textColor="@color/fontHeavy"
-            android:textSize="@dimen/font_size_14sp"
-            app:layout_constraintStart_toEndOf="@+id/imageView3"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/text_view_established"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/image_view_team_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Arsenal" />
 
         <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
+            android:id="@+id/text_view_established"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:text="Founded in 1886 , London"
-            android:fontFamily="@font/lato_medium"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginEnd="@dimen/spacing_large"
+            android:textAppearance="@style/bodyMedium"
             android:textColor="@color/fontLight"
-            android:textSize="@dimen/font_size_12sp"
-            app:layout_constraintStart_toEndOf="@+id/imageView3"
-            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+            app:layout_constraintBottom_toTopOf="@+id/text_view_venue_capacity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/text_view_team_name"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_team_name"
+            tools:text="Founded in 1886 , London" />
 
         <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
+            android:id="@+id/text_view_venue_capacity"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="4dp"
-            android:fontFamily="@font/lato_medium"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:layout_marginBottom="@dimen/spacing_large"
+            android:textAppearance="@style/bodyMedium"
             android:textColor="@color/fontLight"
-            android:text="Emirates Stadium (Capacity : 74,100)"
-            android:textSize="@dimen/font_size_12sp"
-            app:layout_constraintStart_toEndOf="@+id/imageView3"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
-
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/text_view_established"
+            app:layout_constraintStart_toStartOf="@+id/text_view_established"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_established"
+            tools:text="Emirates Stadium (Capacity : 74,100)" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>
