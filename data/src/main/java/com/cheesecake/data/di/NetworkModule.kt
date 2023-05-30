@@ -1,6 +1,7 @@
 package com.cheesecake.data.di
 
 import com.cheesecake.data.BuildConfig
+import com.cheesecake.data.remote.ICoachApiService
 import com.cheesecake.data.remote.IFixturesApiService
 import com.cheesecake.data.remote.ICountriesApiService
 import com.cheesecake.data.remote.IPlayersApiService
@@ -66,6 +67,12 @@ object NetworkModule {
     @Provides
     fun provideVenuesApiService(retrofit: Retrofit): IVenuesApiService {
         return retrofit.create(IVenuesApiService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCoachsApiService(retrofit: Retrofit): ICoachApiService {
+        return retrofit.create(ICoachApiService::class.java)
     }
 
     @Singleton
