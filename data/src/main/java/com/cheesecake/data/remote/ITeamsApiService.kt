@@ -1,6 +1,7 @@
 package com.cheesecake.data.remote
 
 import com.cheesecake.data.models.BaseResponse
+import com.cheesecake.data.models.BaseStaticResponse
 import com.cheesecake.data.models.TeamCountries
 import com.cheesecake.data.models.TeamInformationResponse
 import com.cheesecake.data.models.TeamStatisticsResponse
@@ -14,11 +15,11 @@ interface ITeamsApiService {
     suspend fun getTeamsByLeagueAndSeason(
         @Query("league") leagueId: Int,
         @Query("Seasons") seasonId: Int
-    )
+    ): Response<BaseResponse<TeamInformationResponse>>
 
     @GET("teams")
     suspend fun getTeamById(
-        @Query("id") teamId: String
+        @Query("id") teamId: Int
     ): Response<BaseResponse<TeamInformationResponse>>
 
     @GET("teams/statistics")
@@ -26,7 +27,7 @@ interface ITeamsApiService {
         @Query("team") teamId: Int,
         @Query("season") season: Int,
         @Query("league") leagueId: Int
-    ): Response<BaseResponse<TeamStatisticsResponse>>
+    ): Response<BaseStaticResponse<TeamStatisticsResponse>>
 
     @GET("teams/seasons")
     suspend fun getTeamSeasons(
