@@ -1,9 +1,13 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.cheesecake.league.LeagueDetailsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/text_view_country"
@@ -240,18 +244,19 @@
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/text_view_player_name" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_players_goals"
-        android:layout_width="0dp"
-        android:layout_height="160dp"
-        android:layout_marginHorizontal="@dimen/spacing_medium"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:clipToPadding="false"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_player_name"
-        tools:listitem="@layout/item_player_goals" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_players_goals"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_player_name"
+            tools:listitem="@layout/item_player_goals" />
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -284,3 +289,6 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
+
