@@ -4,6 +4,7 @@ import com.cheesecake.data.BuildConfig
 import com.cheesecake.data.remote.IFixturesApiService
 import com.cheesecake.data.remote.ICountriesApiService
 import com.cheesecake.data.remote.IPlayersApiService
+import com.cheesecake.data.remote.ISidelinedApiService
 import com.cheesecake.data.remote.ITimeZoneApiService
 import com.cheesecake.data.remote.ITeamsApiService
 import com.cheesecake.data.remote.IVenuesApiService
@@ -17,6 +18,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -63,6 +65,12 @@ object NetworkModule {
     @Provides
     fun provideVenuesApiService(retrofit: Retrofit): IVenuesApiService {
         return retrofit.create(IVenuesApiService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSidelinedApiService(retrofit: Retrofit): ISidelinedApiService{
+        return retrofit.create(ISidelinedApiService::class.java)
     }
 
     @Singleton
