@@ -1,8 +1,8 @@
 package com.cheesecake.data.di
 
-import com.cheesecake.data.BuildConfig
 import com.cheesecake.data.remote.IFootballApiService
 import com.cheesecake.data.remote.IPlayersApiService
+import com.cheesecake.data.remote.ITeamsApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -43,6 +43,12 @@ object NetworkModule {
 
     @Singleton
     @Provides
+    fun provideTeamsApiService(retrofit: Retrofit): ITeamsApiService {
+        return retrofit.create(ITeamsApiService::class.java)
+    }
+
+    @Singleton
+    @Provides
     fun provideRetrofitBuilder(
         client: OkHttpClient,
         factory: GsonConverterFactory
@@ -67,7 +73,7 @@ object NetworkModule {
                 val original = chain.request()
                 val request = original.newBuilder()
                     .header(API_HOST_HEADER, API_HOST_VALUE)
-                    .header(API_KEY_HEADER,BuildConfig.my_private_key)
+                    .header(API_KEY_HEADER,"3b2ce7d286a74f2bf9b86aa984d94822")
                     .build()
                 chain.proceed(request)
             })
