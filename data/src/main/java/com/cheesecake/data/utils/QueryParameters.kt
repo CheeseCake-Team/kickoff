@@ -22,5 +22,9 @@ class QueryParameters {
         const val STATUS = "status"
         const val VENUE = "venue"
         const val TIMEZONE = "timezone"
+        const val NAME = "name"
+        const val CITY = "city"
+        const val COUNTRY = "country"
+        const val CODE = "code"
     }
 }
