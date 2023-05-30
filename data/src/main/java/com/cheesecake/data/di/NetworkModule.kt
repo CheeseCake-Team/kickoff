@@ -2,7 +2,7 @@ package com.cheesecake.data.di
 
 import com.cheesecake.data.BuildConfig
 import com.cheesecake.data.remote.IFixturesApiService
-import com.cheesecake.data.remote.IFootballApiService
+import com.cheesecake.data.remote.ICountriesApiService
 import com.cheesecake.data.remote.IPlayersApiService
 import com.cheesecake.data.remote.ITimeZoneApiService
 import com.cheesecake.data.remote.ITeamsApiService
@@ -13,8 +13,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
@@ -35,8 +33,8 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRetrofitService(retrofit: Retrofit): IFootballApiService {
-        return retrofit.create(IFootballApiService::class.java)
+    fun provideRetrofitService(retrofit: Retrofit): ICountriesApiService {
+        return retrofit.create(ICountriesApiService::class.java)
     }
 
     @Singleton
