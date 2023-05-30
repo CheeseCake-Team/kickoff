@@ -7,6 +7,7 @@ import com.cheesecake.data.remote.IPlayersApiService
 import com.cheesecake.data.remote.ISidelinedApiService
 import com.cheesecake.data.remote.ITimeZoneApiService
 import com.cheesecake.data.remote.ITeamsApiService
+import com.cheesecake.data.remote.ITrophiesApiService
 import com.cheesecake.data.remote.IVenuesApiService
 import dagger.Module
 import dagger.Provides
@@ -67,6 +68,12 @@ object NetworkModule {
         return retrofit.create(IVenuesApiService::class.java)
     }
 
+    @Singleton
+    @Provides
+    fun provideTrophiesApiService(retrofit: Retrofit): ITrophiesApiService {
+        return retrofit.create(ITrophiesApiService::class.java)c
+      
+      
     @Singleton
     @Provides
     fun provideSidelinedApiService(retrofit: Retrofit): ISidelinedApiService{
