@@ -76,7 +76,4 @@ interface IPlayersApiService {
         @Query(QueryParameters.LEAGUE) leagueId: Int
     ): Response<BaseResponse<SinglePlayerResponse>>
 
-
-
-
 }
