@@ -1,5 +1,6 @@
 package com.cheesecake.data.di
 
+import com.cheesecake.data.BuildConfig
 import com.cheesecake.data.remote.IFootballApiService
 import com.cheesecake.data.remote.IPlayersApiService
 import com.cheesecake.data.remote.ITeamsApiService
@@ -73,7 +74,7 @@ object NetworkModule {
                 val original = chain.request()
                 val request = original.newBuilder()
                     .header(API_HOST_HEADER, API_HOST_VALUE)
-                    .header(API_KEY_HEADER,"3b2ce7d286a74f2bf9b86aa984d94822")
+                    .header(API_KEY_HEADER, BuildConfig.my_private_key)
                     .build()
                 chain.proceed(request)
             })
