@@ -8,5 +8,8 @@ class QueryParameters {
         const val TEAM = "team"
         const val SEARCH = "search"
         const val PLAYER = "player"
+        const val Name = "name"
+        const val City = "city"
+        const val Country = "country"
     }
 }
