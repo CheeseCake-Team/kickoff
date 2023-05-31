@@ -9,19 +9,6 @@ import com.cheesecake.data.models.SingleEventResponse
 import com.cheesecake.data.models.SingleFixtureResponse
 import com.cheesecake.data.models.SingleLineupResponse
 import com.cheesecake.data.utils.FixtureStatus
-import com.cheesecake.data.utils.QueryParameters.Companion.ID
-import com.cheesecake.data.utils.QueryParameters.Companion.TIMEZONE
-import com.cheesecake.data.utils.QueryParameters.Companion.SEASON
-import com.cheesecake.data.utils.QueryParameters.Companion.TEAM
-import com.cheesecake.data.utils.QueryParameters.Companion.FIXTURE
-import com.cheesecake.data.utils.QueryParameters.Companion.PLAYER
-import com.cheesecake.data.utils.QueryParameters.Companion.DATE
-import com.cheesecake.data.utils.QueryParameters.Companion.FROM
-import com.cheesecake.data.utils.QueryParameters.Companion.TO
-import com.cheesecake.data.utils.QueryParameters.Companion.TYPE
-import com.cheesecake.data.utils.QueryParameters.Companion.STATUS
-import com.cheesecake.data.utils.QueryParameters.Companion.CURRENT
-import com.cheesecake.data.utils.QueryParameters.Companion.LEAGUE
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -31,63 +18,63 @@ interface IFixturesApiService {
     //region Rounds
     @GET("fixtures/rounds")
     suspend fun getFixtureRounds(
-        @Query(SEASON) seasonId: Int,
-        @Query(LEAGUE) leagueId: Int
+        @Query("season") seasonId: Int,
+        @Query("league") leagueId: Int
     ): Response<BaseResponse<String>>
 
     @GET("fixtures/rounds")
     suspend fun getFixtureRoundsCurrentOnly(
-        @Query(SEASON) seasonId: Int,
-        @Query(LEAGUE) leagueId: Int,
-        @Query(CURRENT) current: Boolean,
+        @Query("season") seasonId: Int,
+        @Query("league") leagueId: Int,
+        @Query("current") current: Boolean,
     ): Response<BaseResponse<String>>
     //endregion
 
     //region Fixtuers
     @GET("fixtures")
     suspend fun getFixtureById(
-        @Query(TIMEZONE) timeZone: String,
-        @Query(ID) fixtureId: Int
+        @Query("timezone") timeZone: String,
+        @Query("id") fixtureId: Int
     ): Response<BaseResponse<SingleFixtureResponse>>
 
     @GET("fixtures")
     suspend fun getFixturesBySeasonIdByTeamId(
-        @Query(TIMEZONE) timeZone: String,
-        @Query(SEASON) season: String,
-        @Query(TEAM) teamId: Int
+        @Query("timezone") timeZone: String,
+        @Query("season") season: String,
+        @Query("team") teamId: Int
     ): Response<BaseResponse<SingleFixtureResponse>>
 
     @GET("fixtures")
     suspend fun getFixturesByDate(
-        @Query(TIMEZONE) timeZone: String,
-        @Query(DATE) date: String
+        @Query("timezone") timeZone: String,
+        @Query("date") date: String
     ): Response<BaseResponse<SingleFixtureResponse>>
 
     @GET("fixtures")
     suspend fun getFixturesFromDate(
-        @Query(TIMEZONE) timeZone: String,
-        @Query(FROM) date: String
+        @Query("timezone") timeZone: String,
+        @Query("from") date: String
     ): Response<BaseResponse<SingleFixtureResponse>>
 
     @GET("fixtures")
     suspend fun getFixturesToDate(
-        @Query(TIMEZONE) timeZone: String,
-        @Query(TO) date: String
+        @Query("timezone") timeZone: String,
+        @Query("to") date: String
     ): Response<BaseResponse<SingleFixtureResponse>>
 
     @GET("fixtures")
     suspend fun getFixturesFromDateToDate(
-        @Query(TIMEZONE) timeZone: String,
-        @Query(SEASON) season: String,
-        @Query(TEAM) teamId: Int,
-        @Query(FROM) from: String,
-        @Query(TO) date: String
+        @Query("timezone") timeZone: String,
+        @Query("season") season: String,
+        @Query("team") teamId: Int,
+        @Query("from") from: String,
+        @Query("to") date: String
     ): Response<BaseResponse<SingleFixtureResponse>>
 
     @GET("fixtures")
     suspend fun getFixturesStatus(
-        @Query(TIMEZONE) timeZone: String,
-        @Query(STATUS) fixtureStatusType: String
+        @Query("timezone") timeZone: String,
+        @Query("status") fixtureStatusType: String
     ): Response<BaseResponse<SingleFixtureResponse>>
 
 
@@ -97,127 +84,127 @@ interface IFixturesApiService {
     @GET("fixtures/headtohead")
     suspend fun getHeadToHead(
         @Query("h2h") teamsId: String,
-        @Query(SEASON) seasonId: Int,
-        @Query(TIMEZONE) timeZone: String
+        @Query("season") seasonId: Int,
+        @Query("timezone") timeZone: String
     ): Response<BaseResponse<HeadToHeadResponse>>
 
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByDate(
         @Query("h2h") teamsId: String,
-        @Query(DATE) date: String,
-        @Query(TIMEZONE) timeZone: String
+        @Query("date") date: String,
+        @Query("timezone") timeZone: String
     ): Response<BaseResponse<HeadToHeadResponse>>
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByStatus(
         @Query("h2h") teamsId: String,
-        @Query(STATUS) status: FixtureStatus,
-        @Query(SEASON) seasonId: Int,
-        @Query(TIMEZONE) timeZone: String
+        @Query("status") status: FixtureStatus,
+        @Query("season") seasonId: Int,
+        @Query("timezone") timeZone: String
     ): Response<BaseResponse<HeadToHeadResponse>>
 
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByFromAndTO(
         @Query("h2h") teamsId: String,
-        @Query(FROM) from: String,
-        @Query(TO) to: String,
-        @Query(SEASON) seasonId: Int,
-        @Query(TIMEZONE) timeZone: String
+        @Query("from") from: String,
+        @Query("to") to: String,
+        @Query("season") seasonId: Int,
+        @Query("timezone") timeZone: String
     ): Response<BaseResponse<HeadToHeadResponse>>
 
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByLeague(
         @Query("h2h") teamsId: String,
-        @Query(LEAGUE) leagueId: Int,
-        @Query(SEASON) seasonId: Int,
-        @Query(TIMEZONE) timeZone: String
+        @Query("league") leagueId: Int,
+        @Query("season") seasonId: Int,
+        @Query("timezone") timeZone: String
     ): Response<BaseResponse<HeadToHeadResponse>>
 
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByByDateAndLeague(
         @Query("h2h") teamsId: String,
-        @Query(LEAGUE) leagueId: Int,
-        @Query(DATE) date: String,
-        @Query(TIMEZONE) timeZone: String
+        @Query("league") leagueId: Int,
+        @Query("date") date: String,
+        @Query("timezone") timeZone: String
     ): Response<BaseResponse<HeadToHeadResponse>>
 
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByStatusAndLeague(
         @Query("h2h") teamsId: String,
-        @Query(LEAGUE) leagueId: Int,
-        @Query(STATUS) status: FixtureStatus,
-        @Query(SEASON) seasonId: Int,
-        @Query(TIMEZONE) timeZone: String
+        @Query("league") leagueId: Int,
+        @Query("status") status: FixtureStatus,
+        @Query("season") seasonId: Int,
+        @Query("timezone") timeZone: String
     ): Response<BaseResponse<HeadToHeadResponse>>
 
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByFromAndTOAndLeague(
         @Query("h2h") teamsId: String,
-        @Query(LEAGUE) leagueId: Int,
-        @Query(FROM) from: String,
-        @Query(TO) to: String,
-        @Query(SEASON) seasonId: Int,
-        @Query(TIMEZONE) timeZone: String
+        @Query("league") leagueId: Int,
+        @Query("from") from: String,
+        @Query("to") to: String,
+        @Query("season") seasonId: Int,
+        @Query("timezone") timeZone: String
     ): Response<BaseResponse<HeadToHeadResponse>>
     //endregion
 
     //region Statistics
     @GET("fixtures/statistics")
     suspend fun getFixtureStatisticsByFixtureId(
-        @Query(FIXTURE) fixtureId: Int
+        @Query("fixture") fixtureId: Int
     ): Response<BaseResponse<FixtureStatistics>>
 
     @GET("fixtures/statistics")
     suspend fun getFixtureStatisticsByFixtureIdByTeamId(
-        @Query(FIXTURE) fixtureId: Int,
-        @Query(TEAM) teamId: Int
+        @Query("fixture") fixtureId: Int,
+        @Query("team") teamId: Int
     ): Response<BaseResponse<FixtureStatistics>>
     //endregion
 
     //region Events
     @GET("fixtures/events")
     suspend fun getFixtureEventsByFixtureId(
-        @Query(FIXTURE) fixtureId: Int
+        @Query("fixture") fixtureId: Int
     ): Response<BaseResponse<SingleEventResponse>>
 
     @GET("fixtures/events")
     suspend fun getFixtureEventsByFixtureIdByTeamId(
-        @Query(FIXTURE) fixtureId: Int,
-        @Query(TEAM) teamId: Int
+        @Query("fixture") fixtureId: Int,
+        @Query("team") teamId: Int
     ): Response<BaseResponse<SingleEventResponse>>
 
     @GET("fixtures/events")
     suspend fun getFixtureEventsByFixtureIdByTeamIdByPlayerId(
-        @Query(FIXTURE) fixtureId: Int,
-        @Query(TEAM) teamId: Int,
-        @Query(PLAYER) playerId: Int,
+        @Query("fixture") fixtureId: Int,
+        @Query("team") teamId: Int,
+        @Query("player") playerId: Int,
     ): Response<BaseResponse<SingleEventResponse>>
 
     @GET("fixtures/events")
     suspend fun getFixtureEventsByFixtureIdByTeamIdByPlayerIdByType(
-        @Query(FIXTURE) fixtureId: Int,
-        @Query(TEAM) teamId: Int,
-        @Query(PLAYER) playerId: Int,
-        @Query(TYPE) fixtureEventType: String,
+        @Query("fixture") fixtureId: Int,
+        @Query("team") teamId: Int,
+        @Query("player") playerId: Int,
+        @Query("type") fixtureEventType: String,
     ): Response<BaseResponse<SingleEventResponse>>
     //endregion
 
     //region Lineups
     @GET("fixtures/lineups")
     suspend fun getFixtureLineupsByFixtureId(
-        @Query(FIXTURE) fixtureId: Int
+        @Query("fixture") fixtureId: Int
     ): Response<BaseResponse<SingleLineupResponse>>
 
 
     @GET("fixtures/lineups")
     suspend fun getFixtureLineupsByFixtureIdByTeamId(
-        @Query(FIXTURE) fixtureId: Int,
-        @Query(TEAM) teamId: Int
+        @Query("fixture") fixtureId: Int,
+        @Query("team") teamId: Int
     ): Response<BaseResponse<SingleLineupResponse>>
 
     @GET("fixtures/lineups")
     suspend fun getFixtureLineupsByFixtureIdByPlayerId(
-        @Query(FIXTURE) fixtureId: Int,
-        @Query(PLAYER) playerId: Int
+        @Query("fixture") fixtureId: Int,
+        @Query("player") playerId: Int
     ): Response<BaseResponse<SingleLineupResponse>>
 
     //endregion
@@ -226,13 +213,13 @@ interface IFixturesApiService {
 
     @GET("fixtures/players")
     suspend fun getFixturePlayersByFixtureId(
-        @Query(FIXTURE) fixtureId: String
+        @Query("fixture") fixtureId: String
     ): Response<BaseResponse<FixtureResponse>>
 
     @GET("fixtures/players")
     suspend fun getFixturePlayersByFixtureIdByTeamId(
-        @Query(FIXTURE) fixtureId: Int,
-        @Query(TEAM) teamId: Int
+        @Query("fixture") fixtureId: Int,
+        @Query("team") teamId: Int
     ): Response<BaseResponse<FixtureResponse>>
 
     //endregion
