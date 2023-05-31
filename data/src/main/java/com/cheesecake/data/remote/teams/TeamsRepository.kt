@@ -1,20 +1,45 @@
 package com.cheesecake.data.remote.teams
 
+import com.cheesecake.data.di.DefaultDispatcher
+import com.cheesecake.data.local.daos.TeamsDao
+import com.cheesecake.data.local.models.LocalTeam
 import com.cheesecake.data.models.BaseResponse
 import com.cheesecake.data.models.BaseStaticResponse
 import com.cheesecake.data.models.TeamCountries
 import com.cheesecake.data.models.TeamInformationResponse
 import com.cheesecake.data.models.TeamStatisticsResponse
+import com.cheesecake.data.models.toLocal
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 import retrofit2.Response
 import javax.inject.Inject
 
-class TeamsRepository @Inject constructor(private val teamsApiService: ITeamsApiService) {
+class TeamsRepository @Inject constructor(
+    private val teamsApiService: ITeamsApiService,
+    private val teamsDao: TeamsDao,
+    @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher,
+    ) {
 
     suspend fun getTeamsByLeagueAndSeason(
         leagueId: Int,
         seasonId: Int
-    ): Response<BaseResponse<TeamInformationResponse>> {
-        return teamsApiService.getTeamsByLeagueAndSeason(leagueId, seasonId)
+    ): Flow<List<LocalTeam>> {
+        refresh(leagueId, seasonId)
+        return teamsDao.observeAll()
+    }
+    private suspend fun refresh(leagueId: Int, seasonId: Int) {
+            withContext(defaultDispatcher) {
+                val remoteTeams= teamsApiService.getTeamsByLeagueAndSeason(leagueId, seasonId)
+                teamsDao.deleteAll()
+                remoteTeams.body()?.response?.let { teamInformation ->
+                    teamsDao.upsertAll(teamInformation.map {
+                        it.toLocal()
+                    })
+                }
+            }
+
     }
 
     suspend fun getTeamById(teamId: Int): Response<BaseResponse<TeamInformationResponse>> {
