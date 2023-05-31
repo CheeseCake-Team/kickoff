@@ -1,13 +1,11 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/teams_recycler_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cheesecake.league.LeagueTeamsFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
-</FrameLayout>
+    android:clipToPadding="false"
+    android:padding="@dimen/spacing_custom"
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    tools:context="com.cheesecake.league.LeagueTeamsFragment"
+    tools:listitem="@layout/item_team" />
