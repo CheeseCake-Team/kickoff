@@ -10,6 +10,7 @@ import com.cheesecake.data.remote.ISidelinedApiService
 import com.cheesecake.data.remote.IStandingsApiService
 import com.cheesecake.data.remote.ITimeZoneApiService
 import com.cheesecake.data.remote.ITeamsApiService
+import com.cheesecake.data.remote.ITransferApiService
 import com.cheesecake.data.remote.ITrophiesApiService
 import com.cheesecake.data.remote.IVenuesApiService
 import dagger.Module
@@ -22,7 +23,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -61,6 +61,12 @@ object NetworkModule {
 
     @Singleton
     @Provides
+    fun provideTransfersApiService(retrofit: Retrofit): ITransferApiService {
+        return retrofit.create(ITransferApiService::class.java)
+    }
+
+    @Singleton
+    @Provides
     fun provideTeamsApiService(retrofit: Retrofit): ITeamsApiService {
         return retrofit.create(ITeamsApiService::class.java)
     }
@@ -74,7 +80,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideCoachsApiService(retrofit: Retrofit): ICoachApiService {
+    fun provideCoachesApiService(retrofit: Retrofit): ICoachApiService {
         return retrofit.create(ICoachApiService::class.java)
     }
 
