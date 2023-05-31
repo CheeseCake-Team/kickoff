@@ -1,4 +1,4 @@
-package com.cheesecake.data.remote
+package com.cheesecake.data.remote.fixture
 
 import androidx.paging.DataSource
 import com.cheesecake.data.models.BaseResponse

@@ -1,18 +1,19 @@
 package com.cheesecake.data.di
 
 import com.cheesecake.data.BuildConfig
-import com.cheesecake.data.remote.ICoachApiService
-import com.cheesecake.data.remote.IFixturesApiService
-import com.cheesecake.data.remote.ICountriesApiService
-import com.cheesecake.data.remote.IPlayersApiService
-import com.cheesecake.data.remote.IPredictionsApiService
-import com.cheesecake.data.remote.ISidelinedApiService
-import com.cheesecake.data.remote.IStandingsApiService
-import com.cheesecake.data.remote.ITimeZoneApiService
-import com.cheesecake.data.remote.ITeamsApiService
-import com.cheesecake.data.remote.ITransferApiService
-import com.cheesecake.data.remote.ITrophiesApiService
-import com.cheesecake.data.remote.IVenuesApiService
+import com.cheesecake.data.remote.coach.ICoachApiService
+import com.cheesecake.data.remote.fixture.IFixturesApiService
+import com.cheesecake.data.remote.countries.ICountriesApiService
+import com.cheesecake.data.remote.league.ILeaguesApiService
+import com.cheesecake.data.remote.player.IPlayersApiService
+import com.cheesecake.data.remote.predictions.IPredictionsApiService
+import com.cheesecake.data.remote.sidliend.ISidelinedApiService
+import com.cheesecake.data.remote.standings.IStandingsApiService
+import com.cheesecake.data.remote.timezone.ITimeZoneApiService
+import com.cheesecake.data.remote.teams.ITeamsApiService
+import com.cheesecake.data.remote.trophies.ITrophiesApiService
+import com.cheesecake.data.remote.venues.IVenuesApiService
+import com.cheesecake.data.remote.transfers.ITransferApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -107,6 +108,12 @@ object NetworkModule {
     @Provides
     fun provideIStandingsApiService(retrofit: Retrofit): IStandingsApiService {
         return retrofit.create(IStandingsApiService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideILeaguesApiService(retrofit: Retrofit): ILeaguesApiService {
+        return retrofit.create(ILeaguesApiService::class.java)
     }
 
     @Singleton

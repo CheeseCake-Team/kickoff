@@ -1,4 +1,4 @@
-package com.cheesecake.data.remote
+package com.cheesecake.data.remote.coach
 
 import com.cheesecake.data.models.BaseResponse
 import com.cheesecake.data.models.CoachResponse

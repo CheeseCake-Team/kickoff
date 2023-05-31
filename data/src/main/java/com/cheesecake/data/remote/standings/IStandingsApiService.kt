@@ -1,4 +1,4 @@
-package com.cheesecake.data.remote
+package com.cheesecake.data.remote.standings
 
 import com.cheesecake.data.models.BaseResponse
 import com.cheesecake.data.models.StandingsResponse
