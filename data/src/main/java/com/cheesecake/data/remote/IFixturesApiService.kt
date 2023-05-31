@@ -1,13 +1,14 @@
 package com.cheesecake.data.remote
 
+import androidx.paging.DataSource
 import com.cheesecake.data.models.BaseResponse
 import com.cheesecake.data.models.FixtureResponse
 import com.cheesecake.data.models.FixtureStatistics
+import com.cheesecake.data.models.HeadToHeadResponse
 import com.cheesecake.data.models.SingleEventResponse
 import com.cheesecake.data.models.SingleFixtureResponse
 import com.cheesecake.data.models.SingleLineupResponse
-import com.cheesecake.data.utils.FixtureEventType
-import com.cheesecake.data.utils.FixtureStatusType
+import com.cheesecake.data.utils.FixtureStatus
 import com.cheesecake.data.utils.QueryParameters.Companion.ID
 import com.cheesecake.data.utils.QueryParameters.Companion.TIMEZONE
 import com.cheesecake.data.utils.QueryParameters.Companion.SEASON
@@ -92,13 +93,80 @@ interface IFixturesApiService {
 
     //endregion
 
-    //TODO HEAD 2 HEAD didn't start yet
+
     //region Head 2 Head
     @GET("fixtures/headtohead")
     suspend fun getHeadToHead(
         @Query("team1Id") team1Id: String,
-        @Query("team2Id") team2Id: String
-    ): YourResponseClass
+        @Query("team2Id") team2Id: String,
+        @Query(SEASON) seasonId: Int,
+        @Query(TIMEZONE) timeZone: String
+    ): Response<BaseResponse<HeadToHeadResponse>>
+
+    @GET("fixtures/headtohead")
+    suspend fun getHeadToHeadByDate(
+        @Query("team1Id") team1Id: String,
+        @Query("team2Id") team2Id: String,
+        @Query(DATE) date: String,
+        @Query(TIMEZONE) timeZone: String
+    ): Response<BaseResponse<HeadToHeadResponse>>
+    @GET("fixtures/headtohead")
+    suspend fun getHeadToHeadByStatus(
+        @Query("team1Id") team1Id: String,
+        @Query("team2Id") team2Id: String,
+        @Query(STATUS) status: FixtureStatus,
+        @Query(SEASON) seasonId: Int,
+        @Query(TIMEZONE) timeZone: String
+    ): Response<BaseResponse<HeadToHeadResponse>>
+
+    @GET("fixtures/headtohead")
+    suspend fun getHeadToHeadByFromAndTO(
+        @Query("team1Id") team1Id: String,
+        @Query("team2Id") team2Id: String,
+        @Query(FROM) from: String,
+        @Query(TO) to: String,
+        @Query(SEASON) seasonId: Int,
+        @Query(TIMEZONE) timeZone: String
+    ): Response<BaseResponse<HeadToHeadResponse>>
+
+    @GET("fixtures/headtohead")
+    suspend fun getHeadToHeadByLeague(
+        @Query("team1Id") team1Id: String,
+        @Query("team2Id") team2Id: String,
+        @Query(LEAGUE) leagueId: Int,
+        @Query(SEASON) seasonId: Int,
+        @Query(TIMEZONE) timeZone: String
+    ): Response<BaseResponse<HeadToHeadResponse>>
+
+    @GET("fixtures/headtohead")
+    suspend fun getHeadToHeadByByDateAndLeague(
+        @Query("team1Id") team1Id: String,
+        @Query("team2Id") team2Id: String,
+        @Query(LEAGUE) leagueId: Int,
+        @Query(DATE) date: String,
+        @Query(TIMEZONE) timeZone: String
+    ): Response<BaseResponse<HeadToHeadResponse>>
+
+    @GET("fixtures/headtohead")
+    suspend fun getHeadToHeadByStatusAndLeague(
+        @Query("team1Id") team1Id: String,
+        @Query("team2Id") team2Id: String,
+        @Query(LEAGUE) leagueId: Int,
+        @Query(STATUS) status: FixtureStatus,
+        @Query(SEASON) seasonId: Int,
+        @Query(TIMEZONE) timeZone: String
+    ): Response<BaseResponse<HeadToHeadResponse>>
+
+    @GET("fixtures/headtohead")
+    suspend fun getHeadToHeadByFromAndTOAndLeague(
+        @Query("team1Id") team1Id: String,
+        @Query("team2Id") team2Id: String,
+        @Query(LEAGUE) leagueId: Int,
+        @Query(FROM) from: String,
+        @Query(TO) to: String,
+        @Query(SEASON) seasonId: Int,
+        @Query(TIMEZONE) timeZone: String
+    ): Response<BaseResponse<HeadToHeadResponse>>
     //endregion
 
     //region Statistics
