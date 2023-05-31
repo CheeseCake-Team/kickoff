@@ -5,7 +5,9 @@ import com.cheesecake.data.remote.ICoachApiService
 import com.cheesecake.data.remote.IFixturesApiService
 import com.cheesecake.data.remote.ICountriesApiService
 import com.cheesecake.data.remote.IPlayersApiService
+import com.cheesecake.data.remote.IPredictionsApiService
 import com.cheesecake.data.remote.ISidelinedApiService
+import com.cheesecake.data.remote.IStandingsApiService
 import com.cheesecake.data.remote.ITimeZoneApiService
 import com.cheesecake.data.remote.ITeamsApiService
 import com.cheesecake.data.remote.ITrophiesApiService
@@ -63,6 +65,7 @@ object NetworkModule {
         return retrofit.create(ITeamsApiService::class.java)
     }
 
+
     @Singleton
     @Provides
     fun provideVenuesApiService(retrofit: Retrofit): IVenuesApiService {
@@ -86,6 +89,18 @@ object NetworkModule {
     @Provides
     fun provideSidelinedApiService(retrofit: Retrofit): ISidelinedApiService{
         return retrofit.create(ISidelinedApiService::class.java)
+    }
+    @Singleton
+    @Provides
+    fun providePredictionsApiService(retrofit: Retrofit):IPredictionsApiService{
+        return retrofit.create(IPredictionsApiService::class.java)
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideIStandingsApiService(retrofit: Retrofit): IStandingsApiService {
+        return retrofit.create(IStandingsApiService::class.java)
     }
 
     @Singleton
