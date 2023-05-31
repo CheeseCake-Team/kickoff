@@ -20,17 +20,82 @@ object RepositoryModule {
         return CoachRepository(coachApiService)
     }
 
-    //TODO Countries Repository
-    //TODO Fixtures Repository
-    //TODO League Repository
-    //TODO Player Repository
-    //TODO Predictions Repository
-    //TODO Sidelined Repository
-    //TODO Standings Repository
-    //TODO Teams Repository
-    //TODO Timezone Repository
-    //TODO Transfers Repository
-    //TODO Trophies Repository
-    //TODO Venues Repository
+    @Singleton
+    @Provides
+    fun provideCountriesRepository(countriesApiService: ICountriesApiService): CountriesRepository {
+        return CountriesRepository(countriesApiService)
+    }
+
+    @Singleton
+    @Provides
+    fun provideFixturesRepository(fixturesApiService: IFixturesApiService): FixturesRepository {
+        return FixturesRepository(fixturesApiService)
+    }
+
+    @Singleton
+    @Provides
+    fun provideLeagueRepository(leagueApiService: ILeaguesApiService): LeagueRepository {
+        return LeagueRepository(leagueApiService)
+    }
+
+    @Singleton
+    @Provides
+    fun providePlayerRepository(playersApiService: IPlayersApiService): PlayerRepository {
+        return PlayerRepository(playersApiService)
+    }
+
+    @Singleton
+    @Provides
+    fun providePredictionsRepository(predictionsApiService: IPredictionsApiService): PredictionsRepository {
+        return PredictionsRepository(predictionsApiService)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSidelinedRepository(sidelinedApiService: ISidelinedApiService): SidelinedRepository {
+        return SidelinedRepository(sidelinedApiService)
+    }
+
+    @Singleton
+    @Provides
+    fun provideStandingsRepository(standingsApiService: IStandingsApiService): StandingsRepository {
+        return StandingsRepository(standingsApiService)
+    }
+
+    @Singleton
+    @Provides
+    fun provideTeamsRepository(teamsApiService: ITeamsApiService): TeamsRepository {
+        return TeamsRepository(teamsApiService)
+    }
+
+    @Singleton
+    @Provides
+    fun provideTimezoneRepository(timezoneApiService: ITimeZoneApiService): TimeZoneRepository {
+        return TimeZoneRepository(timezoneApiService)
+    }
+
+    @Singleton
+    @Provides
+    fun provideTransfersRepository(transferApiService: ITransferApiService): TransfersRepository {
+        return TransfersRepository(transferApiService)
+    }
+
+    @Singleton
+    @Provides
+    fun provideTrophiesRepository(trophiesApiService: ITrophiesApiService): TrophiesRepository {
+        return TrophiesRepository(trophiesApiService)
+    }
+
+    @Singleton
+    @Provides
+    fun provideVenuesRepository(venuesApiService: IVenuesApiService): VenuesRepository {
+        return VenuesRepository(venuesApiService)
+    }
+
+    @Singleton
+    @Provides
+    fun provideInjuriesRepository(injuriesApiService: IInjuriesApiService): InjuriesRepository {
+        return InjuriesRepository(injuriesApiService)
+    }
 
 }
