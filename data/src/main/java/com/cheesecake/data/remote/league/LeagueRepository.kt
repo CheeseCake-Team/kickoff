@@ -2,6 +2,7 @@ package com.cheesecake.data.remote.league
 
 import com.cheesecake.data.models.BaseResponse
 import com.cheesecake.data.models.LeagueResponse
+import com.cheesecake.data.utils.LeagueType
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -33,5 +34,31 @@ class LeagueRepository @Inject constructor(private val leaguesApiService: ILeagu
 
     suspend fun getLeagueByIdBySeason(leagueId: Int, season: Int): Response<BaseResponse<LeagueResponse>> {
         return leaguesApiService.getLeagueByIdBySeason(leagueId, season)
+    }
+
+    suspend fun getLeaguesByType(type: LeagueType): Response<BaseResponse<LeagueResponse>>{
+        return leaguesApiService.getLeaguesByType(type)
+    }
+
+    suspend fun getLeaguesByTypeById(type: LeagueType, id: Int)
+    : Response<BaseResponse<LeagueResponse>>{
+        return leaguesApiService.getLeaguesByTypeById(type, id)
+    }
+
+    suspend fun getLeaguesByTypeByIdBySeason(type: LeagueType, id: Int, season: Int)
+    : Response<BaseResponse<LeagueResponse>>{
+        return leaguesApiService.getLeagueByTypeByIdBySeason(type, id, season)
+    }
+
+    suspend fun getCurrentActiveLeagues(current: Boolean): Response<BaseResponse<LeagueResponse>>{
+        return leaguesApiService.getCurrentActiveLeagues(current)
+    }
+
+    suspend fun searchLeague(name: String): Response<BaseResponse<LeagueResponse>>{
+        return leaguesApiService.searchByLeagueName(name)
+    }
+
+    suspend fun getLeaguesSeasons(): Response<BaseResponse<LeagueResponse>>{
+        return leaguesApiService.getLeaguesSeasons()
     }
 }
