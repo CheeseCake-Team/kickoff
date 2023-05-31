@@ -15,23 +15,16 @@ class VenuesRepository @Inject constructor (private val venuesApiService: IVenue
         return venuesApiService.getVenueByName(venueName)
     }
 
-    suspend fun getVenuesByCityName(cityName: String): Response<BaseResponse<List<VenuesResponse>>> {
+    suspend fun getVenuesByCityName(cityName: String): Response<BaseResponse<VenuesResponse>> {
         return venuesApiService.getVenuesByCityName(cityName)
     }
 
-    suspend fun getVenuesByCountryName(countryName: String): Response<BaseResponse<List<VenuesResponse>>> {
+    suspend fun getVenuesByCountryName(countryName: String): Response<BaseResponse<VenuesResponse>> {
         return venuesApiService.getVenuesByCountryName(countryName)
     }
 
     suspend fun searchVenueByName(venueName: String): Response<BaseResponse<VenuesResponse>> {
-        return venuesApiService.searchVenueByName(venueName)
+        return venuesApiService.searchVenue(venueName)
     }
 
-    suspend fun searchVenuesByCountryName(countryName: String): Response<BaseResponse<List<VenuesResponse>>> {
-        return venuesApiService.searchVenuesByCountryName(countryName)
-    }
-
-    suspend fun searchVenuesByCityName(cityName: String): Response<BaseResponse<List<VenuesResponse>>> {
-        return venuesApiService.searchVenuesByCityName(cityName)
-    }
 }

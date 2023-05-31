@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class LeagueRepository @Inject constructor(private val leaguesApiService: ILeaguesApiService) {
 
-    suspend fun getAllLeagues(): Response<BaseResponse<List<LeagueResponse>>> {
+    suspend fun getAllLeagues(): Response<BaseResponse<LeagueResponse>> {
         return leaguesApiService.getAllLeagues()
     }
 
@@ -19,15 +19,15 @@ class LeagueRepository @Inject constructor(private val leaguesApiService: ILeagu
         return leaguesApiService.getLeaguesByName(leagueName)
     }
 
-    suspend fun getLeaguesByCountryName(countryName: String): Response<BaseResponse<List<LeagueResponse>>> {
+    suspend fun getLeaguesByCountryName(countryName: String): Response<BaseResponse<LeagueResponse>> {
         return leaguesApiService.getLeaguesByCountryName(countryName)
     }
 
-    suspend fun getLeaguesByCountryCode(countryCode: String): Response<BaseResponse<List<LeagueResponse>>> {
+    suspend fun getLeaguesByCountryCode(countryCode: String): Response<BaseResponse<LeagueResponse>>{
         return leaguesApiService.getLeaguesByCountryCode(countryCode)
     }
 
-    suspend fun getLeaguesOfSeason(season: Int): Response<BaseResponse<List<LeagueResponse>>> {
+    suspend fun getLeaguesOfSeason(season: Int): Response<BaseResponse<LeagueResponse>> {
         return leaguesApiService.getLeaguesOfSeason(season)
     }
 

@@ -21,26 +21,16 @@ interface IVenuesApiService {
     @GET("venues")
     suspend fun getVenuesByCityName(
         @Query("city") cityName: String
-    ) : Response<BaseResponse<List<VenuesResponse>>>
+    ) : Response<BaseResponse<VenuesResponse>>
 
     @GET("venues")
     suspend fun getVenuesByCountryName(
         @Query("country") countryName: String
-    ) : Response<BaseResponse<List<VenuesResponse>>>
-
-    @GET("venues")
-    suspend fun searchVenueByName(
-        @Query("search") venueName: String
     ) : Response<BaseResponse<VenuesResponse>>
 
     @GET("venues")
-    suspend fun searchVenuesByCountryName(
-        @Query("search") countryName: String
-    ) : Response<BaseResponse<List<VenuesResponse>>>
-
-    @GET("venues")
-    suspend fun searchVenuesByCityName(
-        @Query("search") cityName: String
-    ) : Response<BaseResponse<List<VenuesResponse>>>
+    suspend fun searchVenue(
+        @Query("search") name: String
+    ) : Response<BaseResponse<VenuesResponse>>
 
 }
