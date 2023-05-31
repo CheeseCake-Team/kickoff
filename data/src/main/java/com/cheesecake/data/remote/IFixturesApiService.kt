@@ -93,27 +93,23 @@ interface IFixturesApiService {
 
     //endregion
 
-
     //region Head 2 Head
     @GET("fixtures/headtohead")
     suspend fun getHeadToHead(
-        @Query("team1Id") team1Id: String,
-        @Query("team2Id") team2Id: String,
+        @Query("h2h") teamsId: String,
         @Query(SEASON) seasonId: Int,
         @Query(TIMEZONE) timeZone: String
     ): Response<BaseResponse<HeadToHeadResponse>>
 
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByDate(
-        @Query("team1Id") team1Id: String,
-        @Query("team2Id") team2Id: String,
+        @Query("h2h") teamsId: String,
         @Query(DATE) date: String,
         @Query(TIMEZONE) timeZone: String
     ): Response<BaseResponse<HeadToHeadResponse>>
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByStatus(
-        @Query("team1Id") team1Id: String,
-        @Query("team2Id") team2Id: String,
+        @Query("h2h") teamsId: String,
         @Query(STATUS) status: FixtureStatus,
         @Query(SEASON) seasonId: Int,
         @Query(TIMEZONE) timeZone: String
@@ -121,8 +117,7 @@ interface IFixturesApiService {
 
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByFromAndTO(
-        @Query("team1Id") team1Id: String,
-        @Query("team2Id") team2Id: String,
+        @Query("h2h") teamsId: String,
         @Query(FROM) from: String,
         @Query(TO) to: String,
         @Query(SEASON) seasonId: Int,
@@ -131,8 +126,7 @@ interface IFixturesApiService {
 
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByLeague(
-        @Query("team1Id") team1Id: String,
-        @Query("team2Id") team2Id: String,
+        @Query("h2h") teamsId: String,
         @Query(LEAGUE) leagueId: Int,
         @Query(SEASON) seasonId: Int,
         @Query(TIMEZONE) timeZone: String
@@ -140,8 +134,7 @@ interface IFixturesApiService {
 
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByByDateAndLeague(
-        @Query("team1Id") team1Id: String,
-        @Query("team2Id") team2Id: String,
+        @Query("h2h") teamsId: String,
         @Query(LEAGUE) leagueId: Int,
         @Query(DATE) date: String,
         @Query(TIMEZONE) timeZone: String
@@ -149,8 +142,7 @@ interface IFixturesApiService {
 
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByStatusAndLeague(
-        @Query("team1Id") team1Id: String,
-        @Query("team2Id") team2Id: String,
+        @Query("h2h") teamsId: String,
         @Query(LEAGUE) leagueId: Int,
         @Query(STATUS) status: FixtureStatus,
         @Query(SEASON) seasonId: Int,
@@ -159,8 +151,7 @@ interface IFixturesApiService {
 
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByFromAndTOAndLeague(
-        @Query("team1Id") team1Id: String,
-        @Query("team2Id") team2Id: String,
+        @Query("h2h") teamsId: String,
         @Query(LEAGUE) leagueId: Int,
         @Query(FROM) from: String,
         @Query(TO) to: String,
