@@ -14,7 +14,7 @@ interface ITeamsApiService {
     @GET("teams")
     suspend fun getTeamsByLeagueAndSeason(
         @Query("league") leagueId: Int,
-        @Query("Seasons") seasonId: Int
+        @Query("season") seasonId: Int
     ): Response<BaseResponse<TeamInformationResponse>>
 
     @GET("teams")

@@ -3,6 +3,7 @@ package com.cheesecake.data.di
 import android.content.Context
 import androidx.room.Room
 import com.cheesecake.data.database.KickoffDatabase
+import com.cheesecake.data.local.daos.TeamsDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,8 +19,14 @@ object DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideMarvelDatabase(@ApplicationContext context: Context) =
+    fun provideKickoffDatabase(@ApplicationContext context: Context): KickoffDatabase =
         Room.databaseBuilder(context, KickoffDatabase::class.java, "KICKOFF_DATABASE").build()
 
     //TODO provide all daos here
+
+    @Singleton
+    @Provides
+    fun provideTeamsDoa(kickoffDatabase: KickoffDatabase): TeamsDao =
+        kickoffDatabase.getTeamsDoa()
+
 }

@@ -1,5 +1,6 @@
 package com.cheesecake.data.remote.teams
 
+import android.util.Log
 import com.cheesecake.data.di.DefaultDispatcher
 import com.cheesecake.data.local.daos.TeamsDao
 import com.cheesecake.data.local.models.LocalTeam
@@ -14,6 +15,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import retrofit2.Response
+import java.lang.Exception
 import javax.inject.Inject
 
 class TeamsRepository @Inject constructor(
@@ -31,12 +33,18 @@ class TeamsRepository @Inject constructor(
     }
     private suspend fun refresh(leagueId: Int, seasonId: Int) {
             withContext(defaultDispatcher) {
-                val remoteTeams= teamsApiService.getTeamsByLeagueAndSeason(leagueId, seasonId)
-                teamsDao.deleteAll()
-                remoteTeams.body()?.response?.let { teamInformation ->
-                    teamsDao.upsertAll(teamInformation.map {
-                        it.toLocal()
-                    })
+                try {
+                    val remoteTeams= teamsApiService.getTeamsByLeagueAndSeason(leagueId, seasonId)
+                    teamsDao.deleteAll()
+                    Log.d("refresh: ", "here")
+                    remoteTeams.body()?.response?.let { teamInformation ->
+                        teamsDao.upsertAll(teamInformation.map {
+                            it.toLocal()
+                        })
+                    }
+                } catch (e: Exception) {
+                    Log.d("refresh: ", e.message.toString())
+                    throw e
                 }
             }
 
