@@ -1,7 +1,7 @@
 package com.cheesecake.domain.usecases.venues
 
 import com.cheesecake.data.models.VenuesResponse
-import com.cheesecake.domain.mappers.VenuesDtoToSingleVenueDomain
+import com.cheesecake.domain.mappers.venues.VenuesDtoDomain
 import com.cheesecake.domain.models.SingleVenue
 import javax.inject.Inject
 
@@ -18,6 +18,6 @@ class GetVenuesUseCase
     }
 
     private fun mapResponseIntoShort(input: VenuesResponse): SingleVenue {
-        return VenuesDtoToSingleVenueDomain().map(input)
+        return VenuesDtoDomain().map(input)
     }
 }

@@ -1,7 +1,7 @@
 package com.cheesecake.domain.usecases.standings
 
 import com.cheesecake.data.models.StandingsResponse
-import com.cheesecake.domain.mappers.StandingsDtoToShortStandingsDomain
+import com.cheesecake.domain.mappers.standings.StandingsDtoDomain
 import com.cheesecake.domain.models.ShortStandings
 import javax.inject.Inject
 
@@ -18,7 +18,7 @@ class GetShortStandingsDataUseCases
     }
 
     private fun mapResponseIntoShort(input: StandingsResponse): ShortStandings {
-        return StandingsDtoToShortStandingsDomain().map(input)
+        return StandingsDtoDomain().map(input)
     }
 
 }

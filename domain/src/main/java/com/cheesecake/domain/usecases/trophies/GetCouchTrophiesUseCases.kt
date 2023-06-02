@@ -2,7 +2,7 @@ package com.cheesecake.domain.usecases.trophies
 
 import com.cheesecake.data.models.SingleTrophyResponse
 import com.cheesecake.data.remote.trophies.TrophiesRepository
-import com.cheesecake.domain.mappers.TrophiesDtoToSingleTrophyDomain
+import com.cheesecake.domain.mappers.trophies.TrophiesDtoDomain
 import com.cheesecake.domain.models.SingleTrophy
 import javax.inject.Inject
 
@@ -19,6 +19,6 @@ class GetCouchTrophiesUseCases
     }
 
     private fun mapResponseIntoShort(input: SingleTrophyResponse): SingleTrophy {
-        return TrophiesDtoToSingleTrophyDomain().map(input)
+        return TrophiesDtoDomain().map(input)
     }
 }
