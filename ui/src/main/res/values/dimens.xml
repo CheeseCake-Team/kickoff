@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- margins and paddings -->
+    <dimen name="spacing_tiny">4dp</dimen>
+    <dimen name="spacing_small">8dp</dimen>
+    <dimen name="spacing_custom">12dp</dimen>
+    <dimen name="spacing_semi_medium">14dp</dimen>
+    <dimen name="spacing_medium">16dp</dimen>
+    <dimen name="spacing_extra_medium">20dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_giant">32dp</dimen>
+    <dimen name="spacing_36dp">36dp</dimen>
+    <dimen name="spacing_extra_giant">56dp</dimen>
+
+    <!-- text sizes -->
+    <dimen name="font_size_12sp">12sp</dimen>
+    <dimen name="font_size_14sp">14sp</dimen>
+    <dimen name="font_size_16sp">16sp</dimen>
+    <dimen name="font_size_18sp">18sp</dimen>
+    <dimen name="font_size_20sp">20sp</dimen>
+
+    <!-- radius -->
+    <dimen name="radius_small">4dp</dimen>
+    <dimen name="radius_default">8dp</dimen>
+    <dimen name="radius_large">24dp</dimen>
+    <dimen name="radius_full">100dp</dimen>
+
+
+    <dimen name="team_image_size_24dp">24dp</dimen>
+
+</resources>
