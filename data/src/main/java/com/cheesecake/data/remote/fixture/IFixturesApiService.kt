@@ -1,6 +1,5 @@
 package com.cheesecake.data.remote.fixture
 
-import androidx.paging.DataSource
 import com.cheesecake.data.models.BaseResponse
 import com.cheesecake.data.models.FixtureResponse
 import com.cheesecake.data.models.FixtureStatistics
