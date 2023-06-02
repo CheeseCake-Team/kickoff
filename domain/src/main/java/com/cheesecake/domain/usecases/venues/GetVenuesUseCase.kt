@@ -1,11 +1,7 @@
-package com.cheesecake.domain.usecases
+package com.cheesecake.domain.usecases.venues
 
-import com.cheesecake.data.models.SingleTrophyResponse
 import com.cheesecake.data.models.VenuesResponse
-import com.cheesecake.data.remote.venues.VenuesRepository
-import com.cheesecake.domain.mappers.TrophiesDtoToSingleTrophyDomain
 import com.cheesecake.domain.mappers.VenuesDtoToSingleVenueDomain
-import com.cheesecake.domain.models.SingleTrophy
 import com.cheesecake.domain.models.SingleVenue
 import javax.inject.Inject
 

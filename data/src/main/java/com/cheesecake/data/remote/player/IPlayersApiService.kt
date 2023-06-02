@@ -24,7 +24,7 @@ interface IPlayersApiService {
     @GET("players")
     suspend fun getPlayerBySeasonByLeagueId(
         @Query("season") season: String,
-        @Query("id") leagueId: Int
+        @Query("league") leagueId: Int
     ): Response<BaseResponse<SinglePlayerResponse>>
 
     @GET("players")

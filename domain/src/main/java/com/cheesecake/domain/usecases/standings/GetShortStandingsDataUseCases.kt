@@ -1,7 +1,6 @@
-package com.cheesecake.domain.usecases
+package com.cheesecake.domain.usecases.standings
 
 import com.cheesecake.data.models.StandingsResponse
-import com.cheesecake.data.remote.standings.StandingsRepository
 import com.cheesecake.domain.mappers.StandingsDtoToShortStandingsDomain
 import com.cheesecake.domain.models.ShortStandings
 import javax.inject.Inject

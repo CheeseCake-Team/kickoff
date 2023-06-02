@@ -1,4 +1,4 @@
-package com.cheesecake.domain.usecases
+package com.cheesecake.domain.usecases.trophies
 
 import com.cheesecake.data.models.SingleTrophyResponse
 import com.cheesecake.data.remote.trophies.TrophiesRepository
