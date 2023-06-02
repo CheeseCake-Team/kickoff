@@ -1,4 +1,4 @@
-package com.cheesecake.domain.models
+package com.cheesecake.domain.models.trophies
 
 data class SingleTrophy(
     val country: String,

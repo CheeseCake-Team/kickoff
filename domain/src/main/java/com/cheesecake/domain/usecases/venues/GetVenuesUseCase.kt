@@ -2,13 +2,13 @@ package com.cheesecake.domain.usecases.venues
 
 import com.cheesecake.data.models.VenuesResponse
 import com.cheesecake.domain.mappers.venues.VenuesDtoDomain
-import com.cheesecake.domain.models.SingleVenue
+import com.cheesecake.domain.models.venues.SingleVenue
 import javax.inject.Inject
 
 class GetVenuesUseCase
 @Inject constructor(private val venuesRepository: VenuesRepository){
 
-    suspend operator fun invoke(venueId: Int) : SingleVenue{
+    suspend operator fun invoke(venueId: Int): SingleVenue {
         val dtoResponse = getVenuesResponse(venueId)
         return mapResponseIntoShort(dtoResponse!!)
     }

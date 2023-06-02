@@ -1,4 +1,4 @@
-package com.cheesecake.domain.models
+package com.cheesecake.domain.models.venues
 
 data class SingleVenue(
     val name: String,

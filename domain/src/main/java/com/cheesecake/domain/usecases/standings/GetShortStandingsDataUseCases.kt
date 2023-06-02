@@ -2,7 +2,7 @@ package com.cheesecake.domain.usecases.standings
 
 import com.cheesecake.data.models.StandingsResponse
 import com.cheesecake.domain.mappers.standings.StandingsDtoDomain
-import com.cheesecake.domain.models.ShortStandings
+import com.cheesecake.domain.models.standings.ShortStandings
 import javax.inject.Inject
 
 class GetShortStandingsDataUseCases

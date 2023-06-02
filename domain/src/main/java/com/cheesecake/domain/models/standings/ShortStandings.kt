@@ -1,4 +1,4 @@
-package com.cheesecake.domain.models
+package com.cheesecake.domain.models.standings
 
 data class ShortStandings(
     val flag: String,

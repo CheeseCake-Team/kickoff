@@ -2,7 +2,7 @@ package com.cheesecake.domain.usecases.trophies
 
 import com.cheesecake.data.models.SingleTrophyResponse
 import com.cheesecake.domain.mappers.trophies.TrophiesDtoDomain
-import com.cheesecake.domain.models.SingleTrophy
+import com.cheesecake.domain.models.trophies.SingleTrophy
 import javax.inject.Inject
 
 class GetPlayerTrophiesUseCases
