@@ -40,3 +40,4 @@ google-services.json
 
 # Android Profiling
 *.hprof
+keys_properties.properties
