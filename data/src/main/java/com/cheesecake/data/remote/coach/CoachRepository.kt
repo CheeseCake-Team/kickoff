@@ -1,7 +1,7 @@
 package com.cheesecake.data.remote.coach
 
-import com.cheesecake.data.models.BaseResponse
-import com.cheesecake.data.models.CoachDTO
+import com.cheesecake.data.models.base.BaseResponse
+import com.cheesecake.data.models.dto.CoachDTO
 import retrofit2.Response
 import javax.inject.Inject
 

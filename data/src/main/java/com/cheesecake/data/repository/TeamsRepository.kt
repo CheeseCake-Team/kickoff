@@ -5,12 +5,12 @@ import com.cheesecake.data.di.DefaultDispatcher
 import com.cheesecake.data.local.daos.TeamsDao
 import com.cheesecake.data.local.dataSource.LocalDataSource
 import com.cheesecake.data.local.models.TeamLocalDto
-import com.cheesecake.data.models.BaseResponse
-import com.cheesecake.data.models.BaseStaticResponse
-import com.cheesecake.data.models.TeamCountries
-import com.cheesecake.data.models.TeamInformationResponse
-import com.cheesecake.data.models.TeamStatisticsResponse
-import com.cheesecake.data.models.toLocal
+import com.cheesecake.data.models.base.BaseResponse
+import com.cheesecake.data.models.base.BaseStaticResponse
+import com.cheesecake.data.models.dto.TeamCountriesDTO
+import com.cheesecake.data.models.dto.TeamInformationDTO
+import com.cheesecake.data.models.dto.TeamStatisticsDTO
+import com.cheesecake.data.models.mappers.toLocal
 import com.cheesecake.data.remote.teams.ITeamsApiService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
@@ -78,7 +78,7 @@ class TeamsRepository @Inject constructor(
 //    }
 
 
-    suspend fun getTeamById(teamId: Int): Response<BaseResponse<TeamInformationResponse>> {
+    suspend fun getTeamById(teamId: Int): Response<BaseResponse<TeamInformationDTO>> {
         return teamsApiService.getTeamById(teamId)
     }
 
@@ -86,7 +86,7 @@ class TeamsRepository @Inject constructor(
         teamId: Int,
         season: Int,
         leagueId: Int
-    ): Response<BaseStaticResponse<TeamStatisticsResponse>> {
+    ): Response<BaseStaticResponse<TeamStatisticsDTO>> {
         return teamsApiService.getTeamStatistics(teamId, season, leagueId)
     }
 
@@ -94,7 +94,7 @@ class TeamsRepository @Inject constructor(
         return teamsApiService.getTeamSeasons(teamId)
     }
 
-    suspend fun getTeamCountries(): Response<BaseResponse<TeamCountries>> {
+    suspend fun getTeamCountries(): Response<BaseResponse<TeamCountriesDTO>> {
         return teamsApiService.getTeamCountries()
     }
 }

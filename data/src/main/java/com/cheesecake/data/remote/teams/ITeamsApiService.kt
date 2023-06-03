@@ -1,10 +1,10 @@
 package com.cheesecake.data.remote.teams
 
-import com.cheesecake.data.models.BaseResponse
-import com.cheesecake.data.models.BaseStaticResponse
-import com.cheesecake.data.models.TeamCountriesDTO
-import com.cheesecake.data.models.TeamInformationResponse
-import com.cheesecake.data.models.TeamStatisticsDTO
+import com.cheesecake.data.models.base.BaseResponse
+import com.cheesecake.data.models.base.BaseStaticResponse
+import com.cheesecake.data.models.dto.TeamCountriesDTO
+import com.cheesecake.data.models.dto.TeamInformationDTO
+import com.cheesecake.data.models.dto.TeamStatisticsDTO
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -15,12 +15,12 @@ interface ITeamsApiService {
     suspend fun getTeamsByLeagueAndSeason(
         @Query("league") leagueId: Int,
         @Query("season") seasonId: Int
-    ): Response<BaseResponse<TeamInformationResponse>>
+    ): Response<BaseResponse<TeamInformationDTO>>
 
     @GET("teams")
     suspend fun getTeamById(
         @Query("id") teamId: Int
-    ): Response<BaseResponse<TeamInformationResponse>>
+    ): Response<BaseResponse<TeamInformationDTO>>
 
     @GET("teams/statistics")
     suspend fun getTeamStatistics(

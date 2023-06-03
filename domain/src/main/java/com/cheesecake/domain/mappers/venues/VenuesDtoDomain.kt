@@ -1,6 +1,6 @@
 package com.cheesecake.domain.mappers.venues
 
-import com.cheesecake.data.models.VenuesDTO
+import com.cheesecake.data.models.dto.VenuesDTO
 import com.cheesecake.domain.mappers.IMapper
 import com.cheesecake.domain.models.venues.SingleVenue
 

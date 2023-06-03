@@ -1,12 +1,12 @@
 package com.cheesecake.data.remote.fixture
 
-import com.cheesecake.data.models.BaseResponse
-import com.cheesecake.data.models.FixturesDTO
-import com.cheesecake.data.models.FixtureStatisticsDTO
+import com.cheesecake.data.models.base.BaseResponse
+import com.cheesecake.data.models.dto.FixturesDTO
+import com.cheesecake.data.models.dto.FixtureStatisticsDTO
 import com.cheesecake.data.models.HeadToHeadResponse
-import com.cheesecake.data.models.EventDTO
+import com.cheesecake.data.models.dto.EventDTO
 import com.cheesecake.data.models.SingleFixtureResponse
-import com.cheesecake.data.models.LineupDTO
+import com.cheesecake.data.models.dto.LineupDTO
 import com.cheesecake.data.utils.FixtureStatus
 import retrofit2.Response
 import javax.inject.Inject

@@ -1,4 +1,4 @@
-package com.cheesecake.data.models
+package com.cheesecake.data.models.dto
 
 import com.cheesecake.data.models.base.PersonPhoto
 import com.cheesecake.data.models.base.PlayerPosGrid

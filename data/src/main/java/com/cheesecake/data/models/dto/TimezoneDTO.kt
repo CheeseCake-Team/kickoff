@@ -1,4 +1,4 @@
-package com.cheesecake.data.models
+package com.cheesecake.data.models.dto
 
 import com.google.gson.annotations.SerializedName
 

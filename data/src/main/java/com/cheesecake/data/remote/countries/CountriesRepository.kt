@@ -1,7 +1,7 @@
 package com.cheesecake.data.remote.countries
 
-import com.cheesecake.data.models.BaseResponse
-import com.cheesecake.data.models.TeamCountriesDTO
+import com.cheesecake.data.models.base.BaseResponse
+import com.cheesecake.data.models.dto.TeamCountriesDTO
 import javax.inject.Inject
 import retrofit2.Response
 

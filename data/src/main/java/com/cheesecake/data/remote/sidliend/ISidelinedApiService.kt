@@ -1,7 +1,7 @@
 package com.cheesecake.data.remote.sidliend
 
-import com.cheesecake.data.models.BaseResponse
-import com.cheesecake.data.models.SidelinedDTO
+import com.cheesecake.data.models.base.BaseResponse
+import com.cheesecake.data.models.dto.SidelinedDTO
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

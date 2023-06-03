@@ -1,7 +1,7 @@
 package com.cheesecake.data.remote.trophies
 
-import com.cheesecake.data.models.BaseResponse
-import com.cheesecake.data.models.TrophyDTO
+import com.cheesecake.data.models.base.BaseResponse
+import com.cheesecake.data.models.dto.TrophyDTO
 import retrofit2.Response
 import javax.inject.Inject
 

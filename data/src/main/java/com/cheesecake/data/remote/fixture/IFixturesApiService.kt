@@ -1,12 +1,12 @@
 package com.cheesecake.data.remote.fixture
 
-import com.cheesecake.data.models.BaseResponse
-import com.cheesecake.data.models.FixturesDTO
-import com.cheesecake.data.models.FixtureStatisticsDTO
-import com.cheesecake.data.models.HeadToHeadResponse
-import com.cheesecake.data.models.EventDTO
-import com.cheesecake.data.models.SingleFixtureResponse
-import com.cheesecake.data.models.LineupDTO
+import com.cheesecake.data.models.base.BaseResponse
+import com.cheesecake.data.models.dto.FixturesDTO
+import com.cheesecake.data.models.dto.FixtureStatisticsDTO
+import com.cheesecake.data.models.dto.EventDTO
+import com.cheesecake.data.models.dto.FixtureDTO
+import com.cheesecake.data.models.dto.HeadToHeadDTO
+import com.cheesecake.data.models.dto.LineupDTO
 import com.cheesecake.data.utils.FixtureStatus
 import retrofit2.Response
 import retrofit2.http.GET
@@ -34,32 +34,32 @@ interface IFixturesApiService {
     suspend fun getFixtureById(
         @Query("timezone") timeZone: String,
         @Query("id") fixtureId: Int
-    ): Response<BaseResponse<SingleFixtureResponse>>
+    ): Response<BaseResponse<FixtureDTO>>
 
     @GET("fixtures")
     suspend fun getFixturesBySeasonIdByTeamId(
         @Query("timezone") timeZone: String,
         @Query("season") season: String,
         @Query("team") teamId: Int
-    ): Response<BaseResponse<SingleFixtureResponse>>
+    ): Response<BaseResponse<FixtureDTO>>
 
     @GET("fixtures")
     suspend fun getFixturesByDate(
         @Query("timezone") timeZone: String,
         @Query("date") date: String
-    ): Response<BaseResponse<SingleFixtureResponse>>
+    ): Response<BaseResponse<FixtureDTO>>
 
     @GET("fixtures")
     suspend fun getFixturesFromDate(
         @Query("timezone") timeZone: String,
         @Query("from") date: String
-    ): Response<BaseResponse<SingleFixtureResponse>>
+    ): Response<BaseResponse<FixtureDTO>>
 
     @GET("fixtures")
     suspend fun getFixturesToDate(
         @Query("timezone") timeZone: String,
         @Query("to") date: String
-    ): Response<BaseResponse<SingleFixtureResponse>>
+    ): Response<BaseResponse<FixtureDTO>>
 
     @GET("fixtures")
     suspend fun getFixturesFromDateToDate(
@@ -68,13 +68,13 @@ interface IFixturesApiService {
         @Query("team") teamId: Int,
         @Query("from") from: String,
         @Query("to") date: String
-    ): Response<BaseResponse<SingleFixtureResponse>>
+    ): Response<BaseResponse<FixtureDTO>>
 
     @GET("fixtures")
     suspend fun getFixturesStatus(
         @Query("timezone") timeZone: String,
         @Query("status") fixtureStatusType: String
-    ): Response<BaseResponse<SingleFixtureResponse>>
+    ): Response<BaseResponse<FixtureDTO>>
 
 
     //endregion
@@ -85,21 +85,22 @@ interface IFixturesApiService {
         @Query("h2h") teamsId: String,
         @Query("season") seasonId: Int,
         @Query("timezone") timeZone: String
-    ): Response<BaseResponse<HeadToHeadResponse>>
+    ): Response<BaseResponse<HeadToHeadDTO>>
 
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByDate(
         @Query("h2h") teamsId: String,
         @Query("date") date: String,
         @Query("timezone") timeZone: String
-    ): Response<BaseResponse<HeadToHeadResponse>>
+    ): Response<BaseResponse<HeadToHeadDTO>>
+
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByStatus(
         @Query("h2h") teamsId: String,
         @Query("status") status: FixtureStatus,
         @Query("season") seasonId: Int,
         @Query("timezone") timeZone: String
-    ): Response<BaseResponse<HeadToHeadResponse>>
+    ): Response<BaseResponse<HeadToHeadDTO>>
 
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByFromAndTO(
@@ -108,7 +109,7 @@ interface IFixturesApiService {
         @Query("to") to: String,
         @Query("season") seasonId: Int,
         @Query("timezone") timeZone: String
-    ): Response<BaseResponse<HeadToHeadResponse>>
+    ): Response<BaseResponse<HeadToHeadDTO>>
 
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByLeague(
@@ -116,7 +117,7 @@ interface IFixturesApiService {
         @Query("league") leagueId: Int,
         @Query("season") seasonId: Int,
         @Query("timezone") timeZone: String
-    ): Response<BaseResponse<HeadToHeadResponse>>
+    ): Response<BaseResponse<HeadToHeadDTO>>
 
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByByDateAndLeague(
@@ -124,7 +125,7 @@ interface IFixturesApiService {
         @Query("league") leagueId: Int,
         @Query("date") date: String,
         @Query("timezone") timeZone: String
-    ): Response<BaseResponse<HeadToHeadResponse>>
+    ): Response<BaseResponse<HeadToHeadDTO>>
 
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByStatusAndLeague(
@@ -133,7 +134,7 @@ interface IFixturesApiService {
         @Query("status") status: FixtureStatus,
         @Query("season") seasonId: Int,
         @Query("timezone") timeZone: String
-    ): Response<BaseResponse<HeadToHeadResponse>>
+    ): Response<BaseResponse<HeadToHeadDTO>>
 
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByFromAndTOAndLeague(
@@ -143,7 +144,7 @@ interface IFixturesApiService {
         @Query("to") to: String,
         @Query("season") seasonId: Int,
         @Query("timezone") timeZone: String
-    ): Response<BaseResponse<HeadToHeadResponse>>
+    ): Response<BaseResponse<HeadToHeadDTO>>
     //endregion
 
     //region Statistics

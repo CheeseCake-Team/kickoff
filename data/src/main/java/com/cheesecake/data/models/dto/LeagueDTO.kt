@@ -1,7 +1,6 @@
-package com.cheesecake.data.models
+package com.cheesecake.data.models.dto
 
 
-import com.cheesecake.data.models.base.CountryFlag
 import com.cheesecake.data.models.base.LeagueTypeLogo
 import com.google.gson.annotations.SerializedName
 
@@ -9,7 +8,7 @@ data class LeagueDTO(
     @SerializedName("league")
     val league: LeagueTypeLogo,
     @SerializedName("country")
-    val country: CountryFlag,
+    val country: CountryDto,
     @SerializedName("seasons")
     val seasons: List<Season>
 ) {

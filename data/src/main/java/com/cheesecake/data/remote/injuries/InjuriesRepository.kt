@@ -1,7 +1,7 @@
 package com.cheesecake.data.remote.injuries
 
-import com.cheesecake.data.models.BaseResponse
-import com.cheesecake.data.models.IjuriesDTO
+import com.cheesecake.data.models.base.BaseResponse
+import com.cheesecake.data.models.dto.IjuriesDTO
 
 import retrofit2.Response
 import javax.inject.Inject

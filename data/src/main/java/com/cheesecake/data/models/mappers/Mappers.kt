@@ -1,8 +1,9 @@
-package com.cheesecake.data.models
+package com.cheesecake.data.models.mappers
 
 import com.cheesecake.data.local.models.TeamLocalDto
+import com.cheesecake.data.models.dto.TeamInformationDTO
 
-fun TeamInformationResponse.toLocal() = TeamLocalDto(
+fun TeamInformationDTO.toLocal() = TeamLocalDto(
     teamId = this.team.id,
     teamName = this.team.name,
     founded = this.team.founded,

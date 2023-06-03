@@ -1,6 +1,6 @@
 package com.cheesecake.domain.usecases.venues
 
-import com.cheesecake.data.models.VenuesDTO
+import com.cheesecake.data.models.dto.VenuesDTO
 import com.cheesecake.domain.mappers.venues.VenuesDtoDomain
 import com.cheesecake.domain.models.venues.SingleVenue
 import javax.inject.Inject

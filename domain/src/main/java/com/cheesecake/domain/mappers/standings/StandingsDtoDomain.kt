@@ -1,6 +1,6 @@
 package com.cheesecake.domain.mappers.standings
 
-import com.cheesecake.data.models.StandingsDTO
+import com.cheesecake.data.models.dto.StandingsDTO
 import com.cheesecake.domain.mappers.IMapper
 import com.cheesecake.domain.models.standings.ShortStandings
 

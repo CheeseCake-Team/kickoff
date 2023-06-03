@@ -1,7 +1,7 @@
 package com.cheesecake.data.remote.league
 
-import com.cheesecake.data.models.BaseResponse
-import com.cheesecake.data.models.LeagueDTO
+import com.cheesecake.data.models.base.BaseResponse
+import com.cheesecake.data.models.dto.LeagueDTO
 import com.cheesecake.data.utils.LeagueType
 import retrofit2.Response
 import javax.inject.Inject

@@ -1,6 +1,6 @@
 package com.cheesecake.domain.mappers.trophies
 
-import com.cheesecake.data.models.TrophyDTO
+import com.cheesecake.data.models.dto.TrophyDTO
 import com.cheesecake.domain.mappers.IMapper
 import com.cheesecake.domain.models.trophies.SingleTrophy
 

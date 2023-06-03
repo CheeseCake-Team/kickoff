@@ -1,8 +1,6 @@
-package com.cheesecake.data.models
+package com.cheesecake.data.models.dto
 
 import com.cheesecake.data.models.base.BaseGoals
-import com.cheesecake.data.models.base.BasePeriods
-import com.cheesecake.data.models.base.BaseStatus
 import com.cheesecake.data.models.base.Cards
 import com.cheesecake.data.models.base.PersonPhoto
 import com.cheesecake.data.models.base.Dribbles
@@ -22,7 +20,6 @@ import com.cheesecake.data.models.base.Tackles
 import com.cheesecake.data.models.base.Team
 import com.cheesecake.data.models.base.TeamHomeAway
 import com.cheesecake.data.models.base.TimeMeta
-import com.cheesecake.data.models.base.VenueCity
 import com.google.gson.annotations.SerializedName
 
 data class FixturesDTO(

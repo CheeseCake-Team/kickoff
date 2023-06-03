@@ -1,8 +1,8 @@
-package com.cheesecake.data.models.base
+package com.cheesecake.data.models.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class CountryFlag(
+data class CountryDto(
     @SerializedName("name")
     val name: String,
     @SerializedName("code")

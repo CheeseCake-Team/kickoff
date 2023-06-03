@@ -1,6 +1,6 @@
 package com.cheesecake.domain.usecases.trophies
 
-import com.cheesecake.data.models.TrophyDTO
+import com.cheesecake.data.models.dto.TrophyDTO
 import com.cheesecake.data.remote.trophies.TrophiesRepository
 import com.cheesecake.domain.mappers.trophies.TrophiesDtoDomain
 import com.cheesecake.domain.models.trophies.SingleTrophy

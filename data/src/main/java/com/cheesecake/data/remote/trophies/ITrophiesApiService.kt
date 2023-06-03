@@ -1,7 +1,7 @@
 package com.cheesecake.data.remote.trophies
 
-import com.cheesecake.data.models.TrophyDTO
-import com.cheesecake.data.models.BaseResponse
+import com.cheesecake.data.models.dto.TrophyDTO
+import com.cheesecake.data.models.base.BaseResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
