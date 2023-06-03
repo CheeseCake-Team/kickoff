@@ -5,7 +5,6 @@ import com.cheesecake.data.models.base.BaseGoals
 import com.cheesecake.data.models.base.HomeAway
 import com.cheesecake.data.models.base.PlayerMeta
 import com.cheesecake.data.models.base.ScoreBlock
-import com.cheesecake.data.models.base.ScoreStatus
 import com.cheesecake.data.models.base.Team
 import com.cheesecake.data.models.base.TimeMeta
 import com.google.gson.annotations.SerializedName

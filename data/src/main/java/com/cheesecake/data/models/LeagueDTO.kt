@@ -1,36 +1,18 @@
 package com.cheesecake.data.models
 
 
+import com.cheesecake.data.models.base.CountryFlag
+import com.cheesecake.data.models.base.LeagueTypeLogo
 import com.google.gson.annotations.SerializedName
 
-data class LeagueResponse(
+data class LeagueDTO(
     @SerializedName("league")
-    val league: League,
+    val league: LeagueTypeLogo,
     @SerializedName("country")
-    val country: Country,
+    val country: CountryFlag,
     @SerializedName("seasons")
     val seasons: List<Season>
 ) {
-    data class League(
-        @SerializedName("id")
-        val id: Int,
-        @SerializedName("name")
-        val name: String,
-        @SerializedName("type")
-        val type: String,
-        @SerializedName("logo")
-        val logo: String
-    )
-
-    data class Country(
-        @SerializedName("name")
-        val name: String,
-        @SerializedName("code")
-        val code: String,
-        @SerializedName("flag")
-        val flag: String
-    )
-
     data class Season(
         @SerializedName("year")
         val year: Int,

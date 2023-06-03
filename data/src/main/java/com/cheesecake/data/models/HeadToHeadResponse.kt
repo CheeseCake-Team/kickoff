@@ -2,7 +2,7 @@ package com.cheesecake.data.models
 
 
 import com.cheesecake.data.models.base.HomeAway
-import com.cheesecake.data.models.base.ScoreStatus
+import com.cheesecake.data.models.base.Matches
 import com.google.gson.annotations.SerializedName
 
 data class HeadToHeadResponse(
@@ -92,12 +92,12 @@ data class HeadToHeadResponse(
     )
     data class Score(
         @SerializedName("halftime")
-        val halftime: ScoreStatus,
+        val halftime: Matches,
         @SerializedName("fulltime")
-        val fulltime: ScoreStatus,
+        val fulltime: Matches,
         @SerializedName("extratime")
-        val extratime: ScoreStatus,
+        val extratime: Matches,
         @SerializedName("penalty")
-        val penalty: ScoreStatus
+        val penalty: Matches
     )
 }

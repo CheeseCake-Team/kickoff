@@ -2,9 +2,9 @@ package com.cheesecake.data.models.base
 
 import com.google.gson.annotations.SerializedName
 
-data class ScoreStatus(
+data class ScoreStatusString(
     @SerializedName("home")
-    val home: Int?,
+    val home: String,
     @SerializedName("away")
-    val away: Int?
+    val away: String
 )

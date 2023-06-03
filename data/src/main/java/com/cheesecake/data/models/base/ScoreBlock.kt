@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class ScoreBlock(
     @SerializedName("halftime")
-    val halftime: ScoreStatus,
+    val halftime: Matches,
     @SerializedName("fulltime")
-    val fulltime: ScoreStatus,
+    val fulltime: Matches,
     @SerializedName("extratime")
-    val extratime: ScoreStatus,
+    val extratime: Matches,
     @SerializedName("penalty")
-    val penalty: ScoreStatus
+    val penalty: Matches
 )

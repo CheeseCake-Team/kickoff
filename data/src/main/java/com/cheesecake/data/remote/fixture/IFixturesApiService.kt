@@ -6,7 +6,7 @@ import com.cheesecake.data.models.FixtureStatistics
 import com.cheesecake.data.models.HeadToHeadResponse
 import com.cheesecake.data.models.EventDTO
 import com.cheesecake.data.models.SingleFixtureResponse
-import com.cheesecake.data.models.SingleLineupResponse
+import com.cheesecake.data.models.LineupDTO
 import com.cheesecake.data.utils.FixtureStatus
 import retrofit2.Response
 import retrofit2.http.GET
@@ -191,20 +191,20 @@ interface IFixturesApiService {
     @GET("fixtures/lineups")
     suspend fun getFixtureLineupsByFixtureId(
         @Query("fixture") fixtureId: Int
-    ): Response<BaseResponse<SingleLineupResponse>>
+    ): Response<BaseResponse<LineupDTO>>
 
 
     @GET("fixtures/lineups")
     suspend fun getFixtureLineupsByFixtureIdByTeamId(
         @Query("fixture") fixtureId: Int,
         @Query("team") teamId: Int
-    ): Response<BaseResponse<SingleLineupResponse>>
+    ): Response<BaseResponse<LineupDTO>>
 
     @GET("fixtures/lineups")
     suspend fun getFixtureLineupsByFixtureIdByPlayerId(
         @Query("fixture") fixtureId: Int,
         @Query("player") playerId: Int
-    ): Response<BaseResponse<SingleLineupResponse>>
+    ): Response<BaseResponse<LineupDTO>>
 
     //endregion
 

@@ -6,7 +6,7 @@ import com.cheesecake.data.models.FixtureStatistics
 import com.cheesecake.data.models.HeadToHeadResponse
 import com.cheesecake.data.models.EventDTO
 import com.cheesecake.data.models.SingleFixtureResponse
-import com.cheesecake.data.models.SingleLineupResponse
+import com.cheesecake.data.models.LineupDTO
 import com.cheesecake.data.utils.FixtureStatus
 import retrofit2.Response
 import javax.inject.Inject
@@ -243,21 +243,21 @@ class FixturesRepository @Inject constructor(private val fixturesApiService: IFi
     //region LINEUPS
     suspend fun getFixtureLineupsByFixtureId(
         fixtureId: Int
-    ): Response<BaseResponse<SingleLineupResponse>> {
+    ): Response<BaseResponse<LineupDTO>> {
         return fixturesApiService.getFixtureLineupsByFixtureId(fixtureId)
     }
 
     suspend fun getFixtureLineupsByFixtureIdByTeamId(
         fixtureId: Int,
         teamId: Int
-    ): Response<BaseResponse<SingleLineupResponse>> {
+    ): Response<BaseResponse<LineupDTO>> {
         return fixturesApiService.getFixtureLineupsByFixtureIdByTeamId(fixtureId, teamId)
     }
 
     suspend fun getFixtureLineupsByFixtureIdByPlayerId(
         fixtureId: Int,
         playerId: Int
-    ): Response<BaseResponse<SingleLineupResponse>> {
+    ): Response<BaseResponse<LineupDTO>> {
         return fixturesApiService.getFixtureLineupsByFixtureIdByPlayerId(fixtureId, playerId)
     }
     //endregion

@@ -2,7 +2,7 @@ package com.cheesecake.data.remote.player
 
 import com.cheesecake.data.models.BaseResponse
 import com.cheesecake.data.models.SinglePlayerResponse
-import com.cheesecake.data.models.SingleSquadResponse
+import com.cheesecake.data.models.SquadDTO
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -45,12 +45,12 @@ interface IPlayersApiService {
     @GET("players/squads")
     suspend fun getSquadByPlayerId(
         @Query("player") playerId: Int
-    ): Response<BaseResponse<SingleSquadResponse>>
+    ): Response<BaseResponse<SquadDTO>>
 
     @GET("players/squads")
     suspend fun getSquadByTeamId(
         @Query("team") teamId: Int
-    ): Response<BaseResponse<SingleSquadResponse>>
+    ): Response<BaseResponse<SquadDTO>>
 
     @GET("players/topscorers")
     suspend fun getTopScorers(

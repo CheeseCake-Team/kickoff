@@ -2,7 +2,7 @@ package com.cheesecake.data.remote.player
 
 import com.cheesecake.data.models.BaseResponse
 import com.cheesecake.data.models.SinglePlayerResponse
-import com.cheesecake.data.models.SingleSquadResponse
+import com.cheesecake.data.models.SquadDTO
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -47,11 +47,11 @@ class PlayerRepository @Inject constructor(private val playersApiService: IPlaye
         return playersApiService.getPlayerSeasons()
     }
 
-    suspend fun getSquadByPlayerId(playerId: Int): Response<BaseResponse<SingleSquadResponse>> {
+    suspend fun getSquadByPlayerId(playerId: Int): Response<BaseResponse<SquadDTO>> {
         return playersApiService.getSquadByPlayerId(playerId)
     }
 
-    suspend fun getSquadByTeamId(teamId: Int): Response<BaseResponse<SingleSquadResponse>> {
+    suspend fun getSquadByTeamId(teamId: Int): Response<BaseResponse<SquadDTO>> {
         return playersApiService.getSquadByTeamId(teamId)
     }
 

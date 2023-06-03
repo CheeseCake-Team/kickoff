@@ -4,7 +4,7 @@ import com.cheesecake.data.models.base.BaseBirth
 import com.cheesecake.data.models.base.Team
 import com.google.gson.annotations.SerializedName
 
-data class CoachResponse(
+data class CoachDTO(
     @SerializedName("id")
     val id: Int,
     @SerializedName("name")

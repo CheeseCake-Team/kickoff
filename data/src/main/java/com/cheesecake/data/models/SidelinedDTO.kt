@@ -3,7 +3,7 @@ package com.cheesecake.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class SingleSidelinedResponse(
+data class SidelinedDTO(
     @SerializedName("end")
     val end: String,
     @SerializedName("start")

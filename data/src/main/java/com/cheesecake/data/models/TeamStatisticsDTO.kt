@@ -4,7 +4,7 @@ import com.cheesecake.data.models.base.BaseCards
 import com.cheesecake.data.models.base.BaseGoals
 import com.cheesecake.data.models.base.BasePenalty
 import com.cheesecake.data.models.base.ForAgainst
-import com.cheesecake.data.models.base.Matches
+import com.cheesecake.data.models.base.MatchesTotal
 import com.cheesecake.data.models.base.Team
 import com.google.gson.annotations.SerializedName
 
@@ -15,7 +15,7 @@ data class TeamStatisticsDTO(
     @SerializedName("fixtures") val fixtures: Fixtures,
     @SerializedName("goals") val goals: Goals,
     @SerializedName("biggest") val biggest: Biggest,
-    @SerializedName("clean_sheet") val cleanSheet: Matches,
+    @SerializedName("clean_sheet") val cleanSheet: MatchesTotal,
     @SerializedName("failed_to_score") val failedToScore: FailedToScore,
     @SerializedName("penalty") val penalty: Penalty,
     @SerializedName("lineups") val lineups: List<Lineup>,
@@ -31,10 +31,10 @@ data class TeamStatisticsDTO(
     )
 
     data class Fixtures(
-        @SerializedName("played") val played: Matches,
-        @SerializedName("wins") val wins: Matches,
-        @SerializedName("draws") val draws: Matches,
-        @SerializedName("loses") val loses: Matches
+        @SerializedName("played") val played: MatchesTotal,
+        @SerializedName("wins") val wins: MatchesTotal,
+        @SerializedName("draws") val draws: MatchesTotal,
+        @SerializedName("loses") val loses: MatchesTotal
     )
 
     data class Goals(

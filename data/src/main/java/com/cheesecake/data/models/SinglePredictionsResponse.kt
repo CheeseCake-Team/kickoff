@@ -1,6 +1,15 @@
 package com.cheesecake.data.models
 
 
+import com.cheesecake.data.models.base.GoalAvgTotal
+import com.cheesecake.data.models.base.MatchAvgTotal
+import com.cheesecake.data.models.base.MatchesTotal
+import com.cheesecake.data.models.base.Minute0105
+import com.cheesecake.data.models.base.PenaltyTotal
+import com.cheesecake.data.models.base.PercentageTotal
+import com.cheesecake.data.models.base.ScoreBlock
+import com.cheesecake.data.models.base.Matches
+import com.cheesecake.data.models.base.ScoreStatusString
 import com.google.gson.annotations.SerializedName
 
 data class SinglePredictionsResponse(
@@ -17,79 +26,30 @@ data class SinglePredictionsResponse(
 ) {
     data class Comparison(
         @SerializedName("att")
-        val att: Att,
+        val att: ScoreStatusString,
         @SerializedName("def")
-        val def: Def,
+        val def: ScoreStatusString,
         @SerializedName("form")
-        val form: Form,
+        val form: ScoreStatusString,
         @SerializedName("goals")
-        val goals: Goals,
+        val goals: ScoreStatusString,
         @SerializedName("h2h")
         val h2h: H2h,
         @SerializedName("poisson_distribution")
-        val poissonDistribution: PoissonDistribution,
+        val poissonDistribution: ScoreStatusString,
         @SerializedName("total")
-        val total: Total
-    ) {
-        data class Att(
-            @SerializedName("away")
-            val away: String,
-            @SerializedName("home")
-            val home: String
-        )
-
-        data class Def(
-            @SerializedName("away")
-            val away: String,
-            @SerializedName("home")
-            val home: String
-        )
-
-        data class Form(
-            @SerializedName("away")
-            val away: String,
-            @SerializedName("home")
-            val home: String
-        )
-
-        data class Goals(
-            @SerializedName("away")
-            val away: String,
-            @SerializedName("home")
-            val home: String
-        )
-
-        data class H2h(
-            @SerializedName("away")
-            val away: String,
-            @SerializedName("home")
-            val home: String
-        )
-
-        data class PoissonDistribution(
-            @SerializedName("away")
-            val away: String,
-            @SerializedName("home")
-            val home: String
-        )
-
-        data class Total(
-            @SerializedName("away")
-            val away: String,
-            @SerializedName("home")
-            val home: String
-        )
-    }
+        val total: ScoreStatusString
+    )
 
     data class H2h(
         @SerializedName("fixture")
         val fixture: Fixture,
         @SerializedName("goals")
-        val goals: Goals,
+        val goals: Matches,
         @SerializedName("league")
         val league: League,
         @SerializedName("score")
-        val score: Score,
+        val score: ScoreBlock,
         @SerializedName("teams")
         val teams: Teams
     ) {
@@ -137,12 +97,6 @@ data class SinglePredictionsResponse(
             )
         }
 
-        data class Goals(
-            @SerializedName("away")
-            val away: Int,
-            @SerializedName("home")
-            val home: Int
-        )
 
         data class League(
             @SerializedName("country")
@@ -160,45 +114,6 @@ data class SinglePredictionsResponse(
             @SerializedName("season")
             val season: Int
         )
-
-        data class Score(
-            @SerializedName("extratime")
-            val extratime: Extratime,
-            @SerializedName("fulltime")
-            val fulltime: Fulltime,
-            @SerializedName("halftime")
-            val halftime: Halftime,
-            @SerializedName("penalty")
-            val penalty: Penalty
-        ) {
-            data class Extratime(
-                @SerializedName("away")
-                val away: Any,
-                @SerializedName("home")
-                val home: Any
-            )
-
-            data class Fulltime(
-                @SerializedName("away")
-                val away: Int,
-                @SerializedName("home")
-                val home: Int
-            )
-
-            data class Halftime(
-                @SerializedName("away")
-                val away: Int,
-                @SerializedName("home")
-                val home: Int
-            )
-
-            data class Penalty(
-                @SerializedName("away")
-                val away: Any,
-                @SerializedName("home")
-                val home: Any
-            )
-        }
 
         data class Teams(
             @SerializedName("away")
@@ -249,7 +164,7 @@ data class SinglePredictionsResponse(
         @SerializedName("advice")
         val advice: String,
         @SerializedName("goals")
-        val goals: Goals,
+        val goals: Matches,
         @SerializedName("percent")
         val percent: Percent,
         @SerializedName("under_over")
@@ -341,9 +256,9 @@ data class SinglePredictionsResponse(
                 @SerializedName("cards")
                 val cards: Cards,
                 @SerializedName("clean_sheet")
-                val cleanSheet: CleanSheet,
+                val cleanSheet: MatchesTotal,
                 @SerializedName("failed_to_score")
-                val failedToScore: FailedToScore,
+                val failedToScore: MatchesTotal,
                 @SerializedName("fixtures")
                 val fixtures: Fixtures,
                 @SerializedName("form")
@@ -359,40 +274,18 @@ data class SinglePredictionsResponse(
                     @SerializedName("goals")
                     val goals: Goals,
                     @SerializedName("loses")
-                    val loses: Loses,
+                    val loses: Matches,
                     @SerializedName("streak")
                     val streak: Streak,
                     @SerializedName("wins")
-                    val wins: Wins
+                    val wins: Matches
                 ) {
                     data class Goals(
                         @SerializedName("against")
-                        val against: Against,
+                        val against: Matches,
                         @SerializedName("for")
-                        val forX: For
-                    ) {
-                        data class Against(
-                            @SerializedName("away")
-                            val away: Int,
-                            @SerializedName("home")
-                            val home: Int
-                        )
-
-                        data class For(
-                            @SerializedName("away")
-                            val away: Int,
-                            @SerializedName("home")
-                            val home: Int
-                        )
-                    }
-
-                    data class Loses(
-                        @SerializedName("away")
-                        val away: String,
-                        @SerializedName("home")
-                        val home: String
+                        val forX: Matches
                     )
-
                     data class Streak(
                         @SerializedName("draws")
                         val draws: Int,
@@ -401,470 +294,41 @@ data class SinglePredictionsResponse(
                         @SerializedName("wins")
                         val wins: Int
                     )
-
-                    data class Wins(
-                        @SerializedName("away")
-                        val away: String,
-                        @SerializedName("home")
-                        val home: String
-                    )
                 }
 
                 data class Cards(
                     @SerializedName("red")
-                    val red: Red,
+                    val red: Minute0105,
                     @SerializedName("yellow")
-                    val yellow: Yellow
-                ) {
-                    data class Red(
-                        @SerializedName("0-15")
-                        val x015: X015,
-                        @SerializedName("106-120")
-                        val x106120: X106120,
-                        @SerializedName("16-30")
-                        val x1630: X1630,
-                        @SerializedName("31-45")
-                        val x3145: X3145,
-                        @SerializedName("46-60")
-                        val x4660: X4660,
-                        @SerializedName("61-75")
-                        val x6175: X6175,
-                        @SerializedName("76-90")
-                        val x7690: X7690,
-                        @SerializedName("91-105")
-                        val x91105: X91105
-                    ) {
-                        data class X015(
-                            @SerializedName("percentage")
-                            val percentage: Any,
-                            @SerializedName("total")
-                            val total: Any
-                        )
-
-                        data class X106120(
-                            @SerializedName("percentage")
-                            val percentage: Any,
-                            @SerializedName("total")
-                            val total: Any
-                        )
-
-                        data class X1630(
-                            @SerializedName("percentage")
-                            val percentage: Any,
-                            @SerializedName("total")
-                            val total: Any
-                        )
-
-                        data class X3145(
-                            @SerializedName("percentage")
-                            val percentage: Any,
-                            @SerializedName("total")
-                            val total: Any
-                        )
-
-                        data class X4660(
-                            @SerializedName("percentage")
-                            val percentage: String,
-                            @SerializedName("total")
-                            val total: Int
-                        )
-
-                        data class X6175(
-                            @SerializedName("percentage")
-                            val percentage: String,
-                            @SerializedName("total")
-                            val total: Int
-                        )
-
-                        data class X7690(
-                            @SerializedName("percentage")
-                            val percentage: Any,
-                            @SerializedName("total")
-                            val total: Any
-                        )
-
-                        data class X91105(
-                            @SerializedName("percentage")
-                            val percentage: Any,
-                            @SerializedName("total")
-                            val total: Any
-                        )
-                    }
-
-                    data class Yellow(
-                        @SerializedName("0-15")
-                        val x015: X015,
-                        @SerializedName("106-120")
-                        val x106120: X106120,
-                        @SerializedName("16-30")
-                        val x1630: X1630,
-                        @SerializedName("31-45")
-                        val x3145: X3145,
-                        @SerializedName("46-60")
-                        val x4660: X4660,
-                        @SerializedName("61-75")
-                        val x6175: X6175,
-                        @SerializedName("76-90")
-                        val x7690: X7690,
-                        @SerializedName("91-105")
-                        val x91105: X91105
-                    ) {
-                        data class X015(
-                            @SerializedName("percentage")
-                            val percentage: String,
-                            @SerializedName("total")
-                            val total: Int
-                        )
-
-                        data class X106120(
-                            @SerializedName("percentage")
-                            val percentage: Any,
-                            @SerializedName("total")
-                            val total: Any
-                        )
-
-                        data class X1630(
-                            @SerializedName("percentage")
-                            val percentage: String,
-                            @SerializedName("total")
-                            val total: Int
-                        )
-
-                        data class X3145(
-                            @SerializedName("percentage")
-                            val percentage: String,
-                            @SerializedName("total")
-                            val total: Int
-                        )
-
-                        data class X4660(
-                            @SerializedName("percentage")
-                            val percentage: String,
-                            @SerializedName("total")
-                            val total: Int
-                        )
-
-                        data class X6175(
-                            @SerializedName("percentage")
-                            val percentage: String,
-                            @SerializedName("total")
-                            val total: Int
-                        )
-
-                        data class X7690(
-                            @SerializedName("percentage")
-                            val percentage: String,
-                            @SerializedName("total")
-                            val total: Int
-                        )
-
-                        data class X91105(
-                            @SerializedName("percentage")
-                            val percentage: Any,
-                            @SerializedName("total")
-                            val total: Any
-                        )
-                    }
-                }
-
-                data class CleanSheet(
-                    @SerializedName("away")
-                    val away: Int,
-                    @SerializedName("home")
-                    val home: Int,
-                    @SerializedName("total")
-                    val total: Int
-                )
-
-                data class FailedToScore(
-                    @SerializedName("away")
-                    val away: Int,
-                    @SerializedName("home")
-                    val home: Int,
-                    @SerializedName("total")
-                    val total: Int
+                    val yellow: Minute0105
                 )
 
                 data class Fixtures(
                     @SerializedName("draws")
-                    val draws: Draws,
+                    val draws: MatchesTotal,
                     @SerializedName("loses")
-                    val loses: Loses,
+                    val loses: MatchesTotal,
                     @SerializedName("played")
-                    val played: Played,
+                    val played: MatchesTotal,
                     @SerializedName("wins")
-                    val wins: Wins
-                ) {
-                    data class Draws(
-                        @SerializedName("away")
-                        val away: Int,
-                        @SerializedName("home")
-                        val home: Int,
-                        @SerializedName("total")
-                        val total: Int
-                    )
-
-                    data class Loses(
-                        @SerializedName("away")
-                        val away: Int,
-                        @SerializedName("home")
-                        val home: Int,
-                        @SerializedName("total")
-                        val total: Int
-                    )
-
-                    data class Played(
-                        @SerializedName("away")
-                        val away: Int,
-                        @SerializedName("home")
-                        val home: Int,
-                        @SerializedName("total")
-                        val total: Int
-                    )
-
-                    data class Wins(
-                        @SerializedName("away")
-                        val away: Int,
-                        @SerializedName("home")
-                        val home: Int,
-                        @SerializedName("total")
-                        val total: Int
-                    )
-                }
+                    val wins: MatchesTotal
+                )
 
                 data class Goals(
                     @SerializedName("against")
-                    val against: Against,
+                    val against: GoalAvgTotal,
                     @SerializedName("for")
-                    val forX: For
-                ) {
-                    data class Against(
-                        @SerializedName("average")
-                        val average: Average,
-                        @SerializedName("minute")
-                        val minute: Minute,
-                        @SerializedName("total")
-                        val total: Total
-                    ) {
-                        data class Average(
-                            @SerializedName("away")
-                            val away: String,
-                            @SerializedName("home")
-                            val home: String,
-                            @SerializedName("total")
-                            val total: String
-                        )
-
-                        data class Minute(
-                            @SerializedName("0-15")
-                            val x015: X015,
-                            @SerializedName("106-120")
-                            val x106120: X106120,
-                            @SerializedName("16-30")
-                            val x1630: X1630,
-                            @SerializedName("31-45")
-                            val x3145: X3145,
-                            @SerializedName("46-60")
-                            val x4660: X4660,
-                            @SerializedName("61-75")
-                            val x6175: X6175,
-                            @SerializedName("76-90")
-                            val x7690: X7690,
-                            @SerializedName("91-105")
-                            val x91105: X91105
-                        ) {
-                            data class X015(
-                                @SerializedName("percentage")
-                                val percentage: String,
-                                @SerializedName("total")
-                                val total: Int
-                            )
-
-                            data class X106120(
-                                @SerializedName("percentage")
-                                val percentage: Any,
-                                @SerializedName("total")
-                                val total: Any
-                            )
-
-                            data class X1630(
-                                @SerializedName("percentage")
-                                val percentage: String,
-                                @SerializedName("total")
-                                val total: Int
-                            )
-
-                            data class X3145(
-                                @SerializedName("percentage")
-                                val percentage: String,
-                                @SerializedName("total")
-                                val total: Int
-                            )
-
-                            data class X4660(
-                                @SerializedName("percentage")
-                                val percentage: String,
-                                @SerializedName("total")
-                                val total: Int
-                            )
-
-                            data class X6175(
-                                @SerializedName("percentage")
-                                val percentage: String,
-                                @SerializedName("total")
-                                val total: Int
-                            )
-
-                            data class X7690(
-                                @SerializedName("percentage")
-                                val percentage: String,
-                                @SerializedName("total")
-                                val total: Int
-                            )
-
-                            data class X91105(
-                                @SerializedName("percentage")
-                                val percentage: String,
-                                @SerializedName("total")
-                                val total: Int
-                            )
-                        }
-
-                        data class Total(
-                            @SerializedName("away")
-                            val away: Int,
-                            @SerializedName("home")
-                            val home: Int,
-                            @SerializedName("total")
-                            val total: Int
-                        )
-                    }
-
-                    data class For(
-                        @SerializedName("average")
-                        val average: Average,
-                        @SerializedName("minute")
-                        val minute: Minute,
-                        @SerializedName("total")
-                        val total: Total
-                    ) {
-                        data class Average(
-                            @SerializedName("away")
-                            val away: String,
-                            @SerializedName("home")
-                            val home: String,
-                            @SerializedName("total")
-                            val total: String
-                        )
-
-                        data class Minute(
-                            @SerializedName("0-15")
-                            val x015: X015,
-                            @SerializedName("106-120")
-                            val x106120: X106120,
-                            @SerializedName("16-30")
-                            val x1630: X1630,
-                            @SerializedName("31-45")
-                            val x3145: X3145,
-                            @SerializedName("46-60")
-                            val x4660: X4660,
-                            @SerializedName("61-75")
-                            val x6175: X6175,
-                            @SerializedName("76-90")
-                            val x7690: X7690,
-                            @SerializedName("91-105")
-                            val x91105: X91105
-                        ) {
-                            data class X015(
-                                @SerializedName("percentage")
-                                val percentage: String,
-                                @SerializedName("total")
-                                val total: Int
-                            )
-
-                            data class X106120(
-                                @SerializedName("percentage")
-                                val percentage: Any,
-                                @SerializedName("total")
-                                val total: Any
-                            )
-
-                            data class X1630(
-                                @SerializedName("percentage")
-                                val percentage: Any,
-                                @SerializedName("total")
-                                val total: Any
-                            )
-
-                            data class X3145(
-                                @SerializedName("percentage")
-                                val percentage: String,
-                                @SerializedName("total")
-                                val total: Int
-                            )
-
-                            data class X4660(
-                                @SerializedName("percentage")
-                                val percentage: String,
-                                @SerializedName("total")
-                                val total: Int
-                            )
-
-                            data class X6175(
-                                @SerializedName("percentage")
-                                val percentage: String,
-                                @SerializedName("total")
-                                val total: Int
-                            )
-
-                            data class X7690(
-                                @SerializedName("percentage")
-                                val percentage: String,
-                                @SerializedName("total")
-                                val total: Int
-                            )
-
-                            data class X91105(
-                                @SerializedName("percentage")
-                                val percentage: String,
-                                @SerializedName("total")
-                                val total: Int
-                            )
-                        }
-
-                        data class Total(
-                            @SerializedName("away")
-                            val away: Int,
-                            @SerializedName("home")
-                            val home: Int,
-                            @SerializedName("total")
-                            val total: Int
-                        )
-                    }
-                }
+                    val forX: GoalAvgTotal
+                )
 
                 data class Penalty(
                     @SerializedName("missed")
-                    val missed: Missed,
+                    val missed: PercentageTotal,
                     @SerializedName("scored")
-                    val scored: Scored,
+                    val scored: PercentageTotal,
                     @SerializedName("total")
                     val total: Int
-                ) {
-                    data class Missed(
-                        @SerializedName("percentage")
-                        val percentage: String,
-                        @SerializedName("total")
-                        val total: Int
-                    )
-
-                    data class Scored(
-                        @SerializedName("percentage")
-                        val percentage: String,
-                        @SerializedName("total")
-                        val total: Int
-                    )
-                }
+                )
             }
         }
 
@@ -892,24 +356,10 @@ data class SinglePredictionsResponse(
             ) {
                 data class Goals(
                     @SerializedName("against")
-                    val against: Against,
+                    val against: MatchAvgTotal,
                     @SerializedName("for")
-                    val forX: For
-                ) {
-                    data class Against(
-                        @SerializedName("average")
-                        val average: String,
-                        @SerializedName("total")
-                        val total: Int
-                    )
-
-                    data class For(
-                        @SerializedName("average")
-                        val average: String,
-                        @SerializedName("total")
-                        val total: Int
-                    )
-                }
+                    val forX: MatchAvgTotal
+                )
             }
 
             data class League(
@@ -918,9 +368,9 @@ data class SinglePredictionsResponse(
                 @SerializedName("cards")
                 val cards: Cards,
                 @SerializedName("clean_sheet")
-                val cleanSheet: CleanSheet,
+                val cleanSheet: MatchesTotal,
                 @SerializedName("failed_to_score")
-                val failedToScore: FailedToScore,
+                val failedToScore: MatchesTotal,
                 @SerializedName("fixtures")
                 val fixtures: Fixtures,
                 @SerializedName("form")
@@ -930,46 +380,24 @@ data class SinglePredictionsResponse(
                 @SerializedName("lineups")
                 val lineups: List<Any>,
                 @SerializedName("penalty")
-                val penalty: Penalty
+                val penalty: PenaltyTotal
             ) {
                 data class Biggest(
                     @SerializedName("goals")
                     val goals: Goals,
                     @SerializedName("loses")
-                    val loses: Loses,
+                    val loses: Matches,
                     @SerializedName("streak")
                     val streak: Streak,
                     @SerializedName("wins")
-                    val wins: Wins
+                    val wins: Matches
                 ) {
                     data class Goals(
                         @SerializedName("against")
-                        val against: Against,
+                        val against: Matches,
                         @SerializedName("for")
-                        val forX: For
-                    ) {
-                        data class Against(
-                            @SerializedName("away")
-                            val away: Int,
-                            @SerializedName("home")
-                            val home: Int
-                        )
-
-                        data class For(
-                            @SerializedName("away")
-                            val away: Int,
-                            @SerializedName("home")
-                            val home: Int
-                        )
-                    }
-
-                    data class Loses(
-                        @SerializedName("away")
-                        val away: String,
-                        @SerializedName("home")
-                        val home: String
+                        val forX: Matches
                     )
-
                     data class Streak(
                         @SerializedName("draws")
                         val draws: Int,
@@ -978,470 +406,30 @@ data class SinglePredictionsResponse(
                         @SerializedName("wins")
                         val wins: Int
                     )
-
-                    data class Wins(
-                        @SerializedName("away")
-                        val away: String,
-                        @SerializedName("home")
-                        val home: String
-                    )
                 }
 
                 data class Cards(
                     @SerializedName("red")
-                    val red: Red,
+                    val red: Minute0105,
                     @SerializedName("yellow")
-                    val yellow: Yellow
-                ) {
-                    data class Red(
-                        @SerializedName("0-15")
-                        val x015: X015,
-                        @SerializedName("106-120")
-                        val x106120: X106120,
-                        @SerializedName("16-30")
-                        val x1630: X1630,
-                        @SerializedName("31-45")
-                        val x3145: X3145,
-                        @SerializedName("46-60")
-                        val x4660: X4660,
-                        @SerializedName("61-75")
-                        val x6175: X6175,
-                        @SerializedName("76-90")
-                        val x7690: X7690,
-                        @SerializedName("91-105")
-                        val x91105: X91105
-                    ) {
-                        data class X015(
-                            @SerializedName("percentage")
-                            val percentage: Any,
-                            @SerializedName("total")
-                            val total: Any
-                        )
-
-                        data class X106120(
-                            @SerializedName("percentage")
-                            val percentage: Any,
-                            @SerializedName("total")
-                            val total: Any
-                        )
-
-                        data class X1630(
-                            @SerializedName("percentage")
-                            val percentage: Any,
-                            @SerializedName("total")
-                            val total: Any
-                        )
-
-                        data class X3145(
-                            @SerializedName("percentage")
-                            val percentage: Any,
-                            @SerializedName("total")
-                            val total: Any
-                        )
-
-                        data class X4660(
-                            @SerializedName("percentage")
-                            val percentage: Any,
-                            @SerializedName("total")
-                            val total: Any
-                        )
-
-                        data class X6175(
-                            @SerializedName("percentage")
-                            val percentage: Any,
-                            @SerializedName("total")
-                            val total: Any
-                        )
-
-                        data class X7690(
-                            @SerializedName("percentage")
-                            val percentage: Any,
-                            @SerializedName("total")
-                            val total: Any
-                        )
-
-                        data class X91105(
-                            @SerializedName("percentage")
-                            val percentage: Any,
-                            @SerializedName("total")
-                            val total: Any
-                        )
-                    }
-
-                    data class Yellow(
-                        @SerializedName("0-15")
-                        val x015: X015,
-                        @SerializedName("106-120")
-                        val x106120: X106120,
-                        @SerializedName("16-30")
-                        val x1630: X1630,
-                        @SerializedName("31-45")
-                        val x3145: X3145,
-                        @SerializedName("46-60")
-                        val x4660: X4660,
-                        @SerializedName("61-75")
-                        val x6175: X6175,
-                        @SerializedName("76-90")
-                        val x7690: X7690,
-                        @SerializedName("91-105")
-                        val x91105: X91105
-                    ) {
-                        data class X015(
-                            @SerializedName("percentage")
-                            val percentage: String,
-                            @SerializedName("total")
-                            val total: Int
-                        )
-
-                        data class X106120(
-                            @SerializedName("percentage")
-                            val percentage: Any,
-                            @SerializedName("total")
-                            val total: Any
-                        )
-
-                        data class X1630(
-                            @SerializedName("percentage")
-                            val percentage: String,
-                            @SerializedName("total")
-                            val total: Int
-                        )
-
-                        data class X3145(
-                            @SerializedName("percentage")
-                            val percentage: String,
-                            @SerializedName("total")
-                            val total: Int
-                        )
-
-                        data class X4660(
-                            @SerializedName("percentage")
-                            val percentage: String,
-                            @SerializedName("total")
-                            val total: Int
-                        )
-
-                        data class X6175(
-                            @SerializedName("percentage")
-                            val percentage: String,
-                            @SerializedName("total")
-                            val total: Int
-                        )
-
-                        data class X7690(
-                            @SerializedName("percentage")
-                            val percentage: String,
-                            @SerializedName("total")
-                            val total: Int
-                        )
-
-                        data class X91105(
-                            @SerializedName("percentage")
-                            val percentage: Any,
-                            @SerializedName("total")
-                            val total: Any
-                        )
-                    }
-                }
-
-                data class CleanSheet(
-                    @SerializedName("away")
-                    val away: Int,
-                    @SerializedName("home")
-                    val home: Int,
-                    @SerializedName("total")
-                    val total: Int
+                    val yellow: Minute0105
                 )
-
-                data class FailedToScore(
-                    @SerializedName("away")
-                    val away: Int,
-                    @SerializedName("home")
-                    val home: Int,
-                    @SerializedName("total")
-                    val total: Int
-                )
-
                 data class Fixtures(
                     @SerializedName("draws")
-                    val draws: Draws,
+                    val draws: MatchesTotal,
                     @SerializedName("loses")
-                    val loses: Loses,
+                    val loses: MatchesTotal,
                     @SerializedName("played")
-                    val played: Played,
+                    val played: MatchesTotal,
                     @SerializedName("wins")
-                    val wins: Wins
-                ) {
-                    data class Draws(
-                        @SerializedName("away")
-                        val away: Int,
-                        @SerializedName("home")
-                        val home: Int,
-                        @SerializedName("total")
-                        val total: Int
-                    )
-
-                    data class Loses(
-                        @SerializedName("away")
-                        val away: Int,
-                        @SerializedName("home")
-                        val home: Int,
-                        @SerializedName("total")
-                        val total: Int
-                    )
-
-                    data class Played(
-                        @SerializedName("away")
-                        val away: Int,
-                        @SerializedName("home")
-                        val home: Int,
-                        @SerializedName("total")
-                        val total: Int
-                    )
-
-                    data class Wins(
-                        @SerializedName("away")
-                        val away: Int,
-                        @SerializedName("home")
-                        val home: Int,
-                        @SerializedName("total")
-                        val total: Int
-                    )
-                }
-
+                    val wins: MatchesTotal
+                )
                 data class Goals(
                     @SerializedName("against")
-                    val against: Against,
+                    val against: GoalAvgTotal,
                     @SerializedName("for")
-                    val forX: For
-                ) {
-                    data class Against(
-                        @SerializedName("average")
-                        val average: Average,
-                        @SerializedName("minute")
-                        val minute: Minute,
-                        @SerializedName("total")
-                        val total: Total
-                    ) {
-                        data class Average(
-                            @SerializedName("away")
-                            val away: String,
-                            @SerializedName("home")
-                            val home: String,
-                            @SerializedName("total")
-                            val total: String
-                        )
-
-                        data class Minute(
-                            @SerializedName("0-15")
-                            val x015: X015,
-                            @SerializedName("106-120")
-                            val x106120: X106120,
-                            @SerializedName("16-30")
-                            val x1630: X1630,
-                            @SerializedName("31-45")
-                            val x3145: X3145,
-                            @SerializedName("46-60")
-                            val x4660: X4660,
-                            @SerializedName("61-75")
-                            val x6175: X6175,
-                            @SerializedName("76-90")
-                            val x7690: X7690,
-                            @SerializedName("91-105")
-                            val x91105: X91105
-                        ) {
-                            data class X015(
-                                @SerializedName("percentage")
-                                val percentage: String,
-                                @SerializedName("total")
-                                val total: Int
-                            )
-
-                            data class X106120(
-                                @SerializedName("percentage")
-                                val percentage: Any,
-                                @SerializedName("total")
-                                val total: Any
-                            )
-
-                            data class X1630(
-                                @SerializedName("percentage")
-                                val percentage: String,
-                                @SerializedName("total")
-                                val total: Int
-                            )
-
-                            data class X3145(
-                                @SerializedName("percentage")
-                                val percentage: String,
-                                @SerializedName("total")
-                                val total: Int
-                            )
-
-                            data class X4660(
-                                @SerializedName("percentage")
-                                val percentage: Any,
-                                @SerializedName("total")
-                                val total: Any
-                            )
-
-                            data class X6175(
-                                @SerializedName("percentage")
-                                val percentage: String,
-                                @SerializedName("total")
-                                val total: Int
-                            )
-
-                            data class X7690(
-                                @SerializedName("percentage")
-                                val percentage: String,
-                                @SerializedName("total")
-                                val total: Int
-                            )
-
-                            data class X91105(
-                                @SerializedName("percentage")
-                                val percentage: String,
-                                @SerializedName("total")
-                                val total: Int
-                            )
-                        }
-
-                        data class Total(
-                            @SerializedName("away")
-                            val away: Int,
-                            @SerializedName("home")
-                            val home: Int,
-                            @SerializedName("total")
-                            val total: Int
-                        )
-                    }
-
-                    data class For(
-                        @SerializedName("average")
-                        val average: Average,
-                        @SerializedName("minute")
-                        val minute: Minute,
-                        @SerializedName("total")
-                        val total: Total
-                    ) {
-                        data class Average(
-                            @SerializedName("away")
-                            val away: String,
-                            @SerializedName("home")
-                            val home: String,
-                            @SerializedName("total")
-                            val total: String
-                        )
-
-                        data class Minute(
-                            @SerializedName("0-15")
-                            val x015: X015,
-                            @SerializedName("106-120")
-                            val x106120: X106120,
-                            @SerializedName("16-30")
-                            val x1630: X1630,
-                            @SerializedName("31-45")
-                            val x3145: X3145,
-                            @SerializedName("46-60")
-                            val x4660: X4660,
-                            @SerializedName("61-75")
-                            val x6175: X6175,
-                            @SerializedName("76-90")
-                            val x7690: X7690,
-                            @SerializedName("91-105")
-                            val x91105: X91105
-                        ) {
-                            data class X015(
-                                @SerializedName("percentage")
-                                val percentage: Any,
-                                @SerializedName("total")
-                                val total: Any
-                            )
-
-                            data class X106120(
-                                @SerializedName("percentage")
-                                val percentage: Any,
-                                @SerializedName("total")
-                                val total: Any
-                            )
-
-                            data class X1630(
-                                @SerializedName("percentage")
-                                val percentage: String,
-                                @SerializedName("total")
-                                val total: Int
-                            )
-
-                            data class X3145(
-                                @SerializedName("percentage")
-                                val percentage: String,
-                                @SerializedName("total")
-                                val total: Int
-                            )
-
-                            data class X4660(
-                                @SerializedName("percentage")
-                                val percentage: Any,
-                                @SerializedName("total")
-                                val total: Any
-                            )
-
-                            data class X6175(
-                                @SerializedName("percentage")
-                                val percentage: String,
-                                @SerializedName("total")
-                                val total: Int
-                            )
-
-                            data class X7690(
-                                @SerializedName("percentage")
-                                val percentage: String,
-                                @SerializedName("total")
-                                val total: Int
-                            )
-
-                            data class X91105(
-                                @SerializedName("percentage")
-                                val percentage: Any,
-                                @SerializedName("total")
-                                val total: Any
-                            )
-                        }
-
-                        data class Total(
-                            @SerializedName("away")
-                            val away: Int,
-                            @SerializedName("home")
-                            val home: Int,
-                            @SerializedName("total")
-                            val total: Int
-                        )
-                    }
-                }
-
-                data class Penalty(
-                    @SerializedName("missed")
-                    val missed: Missed,
-                    @SerializedName("scored")
-                    val scored: Scored,
-                    @SerializedName("total")
-                    val total: Int
-                ) {
-                    data class Missed(
-                        @SerializedName("percentage")
-                        val percentage: String,
-                        @SerializedName("total")
-                        val total: Int
-                    )
-
-                    data class Scored(
-                        @SerializedName("percentage")
-                        val percentage: String,
-                        @SerializedName("total")
-                        val total: Int
-                    )
-                }
+                    val forX: GoalAvgTotal
+                )
             }
         }
     }
