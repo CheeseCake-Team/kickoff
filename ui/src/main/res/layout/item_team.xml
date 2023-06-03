@@ -11,7 +11,7 @@
 
         <variable
             name="item"
-            type="com.cheesecake.domain.models.Team" />
+            type="com.cheesecake.domain.models.TeamEntity" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/testFragment"
-        android:name="com.cheesecake.ui.TestFragment"
+        android:name="com.cheesecake.ui.fragment.leagueTeams.TestFragment"
         android:label="TestFragment" />
 </navigation>

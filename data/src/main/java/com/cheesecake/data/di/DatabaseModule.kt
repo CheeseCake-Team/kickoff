@@ -2,7 +2,7 @@ package com.cheesecake.data.di
 
 import android.content.Context
 import androidx.room.Room
-import com.cheesecake.data.database.KickoffDatabase
+import com.cheesecake.data.local.database.KickoffDatabase
 import com.cheesecake.data.local.daos.TeamsDao
 import dagger.Module
 import dagger.Provides

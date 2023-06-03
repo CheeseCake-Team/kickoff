@@ -1,6 +1,7 @@
 package com.cheesecake.data.di
 
 import com.cheesecake.data.local.daos.TeamsDao
+import com.cheesecake.data.local.dataSource.LocalDataSource
 import com.cheesecake.data.remote.coach.CoachRepository
 import com.cheesecake.data.remote.coach.ICoachApiService
 import com.cheesecake.data.remote.countries.CountriesRepository
@@ -20,7 +21,7 @@ import com.cheesecake.data.remote.sidliend.SidelinedRepository
 import com.cheesecake.data.remote.standings.IStandingsApiService
 import com.cheesecake.data.remote.standings.StandingsRepository
 import com.cheesecake.data.remote.teams.ITeamsApiService
-import com.cheesecake.data.remote.teams.TeamsRepository
+import com.cheesecake.data.repository.TeamsRepository
 import com.cheesecake.data.remote.timezone.ITimeZoneApiService
 import com.cheesecake.data.remote.timezone.TimeZoneRepository
 import com.cheesecake.data.remote.transfers.ITransferApiService
@@ -34,8 +35,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
-import retrofit2.Retrofit
-import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
@@ -93,11 +92,12 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideTeamsRepository(
+        localDataSource: LocalDataSource,
         teamsApiService: ITeamsApiService,
         teamsDao: TeamsDao,
         @DefaultDispatcher defaultDispatcher: CoroutineDispatcher
     ): TeamsRepository {
-        return TeamsRepository(teamsApiService, teamsDao, defaultDispatcher)
+        return TeamsRepository(localDataSource,teamsApiService, teamsDao, defaultDispatcher)
     }
 
     @Singleton

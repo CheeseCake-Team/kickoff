@@ -1,16 +1,12 @@
-package com.cheesecake.ui
+package com.cheesecake.ui.fragment.leagueTeams
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
+import com.cheesecake.ui.R
 import com.cheesecake.ui.base.BaseFragment
 import com.cheesecake.ui.databinding.FragmentTeamsLeagueBinding
-import com.cheesecake.ui.utils.TeamsAdapter
+import com.cheesecake.ui.fragment.leagueTeams.adapter.TeamsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
