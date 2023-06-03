@@ -16,6 +16,7 @@ import com.cheesecake.data.models.base.ScoreBlock
 import com.cheesecake.data.models.base.Shots
 import com.cheesecake.data.models.base.Tackles
 import com.cheesecake.data.models.base.Team
+import com.cheesecake.data.models.base.TeamHomeAway
 import com.cheesecake.data.models.base.TeamColor
 import com.cheesecake.data.models.base.TimeMeta
 import com.google.gson.annotations.SerializedName
@@ -26,7 +27,7 @@ data class FixtureResponse(
     @SerializedName("league")
     val league: League,
     @SerializedName("teams")
-    val teams: Teams,
+    val teams: TeamHomeAway,
     @SerializedName("goals")
     val goals: BaseGoals,
     @SerializedName("score")
@@ -99,13 +100,6 @@ data class FixtureResponse(
         val season: Int,
         @SerializedName("round")
         val round: String
-    )
-
-    data class Teams(
-        @SerializedName("home")
-        val home: HomeAway,
-        @SerializedName("away")
-        val away: HomeAway
     )
 
     data class Event(
@@ -186,6 +180,7 @@ data class FixtureResponse(
             val player: PlayerPosGrid
         )
     }
+
     data class Statistic(
         @SerializedName("team")
         val team: Team,
