@@ -1,6 +1,6 @@
 package com.cheesecake.data.remote.timezone
 
-import com.cheesecake.data.models.BaseResponse
+import com.cheesecake.data.models.base.BaseResponse
 import retrofit2.Response
 import retrofit2.http.GET
 

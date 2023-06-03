@@ -1,12 +1,12 @@
 package com.cheesecake.data.remote.fixture
 
-import com.cheesecake.data.models.BaseResponse
-import com.cheesecake.data.models.FixtureResponse
-import com.cheesecake.data.models.FixtureStatistics
+import com.cheesecake.data.models.base.BaseResponse
+import com.cheesecake.data.models.dto.FixturesDTO
+import com.cheesecake.data.models.dto.FixtureStatisticsDTO
 import com.cheesecake.data.models.HeadToHeadResponse
-import com.cheesecake.data.models.SingleEventResponse
+import com.cheesecake.data.models.dto.EventDTO
 import com.cheesecake.data.models.SingleFixtureResponse
-import com.cheesecake.data.models.SingleLineupResponse
+import com.cheesecake.data.models.dto.LineupDTO
 import com.cheesecake.data.utils.FixtureStatus
 import retrofit2.Response
 import javax.inject.Inject
@@ -175,27 +175,27 @@ class FixturesRepository @Inject constructor(private val fixturesApiService: IFi
     //region STATISTICS
     suspend fun getFixtureStatisticsByFixtureId(
         fixtureId: Int
-    ): Response<BaseResponse<FixtureStatistics>> {
+    ): Response<BaseResponse<FixtureStatisticsDTO>> {
         return fixturesApiService.getFixtureStatisticsByFixtureId(fixtureId)
     }
 
     suspend fun getFixtureStatisticsByFixtureIdByTeamId(
         fixtureId: Int,
         teamId: Int
-    ): Response<BaseResponse<FixtureStatistics>> {
+    ): Response<BaseResponse<FixtureStatisticsDTO>> {
         return fixturesApiService.getFixtureStatisticsByFixtureIdByTeamId(fixtureId, teamId)
     }
     //endregion
 
     //region EVENTS
-    suspend fun getFixtureEventsByFixtureId(fixtureId: Int): Response<BaseResponse<SingleEventResponse>> {
+    suspend fun getFixtureEventsByFixtureId(fixtureId: Int): Response<BaseResponse<EventDTO>> {
         return fixturesApiService.getFixtureEventsByFixtureId(fixtureId)
     }
 
     suspend fun getFixtureEventsByFixtureIdByTeamId(
         fixtureId: Int,
         teamId: Int
-    ): Response<BaseResponse<SingleEventResponse>> {
+    ): Response<BaseResponse<EventDTO>> {
         return fixturesApiService.getFixtureEventsByFixtureIdByTeamId(fixtureId, teamId)
     }
 
@@ -203,7 +203,7 @@ class FixturesRepository @Inject constructor(private val fixturesApiService: IFi
         fixtureId: Int,
         teamId: Int,
         playerId: Int
-    ): Response<BaseResponse<SingleEventResponse>> {
+    ): Response<BaseResponse<EventDTO>> {
         return fixturesApiService.getFixtureEventsByFixtureIdByTeamIdByPlayerId(
             fixtureId,
             teamId,
@@ -216,7 +216,7 @@ class FixturesRepository @Inject constructor(private val fixturesApiService: IFi
         teamId: Int,
         playerId: Int,
         fixtureEventType: String
-    ): Response<BaseResponse<SingleEventResponse>> {
+    ): Response<BaseResponse<EventDTO>> {
         return fixturesApiService.getFixtureEventsByFixtureIdByTeamIdByPlayerIdByType(
             fixtureId,
             teamId,
@@ -227,15 +227,16 @@ class FixturesRepository @Inject constructor(private val fixturesApiService: IFi
     //endregion
 
     //region PLAYERS
-    suspend fun getFixturePlayersByFixtureId(fixtureId: String
-    ): Response<BaseResponse<FixtureResponse>> {
+    suspend fun getFixturePlayersByFixtureId(
+        fixtureId: String
+    ): Response<BaseResponse<FixturesDTO>> {
         return fixturesApiService.getFixturePlayersByFixtureId(fixtureId)
     }
 
     suspend fun getFixturePlayersByFixtureIdByTeamId(
         fixtureId: Int,
         teamId: Int
-    ): Response<BaseResponse<FixtureResponse>> {
+    ): Response<BaseResponse<FixturesDTO>> {
         return fixturesApiService.getFixturePlayersByFixtureIdByTeamId(fixtureId, teamId)
     }
     //endregion
@@ -243,21 +244,21 @@ class FixturesRepository @Inject constructor(private val fixturesApiService: IFi
     //region LINEUPS
     suspend fun getFixtureLineupsByFixtureId(
         fixtureId: Int
-    ): Response<BaseResponse<SingleLineupResponse>> {
+    ): Response<BaseResponse<LineupDTO>> {
         return fixturesApiService.getFixtureLineupsByFixtureId(fixtureId)
     }
 
     suspend fun getFixtureLineupsByFixtureIdByTeamId(
         fixtureId: Int,
         teamId: Int
-    ): Response<BaseResponse<SingleLineupResponse>> {
+    ): Response<BaseResponse<LineupDTO>> {
         return fixturesApiService.getFixtureLineupsByFixtureIdByTeamId(fixtureId, teamId)
     }
 
     suspend fun getFixtureLineupsByFixtureIdByPlayerId(
         fixtureId: Int,
         playerId: Int
-    ): Response<BaseResponse<SingleLineupResponse>> {
+    ): Response<BaseResponse<LineupDTO>> {
         return fixturesApiService.getFixtureLineupsByFixtureIdByPlayerId(fixtureId, playerId)
     }
     //endregion

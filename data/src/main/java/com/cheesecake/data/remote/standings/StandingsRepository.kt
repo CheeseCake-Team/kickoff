@@ -1,7 +1,7 @@
 package com.cheesecake.data.remote.standings
 
-import com.cheesecake.data.models.BaseResponse
-import com.cheesecake.data.models.StandingsResponse
+import com.cheesecake.data.models.base.BaseResponse
+import com.cheesecake.data.models.dto.StandingsDTO
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -10,14 +10,14 @@ class StandingsRepository @Inject constructor(private val standingsApiService: I
     suspend fun getStandingsByTeamId(
         seasonId: Int,
         teamId: Int
-    ): Response<BaseResponse<StandingsResponse>> {
+    ): Response<BaseResponse<StandingsDTO>> {
         return standingsApiService.getStandingsByTeamId(seasonId, teamId)
     }
 
     suspend fun getStandingsByLeagueId(
         seasonId: Int,
         leagueId: Int
-    ): Response<BaseResponse<StandingsResponse>> {
+    ): Response<BaseResponse<StandingsDTO>> {
         return standingsApiService.getStandingsByLeagueId(seasonId, leagueId)
     }
 
@@ -25,7 +25,7 @@ class StandingsRepository @Inject constructor(private val standingsApiService: I
         seasonId: Int,
         teamId: Int,
         leagueId: Int
-    ): Response<BaseResponse<StandingsResponse>> {
+    ): Response<BaseResponse<StandingsDTO>> {
         return standingsApiService.getStandingsByTeamIdAndLeagueId(seasonId, teamId, leagueId)
     }
 }
