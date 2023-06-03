@@ -2,10 +2,10 @@ package com.cheesecake.data.models
 
 
 import com.cheesecake.data.models.base.BaseGoals
-import com.cheesecake.data.models.base.HomeAway
 import com.cheesecake.data.models.base.PlayerMeta
 import com.cheesecake.data.models.base.ScoreBlock
 import com.cheesecake.data.models.base.Team
+import com.cheesecake.data.models.base.TeamHomeAway
 import com.cheesecake.data.models.base.TimeMeta
 import com.google.gson.annotations.SerializedName
 
@@ -15,7 +15,7 @@ data class FixtureResponse(
     @SerializedName("league")
     val league: League,
     @SerializedName("teams")
-    val teams: Teams,
+    val teams: TeamHomeAway,
     @SerializedName("goals")
     val goals: BaseGoals,
     @SerializedName("score")
@@ -88,13 +88,6 @@ data class FixtureResponse(
         val season: Int,
         @SerializedName("round")
         val round: String
-    )
-
-    data class Teams(
-        @SerializedName("home")
-        val home: HomeAway,
-        @SerializedName("away")
-        val away: HomeAway
     )
 
     data class Event(
