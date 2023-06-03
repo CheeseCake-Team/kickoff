@@ -1,8 +1,9 @@
 package com.cheesecake.domain.usecases.standings
 
 import com.cheesecake.data.models.dto.StandingsDTO
+import com.cheesecake.data.remote.standings.StandingsRepository
 import com.cheesecake.domain.mappers.standings.StandingsDtoDomain
-import com.cheesecake.domain.models.standings.ShortStandings
+import com.cheesecake.domain.models.ShortStandings
 import javax.inject.Inject
 
 class GetShortStandingsDataUseCases

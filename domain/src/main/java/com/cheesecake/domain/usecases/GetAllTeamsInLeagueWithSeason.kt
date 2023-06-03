@@ -7,7 +7,6 @@ import javax.inject.Inject
 
 class GetAllTeamsInLeagueWithSeason @Inject constructor(
     private val teamsRepository: TeamsRepository,
-
     ) {
 
     suspend operator fun invoke(leagueId: Int, season: Int) =
@@ -24,7 +23,4 @@ class GetAllTeamsInLeagueWithSeason @Inject constructor(
                  )
              }
          }
-
-
-
 }

@@ -2,7 +2,7 @@ package com.cheesecake.domain.mappers.trophies
 
 import com.cheesecake.data.models.dto.TrophyDTO
 import com.cheesecake.domain.mappers.IMapper
-import com.cheesecake.domain.models.trophies.SingleTrophy
+import com.cheesecake.domain.models.SingleTrophy
 
 class TrophiesDtoDomain : IMapper<TrophyDTO, SingleTrophy> {
 

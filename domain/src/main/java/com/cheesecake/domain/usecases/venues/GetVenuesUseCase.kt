@@ -1,8 +1,9 @@
 package com.cheesecake.domain.usecases.venues
 
 import com.cheesecake.data.models.dto.VenuesDTO
+import com.cheesecake.data.remote.venues.VenuesRepository
 import com.cheesecake.domain.mappers.venues.VenuesDtoDomain
-import com.cheesecake.domain.models.venues.SingleVenue
+import com.cheesecake.domain.models.SingleVenue
 import javax.inject.Inject
 
 class GetVenuesUseCase

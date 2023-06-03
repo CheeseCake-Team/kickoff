@@ -3,9 +3,9 @@ package com.cheesecake.data.remote.fixture
 import com.cheesecake.data.models.base.BaseResponse
 import com.cheesecake.data.models.dto.FixturesDTO
 import com.cheesecake.data.models.dto.FixtureStatisticsDTO
-import com.cheesecake.data.models.HeadToHeadResponse
 import com.cheesecake.data.models.dto.EventDTO
-import com.cheesecake.data.models.SingleFixtureResponse
+import com.cheesecake.data.models.dto.FixtureDTO
+import com.cheesecake.data.models.dto.HeadToHeadDTO
 import com.cheesecake.data.models.dto.LineupDTO
 import com.cheesecake.data.utils.FixtureStatus
 import retrofit2.Response
@@ -32,7 +32,7 @@ class FixturesRepository @Inject constructor(private val fixturesApiService: IFi
     suspend fun getFixtureById(
         timeZone: String,
         fixtureId: Int
-    ): Response<BaseResponse<SingleFixtureResponse>> {
+    ): Response<BaseResponse<FixtureDTO>> {
         return fixturesApiService.getFixtureById(timeZone, fixtureId)
     }
 
@@ -40,28 +40,28 @@ class FixturesRepository @Inject constructor(private val fixturesApiService: IFi
         timeZone: String,
         season: String,
         teamId: Int
-    ): Response<BaseResponse<SingleFixtureResponse>> {
+    ): Response<BaseResponse<FixtureDTO>> {
         return fixturesApiService.getFixturesBySeasonIdByTeamId(timeZone, season, teamId)
     }
 
     suspend fun getFixturesByDate(
         timeZone: String,
         date: String
-    ): Response<BaseResponse<SingleFixtureResponse>> {
+    ): Response<BaseResponse<FixtureDTO>> {
         return fixturesApiService.getFixturesByDate(timeZone, date)
     }
 
     suspend fun getFixturesFromDate(
         timeZone: String,
         date: String
-    ): Response<BaseResponse<SingleFixtureResponse>> {
+    ): Response<BaseResponse<FixtureDTO>> {
         return fixturesApiService.getFixturesFromDate(timeZone, date)
     }
 
     suspend fun getFixturesToDate(
         timeZone: String,
         date: String
-    ): Response<BaseResponse<SingleFixtureResponse>> {
+    ): Response<BaseResponse<FixtureDTO>> {
         return fixturesApiService.getFixturesToDate(timeZone, date)
     }
 
@@ -71,14 +71,14 @@ class FixturesRepository @Inject constructor(private val fixturesApiService: IFi
         teamId: Int,
         from: String,
         to: String
-    ): Response<BaseResponse<SingleFixtureResponse>> {
+    ): Response<BaseResponse<FixtureDTO>> {
         return fixturesApiService.getFixturesFromDateToDate(timeZone, season, teamId, from, to)
     }
 
     suspend fun getFixturesStatus(
         timeZone: String,
         fixtureStatusType: String
-    ): Response<BaseResponse<SingleFixtureResponse>> {
+    ): Response<BaseResponse<FixtureDTO>> {
         return fixturesApiService.getFixturesStatus(timeZone, fixtureStatusType)
     }
     //endregion
@@ -88,7 +88,7 @@ class FixturesRepository @Inject constructor(private val fixturesApiService: IFi
         teamsId: String,
         seasonId: Int,
         timeZone: String
-    ): Response<BaseResponse<HeadToHeadResponse>> {
+    ): Response<BaseResponse<HeadToHeadDTO>> {
         return fixturesApiService.getHeadToHead(teamsId, seasonId, timeZone)
     }
 
@@ -96,7 +96,7 @@ class FixturesRepository @Inject constructor(private val fixturesApiService: IFi
         teamsId: String,
         date: String,
         timeZone: String
-    ): Response<BaseResponse<HeadToHeadResponse>> {
+    ): Response<BaseResponse<HeadToHeadDTO>> {
         return fixturesApiService.getHeadToHeadByDate(teamsId, date, timeZone)
     }
 
@@ -105,7 +105,7 @@ class FixturesRepository @Inject constructor(private val fixturesApiService: IFi
         status: FixtureStatus,
         seasonId: Int,
         timeZone: String
-    ): Response<BaseResponse<HeadToHeadResponse>> {
+    ): Response<BaseResponse<HeadToHeadDTO>> {
         return fixturesApiService.getHeadToHeadByStatus(teamsId, status, seasonId, timeZone)
     }
 
@@ -115,7 +115,7 @@ class FixturesRepository @Inject constructor(private val fixturesApiService: IFi
         to: String,
         seasonId: Int,
         timeZone: String
-    ): Response<BaseResponse<HeadToHeadResponse>> {
+    ): Response<BaseResponse<HeadToHeadDTO>> {
         return fixturesApiService.getHeadToHeadByFromAndTO(teamsId, from, to, seasonId, timeZone)
     }
 
@@ -124,7 +124,7 @@ class FixturesRepository @Inject constructor(private val fixturesApiService: IFi
         leagueId: Int,
         seasonId: Int,
         timeZone: String
-    ): Response<BaseResponse<HeadToHeadResponse>> {
+    ): Response<BaseResponse<HeadToHeadDTO>> {
         return fixturesApiService.getHeadToHeadByLeague(teamsId, leagueId, seasonId, timeZone)
     }
 
@@ -133,7 +133,7 @@ class FixturesRepository @Inject constructor(private val fixturesApiService: IFi
         leagueId: Int,
         date: String,
         timeZone: String
-    ): Response<BaseResponse<HeadToHeadResponse>> {
+    ): Response<BaseResponse<HeadToHeadDTO>> {
         return fixturesApiService.getHeadToHeadByByDateAndLeague(teamsId, leagueId, date, timeZone)
     }
 
@@ -143,7 +143,7 @@ class FixturesRepository @Inject constructor(private val fixturesApiService: IFi
         status: FixtureStatus,
         seasonId: Int,
         timeZone: String
-    ): Response<BaseResponse<HeadToHeadResponse>> {
+    ): Response<BaseResponse<HeadToHeadDTO>> {
         return fixturesApiService.getHeadToHeadByStatusAndLeague(
             teamsId,
             leagueId,
@@ -160,7 +160,7 @@ class FixturesRepository @Inject constructor(private val fixturesApiService: IFi
         to: String,
         seasonId: Int,
         timeZone: String
-    ): Response<BaseResponse<HeadToHeadResponse>> {
+    ): Response<BaseResponse<HeadToHeadDTO>> {
         return fixturesApiService.getHeadToHeadByFromAndTOAndLeague(
             teamsId,
             leagueId,

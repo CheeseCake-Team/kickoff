@@ -1,8 +1,9 @@
 package com.cheesecake.domain.usecases.trophies
 
 import com.cheesecake.data.models.dto.TrophyDTO
+import com.cheesecake.data.remote.trophies.TrophiesRepository
 import com.cheesecake.domain.mappers.trophies.TrophiesDtoDomain
-import com.cheesecake.domain.models.trophies.SingleTrophy
+import com.cheesecake.domain.models.SingleTrophy
 import javax.inject.Inject
 
 class GetPlayerTrophiesUseCases

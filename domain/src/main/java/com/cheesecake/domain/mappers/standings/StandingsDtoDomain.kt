@@ -2,7 +2,7 @@ package com.cheesecake.domain.mappers.standings
 
 import com.cheesecake.data.models.dto.StandingsDTO
 import com.cheesecake.domain.mappers.IMapper
-import com.cheesecake.domain.models.standings.ShortStandings
+import com.cheesecake.domain.models.ShortStandings
 
 class StandingsDtoDomain : IMapper<StandingsDTO, ShortStandings> {
     override fun map(input: StandingsDTO): ShortStandings {
