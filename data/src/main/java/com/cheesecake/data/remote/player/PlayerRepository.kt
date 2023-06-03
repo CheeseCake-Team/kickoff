@@ -1,7 +1,7 @@
 package com.cheesecake.data.remote.player
 
 import com.cheesecake.data.models.BaseResponse
-import com.cheesecake.data.models.SinglePlayerResponse
+import com.cheesecake.data.models.PlayerDTO
 import com.cheesecake.data.models.SquadDTO
 import retrofit2.Response
 import javax.inject.Inject
@@ -11,35 +11,35 @@ class PlayerRepository @Inject constructor(private val playersApiService: IPlaye
     suspend fun getPlayerBySeasonByPlayerId(
         season: String,
         playerId: Int
-    ): Response<BaseResponse<SinglePlayerResponse>> {
+    ): Response<BaseResponse<PlayerDTO>> {
         return playersApiService.getPlayerBySeasonByPlayerId(season, playerId)
     }
 
     suspend fun getPlayerBySeasonByTeamId(
         season: String,
         teamId: Int
-    ): Response<BaseResponse<SinglePlayerResponse>> {
+    ): Response<BaseResponse<PlayerDTO>> {
         return playersApiService.getPlayerBySeasonByTeamId(season, teamId)
     }
 
     suspend fun getPlayerBySeasonByLeagueId(
         season: String,
         leagueId: Int
-    ): Response<BaseResponse<SinglePlayerResponse>> {
+    ): Response<BaseResponse<PlayerDTO>> {
         return playersApiService.getPlayerBySeasonByLeagueId(season, leagueId)
     }
 
     suspend fun searchPlayerNameByTeamId(
         playerName: String,
         teamId: Int
-    ): Response<BaseResponse<SinglePlayerResponse>> {
+    ): Response<BaseResponse<PlayerDTO>> {
         return playersApiService.searchPlayerNameByTeamId(playerName, teamId)
     }
 
     suspend fun searchPlayerNameByLeagueId(
         playerName: String,
         leagueId: Int
-    ): Response<BaseResponse<SinglePlayerResponse>> {
+    ): Response<BaseResponse<PlayerDTO>> {
         return playersApiService.searchPlayerNameByLeagueId(playerName, leagueId)
     }
 
@@ -58,28 +58,28 @@ class PlayerRepository @Inject constructor(private val playersApiService: IPlaye
     suspend fun getTopScorers(
         seasonId: Int,
         leagueId: Int
-    ): Response<BaseResponse<SinglePlayerResponse>> {
+    ): Response<BaseResponse<PlayerDTO>> {
         return playersApiService.getTopScorers(seasonId, leagueId)
     }
 
     suspend fun getTopAssists(
         seasonId: Int,
         leagueId: Int
-    ): Response<BaseResponse<SinglePlayerResponse>> {
+    ): Response<BaseResponse<PlayerDTO>> {
         return playersApiService.getTopAssists(seasonId, leagueId)
     }
 
     suspend fun getTopYellowCards(
         seasonId: Int,
         leagueId: Int
-    ): Response<BaseResponse<SinglePlayerResponse>> {
+    ): Response<BaseResponse<PlayerDTO>> {
         return playersApiService.getTopYellowCards(seasonId, leagueId)
     }
 
     suspend fun getTopRedCards(
         seasonId: Int,
         leagueId: Int
-    ): Response<BaseResponse<SinglePlayerResponse>> {
+    ): Response<BaseResponse<PlayerDTO>> {
         return playersApiService.getTopRedCards(seasonId, leagueId)
     }
 }

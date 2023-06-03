@@ -1,7 +1,7 @@
 package com.cheesecake.data.remote.player
 
 import com.cheesecake.data.models.BaseResponse
-import com.cheesecake.data.models.SinglePlayerResponse
+import com.cheesecake.data.models.PlayerDTO
 import com.cheesecake.data.models.SquadDTO
 import retrofit2.Response
 import retrofit2.http.GET
@@ -13,31 +13,31 @@ interface IPlayersApiService {
     suspend fun getPlayerBySeasonByPlayerId(
         @Query("season") season: String,
         @Query("id") playerId: Int,
-    ): Response<BaseResponse<SinglePlayerResponse>>
+    ): Response<BaseResponse<PlayerDTO>>
 
     @GET("players")
     suspend fun getPlayerBySeasonByTeamId(
         @Query("season") season: String,
         @Query("team") teamId: Int,
-    ): Response<BaseResponse<SinglePlayerResponse>>
+    ): Response<BaseResponse<PlayerDTO>>
 
     @GET("players")
     suspend fun getPlayerBySeasonByLeagueId(
         @Query("season") season: String,
         @Query("league") leagueId: Int
-    ): Response<BaseResponse<SinglePlayerResponse>>
+    ): Response<BaseResponse<PlayerDTO>>
 
     @GET("players")
     suspend fun searchPlayerNameByTeamId(
         @Query("search") playerName: String,
         @Query("team") teamId: Int
-    ): Response<BaseResponse<SinglePlayerResponse>>
+    ): Response<BaseResponse<PlayerDTO>>
 
     @GET("players")
     suspend fun searchPlayerNameByLeagueId(
         @Query("search") playerName: String,
         @Query("league") leagueId: Int
-    ): Response<BaseResponse<SinglePlayerResponse>>
+    ): Response<BaseResponse<PlayerDTO>>
 
     @GET("players/seasons")
     suspend fun getPlayerSeasons(): Response<BaseResponse<Int>>
@@ -56,24 +56,24 @@ interface IPlayersApiService {
     suspend fun getTopScorers(
         @Query("season") seasonId: Int,
         @Query("league") leagueId: Int
-    ): Response<BaseResponse<SinglePlayerResponse>>
+    ): Response<BaseResponse<PlayerDTO>>
 
     @GET("players/topassists")
     suspend fun getTopAssists(
         @Query("season") seasonId: Int,
         @Query("league") leagueId: Int
-    ): Response<BaseResponse<SinglePlayerResponse>>
+    ): Response<BaseResponse<PlayerDTO>>
 
     @GET("players/topyellowcards")
     suspend fun getTopYellowCards(
         @Query("season") seasonId: Int,
         @Query("league") leagueId: Int
-    ): Response<BaseResponse<SinglePlayerResponse>>
+    ): Response<BaseResponse<PlayerDTO>>
 
     @GET("players/topredcards")
     suspend fun getTopRedCards(
         @Query("season") seasonId: Int,
         @Query("league") leagueId: Int
-    ): Response<BaseResponse<SinglePlayerResponse>>
+    ): Response<BaseResponse<PlayerDTO>>
 
 }

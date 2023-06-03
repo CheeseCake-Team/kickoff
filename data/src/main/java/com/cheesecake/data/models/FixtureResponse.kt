@@ -2,10 +2,21 @@ package com.cheesecake.data.models
 
 
 import com.cheesecake.data.models.base.BaseGoals
+import com.cheesecake.data.models.base.Cards
+import com.cheesecake.data.models.base.Dribbles
+import com.cheesecake.data.models.base.Duels
+import com.cheesecake.data.models.base.Fouls
+import com.cheesecake.data.models.base.GoalsState
 import com.cheesecake.data.models.base.HomeAway
+import com.cheesecake.data.models.base.Passes
+import com.cheesecake.data.models.base.Penalty
 import com.cheesecake.data.models.base.PlayerMeta
+import com.cheesecake.data.models.base.PlayerPosGrid
 import com.cheesecake.data.models.base.ScoreBlock
+import com.cheesecake.data.models.base.Shots
+import com.cheesecake.data.models.base.Tackles
 import com.cheesecake.data.models.base.Team
+import com.cheesecake.data.models.base.TeamColor
 import com.cheesecake.data.models.base.TimeMeta
 import com.google.gson.annotations.SerializedName
 
@@ -134,14 +145,8 @@ data class FixtureResponse(
             @SerializedName("logo")
             val logo: String,
             @SerializedName("colors")
-            val colors: Colors
+            val colors: TeamColor
         ) {
-            data class Colors(
-                @SerializedName("player")
-                val player: Player,
-                @SerializedName("goalkeeper")
-                val goalkeeper: Goalkeeper
-            ) {
                 data class Player(
                     @SerializedName("primary")
                     val primary: String,
@@ -173,41 +178,14 @@ data class FixtureResponse(
 
         data class StartXI(
             @SerializedName("player")
-            val player: Player
-        ) {
-            data class Player(
-                @SerializedName("id")
-                val id: Int,
-                @SerializedName("name")
-                val name: String,
-                @SerializedName("number")
-                val number: Int,
-                @SerializedName("pos")
-                val pos: String,
-                @SerializedName("grid")
-                val grid: String
-            )
-        }
+            val player: PlayerPosGrid
+        )
 
         data class Substitute(
             @SerializedName("player")
-            val player: Player
-        ) {
-            data class Player(
-                @SerializedName("id")
-                val id: Int,
-                @SerializedName("name")
-                val name: String,
-                @SerializedName("number")
-                val number: Int,
-                @SerializedName("pos")
-                val pos: String,
-                @SerializedName("grid")
-                val grid: Any
-            )
-        }
+            val player: PlayerPosGrid
+        )
     }
-
     data class Statistic(
         @SerializedName("team")
         val team: Team,
@@ -271,7 +249,7 @@ data class FixtureResponse(
                 @SerializedName("shots")
                 val shots: Shots,
                 @SerializedName("goals")
-                val goals: Goals,
+                val goals: GoalsState,
                 @SerializedName("passes")
                 val passes: Passes,
                 @SerializedName("tackles")
@@ -302,85 +280,8 @@ data class FixtureResponse(
                     val substitute: Boolean
                 )
 
-                data class Shots(
-                    @SerializedName("total")
-                    val total: Int,
-                    @SerializedName("on")
-                    val on: Int
-                )
 
-                data class Goals(
-                    @SerializedName("total")
-                    val total: Int,
-                    @SerializedName("conceded")
-                    val conceded: Int,
-                    @SerializedName("assists")
-                    val assists: Int,
-                    @SerializedName("saves")
-                    val saves: Int
-                )
 
-                data class Passes(
-                    @SerializedName("total")
-                    val total: Int,
-                    @SerializedName("key")
-                    val key: Int,
-                    @SerializedName("accuracy")
-                    val accuracy: String
-                )
-
-                data class Tackles(
-                    @SerializedName("total")
-                    val total: Int,
-                    @SerializedName("blocks")
-                    val blocks: Int,
-                    @SerializedName("interceptions")
-                    val interceptions: Int
-                )
-
-                data class Duels(
-                    @SerializedName("total")
-                    val total: Int,
-                    @SerializedName("won")
-                    val won: Int
-                )
-
-                data class Dribbles(
-                    @SerializedName("attempts")
-                    val attempts: Int,
-                    @SerializedName("success")
-                    val success: Int,
-                    @SerializedName("past")
-                    val past: Int
-                )
-
-                data class Fouls(
-                    @SerializedName("drawn")
-                    val drawn: Int,
-                    @SerializedName("committed")
-                    val committed: Int
-                )
-
-                data class Cards(
-                    @SerializedName("yellow")
-                    val yellow: Int,
-                    @SerializedName("red")
-                    val red: Int
-                )
-
-                data class Penalty(
-                    @SerializedName("won")
-                    val won: Any,
-                    @SerializedName("commited")
-                    val commited: Any,
-                    @SerializedName("scored")
-                    val scored: Int,
-                    @SerializedName("missed")
-                    val missed: Int,
-                    @SerializedName("saved")
-                    val saved: Int
-                )
             }
         }
     }
-}
