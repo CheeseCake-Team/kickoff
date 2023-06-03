@@ -1,15 +1,19 @@
 package com.cheesecake.data.models
 
-
 import com.cheesecake.data.models.base.BaseGoals
+import com.cheesecake.data.models.base.BasePeriods
+import com.cheesecake.data.models.base.BaseStatus
 import com.cheesecake.data.models.base.Cards
+import com.cheesecake.data.models.base.PersonPhoto
 import com.cheesecake.data.models.base.Dribbles
 import com.cheesecake.data.models.base.Duels
+import com.cheesecake.data.models.base.Fixture
 import com.cheesecake.data.models.base.Fouls
 import com.cheesecake.data.models.base.GoalsState
-import com.cheesecake.data.models.base.HomeAway
+import com.cheesecake.data.models.base.LeagueCountrySeasonRound
 import com.cheesecake.data.models.base.Passes
 import com.cheesecake.data.models.base.Penalty
+import com.cheesecake.data.models.base.PlayerColor
 import com.cheesecake.data.models.base.PlayerMeta
 import com.cheesecake.data.models.base.PlayerPosGrid
 import com.cheesecake.data.models.base.ScoreBlock
@@ -17,15 +21,15 @@ import com.cheesecake.data.models.base.Shots
 import com.cheesecake.data.models.base.Tackles
 import com.cheesecake.data.models.base.Team
 import com.cheesecake.data.models.base.TeamHomeAway
-import com.cheesecake.data.models.base.TeamColor
 import com.cheesecake.data.models.base.TimeMeta
+import com.cheesecake.data.models.base.VenueCity
 import com.google.gson.annotations.SerializedName
 
-data class FixtureResponse(
+data class FixturesDTO(
     @SerializedName("fixture")
     val fixture: Fixture,
     @SerializedName("league")
-    val league: League,
+    val league: LeagueCountrySeasonRound,
     @SerializedName("teams")
     val teams: TeamHomeAway,
     @SerializedName("goals")
@@ -41,67 +45,6 @@ data class FixtureResponse(
     @SerializedName("players")
     val players: List<Player>
 ) {
-    data class Fixture(
-        @SerializedName("id")
-        val id: Int,
-        @SerializedName("referee")
-        val referee: String,
-        @SerializedName("timezone")
-        val timezone: String,
-        @SerializedName("date")
-        val date: String,
-        @SerializedName("timestamp")
-        val timestamp: Int,
-        @SerializedName("periods")
-        val periods: Periods,
-        @SerializedName("venue")
-        val venue: Venue,
-        @SerializedName("status")
-        val status: Status
-    ) {
-        data class Periods(
-            @SerializedName("first")
-            val first: Int,
-            @SerializedName("second")
-            val second: Int
-        )
-
-        data class Venue(
-            @SerializedName("id")
-            val id: Int,
-            @SerializedName("name")
-            val name: String,
-            @SerializedName("city")
-            val city: String
-        )
-
-        data class Status(
-            @SerializedName("long")
-            val long: String,
-            @SerializedName("short")
-            val short: String,
-            @SerializedName("elapsed")
-            val elapsed: Int
-        )
-    }
-
-    data class League(
-        @SerializedName("id")
-        val id: Int,
-        @SerializedName("name")
-        val name: String,
-        @SerializedName("country")
-        val country: String,
-        @SerializedName("logo")
-        val logo: String,
-        @SerializedName("flag")
-        val flag: String,
-        @SerializedName("season")
-        val season: Int,
-        @SerializedName("round")
-        val round: String
-    )
-
     data class Event(
         @SerializedName("time")
         val time: TimeMeta,
@@ -123,7 +66,7 @@ data class FixtureResponse(
         @SerializedName("team")
         val team: Team,
         @SerializedName("coach")
-        val coach: Coach,
+        val coach: PersonPhoto,
         @SerializedName("formation")
         val formation: String,
         @SerializedName("startXI")
@@ -139,47 +82,19 @@ data class FixtureResponse(
             @SerializedName("logo")
             val logo: String,
             @SerializedName("colors")
-            val colors: TeamColor
-        ) {
-                data class Player(
-                    @SerializedName("primary")
-                    val primary: String,
-                    @SerializedName("number")
-                    val number: String,
-                    @SerializedName("border")
-                    val border: String
-                )
-
-                data class Goalkeeper(
-                    @SerializedName("primary")
-                    val primary: String,
-                    @SerializedName("number")
-                    val number: String,
-                    @SerializedName("border")
-                    val border: String
-                )
-            }
-        }
-
-        data class Coach(
-            @SerializedName("id")
-            val id: Int,
-            @SerializedName("name")
-            val name: String,
-            @SerializedName("photo")
-            val photo: String
-        )
-
-        data class StartXI(
-            @SerializedName("player")
-            val player: PlayerPosGrid
-        )
-
-        data class Substitute(
-            @SerializedName("player")
-            val player: PlayerPosGrid
+            val colors: PlayerColor
         )
     }
+
+    data class StartXI(
+        @SerializedName("player")
+        val player: PlayerPosGrid
+    )
+
+    data class Substitute(
+        @SerializedName("player")
+        val player: PlayerPosGrid
+    )
 
     data class Statistic(
         @SerializedName("team")
@@ -187,15 +102,6 @@ data class FixtureResponse(
         @SerializedName("statistics")
         val statistics: List<Statistic>
     ) {
-        data class Team(
-            @SerializedName("id")
-            val id: Int,
-            @SerializedName("name")
-            val name: String,
-            @SerializedName("logo")
-            val logo: String
-        )
-
         data class Statistic(
             @SerializedName("type")
             val type: String,
@@ -223,19 +129,10 @@ data class FixtureResponse(
 
         data class Player(
             @SerializedName("player")
-            val player: Player,
+            val player: PersonPhoto,
             @SerializedName("statistics")
             val statistics: List<Statistic>
         ) {
-            data class Player(
-                @SerializedName("id")
-                val id: Int,
-                @SerializedName("name")
-                val name: String,
-                @SerializedName("photo")
-                val photo: String
-            )
-
             data class Statistic(
                 @SerializedName("games")
                 val games: Games,
@@ -274,9 +171,8 @@ data class FixtureResponse(
                     @SerializedName("substitute")
                     val substitute: Boolean
                 )
-
-
-
             }
         }
     }
+}
+

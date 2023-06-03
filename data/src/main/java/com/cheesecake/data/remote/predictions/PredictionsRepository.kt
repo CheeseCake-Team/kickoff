@@ -1,7 +1,6 @@
 package com.cheesecake.data.remote.predictions
 
 import com.cheesecake.data.models.BaseResponse
-import com.cheesecake.data.models.SinglePredictionsResponse
 import retrofit2.Response
 import javax.inject.Inject
 

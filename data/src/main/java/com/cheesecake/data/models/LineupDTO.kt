@@ -1,6 +1,6 @@
 package com.cheesecake.data.models
 
-import com.cheesecake.data.models.base.CoachPhoto
+import com.cheesecake.data.models.base.PersonPhoto
 import com.cheesecake.data.models.base.PlayerPosGrid
 import com.cheesecake.data.models.base.TeamColor
 import com.google.gson.annotations.SerializedName
@@ -9,7 +9,7 @@ data class LineupDTO(
     @SerializedName("team")
     val team: Team,
     @SerializedName("coach")
-    val coach: CoachPhoto,
+    val coach: PersonPhoto,
     @SerializedName("formation")
     val formation: String,
     @SerializedName("startXI")

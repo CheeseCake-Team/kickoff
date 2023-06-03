@@ -1,8 +1,8 @@
 package com.cheesecake.data.remote.fixture
 
 import com.cheesecake.data.models.BaseResponse
-import com.cheesecake.data.models.FixtureResponse
-import com.cheesecake.data.models.FixtureStatistics
+import com.cheesecake.data.models.FixturesDTO
+import com.cheesecake.data.models.FixtureStatisticsDTO
 import com.cheesecake.data.models.HeadToHeadResponse
 import com.cheesecake.data.models.EventDTO
 import com.cheesecake.data.models.SingleFixtureResponse
@@ -150,13 +150,13 @@ interface IFixturesApiService {
     @GET("fixtures/statistics")
     suspend fun getFixtureStatisticsByFixtureId(
         @Query("fixture") fixtureId: Int
-    ): Response<BaseResponse<FixtureStatistics>>
+    ): Response<BaseResponse<FixtureStatisticsDTO>>
 
     @GET("fixtures/statistics")
     suspend fun getFixtureStatisticsByFixtureIdByTeamId(
         @Query("fixture") fixtureId: Int,
         @Query("team") teamId: Int
-    ): Response<BaseResponse<FixtureStatistics>>
+    ): Response<BaseResponse<FixtureStatisticsDTO>>
     //endregion
 
     //region Events
@@ -213,13 +213,13 @@ interface IFixturesApiService {
     @GET("fixtures/players")
     suspend fun getFixturePlayersByFixtureId(
         @Query("fixture") fixtureId: String
-    ): Response<BaseResponse<FixtureResponse>>
+    ): Response<BaseResponse<FixturesDTO>>
 
     @GET("fixtures/players")
     suspend fun getFixturePlayersByFixtureIdByTeamId(
         @Query("fixture") fixtureId: Int,
         @Query("team") teamId: Int
-    ): Response<BaseResponse<FixtureResponse>>
+    ): Response<BaseResponse<FixturesDTO>>
 
     //endregion
 }
