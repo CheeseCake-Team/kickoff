@@ -1,6 +1,13 @@
 package com.cheesecake.data.models
 
 
+import com.cheesecake.data.models.base.BaseGoals
+import com.cheesecake.data.models.base.HomeAway
+import com.cheesecake.data.models.base.PlayerMeta
+import com.cheesecake.data.models.base.ScoreBlock
+import com.cheesecake.data.models.base.ScoreStatus
+import com.cheesecake.data.models.base.Team
+import com.cheesecake.data.models.base.TimeMeta
 import com.google.gson.annotations.SerializedName
 
 data class FixtureResponse(
@@ -11,9 +18,9 @@ data class FixtureResponse(
     @SerializedName("teams")
     val teams: Teams,
     @SerializedName("goals")
-    val goals: Goals,
+    val goals: BaseGoals,
     @SerializedName("score")
-    val score: Score,
+    val score: ScoreBlock,
     @SerializedName("events")
     val events: List<Event>,
     @SerializedName("lineups")
@@ -86,125 +93,27 @@ data class FixtureResponse(
 
     data class Teams(
         @SerializedName("home")
-        val home: Home,
+        val home: HomeAway,
         @SerializedName("away")
-        val away: Away
-    ) {
-        data class Home(
-            @SerializedName("id")
-            val id: Int,
-            @SerializedName("name")
-            val name: String,
-            @SerializedName("logo")
-            val logo: String,
-            @SerializedName("winner")
-            val winner: Boolean
-        )
-
-        data class Away(
-            @SerializedName("id")
-            val id: Int,
-            @SerializedName("name")
-            val name: String,
-            @SerializedName("logo")
-            val logo: String,
-            @SerializedName("winner")
-            val winner: Boolean
-        )
-    }
-
-    data class Goals(
-        @SerializedName("home")
-        val home: Int,
-        @SerializedName("away")
-        val away: Int
+        val away: HomeAway
     )
-
-    data class Score(
-        @SerializedName("halftime")
-        val halftime: Halftime,
-        @SerializedName("fulltime")
-        val fulltime: Fulltime,
-        @SerializedName("extratime")
-        val extratime: Extratime,
-        @SerializedName("penalty")
-        val penalty: Penalty
-    ) {
-        data class Halftime(
-            @SerializedName("home")
-            val home: Int,
-            @SerializedName("away")
-            val away: Int
-        )
-
-        data class Fulltime(
-            @SerializedName("home")
-            val home: Int,
-            @SerializedName("away")
-            val away: Int
-        )
-
-        data class Extratime(
-            @SerializedName("home")
-            val home: Any,
-            @SerializedName("away")
-            val away: Any
-        )
-
-        data class Penalty(
-            @SerializedName("home")
-            val home: Any,
-            @SerializedName("away")
-            val away: Any
-        )
-    }
 
     data class Event(
         @SerializedName("time")
-        val time: Time,
+        val time: TimeMeta,
         @SerializedName("team")
         val team: Team,
         @SerializedName("player")
-        val player: Player,
+        val player: PlayerMeta,
         @SerializedName("assist")
-        val assist: Assist,
+        val assist: PlayerMeta,
         @SerializedName("type")
         val type: String,
         @SerializedName("detail")
         val detail: String,
         @SerializedName("comments")
         val comments: String
-    ) {
-        data class Time(
-            @SerializedName("elapsed")
-            val elapsed: Int,
-            @SerializedName("extra")
-            val extra: Any
-        )
-
-        data class Team(
-            @SerializedName("id")
-            val id: Int,
-            @SerializedName("name")
-            val name: String,
-            @SerializedName("logo")
-            val logo: String
-        )
-
-        data class Player(
-            @SerializedName("id")
-            val id: Int,
-            @SerializedName("name")
-            val name: String
-        )
-
-        data class Assist(
-            @SerializedName("id")
-            val id: Int,
-            @SerializedName("name")
-            val name: String
-        )
-    }
+    )
 
     data class Lineup(
         @SerializedName("team")

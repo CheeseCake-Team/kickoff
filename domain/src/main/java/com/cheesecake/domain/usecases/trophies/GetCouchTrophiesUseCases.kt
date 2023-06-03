@@ -1,6 +1,6 @@
 package com.cheesecake.domain.usecases.trophies
 
-import com.cheesecake.data.models.SingleTrophyResponse
+import com.cheesecake.data.models.TrophyDTO
 import com.cheesecake.data.remote.trophies.TrophiesRepository
 import com.cheesecake.domain.mappers.trophies.TrophiesDtoDomain
 import com.cheesecake.domain.models.trophies.SingleTrophy
@@ -14,11 +14,11 @@ class GetCouchTrophiesUseCases
         return mapResponseIntoShort(dtoResponse!!)
     }
 
-    private suspend fun getCoachTrophiesResponse(coachId: Int): SingleTrophyResponse? {
+    private suspend fun getCoachTrophiesResponse(coachId: Int): TrophyDTO? {
         return TrophiesRepository.getCoachTrophies(coachId).body()?.response?.get(0)
     }
 
-    private fun mapResponseIntoShort(input: SingleTrophyResponse): SingleTrophy {
+    private fun mapResponseIntoShort(input: TrophyDTO): SingleTrophy {
         return TrophiesDtoDomain().map(input)
     }
 }

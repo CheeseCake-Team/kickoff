@@ -1,11 +1,11 @@
 package com.cheesecake.domain.mappers.venues
 
-import com.cheesecake.data.models.VenuesResponse
+import com.cheesecake.data.models.VenuesDTO
 import com.cheesecake.domain.mappers.IMapper
 import com.cheesecake.domain.models.venues.SingleVenue
 
-class VenuesDtoDomain : IMapper<VenuesResponse, SingleVenue> {
-    override fun map(input: VenuesResponse): SingleVenue {
+class VenuesDtoDomain : IMapper<VenuesDTO, SingleVenue> {
+    override fun map(input: VenuesDTO): SingleVenue {
         return SingleVenue(
             name = input.name,
             address = input.address,

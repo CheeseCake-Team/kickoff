@@ -4,7 +4,7 @@ import com.cheesecake.data.models.BaseResponse
 import com.cheesecake.data.models.FixtureResponse
 import com.cheesecake.data.models.FixtureStatistics
 import com.cheesecake.data.models.HeadToHeadResponse
-import com.cheesecake.data.models.SingleEventResponse
+import com.cheesecake.data.models.EventDTO
 import com.cheesecake.data.models.SingleFixtureResponse
 import com.cheesecake.data.models.SingleLineupResponse
 import com.cheesecake.data.utils.FixtureStatus
@@ -188,14 +188,14 @@ class FixturesRepository @Inject constructor(private val fixturesApiService: IFi
     //endregion
 
     //region EVENTS
-    suspend fun getFixtureEventsByFixtureId(fixtureId: Int): Response<BaseResponse<SingleEventResponse>> {
+    suspend fun getFixtureEventsByFixtureId(fixtureId: Int): Response<BaseResponse<EventDTO>> {
         return fixturesApiService.getFixtureEventsByFixtureId(fixtureId)
     }
 
     suspend fun getFixtureEventsByFixtureIdByTeamId(
         fixtureId: Int,
         teamId: Int
-    ): Response<BaseResponse<SingleEventResponse>> {
+    ): Response<BaseResponse<EventDTO>> {
         return fixturesApiService.getFixtureEventsByFixtureIdByTeamId(fixtureId, teamId)
     }
 
@@ -203,7 +203,7 @@ class FixturesRepository @Inject constructor(private val fixturesApiService: IFi
         fixtureId: Int,
         teamId: Int,
         playerId: Int
-    ): Response<BaseResponse<SingleEventResponse>> {
+    ): Response<BaseResponse<EventDTO>> {
         return fixturesApiService.getFixtureEventsByFixtureIdByTeamIdByPlayerId(
             fixtureId,
             teamId,
@@ -216,7 +216,7 @@ class FixturesRepository @Inject constructor(private val fixturesApiService: IFi
         teamId: Int,
         playerId: Int,
         fixtureEventType: String
-    ): Response<BaseResponse<SingleEventResponse>> {
+    ): Response<BaseResponse<EventDTO>> {
         return fixturesApiService.getFixtureEventsByFixtureIdByTeamIdByPlayerIdByType(
             fixtureId,
             teamId,

@@ -1,28 +1,28 @@
 package com.cheesecake.data.remote.countries
 
 import com.cheesecake.data.models.BaseResponse
-import com.cheesecake.data.models.TeamCountries
+import com.cheesecake.data.models.TeamCountriesDTO
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ICountriesApiService {
     @GET("countries")
-    suspend fun getAllCountries(): Response<BaseResponse<TeamCountries>>
+    suspend fun getAllCountries(): Response<BaseResponse<TeamCountriesDTO>>
 
     @GET("countries")
     suspend fun getCountryByName(
         @Query("name") countryName: String
-    ): Response<BaseResponse<TeamCountries>>
+    ): Response<BaseResponse<TeamCountriesDTO>>
 
     @GET("countries")
     suspend fun getCountryByCode(
         @Query("code") countryCode: String
-    ): Response<BaseResponse<TeamCountries>>
+    ): Response<BaseResponse<TeamCountriesDTO>>
 
     @GET("countries")
     suspend fun searchInCountries(
         @Query("search") searchQuery: String
-    ): Response<BaseResponse<TeamCountries>>
+    ): Response<BaseResponse<TeamCountriesDTO>>
 
 }

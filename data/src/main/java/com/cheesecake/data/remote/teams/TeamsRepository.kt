@@ -2,9 +2,9 @@ package com.cheesecake.data.remote.teams
 
 import com.cheesecake.data.models.BaseResponse
 import com.cheesecake.data.models.BaseStaticResponse
-import com.cheesecake.data.models.TeamCountries
+import com.cheesecake.data.models.TeamCountriesDTO
 import com.cheesecake.data.models.TeamInformationResponse
-import com.cheesecake.data.models.TeamStatisticsResponse
+import com.cheesecake.data.models.TeamStatisticsDTO
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -25,7 +25,7 @@ class TeamsRepository @Inject constructor(private val teamsApiService: ITeamsApi
         teamId: Int,
         season: Int,
         leagueId: Int
-    ): Response<BaseStaticResponse<TeamStatisticsResponse>> {
+    ): Response<BaseStaticResponse<TeamStatisticsDTO>> {
         return teamsApiService.getTeamStatistics(teamId, season, leagueId)
     }
 
@@ -33,7 +33,7 @@ class TeamsRepository @Inject constructor(private val teamsApiService: ITeamsApi
         return teamsApiService.getTeamSeasons(teamId)
     }
 
-    suspend fun getTeamCountries(): Response<BaseResponse<TeamCountries>> {
+    suspend fun getTeamCountries(): Response<BaseResponse<TeamCountriesDTO>> {
         return teamsApiService.getTeamCountries()
     }
 }

@@ -1,12 +1,12 @@
 package com.cheesecake.domain.mappers.trophies
 
-import com.cheesecake.data.models.SingleTrophyResponse
+import com.cheesecake.data.models.TrophyDTO
 import com.cheesecake.domain.mappers.IMapper
 import com.cheesecake.domain.models.trophies.SingleTrophy
 
-class TrophiesDtoDomain : IMapper<SingleTrophyResponse, SingleTrophy> {
+class TrophiesDtoDomain : IMapper<TrophyDTO, SingleTrophy> {
 
-    override fun map(input: SingleTrophyResponse): SingleTrophy {
+    override fun map(input: TrophyDTO): SingleTrophy {
         return SingleTrophy(
             league = input.league,
             country = input.country,

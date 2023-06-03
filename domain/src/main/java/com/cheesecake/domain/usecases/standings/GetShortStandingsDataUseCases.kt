@@ -1,6 +1,6 @@
 package com.cheesecake.domain.usecases.standings
 
-import com.cheesecake.data.models.StandingsResponse
+import com.cheesecake.data.models.StandingsDTO
 import com.cheesecake.domain.mappers.standings.StandingsDtoDomain
 import com.cheesecake.domain.models.standings.ShortStandings
 import javax.inject.Inject
@@ -13,11 +13,13 @@ class GetShortStandingsDataUseCases
         return mapResponseIntoShort(dtoResponse!!)
     }
 
-    private suspend fun getSingleStandingResponse(seasonId: Int, leagueId: Int): StandingsResponse? {
-        return standingsRepository.getStandingsByLeagueId(seasonId, leagueId).body()?.response?.get(0)
+    private suspend fun getSingleStandingResponse(seasonId: Int, leagueId: Int): StandingsDTO? {
+        return standingsRepository.getStandingsByLeagueId(seasonId, leagueId).body()?.response?.get(
+            0
+        )
     }
 
-    private fun mapResponseIntoShort(input: StandingsResponse): ShortStandings {
+    private fun mapResponseIntoShort(input: StandingsDTO): ShortStandings {
         return StandingsDtoDomain().map(input)
     }
 

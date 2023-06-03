@@ -1,6 +1,8 @@
 package com.cheesecake.data.models
 
 
+import com.cheesecake.data.models.base.HomeAway
+import com.cheesecake.data.models.base.ScoreStatus
 import com.google.gson.annotations.SerializedName
 
 data class HeadToHeadResponse(
@@ -78,76 +80,24 @@ data class HeadToHeadResponse(
 
     data class Teams(
         @SerializedName("home")
-        val home: Home,
+        val home: HomeAway,
         @SerializedName("away")
-        val away: Away
-    ) {
-        data class Home(
-            @SerializedName("id")
-            val id: Int,
-            @SerializedName("name")
-            val name: String,
-            @SerializedName("logo")
-            val logo: String,
-            @SerializedName("winner")
-            val winner: Boolean
-        )
-
-        data class Away(
-            @SerializedName("id")
-            val id: Int,
-            @SerializedName("name")
-            val name: String,
-            @SerializedName("logo")
-            val logo: String,
-            @SerializedName("winner")
-            val winner: Boolean
-        )
-    }
-
+        val away: HomeAway
+    )
     data class Goals(
         @SerializedName("home")
         val home: Int,
         @SerializedName("away")
         val away: Int
     )
-
     data class Score(
         @SerializedName("halftime")
-        val halftime: Halftime,
+        val halftime: ScoreStatus,
         @SerializedName("fulltime")
-        val fulltime: Fulltime,
+        val fulltime: ScoreStatus,
         @SerializedName("extratime")
-        val extratime: Extratime,
+        val extratime: ScoreStatus,
         @SerializedName("penalty")
-        val penalty: Penalty
-    ) {
-        data class Halftime(
-            @SerializedName("home")
-            val home: Int,
-            @SerializedName("away")
-            val away: Int
-        )
-
-        data class Fulltime(
-            @SerializedName("home")
-            val home: Int,
-            @SerializedName("away")
-            val away: Int
-        )
-
-        data class Extratime(
-            @SerializedName("home")
-            val home: Any,
-            @SerializedName("away")
-            val away: Any
-        )
-
-        data class Penalty(
-            @SerializedName("home")
-            val home: Any,
-            @SerializedName("away")
-            val away: Any
-        )
-    }
+        val penalty: ScoreStatus
+    )
 }

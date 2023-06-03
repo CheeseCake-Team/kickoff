@@ -1,11 +1,11 @@
 package com.cheesecake.domain.mappers.standings
 
-import com.cheesecake.data.models.StandingsResponse
+import com.cheesecake.data.models.StandingsDTO
 import com.cheesecake.domain.mappers.IMapper
 import com.cheesecake.domain.models.standings.ShortStandings
 
-class StandingsDtoDomain : IMapper<StandingsResponse, ShortStandings> {
-    override fun map(input: StandingsResponse): ShortStandings {
+class StandingsDtoDomain : IMapper<StandingsDTO, ShortStandings> {
+    override fun map(input: StandingsDTO): ShortStandings {
         return ShortStandings(
             flag = input.league.flag,
             name = input.league.name,

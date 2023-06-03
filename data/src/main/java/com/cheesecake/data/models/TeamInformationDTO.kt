@@ -3,13 +3,13 @@ package com.cheesecake.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class TeamInformationResponse(
+data class TeamInformationDTO(
     @SerializedName("team")
-    val team: Team,
+    val team: TeamInformation,
     @SerializedName("venue")
     val venue: Venue
 ) {
-    data class Team(
+    data class TeamInformation(
         @SerializedName("id")
         val id: Int,
         @SerializedName("name")

@@ -3,7 +3,7 @@ package com.cheesecake.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class VenuesResponse(
+data class VenuesDTO(
     @SerializedName("id")
     val id: Int,
     @SerializedName("name")

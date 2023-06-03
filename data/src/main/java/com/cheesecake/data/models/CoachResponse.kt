@@ -1,5 +1,7 @@
 package com.cheesecake.data.models
 
+import com.cheesecake.data.models.base.BaseBirth
+import com.cheesecake.data.models.base.Team
 import com.google.gson.annotations.SerializedName
 
 data class CoachResponse(
@@ -14,7 +16,7 @@ data class CoachResponse(
     @SerializedName("age")
     val age: Int,
     @SerializedName("birth")
-    val birth: Birth,
+    val birth: BaseBirth,
     @SerializedName("nationality")
     val nationality: String,
     @SerializedName("height")
@@ -28,24 +30,6 @@ data class CoachResponse(
     @SerializedName("career")
     val career: List<Career>
 ) {
-    data class Birth(
-        @SerializedName("date")
-        val date: String,
-        @SerializedName("place")
-        val place: String,
-        @SerializedName("country")
-        val country: String
-    )
-
-    data class Team(
-        @SerializedName("id")
-        val id: Int,
-        @SerializedName("name")
-        val name: String,
-        @SerializedName("logo")
-        val logo: String
-    )
-
     data class Career(
         @SerializedName("team")
         val team: Team,
@@ -53,14 +37,5 @@ data class CoachResponse(
         val start: String,
         @SerializedName("end")
         val end: String
-    ) {
-        data class Team(
-            @SerializedName("id")
-            val id: Int,
-            @SerializedName("name")
-            val name: String,
-            @SerializedName("logo")
-            val logo: String
-        )
-    }
+    )
 }
