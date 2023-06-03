@@ -1,6 +1,7 @@
 package com.cheesecake.data.models
 
 
+import com.cheesecake.data.local.models.TeamLocalDto
 import com.google.gson.annotations.SerializedName
 
 data class TeamInformationDTO(
@@ -43,3 +44,4 @@ data class TeamInformationDTO(
         val image: String
     )
 }
+
