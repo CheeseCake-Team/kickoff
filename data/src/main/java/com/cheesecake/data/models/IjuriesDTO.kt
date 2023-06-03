@@ -1,9 +1,11 @@
 package com.cheesecake.data.models
 
 
+import com.cheesecake.data.models.base.LeagueCountrySeason
+import com.cheesecake.data.models.base.Team
 import com.google.gson.annotations.SerializedName
 
-data class SingleInjuriesResponse(
+data class IjuriesDTO(
     @SerializedName("player")
     val player: Player,
     @SerializedName("team")
@@ -11,7 +13,7 @@ data class SingleInjuriesResponse(
     @SerializedName("fixture")
     val fixture: Fixture,
     @SerializedName("league")
-    val league: League
+    val league: LeagueCountrySeason
 ) {
     data class Player(
         @SerializedName("id")
@@ -26,15 +28,6 @@ data class SingleInjuriesResponse(
         val reason: String
     )
 
-    data class Team(
-        @SerializedName("id")
-        val id: Int,
-        @SerializedName("name")
-        val name: String,
-        @SerializedName("logo")
-        val logo: String
-    )
-
     data class Fixture(
         @SerializedName("id")
         val id: Int,
@@ -44,20 +37,5 @@ data class SingleInjuriesResponse(
         val date: String,
         @SerializedName("timestamp")
         val timestamp: Int
-    )
-
-    data class League(
-        @SerializedName("id")
-        val id: Int,
-        @SerializedName("season")
-        val season: Int,
-        @SerializedName("name")
-        val name: String,
-        @SerializedName("country")
-        val country: String,
-        @SerializedName("logo")
-        val logo: String,
-        @SerializedName("flag")
-        val flag: String
     )
 }
