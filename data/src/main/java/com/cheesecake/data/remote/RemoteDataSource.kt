@@ -1,8 +1,13 @@
 package com.cheesecake.data.remote
 
 import com.cheesecake.data.models.dto.CoachDTO
+import com.cheesecake.data.models.dto.EventDTO
+import com.cheesecake.data.models.dto.FixtureStatisticsDTO
+import com.cheesecake.data.models.dto.FixturesDTO
+import com.cheesecake.data.models.dto.HeadToHeadDTO
 import com.cheesecake.data.models.dto.IjuriesDTO
 import com.cheesecake.data.models.dto.LeagueDTO
+import com.cheesecake.data.models.dto.LineupDTO
 import com.cheesecake.data.models.dto.PlayerDTO
 import com.cheesecake.data.models.dto.PredictionsDTO
 import com.cheesecake.data.models.dto.SidelinedDTO
@@ -15,15 +20,12 @@ import com.cheesecake.data.models.dto.TransferDTO
 import com.cheesecake.data.models.dto.TrophyDTO
 import com.cheesecake.data.models.dto.VenuesDTO
 import com.cheesecake.data.remote.response.FixtureResponse
+import com.cheesecake.data.utils.FixtureStatus
 import com.cheesecake.data.utils.LeagueType
 
 
 interface RemoteDataSource {
 
-    suspend fun getFixtureById(
-        timeZone: String,
-        fixtureId: Int
-    ): List<FixtureResponse>
 
     //region coachs
 
@@ -60,6 +62,196 @@ interface RemoteDataSource {
     suspend fun searchInCountries(
         searchQuery: String
     ): List<TeamCountriesDTO>
+    //endregion
+
+    //region fixtures
+    //region Rounds
+    suspend fun getFixtureRounds(
+        seasonId: Int,
+        leagueId: Int
+    ): List<String>
+
+
+    suspend fun getFixtureRoundsCurrentOnly(
+        seasonId: Int,
+        leagueId: Int,
+        current: Boolean,
+    ): List<String>
+
+    //endregion
+    //region Fixtuers
+    suspend fun getFixtureById(
+        timeZone: String,
+        fixtureId: Int
+    ): List<FixtureResponse>
+
+    suspend fun getFixtureBySeasonByTeamId(
+        timeZone: String,
+        season: String,
+        TeamId: Int
+    ): List<FixtureResponse>
+
+    suspend fun getFixturesByDate(
+        timeZone: String,
+        date: String
+    ): List<FixtureResponse>
+
+
+    suspend fun getFixturesFromDate(
+        timeZone: String,
+        date: String
+    ): List<FixtureResponse>
+
+    suspend fun getFixturesToDate(
+        timeZone: String,
+        date: String
+    ): List<FixtureResponse>
+
+    suspend fun getFixturesFromDateToDate(
+        timeZone: String,
+        season: String,
+        TeamId: Int,
+        from: String,
+        date: String
+    ): List<FixtureResponse>
+
+    suspend fun getFixturesStatus(
+        timeZone: String,
+        fixtureStatusType: String
+    ): List<FixtureResponse>
+    //endregion
+    //region Head 2 Head
+
+    suspend fun getHeadToHead(
+        teamsId: String,
+        seasonId: Int,
+        timeZone: String
+    ): List<HeadToHeadDTO>
+
+
+    suspend fun getHeadToHeadByDate(
+        teamsId: String,
+        date: String,
+        timeZone: String
+    ): List<HeadToHeadDTO>
+
+
+    suspend fun getHeadToHeadByStatus(
+        teamsId: String,
+        status: FixtureStatus,
+        seasonId: Int,
+        timeZone: String
+    ): List<HeadToHeadDTO>
+
+
+    suspend fun getHeadToHeadByFromAndTO(
+        teamsId: String,
+        from: String,
+        to: String,
+        seasonId: Int,
+        timeZone: String
+    ): List<HeadToHeadDTO>
+
+
+    suspend fun getHeadToHeadByLeague(
+        teamsId: String,
+        leagueId: Int,
+        seasonId: Int,
+        timeZone: String
+    ): List<HeadToHeadDTO>
+
+
+    suspend fun getHeadToHeadByByDateAndLeague(
+        teamsId: String,
+        leagueId: Int,
+        date: String,
+        timeZone: String
+    ): List<HeadToHeadDTO>
+
+
+    suspend fun getHeadToHeadByStatusAndLeague(
+        teamsId: String,
+        leagueId: Int,
+        status: FixtureStatus,
+        seasonId: Int,
+        timeZone: String
+    ): List<HeadToHeadDTO>
+
+
+    suspend fun getHeadToHeadByFromAndTOAndLeague(
+        teamsId: String,
+        leagueId: Int,
+        from: String,
+        to: String,
+        seasonId: Int,
+        timeZone: String
+    ): List<HeadToHeadDTO>
+    //endregion
+    //region Statistics
+
+    suspend fun getFixtureStatisticsByFixtureId(
+        fixtureId: Int
+    ): List<FixtureStatisticsDTO>
+
+
+    suspend fun getFixtureStatisticsByFixtureIdByTeamId(
+        fixtureId: Int,
+        teamId: Int
+    ): List<FixtureStatisticsDTO>
+    //endregion
+    //region Events
+
+    suspend fun getFixtureEventsByFixtureId(
+        fixtureId: Int
+    ): List<EventDTO>
+
+
+    suspend fun getFixtureEventsByFixtureIdByTeamId(
+        fixtureId: Int,
+        teamId: Int
+    ): List<EventDTO>
+
+
+    suspend fun getFixtureEventsByFixtureIdByTeamIdByPlayerId(
+        fixtureId: Int,
+        teamId: Int,
+        playerId: Int,
+    ): List<EventDTO>
+
+
+    suspend fun getFixtureEventsByFixtureIdByTeamIdByPlayerIdByType(
+        fixtureId: Int,
+        teamId: Int,
+        playerId: Int,
+        fixtureEventType: String,
+    ): List<EventDTO>
+    //endregion
+    //region Lineups
+    suspend fun getFixtureLineupsByFixtureId(
+        fixtureId: Int
+    ): List<LineupDTO>
+
+    suspend fun getFixtureLineupsByFixtureIdByTeamId(
+        fixtureId: Int,
+        teamId: Int
+    ): List<LineupDTO>
+
+    suspend fun getFixtureLineupsByFixtureIdByPlayerId(
+        fixtureId: Int,
+        playerId: Int
+    ): List<LineupDTO>
+
+    //endregion
+    //region Players
+    suspend fun getFixturePlayersByFixtureId(
+        fixtureId: String
+    ): List<FixturesDTO>
+    suspend fun getFixturePlayersByFixtureIdByTeamId(
+        fixtureId: Int,
+        teamId: Int
+    ): List<FixturesDTO>
+
+    //endregion
     //endregion
 
     //region injuries

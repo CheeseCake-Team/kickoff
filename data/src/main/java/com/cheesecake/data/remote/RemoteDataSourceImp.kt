@@ -3,8 +3,13 @@ package com.cheesecake.data.remote
 import com.cheesecake.data.models.base.BaseResponse
 import com.cheesecake.data.models.base.BaseStaticResponse
 import com.cheesecake.data.models.dto.CoachDTO
+import com.cheesecake.data.models.dto.EventDTO
+import com.cheesecake.data.models.dto.FixtureStatisticsDTO
+import com.cheesecake.data.models.dto.FixturesDTO
+import com.cheesecake.data.models.dto.HeadToHeadDTO
 import com.cheesecake.data.models.dto.IjuriesDTO
 import com.cheesecake.data.models.dto.LeagueDTO
+import com.cheesecake.data.models.dto.LineupDTO
 import com.cheesecake.data.models.dto.PlayerDTO
 import com.cheesecake.data.models.dto.PredictionsDTO
 import com.cheesecake.data.models.dto.SidelinedDTO
@@ -18,6 +23,7 @@ import com.cheesecake.data.models.dto.TrophyDTO
 import com.cheesecake.data.models.dto.VenuesDTO
 import com.cheesecake.data.remote.api.FootballApiService
 import com.cheesecake.data.remote.response.FixtureResponse
+import com.cheesecake.data.utils.FixtureStatus
 import com.cheesecake.data.utils.LeagueType
 import retrofit2.Response
 import javax.inject.Inject
@@ -25,11 +31,7 @@ import javax.inject.Inject
 class RemoteDataSourceImp @Inject constructor(
     private val service: FootballApiService
 ) : RemoteDataSource {
-    override suspend fun getFixtureById(timeZone: String, fixtureId: Int): List<FixtureResponse> {
-        return wrapBaseResponse {
-            service.getFixtureById(timeZone, fixtureId)
-        }
-    }
+
     //region coachs
     override suspend fun getCoachById(playerID: Int): List<CoachDTO> {
         return wrapBaseResponse { service.getCoachById(playerID) }
@@ -64,6 +66,229 @@ class RemoteDataSourceImp @Inject constructor(
     }
 
 
+    //endregion
+
+    //region fixtures
+    //region Rounds
+    override suspend fun getFixtureRounds(seasonId: Int, leagueId: Int): List<String> {
+        return wrapBaseResponse { service.getFixtureRounds(seasonId, leagueId) }
+    }
+
+    override suspend fun getFixtureRoundsCurrentOnly(
+        seasonId: Int,
+        leagueId: Int,
+        current: Boolean
+    ): List<String> {
+        return wrapBaseResponse { service.getFixtureRoundsCurrentOnly(seasonId, leagueId, current) }
+    }
+    //endregion
+    //region Fixtuers
+    override suspend fun getFixtureById(timeZone: String, fixtureId: Int): List<FixtureResponse> {
+        return wrapBaseResponse { service.getFixtureById(timeZone,fixtureId)
+        }
+    }
+
+    override suspend fun getFixtureBySeasonByTeamId(
+        timeZone: String,
+        season: String,
+        TeamId: Int
+    ): List<FixtureResponse> {
+        return wrapBaseResponse { service.getFixturesBySeasonIdByTeamId(timeZone, season, TeamId) }
+    }
+
+    override suspend fun getFixturesByDate(timeZone: String, date: String): List<FixtureResponse> {
+        return wrapBaseResponse { service.getFixturesByDate(timeZone, date) }
+    }
+
+    override suspend fun getFixturesFromDate(
+        timeZone: String,
+        date: String
+    ): List<FixtureResponse> {
+        return wrapBaseResponse { service.getFixturesFromDate(timeZone, date) }
+    }
+
+    override suspend fun getFixturesToDate(timeZone: String, date: String): List<FixtureResponse> {
+        return wrapBaseResponse { service.getFixturesToDate(timeZone, date) }
+    }
+
+    override suspend fun getFixturesFromDateToDate(
+        timeZone: String,
+        season: String,
+        TeamId: Int,
+        from: String,
+        date: String
+    ): List<FixtureResponse> {
+        return wrapBaseResponse { service.getFixturesFromDateToDate(
+            timeZone, season, TeamId,from,date) }
+    }
+
+    override suspend fun getFixturesStatus(
+        timeZone: String,
+        fixtureStatusType: String
+    ): List<FixtureResponse> {
+        return wrapBaseResponse { service.getFixturesStatus(timeZone, fixtureStatusType) }
+    }
+
+
+    //endregion
+    //region Head 2 Head
+    override suspend fun getHeadToHead(
+        teamsId: String,
+        seasonId: Int,
+        timeZone: String
+    ): List<HeadToHeadDTO> {
+        return wrapBaseResponse { service.getHeadToHead(teamsId, seasonId, timeZone) }
+    }
+
+    override suspend fun getHeadToHeadByDate(
+        teamsId: String,
+        date: String,
+        timeZone: String
+    ): List<HeadToHeadDTO> {
+        return wrapBaseResponse { service.getHeadToHeadByDate(
+            teamsId, date, timeZone) }
+    }
+
+    override suspend fun getHeadToHeadByStatus(
+        teamsId: String,
+        status: FixtureStatus,
+        seasonId: Int,
+        timeZone: String
+    ): List<HeadToHeadDTO> {
+        return wrapBaseResponse { service.getHeadToHeadByStatus(
+            teamsId, status, seasonId, timeZone) }
+    }
+
+    override suspend fun getHeadToHeadByFromAndTO(
+        teamsId: String,
+        from: String,
+        to: String,
+        seasonId: Int,
+        timeZone: String
+    ): List<HeadToHeadDTO> {
+        return wrapBaseResponse { service.getHeadToHeadByFromAndTO(
+            teamsId, from, to, seasonId, timeZone) }
+    }
+
+    override suspend fun getHeadToHeadByLeague(
+        teamsId: String,
+        leagueId: Int,
+        seasonId: Int,
+        timeZone: String
+    ): List<HeadToHeadDTO> {
+        return wrapBaseResponse { service.getHeadToHeadByLeague(
+            teamsId, leagueId, seasonId, timeZone) }
+    }
+
+    override suspend fun getHeadToHeadByByDateAndLeague(
+        teamsId: String,
+        leagueId: Int,
+        date: String,
+        timeZone: String
+    ): List<HeadToHeadDTO> {
+        return wrapBaseResponse { service.getHeadToHeadByByDateAndLeague(
+            teamsId, leagueId, date, timeZone) }
+    }
+
+    override suspend fun getHeadToHeadByStatusAndLeague(
+        teamsId: String,
+        leagueId: Int,
+        status: FixtureStatus,
+        seasonId: Int,
+        timeZone: String
+    ): List<HeadToHeadDTO> {
+        return wrapBaseResponse { service.getHeadToHeadByStatusAndLeague(
+            teamsId, leagueId, status, seasonId, timeZone) }
+    }
+
+    override suspend fun getHeadToHeadByFromAndTOAndLeague(
+        teamsId: String,
+        leagueId: Int,
+        from: String,
+        to: String,
+        seasonId: Int,
+        timeZone: String
+    ): List<HeadToHeadDTO> {
+        return wrapBaseResponse { service.getHeadToHeadByFromAndTOAndLeague(
+            teamsId, leagueId, from, to, seasonId, timeZone) }
+    }
+    //endregion
+    //region Statistics
+    override suspend fun getFixtureStatisticsByFixtureId(fixtureId: Int): List<FixtureStatisticsDTO> {
+        return wrapBaseResponse { service.getFixtureStatisticsByFixtureId(fixtureId) }
+    }
+
+    override suspend fun getFixtureStatisticsByFixtureIdByTeamId(
+        fixtureId: Int,
+        teamId: Int
+    ): List<FixtureStatisticsDTO> {
+        return wrapBaseResponse { service.getFixtureStatisticsByFixtureIdByTeamId(
+            fixtureId, teamId) }
+    }
+    //endregion
+    //region Events
+    override suspend fun getFixtureEventsByFixtureId(fixtureId: Int): List<EventDTO> {
+        return wrapBaseResponse { service.getFixtureEventsByFixtureId(fixtureId) }
+    }
+
+    override suspend fun getFixtureEventsByFixtureIdByTeamId(
+        fixtureId: Int,
+        teamId: Int
+    ): List<EventDTO> {
+        return wrapBaseResponse { service.getFixtureEventsByFixtureIdByTeamId(fixtureId, teamId) }
+    }
+
+    override suspend fun getFixtureEventsByFixtureIdByTeamIdByPlayerId(
+        fixtureId: Int,
+        teamId: Int,
+        playerId: Int
+    ): List<EventDTO> {
+        return wrapBaseResponse { service.getFixtureEventsByFixtureIdByTeamIdByPlayerId(
+            fixtureId, teamId, playerId) }
+    }
+
+    override suspend fun getFixtureEventsByFixtureIdByTeamIdByPlayerIdByType(
+        fixtureId: Int,
+        teamId: Int,
+        playerId: Int,
+        fixtureEventType: String
+    ): List<EventDTO> {
+        return wrapBaseResponse { service.getFixtureEventsByFixtureIdByTeamIdByPlayerIdByType(
+            fixtureId, teamId, playerId, fixtureEventType) }
+    }
+    //endregion
+    //region LineUps
+    override suspend fun getFixtureLineupsByFixtureId(fixtureId: Int): List<LineupDTO> {
+        return wrapBaseResponse { service.getFixtureLineupsByFixtureId(fixtureId) }
+    }
+
+    override suspend fun getFixtureLineupsByFixtureIdByTeamId(
+        fixtureId: Int,
+        teamId: Int
+    ): List<LineupDTO> {
+        return wrapBaseResponse { service.getFixtureLineupsByFixtureIdByTeamId(
+            fixtureId, teamId) }
+    }
+
+    override suspend fun getFixtureLineupsByFixtureIdByPlayerId(
+        fixtureId: Int,
+        playerId: Int
+    ): List<LineupDTO> {
+        return wrapBaseResponse { service.getFixtureLineupsByFixtureIdByPlayerId(fixtureId, playerId) }
+    }
+    //endregion
+    //region Players
+    override suspend fun getFixturePlayersByFixtureId(fixtureId: String): List<FixturesDTO> {
+        return wrapBaseResponse { service.getFixturePlayersByFixtureId(fixtureId) }
+    }
+
+    override suspend fun getFixturePlayersByFixtureIdByTeamId(
+        fixtureId: Int,
+        teamId: Int
+    ): List<FixturesDTO> {
+        return wrapBaseResponse { service.getFixturePlayersByFixtureIdByTeamId(fixtureId, teamId) }
+    }
+    //endregion
     //endregion
 
     //region injuries
@@ -347,6 +572,7 @@ class RemoteDataSourceImp @Inject constructor(
 
 
     //endregion
+
 
 
 
