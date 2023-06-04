@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.models.TeamEntity
 import com.cheesecake.domain.usecases.fixture.GetSingleFixtureByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -43,7 +42,7 @@ class LeagueTeamsViewModel @Inject constructor(
 //                        }
 //                    }
 
-             val f =    getSingleFixtureByIdUseCase("Europe/London",239625)
+                val f = getSingleFixtureByIdUseCase("Europe/London", 239625)
                 Log.d("TAG", "getData: f")
             } catch (e: Exception) {
                 _leagueTeamsUIState.update {

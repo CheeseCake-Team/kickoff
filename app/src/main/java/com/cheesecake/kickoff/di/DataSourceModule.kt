@@ -1,7 +1,7 @@
 package com.cheesecake.kickoff.di
 
-import com.cheesecake.data.dataSource.local.LocalDataSource
-import com.cheesecake.data.dataSource.local.LocalDataSourceImp
+import com.cheesecake.data.local.LocalDataSource
+import com.cheesecake.data.local.LocalDataSourceImp
 import com.cheesecake.data.remote.RemoteDataSource
 import com.cheesecake.data.remote.RemoteDataSourceImp
 import dagger.Binds

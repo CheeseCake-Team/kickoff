@@ -1,67 +1,70 @@
 package com.cheesecake.data.repository.league
 
-import com.cheesecake.data.models.base.BaseResponse
+import com.cheesecake.data.local.LocalDataSource
 import com.cheesecake.data.models.dto.LeagueDTO
+import com.cheesecake.data.remote.RemoteDataSource
 import com.cheesecake.data.utils.LeagueType
-import retrofit2.Response
 import javax.inject.Inject
 
-class LeagueRepository @Inject constructor(private val leaguesApiService: ILeaguesApiService) {
+class LeagueRepository @Inject constructor(
+    private val remoteDataSource: RemoteDataSource,
+    private val localDataSource: LocalDataSource,
+    ) {
 
-    suspend fun getAllLeagues(): Response<BaseResponse<LeagueDTO>> {
-        return leaguesApiService.getAllLeagues()
+    suspend fun getAllLeagues(): List<LeagueDTO> {
+        return remoteDataSource.getAllLeagues()
     }
 
-    suspend fun getLeaguesById(leagueId: Int): Response<BaseResponse<LeagueDTO>> {
-        return leaguesApiService.getLeaguesById(leagueId)
+    suspend fun getLeaguesById(leagueId: Int): List<LeagueDTO> {
+        return remoteDataSource.getLeaguesById(leagueId)
     }
 
-    suspend fun getLeaguesByName(leagueName: String): Response<BaseResponse<LeagueDTO>> {
-        return leaguesApiService.getLeaguesByName(leagueName)
+    suspend fun getLeaguesByName(leagueName: String): List<LeagueDTO> {
+        return remoteDataSource.getLeaguesByName(leagueName)
     }
 
-    suspend fun getLeaguesByCountryName(countryName: String): Response<BaseResponse<LeagueDTO>> {
-        return leaguesApiService.getLeaguesByCountryName(countryName)
+    suspend fun getLeaguesByCountryName(countryName: String): List<LeagueDTO> {
+        return remoteDataSource.getLeaguesByCountryName(countryName)
     }
 
-    suspend fun getLeaguesByCountryCode(countryCode: String): Response<BaseResponse<LeagueDTO>> {
-        return leaguesApiService.getLeaguesByCountryCode(countryCode)
+    suspend fun getLeaguesByCountryCode(countryCode: String): List<LeagueDTO> {
+        return remoteDataSource.getLeaguesByCountryCode(countryCode)
     }
 
-    suspend fun getLeaguesOfSeason(season: Int): Response<BaseResponse<LeagueDTO>> {
-        return leaguesApiService.getLeaguesOfSeason(season)
+    suspend fun getLeaguesOfSeason(season: Int): List<LeagueDTO> {
+        return remoteDataSource.getLeaguesOfSeason(season)
     }
 
     suspend fun getLeagueByIdBySeason(
         leagueId: Int,
         season: Int
-    ): Response<BaseResponse<LeagueDTO>> {
-        return leaguesApiService.getLeagueByIdBySeason(leagueId, season)
+    ): List<LeagueDTO> {
+        return remoteDataSource.getLeagueByIdBySeason(leagueId, season)
     }
 
-    suspend fun getLeaguesByType(type: LeagueType): Response<BaseResponse<LeagueDTO>> {
-        return leaguesApiService.getLeaguesByType(type)
+    suspend fun getLeaguesByType(type: LeagueType): List<LeagueDTO> {
+        return remoteDataSource.getLeaguesByType(type)
     }
 
     suspend fun getLeaguesByTypeById(type: LeagueType, id: Int)
-            : Response<BaseResponse<LeagueDTO>> {
-        return leaguesApiService.getLeaguesByTypeById(type, id)
+            : List<LeagueDTO> {
+        return remoteDataSource.getLeaguesByTypeById(type, id)
     }
 
     suspend fun getLeaguesByTypeByIdBySeason(type: LeagueType, id: Int, season: Int)
-            : Response<BaseResponse<LeagueDTO>> {
-        return leaguesApiService.getLeagueByTypeByIdBySeason(type, id, season)
+            : List<LeagueDTO> {
+        return remoteDataSource.getLeagueByTypeByIdBySeason(type, id, season)
     }
 
-    suspend fun getCurrentActiveLeagues(current: Boolean): Response<BaseResponse<LeagueDTO>> {
-        return leaguesApiService.getCurrentActiveLeagues(current)
+    suspend fun getCurrentActiveLeagues(current: Boolean): List<LeagueDTO> {
+        return remoteDataSource.getCurrentActiveLeagues(current)
     }
 
-    suspend fun searchLeague(name: String): Response<BaseResponse<LeagueDTO>> {
-        return leaguesApiService.searchByLeagueName(name)
+    suspend fun searchLeague(name: String): List<LeagueDTO> {
+        return remoteDataSource.searchByLeagueName(name)
     }
 
-    suspend fun getLeaguesSeasons(): Response<BaseResponse<LeagueDTO>> {
-        return leaguesApiService.getLeaguesSeasons()
+    suspend fun getLeaguesSeasons(): List<LeagueDTO> {
+        return remoteDataSource.getLeaguesSeasons()
     }
 }

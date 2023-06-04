@@ -1,6 +1,6 @@
-package com.cheesecake.data.repository
+package com.cheesecake.data.repository.teams
 
-import com.cheesecake.data.dataSource.local.LocalDataSource
+import com.cheesecake.data.local.LocalDataSource
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 

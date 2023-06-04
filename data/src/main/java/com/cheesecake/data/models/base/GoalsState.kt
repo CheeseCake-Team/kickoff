@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class GoalsState(
     @SerializedName("total")
-    val total: Int,
+    val total: Int?,
     @SerializedName("conceded")
-    val conceded: Int,
+    val conceded: Int?,
     @SerializedName("assists")
-    val assists: Int,
+    val assists: Int?,
     @SerializedName("saves")
-    val saves: Any
+    val saves: Int?
 )
