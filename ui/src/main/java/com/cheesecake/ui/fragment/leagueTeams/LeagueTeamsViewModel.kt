@@ -43,7 +43,7 @@ class LeagueTeamsViewModel @Inject constructor(
 //                    }
 
                 val f = getSingleFixtureByIdUseCase("Europe/London", 239625)
-                Log.d("TAG", "getData: f")
+                Log.d("TAG", "getData: $f")
             } catch (e: Exception) {
                 _leagueTeamsUIState.update {
                     Log.i("TAGgggggggggggggggggg", e.message.toString())

@@ -2,16 +2,17 @@ package com.cheesecake.data.repository.transfers
 
 import com.cheesecake.data.models.base.BaseResponse
 import com.cheesecake.data.models.dto.TransferDTO
+import com.cheesecake.data.remote.RemoteDataSource
 import retrofit2.Response
 import javax.inject.Inject
 
-class TransfersRepository @Inject constructor(private val transferApiService: ITransferApiService) {
+class TransfersRepository @Inject constructor(private val remoteDataSource: RemoteDataSource) {
 
-    suspend fun getTransfersByPlayerId(playerId: Int): Response<BaseResponse<TransferDTO>> {
-        return transferApiService.getTransfersByPlayerId(playerId)
+    suspend fun getTransfersByPlayerId(playerId: Int): List<TransferDTO> {
+        return remoteDataSource.getTransfersByPlayerId(playerId)
     }
 
-    suspend fun getTransfersByTeamId(teamId: Int): Response<BaseResponse<TransferDTO>> {
-        return transferApiService.getTransfersByTeamId(teamId)
+    suspend fun getTransfersByTeamId(teamId: Int): List<TransferDTO> {
+        return remoteDataSource.getTransfersByTeamId(teamId)
     }
 }

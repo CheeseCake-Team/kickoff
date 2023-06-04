@@ -1,85 +1,84 @@
 package com.cheesecake.data.repository.player
 
-import com.cheesecake.data.models.base.BaseResponse
 import com.cheesecake.data.models.dto.PlayerDTO
 import com.cheesecake.data.models.dto.SquadDTO
-import retrofit2.Response
+import com.cheesecake.data.remote.RemoteDataSource
 import javax.inject.Inject
 
-class PlayerRepository @Inject constructor(private val playersApiService: IPlayersApiService) {
+class PlayerRepository @Inject constructor(private val remoteDataSource: RemoteDataSource) {
 
     suspend fun getPlayerBySeasonByPlayerId(
         season: String,
         playerId: Int
-    ): Response<BaseResponse<PlayerDTO>> {
-        return playersApiService.getPlayerBySeasonByPlayerId(season, playerId)
+    ): List<PlayerDTO> {
+        return remoteDataSource.getPlayerBySeasonByPlayerId(season, playerId)
     }
 
     suspend fun getPlayerBySeasonByTeamId(
         season: String,
         teamId: Int
-    ): Response<BaseResponse<PlayerDTO>> {
-        return playersApiService.getPlayerBySeasonByTeamId(season, teamId)
+    ): List<PlayerDTO> {
+        return remoteDataSource.getPlayerBySeasonByTeamId(season, teamId)
     }
 
     suspend fun getPlayerBySeasonByLeagueId(
         season: String,
         leagueId: Int
-    ): Response<BaseResponse<PlayerDTO>> {
-        return playersApiService.getPlayerBySeasonByLeagueId(season, leagueId)
+    ): List<PlayerDTO> {
+        return remoteDataSource.getPlayerBySeasonByLeagueId(season, leagueId)
     }
 
     suspend fun searchPlayerNameByTeamId(
         playerName: String,
         teamId: Int
-    ): Response<BaseResponse<PlayerDTO>> {
-        return playersApiService.searchPlayerNameByTeamId(playerName, teamId)
+    ): List<PlayerDTO> {
+        return remoteDataSource.searchPlayerNameByTeamId(playerName, teamId)
     }
 
     suspend fun searchPlayerNameByLeagueId(
         playerName: String,
         leagueId: Int
-    ): Response<BaseResponse<PlayerDTO>> {
-        return playersApiService.searchPlayerNameByLeagueId(playerName, leagueId)
+    ): List<PlayerDTO> {
+        return remoteDataSource.searchPlayerNameByLeagueId(playerName, leagueId)
     }
 
-    suspend fun getPlayerSeasons(): Response<BaseResponse<Int>> {
-        return playersApiService.getPlayerSeasons()
+    suspend fun getPlayerSeasons(): List<Int> {
+        return remoteDataSource.getPlayerSeasons()
     }
 
-    suspend fun getSquadByPlayerId(playerId: Int): Response<BaseResponse<SquadDTO>> {
-        return playersApiService.getSquadByPlayerId(playerId)
+    suspend fun getSquadByPlayerId(playerId: Int): List<SquadDTO> {
+        return remoteDataSource.getSquadByPlayerId(playerId)
     }
 
-    suspend fun getSquadByTeamId(teamId: Int): Response<BaseResponse<SquadDTO>> {
-        return playersApiService.getSquadByTeamId(teamId)
+    suspend fun getSquadByTeamId(teamId: Int): List<SquadDTO> {
+        return remoteDataSource.getSquadByTeamId(teamId)
     }
 
     suspend fun getTopScorers(
         seasonId: Int,
         leagueId: Int
-    ): Response<BaseResponse<PlayerDTO>> {
-        return playersApiService.getTopScorers(seasonId, leagueId)
+    ): List<PlayerDTO> {
+        return remoteDataSource.getTopScorers(seasonId, leagueId)
     }
 
     suspend fun getTopAssists(
         seasonId: Int,
         leagueId: Int
-    ): Response<BaseResponse<PlayerDTO>> {
-        return playersApiService.getTopAssists(seasonId, leagueId)
+    ): List<PlayerDTO> {
+        return remoteDataSource.getTopAssists(seasonId, leagueId)
     }
 
     suspend fun getTopYellowCards(
         seasonId: Int,
         leagueId: Int
-    ): Response<BaseResponse<PlayerDTO>> {
-        return playersApiService.getTopYellowCards(seasonId, leagueId)
+    ): List<PlayerDTO> {
+        return remoteDataSource.getTopYellowCards(seasonId, leagueId)
     }
 
     suspend fun getTopRedCards(
         seasonId: Int,
         leagueId: Int
-    ): Response<BaseResponse<PlayerDTO>> {
-        return playersApiService.getTopRedCards(seasonId, leagueId)
+    ): List<PlayerDTO> {
+        return remoteDataSource.getTopRedCards(seasonId, leagueId)
     }
 }

@@ -2,19 +2,20 @@ package com.cheesecake.data.repository.coach
 
 import com.cheesecake.data.models.base.BaseResponse
 import com.cheesecake.data.models.dto.CoachDTO
+import com.cheesecake.data.remote.RemoteDataSource
 import retrofit2.Response
 import javax.inject.Inject
 
-class CoachRepository @Inject constructor(private val coachApiService: ICoachApiService) {
-    suspend fun getCoachById(playerID: Int): Response<BaseResponse<CoachDTO>> {
-        return coachApiService.getCoachById(playerID)
+class CoachRepository @Inject constructor(private val remoteDataSource: RemoteDataSource) {
+    suspend fun getCoachById(playerID: Int): List<CoachDTO> {
+        return remoteDataSource.getCoachById(playerID)
     }
 
-    suspend fun getCoachByTeam(teamID: Int): Response<BaseResponse<CoachDTO>> {
-        return coachApiService.getCoachByTeam(teamID)
+    suspend fun getCoachByTeam(teamID: Int): List<CoachDTO> {
+        return remoteDataSource.getCoachByTeam(teamID)
     }
 
-    suspend fun getCoachBySearch(coachName: String): Response<BaseResponse<CoachDTO>> {
-        return coachApiService.getCoachBySearch(coachName)
+    suspend fun getCoachBySearch(coachName: String): List<CoachDTO> {
+        return remoteDataSource.getCoachBySearch(coachName)
     }
 }

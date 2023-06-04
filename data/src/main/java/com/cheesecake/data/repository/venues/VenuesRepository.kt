@@ -1,30 +1,29 @@
 package com.cheesecake.data.repository.venues
 
-import com.cheesecake.data.models.base.BaseResponse
 import com.cheesecake.data.models.dto.VenuesDTO
-import retrofit2.Response
+import com.cheesecake.data.remote.RemoteDataSource
 import javax.inject.Inject
 
-class VenuesRepository @Inject constructor (private val venuesApiService: IVenuesApiService) {
+class VenuesRepository @Inject constructor(private val remoteDataSource: RemoteDataSource) {
 
-    suspend fun getVenueById(venueId: Int): Response<BaseResponse<VenuesDTO>> {
-        return venuesApiService.getVenueById(venueId)
+    suspend fun getVenueById(venueId: Int): List<VenuesDTO> {
+        return remoteDataSource.getVenueById(venueId)
     }
 
-    suspend fun getVenueByName(venueName: String): Response<BaseResponse<VenuesDTO>> {
-        return venuesApiService.getVenueByName(venueName)
+    suspend fun getVenueByName(venueName: String): List<VenuesDTO> {
+        return remoteDataSource.getVenueByName(venueName)
     }
 
-    suspend fun getVenuesByCityName(cityName: String): Response<BaseResponse<VenuesDTO>> {
-        return venuesApiService.getVenuesByCityName(cityName)
+    suspend fun getVenuesByCityName(cityName: String): List<VenuesDTO> {
+        return remoteDataSource.getVenuesByCityName(cityName)
     }
 
-    suspend fun getVenuesByCountryName(countryName: String): Response<BaseResponse<VenuesDTO>> {
-        return venuesApiService.getVenuesByCountryName(countryName)
+    suspend fun getVenuesByCountryName(countryName: String): List<VenuesDTO> {
+        return remoteDataSource.getVenuesByCountryName(countryName)
     }
 
-    suspend fun searchVenueByName(venueName: String): Response<BaseResponse<VenuesDTO>> {
-        return venuesApiService.searchVenue(venueName)
+    suspend fun searchVenueByName(venueName: String): List<VenuesDTO> {
+        return remoteDataSource.searchVenue(venueName)
     }
 
 }
