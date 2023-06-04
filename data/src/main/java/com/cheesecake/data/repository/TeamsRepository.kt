@@ -3,7 +3,8 @@ package com.cheesecake.data.repository
 import android.util.Log
 import com.cheesecake.data.di.DefaultDispatcher
 import com.cheesecake.data.local.daos.TeamsDao
-import com.cheesecake.data.local.dataSource.LocalDataSource
+import com.cheesecake.data.dataSource.local.LocalDataSource
+import com.cheesecake.data.dataSource.remote.RemoteDataSource
 import com.cheesecake.data.local.models.TeamLocalDto
 import com.cheesecake.data.models.base.BaseResponse
 import com.cheesecake.data.models.base.BaseStaticResponse
@@ -21,8 +22,7 @@ import javax.inject.Inject
 
 class TeamsRepository @Inject constructor(
     private val localDataSource: LocalDataSource,
-    private val teamsApiService: ITeamsApiService,
-    private val teamsDao: TeamsDao,
+    private val remoteDataSource: RemoteDataSource,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher,
 ) {
 
@@ -41,10 +41,10 @@ class TeamsRepository @Inject constructor(
     private suspend fun refresh(leagueId: Int, seasonId: Int) {
         withContext(defaultDispatcher) {
 //            try {
-            val remoteTeams = teamsApiService.getTeamsByLeagueAndSeason(leagueId, seasonId)
+            val remoteTeams = remoteDataSource.getTeamsByLeagueAndSeason(leagueId, seasonId)
             localDataSource.deleteAll()
             Log.d("refresh: ", "here")
-            remoteTeams.body()?.response?.let { teamInformation ->
+            remoteTeams.let { teamInformation ->
                 localDataSource.upsertAll(teamInformation.map {
                     it.toLocal()
                 })
@@ -67,19 +67,8 @@ class TeamsRepository @Inject constructor(
         }
     }
 
-//    private suspend fun <T : Any> wrap(function: suspend () -> Response<BaseResponse<T>>): T {
-//        val response = function()
-//        return if (response.isSuccessful) {
-//            response.body()?.response
-//            } else {
-//            throw Throwable("Network Error")
-//
-//        } as T
-//    }
-
-
     suspend fun getTeamById(teamId: Int): Response<BaseResponse<TeamInformationDTO>> {
-        return teamsApiService.getTeamById(teamId)
+        return remoteDataSource.getTeamById(teamId)
     }
 
     suspend fun getTeamStatistics(
@@ -87,15 +76,15 @@ class TeamsRepository @Inject constructor(
         season: Int,
         leagueId: Int
     ): Response<BaseStaticResponse<TeamStatisticsDTO>> {
-        return teamsApiService.getTeamStatistics(teamId, season, leagueId)
+        return remoteDataSource.getTeamStatistics(teamId, season, leagueId)
     }
 
     suspend fun getTeamSeasons(teamId: Int): Response<BaseResponse<Int>> {
-        return teamsApiService.getTeamSeasons(teamId)
+        return remoteDataSource.getTeamSeasons(teamId)
     }
 
     suspend fun getTeamCountries(): Response<BaseResponse<TeamCountriesDTO>> {
-        return teamsApiService.getTeamCountries()
+        return remoteDataSource.getTeamCountries()
     }
 }
 

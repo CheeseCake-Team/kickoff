@@ -1,4 +1,4 @@
-package com.cheesecake.data.local.dataSource
+package com.cheesecake.data.dataSource.local
 
 import com.cheesecake.data.local.models.TeamLocalDto
 import kotlinx.coroutines.flow.Flow

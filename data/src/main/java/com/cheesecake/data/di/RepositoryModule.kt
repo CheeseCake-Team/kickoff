@@ -1,7 +1,8 @@
 package com.cheesecake.data.di
 
 import com.cheesecake.data.local.daos.TeamsDao
-import com.cheesecake.data.local.dataSource.LocalDataSource
+import com.cheesecake.data.dataSource.local.LocalDataSource
+import com.cheesecake.data.dataSource.remote.RemoteDataSource
 import com.cheesecake.data.remote.coach.CoachRepository
 import com.cheesecake.data.remote.coach.ICoachApiService
 import com.cheesecake.data.remote.countries.CountriesRepository
@@ -93,11 +94,10 @@ object RepositoryModule {
     @Provides
     fun provideTeamsRepository(
         localDataSource: LocalDataSource,
-        teamsApiService: ITeamsApiService,
-        teamsDao: TeamsDao,
+        remoteDataSource: RemoteDataSource,
         @DefaultDispatcher defaultDispatcher: CoroutineDispatcher
     ): TeamsRepository {
-        return TeamsRepository(localDataSource,teamsApiService, teamsDao, defaultDispatcher)
+        return TeamsRepository(localDataSource,remoteDataSource, defaultDispatcher)
     }
 
     @Singleton
