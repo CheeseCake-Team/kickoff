@@ -384,6 +384,13 @@ interface FootballApiService {
 
     @GET("leagues/seasons")
     suspend fun getLeaguesSeasons(): Response<BaseResponse<LeagueDTO>>
+
+    @GET("leagues")
+    suspend fun getCurrentSeasonLeague(
+        @Query("id") id: Int,
+        @Query("current") current: Boolean
+    ): Response<BaseResponse<LeagueDTO>>
+
     //endregion
 
     //region players
