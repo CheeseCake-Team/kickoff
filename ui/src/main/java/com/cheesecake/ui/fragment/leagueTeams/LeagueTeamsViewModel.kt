@@ -4,9 +4,8 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.models.TeamEntity
-import com.cheesecake.domain.usecases.GetAllTeamsInLeagueWithSeason
+import com.cheesecake.domain.usecases.fixture.GetSingleFixtureByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -21,7 +20,8 @@ data class LeagueTeamsUIState(
 
 @HiltViewModel
 class LeagueTeamsViewModel @Inject constructor(
-    private val getAllTeamsInLeagueWithSeason: GetAllTeamsInLeagueWithSeason
+//    private val getAllTeamsInLeagueWithSeason: GetAllTeamsInLeagueWithSeason
+    private val getSingleFixtureByIdUseCase: GetSingleFixtureByIdUseCase
 ) : ViewModel() {
 
     private val _leagueTeamsUIState = MutableStateFlow(LeagueTeamsUIState())
@@ -34,13 +34,16 @@ class LeagueTeamsViewModel @Inject constructor(
     private fun getData() {
         viewModelScope.launch {
             try {
-                getAllTeamsInLeagueWithSeason(39, 2022)
-                    .collect { list ->
-                        _leagueTeamsUIState.update {
-                            delay(2000)
-                            it.copy(data = list, isLoading = false)
-                        }
-                    }
+//                getAllTeamsInLeagueWithSeason(39, 2022)
+//                    .collect { list ->
+//                        _leagueTeamsUIState.update {
+//                            delay(2000)
+//                            it.copy(data = list, isLoading = false)
+//                        }
+//                    }
+
+                val f = getSingleFixtureByIdUseCase("Europe/London", 239625)
+                Log.d("TAG", "getData: $f")
             } catch (e: Exception) {
                 _leagueTeamsUIState.update {
                     Log.i("TAGgggggggggggggggggg", e.message.toString())
