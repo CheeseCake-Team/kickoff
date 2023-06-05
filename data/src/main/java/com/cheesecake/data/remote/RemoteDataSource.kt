@@ -348,6 +348,11 @@ interface RemoteDataSource {
     suspend fun getLeaguesSeasons(
 
     ): List<LeagueDTO>
+
+    suspend fun getCurrentSeasonLeague(
+        id: Int,
+        current: Boolean
+    ): List<LeagueDTO>
     //endregion
 
     //region players

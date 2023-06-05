@@ -383,6 +383,10 @@ class RemoteDataSourceImp @Inject constructor(
         return wrapBaseResponse { service.getLeaguesSeasons() }
     }
 
+    override suspend fun getCurrentSeasonLeague(id: Int, current: Boolean): List<LeagueDTO> {
+        return wrapBaseResponse { service.getCurrentSeasonLeague(id, current) }
+    }
+
 
     //endregion
 
