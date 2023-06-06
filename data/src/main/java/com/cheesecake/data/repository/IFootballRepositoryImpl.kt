@@ -1,7 +1,7 @@
 package com.cheesecake.data.repository
 
 
-import com.cheesecake.data.repository.models.dto.mapToDomain
+import com.cheesecake.data.repository.models.response.mapToDomain
 import com.cheesecake.domain.Entity.*
 import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject

@@ -51,7 +51,7 @@ class TeamsRepository @Inject constructor(
 //        }
 //    }
 //
-//    suspend fun getTeamById(teamId: Int): Response<BaseResponse<TeamInformationDTO>> {
+//    suspend fun getTeamById(teamId: Int): Response<BaseResponse<TeamInformationResponse>> {
 //        return remoteDataSource.getTeamById(teamId)
 //    }
 //
