@@ -20,6 +20,5 @@ interface LocalDataSource {
 
     suspend fun updateOrInsertLeague(league: LeagueLocalDto)
 
-    suspend fun deleteAllUnFavouriteLeagues()
 
 }

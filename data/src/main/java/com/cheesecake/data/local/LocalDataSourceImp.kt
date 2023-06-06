@@ -46,16 +46,12 @@ class LocalDataSourceImp @Inject constructor(
        teamsDao.deleteAll()
     }
 
-    override suspend fun getLeagueById(leagueId: Int): LeagueLocalDto? {
-        return teamsDao.getLeagueById(leagueId)
+    override suspend fun getLeagueByIdAndSeason(leagueId: Int, leagueSeason: Int): LeagueLocalDto? {
+        return leagueDao.getLeagueByIdAndSeason(leagueId, leagueSeason)
     }
 
     override suspend fun updateOrInsertLeague(league: LeagueLocalDto) {
-        teamsDao.updateOrInsertLeagueLocalDto(league)
-    }
-
-    override suspend fun deleteAllUnFavouriteLeagues() {
-        teamsDao.deleteAllUnFavouriteLeagues()
+        leagueDao.updateOrInsertLeagueLocalDto(league)
     }
 
 }

@@ -40,7 +40,7 @@ class LeagueRepository @Inject constructor(
         leagueId: Int,
         season: Int
     ): List<LeagueDTO> {
-        return remoteDataSource.getLeagueByIdBySeason(leagueId, season)
+        return remoteDataSource.getLeagueByIdAndSeason(leagueId, season)
     }
 
     suspend fun getLeaguesByType(type: LeagueType): List<LeagueDTO> {
