@@ -32,7 +32,6 @@
             android:id="@+id/imageView"
             android:layout_width="@dimen/team_image_size_48dp"
             android:layout_height="@dimen/team_image_size_48dp"
-            android:layout_marginStart="@dimen/spacing_medium"
             android:contentDescription="@string/league_loge"
             app:imageUrl="@{viewModel.leagueUIState.imageUrl}"
             app:layout_constraintStart_toEndOf="@+id/back_button"
