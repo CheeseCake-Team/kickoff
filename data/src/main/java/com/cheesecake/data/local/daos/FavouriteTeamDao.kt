@@ -1,13 +1,13 @@
 package com.cheesecake.data.local.daos
 
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.cheesecake.data.local.models.FavouriteTeamLocalDto
-import com.cheesecake.data.local.models.TeamLocalDto
 import kotlinx.coroutines.flow.Flow
 
+@Dao
 interface FavouriteTeamDao {
-
 
     @Query("SELECT * FROM team_table")
     fun getFavTeams(): Flow<List<FavouriteTeamLocalDto>>

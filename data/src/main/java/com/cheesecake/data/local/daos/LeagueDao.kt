@@ -1,10 +1,12 @@
 package com.cheesecake.data.local.daos
 
+import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
 import com.cheesecake.data.local.models.LeagueLocalDto
 import kotlinx.coroutines.flow.Flow
 
+@Dao
 interface LeagueDao {
 
 
