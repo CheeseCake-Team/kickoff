@@ -1,10 +1,9 @@
 package com.cheesecake.domain.usecases.trophies
 
-import com.cheesecake.data.repository.trophies.TrophiesRepository
 import javax.inject.Inject
 
 class GetPlayerTrophiesUseCases
-@Inject constructor(private val TrophiesRepository: TrophiesRepository) {
+@Inject constructor(/*private val TrophiesRepository: TrophiesRepository*/) {
 
 //    suspend operator fun invoke(playerId: Int): Trophy {
 //        val dtoResponse = getPlayerTrophiesResponse(playerId)
