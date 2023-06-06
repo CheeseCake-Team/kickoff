@@ -1,6 +1,7 @@
 package com.cheesecake.ui.fragment.league
 
 import androidx.lifecycle.viewModelScope
+import com.cheesecake.domain.usecases.FavouriteLeagueUseCase
 import com.cheesecake.domain.usecases.GetLeagueByIdAndSeasonUseCase
 import com.cheesecake.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,7 +22,8 @@ data class LeagueUIState(
 
 @HiltViewModel
 class LeagueViewModel @Inject constructor(
-    private val getLeagueByIdAndSeasonUseCase: GetLeagueByIdAndSeasonUseCase
+    private val getLeagueByIdAndSeasonUseCase: GetLeagueByIdAndSeasonUseCase,
+    private val favouriteLeagueUseCase: FavouriteLeagueUseCase
 ) : BaseViewModel() {
 
     private val _leagueUIState = MutableStateFlow(LeagueUIState())
@@ -29,6 +31,11 @@ class LeagueViewModel @Inject constructor(
 
     init {
         getLeague()
+    }
+    fun toggleFavourite(){
+        viewModelScope.launch {
+            favouriteLeagueUseCase(39, 2022)
+        }
     }
 
     private fun getLeague() {
@@ -44,8 +51,6 @@ class LeagueViewModel @Inject constructor(
                     )
                 }
             }
-
         }
     }
-
 }
