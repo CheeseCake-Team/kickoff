@@ -2,6 +2,8 @@ package com.cheesecake.data.repository
 
 
 import com.cheesecake.data.local.LocalDataSource
+import com.cheesecake.data.local.models.mapToDomain
+import com.cheesecake.data.local.models.toLocal
 import com.cheesecake.data.models.dto.mapToDomain
 import com.cheesecake.data.remote.RemoteDataSource
 import com.cheesecake.domain.models.*
@@ -34,4 +36,17 @@ class IFootballRepositoryImpl
     override suspend fun getLeagueTopScorers(leagueId: Int, season: Int): List<Player> {
         return remoteDataSource.getTopScorers(season, leagueId).mapToDomain()
     }
+
+    override suspend fun getLocallyLeagueByIdAndSeason(leagueId: Int, leagueSeason: Int): League? {
+        return localDataSource.getLeagueByIdAndSeason(leagueId, leagueSeason)?.mapToDomain()
+    }
+
+    override suspend fun getRemotelyLeagueByIdAndSeason(leagueId: Int, leagueSeason: Int): League {
+        return remoteDataSource.getLeagueByIdAndSeason(leagueId, leagueSeason).mapToDomain().first()
+    }
+
+    override suspend fun updateOrInsertLeague(league: League) {
+        localDataSource.updateOrInsertLeague(league.toLocal())
+    }
+
 }

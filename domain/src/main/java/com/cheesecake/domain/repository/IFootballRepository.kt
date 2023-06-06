@@ -15,4 +15,11 @@ interface IFootballRepository {
     suspend fun getLeagueStanding(leagueId: Int, season: Int): List<Standings>
 
     suspend fun getLeagueTopScorers(leagueId: Int, season: Int): List<Player>
+
+    suspend fun getLocallyLeagueByIdAndSeason(leagueId: Int, leagueSeason: Int): League?
+
+    suspend fun getRemotelyLeagueByIdAndSeason(leagueId: Int, leagueSeason: Int): League?
+
+    suspend fun updateOrInsertLeague(league: League)
+
 }
