@@ -1,6 +1,7 @@
 package com.cheesecake.data.models.dto
 
 
+import com.cheesecake.data.local.models.LeagueLocalDto
 import com.cheesecake.data.models.base.LeagueTypeLogo
 import com.cheesecake.domain.models.League
 import com.cheesecake.domain.models.TeamInformation
@@ -62,10 +63,32 @@ data class LeagueDTO(
 
 fun LeagueDTO.mapToDomain(): League {
     return League(
-        //TODO implement TeamInformation data class
+        leagueId = this.league.id,
+        leagueName = this.league.name,
+        leagueSeason = this.seasons.first().year.toString(),
+        leagueLogo = this.league.logo,
+        seasonStartYear = this.seasons.first().start,
+        seasonEndYear = this.seasons.first().end,
+        isFavourite = false
     )
 }
 
-fun List<LeagueDTO>.mapToDomain():List<League>{
+fun List<LeagueDTO>.mapToDomain(): List<League>{
     return this.map { it.mapToDomain() }
+}
+
+fun LeagueDTO.mapToLocal(): LeagueLocalDto {
+    return LeagueLocalDto(
+        leagueId = this.league.id,
+        leagueName = this.league.name,
+        leagueSeason = this.seasons.first().year.toString(),
+        leagueLogoUrl = this.league.logo,
+        seasonStartYear = this.seasons.first().start,
+        seasonEndYear = this.seasons.first().end,
+        isFavourite = false
+    )
+}
+
+fun List<LeagueDTO>.mapToLocal(): List<LeagueLocalDto>{
+    return this.map { it.mapToLocal() }
 }
