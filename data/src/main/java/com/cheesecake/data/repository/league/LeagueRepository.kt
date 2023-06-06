@@ -1,6 +1,7 @@
 package com.cheesecake.data.repository.league
 
 import com.cheesecake.data.local.LocalDataSource
+import com.cheesecake.data.local.models.LeagueLocalDto
 import com.cheesecake.data.models.dto.LeagueDTO
 import com.cheesecake.data.remote.RemoteDataSource
 import com.cheesecake.data.utils.LeagueType
@@ -15,8 +16,8 @@ class LeagueRepository @Inject constructor(
         return remoteDataSource.getAllLeagues()
     }
 
-    suspend fun getLeaguesById(leagueId: Int): List<LeagueDTO> {
-        return remoteDataSource.getLeaguesById(leagueId)
+    suspend fun getLeaguesById(leagueId: Int): LeagueLocalDto {
+        TODO("implement it..........")
     }
 
     suspend fun getLeaguesByName(leagueName: String): List<LeagueDTO> {
