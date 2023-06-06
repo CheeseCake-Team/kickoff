@@ -1,15 +1,15 @@
 package com.cheesecake.data.remote.api
 
-import com.cheesecake.data.models.base.BaseResponse
-import com.cheesecake.data.models.base.BaseStaticResponse
-import com.cheesecake.data.models.dto.CoachDTO
-import com.cheesecake.data.models.dto.EventDTO
-import com.cheesecake.data.remote.response.FixtureResponse
-import com.cheesecake.data.models.dto.FixtureStatisticsDTO
-import com.cheesecake.data.models.dto.FixturesDTO
-import com.cheesecake.data.models.dto.HeadToHeadDTO
-import com.cheesecake.data.models.dto.IjuriesDTO
-import com.cheesecake.data.models.dto.LeagueDTO
+import com.cheesecake.data.remote.response.BaseResponse
+import com.cheesecake.data.remote.response.BaseStaticResponse
+import com.cheesecake.data.repository.models.dto.CoachDTO
+import com.cheesecake.data.repository.models.dto.EventDTO
+import com.cheesecake.data.repository.models.dto.FixtureDTO
+import com.cheesecake.data.repository.models.dto.FixtureStatisticsDTO
+import com.cheesecake.data.repository.models.dto.FixturesDTO
+import com.cheesecake.data.repository.models.dto.HeadToHeadDTO
+import com.cheesecake.data.repository.models.dto.IjuriesDTO
+import com.cheesecake.data.repository.models.dto.LeagueDTO
 import com.cheesecake.data.models.dto.LineupDTO
 import com.cheesecake.data.models.dto.PlayerDTO
 import com.cheesecake.data.models.dto.PredictionsDTO
@@ -89,32 +89,32 @@ interface FootballApiService {
     suspend fun getFixtureById(
         @Query("timezone") timeZone: String,
         @Query("id") fixtureId: Int
-    ): Response<BaseResponse<FixtureResponse>>
+    ): Response<BaseResponse<FixtureDTO>>
 
     @GET("fixtures")
     suspend fun getFixturesBySeasonIdByTeamId(
         @Query("timezone") timeZone: String,
         @Query("season") season: String,
         @Query("team") teamId: Int
-    ): Response<BaseResponse<FixtureResponse>>
+    ): Response<BaseResponse<FixtureDTO>>
 
     @GET("fixtures")
     suspend fun getFixturesByDate(
         @Query("timezone") timeZone: String,
         @Query("date") date: String
-    ): Response<BaseResponse<FixtureResponse>>
+    ): Response<BaseResponse<FixtureDTO>>
 
     @GET("fixtures")
     suspend fun getFixturesFromDate(
         @Query("timezone") timeZone: String,
         @Query("from") date: String
-    ): Response<BaseResponse<FixtureResponse>>
+    ): Response<BaseResponse<FixtureDTO>>
 
     @GET("fixtures")
     suspend fun getFixturesToDate(
         @Query("timezone") timeZone: String,
         @Query("to") date: String
-    ): Response<BaseResponse<FixtureResponse>>
+    ): Response<BaseResponse<FixtureDTO>>
 
     @GET("fixtures")
     suspend fun getFixturesFromDateToDate(
@@ -123,13 +123,13 @@ interface FootballApiService {
         @Query("team") teamId: Int,
         @Query("from") from: String,
         @Query("to") date: String
-    ): Response<BaseResponse<FixtureResponse>>
+    ): Response<BaseResponse<FixtureDTO>>
 
     @GET("fixtures")
     suspend fun getFixturesStatus(
         @Query("timezone") timeZone: String,
         @Query("status") fixtureStatusType: String
-    ): Response<BaseResponse<FixtureResponse>>
+    ): Response<BaseResponse<FixtureDTO>>
 
 
     //endregion

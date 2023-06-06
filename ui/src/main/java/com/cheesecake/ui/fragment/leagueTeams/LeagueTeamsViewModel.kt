@@ -3,7 +3,7 @@ package com.cheesecake.ui.fragment.leagueTeams
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cheesecake.domain.models.Team
+import com.cheesecake.domain.Entity.Team
 import com.cheesecake.domain.usecases.fixture.GetSingleFixtureByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

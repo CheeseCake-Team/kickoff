@@ -11,7 +11,8 @@ data class TeamLocalDto(
     val teamCountry: String,
     val venueCapacity: Int,
     val venueName: String,
-    val imageUrl: String
+    val imageUrl: String,
+    val isFavourite:Boolean = false
 )
 
 
