@@ -13,9 +13,6 @@ class LocalDataSourceImp @Inject constructor(
     private val teamsDao: TeamsDao,
     private val leagueDao: LeagueDao,
 
-
-    private val favouriteTeamDao: FavouriteTeamDao,
-
     ) : LocalDataSource {
 
     override fun getAllTeams(): Flow<List<TeamLocalDto>> {
@@ -27,13 +24,13 @@ class LocalDataSourceImp @Inject constructor(
     }
 
     override suspend fun insertTeam(favTeamDto: FavouriteTeamLocalDto) {
-        favouriteTeamDao.insertTeam(favTeamDto)
+        //favouriteTeamDao.insertTeam(favTeamDto)
     }
 
     override suspend fun getFavTeams(): Flow<List<FavouriteTeamLocalDto>> {
 
-        return favouriteTeamDao.getFavTeams()
-
+        //return favouriteTeamDao.getFavTeams()
+        TODO("NOT IMPLEMENTED YET")
     }
 
 
