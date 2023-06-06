@@ -22,6 +22,4 @@ interface LocalDataSource {
 
     suspend fun deleteAllUnFavouriteLeagues()
 
-    fun getAllLocallyLeagues(): List<LeagueLocalDto>
-
 }
