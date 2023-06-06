@@ -32,17 +32,24 @@ class LeagueViewModel @Inject constructor(
     init {
         getLeague()
     }
-    fun toggleFavourite(){
+
+    fun toggleFavourite() {
         viewModelScope.launch {
-            favouriteLeagueUseCase(39, 2022)
+            favouriteLeagueUseCase(39, 2022)?.let {
+                _leagueUIState.update { uiState ->
+                    uiState.copy(
+                        isFavourite = it.isFavourite
+                    )
+                }
+            }
         }
     }
 
     private fun getLeague() {
         viewModelScope.launch {
             getLeagueByIdAndSeasonUseCase(39, 2022)?.let { league ->
-                _leagueUIState.update {
-                    it.copy(
+                _leagueUIState.update { uiState ->
+                    uiState.copy(
                         leagueName = league.leagueName,
                         seasonStartEndYear = "${league.seasonStartYear}/${league.seasonEndYear}",
                         imageUrl = league.leagueLogo,
