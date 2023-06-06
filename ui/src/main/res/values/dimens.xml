@@ -11,6 +11,7 @@
     <dimen name="spacing_large">24dp</dimen>
     <dimen name="spacing_giant">32dp</dimen>
     <dimen name="spacing_36dp">36dp</dimen>
+    <dimen name="spacing_48dp">48dp</dimen>
     <dimen name="spacing_extra_giant">56dp</dimen>
 
     <!-- text sizes -->
@@ -28,5 +29,6 @@
 
 
     <dimen name="team_image_size_24dp">24dp</dimen>
+    <dimen name="team_image_size_48dp">48dp</dimen>
 
 </resources>
