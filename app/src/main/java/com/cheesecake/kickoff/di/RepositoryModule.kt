@@ -1,7 +1,9 @@
 package com.cheesecake.kickoff.di
 
+import com.cheesecake.data.repository.IFootballRepositoryImpl
 import com.cheesecake.data.repository.fixture.FixturesRepository
 import com.cheesecake.data.repository.fixture.FixturesRepositoryImpl
+import com.cheesecake.domain.repository.IFootballRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -13,6 +15,11 @@ abstract class RepositoryModule {
     @Binds
     abstract fun provideFixturesRepository(fixturesRepositoryImpl: FixturesRepositoryImpl)
             : FixturesRepository
+
+    @Binds
+    abstract fun provideFootballRepository(footballRepository: IFootballRepositoryImpl)
+            : IFootballRepository
+    
 }
 
 
