@@ -22,8 +22,8 @@ interface TeamsDao {
     @Upsert
     suspend fun updateOrInsertLeagueLocalDto(LeagueLocalDto: LeagueLocalDto)
 
-    @Query("SELECT * FROM league_table where leagueId = :leagueId")
-    suspend fun getLeagueById(leagueId: Int): LeagueLocalDto?
+    @Query("SELECT * FROM league_table where leagueId = :leagueId And leagueSeason = :leagueSeason")
+    suspend fun getLeagueById(leagueId: Int, leagueSeason: Int): LeagueLocalDto?
 
     @Query("DELETE FROM league_table where isFavourite = 0")
     suspend fun deleteAllUnFavouriteLeagues()
