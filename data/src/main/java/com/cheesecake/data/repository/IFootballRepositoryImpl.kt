@@ -8,10 +8,11 @@ import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
 class IFootballRepositoryImpl
-@Inject constructor(private val remoteDataSource: RemoteDataSource) :
+@Inject constructor(
+    private val remoteDataSource: RemoteDataSource,
+    private val localDataSource: LocalDataSource
+    ):
     IFootballRepository {
-
-
 
     override suspend fun getLeagueNameAndCountry(leagueId: Int, current: Boolean): List<League> {
         return remoteDataSource.getCurrentSeasonLeague(leagueId, current).mapToDomain()
