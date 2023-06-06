@@ -20,5 +20,6 @@ interface LocalDataSource {
 
     suspend fun updateOrInsertLeague(league: LeagueLocalDto)
 
+    suspend fun deleteLeagueById(leagueId: Int)
 
 }

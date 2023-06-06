@@ -49,4 +49,8 @@ class IFootballRepositoryImpl
         localDataSource.updateOrInsertLeague(league.toLocal())
     }
 
+    override suspend fun deleteLeagueById(leagueId: Int) {
+        localDataSource.deleteLeagueById(leagueId)
+    }
+
 }

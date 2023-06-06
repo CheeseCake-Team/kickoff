@@ -22,4 +22,5 @@ interface IFootballRepository {
 
     suspend fun updateOrInsertLeague(league: League)
 
+    suspend fun deleteLeagueById(leagueId: Int)
 }

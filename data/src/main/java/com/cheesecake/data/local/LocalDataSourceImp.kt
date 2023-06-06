@@ -1,6 +1,5 @@
 package com.cheesecake.data.local
 
-import com.cheesecake.data.local.daos.FavouriteTeamDao
 import com.cheesecake.data.local.daos.LeagueDao
 import com.cheesecake.data.local.daos.TeamsDao
 import com.cheesecake.data.local.models.FavouriteTeamLocalDto
@@ -49,6 +48,10 @@ class LocalDataSourceImp @Inject constructor(
 
     override suspend fun updateOrInsertLeague(league: LeagueLocalDto) {
         leagueDao.updateOrInsertLeagueLocalDto(league)
+    }
+
+    override suspend fun deleteLeagueById(leagueId: Int) {
+        leagueDao.deleteLeagueById(leagueId)
     }
 
 }
