@@ -4,7 +4,6 @@ package com.cheesecake.data.models.dto
 import com.cheesecake.data.local.models.LeagueLocalDto
 import com.cheesecake.data.models.base.LeagueTypeLogo
 import com.cheesecake.domain.models.League
-import com.cheesecake.domain.models.TeamInformation
 import com.google.gson.annotations.SerializedName
 
 data class LeagueDTO(
@@ -67,8 +66,8 @@ fun LeagueDTO.mapToDomain(): League {
         leagueName = this.league.name,
         leagueSeason = this.seasons.first().year.toString(),
         leagueLogo = this.league.logo,
-        seasonStartYear = this.seasons.first().start,
-        seasonEndYear = this.seasons.first().end,
+        seasonStartYear = this.seasons.first().start.substring(0, 4),
+        seasonEndYear = this.seasons.first().end.substring(0, 4),
         isFavourite = false
     )
 }
