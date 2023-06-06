@@ -7,7 +7,7 @@ import com.cheesecake.domain.models.*
 import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
-class Repository
+class IFootballRepositoryImpl
 @Inject constructor(private val remoteDataSource: RemoteDataSource) :
     IFootballRepository {
 
