@@ -12,6 +12,7 @@ import com.cheesecake.data.models.base.Penalty
 import com.cheesecake.data.models.base.Shots
 import com.cheesecake.data.models.base.Tackles
 import com.cheesecake.data.models.base.Team
+import com.cheesecake.domain.models.Player
 import com.google.gson.annotations.SerializedName
 
 data class PlayerDTO(
@@ -99,9 +100,16 @@ data class PlayerDTO(
             @SerializedName("bench")
             val bench: Int
         )
-
-
-
-
     }
+}
+
+
+fun PlayerDTO.mapToDomain(): Player{
+    return Player(
+
+    )
+}
+
+fun List<PlayerDTO>.mapToDomain():List<Player>{
+    return this.map { it.mapToDomain() }
 }

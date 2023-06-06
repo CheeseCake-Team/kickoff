@@ -1,6 +1,9 @@
 package com.cheesecake.data.models.dto
 
 
+import com.cheesecake.domain.models.Standings
+import com.cheesecake.domain.models.Team
+import com.cheesecake.domain.models.TeamInformation
 import com.google.gson.annotations.SerializedName
 
 data class TeamInformationDTO(
@@ -42,5 +45,15 @@ data class TeamInformationDTO(
         @SerializedName("image")
         val image: String
     )
+}
+
+fun TeamInformationDTO.mapToDomain(): TeamInformation {
+    return TeamInformation(
+        //TODO implement TeamInformation data class
+    )
+}
+
+fun List<TeamInformationDTO>.mapToDomain():List<TeamInformation>{
+    return this.map { it.mapToDomain() }
 }
 

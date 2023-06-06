@@ -1,13 +1,10 @@
 package com.cheesecake.domain.usecases.standings
 
-import com.cheesecake.data.models.dto.StandingsDTO
-import com.cheesecake.data.repository.standings.StandingsRepository
-import com.cheesecake.domain.mappers.standings.StandingsDtoDomain
-import com.cheesecake.domain.models.ShortStandings
+import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
 class GetShortStandingsDataUseCases
-@Inject constructor(private val standingsRepository: StandingsRepository) {
+@Inject constructor(private val iFootballRepository: IFootballRepository) {
 
 //    suspend operator fun invoke(seasonId: Int, leagueId: Int): ShortStandings {
 //        val dtoResponse = getSingleStandingResponse(seasonId, leagueId)

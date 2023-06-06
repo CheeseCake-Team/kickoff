@@ -2,6 +2,8 @@ package com.cheesecake.data.models.dto
 
 
 import com.cheesecake.data.models.base.LeagueTypeLogo
+import com.cheesecake.domain.models.League
+import com.cheesecake.domain.models.TeamInformation
 import com.google.gson.annotations.SerializedName
 
 data class LeagueDTO(
@@ -56,4 +58,14 @@ data class LeagueDTO(
             )
         }
     }
+}
+
+fun LeagueDTO.mapToDomain(): League {
+    return League(
+        //TODO implement TeamInformation data class
+    )
+}
+
+fun List<LeagueDTO>.mapToDomain():List<League>{
+    return this.map { it.mapToDomain() }
 }

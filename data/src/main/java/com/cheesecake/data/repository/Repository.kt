@@ -1,31 +1,35 @@
 package com.cheesecake.data.repository
 
-import com.cheesecake.data.models.dto.LeagueDTO
-import com.cheesecake.data.models.dto.PlayerDTO
-import com.cheesecake.data.models.dto.StandingsDTO
-import com.cheesecake.data.models.dto.TeamInformationDTO
+
+import com.cheesecake.data.models.dto.mapToDomain
 import com.cheesecake.data.remote.RemoteDataSource
+import com.cheesecake.domain.models.*
+import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
-class Repository@Inject constructor(private val remoteDataSource: RemoteDataSource){
+class Repository
+@Inject constructor(private val remoteDataSource: RemoteDataSource) :
+    IFootballRepository {
 
-    suspend fun getLeagueNameAndCountry(leagueId: Int, current: Boolean) : List<LeagueDTO>{
-        return remoteDataSource.getCurrentSeasonLeague(leagueId, current)
+
+
+    override suspend fun getLeagueNameAndCountry(leagueId: Int, current: Boolean): List<League> {
+        return remoteDataSource.getCurrentSeasonLeague(leagueId, current).mapToDomain()
     }
 
-    suspend fun getLeagueCurrentRound(leagueId: Int, season: Int, current: Boolean): List<String>{
-        return remoteDataSource.getFixtureRoundsCurrentOnly(season,leagueId,current)
+    override suspend fun getLeagueCurrentRound(leagueId: Int, season: Int, current: Boolean): List<String> {
+        return remoteDataSource.getFixtureRoundsCurrentOnly(season, leagueId, current)
     }
 
-    suspend fun getNumberOfTeamsInLeague(leagueId: Int, season: Int): List<TeamInformationDTO> {
-        return remoteDataSource.getTeamsByLeagueAndSeason(leagueId, season)
+    override suspend fun getNumberOfTeamsInLeague(leagueId: Int, season: Int): List<TeamInformation> {
+        return remoteDataSource.getTeamsByLeagueAndSeason(leagueId, season).mapToDomain()
     }
 
-    suspend fun getLeagueStanding(leagueId: Int, season: Int): List<StandingsDTO>{
-        return remoteDataSource.getStandingsByLeagueId(season, leagueId)
+    override suspend fun getLeagueStanding(leagueId: Int, season: Int): List<Standings> {
+        return remoteDataSource.getStandingsByLeagueId(season,leagueId).mapToDomain()
     }
 
-    suspend fun getLeagueTopScorers(leagueId: Int, season: Int): List<PlayerDTO>{
-        return remoteDataSource.getTopScorers(season, leagueId)
+    override suspend fun getLeagueTopScorers(leagueId: Int, season: Int): List<Player> {
+        return remoteDataSource.getTopScorers(season, leagueId).mapToDomain()
     }
 }

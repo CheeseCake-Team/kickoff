@@ -3,6 +3,8 @@ package com.cheesecake.data.models.dto
 
 import com.cheesecake.data.models.base.StandingsMatchStatistics
 import com.cheesecake.data.models.base.Team
+import com.cheesecake.domain.models.Player
+import com.cheesecake.domain.models.Standings
 import com.google.gson.annotations.SerializedName
 
 data class StandingsDTO(
@@ -52,4 +54,20 @@ data class StandingsDTO(
             val update: String
         )
     }
+}
+
+fun StandingsDTO.mapToDomain(): Standings {
+    return Standings(
+        flag = this.league.flag,
+        name = this.league.name,
+        played = this.league.standings[0][0].all.played,
+        won = this.league.standings[0][0].all.win,
+        draw = this.league.standings[0][0].all.draw,
+        lose = this.league.standings[0][0].all.lose,
+        points = this.league.standings[0][0].points,
+    )
+}
+
+fun List<StandingsDTO>.mapToDomain():List<Standings>{
+    return this.map { it.mapToDomain() }
 }

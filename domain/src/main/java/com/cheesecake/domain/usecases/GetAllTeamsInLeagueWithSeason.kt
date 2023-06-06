@@ -7,7 +7,7 @@ class GetAllTeamsInLeagueWithSeason @Inject constructor(
     private val teamsRepository: TeamsRepository,
 ) {
 
-//    suspend operator fun invoke(leagueId: Int, season: Int) : Flow<List<TeamEntity>> {
+//    suspend operator fun invoke(leagueId: Int, season: Int) : Flow<List<Team>> {
 //        return teamsRepository.getTeamsByLeagueAndSeason(leagueId, season).map { localTeamsDto ->
 //            localTeamsDto.map { it.toEntity() }
 //        }
