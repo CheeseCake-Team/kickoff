@@ -16,5 +16,12 @@ interface LocalDataSource {
     fun getLeague(): Flow<List<LeagueLocalDto>>
     suspend fun deleteAll()
 
+    suspend fun getLeagueById(leagueId: Int): LeagueLocalDto?
+
+    suspend fun updateOrInsertLeague(league: LeagueLocalDto)
+
+    suspend fun deleteAllUnFavouriteLeagues()
+
+    fun getAllLocallyLeagues(): List<LeagueLocalDto>
 
 }
