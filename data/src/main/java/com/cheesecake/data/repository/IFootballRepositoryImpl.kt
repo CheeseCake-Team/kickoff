@@ -1,16 +1,11 @@
 package com.cheesecake.data.repository
 
-
-import com.cheesecake.data.remote.response.mapToDomain
-import com.cheesecake.data.repository.mappers.mapLocalDtoToEntity
-import com.cheesecake.data.repository.mappers.mapRemoteDtoToEntity
-import com.cheesecake.data.repository.mappers.mapToLocal
-import com.cheesecake.data.repository.mappers.toLocal
-import com.cheesecake.domain.entity.FixtureEntity
-import com.cheesecake.domain.entity.LeagueEntity
-import com.cheesecake.domain.entity.PlayerEntity
-import com.cheesecake.domain.entity.StandingsEntity
-import com.cheesecake.domain.entity.TeamEntity
+import com.cheesecake.data.local.models.mapToDomain
+import com.cheesecake.data.local.models.mapToLocal
+import com.cheesecake.data.local.models.toLocal
+import com.cheesecake.data.repository.models.response.LeagueResponse
+import com.cheesecake.data.repository.models.response.mapToDomain
+import com.cheesecake.domain.entity.*
 import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
@@ -95,6 +90,10 @@ class IFootballRepositoryImpl
         leagueSeason: Int
     ) {
         localDataSource.updateOrInsertTeams(teamEntityEntities.mapToLocal(leagueId, leagueSeason))
+    }
+
+    override suspend fun getLeaguesByName(leagueName: String): List<LeagueEntity> {
+        return remoteDataSource.getLeaguesByName(leagueName).mapToDomain()
     }
 
     override suspend fun getCurrentRoundByIdAndSeason(leagueId: Int, season: Int): String {
