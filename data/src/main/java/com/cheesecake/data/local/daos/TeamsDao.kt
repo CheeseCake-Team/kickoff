@@ -4,19 +4,23 @@ import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
 import com.cheesecake.data.local.models.TeamLocalDto
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TeamsDao {
 
-    @Query("SELECT * FROM team_table")
-    fun getAllTeams(): Flow<List<TeamLocalDto>>
+    @Query("SELECT * FROM team_table WHERE leagueId = :leagueId AND season = :season")
+    fun getLocallyTeamsByIdAndSeason(leagueId: Int, season: Int): List<TeamLocalDto>
 
     @Upsert
-    suspend fun upsertAll(tasks: List<TeamLocalDto>)
+    suspend fun updateOrInsertTeams(teams: List<TeamLocalDto>)
 
+    @Upsert
+    suspend fun updateOrInsertTeam(team: TeamLocalDto)
 
     @Query("DELETE FROM team_table")
-    suspend fun deleteAll()
+    suspend fun deleteAllTeams()
+
+    @Query("SELECT * FROM team_table WHERE isFavourite = 1")
+    suspend fun getFavouriteTeams(): List<TeamLocalDto>
 
 }

@@ -2,16 +2,15 @@ package com.cheesecake.data.local.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.cheesecake.data.models.base.LeagueTypeLogo
-import com.cheesecake.data.models.dto.CountryDto
-import com.cheesecake.data.models.dto.LeagueDTO
+import com.cheesecake.domain.entity.LeagueEntity
 
-@Entity(tableName = "league_table")
-
+@Entity("league_table")
 data class LeagueLocalDto(
-
-    @PrimaryKey val league: LeagueTypeLogo,
-    val country: CountryDto,
-    val seasons: List<LeagueDTO.Season>,
-
-    )
+    @PrimaryKey val leagueId: Int,
+    val leagueName: String,
+    val leagueSeason: String,
+    val leagueLogoUrl: String,
+    val seasonStartYear: String,
+    val seasonEndYear: String,
+    val isFavourite: Boolean
+)
