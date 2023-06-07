@@ -1,6 +1,6 @@
-package com.cheesecake.domain.models
+package com.cheesecake.domain.entity
 
-data class League(
+data class LeagueEntity(
     val leagueId: Int,
     val leagueName: String,
     val leagueLogo: String,

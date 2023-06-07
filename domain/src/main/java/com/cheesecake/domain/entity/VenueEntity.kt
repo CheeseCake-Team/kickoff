@@ -1,6 +1,6 @@
-package com.cheesecake.domain.Entity
+package com.cheesecake.domain.entity
 
-data class Venue(
+data class VenueEntity(
     val name: String,
     val address: String,
     val city: String,

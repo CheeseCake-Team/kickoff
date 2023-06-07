@@ -1,6 +1,6 @@
-package com.cheesecake.domain.Entity
+package com.cheesecake.domain.entity
 
-data class Standings(
+data class StandingsEntity(
     val flag: String,
     val name: String,
     val played: Int,

@@ -1,4 +1,4 @@
-package com.cheesecake.domain.models
+package com.cheesecake.domain.entity
 
 data class FixtureEntity(
     val homeTeamName: String,
