@@ -1,4 +1,4 @@
-package com.cheesecake.ui.fragment.TeamStatistics
+package com.cheesecake.ui.fragment.teamStatistics
 
 import android.os.Bundle
 import android.view.View
@@ -6,7 +6,7 @@ import androidx.fragment.app.viewModels
 import com.cheesecake.ui.R
 import com.cheesecake.ui.base.BaseFragment
 import com.cheesecake.ui.databinding.FragmentTeamsLeagueBinding
-import com.cheesecake.ui.fragment.leagueTeams.adapter.TeamsAdapter
+import com.cheesecake.ui.fragment.leagueTeams.TeamsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

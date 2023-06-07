@@ -1,5 +1,6 @@
 package com.cheesecake.domain.usecases.standings
 
+import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
 class GetShortStandingsDataUseCases

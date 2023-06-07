@@ -1,18 +1,6 @@
 package com.cheesecake.data.remote.response
 
-import com.cheesecake.data.remote.models.BaseBirthDTO
-import com.cheesecake.data.remote.models.CardsDTO
-import com.cheesecake.data.remote.models.DribblesDTO
-import com.cheesecake.data.remote.models.DuelsDTO
-import com.cheesecake.data.remote.models.FoulsDTO
-import com.cheesecake.data.remote.models.GoalsStateDTO
-import com.cheesecake.data.remote.models.LeagueCountrySeasonDTO
-import com.cheesecake.data.remote.models.PassesDTO
-import com.cheesecake.data.remote.models.PenaltyDTO
-import com.cheesecake.data.remote.models.ShotsDTO
-import com.cheesecake.data.remote.models.TacklesDTO
-import com.cheesecake.data.remote.models.TeamDTO
-import com.cheesecake.domain.entity.PlayerEntity
+import com.cheesecake.domain.entity.PlayerStatisticsEntity
 import com.google.gson.annotations.SerializedName
 
 data class PlayerResponse(
@@ -101,57 +89,4 @@ data class PlayerResponse(
             val bench: Int
         )
     }
-}
-
-
-fun PlayerResponse.mapToDomain(): PlayerEntity{
-    return PlayerEntity(
-        this.player.id,
-        this.statistics[0].team.logo,
-        this.player.name,
-        this.player.photo,
-        this.statistics[0].games.rating,
-        this.statistics[0].games.number,
-        this.statistics[0].games.minutes,
-        this.statistics[0].goals.total,
-        this.statistics[0].goals.assists,
-        this.statistics[0].goals.conceded,
-        this.statistics[0].passes.key,
-        this.statistics[0].shots.total,
-        this.statistics[0].shots.on,
-        this.statistics[0].tackles.total,
-        this.statistics[0].tackles.interceptions,
-        this.statistics[0].tackles.blocks,
-        this.statistics[0].fouls.committed,
-        this.statistics[0].fouls.drawn,
-        this.statistics[0].cards.yellow,
-        this.statistics[0].cards.red
-
-fun PlayerDTO.mapToDomain(): PlayerStatisticsEntity {
-    return PlayerStatisticsEntity(
-        id = this.player.id,
-        name = this.player.name,
-        firstname = this.player.firstname,
-        lastname = this.player.lastname,
-        age = this.player.age,
-        date = this.player.birth.date,
-        place = this.player.birth.place,
-        country = this.player.birth.country,
-        nationality = this.player.nationality,
-        height = this.player.height,
-        weight = this.player.weight,
-        injured = this.player.injured,
-        appearences = this.statistics.first().games.appearences,
-        lineups = this.statistics.first().games.lineups,
-        minutes = this.statistics.first().games.minutes,
-        number = this.statistics.first().games.number,
-        position = this.statistics.first().games.position,
-        rating = this.statistics.first().games.rating,
-        captain = this.statistics.first().games.captain,
-        photo = this.player.photo
-    )
-}
-
-fun List<PlayerResponse>.mapToDomain():List<PlayerEntity>{
-    return this.map { it.mapToDomain() }
 }
