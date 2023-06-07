@@ -1,5 +1,6 @@
 package com.cheesecake.data.remote
 
+import com.cheesecake.data.models.base.BaseResponse
 import com.cheesecake.data.models.dto.CoachDTO
 import com.cheesecake.data.models.dto.EventDTO
 import com.cheesecake.data.models.dto.FixtureStatisticsDTO
@@ -22,6 +23,9 @@ import com.cheesecake.data.models.dto.VenuesDTO
 import com.cheesecake.data.remote.response.FixtureResponse
 import com.cheesecake.data.utils.FixtureStatus
 import com.cheesecake.data.utils.LeagueType
+import retrofit2.Response
+import retrofit2.http.GET
+import retrofit2.http.Query
 
 
 interface RemoteDataSource {
@@ -89,6 +93,12 @@ interface RemoteDataSource {
         timeZone: String,
         season: String,
         TeamId: Int
+    ): List<FixtureResponse>
+
+    suspend fun getFixturesBySeasonIdAndLeagueId(
+        timeZone: String,
+        season: String,
+        leagueId: Int
     ): List<FixtureResponse>
 
     suspend fun getFixturesByDate(
