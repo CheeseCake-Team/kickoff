@@ -460,6 +460,10 @@ interface RemoteDataSource {
         seasonId: Int
     ): List<TeamInformationResponse>
 
+    suspend fun getTeamsByName(
+        name: String,
+    ): List<TeamInformationResponse>
+
     suspend fun getTeamById(
         teamId: Int
     ): List<TeamInformationResponse>
