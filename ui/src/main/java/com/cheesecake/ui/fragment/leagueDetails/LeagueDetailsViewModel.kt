@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.math.log
 
 @HiltViewModel
 class LeagueDetailsViewModel @Inject constructor(
@@ -33,7 +32,7 @@ class LeagueDetailsViewModel @Inject constructor(
                 _leagueDetailsUIState.update {
                     Log.i("dsaf", standingList.toString())
                     it.copy(
-                        teamsStanding = standingList.take(6), isLoading = false
+                        teamsStanding = standingList.take(4), isLoading = false
                     )
                 }
             }
