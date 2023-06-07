@@ -1,15 +1,11 @@
 package com.cheesecake.data.repository
 
 
-import com.cheesecake.data.local.LocalDataSource
 import com.cheesecake.data.local.models.mapToDomain
+import com.cheesecake.data.local.models.mapToLocal
 import com.cheesecake.data.local.models.toLocal
-import com.cheesecake.data.models.dto.mapToDomain
-import com.cheesecake.data.remote.RemoteDataSource
-import com.cheesecake.data.remote.response.mapToDomain
-import com.cheesecake.domain.models.*
 import com.cheesecake.data.repository.models.response.mapToDomain
-import com.cheesecake.domain.Entity.*
+import com.cheesecake.domain.entity.*
 import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
@@ -20,7 +16,7 @@ class IFootballRepositoryImpl
     ):
     IFootballRepository {
 
-    override suspend fun getLeagueNameAndCountry(leagueId: Int, current: Boolean): List<League> {
+    override suspend fun getLeagueNameAndCountry(leagueId: Int, current: Boolean): List<LeagueEntity> {
         return remoteDataSource.getCurrentSeasonLeague(leagueId, current).mapToDomain()
     }
 
@@ -28,36 +24,52 @@ class IFootballRepositoryImpl
         return remoteDataSource.getFixtureRoundsCurrentOnly(season, leagueId, current)
     }
 
-    override suspend fun getNumberOfTeamsInLeague(leagueId: Int, season: Int): List<TeamInformation> {
-        return remoteDataSource.getTeamsByLeagueAndSeason(leagueId, season).mapToDomain()
-    }
-
-    override suspend fun getLeagueStanding(leagueId: Int, season: Int): List<Standings> {
+    override suspend fun getLeagueStanding(leagueId: Int, season: Int): List<StandingsEntity> {
         return remoteDataSource.getStandingsByLeagueId(season,leagueId).mapToDomain()
     }
 
-    override suspend fun getLeagueTopScorers(leagueId: Int, season: Int): List<Player> {
+    override suspend fun getLeagueTopScorers(leagueId: Int, season: Int): List<PlayerEntity> {
         return remoteDataSource.getTopScorers(season, leagueId).mapToDomain()
     }
 
-    override suspend fun getLocallyLeagueByIdAndSeason(leagueId: Int, leagueSeason: Int): League? {
+    override suspend fun getLocallyLeagueByIdAndSeason(leagueId: Int, leagueSeason: Int): LeagueEntity? {
         return localDataSource.getLeagueByIdAndSeason(leagueId, leagueSeason)?.mapToDomain()
     }
 
-    override suspend fun getRemotelyLeagueByIdAndSeason(leagueId: Int, leagueSeason: Int): League {
-        return remoteDataSource.getLeagueByIdAndSeason(leagueId, leagueSeason).mapToDomain().first()
+    override suspend fun getRemotelyLeagueByIdAndSeason(leagueId: Int, leagueSeason: Int): LeagueEntity {
+        return remoteDataSource.getLeagueByIdAndSeason(leagueId, leagueSeason).first().mapToDomain()
     }
 
-    override suspend fun updateOrInsertLeague(league: League) {
-        localDataSource.updateOrInsertLeague(league.toLocal())
+    override suspend fun updateOrInsertLeague(leagueEntity: LeagueEntity) {
+        localDataSource.updateOrInsertLeague(leagueEntity.toLocal())
     }
 
-    override suspend fun getMatchesByLeagueIdAndSeason(timeZone: String, leagueId: Int, Season: String): List<FixtureEntity> {
-      return  remoteDataSource.getFixturesBySeasonIdAndLeagueId(timeZone, Season, leagueId).mapToDomain()
+    override suspend fun getMatchesByLeagueIdAndSeason(timeZone: String, leagueId: Int, Season: String):
+            List<FixtureEntity> {
+      return  remoteDataSource.getFixturesBySeasonIdAndLeagueId(timeZone, Season, leagueId)
+          .mapToDomain()
     }
 
     override suspend fun deleteLeagueById(leagueId: Int) {
         localDataSource.deleteLeagueById(leagueId)
+    }
+
+    override fun getLocallyTeamsByIdAndSeason(
+        leagueId: Int,
+        leagueSeason: Int
+    ): List<TeamEntity> {
+        return localDataSource.getLocallyTeamsByIdAndSeason(leagueId, leagueSeason).mapToDomain()
+    }
+
+    override suspend fun getRemotelyTeamsByIdAndSeason(
+        leagueId: Int,
+        leagueSeason: Int
+    ): List<TeamEntity> {
+        return remoteDataSource.getTeamsByLeagueAndSeason(leagueId, leagueSeason).mapToDomain()
+    }
+
+    override suspend fun updateOrInsertTeams(teamEntityEntities: List<TeamEntity>, leagueId: Int, leagueSeason: Int) {
+        localDataSource.updateOrInsertTeams(teamEntityEntities.mapToLocal(leagueId, leagueSeason))
     }
 
 }
