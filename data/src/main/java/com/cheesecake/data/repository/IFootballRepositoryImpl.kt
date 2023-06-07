@@ -1,10 +1,10 @@
 package com.cheesecake.data.repository
 
-import com.cheesecake.data.local.models.mapToDomain
-import com.cheesecake.data.local.models.mapToLocal
-import com.cheesecake.data.local.models.toLocal
-import com.cheesecake.data.repository.models.response.LeagueResponse
-import com.cheesecake.data.repository.models.response.mapToDomain
+import com.cheesecake.data.remote.response.mapToDomain
+import com.cheesecake.data.repository.mappers.mapLocalDtoToEntity
+import com.cheesecake.data.repository.mappers.mapRemoteDtoToEntity
+import com.cheesecake.data.repository.mappers.mapToLocal
+import com.cheesecake.data.repository.mappers.toLocal
 import com.cheesecake.domain.entity.*
 import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
@@ -93,7 +93,7 @@ class IFootballRepositoryImpl
     }
 
     override suspend fun getLeaguesByName(leagueName: String): List<LeagueEntity> {
-        return remoteDataSource.getLeaguesByName(leagueName).mapToDomain()
+        return remoteDataSource.getLeaguesByName(leagueName).mapRemoteDtoToEntity()
     }
 
     override suspend fun getCurrentRoundByIdAndSeason(leagueId: Int, season: Int): String {
