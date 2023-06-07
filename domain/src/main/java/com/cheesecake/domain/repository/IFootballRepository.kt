@@ -24,4 +24,11 @@ interface IFootballRepository {
     suspend fun getMatchesByLeagueIdAndSeason(timeZone: String, leagueId: Int, Season: String): List<FixtureEntity>
 
     suspend fun deleteLeagueById(leagueId: Int)
+
+    fun getLocallyTeamsByIdAndSeason(leagueId: Int, leagueSeason: Int): List<TeamEntity>
+
+    suspend fun getRemotelyTeamsByIdAndSeason(leagueId: Int, leagueSeason: Int): List<TeamEntity>
+
+    suspend fun updateOrInsertTeams(teamEntityEntities: List<TeamEntity>, leagueId: Int, leagueSeason: Int)
+
 }
