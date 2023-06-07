@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="listener"
             type="com.cheesecake.ui.base.BaseInteractionListener" />
 
         <variable
             name="item"
-            type="com.cheesecake.domain.Entity.Team" />
+            type="com.cheesecake.domain.entity.TeamEntity" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -36,7 +35,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
+                tools:srcCompat="@tools:sample/avatars"
+                android:contentDescription="Team Logo" />
 
             <TextView
                 android:id="@+id/text_view_team_name"
