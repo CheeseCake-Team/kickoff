@@ -21,5 +21,6 @@
     <string name="capacity">%1$s (Capacity : %2$i)</string>
     <string name="Club">Club</string>
     <string name="league_loge">League loge</string>
+    <string name="p">P</string>
 
 </resources>
