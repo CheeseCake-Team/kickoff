@@ -1,6 +1,5 @@
 package com.cheesecake.data.repository
 
-import com.cheesecake.data.remote.response.StandingsResponse
 import com.cheesecake.data.remote.response.mapToDomain
 import com.cheesecake.data.repository.mappers.mapLocalDtoToEntity
 import com.cheesecake.data.repository.mappers.mapRemoteDtoToEntity
@@ -9,10 +8,8 @@ import com.cheesecake.data.repository.mappers.toLocal
 import com.cheesecake.domain.entity.FixtureEntity
 import com.cheesecake.domain.entity.LeagueEntity
 import com.cheesecake.domain.entity.PlayerEntity
-import com.cheesecake.domain.entity.StandingsEntity
 import com.cheesecake.domain.entity.TeamEntity
-import com.cheesecake.data.repository.models.response.mapToDomain
-import com.cheesecake.domain.entity.PlayerEntity
+import com.cheesecake.domain.entity.TeamStandingEntity
 import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
@@ -42,8 +39,10 @@ class IFootballRepositoryImpl
         leagueId: Int,
         leagueSeason: Int
     ): LeagueEntity? {
-        return localDataSource.getLeagueByIdAndSeason(leagueId, leagueSeason)?.mapRemoteDtoToEntity()
-@Inject constructor(private val remoteDataSource: RemoteDataSource) : IFootballRepository {
+        return localDataSource.getLeagueByIdAndSeason(leagueId, leagueSeason)
+            ?.mapRemoteDtoToEntity()
+    }
+
     override suspend fun getSinglePlayerCompact(season: String, teamId: Int): List<PlayerEntity> {
         return remoteDataSource.getPlayerBySeasonByTeamId(season, teamId).mapToDomain()
     }
@@ -52,7 +51,8 @@ class IFootballRepositoryImpl
         leagueId: Int,
         leagueSeason: Int
     ): LeagueEntity {
-        return remoteDataSource.getLeagueByIdAndSeason(leagueId, leagueSeason).first().mapRemoteDtoToEntity()
+        return remoteDataSource.getLeagueByIdAndSeason(leagueId, leagueSeason).first()
+            .mapRemoteDtoToEntity()
     }
 
     override suspend fun updateOrInsertLeague(leagueEntity: LeagueEntity) {
@@ -76,14 +76,16 @@ class IFootballRepositoryImpl
         leagueId: Int,
         leagueSeason: Int
     ): List<TeamEntity> {
-        return localDataSource.getLocallyTeamsByIdAndSeason(leagueId, leagueSeason).mapLocalDtoToEntity()
+        return localDataSource.getLocallyTeamsByIdAndSeason(leagueId, leagueSeason)
+            .mapLocalDtoToEntity()
     }
 
     override suspend fun getRemotelyTeamsByIdAndSeason(
         leagueId: Int,
         leagueSeason: Int
     ): List<TeamEntity> {
-        return remoteDataSource.getTeamsByLeagueAndSeason(leagueId, leagueSeason).mapRemoteDtoToEntity()
+        return remoteDataSource.getTeamsByLeagueAndSeason(leagueId, leagueSeason)
+            .mapRemoteDtoToEntity()
     }
 
     override suspend fun updateOrInsertTeams(
@@ -110,7 +112,7 @@ class IFootballRepositoryImpl
         leagueId: Int,
         season: Int
     ): List<TeamStandingEntity> {
-        return  remoteDataSource.getStandingsByLeagueId(season,leagueId).mapRemoteDtoToEntity()
+        return remoteDataSource.getStandingsByLeagueId(season, leagueId).mapRemoteDtoToEntity()
     }
 
 }
