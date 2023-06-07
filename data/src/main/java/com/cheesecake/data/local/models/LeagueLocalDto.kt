@@ -2,7 +2,7 @@ package com.cheesecake.data.local.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.cheesecake.domain.models.League
+import com.cheesecake.domain.entity.LeagueEntity
 
 @Entity("league_table")
 data class LeagueLocalDto(
@@ -14,31 +14,3 @@ data class LeagueLocalDto(
     val seasonEndYear: String,
     val isFavourite: Boolean
 )
-
-fun LeagueLocalDto.mapToDomain(): League {
-    return League(
-        leagueId = leagueId,
-        leagueName = leagueName,
-        leagueSeason = leagueSeason,
-        leagueLogo = leagueLogoUrl,
-        seasonStartYear = seasonStartYear,
-        seasonEndYear = seasonEndYear,
-        isFavourite = isFavourite
-    )
-}
-
-fun List<LeagueLocalDto>.mapToDomain(): List<League> {
-    return this.map { it.mapToDomain() }
-}
-
-fun League.toLocal(): LeagueLocalDto {
-    return LeagueLocalDto(
-        leagueId = leagueId,
-        leagueName = leagueName,
-        leagueSeason = leagueSeason,
-        leagueLogoUrl = leagueLogo,
-        seasonStartYear = seasonStartYear,
-        seasonEndYear = seasonEndYear,
-        isFavourite = isFavourite
-    )
-}

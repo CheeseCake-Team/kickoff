@@ -1,6 +1,6 @@
 package com.cheesecake.domain.usecases
 
-import com.cheesecake.domain.models.League
+import com.cheesecake.domain.entity.LeagueEntity
 import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
@@ -9,10 +9,10 @@ class FavouriteLeagueUseCase @Inject constructor(
     private val getLeagueByIdAndSeasonUseCase: GetLeagueByIdAndSeasonUseCase
 ) {
 
-    suspend operator fun invoke(leagueId: Int, leagueSeason: Int): League? {
+    suspend operator fun invoke(leagueId: Int, leagueSeason: Int): LeagueEntity? {
         getLeagueByIdAndSeasonUseCase(leagueId, leagueSeason)?.let {
             footballRepository.updateOrInsertLeague(
-                League(
+                LeagueEntity(
                     leagueId = it.leagueId,
                     leagueName = it.leagueName,
                     leagueLogo = it.leagueLogo,
