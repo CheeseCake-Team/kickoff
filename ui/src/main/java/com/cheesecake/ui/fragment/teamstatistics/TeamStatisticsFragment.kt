@@ -1,4 +1,4 @@
-package com.cheesecake.ui.teamstatistics
+package com.cheesecake.ui.fragment.teamstatistics
 
 import android.os.Bundle
 import android.view.View
