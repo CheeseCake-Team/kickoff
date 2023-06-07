@@ -31,6 +31,8 @@ interface IFootballRepository {
 
     suspend fun getLeaguesByName(leagueName: String): List<LeagueEntity>
 
+    suspend fun getTeamsByName(teamName: String): List<TeamEntity>
+
     suspend fun getCurrentRoundByIdAndSeason(leagueId: Int, season: Int): String
 
     suspend fun getTeamsStandingByLeagueIdAndSeason(leagueId: Int, season: Int): List<TeamStandingEntity>
