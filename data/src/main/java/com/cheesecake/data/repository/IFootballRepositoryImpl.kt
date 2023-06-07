@@ -33,7 +33,7 @@ class IFootballRepositoryImpl
         return remoteDataSource.getStandingsByLeagueId(season,leagueId).mapToDomain()
     }
 
-    override suspend fun getLeagueTopScorers(leagueId: Int, season: Int): List<Player> {
+    override suspend fun getLeagueTopScorers(leagueId: Int, season: Int): List<PlayerStatisticsEntity> {
         return remoteDataSource.getTopScorers(season, leagueId).mapToDomain()
     }
 
@@ -51,6 +51,10 @@ class IFootballRepositoryImpl
 
     override suspend fun deleteLeagueById(leagueId: Int) {
         localDataSource.deleteLeagueById(leagueId)
+    }
+
+    override suspend fun getPlayerBySeasonByPlayerId(season: String, playerId: Int): PlayerStatisticsEntity {
+        return remoteDataSource.getPlayerBySeasonByPlayerId(season, playerId).first().mapToDomain()
     }
 
 }
