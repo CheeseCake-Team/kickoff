@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import com.cheesecake.ui.R
 import com.cheesecake.ui.base.BaseFragment
+import com.cheesecake.ui.base.BaseFragmentsAdapter
 import com.cheesecake.ui.databinding.FragmentLeagueBinding
 import com.cheesecake.ui.fragment.leagueTeams.LeagueTeamsFragment
 import com.google.android.material.tabs.TabLayoutMediator
@@ -28,7 +29,7 @@ class LeagueFragment : BaseFragment<FragmentLeagueBinding>() {
             LeagueTeamsFragment(),
             LeagueTeamsFragment(),
         )
-        val fragmentsAdapter = FragmentsAdapter((activity as AppCompatActivity), fragments)
+        val fragmentsAdapter = BaseFragmentsAdapter((activity as AppCompatActivity), fragments)
         binding.leagueViewPager.adapter = fragmentsAdapter
         TabLayoutMediator(binding.tabLayout, binding.leagueViewPager) { tab, position ->
             when (position) {
