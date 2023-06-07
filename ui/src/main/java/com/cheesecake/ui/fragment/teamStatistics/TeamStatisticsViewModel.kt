@@ -1,4 +1,4 @@
-package com.cheesecake.ui.fragment.TeamStatistics
+package com.cheesecake.ui.fragment.teamstatistics
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
