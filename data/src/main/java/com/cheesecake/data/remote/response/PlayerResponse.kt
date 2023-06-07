@@ -1,18 +1,6 @@
 package com.cheesecake.data.remote.response
 
-import com.cheesecake.data.remote.models.BaseBirthDTO
-import com.cheesecake.data.remote.models.CardsDTO
-import com.cheesecake.data.remote.models.DribblesDTO
-import com.cheesecake.data.remote.models.DuelsDTO
-import com.cheesecake.data.remote.models.FoulsDTO
-import com.cheesecake.data.remote.models.GoalsStateDTO
-import com.cheesecake.data.remote.models.LeagueCountrySeasonDTO
-import com.cheesecake.data.remote.models.PassesDTO
-import com.cheesecake.data.remote.models.PenaltyDTO
-import com.cheesecake.data.remote.models.ShotsDTO
-import com.cheesecake.data.remote.models.TacklesDTO
-import com.cheesecake.data.remote.models.TeamDTO
-import com.cheesecake.domain.entity.PlayerEntity
+import com.cheesecake.domain.entity.PlayerStatisticsEntity
 import com.google.gson.annotations.SerializedName
 
 data class PlayerResponse(
@@ -83,7 +71,7 @@ data class PlayerResponse(
             @SerializedName("minutes")
             val minutes: Int,
             @SerializedName("number")
-            val number: Any,
+            val number: Int,
             @SerializedName("position")
             val position: String,
             @SerializedName("rating")
@@ -101,15 +89,4 @@ data class PlayerResponse(
             val bench: Int
         )
     }
-}
-
-
-fun PlayerResponse.mapToDomain(): PlayerEntity{
-    return PlayerEntity(
-
-    )
-}
-
-fun List<PlayerResponse>.mapToDomain():List<PlayerEntity>{
-    return this.map { it.mapToDomain() }
 }

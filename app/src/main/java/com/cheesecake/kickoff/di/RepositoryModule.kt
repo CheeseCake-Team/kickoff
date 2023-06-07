@@ -14,7 +14,8 @@ abstract class RepositoryModule {
     @Binds
     abstract fun provideFootballRepository(footballRepository: IFootballRepositoryImpl)
             : IFootballRepository
-    
+
+
 }
 
 

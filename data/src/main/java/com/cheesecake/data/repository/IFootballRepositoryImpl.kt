@@ -1,6 +1,18 @@
 package com.cheesecake.data.repository
 
 import com.cheesecake.data.remote.response.mapToDomain
+import com.cheesecake.data.repository.mappers.mapLocalDtoToEntity
+import com.cheesecake.data.repository.mappers.mapRemoteDtoToEntity
+import com.cheesecake.data.repository.mappers.mapToDomain
+import com.cheesecake.data.repository.mappers.mapToLocal
+import com.cheesecake.data.repository.mappers.toLocal
+import com.cheesecake.domain.entity.FixtureEntity
+import com.cheesecake.domain.entity.LeagueEntity
+import com.cheesecake.domain.entity.TeamEntity
+import com.cheesecake.domain.entity.TeamStandingEntity
+import com.cheesecake.data.repository.mappers.toEntity
+import com.cheesecake.domain.entity.TeamStatisticsEntity
+import com.cheesecake.domain.entity.PlayerStatisticsEntity
 import com.cheesecake.data.repository.mappers.*
 import com.cheesecake.domain.entity.*
 import com.cheesecake.domain.repository.IFootballRepository
@@ -20,7 +32,7 @@ class IFootballRepositoryImpl
         return remoteDataSource.getCurrentSeasonLeague(leagueId, current).mapRemoteDtoToEntity()
     }
 
-    override suspend fun getLeagueTopScorers(leagueId: Int, season: Int): List<PlayerEntity> {
+    override suspend fun getLeagueTopScorers(leagueId: Int, season: Int): List<PlayerStatisticsEntity> {
         return remoteDataSource.getTopScorers(season, leagueId).mapToDomain()
     }
 
@@ -28,14 +40,20 @@ class IFootballRepositoryImpl
         leagueId: Int,
         leagueSeason: Int
     ): LeagueEntity? {
-        return localDataSource.getLeagueByIdAndSeason(leagueId, leagueSeason)?.mapRemoteDtoToEntity()
+        return localDataSource.getLeagueByIdAndSeason(leagueId, leagueSeason)
+            ?.mapRemoteDtoToEntity()
+    }
+
+    override suspend fun getSinglePlayerCompact(season: String, teamId: Int): List<PlayerStatisticsEntity> {
+        return remoteDataSource.getPlayerBySeasonByTeamId(season, teamId).mapToDomain()
     }
 
     override suspend fun getRemotelyLeagueByIdAndSeason(
         leagueId: Int,
         leagueSeason: Int
     ): LeagueEntity {
-        return remoteDataSource.getLeagueByIdAndSeason(leagueId, leagueSeason).first().mapRemoteDtoToEntity()
+        return remoteDataSource.getLeagueByIdAndSeason(leagueId, leagueSeason).first()
+            .mapRemoteDtoToEntity()
     }
 
     override suspend fun updateOrInsertLeague(leagueEntity: LeagueEntity) {
@@ -59,14 +77,16 @@ class IFootballRepositoryImpl
         leagueId: Int,
         leagueSeason: Int
     ): List<TeamEntity> {
-        return localDataSource.getLocallyTeamsByIdAndSeason(leagueId, leagueSeason).mapLocalDtoToEntity()
+        return localDataSource.getLocallyTeamsByIdAndSeason(leagueId, leagueSeason)
+            .mapLocalDtoToEntity()
     }
 
     override suspend fun getRemotelyTeamsByIdAndSeason(
         leagueId: Int,
         leagueSeason: Int
     ): List<TeamEntity> {
-        return remoteDataSource.getTeamsByLeagueAndSeason(leagueId, leagueSeason).mapRemoteDtoToEntity()
+        return remoteDataSource.getTeamsByLeagueAndSeason(leagueId, leagueSeason)
+            .mapRemoteDtoToEntity()
     }
 
     override suspend fun updateOrInsertTeams(
@@ -81,6 +101,11 @@ class IFootballRepositoryImpl
         return remoteDataSource.getLeaguesByName(leagueName).mapRemoteDtoToEntity()
     }
 
+    override suspend fun getTeamsByName(teamName: String): List<TeamEntity> {
+        return remoteDataSource.getTeamsByName(teamName).mapRemoteDtoToEntity()
+    }
+
+
     override suspend fun getCurrentRoundByIdAndSeason(leagueId: Int, season: Int): String? {
         return remoteDataSource.getCurrentRoundByLeagueIdAndSeason(leagueId, season, true).firstOrNull()
     }
@@ -89,7 +114,18 @@ class IFootballRepositoryImpl
         leagueId: Int,
         season: Int
     ): List<TeamStandingEntity> {
-        return  remoteDataSource.getStandingsByLeagueId(season,leagueId).mapRemoteDtoToEntity()
+        return remoteDataSource.getStandingsByLeagueId(season, leagueId).mapRemoteDtoToEntity()
+    }
+
+    override suspend fun getTeamStatistics(
+        teamId: Int,
+        season: Int,
+        leagueId: Int
+    ): TeamStatisticsEntity {
+        return remoteDataSource.getTeamStatistics(teamId, season, leagueId).toEntity()
+    }
+    override suspend fun getPlayerBySeasonByPlayerId(season: String, playerId: Int): PlayerStatisticsEntity {
+        return remoteDataSource.getPlayerBySeasonByPlayerId(season, playerId).first().mapToDomain()
     }
 
 }
