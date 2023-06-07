@@ -579,7 +579,12 @@ class RemoteDataSourceImp @Inject constructor(
     private suspend fun <T> wrapBaseResponse(
         function: suspend () -> Response<BaseResponse<T>>,
     ): List<T> {
-        return function().body()?.response ?: throw Throwable("Not Success Request")
+        val response = function()
+        return if (response.isSuccessful) {
+            response.body()?.response!!
+        } else {
+            throw Throwable(" Not Success Request ")
+        }
     }
 
 

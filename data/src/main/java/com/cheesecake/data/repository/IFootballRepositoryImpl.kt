@@ -1,9 +1,9 @@
 package com.cheesecake.data.repository
 
-
 import com.cheesecake.data.local.models.mapToDomain
 import com.cheesecake.data.local.models.mapToLocal
 import com.cheesecake.data.local.models.toLocal
+import com.cheesecake.data.repository.models.response.LeagueResponse
 import com.cheesecake.data.repository.models.response.mapToDomain
 import com.cheesecake.domain.entity.*
 import com.cheesecake.domain.repository.IFootballRepository
@@ -70,6 +70,10 @@ class IFootballRepositoryImpl
 
     override suspend fun updateOrInsertTeams(teamEntityEntities: List<TeamEntity>, leagueId: Int, leagueSeason: Int) {
         localDataSource.updateOrInsertTeams(teamEntityEntities.mapToLocal(leagueId, leagueSeason))
+    }
+
+    override suspend fun getLeaguesByName(leagueName: String): List<LeagueEntity> {
+        return remoteDataSource.getLeaguesByName(leagueName).mapToDomain()
     }
 
 }
