@@ -1,4 +1,4 @@
-package com.cheesecake.ui
+package com.cheesecake.ui.teamstatistics
 
 import androidx.lifecycle.ViewModel
 import com.cheesecake.domain.entity.TeamEntity
