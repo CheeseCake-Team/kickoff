@@ -9,9 +9,9 @@ data class TeamEntity(
     val venueName: String,
     val imageUrl: String,
     val isFavourite: Boolean,
-    val leagueMatchesPlayed: Int?,
-    val leagueWins: Int?,
-    val leagueDraws: Int?,
-    val leagueLoses: Int?,
-    val leaguePoints: Int?
+    val matchesPlayed: Int?,
+    val matchesWins: Int?,
+    val matchesDraws: Int?,
+    val matchesLoses: Int?,
+    val teamPoints: Int?
 )
