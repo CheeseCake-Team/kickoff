@@ -2,16 +2,20 @@ package com.cheesecake.data.local.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.cheesecake.data.local.daos.LeagueDao
 import com.cheesecake.data.local.daos.TeamsDao
+import com.cheesecake.data.local.models.LeagueLocalDto
 import com.cheesecake.data.local.models.TeamLocalDto
 
 @Database(
-    entities = [TeamLocalDto::class],
+    entities = [TeamLocalDto::class, LeagueLocalDto::class],
     version = 1
 ) //TODO add all entities into the annotation
 
 abstract class KickoffDatabase : RoomDatabase() {
 
-    abstract fun getTeamsDoa(): TeamsDao
+    abstract fun getTeamsDao(): TeamsDao
+
+    abstract fun getLeagueDao(): LeagueDao
 
 }

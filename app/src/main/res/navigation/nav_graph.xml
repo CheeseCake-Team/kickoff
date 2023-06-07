@@ -2,10 +2,14 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/testFragment">
+    app:startDestination="@id/leagueFragment">
 
     <fragment
         android:id="@+id/testFragment"
         android:name="com.cheesecake.ui.fragment.leagueTeams.TestFragment"
         android:label="TestFragment" />
+    <fragment
+        android:id="@+id/leagueFragment"
+        android:name="com.cheesecake.ui.fragment.league.LeagueFragment"
+        android:label="LeagueFragment" />
 </navigation>

@@ -1,6 +1,6 @@
 package com.cheesecake.data.repository.teams
 
-import com.cheesecake.data.local.LocalDataSource
+import com.cheesecake.data.repository.LocalDataSource
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 
@@ -51,7 +51,7 @@ class TeamsRepository @Inject constructor(
 //        }
 //    }
 //
-//    suspend fun getTeamById(teamId: Int): Response<BaseResponse<TeamInformationDTO>> {
+//    suspend fun getTeamById(teamId: Int): Response<BaseResponse<TeamInformationResponse>> {
 //        return remoteDataSource.getTeamById(teamId)
 //    }
 //
