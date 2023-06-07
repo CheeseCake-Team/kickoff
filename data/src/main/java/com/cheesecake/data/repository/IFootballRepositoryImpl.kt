@@ -97,4 +97,15 @@ class IFootballRepositoryImpl
         localDataSource.updateOrInsertTeams(teamEntityEntities.mapToLocal(leagueId, leagueSeason))
     }
 
+    override suspend fun getCurrentRoundByIdAndSeason(leagueId: Int, season: Int): String {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getTeamsStandingByLeagueIdAndSeason(
+        leagueId: Int,
+        season: Int
+    ): List<TeamEntity> {
+        TODO("Not yet implemented")
+    }
+
 }
