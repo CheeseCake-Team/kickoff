@@ -1,6 +1,18 @@
 package com.cheesecake.data.repository
 
-import com.cheesecake.data.repository.models.response.*
+import com.cheesecake.data.remote.response.FixtureResponse
+import com.cheesecake.data.remote.response.LineupResponse
+import com.cheesecake.data.remote.response.PlayerResponse
+import com.cheesecake.data.remote.response.PredictionsResponse
+import com.cheesecake.data.remote.response.SidelinedResponse
+import com.cheesecake.data.remote.response.SquadResponse
+import com.cheesecake.data.remote.response.StandingsResponse
+import com.cheesecake.data.remote.response.TeamCountriesResponse
+import com.cheesecake.data.remote.response.TeamInformationResponse
+import com.cheesecake.data.remote.response.TeamStatisticsResponse
+import com.cheesecake.data.remote.response.TransferResponse
+import com.cheesecake.data.remote.response.TrophyResponse
+import com.cheesecake.data.remote.response.VenuesResponse
 import com.cheesecake.data.utils.FixtureStatus
 import com.cheesecake.data.utils.LeagueType
 import retrofit2.Response
@@ -15,17 +27,17 @@ interface RemoteDataSource {
 
     suspend fun getCoachById(
         playerID: Int
-    ): List<CoachResponse>
+    ): List<com.cheesecake.data.remote.response.CoachResponse>
 
 
     suspend fun getCoachByTeam(
         teamID: Int
-    ): List<CoachResponse>
+    ): List<com.cheesecake.data.remote.response.CoachResponse>
 
 
     suspend fun getCoachBySearch(
         getCoachName: String
-    ): List<CoachResponse>
+    ): List<com.cheesecake.data.remote.response.CoachResponse>
     //endregion
 
     //region countries
@@ -67,13 +79,13 @@ interface RemoteDataSource {
     suspend fun getFixtureById(
         timeZone: String,
         fixtureId: Int
-    ): List<FixtureResponse>
+    ): List<com.cheesecake.data.remote.response.FixtureResponse>
 
     suspend fun getFixtureBySeasonByTeamId(
         timeZone: String,
         season: String,
         TeamId: Int
-    ): List<FixtureResponse>
+    ): List<com.cheesecake.data.remote.response.FixtureResponse>
 
     suspend fun getFixturesBySeasonIdAndLeagueId(
         timeZone: String,
@@ -84,18 +96,18 @@ interface RemoteDataSource {
     suspend fun getFixturesByDate(
         timeZone: String,
         date: String
-    ): List<FixtureResponse>
+    ): List<com.cheesecake.data.remote.response.FixtureResponse>
 
 
     suspend fun getFixturesFromDate(
         timeZone: String,
         date: String
-    ): List<FixtureResponse>
+    ): List<com.cheesecake.data.remote.response.FixtureResponse>
 
     suspend fun getFixturesToDate(
         timeZone: String,
         date: String
-    ): List<FixtureResponse>
+    ): List<com.cheesecake.data.remote.response.FixtureResponse>
 
     suspend fun getFixturesFromDateToDate(
         timeZone: String,
@@ -103,12 +115,12 @@ interface RemoteDataSource {
         TeamId: Int,
         from: String,
         date: String
-    ): List<FixtureResponse>
+    ): List<com.cheesecake.data.remote.response.FixtureResponse>
 
     suspend fun getFixturesStatus(
         timeZone: String,
         fixtureStatusType: String
-    ): List<FixtureResponse>
+    ): List<com.cheesecake.data.remote.response.FixtureResponse>
     //endregion
     //region Head 2 Head
 
@@ -116,14 +128,14 @@ interface RemoteDataSource {
         teamsId: String,
         seasonId: Int,
         timeZone: String
-    ): List<HeadToHeadResponse>
+    ): List<com.cheesecake.data.remote.response.HeadToHeadResponse>
 
 
     suspend fun getHeadToHeadByDate(
         teamsId: String,
         date: String,
         timeZone: String
-    ): List<HeadToHeadResponse>
+    ): List<com.cheesecake.data.remote.response.HeadToHeadResponse>
 
 
     suspend fun getHeadToHeadByStatus(
@@ -131,7 +143,7 @@ interface RemoteDataSource {
         status: FixtureStatus,
         seasonId: Int,
         timeZone: String
-    ): List<HeadToHeadResponse>
+    ): List<com.cheesecake.data.remote.response.HeadToHeadResponse>
 
 
     suspend fun getHeadToHeadByFromAndTO(
@@ -140,7 +152,7 @@ interface RemoteDataSource {
         to: String,
         seasonId: Int,
         timeZone: String
-    ): List<HeadToHeadResponse>
+    ): List<com.cheesecake.data.remote.response.HeadToHeadResponse>
 
 
     suspend fun getHeadToHeadByLeague(
@@ -148,7 +160,7 @@ interface RemoteDataSource {
         leagueId: Int,
         seasonId: Int,
         timeZone: String
-    ): List<HeadToHeadResponse>
+    ): List<com.cheesecake.data.remote.response.HeadToHeadResponse>
 
 
     suspend fun getHeadToHeadByByDateAndLeague(
@@ -156,7 +168,7 @@ interface RemoteDataSource {
         leagueId: Int,
         date: String,
         timeZone: String
-    ): List<HeadToHeadResponse>
+    ): List<com.cheesecake.data.remote.response.HeadToHeadResponse>
 
 
     suspend fun getHeadToHeadByStatusAndLeague(
@@ -165,7 +177,7 @@ interface RemoteDataSource {
         status: FixtureStatus,
         seasonId: Int,
         timeZone: String
-    ): List<HeadToHeadResponse>
+    ): List<com.cheesecake.data.remote.response.HeadToHeadResponse>
 
 
     suspend fun getHeadToHeadByFromAndTOAndLeague(
@@ -175,38 +187,38 @@ interface RemoteDataSource {
         to: String,
         seasonId: Int,
         timeZone: String
-    ): List<HeadToHeadResponse>
+    ): List<com.cheesecake.data.remote.response.HeadToHeadResponse>
     //endregion
     //region Statistics
 
     suspend fun getFixtureStatisticsByFixtureId(
         fixtureId: Int
-    ): List<FixtureStatisticsResponse>
+    ): List<com.cheesecake.data.remote.response.FixtureStatisticsResponse>
 
 
     suspend fun getFixtureStatisticsByFixtureIdByTeamId(
         fixtureId: Int,
         teamId: Int
-    ): List<FixtureStatisticsResponse>
+    ): List<com.cheesecake.data.remote.response.FixtureStatisticsResponse>
     //endregion
     //region Events
 
     suspend fun getFixtureEventsByFixtureId(
         fixtureId: Int
-    ): List<EventResponse>
+    ): List<com.cheesecake.data.remote.response.EventResponse>
 
 
     suspend fun getFixtureEventsByFixtureIdByTeamId(
         fixtureId: Int,
         teamId: Int
-    ): List<EventResponse>
+    ): List<com.cheesecake.data.remote.response.EventResponse>
 
 
     suspend fun getFixtureEventsByFixtureIdByTeamIdByPlayerId(
         fixtureId: Int,
         teamId: Int,
         playerId: Int,
-    ): List<EventResponse>
+    ): List<com.cheesecake.data.remote.response.EventResponse>
 
 
     suspend fun getFixtureEventsByFixtureIdByTeamIdByPlayerIdByType(
@@ -214,7 +226,7 @@ interface RemoteDataSource {
         teamId: Int,
         playerId: Int,
         fixtureEventType: String,
-    ): List<EventResponse>
+    ): List<com.cheesecake.data.remote.response.EventResponse>
     //endregion
     //region Lineups
     suspend fun getFixtureLineupsByFixtureId(
@@ -235,11 +247,11 @@ interface RemoteDataSource {
     //region Players
     suspend fun getFixturePlayersByFixtureId(
         fixtureId: String
-    ): List<FixturesResponse>
+    ): List<com.cheesecake.data.remote.response.FixturesResponse>
     suspend fun getFixturePlayersByFixtureIdByTeamId(
         fixtureId: Int,
         teamId: Int
-    ): List<FixturesResponse>
+    ): List<com.cheesecake.data.remote.response.FixturesResponse>
 
     //endregion
     //endregion
@@ -248,101 +260,101 @@ interface RemoteDataSource {
 
     suspend fun getInjuriesByFixtureID(
         fixtureId: Int
-    ): List<InjuriesResponse>
+    ): List<com.cheesecake.data.remote.response.InjuriesResponse>
 
 
     suspend fun getInjuriesByLeagueIDAndSeason(
         leagueId: Int,
         season: Int
 
-    ): List<InjuriesResponse>
+    ): List<com.cheesecake.data.remote.response.InjuriesResponse>
 
 
     suspend fun getInjuriesByTeamIDAndSeason(
         teamId: Int,
         season: Int
 
-    ): List<InjuriesResponse>
+    ): List<com.cheesecake.data.remote.response.InjuriesResponse>
 
 
     suspend fun getInjuriesByPlayerIDAndSeason(
         playerId: Int,
         season: Int
 
-    ): List<InjuriesResponse>
+    ): List<com.cheesecake.data.remote.response.InjuriesResponse>
 
 
     suspend fun getInjuriesByTimeZone(
         timeZone: String,
-    ): List<InjuriesResponse>
+    ): List<com.cheesecake.data.remote.response.InjuriesResponse>
 
 
     suspend fun getInjuriesByDate(
         date: String,
-    ): List<InjuriesResponse>
+    ): List<com.cheesecake.data.remote.response.InjuriesResponse>
     //endregion
 
     //region leagues
     suspend fun getAllLeagues(
 
-    ): List<LeagueResponse>
+    ): List<com.cheesecake.data.remote.response.LeagueResponse>
 
     suspend fun getLeaguesById(
         leagueId: Int
-    ): List<LeagueResponse>
+    ): List<com.cheesecake.data.remote.response.LeagueResponse>
 
     suspend fun getLeaguesByName(
         leagueName: String
-    ): List<LeagueResponse>
+    ): List<com.cheesecake.data.remote.response.LeagueResponse>
 
     suspend fun getLeaguesByCountryName(
         countryName: String
-    ): List<LeagueResponse>
+    ): List<com.cheesecake.data.remote.response.LeagueResponse>
 
     suspend fun getLeaguesByCountryCode(
         countryName: String
-    ): List<LeagueResponse>
+    ): List<com.cheesecake.data.remote.response.LeagueResponse>
 
     suspend fun getLeaguesOfSeason(
         season: Int
-    ): List<LeagueResponse>
+    ): List<com.cheesecake.data.remote.response.LeagueResponse>
 
     suspend fun getLeagueByIdAndSeason(
         season: Int,
         leagueId: Int
-    ): List<LeagueResponse>
+    ): List<com.cheesecake.data.remote.response.LeagueResponse>
 
     suspend fun getLeaguesByType(
         type: LeagueType
-    ): List<LeagueResponse>
+    ): List<com.cheesecake.data.remote.response.LeagueResponse>
 
     suspend fun getLeaguesByTypeById(
         type: LeagueType,
         id: Int
-    ): List<LeagueResponse>
+    ): List<com.cheesecake.data.remote.response.LeagueResponse>
 
     suspend fun getLeagueByTypeByIdBySeason(
         type: LeagueType,
         id: Int,
         season: Int
-    ): List<LeagueResponse>
+    ): List<com.cheesecake.data.remote.response.LeagueResponse>
 
     suspend fun getCurrentActiveLeagues(
         current: Boolean
-    ): List<LeagueResponse>
+    ): List<com.cheesecake.data.remote.response.LeagueResponse>
 
     suspend fun searchByLeagueName(
         name: String
-    ): List<LeagueResponse>
+    ): List<com.cheesecake.data.remote.response.LeagueResponse>
 
     suspend fun getLeaguesSeasons(
 
-    ): List<LeagueResponse>
+    ): List<com.cheesecake.data.remote.response.LeagueResponse>
 
     suspend fun getCurrentSeasonLeague(
         id: Int,
         current: Boolean
-    ): List<LeagueResponse>
+    ): List<com.cheesecake.data.remote.response.LeagueResponse>
     //endregion
 
     //region players

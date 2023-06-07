@@ -3,21 +3,22 @@ package com.cheesecake.data.remote
 import com.cheesecake.data.remote.response.BaseResponse
 import com.cheesecake.data.remote.response.BaseStaticResponse
 import com.cheesecake.data.remote.api.FootballApiService
-import com.cheesecake.data.repository.models.response.FixtureResponse
+import com.cheesecake.data.remote.response.FixtureResponse
 import com.cheesecake.data.repository.RemoteDataSource
-import com.cheesecake.data.repository.models.response.LeagueResponse
-import com.cheesecake.data.repository.models.response.LineupResponse
-import com.cheesecake.data.repository.models.response.PlayerResponse
-import com.cheesecake.data.repository.models.response.PredictionsResponse
-import com.cheesecake.data.repository.models.response.SidelinedResponse
-import com.cheesecake.data.repository.models.response.SquadResponse
-import com.cheesecake.data.repository.models.response.StandingsResponse
-import com.cheesecake.data.repository.models.response.TeamCountriesResponse
-import com.cheesecake.data.repository.models.response.TeamInformationResponse
-import com.cheesecake.data.repository.models.response.TeamStatisticsResponse
-import com.cheesecake.data.repository.models.response.TransferResponse
-import com.cheesecake.data.repository.models.response.TrophyResponse
-import com.cheesecake.data.repository.models.response.VenuesResponse
+import com.cheesecake.data.remote.response.LeagueResponse
+import com.cheesecake.data.remote.response.LineupResponse
+import com.cheesecake.data.remote.response.PlayerResponse
+import com.cheesecake.data.remote.response.PredictionsResponse
+import com.cheesecake.data.remote.response.SidelinedResponse
+import com.cheesecake.data.remote.response.SquadResponse
+import com.cheesecake.data.remote.response.StandingsResponse
+import com.cheesecake.data.remote.response.TeamCountriesResponse
+import com.cheesecake.data.remote.response.TeamInformationResponse
+import com.cheesecake.data.remote.response.TeamStatisticsResponse
+import com.cheesecake.data.remote.response.TransferResponse
+import com.cheesecake.data.remote.response.TrophyResponse
+import com.cheesecake.data.remote.response.VenuesResponse
+
 import com.cheesecake.data.utils.FixtureStatus
 import com.cheesecake.data.utils.LeagueType
 import retrofit2.Response
@@ -28,15 +29,15 @@ class RemoteDataSourceImp @Inject constructor(
 ) : RemoteDataSource {
 
     //region coachs
-    override suspend fun getCoachById(playerID: Int): List<com.cheesecake.data.repository.models.response.CoachResponse> {
+    override suspend fun getCoachById(playerID: Int): List<com.cheesecake.data.remote.response.CoachResponse> {
         return wrapBaseResponse { service.getCoachById(playerID) }
     }
 
-    override suspend fun getCoachByTeam(teamID: Int): List<com.cheesecake.data.repository.models.response.CoachResponse> {
+    override suspend fun getCoachByTeam(teamID: Int): List<com.cheesecake.data.remote.response.CoachResponse> {
         return wrapBaseResponse { service.getCoachByTeam(teamID) }
     }
 
-    override suspend fun getCoachBySearch(getCoachName: String): List<com.cheesecake.data.repository.models.response.CoachResponse> {
+    override suspend fun getCoachBySearch(getCoachName: String): List<com.cheesecake.data.remote.response.CoachResponse> {
         return wrapBaseResponse { service.getCoachBySearch(getCoachName) }
     }
 
@@ -78,7 +79,7 @@ class RemoteDataSourceImp @Inject constructor(
     }
     //endregion
     //region Fixtuers
-    override suspend fun getFixtureById(timeZone: String, fixtureId: Int): List<FixtureResponse> {
+    override suspend fun getFixtureById(timeZone: String, fixtureId: Int): List<com.cheesecake.data.remote.response.FixtureResponse> {
         return wrapBaseResponse { service.getFixtureById(timeZone,fixtureId)
         }
     }
@@ -87,7 +88,7 @@ class RemoteDataSourceImp @Inject constructor(
         timeZone: String,
         season: String,
         TeamId: Int
-    ): List<FixtureResponse> {
+    ): List<com.cheesecake.data.remote.response.FixtureResponse> {
         return wrapBaseResponse { service.getFixturesBySeasonIdByTeamId(timeZone, season, TeamId) }
     }
 
@@ -106,11 +107,11 @@ class RemoteDataSourceImp @Inject constructor(
     override suspend fun getFixturesFromDate(
         timeZone: String,
         date: String
-    ): List<FixtureResponse> {
+    ): List<com.cheesecake.data.remote.response.FixtureResponse> {
         return wrapBaseResponse { service.getFixturesFromDate(timeZone, date) }
     }
 
-    override suspend fun getFixturesToDate(timeZone: String, date: String): List<FixtureResponse> {
+    override suspend fun getFixturesToDate(timeZone: String, date: String): List<com.cheesecake.data.remote.response.FixtureResponse> {
         return wrapBaseResponse { service.getFixturesToDate(timeZone, date) }
     }
 
@@ -120,7 +121,7 @@ class RemoteDataSourceImp @Inject constructor(
         TeamId: Int,
         from: String,
         date: String
-    ): List<FixtureResponse> {
+    ): List<com.cheesecake.data.remote.response.FixtureResponse> {
         return wrapBaseResponse { service.getFixturesFromDateToDate(
             timeZone, season, TeamId,from,date) }
     }
@@ -128,7 +129,7 @@ class RemoteDataSourceImp @Inject constructor(
     override suspend fun getFixturesStatus(
         timeZone: String,
         fixtureStatusType: String
-    ): List<FixtureResponse> {
+    ): List<com.cheesecake.data.remote.response.FixtureResponse> {
         return wrapBaseResponse { service.getFixturesStatus(timeZone, fixtureStatusType) }
     }
 
@@ -139,7 +140,7 @@ class RemoteDataSourceImp @Inject constructor(
         teamsId: String,
         seasonId: Int,
         timeZone: String
-    ): List<com.cheesecake.data.repository.models.response.HeadToHeadResponse> {
+    ): List<com.cheesecake.data.remote.response.HeadToHeadResponse> {
         return wrapBaseResponse { service.getHeadToHead(teamsId, seasonId, timeZone) }
     }
 
@@ -147,7 +148,7 @@ class RemoteDataSourceImp @Inject constructor(
         teamsId: String,
         date: String,
         timeZone: String
-    ): List<com.cheesecake.data.repository.models.response.HeadToHeadResponse> {
+    ): List<com.cheesecake.data.remote.response.HeadToHeadResponse> {
         return wrapBaseResponse { service.getHeadToHeadByDate(
             teamsId, date, timeZone) }
     }
@@ -157,7 +158,7 @@ class RemoteDataSourceImp @Inject constructor(
         status: FixtureStatus,
         seasonId: Int,
         timeZone: String
-    ): List<com.cheesecake.data.repository.models.response.HeadToHeadResponse> {
+    ): List<com.cheesecake.data.remote.response.HeadToHeadResponse> {
         return wrapBaseResponse { service.getHeadToHeadByStatus(
             teamsId, status, seasonId, timeZone) }
     }
@@ -168,7 +169,7 @@ class RemoteDataSourceImp @Inject constructor(
         to: String,
         seasonId: Int,
         timeZone: String
-    ): List<com.cheesecake.data.repository.models.response.HeadToHeadResponse> {
+    ): List<com.cheesecake.data.remote.response.HeadToHeadResponse> {
         return wrapBaseResponse { service.getHeadToHeadByFromAndTO(
             teamsId, from, to, seasonId, timeZone) }
     }
@@ -178,7 +179,7 @@ class RemoteDataSourceImp @Inject constructor(
         leagueId: Int,
         seasonId: Int,
         timeZone: String
-    ): List<com.cheesecake.data.repository.models.response.HeadToHeadResponse> {
+    ): List<com.cheesecake.data.remote.response.HeadToHeadResponse> {
         return wrapBaseResponse { service.getHeadToHeadByLeague(
             teamsId, leagueId, seasonId, timeZone) }
     }
@@ -188,7 +189,7 @@ class RemoteDataSourceImp @Inject constructor(
         leagueId: Int,
         date: String,
         timeZone: String
-    ): List<com.cheesecake.data.repository.models.response.HeadToHeadResponse> {
+    ): List<com.cheesecake.data.remote.response.HeadToHeadResponse> {
         return wrapBaseResponse { service.getHeadToHeadByByDateAndLeague(
             teamsId, leagueId, date, timeZone) }
     }
@@ -199,7 +200,7 @@ class RemoteDataSourceImp @Inject constructor(
         status: FixtureStatus,
         seasonId: Int,
         timeZone: String
-    ): List<com.cheesecake.data.repository.models.response.HeadToHeadResponse> {
+    ): List<com.cheesecake.data.remote.response.HeadToHeadResponse> {
         return wrapBaseResponse { service.getHeadToHeadByStatusAndLeague(
             teamsId, leagueId, status, seasonId, timeZone) }
     }
@@ -211,33 +212,33 @@ class RemoteDataSourceImp @Inject constructor(
         to: String,
         seasonId: Int,
         timeZone: String
-    ): List<com.cheesecake.data.repository.models.response.HeadToHeadResponse> {
+    ): List<com.cheesecake.data.remote.response.HeadToHeadResponse> {
         return wrapBaseResponse { service.getHeadToHeadByFromAndTOAndLeague(
             teamsId, leagueId, from, to, seasonId, timeZone) }
     }
     //endregion
     //region Statistics
-    override suspend fun getFixtureStatisticsByFixtureId(fixtureId: Int): List<com.cheesecake.data.repository.models.response.FixtureStatisticsResponse> {
+    override suspend fun getFixtureStatisticsByFixtureId(fixtureId: Int): List<com.cheesecake.data.remote.response.FixtureStatisticsResponse> {
         return wrapBaseResponse { service.getFixtureStatisticsByFixtureId(fixtureId) }
     }
 
     override suspend fun getFixtureStatisticsByFixtureIdByTeamId(
         fixtureId: Int,
         teamId: Int
-    ): List<com.cheesecake.data.repository.models.response.FixtureStatisticsResponse> {
+    ): List<com.cheesecake.data.remote.response.FixtureStatisticsResponse> {
         return wrapBaseResponse { service.getFixtureStatisticsByFixtureIdByTeamId(
             fixtureId, teamId) }
     }
     //endregion
     //region Events
-    override suspend fun getFixtureEventsByFixtureId(fixtureId: Int): List<com.cheesecake.data.repository.models.response.EventResponse> {
+    override suspend fun getFixtureEventsByFixtureId(fixtureId: Int): List<com.cheesecake.data.remote.response.EventResponse> {
         return wrapBaseResponse { service.getFixtureEventsByFixtureId(fixtureId) }
     }
 
     override suspend fun getFixtureEventsByFixtureIdByTeamId(
         fixtureId: Int,
         teamId: Int
-    ): List<com.cheesecake.data.repository.models.response.EventResponse> {
+    ): List<com.cheesecake.data.remote.response.EventResponse> {
         return wrapBaseResponse { service.getFixtureEventsByFixtureIdByTeamId(fixtureId, teamId) }
     }
 
@@ -245,7 +246,7 @@ class RemoteDataSourceImp @Inject constructor(
         fixtureId: Int,
         teamId: Int,
         playerId: Int
-    ): List<com.cheesecake.data.repository.models.response.EventResponse> {
+    ): List<com.cheesecake.data.remote.response.EventResponse> {
         return wrapBaseResponse { service.getFixtureEventsByFixtureIdByTeamIdByPlayerId(
             fixtureId, teamId, playerId) }
     }
@@ -255,7 +256,7 @@ class RemoteDataSourceImp @Inject constructor(
         teamId: Int,
         playerId: Int,
         fixtureEventType: String
-    ): List<com.cheesecake.data.repository.models.response.EventResponse> {
+    ): List<com.cheesecake.data.remote.response.EventResponse> {
         return wrapBaseResponse { service.getFixtureEventsByFixtureIdByTeamIdByPlayerIdByType(
             fixtureId, teamId, playerId, fixtureEventType) }
     }
@@ -281,75 +282,75 @@ class RemoteDataSourceImp @Inject constructor(
     }
     //endregion
     //region Players
-    override suspend fun getFixturePlayersByFixtureId(fixtureId: String): List<com.cheesecake.data.repository.models.response.FixturesResponse> {
+    override suspend fun getFixturePlayersByFixtureId(fixtureId: String): List<com.cheesecake.data.remote.response.FixturesResponse> {
         return wrapBaseResponse { service.getFixturePlayersByFixtureId(fixtureId) }
     }
 
     override suspend fun getFixturePlayersByFixtureIdByTeamId(
         fixtureId: Int,
         teamId: Int
-    ): List<com.cheesecake.data.repository.models.response.FixturesResponse> {
+    ): List<com.cheesecake.data.remote.response.FixturesResponse> {
         return wrapBaseResponse { service.getFixturePlayersByFixtureIdByTeamId(fixtureId, teamId) }
     }
     //endregion
     //endregion
 
     //region injuries
-    override suspend fun getInjuriesByFixtureID(fixtureId: Int): List<com.cheesecake.data.repository.models.response.InjuriesResponse> {
+    override suspend fun getInjuriesByFixtureID(fixtureId: Int): List<com.cheesecake.data.remote.response.InjuriesResponse> {
         return wrapBaseResponse { service.getInjuriesByFixtureID(fixtureId) }
     }
 
     override suspend fun getInjuriesByLeagueIDAndSeason(
         leagueId: Int,
         season: Int
-    ): List<com.cheesecake.data.repository.models.response.InjuriesResponse> {
+    ): List<com.cheesecake.data.remote.response.InjuriesResponse> {
         return wrapBaseResponse { service.getInjuriesByLeagueIDAndSeason(leagueId, season) }
     }
 
-    override suspend fun getInjuriesByTeamIDAndSeason(teamId: Int, season: Int): List<com.cheesecake.data.repository.models.response.InjuriesResponse> {
+    override suspend fun getInjuriesByTeamIDAndSeason(teamId: Int, season: Int): List<com.cheesecake.data.remote.response.InjuriesResponse> {
         return wrapBaseResponse { service.getInjuriesByTeamIDAndSeason(teamId, season) }
     }
 
     override suspend fun getInjuriesByPlayerIDAndSeason(
         playerId: Int,
         season: Int
-    ): List<com.cheesecake.data.repository.models.response.InjuriesResponse> {
+    ): List<com.cheesecake.data.remote.response.InjuriesResponse> {
         return wrapBaseResponse { service.getInjuriesByPlayerIDAndSeason(playerId, season) }
     }
 
-    override suspend fun getInjuriesByTimeZone(timeZone: String): List<com.cheesecake.data.repository.models.response.InjuriesResponse> {
+    override suspend fun getInjuriesByTimeZone(timeZone: String): List<com.cheesecake.data.remote.response.InjuriesResponse> {
         return wrapBaseResponse { service.getInjuriesByTimeZone(timeZone) }
     }
 
-    override suspend fun getInjuriesByDate(date: String): List<com.cheesecake.data.repository.models.response.InjuriesResponse> {
+    override suspend fun getInjuriesByDate(date: String): List<com.cheesecake.data.remote.response.InjuriesResponse> {
         return wrapBaseResponse { service.getInjuriesByDate(date) }
     }
     //endregion
 
     //region leagues
-    override suspend fun getAllLeagues(): List<LeagueResponse> {
+    override suspend fun getAllLeagues(): List<com.cheesecake.data.remote.response.LeagueResponse> {
         return wrapBaseResponse { service.getAllLeagues() }
     }
 
-    override suspend fun getLeaguesById(leagueId: Int): List<LeagueResponse> {
+    override suspend fun getLeaguesById(leagueId: Int): List<com.cheesecake.data.remote.response.LeagueResponse> {
         return wrapBaseResponse { service.getLeaguesById(leagueId) }
     }
 
-    override suspend fun getLeaguesByName(leagueName: String): List<LeagueResponse> {
+    override suspend fun getLeaguesByName(leagueName: String): List<com.cheesecake.data.remote.response.LeagueResponse> {
         return wrapBaseResponse { service.getLeaguesByName(leagueName) }
     }
 
-    override suspend fun getLeaguesByCountryName(countryName: String): List<LeagueResponse> {
+    override suspend fun getLeaguesByCountryName(countryName: String): List<com.cheesecake.data.remote.response.LeagueResponse> {
         return wrapBaseResponse { service.getLeaguesByCountryName(countryName) }
     }
 
 
-    override suspend fun getLeaguesByCountryCode(countryName: String): List<LeagueResponse> {
+    override suspend fun getLeaguesByCountryCode(countryName: String): List<com.cheesecake.data.remote.response.LeagueResponse> {
         return wrapBaseResponse { service.getLeaguesByCountryCode(countryName) }
     }
 
 
-    override suspend fun getLeaguesOfSeason(season: Int): List<LeagueResponse> {
+    override suspend fun getLeaguesOfSeason(season: Int): List<com.cheesecake.data.remote.response.LeagueResponse> {
         return wrapBaseResponse { service.getLeaguesOfSeason(season) }
     }
 
@@ -358,11 +359,11 @@ class RemoteDataSourceImp @Inject constructor(
         return wrapBaseResponse { service.getLeagueByIdBySeason(season, leagueId) }
     }
 
-    override suspend fun getLeaguesByType(type: LeagueType): List<LeagueResponse> {
+    override suspend fun getLeaguesByType(type: LeagueType): List<com.cheesecake.data.remote.response.LeagueResponse> {
         return wrapBaseResponse { service.getLeaguesByType(type) }
     }
 
-    override suspend fun getLeaguesByTypeById(type: LeagueType, id: Int): List<LeagueResponse> {
+    override suspend fun getLeaguesByTypeById(type: LeagueType, id: Int): List<com.cheesecake.data.remote.response.LeagueResponse> {
         return wrapBaseResponse { service.getLeaguesByTypeById(type, id) }
     }
 
@@ -370,23 +371,23 @@ class RemoteDataSourceImp @Inject constructor(
         type: LeagueType,
         id: Int,
         season: Int
-    ): List<LeagueResponse> {
+    ): List<com.cheesecake.data.remote.response.LeagueResponse> {
         return wrapBaseResponse { service.getLeagueByTypeByIdBySeason(type, id, season) }
     }
 
-    override suspend fun getCurrentActiveLeagues(current: Boolean): List<LeagueResponse> {
+    override suspend fun getCurrentActiveLeagues(current: Boolean): List<com.cheesecake.data.remote.response.LeagueResponse> {
         return wrapBaseResponse { service.getCurrentActiveLeagues(current) }
     }
 
-    override suspend fun searchByLeagueName(name: String): List<LeagueResponse> {
+    override suspend fun searchByLeagueName(name: String): List<com.cheesecake.data.remote.response.LeagueResponse> {
         return wrapBaseResponse { service.searchByLeagueName(name) }
     }
 
-    override suspend fun getLeaguesSeasons(): List<LeagueResponse> {
+    override suspend fun getLeaguesSeasons(): List<com.cheesecake.data.remote.response.LeagueResponse> {
         return wrapBaseResponse { service.getLeaguesSeasons() }
     }
 
-    override suspend fun getCurrentSeasonLeague(id: Int, current: Boolean): List<LeagueResponse> {
+    override suspend fun getCurrentSeasonLeague(id: Int, current: Boolean): List<com.cheesecake.data.remote.response.LeagueResponse> {
         return wrapBaseResponse { service.getCurrentSeasonLeague(id, current) }
     }
 

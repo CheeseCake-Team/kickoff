@@ -14,31 +14,3 @@ data class LeagueLocalDto(
     val seasonEndYear: String,
     val isFavourite: Boolean
 )
-
-fun LeagueLocalDto.mapToDomain(): LeagueEntity {
-    return LeagueEntity(
-        leagueId = leagueId,
-        leagueName = leagueName,
-        leagueSeason = leagueSeason,
-        leagueLogo = leagueLogoUrl,
-        seasonStartYear = seasonStartYear,
-        seasonEndYear = seasonEndYear,
-        isFavourite = isFavourite
-    )
-}
-
-fun List<LeagueLocalDto>.mapToDomain(): List<LeagueEntity> {
-    return this.map { it.mapToDomain() }
-}
-
-fun LeagueEntity.toLocal(): LeagueLocalDto {
-    return LeagueLocalDto(
-        leagueId = leagueId,
-        leagueName = leagueName,
-        leagueSeason = leagueSeason,
-        leagueLogoUrl = leagueLogo,
-        seasonStartYear = seasonStartYear,
-        seasonEndYear = seasonEndYear,
-        isFavourite = isFavourite
-    )
-}
