@@ -130,6 +130,19 @@
         app:layout_constraintStart_toStartOf="@+id/text_view_standing"
         app:layout_constraintTop_toBottomOf="@+id/text_view_standing" />
 
+
+        <TextView
+            android:id="@+id/text_view_played_matches"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:text="@string/p"
+            android:textColor="@color/fontHeavy"
+            android:textSize="@dimen/font_size_12sp"
+            app:layout_constraintEnd_toEndOf="@+id/guideline5"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
+            app:layout_constraintTop_toTopOf="@+id/text_view_club" />
+
     <TextView
         android:id="@+id/text_view_wins"
         android:layout_width="wrap_content"
@@ -278,14 +291,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="116dp" />
+        app:layout_constraintGuide_end="118dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="145dp" />
+        app:layout_constraintGuide_end="148dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="178dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
