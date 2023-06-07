@@ -68,7 +68,7 @@ interface RemoteDataSource {
     ): List<String>
 
 
-    suspend fun getFixtureRoundsCurrentOnly(
+    suspend fun getCurrentRoundByLeagueIdAndSeason(
         seasonId: Int,
         leagueId: Int,
         current: Boolean,
