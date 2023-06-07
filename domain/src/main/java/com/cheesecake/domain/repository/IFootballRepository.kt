@@ -10,6 +10,7 @@ import com.cheesecake.domain.entity.TeamStandingEntity
 import com.cheesecake.domain.entity.FixtureEntity
 import com.cheesecake.domain.entity.LeagueEntity
 import com.cheesecake.domain.entity.TeamEntity
+import com.cheesecake.domain.models.PlayerStatisticsEntity
 
 interface IFootballRepository {
     suspend fun getLeagueNameAndCountry(leagueId: Int, current: Boolean): List<League>
@@ -30,5 +31,11 @@ interface IFootballRepository {
     suspend fun getTeamsStandingByLeagueIdAndSeason(leagueId: Int, season: Int): List<TeamStandingEntity>
 
     suspend fun getSinglePlayerCompact(season: String, teamId: Int):List<PlayerEntity>
+
+
+    suspend fun getPlayerBySeasonByPlayerId(season: String,playerId: Int) : PlayerStatisticsEntity
+
+
+
 
 }

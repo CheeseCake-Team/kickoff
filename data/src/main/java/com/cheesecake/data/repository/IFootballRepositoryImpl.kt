@@ -10,7 +10,6 @@ import com.cheesecake.domain.entity.LeagueEntity
 import com.cheesecake.domain.entity.PlayerEntity
 import com.cheesecake.domain.entity.TeamEntity
 import com.cheesecake.domain.entity.TeamStandingEntity
-
 import com.cheesecake.data.repository.mappers.toEntity
 import com.cheesecake.data.repository.models.response.mapToDomain
 import com.cheesecake.domain.Entity.*
@@ -36,7 +35,8 @@ class IFootballRepositoryImpl
         return remoteDataSource.getStandingsByLeagueId(season, leagueId).mapRemoteDtoToEntity()
     }
 
-    override suspend fun getLeagueTopScorers(leagueId: Int, season: Int): List<PlayerEntity> {
+
+    override suspend fun getLeagueTopScorers(leagueId: Int, season: Int): List<PlayerStatisticsEntity> {
         return remoteDataSource.getTopScorers(season, leagueId).mapToDomain()
     }
 
@@ -129,4 +129,8 @@ class IFootballRepositoryImpl
     ): TeamStatisticsEntity {
         return remoteDataSource.getTeamStatistics(teamId, season, leagueId).toEntity()
     }
+    override suspend fun getPlayerBySeasonByPlayerId(season: String, playerId: Int): PlayerStatisticsEntity {
+        return remoteDataSource.getPlayerBySeasonByPlayerId(season, playerId).first().mapToDomain()
+    }
+
 }
