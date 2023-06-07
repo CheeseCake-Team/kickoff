@@ -1,20 +1,19 @@
 package com.cheesecake.data.repository
 
-import com.cheesecake.data.local.models.FavouriteTeamLocalDto
 import com.cheesecake.data.local.models.LeagueLocalDto
 import com.cheesecake.data.local.models.TeamLocalDto
-import kotlinx.coroutines.flow.Flow
 
 interface LocalDataSource {
 
-    fun getAllTeams(): Flow<List<TeamLocalDto>>
-    suspend fun getFavTeams(): Flow<List<FavouriteTeamLocalDto>>
+    fun getLocallyTeamsByIdAndSeason(leagueId: Int, season: Int): List<TeamLocalDto>
 
-    suspend fun upsertAll(teams: List<TeamLocalDto>)
-    suspend fun insertTeam(favTeamDto: FavouriteTeamLocalDto)
+    suspend fun updateOrInsertTeams(teams: List<TeamLocalDto>)
 
-    fun getLeague(): Flow<List<LeagueLocalDto>>
-    suspend fun deleteAll()
+    suspend fun updateOrInsertTeam(team: TeamLocalDto)
+
+    suspend fun getFavouriteTeams(): List<TeamLocalDto>
+
+    suspend fun deleteAllTeams()
 
     suspend fun getLeagueByIdAndSeason(leagueId: Int, leagueSeason: Int): LeagueLocalDto?
 
