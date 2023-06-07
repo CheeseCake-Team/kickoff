@@ -1,9 +1,8 @@
-package com.cheesecake.domain.models
+package com.cheesecake.domain.entity
 
 
 
 data class PlayerStatisticsEntity(
-
     val id: Int,
     val name: String,
     val firstname: String,
@@ -24,8 +23,6 @@ data class PlayerStatisticsEntity(
     val position: String,
     val rating: String,
     val captain: Boolean
-
-
 )
 
 

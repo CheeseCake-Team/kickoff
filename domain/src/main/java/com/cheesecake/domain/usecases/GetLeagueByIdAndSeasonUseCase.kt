@@ -1,6 +1,7 @@
 package com.cheesecake.domain.usecases
 
 import com.cheesecake.domain.entity.LeagueEntity
+import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
 class GetLeagueByIdAndSeasonUseCase @Inject constructor(

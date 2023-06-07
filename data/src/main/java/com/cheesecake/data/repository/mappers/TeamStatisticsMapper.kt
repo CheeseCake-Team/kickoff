@@ -1,6 +1,6 @@
 package com.cheesecake.data.repository.mappers
 
-import com.cheesecake.data.repository.models.response.TeamStatisticsResponse
+import com.cheesecake.data.remote.response.TeamStatisticsResponse
 import com.cheesecake.domain.entity.TeamStatisticsEntity
 import com.cheesecake.domain.entity.TeamStats
 
