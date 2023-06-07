@@ -24,13 +24,14 @@ class LeagueDetailsViewModel @Inject constructor(
 
     private fun getCurrentRound() {
         viewModelScope.launch {
-            getCurrentRoundByLeagueIdAndSeason(39, 2022).let { round ->
+            getCurrentRoundByLeagueIdAndSeason(39, 2022).apply {
                 _leagueDetailsUIState.update {
                     it.copy(
-                        round = round
+                        round = this
                     )
                 }
             }
+
         }
     }
 

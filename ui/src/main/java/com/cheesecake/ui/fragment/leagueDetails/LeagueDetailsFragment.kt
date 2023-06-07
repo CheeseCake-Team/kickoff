@@ -6,8 +6,9 @@ import androidx.fragment.app.viewModels
 import com.cheesecake.ui.R
 import com.cheesecake.ui.base.BaseFragment
 import com.cheesecake.ui.databinding.FragmentLeagueDetailsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class LeagueDetailsFragment: BaseFragment<FragmentLeagueDetailsBinding>() {
     override val layoutIdFragment: Int
         get() = R.layout.fragment_league_details
