@@ -8,7 +8,6 @@ class GetTeamsStandingByLeagueIdAndSeasonUseCase @Inject constructor(
     private val footballRepository: IFootballRepository,
 ) {
 
-
     suspend operator fun invoke(leagueId: Int, Season: Int): List<TeamStandingEntity> {
         return footballRepository.getTeamsStandingByLeagueIdAndSeason(leagueId, Season)
     }
