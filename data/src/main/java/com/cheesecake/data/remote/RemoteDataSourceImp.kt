@@ -70,13 +70,14 @@ class RemoteDataSourceImp @Inject constructor(
         return wrapBaseResponse { service.getFixtureRounds(seasonId, leagueId) }
     }
 
-    override suspend fun getFixtureRoundsCurrentOnly(
+    override suspend fun getCurrentRoundByLeagueIdAndSeason(
         seasonId: Int,
         leagueId: Int,
         current: Boolean
     ): List<String> {
-        return wrapBaseResponse { service.getFixtureRoundsCurrentOnly(seasonId, leagueId, current) }
+        return wrapBaseResponse { service.getCurrentRoundByLeagueIdAndSeason(leagueId, seasonId, current) }
     }
+
     //endregion
     //region Fixtuers
     override suspend fun getFixtureById(timeZone: String, fixtureId: Int): List<com.cheesecake.data.remote.response.FixtureResponse> {
