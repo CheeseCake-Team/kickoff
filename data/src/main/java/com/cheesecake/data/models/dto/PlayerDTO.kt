@@ -12,7 +12,8 @@ import com.cheesecake.data.models.base.Penalty
 import com.cheesecake.data.models.base.Shots
 import com.cheesecake.data.models.base.Tackles
 import com.cheesecake.data.models.base.Team
-import com.cheesecake.domain.models.Player
+
+import com.cheesecake.domain.models.PlayerStatisticsEntity
 import com.google.gson.annotations.SerializedName
 
 data class PlayerDTO(
@@ -104,12 +105,31 @@ data class PlayerDTO(
 }
 
 
-fun PlayerDTO.mapToDomain(): Player{
-    return Player(
-
+fun PlayerDTO.mapToDomain(): PlayerStatisticsEntity {
+    return PlayerStatisticsEntity(
+        id = this.player.id,
+        name = this.player.name,
+        firstname = this.player.firstname,
+        lastname = this.player.lastname,
+        age = this.player.age,
+        date = this.player.birth.date,
+        place = this.player.birth.place,
+        country = this.player.birth.country,
+        nationality = this.player.nationality,
+        height = this.player.height,
+        weight = this.player.weight,
+        injured = this.player.injured,
+        appearences = this.statistics.first().games.appearences,
+        lineups = this.statistics.first().games.lineups,
+        minutes = this.statistics.first().games.minutes,
+        number = this.statistics.first().games.number,
+        position = this.statistics.first().games.position,
+        rating = this.statistics.first().games.rating,
+        captain = this.statistics.first().games.captain,
+        photo = this.player.photo
     )
 }
 
-fun List<PlayerDTO>.mapToDomain():List<Player>{
+fun List<PlayerDTO>.mapToDomain(): List<PlayerStatisticsEntity> {
     return this.map { it.mapToDomain() }
 }
