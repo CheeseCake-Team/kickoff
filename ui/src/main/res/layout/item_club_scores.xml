@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="@+id/team_icon_button" />
 
     <TextView
-        android:id="@+id/win_number_text_view"
+        android:id="@+id/played_matches_number_text_view"
         style="@style/SubtitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,14 +41,25 @@
         app:layout_constraintTop_toTopOf="@+id/draw_number_text_view" />
 
     <TextView
+        android:id="@+id/win_number_text_view"
+        style="@style/SubtitleMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/fontHeavy"
+        app:layout_constraintBottom_toBottomOf="@+id/draw_number_text_view"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toTopOf="@+id/draw_number_text_view" />
+
+    <TextView
         android:id="@+id/draw_number_text_view"
         style="@style/SubtitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/fontHeavy"
         app:layout_constraintBottom_toBottomOf="@+id/lose_number_text_view"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="@+id/lose_number_text_view" />
 
     <TextView
@@ -57,8 +68,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/fontHeavy"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="@+id/total_number_text_view" />
 
     <TextView
@@ -68,8 +79,8 @@
         android:layout_height="wrap_content"
         android:textColor="@color/fontHeavy"
         app:layout_constraintBottom_toBottomOf="@+id/team_icon_button"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/team_icon_button" />
 
     <View
@@ -80,31 +91,38 @@
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
+        android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="44dp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
+        android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="88dp" />
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="118dp" />
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="116dp" />
+        app:layout_constraintGuide_end="148dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="145dp" />
+        app:layout_constraintGuide_end="178dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
