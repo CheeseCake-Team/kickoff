@@ -1,7 +1,8 @@
 package com.cheesecake.data.repository.models.response
 
 
-import com.cheesecake.domain.Entity.TeamInformation
+import com.cheesecake.data.local.models.TeamLocalDto
+import com.cheesecake.domain.entity.TeamEntity
 import com.google.gson.annotations.SerializedName
 
 data class TeamInformationResponse(
@@ -45,13 +46,35 @@ data class TeamInformationResponse(
     )
 }
 
-fun TeamInformationResponse.mapToDomain(): TeamInformation {
-    return TeamInformation(
-        //TODO implement TeamInformation data class
+fun TeamInformationResponse.mapToDomain(): TeamEntity {
+    return TeamEntity(
+        teamId = this.team.id,
+        teamName = this.team.name,
+        founded = this.team.founded,
+        teamCountry = this.team.country,
+        venueCapacity = this.venue.capacity,
+        venueName = this.venue.name,
+        imageUrl = this.team.logo,
+        isFavourite = false
     )
 }
 
-fun List<TeamInformationResponse>.mapToDomain():List<TeamInformation>{
+fun List<TeamInformationResponse>.mapToDomain():List<TeamEntity>{
     return this.map { it.mapToDomain() }
+}
+
+fun TeamEntity.toLocal(leagueId: Int, leagueSeason: Int): TeamLocalDto {
+    return TeamLocalDto(
+        teamId = this.teamId,
+        leagueId = leagueId,
+        season = leagueSeason,
+        teamName = this.teamName,
+        founded = this.founded,
+        teamCountry = this.teamCountry,
+        venueCapacity = this.venueCapacity,
+        venueName = this.venueName,
+        imageUrl = this.imageUrl,
+        isFavourite = this.isFavourite
+    )
 }
 
