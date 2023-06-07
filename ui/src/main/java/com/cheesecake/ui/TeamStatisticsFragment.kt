@@ -1,9 +1,8 @@
-package com.cheesecake.ui.fragment.teamstatistics
+package com.cheesecake.ui
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import com.cheesecake.ui.R
 import com.cheesecake.ui.base.BaseFragment
 import com.cheesecake.ui.databinding.FragmentTeamsLeagueBinding
 import com.cheesecake.ui.fragment.leagueTeams.TeamsAdapter
@@ -19,6 +18,5 @@ class TestFragment : BaseFragment<FragmentTeamsLeagueBinding>() {
         super.onViewCreated(view, savedInstanceState)
         binding.teamsRecyclerView.adapter = TeamsAdapter()
     }
-
 
 }

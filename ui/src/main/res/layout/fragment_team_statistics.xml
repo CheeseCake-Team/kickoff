@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.cheesecake.ui.fragment.teamstatistics.TeamStatisticsViewModel" />
+            type="com.cheesecake.ui.TeamStatisticsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

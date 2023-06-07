@@ -1,4 +1,4 @@
-package com.cheesecake.ui.fragment.teamstatistics
+package com.cheesecake.ui
 
 import androidx.lifecycle.ViewModel
 import com.cheesecake.domain.entity.TeamEntity
@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
-data class TeamStatisticsUIState (
+data class TeamStatisticsUIState(
     val isLoading: Boolean = true,
     val data: List<TeamEntity> = emptyList(),
     val isError: String = "Error"
@@ -19,8 +19,6 @@ class TeamStatisticsViewModel @Inject constructor(
 
     private val _teamStatisticsUIState = MutableStateFlow(TeamStatisticsUIState())
     val teamStatisticsUIState = _teamStatisticsUIState.asStateFlow()
-
-
 
 
 }
