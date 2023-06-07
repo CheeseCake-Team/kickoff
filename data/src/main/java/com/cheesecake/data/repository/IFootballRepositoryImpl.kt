@@ -111,6 +111,8 @@ class IFootballRepositoryImpl
 
     override suspend fun getCurrentRoundByIdAndSeason(leagueId: Int, season: Int): String {
         return remoteDataSource.getCurrentRoundByLeagueIdAndSeason(leagueId, season, true).first()
+    override suspend fun getCurrentRoundByIdAndSeason(leagueId: Int, season: Int): String? {
+        return remoteDataSource.getCurrentRoundByLeagueIdAndSeason(leagueId, season, true).firstOrNull()
     }
 
     override suspend fun getTeamsStandingByLeagueIdAndSeason(

@@ -9,6 +9,7 @@ class GetCurrentRoundByLeagueIdAndSeason @Inject constructor(
 
     suspend operator fun invoke(leagueId: Int, season: Int): String {
         return footballRepository.getCurrentRoundByIdAndSeason(leagueId, season)
+            ?: "This league is Finished."
     }
 
 }

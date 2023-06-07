@@ -70,7 +70,7 @@ interface FootballApiService {
     ): Response<BaseResponse<String>>
 
     @GET("fixtures/rounds")
-    suspend fun getFixtureRoundsCurrentOnly(
+    suspend fun getCurrentRoundByLeagueIdAndSeason(
         @Query("season") seasonId: Int,
         @Query("league") leagueId: Int,
         @Query("current") current: Boolean,

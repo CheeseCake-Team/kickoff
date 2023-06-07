@@ -75,8 +75,9 @@ class RemoteDataSourceImp @Inject constructor(
         leagueId: Int,
         current: Boolean
     ): List<String> {
-        TODO("Not yet implemented")
+        return wrapBaseResponse { service.getCurrentRoundByLeagueIdAndSeason(leagueId, seasonId, current) }
     }
+
 
 //    override suspend fun getFixtureRoundsCurrentOnly(
 //        seasonId: Int,
@@ -506,10 +507,6 @@ class RemoteDataSourceImp @Inject constructor(
         seasonId: Int
     ): List<TeamInformationResponse> {
         return wrapBaseResponse { service.getTeamsByLeagueAndSeason(leagueId, seasonId) }
-    }
-
-    override suspend fun getTeamsByName(name: String): List<TeamInformationResponse> {
-        return wrapBaseResponse { service.getTeamsByName(name) }
     }
 
     override suspend fun getTeamById(teamId: Int): List<TeamInformationResponse> {
