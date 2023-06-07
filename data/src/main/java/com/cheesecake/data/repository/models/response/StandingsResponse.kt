@@ -3,7 +3,7 @@ package com.cheesecake.data.repository.models.response
 
 import com.cheesecake.data.repository.models.dto.StandingsMatchStatisticsDTO
 import com.cheesecake.data.repository.models.dto.TeamDTO
-import com.cheesecake.domain.Entity.Standings
+import com.cheesecake.domain.entity.StandingsEntity
 import com.google.gson.annotations.SerializedName
 
 data class StandingsResponse(
@@ -55,8 +55,8 @@ data class StandingsResponse(
     }
 }
 
-fun StandingsResponse.mapToDomain(): Standings {
-    return Standings(
+fun StandingsResponse.mapToDomain(): StandingsEntity {
+    return StandingsEntity(
         flag = this.league.flag,
         name = this.league.name,
         played = this.league.standings[0][0].all.played,
@@ -67,6 +67,6 @@ fun StandingsResponse.mapToDomain(): Standings {
     )
 }
 
-fun List<StandingsResponse>.mapToDomain():List<Standings>{
+fun List<StandingsResponse>.mapToDomain():List<StandingsEntity>{
     return this.map { it.mapToDomain() }
 }

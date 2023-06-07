@@ -1,6 +1,6 @@
 package com.cheesecake.data.repository.models.response
 
-import com.cheesecake.domain.Entity.Player
+import com.cheesecake.domain.entity.PlayerEntity
 import com.google.gson.annotations.SerializedName
 
 data class PlayerResponse(
@@ -92,12 +92,12 @@ data class PlayerResponse(
 }
 
 
-fun PlayerResponse.mapToDomain(): Player{
-    return Player(
+fun PlayerResponse.mapToDomain(): PlayerEntity{
+    return PlayerEntity(
 
     )
 }
 
-fun List<PlayerResponse>.mapToDomain():List<Player>{
+fun List<PlayerResponse>.mapToDomain():List<PlayerEntity>{
     return this.map { it.mapToDomain() }
 }

@@ -1,8 +1,9 @@
 package com.cheesecake.data.repository.models.response
 
 
+import com.cheesecake.data.local.models.LeagueLocalDto
 import com.cheesecake.data.repository.models.dto.LeagueTypeLogoDTO
-import com.cheesecake.domain.Entity.League
+import com.cheesecake.domain.entity.LeagueEntity
 import com.google.gson.annotations.SerializedName
 
 data class LeagueResponse(
@@ -59,8 +60,8 @@ data class LeagueResponse(
     }
 }
 
-fun LeagueResponse.mapToDomain(): League {
-    return League(
+fun LeagueResponse.mapToDomain(): LeagueEntity {
+    return LeagueEntity(
         leagueId = this.league.id,
         leagueName = this.league.name,
         leagueSeason = this.seasons.first().year.toString(),
@@ -71,22 +72,22 @@ fun LeagueResponse.mapToDomain(): League {
     )
 }
 
-fun List<LeagueResponse>.mapToDomain():List<League>{
+fun List<LeagueResponse>.mapToDomain():List<LeagueEntity>{
     return this.map { it.mapToDomain() }
 }
 
-fun LeagueResponse.mapToLocal(): LeagueResponse {
-    return LeagueResponse(
+fun LeagueResponse.mapToLocal(): LeagueLocalDto {
+    return LeagueLocalDto(
         leagueId = this.league.id,
         leagueName = this.league.name,
         leagueSeason = this.seasons.first().year.toString(),
         leagueLogoUrl = this.league.logo,
         seasonStartYear = this.seasons.first().start,
         seasonEndYear = this.seasons.first().end,
-        isFavourite = false
+        isFavourite  = false
     )
 }
 
-fun List<LeagueResponse>.mapToLocal(): List<LeagueResponse>{
+fun List<LeagueResponse>.mapToLocal(): List<LeagueLocalDto>{
     return this.map { it.mapToLocal() }
 }
