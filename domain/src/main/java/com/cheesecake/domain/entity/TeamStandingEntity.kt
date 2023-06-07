@@ -1,8 +1,11 @@
 package com.cheesecake.domain.entity
 
-data class StandingsEntity(
-    val flag: String,
+data class TeamStandingEntity(
+    val teamId: Int,
+    val season: Int,
+    val form: String,
     val name: String,
+    val logo: String,
     val played: Int,
     val won: Int,
     val draw: Int,

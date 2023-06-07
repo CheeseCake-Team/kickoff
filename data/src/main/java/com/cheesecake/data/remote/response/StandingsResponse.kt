@@ -1,9 +1,6 @@
 package com.cheesecake.data.remote.response
 
 
-import com.cheesecake.data.remote.models.StandingsMatchStatisticsDTO
-import com.cheesecake.data.remote.models.TeamDTO
-import com.cheesecake.domain.entity.StandingsEntity
 import com.google.gson.annotations.SerializedName
 
 data class StandingsResponse(
@@ -53,20 +50,4 @@ data class StandingsResponse(
             val update: String
         )
     }
-}
-
-fun StandingsResponse.mapToDomain(): StandingsEntity {
-    return StandingsEntity(
-        flag = this.league.flag,
-        name = this.league.name,
-        played = this.league.standings[0][0].all.played,
-        won = this.league.standings[0][0].all.win,
-        draw = this.league.standings[0][0].all.draw,
-        lose = this.league.standings[0][0].all.lose,
-        points = this.league.standings[0][0].points,
-    )
-}
-
-fun List<StandingsResponse>.mapToDomain():List<StandingsEntity>{
-    return this.map { it.mapToDomain() }
 }

@@ -8,5 +8,5 @@ data class TeamEntity(
     val venueCapacity: Int,
     val venueName: String,
     val imageUrl: String,
-    val isFavourite: Boolean
+    val isFavourite: Boolean,
 )
