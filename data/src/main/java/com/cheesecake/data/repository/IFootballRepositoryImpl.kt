@@ -10,6 +10,11 @@ import com.cheesecake.domain.entity.LeagueEntity
 import com.cheesecake.domain.entity.PlayerEntity
 import com.cheesecake.domain.entity.TeamEntity
 import com.cheesecake.domain.entity.TeamStandingEntity
+
+import com.cheesecake.data.repository.mappers.toEntity
+import com.cheesecake.data.repository.models.response.mapToDomain
+import com.cheesecake.domain.Entity.*
+import com.cheesecake.domain.entity.TeamStatisticsEntity
 import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
@@ -115,4 +120,11 @@ class IFootballRepositoryImpl
         return remoteDataSource.getStandingsByLeagueId(season, leagueId).mapRemoteDtoToEntity()
     }
 
+    override suspend fun getTeamStatistics(
+        teamId: Int,
+        season: Int,
+        leagueId: Int
+    ): TeamStatisticsEntity {
+        return remoteDataSource.getTeamStatistics(teamId, season, leagueId).toEntity()
+    }
 }
