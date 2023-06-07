@@ -210,10 +210,11 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view_clubs_scores"
                     android:layout_width="0dp"
-                    android:layout_height="160dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/spacing_medium"
-                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_marginTop="@dimen/spacing_small"
                     android:clipToPadding="false"
+                    android:overScrollMode="never"
                     app:items="@{viewModel.leagueDetailsUIState.teamsStanding}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
