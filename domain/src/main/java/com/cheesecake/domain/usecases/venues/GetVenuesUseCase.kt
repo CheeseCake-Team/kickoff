@@ -1,6 +1,5 @@
 package com.cheesecake.domain.usecases.venues
 
-import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
 class GetVenuesUseCase

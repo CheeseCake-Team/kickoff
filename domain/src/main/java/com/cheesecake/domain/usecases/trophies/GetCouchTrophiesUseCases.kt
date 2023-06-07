@@ -1,6 +1,5 @@
 package com.cheesecake.domain.usecases.trophies
 
-import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
 class GetCouchTrophiesUseCases

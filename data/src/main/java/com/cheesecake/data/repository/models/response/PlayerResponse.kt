@@ -71,7 +71,7 @@ data class PlayerResponse(
             @SerializedName("minutes")
             val minutes: Int,
             @SerializedName("number")
-            val number: Any,
+            val number: Int,
             @SerializedName("position")
             val position: String,
             @SerializedName("rating")
@@ -94,7 +94,26 @@ data class PlayerResponse(
 
 fun PlayerResponse.mapToDomain(): PlayerEntity{
     return PlayerEntity(
-
+        this.player.id,
+        this.statistics[0].team.logo,
+        this.player.name,
+        this.player.photo,
+        this.statistics[0].games.rating,
+        this.statistics[0].games.number,
+        this.statistics[0].games.minutes,
+        this.statistics[0].goals.total,
+        this.statistics[0].goals.assists,
+        this.statistics[0].goals.conceded,
+        this.statistics[0].passes.key,
+        this.statistics[0].shots.total,
+        this.statistics[0].shots.on,
+        this.statistics[0].tackles.total,
+        this.statistics[0].tackles.interceptions,
+        this.statistics[0].tackles.blocks,
+        this.statistics[0].fouls.committed,
+        this.statistics[0].fouls.drawn,
+        this.statistics[0].cards.yellow,
+        this.statistics[0].cards.red
     )
 }
 
