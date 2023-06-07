@@ -1,4 +1,4 @@
-package com.cheesecake.ui.fragment.teamStatistics
+package com.cheesecake.ui.fragment.teamstatistics
 
 import androidx.lifecycle.ViewModel
 import com.cheesecake.domain.entity.TeamEntity
@@ -19,6 +19,7 @@ class TeamStatisticsViewModel @Inject constructor(
 
     private val _teamStatisticsUIState = MutableStateFlow(TeamStatisticsUIState())
     val teamStatisticsUIState = _teamStatisticsUIState.asStateFlow()
+
 
 
 
