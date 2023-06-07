@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="item"
+            type="com.cheesecake.domain.entity.TeamStandingEntity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_tiny">
 
         <ImageView
@@ -18,6 +20,7 @@
             android:layout_height="@dimen/team_image_size_24dp"
             android:layout_marginVertical="@dimen/spacing_small"
             android:layout_marginStart="@dimen/spacing_medium"
+            app:imageUrl="@{item.logo}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -28,6 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_small"
+            android:text="@{item.name}"
             android:textColor="@color/fontHeavy"
             app:layout_constraintBottom_toBottomOf="@+id/team_icon_button"
             app:layout_constraintEnd_toStartOf="@+id/win_number_text_view"
@@ -41,6 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/fontHeavy"
+            android:text="@{item.played}"
             app:layout_constraintBottom_toBottomOf="@+id/draw_number_text_view"
             app:layout_constraintEnd_toStartOf="@+id/guideline5"
             app:layout_constraintStart_toStartOf="@+id/guideline5"
@@ -52,6 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/fontHeavy"
+            android:text="@{item.won}"
             app:layout_constraintBottom_toBottomOf="@+id/draw_number_text_view"
             app:layout_constraintEnd_toStartOf="@+id/guideline4"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
@@ -63,6 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/fontHeavy"
+            android:text="@{item.draw}"
             app:layout_constraintBottom_toBottomOf="@+id/lose_number_text_view"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -74,6 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/fontHeavy"
+            android:text="@{item.lose}"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="@+id/total_number_text_view" />
@@ -84,6 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/fontHeavy"
+            android:text="@{item.points}"
             app:layout_constraintBottom_toBottomOf="@+id/team_icon_button"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -101,35 +110,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_end="44dp" />
+            app:layout_constraintGuide_end="24dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_end="88dp" />
+            app:layout_constraintGuide_end="68dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_end="118dp" />
+            app:layout_constraintGuide_end="98dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_end="148dp" />
+            app:layout_constraintGuide_end="128dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_end="178dp" />
+            app:layout_constraintGuide_end="158dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
