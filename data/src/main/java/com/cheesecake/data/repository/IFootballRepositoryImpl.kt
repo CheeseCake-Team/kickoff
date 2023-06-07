@@ -23,16 +23,8 @@ class IFootballRepositoryImpl
         return remoteDataSource.getCurrentSeasonLeague(leagueId, current).mapRemoteDtoToEntity()
     }
 
-    override suspend fun getLeagueCurrentRound(
-        leagueId: Int,
-        season: Int,
-        current: Boolean
-    ): List<String> {
-        return remoteDataSource.getFixtureRoundsCurrentOnly(season, leagueId, current)
-    }
-
-    override suspend fun getLeagueStanding(leagueId: Int, season: Int): List<StandingsEntity> {
-        return remoteDataSource.getStandingsByLeagueId(season, leagueId).mapToDomain()
+    override suspend fun getLeagueStanding(leagueId: Int, season: Int): List<TeamStandingEntity> {
+        return remoteDataSource.getStandingsByLeagueId(season, leagueId).mapRemoteDtoToEntity()
     }
 
     override suspend fun getLeagueTopScorers(leagueId: Int, season: Int): List<PlayerEntity> {
@@ -97,7 +89,7 @@ class IFootballRepositoryImpl
     }
 
     override suspend fun getCurrentRoundByIdAndSeason(leagueId: Int, season: Int): String {
-        TODO("Not yet implemented")
+        return remoteDataSource.getCurrentRoundByLeagueIdAndSeason(leagueId, season, true).first()
     }
 
     override suspend fun getTeamsStandingByLeagueIdAndSeason(
