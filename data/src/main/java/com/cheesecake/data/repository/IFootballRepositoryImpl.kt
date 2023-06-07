@@ -1,5 +1,6 @@
 package com.cheesecake.data.repository
 
+import com.cheesecake.data.remote.response.StandingsResponse
 import com.cheesecake.data.remote.response.mapToDomain
 import com.cheesecake.data.repository.mappers.mapLocalDtoToEntity
 import com.cheesecake.data.repository.mappers.mapRemoteDtoToEntity
@@ -95,8 +96,8 @@ class IFootballRepositoryImpl
     override suspend fun getTeamsStandingByLeagueIdAndSeason(
         leagueId: Int,
         season: Int
-    ): List<TeamEntity> {
-        TODO("Not yet implemented")
+    ): List<TeamStandingEntity> {
+        return  remoteDataSource.getStandingsByLeagueId(season,leagueId).mapRemoteDtoToEntity()
     }
 
 }
