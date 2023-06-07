@@ -3,8 +3,7 @@ package com.cheesecake.ui.fragment.leagueTeams
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cheesecake.domain.models.Team
-import com.cheesecake.domain.usecases.fixture.GetSingleFixtureByIdUseCase
+import com.cheesecake.domain.Entity.Team
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -21,7 +20,7 @@ data class LeagueTeamsUIState(
 @HiltViewModel
 class LeagueTeamsViewModel @Inject constructor(
 //    private val getAllTeamsInLeagueWithSeason: GetAllTeamsInLeagueWithSeason
-    private val getSingleFixtureByIdUseCase: GetSingleFixtureByIdUseCase
+ //   private val getSingleFixtureByIdUseCase: GetSingleFixtureByIdUseCase
 ) : ViewModel() {
 
     private val _leagueTeamsUIState = MutableStateFlow(LeagueTeamsUIState())

@@ -11,12 +11,12 @@ class GetShortStandingsDataUseCases
 //        return mapResponseIntoShort(dtoResponse!!)
 //    }
 //
-//    private suspend fun getSingleStandingResponse(seasonId: Int, leagueId: Int): StandingsDTO? {
+//    private suspend fun getSingleStandingResponse(seasonId: Int, leagueId: Int): StandingsResponse? {
 //        return standingsRepository.
 //        getStandingsByLeagueId(seasonId, leagueId).body()?.response?.get(0)
 //    }
 //
-//    private fun mapResponseIntoShort(input: StandingsDTO): ShortStandings {
+//    private fun mapResponseIntoShort(input: StandingsResponse): ShortStandings {
 //        return StandingsDtoDomain().map(input)
 //    }
 

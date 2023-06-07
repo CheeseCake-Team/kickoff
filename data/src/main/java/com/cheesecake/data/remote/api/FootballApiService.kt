@@ -1,27 +1,27 @@
 package com.cheesecake.data.remote.api
 
-import com.cheesecake.data.models.base.BaseResponse
-import com.cheesecake.data.models.base.BaseStaticResponse
-import com.cheesecake.data.models.dto.CoachDTO
-import com.cheesecake.data.models.dto.EventDTO
-import com.cheesecake.data.remote.response.FixtureResponse
-import com.cheesecake.data.models.dto.FixtureStatisticsDTO
-import com.cheesecake.data.models.dto.FixturesDTO
-import com.cheesecake.data.models.dto.HeadToHeadDTO
-import com.cheesecake.data.models.dto.IjuriesDTO
-import com.cheesecake.data.models.dto.LeagueDTO
-import com.cheesecake.data.models.dto.LineupDTO
-import com.cheesecake.data.models.dto.PlayerDTO
-import com.cheesecake.data.models.dto.PredictionsDTO
-import com.cheesecake.data.models.dto.SidelinedDTO
-import com.cheesecake.data.models.dto.SquadDTO
-import com.cheesecake.data.models.dto.StandingsDTO
-import com.cheesecake.data.models.dto.TeamCountriesDTO
-import com.cheesecake.data.models.dto.TeamInformationDTO
-import com.cheesecake.data.models.dto.TeamStatisticsDTO
-import com.cheesecake.data.models.dto.TransferDTO
-import com.cheesecake.data.models.dto.TrophyDTO
-import com.cheesecake.data.models.dto.VenuesDTO
+import com.cheesecake.data.remote.response.BaseResponse
+import com.cheesecake.data.remote.response.BaseStaticResponse
+import com.cheesecake.data.repository.models.response.CoachResponse
+import com.cheesecake.data.repository.models.response.EventResponse
+import com.cheesecake.data.repository.models.response.FixtureResponse
+import com.cheesecake.data.repository.models.response.FixtureStatisticsResponse
+import com.cheesecake.data.repository.models.response.FixturesResponse
+import com.cheesecake.data.repository.models.response.HeadToHeadResponse
+import com.cheesecake.data.repository.models.response.InjuriesResponse
+import com.cheesecake.data.repository.models.response.LeagueResponse
+import com.cheesecake.data.repository.models.response.LineupResponse
+import com.cheesecake.data.repository.models.response.PlayerResponse
+import com.cheesecake.data.repository.models.response.PredictionsResponse
+import com.cheesecake.data.repository.models.response.SidelinedResponse
+import com.cheesecake.data.repository.models.response.SquadResponse
+import com.cheesecake.data.repository.models.response.StandingsResponse
+import com.cheesecake.data.repository.models.response.TeamCountriesResponse
+import com.cheesecake.data.repository.models.response.TeamInformationResponse
+import com.cheesecake.data.repository.models.response.TeamStatisticsResponse
+import com.cheesecake.data.repository.models.response.TransferResponse
+import com.cheesecake.data.repository.models.response.TrophyResponse
+import com.cheesecake.data.repository.models.response.VenuesResponse
 import com.cheesecake.data.utils.FixtureStatus
 import com.cheesecake.data.utils.LeagueType
 import retrofit2.Response
@@ -35,37 +35,37 @@ interface FootballApiService {
     @GET("coachs")
     suspend fun getCoachById(
         @Query("id") playerID: Int
-    ): Response<BaseResponse<CoachDTO>>
+    ): Response<BaseResponse<CoachResponse>>
 
     @GET("coachs")
     suspend fun getCoachByTeam(
         @Query("team") teamID: Int
-    ): Response<BaseResponse<CoachDTO>>
+    ): Response<BaseResponse<CoachResponse>>
 
     @GET("coachs")
     suspend fun getCoachBySearch(
         @Query("search") getCoachName: String
-    ): Response<BaseResponse<CoachDTO>>
+    ): Response<BaseResponse<CoachResponse>>
     //endregion
 
     //region countries
     @GET("countries")
-    suspend fun getAllCountries(): Response<BaseResponse<TeamCountriesDTO>>
+    suspend fun getAllCountries(): Response<BaseResponse<TeamCountriesResponse>>
 
     @GET("countries")
     suspend fun getCountryByName(
         @Query("name") countryName: String
-    ): Response<BaseResponse<TeamCountriesDTO>>
+    ): Response<BaseResponse<TeamCountriesResponse>>
 
     @GET("countries")
     suspend fun getCountryByCode(
         @Query("code") countryCode: String
-    ): Response<BaseResponse<TeamCountriesDTO>>
+    ): Response<BaseResponse<TeamCountriesResponse>>
 
     @GET("countries")
     suspend fun searchInCountries(
         @Query("search") searchQuery: String
-    ): Response<BaseResponse<TeamCountriesDTO>>
+    ): Response<BaseResponse<TeamCountriesResponse>>
     //endregion
 
     //region fixtures
@@ -147,14 +147,14 @@ interface FootballApiService {
         @Query("h2h") teamsId: String,
         @Query("season") seasonId: Int,
         @Query("timezone") timeZone: String
-    ): Response<BaseResponse<HeadToHeadDTO>>
+    ): Response<BaseResponse<HeadToHeadResponse>>
 
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByDate(
         @Query("h2h") teamsId: String,
         @Query("date") date: String,
         @Query("timezone") timeZone: String
-    ): Response<BaseResponse<HeadToHeadDTO>>
+    ): Response<BaseResponse<HeadToHeadResponse>>
 
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByStatus(
@@ -162,7 +162,7 @@ interface FootballApiService {
         @Query("status") status: FixtureStatus,
         @Query("season") seasonId: Int,
         @Query("timezone") timeZone: String
-    ): Response<BaseResponse<HeadToHeadDTO>>
+    ): Response<BaseResponse<HeadToHeadResponse>>
 
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByFromAndTO(
@@ -171,7 +171,7 @@ interface FootballApiService {
         @Query("to") to: String,
         @Query("season") seasonId: Int,
         @Query("timezone") timeZone: String
-    ): Response<BaseResponse<HeadToHeadDTO>>
+    ): Response<BaseResponse<HeadToHeadResponse>>
 
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByLeague(
@@ -179,7 +179,7 @@ interface FootballApiService {
         @Query("league") leagueId: Int,
         @Query("season") seasonId: Int,
         @Query("timezone") timeZone: String
-    ): Response<BaseResponse<HeadToHeadDTO>>
+    ): Response<BaseResponse<HeadToHeadResponse>>
 
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByByDateAndLeague(
@@ -187,7 +187,7 @@ interface FootballApiService {
         @Query("league") leagueId: Int,
         @Query("date") date: String,
         @Query("timezone") timeZone: String
-    ): Response<BaseResponse<HeadToHeadDTO>>
+    ): Response<BaseResponse<HeadToHeadResponse>>
 
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByStatusAndLeague(
@@ -196,7 +196,7 @@ interface FootballApiService {
         @Query("status") status: FixtureStatus,
         @Query("season") seasonId: Int,
         @Query("timezone") timeZone: String
-    ): Response<BaseResponse<HeadToHeadDTO>>
+    ): Response<BaseResponse<HeadToHeadResponse>>
 
     @GET("fixtures/headtohead")
     suspend fun getHeadToHeadByFromAndTOAndLeague(
@@ -206,40 +206,40 @@ interface FootballApiService {
         @Query("to") to: String,
         @Query("season") seasonId: Int,
         @Query("timezone") timeZone: String
-    ): Response<BaseResponse<HeadToHeadDTO>>
+    ): Response<BaseResponse<HeadToHeadResponse>>
     //endregion
 
     //region Statistics
     @GET("fixtures/statistics")
     suspend fun getFixtureStatisticsByFixtureId(
         @Query("fixture") fixtureId: Int
-    ): Response<BaseResponse<FixtureStatisticsDTO>>
+    ): Response<BaseResponse<FixtureStatisticsResponse>>
 
     @GET("fixtures/statistics")
     suspend fun getFixtureStatisticsByFixtureIdByTeamId(
         @Query("fixture") fixtureId: Int,
         @Query("team") teamId: Int
-    ): Response<BaseResponse<FixtureStatisticsDTO>>
+    ): Response<BaseResponse<FixtureStatisticsResponse>>
     //endregion
 
     //region Events
     @GET("fixtures/events")
     suspend fun getFixtureEventsByFixtureId(
         @Query("fixture") fixtureId: Int
-    ): Response<BaseResponse<EventDTO>>
+    ): Response<BaseResponse<EventResponse>>
 
     @GET("fixtures/events")
     suspend fun getFixtureEventsByFixtureIdByTeamId(
         @Query("fixture") fixtureId: Int,
         @Query("team") teamId: Int
-    ): Response<BaseResponse<EventDTO>>
+    ): Response<BaseResponse<EventResponse>>
 
     @GET("fixtures/events")
     suspend fun getFixtureEventsByFixtureIdByTeamIdByPlayerId(
         @Query("fixture") fixtureId: Int,
         @Query("team") teamId: Int,
         @Query("player") playerId: Int,
-    ): Response<BaseResponse<EventDTO>>
+    ): Response<BaseResponse<EventResponse>>
 
     @GET("fixtures/events")
     suspend fun getFixtureEventsByFixtureIdByTeamIdByPlayerIdByType(
@@ -247,27 +247,27 @@ interface FootballApiService {
         @Query("team") teamId: Int,
         @Query("player") playerId: Int,
         @Query("type") fixtureEventType: String,
-    ): Response<BaseResponse<EventDTO>>
+    ): Response<BaseResponse<EventResponse>>
     //endregion
 
     //region Lineups
     @GET("fixtures/lineups")
     suspend fun getFixtureLineupsByFixtureId(
         @Query("fixture") fixtureId: Int
-    ): Response<BaseResponse<LineupDTO>>
+    ): Response<BaseResponse<LineupResponse>>
 
 
     @GET("fixtures/lineups")
     suspend fun getFixtureLineupsByFixtureIdByTeamId(
         @Query("fixture") fixtureId: Int,
         @Query("team") teamId: Int
-    ): Response<BaseResponse<LineupDTO>>
+    ): Response<BaseResponse<LineupResponse>>
 
     @GET("fixtures/lineups")
     suspend fun getFixtureLineupsByFixtureIdByPlayerId(
         @Query("fixture") fixtureId: Int,
         @Query("player") playerId: Int
-    ): Response<BaseResponse<LineupDTO>>
+    ): Response<BaseResponse<LineupResponse>>
 
     //endregion
 
@@ -276,13 +276,13 @@ interface FootballApiService {
     @GET("fixtures/players")
     suspend fun getFixturePlayersByFixtureId(
         @Query("fixture") fixtureId: String
-    ): Response<BaseResponse<FixturesDTO>>
+    ): Response<BaseResponse<FixturesResponse>>
 
     @GET("fixtures/players")
     suspend fun getFixturePlayersByFixtureIdByTeamId(
         @Query("fixture") fixtureId: Int,
         @Query("team") teamId: Int
-    ): Response<BaseResponse<FixturesDTO>>
+    ): Response<BaseResponse<FixturesResponse>>
 
     //endregion
 
@@ -292,111 +292,111 @@ interface FootballApiService {
     @GET("injuries")
     suspend fun getInjuriesByFixtureID(
         @Query("fixture") fixtureId: Int
-    ): Response<BaseResponse<IjuriesDTO>>
+    ): Response<BaseResponse<InjuriesResponse>>
 
     @GET("injuries")
     suspend fun getInjuriesByLeagueIDAndSeason(
         @Query("league") leagueId: Int,
         @Query("season") season: Int
 
-    ): Response<BaseResponse<IjuriesDTO>>
+    ): Response<BaseResponse<InjuriesResponse>>
 
     @GET("injuries")
     suspend fun getInjuriesByTeamIDAndSeason(
         @Query("team") teamId: Int,
         @Query("season") season: Int
 
-    ): Response<BaseResponse<IjuriesDTO>>
+    ): Response<BaseResponse<InjuriesResponse>>
 
     @GET("injuries")
     suspend fun getInjuriesByPlayerIDAndSeason(
         @Query("player") playerId: Int,
         @Query("season") season: Int
 
-    ): Response<BaseResponse<IjuriesDTO>>
+    ): Response<BaseResponse<InjuriesResponse>>
 
     @GET("injuries")
     suspend fun getInjuriesByTimeZone(
         @Query("timezone") timeZone: String,
-    ): Response<BaseResponse<IjuriesDTO>>
+    ): Response<BaseResponse<InjuriesResponse>>
 
     @GET("injuries")
     suspend fun getInjuriesByDate(
         @Query("date") date: String,
-    ): Response<BaseResponse<IjuriesDTO>>
+    ): Response<BaseResponse<InjuriesResponse>>
     //endregion
 
     //region leagues
     @GET("leagues")
-    suspend fun getAllLeagues(): Response<BaseResponse<LeagueDTO>>
+    suspend fun getAllLeagues(): Response<BaseResponse<LeagueResponse>>
 
     @GET("leagues")
     suspend fun getLeaguesById(
         @Query("id") leagueId: Int
-    ): Response<BaseResponse<LeagueDTO>>
+    ): Response<BaseResponse<LeagueResponse>>
 
     @GET("leagues")
     suspend fun getLeaguesByName(
         @Query("name") leagueName: String
-    ): Response<BaseResponse<LeagueDTO>>
+    ): Response<BaseResponse<LeagueResponse>>
 
     @GET("leagues")
     suspend fun getLeaguesByCountryName(
         @Query("country") countryName: String
-    ): Response<BaseResponse<LeagueDTO>>
+    ): Response<BaseResponse<LeagueResponse>>
 
     @GET("leagues")
     suspend fun getLeaguesByCountryCode(
         @Query("code") countryCode: String
-    ): Response<BaseResponse<LeagueDTO>>
+    ): Response<BaseResponse<LeagueResponse>>
 
     @GET("leagues")
     suspend fun getLeaguesOfSeason(
         @Query("season") season: Int
-    ): Response<BaseResponse<LeagueDTO>>
+    ): Response<BaseResponse<LeagueResponse>>
 
     @GET("leagues")
     suspend fun getLeagueByIdBySeason(
         @Query("id") leagueId: Int,
         @Query("season") season: Int
-    ): Response<BaseResponse<LeagueDTO>>
+    ): Response<BaseResponse<LeagueResponse>>
 
     @GET("leagues")
     suspend fun getLeaguesByType(
         @Query("type") type: LeagueType
-    ): Response<BaseResponse<LeagueDTO>>
+    ): Response<BaseResponse<LeagueResponse>>
 
     @GET("leagues")
     suspend fun getLeaguesByTypeById(
         @Query("type") type: LeagueType,
         @Query("id") id: Int
-    ): Response<BaseResponse<LeagueDTO>>
+    ): Response<BaseResponse<LeagueResponse>>
 
     @GET("leagues")
     suspend fun getLeagueByTypeByIdBySeason(
         @Query("type") type: LeagueType,
         @Query("id") id: Int,
         @Query("season") season: Int
-    ): Response<BaseResponse<LeagueDTO>>
+    ): Response<BaseResponse<LeagueResponse>>
 
     @GET("leagues")
     suspend fun getCurrentActiveLeagues(
         @Query("current") current: Boolean
-    ): Response<BaseResponse<LeagueDTO>>
+    ): Response<BaseResponse<LeagueResponse>>
 
     @GET("leagues")
     suspend fun searchByLeagueName(
         @Query("search") name: String
-    ): Response<BaseResponse<LeagueDTO>>
+    ): Response<BaseResponse<LeagueResponse>>
 
     @GET("leagues/seasons")
-    suspend fun getLeaguesSeasons(): Response<BaseResponse<LeagueDTO>>
+    suspend fun getLeaguesSeasons(): Response<BaseResponse<LeagueResponse>>
 
     @GET("leagues")
     suspend fun getCurrentSeasonLeague(
         @Query("id") id: Int,
         @Query("current") current: Boolean
-    ): Response<BaseResponse<LeagueDTO>>
+    ): Response<BaseResponse<LeagueResponse>>
 
     //endregion
 
@@ -405,31 +405,31 @@ interface FootballApiService {
     suspend fun getPlayerBySeasonByPlayerId(
         @Query("season") season: String,
         @Query("id") playerId: Int,
-    ): Response<BaseResponse<PlayerDTO>>
+    ): Response<BaseResponse<PlayerResponse>>
 
     @GET("players")
     suspend fun getPlayerBySeasonByTeamId(
         @Query("season") season: String,
         @Query("team") teamId: Int,
-    ): Response<BaseResponse<PlayerDTO>>
+    ): Response<BaseResponse<PlayerResponse>>
 
     @GET("players")
     suspend fun getPlayerBySeasonByLeagueId(
         @Query("season") season: String,
         @Query("league") leagueId: Int
-    ): Response<BaseResponse<PlayerDTO>>
+    ): Response<BaseResponse<PlayerResponse>>
 
     @GET("players")
     suspend fun searchPlayerNameByTeamId(
         @Query("search") playerName: String,
         @Query("team") teamId: Int
-    ): Response<BaseResponse<PlayerDTO>>
+    ): Response<BaseResponse<PlayerResponse>>
 
     @GET("players")
     suspend fun searchPlayerNameByLeagueId(
         @Query("search") playerName: String,
         @Query("league") leagueId: Int
-    ): Response<BaseResponse<PlayerDTO>>
+    ): Response<BaseResponse<PlayerResponse>>
 
     @GET("players/seasons")
     suspend fun getPlayerSeasons(): Response<BaseResponse<Int>>
@@ -437,43 +437,43 @@ interface FootballApiService {
     @GET("players/squads")
     suspend fun getSquadByPlayerId(
         @Query("player") playerId: Int
-    ): Response<BaseResponse<SquadDTO>>
+    ): Response<BaseResponse<SquadResponse>>
 
     @GET("players/squads")
     suspend fun getSquadByTeamId(
         @Query("team") teamId: Int
-    ): Response<BaseResponse<SquadDTO>>
+    ): Response<BaseResponse<SquadResponse>>
 
     @GET("players/topscorers")
     suspend fun getTopScorers(
         @Query("season") seasonId: Int,
         @Query("league") leagueId: Int
-    ): Response<BaseResponse<PlayerDTO>>
+    ): Response<BaseResponse<PlayerResponse>>
 
     @GET("players/topassists")
     suspend fun getTopAssists(
         @Query("season") seasonId: Int,
         @Query("league") leagueId: Int
-    ): Response<BaseResponse<PlayerDTO>>
+    ): Response<BaseResponse<PlayerResponse>>
 
     @GET("players/topyellowcards")
     suspend fun getTopYellowCards(
         @Query("season") seasonId: Int,
         @Query("league") leagueId: Int
-    ): Response<BaseResponse<PlayerDTO>>
+    ): Response<BaseResponse<PlayerResponse>>
 
     @GET("players/topredcards")
     suspend fun getTopRedCards(
         @Query("season") seasonId: Int,
         @Query("league") leagueId: Int
-    ): Response<BaseResponse<PlayerDTO>>
+    ): Response<BaseResponse<PlayerResponse>>
     //endregion
 
     //region predictions
     @GET("predictions")
     suspend fun getPredictionsByFixtureId(
         @Query("fixture") fixtureId: Int
-    ): Response<BaseResponse<PredictionsDTO>>
+    ): Response<BaseResponse<PredictionsResponse>>
     //endregion
 
     //region sidelined
@@ -481,13 +481,13 @@ interface FootballApiService {
     @GET("sidelined")
     suspend fun getPlayerSidelined(
         @Query("player") playerId: Int
-    ): Response<BaseResponse<SidelinedDTO>>
+    ): Response<BaseResponse<SidelinedResponse>>
 
 
     @GET("sidelined")
     suspend fun getCoachSidelined(
         @Query("coach") coachId: Int
-    ): Response<BaseResponse<SidelinedDTO>>
+    ): Response<BaseResponse<SidelinedResponse>>
     //endregion
 
     //region standings
@@ -495,20 +495,20 @@ interface FootballApiService {
     suspend fun getStandingsByTeamId(
         @Query("season") seasonId: Int,
         @Query("team") teamId: Int
-    ): Response<BaseResponse<StandingsDTO>>
+    ): Response<BaseResponse<StandingsResponse>>
 
     @GET("standings")
     suspend fun getStandingsByLeagueId(
         @Query("season") seasonId: Int,
         @Query("league") leagueId: Int
-    ): Response<BaseResponse<StandingsDTO>>
+    ): Response<BaseResponse<StandingsResponse>>
 
     @GET("standings")
     suspend fun getStandingsByTeamIdAndLeagueId(
         @Query("season") seasonId: Int,
         @Query("team") teamId: Int,
         @Query("league") leagueId: Int
-    ): Response<BaseResponse<StandingsDTO>>
+    ): Response<BaseResponse<StandingsResponse>>
     //endregion
 
     //region teams
@@ -516,19 +516,19 @@ interface FootballApiService {
     suspend fun getTeamsByLeagueAndSeason(
         @Query("league") leagueId: Int,
         @Query("season") seasonId: Int
-    ): Response<BaseResponse<TeamInformationDTO>>
+    ): Response<BaseResponse<TeamInformationResponse>>
 
     @GET("teams")
     suspend fun getTeamById(
         @Query("id") teamId: Int
-    ): Response<BaseResponse<TeamInformationDTO>>
+    ): Response<BaseResponse<TeamInformationResponse>>
 
     @GET("teams/statistics")
     suspend fun getTeamStatistics(
         @Query("team") teamId: Int,
         @Query("season") season: Int,
         @Query("league") leagueId: Int
-    ): Response<BaseStaticResponse<TeamStatisticsDTO>>
+    ): Response<BaseStaticResponse<TeamStatisticsResponse>>
 
     @GET("teams/seasons")
     suspend fun getTeamSeasons(
@@ -536,7 +536,7 @@ interface FootballApiService {
     ): Response<BaseResponse<Int>>
 
     @GET("teams/countries")
-    suspend fun getTeamCountries(): Response<BaseResponse<TeamCountriesDTO>>
+    suspend fun getTeamCountries(): Response<BaseResponse<TeamCountriesResponse>>
     //endregion
 
     //region timezone
@@ -548,52 +548,52 @@ interface FootballApiService {
     @GET("transfers")
     suspend fun getTransfersByPlayerId(
         @Query("id") playerId: Int
-    ): Response<BaseResponse<TransferDTO>>
+    ): Response<BaseResponse<TransferResponse>>
 
     @GET("transfers")
     suspend fun getTransfersByTeamId(
         @Query("team") teamId: Int
-    ): Response<BaseResponse<TransferDTO>>
+    ): Response<BaseResponse<TransferResponse>>
     //endregion
 
     //region trophies
     @GET("trophies")
     suspend fun getPlayerTrophies(
         @Query("player") playerId: Int
-    ): Response<BaseResponse<TrophyDTO>>
+    ): Response<BaseResponse<TrophyResponse>>
 
 
     @GET("trophies")
     suspend fun getCoachTrophies(
         @Query("coach") coachId: Int
-    ): Response<BaseResponse<TrophyDTO>>
+    ): Response<BaseResponse<TrophyResponse>>
     //endregion
 
     //region venues
     @GET("venues")
     suspend fun getVenueById(
         @Query("id") venueId: Int
-    ): Response<BaseResponse<VenuesDTO>>
+    ): Response<BaseResponse<VenuesResponse>>
 
     @GET("venues")
     suspend fun getVenueByName(
         @Query("name") venueName: String
-    ): Response<BaseResponse<VenuesDTO>>
+    ): Response<BaseResponse<VenuesResponse>>
 
     @GET("venues")
     suspend fun getVenuesByCityName(
         @Query("city") cityName: String
-    ): Response<BaseResponse<VenuesDTO>>
+    ): Response<BaseResponse<VenuesResponse>>
 
     @GET("venues")
     suspend fun getVenuesByCountryName(
         @Query("country") countryName: String
-    ): Response<BaseResponse<VenuesDTO>>
+    ): Response<BaseResponse<VenuesResponse>>
 
     @GET("venues")
     suspend fun searchVenue(
         @Query("search") name: String
-    ): Response<BaseResponse<VenuesDTO>>
+    ): Response<BaseResponse<VenuesResponse>>
     //endregion
 
 }

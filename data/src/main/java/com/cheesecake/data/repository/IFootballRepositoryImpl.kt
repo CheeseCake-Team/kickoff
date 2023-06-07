@@ -8,6 +8,8 @@ import com.cheesecake.data.models.dto.mapToDomain
 import com.cheesecake.data.remote.RemoteDataSource
 import com.cheesecake.data.remote.response.mapToDomain
 import com.cheesecake.domain.models.*
+import com.cheesecake.data.repository.models.response.mapToDomain
+import com.cheesecake.domain.Entity.*
 import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
