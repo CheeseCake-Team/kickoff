@@ -1,4 +1,11 @@
 package com.cheesecake.ui.fragment.leagueDetails
 
-class LeagueDetailsViewModel {
+import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+
+@HiltViewModel
+class LeagueDetailsViewModel(
+
+): ViewModel() {
+
 }
