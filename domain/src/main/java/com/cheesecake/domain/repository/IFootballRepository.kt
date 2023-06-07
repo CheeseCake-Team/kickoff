@@ -1,5 +1,6 @@
 package com.cheesecake.domain.repository
 
+import com.cheesecake.domain.models.FixtureEntity
 import com.cheesecake.domain.models.League
 import com.cheesecake.domain.models.Player
 import com.cheesecake.domain.models.Standings
@@ -21,6 +22,8 @@ interface IFootballRepository {
     suspend fun getRemotelyLeagueByIdAndSeason(leagueId: Int, leagueSeason: Int): League?
 
     suspend fun updateOrInsertLeague(league: League)
+
+    suspend fun getMatchesByLeagueIdAndSeason(timeZone: String, leagueId: Int, Season: String): List<FixtureEntity>
 
     suspend fun deleteLeagueById(leagueId: Int)
 }

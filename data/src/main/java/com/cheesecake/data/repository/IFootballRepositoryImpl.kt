@@ -6,6 +6,7 @@ import com.cheesecake.data.local.models.mapToDomain
 import com.cheesecake.data.local.models.toLocal
 import com.cheesecake.data.models.dto.mapToDomain
 import com.cheesecake.data.remote.RemoteDataSource
+import com.cheesecake.data.remote.response.mapToDomain
 import com.cheesecake.domain.models.*
 import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
@@ -47,6 +48,10 @@ class IFootballRepositoryImpl
 
     override suspend fun updateOrInsertLeague(league: League) {
         localDataSource.updateOrInsertLeague(league.toLocal())
+    }
+
+    override suspend fun getMatchesByLeagueIdAndSeason(timeZone: String, leagueId: Int, Season: String): List<FixtureEntity> {
+      return  remoteDataSource.getFixturesBySeasonIdAndLeagueId(timeZone, Season, leagueId).mapToDomain()
     }
 
     override suspend fun deleteLeagueById(leagueId: Int) {
