@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.usecases.GetAllTeamsInLeagueWithSeason
 import com.cheesecake.ui.mapper.toUIModel
 import com.cheesecake.ui.models.LeagueTeamsUIState
-import com.cheesecake.ui.models.TeamUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

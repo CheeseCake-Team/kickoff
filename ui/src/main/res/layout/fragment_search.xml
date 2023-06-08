@@ -39,6 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:clipToPadding="false"
+            app:items="@{viewModel.uiState.searchResult}"
             android:padding="@dimen/spacing_custom"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"

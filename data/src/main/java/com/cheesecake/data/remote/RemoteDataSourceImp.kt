@@ -1,10 +1,10 @@
 package com.cheesecake.data.remote
 
+import com.cheesecake.data.remote.api.FootballApiService
 import com.cheesecake.data.remote.response.BaseResponse
 import com.cheesecake.data.remote.response.BaseStaticResponse
-import com.cheesecake.data.remote.api.FootballApiService
+import com.cheesecake.data.remote.response.CoachResponse
 import com.cheesecake.data.remote.response.FixtureResponse
-import com.cheesecake.data.repository.RemoteDataSource
 import com.cheesecake.data.remote.response.LeagueResponse
 import com.cheesecake.data.remote.response.LineupResponse
 import com.cheesecake.data.remote.response.PlayerResponse
@@ -18,13 +18,11 @@ import com.cheesecake.data.remote.response.TeamStatisticsResponse
 import com.cheesecake.data.remote.response.TransferResponse
 import com.cheesecake.data.remote.response.TrophyResponse
 import com.cheesecake.data.remote.response.VenuesResponse
-
+import com.cheesecake.data.repository.RemoteDataSource
 import com.cheesecake.data.utils.FixtureStatus
 import com.cheesecake.data.utils.LeagueType
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.single
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -33,15 +31,15 @@ class RemoteDataSourceImp @Inject constructor(
 ) : RemoteDataSource {
 
     //region coachs
-    override suspend fun getCoachById(playerID: Int): List<com.cheesecake.data.remote.response.CoachResponse> {
+    override suspend fun getCoachById(playerID: Int): List<CoachResponse> {
         return wrapBaseResponse { service.getCoachById(playerID) }
     }
 
-    override suspend fun getCoachByTeam(teamID: Int): List<com.cheesecake.data.remote.response.CoachResponse> {
+    override suspend fun getCoachByTeam(teamID: Int): List<CoachResponse> {
         return wrapBaseResponse { service.getCoachByTeam(teamID) }
     }
 
-    override suspend fun getCoachBySearch(getCoachName: String): List<com.cheesecake.data.remote.response.CoachResponse> {
+    override suspend fun getCoachBySearch(getCoachName: String): List<CoachResponse> {
         return wrapBaseResponse { service.getCoachBySearch(getCoachName) }
     }
 
@@ -372,7 +370,7 @@ class RemoteDataSourceImp @Inject constructor(
         return wrapBaseResponse { service.getLeaguesByType(type) }
     }
 
-    override suspend fun getLeaguesByTypeById(type: LeagueType, id: Int): List<com.cheesecake.data.remote.response.LeagueResponse> {
+    override suspend fun getLeaguesByTypeById(type: LeagueType, id: Int): List<LeagueResponse> {
         return wrapBaseResponse { service.getLeaguesByTypeById(type, id) }
     }
 
@@ -384,19 +382,19 @@ class RemoteDataSourceImp @Inject constructor(
         return wrapBaseResponse { service.getLeagueByTypeByIdBySeason(type, id, season) }
     }
 
-    override suspend fun getCurrentActiveLeagues(current: Boolean): List<com.cheesecake.data.remote.response.LeagueResponse> {
+    override suspend fun getCurrentActiveLeagues(current: Boolean): List<LeagueResponse> {
         return wrapBaseResponse { service.getCurrentActiveLeagues(current) }
     }
 
-    override suspend fun searchByLeagueName(name: String): List<com.cheesecake.data.remote.response.LeagueResponse> {
+    override suspend fun searchByLeagueName(name: String): List<LeagueResponse> {
         return wrapBaseResponse { service.searchByLeagueName(name) }
     }
 
-    override suspend fun getLeaguesSeasons(): List<com.cheesecake.data.remote.response.LeagueResponse> {
+    override suspend fun getLeaguesSeasons(): List<LeagueResponse> {
         return wrapBaseResponse { service.getLeaguesSeasons() }
     }
 
-    override suspend fun getCurrentSeasonLeague(id: Int, current: Boolean): List<com.cheesecake.data.remote.response.LeagueResponse> {
+    override suspend fun getCurrentSeasonLeague(id: Int, current: Boolean): List<LeagueResponse> {
         return wrapBaseResponse { service.getCurrentSeasonLeague(id, current) }
     }
 
@@ -604,6 +602,17 @@ class RemoteDataSourceImp @Inject constructor(
             throw Throwable(" Not Success Request ")
         }
     }
+
+//    private suspend fun <T> wrapTeamBaseResponse(
+//        function: suspend () -> Response<TeamInformationResponse<T>>,
+//    ): List<T> {
+//        val response = function()
+//        return if (response.isSuccessful) {
+//            response.body()?.response!!
+//        } else {
+//            throw Throwable(" Not Success Request ")
+//        }
+//    }
 
     private suspend fun <T> wrapFlowBaseResponse(
         function: suspend () -> Flow<Response<BaseResponse<T>>>

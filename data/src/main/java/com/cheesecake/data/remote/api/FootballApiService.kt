@@ -3,6 +3,7 @@ package com.cheesecake.data.remote.api
 import com.cheesecake.data.remote.response.BaseResponse
 import com.cheesecake.data.remote.response.BaseStaticResponse
 import com.cheesecake.data.remote.response.FixtureResponse
+import com.cheesecake.data.remote.response.LeagueResponse
 import com.cheesecake.data.remote.response.LineupResponse
 import com.cheesecake.data.remote.response.PlayerResponse
 import com.cheesecake.data.remote.response.PredictionsResponse
@@ -372,7 +373,7 @@ interface FootballApiService {
     @GET("leagues")
     suspend fun getCurrentSeasonLeague(
         @Query("id") id: Int, @Query("current") current: Boolean
-    ): Response<BaseResponse<com.cheesecake.data.remote.response.LeagueResponse>>
+    ): Response<BaseResponse<LeagueResponse>>
 
     //endregion
 

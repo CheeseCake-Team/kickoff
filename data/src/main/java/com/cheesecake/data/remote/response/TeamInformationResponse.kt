@@ -1,8 +1,6 @@
 package com.cheesecake.data.remote.response
 
 
-import com.cheesecake.data.local.models.TeamLocalDto
-import com.cheesecake.domain.entity.TeamEntity
 import com.google.gson.annotations.SerializedName
 
 data class TeamInformationResponse(
