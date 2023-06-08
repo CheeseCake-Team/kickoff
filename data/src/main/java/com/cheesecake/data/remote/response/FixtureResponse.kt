@@ -1,8 +1,6 @@
 package com.cheesecake.data.remote.response
 
 
-import com.cheesecake.data.remote.utils.FixtureStatus
-import com.cheesecake.domain.entity.FixtureEntity
 import com.google.gson.annotations.SerializedName
 
 data class FixtureResponse(
@@ -17,22 +15,3 @@ data class FixtureResponse(
     @SerializedName("score")
     val score: com.cheesecake.data.remote.models.ScoreBlockDTO
 )
-
-
-fun FixtureResponse.mapToDomain(): FixtureEntity {
-    return FixtureEntity(
-        homeTeamName = this.teams.home.name,
-        homeTeamLogo = this.league.logo,
-        homeTeamGoals = this.goals.home.toString(),
-        awayTeamName = this.teams.away.name,
-        awayTeamLogo = this.teams.away.logo,
-        awayTeamGoals = this.goals.away.toString(),
-        matchTime = this.fixtureDTO.timestamp,
-        matchDate = this.fixtureDTO.date,
-        isFinished = this.fixtureDTO.status.short == FixtureStatus.MatchFinished.toString()
-    )
-}
-
-fun List<FixtureResponse>.mapToDomain(): List<FixtureEntity> {
-    return this.map { it.mapToDomain() }
-}
