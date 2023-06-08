@@ -27,9 +27,7 @@ class SearchViewModel @Inject constructor(
     val uiState: StateFlow<SearchUIState> = _uiState
 
 
-    init {
 
-    }
 
     @OptIn(FlowPreview::class)
     suspend fun onSearchInputChanged(newSearchInput: String) {
@@ -40,14 +38,14 @@ class SearchViewModel @Inject constructor(
                 getTeamByNameUseCase(_uiState.value.searchInput)
                     .debounce(3000)
                     .collect { list ->
-                    _uiState.update { searchUIState ->
-                        searchUIState.copy(
-                            searchResult = list.map { it.toUIModel() }, isLoading = false
-                        )
+                        _uiState.update { searchUIState ->
+                            searchUIState.copy(
+                                searchResult = list.map { it.toUIModel() }, isLoading = false
+                            )
+                        }
                     }
-                }
             } catch (e: Exception) {
-                _uiState.update { it.copy(error = emptyList())}
+                _uiState.update { it.copy(error = emptyList()) }
             }
 
         }

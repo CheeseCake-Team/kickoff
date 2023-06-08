@@ -23,7 +23,7 @@ class LeagueViewModel @Inject constructor(
 
     fun toggleFavourite() {
         viewModelScope.launch {
-            favouriteLeagueUseCase(39, 2022)?.let {
+            favouriteLeagueUseCase(39, 2022).let {
                 _state.update { uiState ->
                     uiState.copy(
                         isFavourite = it.isFavourite
@@ -35,7 +35,7 @@ class LeagueViewModel @Inject constructor(
 
     private fun getLeague() {
         viewModelScope.launch {
-            getLeagueByIdAndSeasonUseCase(39, 2022)?.let { league ->
+            getLeagueByIdAndSeasonUseCase(39, 2022).let { league ->
                 _state.update { uiState ->
                     uiState.copy(
                         leagueName = league.leagueName,

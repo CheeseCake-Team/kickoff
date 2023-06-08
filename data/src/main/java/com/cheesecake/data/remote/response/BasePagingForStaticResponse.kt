@@ -1,15 +1,14 @@
 package com.cheesecake.data.remote.response
 
-
 import com.google.gson.annotations.SerializedName
 
-data class BaseResponse<T>(
+data class BasePagingForStaticResponse<T>(
     @SerializedName("errors")
     val errors: List<String>,
     @SerializedName("paging")
     val paging: Paging,
     @SerializedName("response")
-    val response: List<T>
+    val response: T
 ) {
     data class Paging(
         @SerializedName("current")

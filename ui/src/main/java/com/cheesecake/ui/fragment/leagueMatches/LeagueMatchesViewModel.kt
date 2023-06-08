@@ -19,7 +19,7 @@ class LeagueMatchesViewModel @Inject constructor(
     }
 
     private fun getData() {
-        tryToExecute<List<Pair<String, List<FixtureEntity>>>>(
+        tryToExecute(
             ::getPairsOfMatchesAndDateByLeagueIdAndSeason,
             ::onSuccess,
             ::onError

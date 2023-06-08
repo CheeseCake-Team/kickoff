@@ -9,8 +9,8 @@ class FavouriteLeagueUseCase @Inject constructor(
     private val getLeagueByIdAndSeasonUseCase: GetLeagueByIdAndSeasonUseCase
 ) {
 
-    suspend operator fun invoke(leagueId: Int, leagueSeason: Int): LeagueEntity? {
-        getLeagueByIdAndSeasonUseCase(leagueId, leagueSeason)?.let {
+    suspend operator fun invoke(leagueId: Int, leagueSeason: Int): LeagueEntity {
+        getLeagueByIdAndSeasonUseCase(leagueId, leagueSeason).let {
             footballRepository.updateOrInsertLeague(
                 LeagueEntity(
                     leagueId = it.leagueId,
