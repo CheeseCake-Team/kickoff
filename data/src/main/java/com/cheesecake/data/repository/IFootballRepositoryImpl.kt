@@ -123,4 +123,11 @@ class IFootballRepositoryImpl
         return remoteDataSource.getPlayerBySeasonByPlayerId(season, playerId).first().mapToDomain()
     }
 
+    override suspend fun getPlayerTrophy(playerId: Int): List<TrophyEntity> {
+        return remoteDataSource.getPlayerTrophies(playerId).mapToDomain()
+    }
+
+    override suspend fun getCoachTrophy(coachId: Int): List<TrophyEntity> {
+        return remoteDataSource.getCoachTrophies(coachId).mapToDomain()
+    }
 }

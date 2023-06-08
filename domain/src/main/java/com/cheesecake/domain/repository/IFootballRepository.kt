@@ -6,6 +6,7 @@ import com.cheesecake.domain.entity.TeamStandingEntity
 import com.cheesecake.domain.entity.LeagueEntity
 import com.cheesecake.domain.entity.TeamEntity
 import com.cheesecake.domain.entity.PlayerStatisticsEntity
+import com.cheesecake.domain.entity.TrophyEntity
 
 interface IFootballRepository {
     suspend fun getLeagueNameAndCountry(leagueId: Int, current: Boolean): List<LeagueEntity>
@@ -21,9 +22,7 @@ interface IFootballRepository {
     suspend fun updateOrInsertLeague(leagueEntity: LeagueEntity)
 
     suspend fun getMatchesByLeagueIdAndSeason(
-        timeZone: String,
-        leagueId: Int,
-        Season: String
+        timeZone: String, leagueId: Int, Season: String
     ): List<FixtureEntity>
 
     suspend fun deleteLeagueById(leagueId: Int)
@@ -33,9 +32,7 @@ interface IFootballRepository {
     suspend fun getRemotelyTeamsByIdAndSeason(leagueId: Int, leagueSeason: Int): List<TeamEntity>
 
     suspend fun updateOrInsertTeams(
-        teamEntityEntities: List<TeamEntity>,
-        leagueId: Int,
-        leagueSeason: Int
+        teamEntityEntities: List<TeamEntity>, leagueId: Int, leagueSeason: Int
     )
 
     suspend fun getLeaguesByName(leagueName: String): List<LeagueEntity>
@@ -44,9 +41,15 @@ interface IFootballRepository {
 
     suspend fun getCurrentRoundByIdAndSeason(leagueId: Int, season: Int): String?
 
-    suspend fun getTeamsStandingByLeagueIdAndSeason(leagueId: Int, season: Int): List<TeamStandingEntity>
+    suspend fun getTeamsStandingByLeagueIdAndSeason(
+        leagueId: Int,
+        season: Int
+    ): List<TeamStandingEntity>
 
     suspend fun getTeamStatistics(teamId: Int, season: Int, leagueId: Int): TeamStatisticsEntity
 
     suspend fun getPlayerBySeasonByPlayerId(season: String, playerId: Int): PlayerStatisticsEntity
+
+    suspend fun getPlayerTrophy(playerId: Int): List<TrophyEntity>
+    suspend fun getCoachTrophy(coachId: Int): List<TrophyEntity>
 }
