@@ -34,11 +34,7 @@ class LeagueDetailsViewModel @Inject constructor(
     private fun getLeague() {
         viewModelScope.launch {
             getLeagueByLeagueIdAndSeasonUseCase(39, 2022)?.let { league ->
-                _leagueDetailsUIState.update {
-                    it.copy(
-                        country = league.country
-                    )
-                }
+                _leagueDetailsUIState.update { it.copy(country = league.country) }
             }
         }
     }
@@ -46,11 +42,7 @@ class LeagueDetailsViewModel @Inject constructor(
     private fun getTopScorers() {
         viewModelScope.launch {
             getTopScorersByLeagueIdAndSeason(39, 2022).let { scorers ->
-                _leagueDetailsUIState.update {
-                    it.copy(
-                        topPlayers = scorers.take(7), isLoading = false
-                    )
-                }
+                _leagueDetailsUIState.update { it.copy(topPlayers = scorers.take(7), isLoading = false) }
             }
         }
     }
@@ -72,13 +64,8 @@ class LeagueDetailsViewModel @Inject constructor(
     private fun getCurrentRound() {
         viewModelScope.launch {
             getCurrentRoundByLeagueIdAndSeason(39, 2022).apply {
-                _leagueDetailsUIState.update {
-                    it.copy(
-                        round = this
-                    )
-                }
+                _leagueDetailsUIState.update {  it.copy(round = this) }
             }
-
         }
     }
 
