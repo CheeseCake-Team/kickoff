@@ -4,12 +4,17 @@ import com.cheesecake.domain.entity.FixtureEntity
 import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
-class GetMatchesByLeagueIdAndSeasonUseCase @Inject constructor(
+class GetPairsOfMatchesAndDateByLeagueIdAndSeasonUseCase @Inject constructor(
     private val footballRepository: IFootballRepository,
 ) {
 
-
-    suspend operator fun invoke(timeZone: String, leagueId: Int, Season: String): List<FixtureEntity> {
+    suspend operator fun invoke(
+        timeZone: String,
+        leagueId: Int,
+        Season: Int
+    ): List<Pair<String, List<FixtureEntity>>> {
         return footballRepository.getMatchesByLeagueIdAndSeason(timeZone, leagueId, Season)
+            .groupBy { it.matchDate }.toList().reversed()
     }
+
 }
