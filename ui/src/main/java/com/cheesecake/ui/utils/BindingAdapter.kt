@@ -1,6 +1,5 @@
 package com.cheesecake.ui.utils
 
-import android.app.PendingIntent.OnFinished
 import android.util.Log
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -12,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.cheesecake.domain.entity.FixtureEntity
 import com.cheesecake.ui.base.BaseAdapter
+import com.cheesecake.ui.fragment.leagueMatches.LeagueMatchesHeadToHeadAdapter
 
 
 @BindingAdapter("app:imageUrl")
@@ -44,18 +44,27 @@ fun <T> setRecyclerItems(view: RecyclerView, items: List<T>?) {
     }
 }
 
+@BindingAdapter(value = ["app:fixtureItems"])
+fun <T> setItems(view: RecyclerView, items: List<T>?) {
+    items?.let {
+        val adapter = LeagueMatchesHeadToHeadAdapter()
+        adapter.setItems(it as List<FixtureEntity>)
+        view.adapter = adapter
+    }
+}
+
 @BindingAdapter(value = ["app:showLoading"])
 fun showLoading(view: ProgressBar, isShowing: Boolean?) {
     isShowing?.let {
         Log.i("showLoading: ", isShowing.toString())
         view.isVisible = isShowing
     }
+}
 
-    @BindingAdapter("app:matchScore")
-    fun TextView.setMatchScore(fixtureEntity: FixtureEntity?) {
-        fixtureEntity?.let {
-            if (it.isFinished) this.text = "Finished\n  ${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
-            else this.text = it.matchTime.toString()
-        }
+@BindingAdapter("app:matchScore")
+fun TextView.setMatchScore(fixtureEntity: FixtureEntity?) {
+    fixtureEntity?.let {
+        if (it.isFinished) this.text = "Finished\n  ${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
+        else this.text = it.matchTime.toString()
     }
 }
