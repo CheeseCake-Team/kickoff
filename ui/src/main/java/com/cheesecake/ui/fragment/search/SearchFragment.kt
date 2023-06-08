@@ -1,6 +1,7 @@
 package com.cheesecake.ui.fragment.search
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,9 @@ import com.cheesecake.ui.R
 import com.cheesecake.ui.base.BaseFragment
 import com.cheesecake.ui.databinding.FragmentSearchBinding
 import com.cheesecake.ui.fragment.leagueTeams.TeamsAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     override val layoutIdFragment: Int
@@ -20,6 +23,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.searchText.observe(viewLifecycleOwner){
+            Log.i( "onViewCreated: ", it.toString())
+        }
     }
 
 }
