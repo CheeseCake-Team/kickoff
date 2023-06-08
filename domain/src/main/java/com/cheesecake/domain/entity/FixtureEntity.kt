@@ -7,7 +7,7 @@ data class FixtureEntity(
     val awayTeamName: String,
     val awayTeamLogo: String,
     val awayTeamGoals: String?,
-    val matchTime: Int?,
+    val matchTime: String?,
     val matchDate: String,
     val isFinished: Boolean = false
 )
