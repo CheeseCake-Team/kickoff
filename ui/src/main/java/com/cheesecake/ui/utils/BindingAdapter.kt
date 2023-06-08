@@ -1,13 +1,16 @@
 package com.cheesecake.ui.utils
 
+import android.app.PendingIntent.OnFinished
 import android.util.Log
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.cheesecake.domain.entity.FixtureEntity
 import com.cheesecake.ui.base.BaseAdapter
 
 
@@ -46,5 +49,13 @@ fun showLoading(view: ProgressBar, isShowing: Boolean?) {
     isShowing?.let {
         Log.i("showLoading: ", isShowing.toString())
         view.isVisible = isShowing
+    }
+
+    @BindingAdapter("app:matchScore")
+    fun TextView.setMatchScore(fixtureEntity: FixtureEntity?) {
+        fixtureEntity?.let {
+            if (it.isFinished) this.text = "Finished\n  ${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
+            else this.text = it.matchTime.toString()
+        }
     }
 }
