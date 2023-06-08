@@ -31,7 +31,7 @@ Kick Off is a feature-rich Android application designed to keep football fans up
 
 Kick Off follows a clean architecture approach to ensure separation of concerns and maintainability. The app is divided into the following layers:
 
-![App Architecture](assets/app_architecture.png)
+![App Architecture](https://github.com/CheeseCake-Team/kickoff/tree/development/app/src/main/assets/app_architecture.png)
 
 - **Presentation Layer**: Responsible for handling UI-related tasks, including activities, fragments, and view models.
 - **Domain Layer**: Contains the business logic of the application, including use cases and repositories.
