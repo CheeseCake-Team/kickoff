@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.usecases.GetAllTeamsInLeagueWithSeason
 import com.cheesecake.ui.mapper.toUIModel
+import com.cheesecake.ui.models.LeagueTeamsUIState
 import com.cheesecake.ui.models.TeamUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -14,12 +15,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-
-data class LeagueTeamsUIState(
-    val isLoading: Boolean = true,
-    val data: List<TeamUIState> = emptyList(),
-    val isError: String = "Error"
-)
 
 @HiltViewModel
 class LeagueTeamsViewModel @Inject constructor(
