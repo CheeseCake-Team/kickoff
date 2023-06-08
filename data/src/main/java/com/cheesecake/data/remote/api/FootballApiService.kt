@@ -3,6 +3,7 @@ package com.cheesecake.data.remote.api
 import com.cheesecake.data.remote.response.BaseResponse
 import com.cheesecake.data.remote.response.BaseStaticResponse
 import com.cheesecake.data.remote.response.FixtureResponse
+import com.cheesecake.data.remote.response.LeagueResponse
 import com.cheesecake.data.remote.response.LineupResponse
 import com.cheesecake.data.remote.response.PlayerResponse
 import com.cheesecake.data.remote.response.PredictionsResponse
@@ -10,7 +11,7 @@ import com.cheesecake.data.remote.response.SidelinedResponse
 import com.cheesecake.data.remote.response.SquadResponse
 import com.cheesecake.data.remote.response.StandingsResponse
 import com.cheesecake.data.remote.response.TeamCountriesResponse
-import com.cheesecake.data.remote.response.TeamInformationResponse
+import com.cheesecake.data.remote.response.TeamResponse
 import com.cheesecake.data.remote.response.TeamStatisticsResponse
 import com.cheesecake.data.remote.response.TransferResponse
 import com.cheesecake.data.remote.response.TrophyResponse
@@ -371,7 +372,7 @@ interface FootballApiService {
     @GET("leagues")
     suspend fun getCurrentSeasonLeague(
         @Query("id") id: Int, @Query("current") current: Boolean
-    ): Response<BaseResponse<com.cheesecake.data.remote.response.LeagueResponse>>
+    ): Response<BaseResponse<LeagueResponse>>
 
     //endregion
 
@@ -479,16 +480,16 @@ interface FootballApiService {
     @GET("teams")
     suspend fun getTeamsByLeagueAndSeason(
         @Query("league") leagueId: Int, @Query("season") seasonId: Int
-    ): Response<BaseResponse<TeamInformationResponse>> @GET("teams")
+    ): Response<BaseResponse<TeamResponse>> @GET("teams")
 
     suspend fun getTeamsByName(
         @Query("name") name: String
-    ): Response<BaseResponse<TeamInformationResponse>>
+    ): Response<BaseResponse<TeamResponse>>
 
     @GET("teams")
     suspend fun getTeamById(
         @Query("id") teamId: Int
-    ): Response<BaseResponse<TeamInformationResponse>>
+    ): Response<BaseResponse<TeamResponse>>
 
     @GET("teams/statistics")
     suspend fun getTeamStatistics(

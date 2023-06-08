@@ -1,11 +1,11 @@
 package com.cheesecake.data.repository.mappers
 
 import com.cheesecake.data.local.models.TeamLocalDto
-import com.cheesecake.data.remote.response.TeamInformationResponse
+import com.cheesecake.data.remote.response.TeamResponse
 import com.cheesecake.domain.entity.TeamEntity
 
 
-fun TeamInformationResponse.mapRemoteDtoToEntity(): TeamEntity = TeamEntity(
+fun TeamResponse.mapRemoteDtoToEntity(): TeamEntity = TeamEntity(
     teamId = this.team.id,
     teamName = this.team.name,
     founded = this.team.founded,
@@ -43,5 +43,5 @@ fun List<TeamEntity>.mapToLocal(leagueId: Int, leagueSeason: Int): List<TeamLoca
     map { it.toLocal(leagueId, leagueSeason) }
 
 
-fun List<TeamInformationResponse>.mapRemoteDtoToEntity(): List<TeamEntity> =
+fun List<TeamResponse>.mapRemoteDtoToEntity(): List<TeamEntity> =
     map { it.mapRemoteDtoToEntity() }

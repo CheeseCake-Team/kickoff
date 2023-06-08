@@ -1,10 +1,10 @@
 package com.cheesecake.data.remote
 
+import com.cheesecake.data.remote.api.FootballApiService
 import com.cheesecake.data.remote.response.BaseResponse
 import com.cheesecake.data.remote.response.BaseStaticResponse
-import com.cheesecake.data.remote.api.FootballApiService
+import com.cheesecake.data.remote.response.CoachResponse
 import com.cheesecake.data.remote.response.FixtureResponse
-import com.cheesecake.data.repository.RemoteDataSource
 import com.cheesecake.data.remote.response.LeagueResponse
 import com.cheesecake.data.remote.response.LineupResponse
 import com.cheesecake.data.remote.response.PlayerResponse
@@ -13,14 +13,16 @@ import com.cheesecake.data.remote.response.SidelinedResponse
 import com.cheesecake.data.remote.response.SquadResponse
 import com.cheesecake.data.remote.response.StandingsResponse
 import com.cheesecake.data.remote.response.TeamCountriesResponse
-import com.cheesecake.data.remote.response.TeamInformationResponse
+import com.cheesecake.data.remote.response.TeamResponse
 import com.cheesecake.data.remote.response.TeamStatisticsResponse
 import com.cheesecake.data.remote.response.TransferResponse
 import com.cheesecake.data.remote.response.TrophyResponse
 import com.cheesecake.data.remote.response.VenuesResponse
-
+import com.cheesecake.data.repository.RemoteDataSource
 import com.cheesecake.data.remote.utils.FixtureStatus
 import com.cheesecake.data.remote.utils.LeagueType
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -29,15 +31,15 @@ class RemoteDataSourceImp @Inject constructor(
 ) : RemoteDataSource {
 
     //region coach
-    override suspend fun getCoachById(playerID: Int): List<com.cheesecake.data.remote.response.CoachResponse> {
+    override suspend fun getCoachById(playerID: Int): List<CoachResponse> {
         return wrapBaseResponse { service.getCoachById(playerID) }
     }
 
-    override suspend fun getCoachByTeam(teamID: Int): List<com.cheesecake.data.remote.response.CoachResponse> {
+    override suspend fun getCoachByTeam(teamID: Int): List<CoachResponse> {
         return wrapBaseResponse { service.getCoachByTeam(teamID) }
     }
 
-    override suspend fun getCoachBySearch(getCoachName: String): List<com.cheesecake.data.remote.response.CoachResponse> {
+    override suspend fun getCoachBySearch(getCoachName: String): List<CoachResponse> {
         return wrapBaseResponse { service.getCoachBySearch(getCoachName) }
     }
 
@@ -346,19 +348,13 @@ class RemoteDataSourceImp @Inject constructor(
         return wrapBaseResponse { service.getLeaguesById(leagueId) }
     }
 
-    override suspend fun getLeaguesByName(leagueName: String): List<LeagueResponse> {
-        return wrapBaseResponse { service.getLeaguesByName(leagueName) }
-    }
-
-    override suspend fun getLeaguesByCountryName(countryName: String): List<LeagueResponse> {
+    override suspend fun getLeaguesByCountryName(countryName: String): List<com.cheesecake.data.remote.response.LeagueResponse> {
         return wrapBaseResponse { service.getLeaguesByCountryName(countryName) }
     }
-
 
     override suspend fun getLeaguesByCountryCode(countryName: String): List<LeagueResponse> {
         return wrapBaseResponse { service.getLeaguesByCountryCode(countryName) }
     }
-
 
     override suspend fun getLeaguesOfSeason(season: Int): List<LeagueResponse> {
         return wrapBaseResponse { service.getLeaguesOfSeason(season) }
@@ -400,7 +396,6 @@ class RemoteDataSourceImp @Inject constructor(
     override suspend fun getCurrentSeasonLeague(id: Int, current: Boolean): List<LeagueResponse> {
         return wrapBaseResponse { service.getCurrentSeasonLeague(id, current) }
     }
-
 
     //endregion
 
@@ -506,15 +501,19 @@ class RemoteDataSourceImp @Inject constructor(
     override suspend fun getTeamsByLeagueAndSeason(
         leagueId: Int,
         seasonId: Int
-    ): List<TeamInformationResponse> {
+    ): List<TeamResponse> {
         return wrapBaseResponse { service.getTeamsByLeagueAndSeason(leagueId, seasonId) }
     }
 
-    override suspend fun getTeamsByName(name: String): List<TeamInformationResponse> {
-        return wrapBaseResponse { service.getTeamsByName(name) }
+    override suspend fun getTeamsByName(teamName: String): List<TeamResponse> {
+        return wrapBaseResponse { service.getTeamsByName(teamName) }
     }
 
-    override suspend fun getTeamById(teamId: Int): List<TeamInformationResponse> {
+    override suspend fun getLeaguesByName(leagueName: String): List<LeagueResponse> {
+        return wrapBaseResponse { service.getLeaguesByName(leagueName) }
+    }
+
+    override suspend fun getTeamById(teamId: Int): List<TeamResponse> {
         return wrapBaseResponse { service.getTeamById(teamId) }
     }
 
@@ -601,6 +600,35 @@ class RemoteDataSourceImp @Inject constructor(
             throw Throwable(" Not Success Request ")
         }
     }
+
+//    private suspend fun <T> wrapTeamBaseResponse(
+//        function: suspend () -> Response<TeamInformationResponse<T>>,
+//    ): List<T> {
+//        val response = function()
+//        return if (response.isSuccessful) {
+//            response.body()?.response!!
+//        } else {
+//            throw Throwable(" Not Success Request ")
+//        }
+//    }
+
+    private suspend fun <T> wrapFlowBaseResponse(
+        function: suspend () -> Flow<Response<BaseResponse<T>>>
+    ): Flow<List<T>> {
+        return flow {
+            function().collect { response ->
+                if (response.isSuccessful) {
+                    response.body()?.response?.let { responseBody ->
+                        emit(responseBody)
+                    }
+                } else {
+                    throw Throwable("Not Successful Request")
+                }
+            }
+        }
+    }
+
+
 
 
     private suspend fun <T> wrapBaseStaticResponse(

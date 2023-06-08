@@ -3,6 +3,8 @@ package com.cheesecake.ui.fragment.leagueTeams
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cheesecake.domain.usecases.GetAllTeamsInLeagueWithSeason
+import com.cheesecake.ui.mapper.toUIModel
 import com.cheesecake.domain.usecases.GetAllTeamsInLeagueWithSeasonUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -12,7 +14,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-
 
 @HiltViewModel
 class LeagueTeamsViewModel @Inject constructor(
@@ -31,9 +32,9 @@ class LeagueTeamsViewModel @Inject constructor(
             withContext(Dispatchers.IO) {
                 try {
                     getAllTeamsInLeagueWithSeason(39, 2022).let { list ->
-                        _leagueTeamsUIState.update {
+                        _leagueTeamsUIState.update { teamUIState ->
                             Log.i("getData: ", list.toString())
-                            it.copy(data = list, isLoading = false)
+                            teamUIState.copy(data = list.map { it.toUIModel() }, isLoading = false)
                         }
                     }
                 } catch (e: Exception) {

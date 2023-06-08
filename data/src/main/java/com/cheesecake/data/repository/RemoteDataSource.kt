@@ -1,6 +1,7 @@
 package com.cheesecake.data.repository
 
 import com.cheesecake.data.remote.response.FixtureResponse
+import com.cheesecake.data.remote.response.LeagueResponse
 import com.cheesecake.data.remote.response.LineupResponse
 import com.cheesecake.data.remote.response.PlayerResponse
 import com.cheesecake.data.remote.response.PredictionsResponse
@@ -8,7 +9,7 @@ import com.cheesecake.data.remote.response.SidelinedResponse
 import com.cheesecake.data.remote.response.SquadResponse
 import com.cheesecake.data.remote.response.StandingsResponse
 import com.cheesecake.data.remote.response.TeamCountriesResponse
-import com.cheesecake.data.remote.response.TeamInformationResponse
+import com.cheesecake.data.remote.response.TeamResponse
 import com.cheesecake.data.remote.response.TeamStatisticsResponse
 import com.cheesecake.data.remote.response.TransferResponse
 import com.cheesecake.data.remote.response.TrophyResponse
@@ -256,7 +257,7 @@ interface RemoteDataSource {
 
     suspend fun getLeaguesByName(
         leagueName: String
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+    ): List<LeagueResponse>
 
     suspend fun getLeaguesByCountryName(
         countryName: String
@@ -392,15 +393,15 @@ interface RemoteDataSource {
     //region teams
     suspend fun getTeamsByLeagueAndSeason(
         leagueId: Int, seasonId: Int
-    ): List<TeamInformationResponse>
+    ): List<TeamResponse>
 
     suspend fun getTeamsByName(
         name: String,
-    ): List<TeamInformationResponse>
+    ): List<TeamResponse>
 
     suspend fun getTeamById(
         teamId: Int
-    ): List<TeamInformationResponse>
+    ): List<TeamResponse>
 
     suspend fun getTeamStatistics(
         teamId: Int, season: Int, leagueId: Int

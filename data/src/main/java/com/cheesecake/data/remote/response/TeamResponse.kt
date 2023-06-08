@@ -1,17 +1,15 @@
 package com.cheesecake.data.remote.response
 
 
-import com.cheesecake.data.local.models.TeamLocalDto
-import com.cheesecake.domain.entity.TeamEntity
 import com.google.gson.annotations.SerializedName
 
-data class TeamInformationResponse(
+data class TeamResponse(
     @SerializedName("team")
-    val team: TeamInformation,
+    val team: TeamDto,
     @SerializedName("venue")
     val venue: Venue
 ) {
-    data class TeamInformation(
+    data class TeamDto(
         @SerializedName("id")
         val id: Int,
         @SerializedName("name")

@@ -3,7 +3,7 @@ package com.cheesecake.data.repository.mappers
 import com.cheesecake.data.remote.response.PlayerResponse
 import com.cheesecake.domain.entity.PlayerStatisticsEntity
 
-fun PlayerResponse.mapToDomain(): PlayerStatisticsEntity {
+fun PlayerResponse.mapToEntity(): PlayerStatisticsEntity {
     return PlayerStatisticsEntity(
         id = this.player.id,
         name = this.player.name,
@@ -29,6 +29,6 @@ fun PlayerResponse.mapToDomain(): PlayerStatisticsEntity {
     )
 }
 
-fun List<PlayerResponse>.mapToDomain():List<PlayerStatisticsEntity>{
-    return this.map { it.mapToDomain() }
+fun List<PlayerResponse>.mapToEntity():List<PlayerStatisticsEntity>{
+    return this.map { it.mapToEntity() }
 }

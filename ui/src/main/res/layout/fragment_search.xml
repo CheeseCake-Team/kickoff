@@ -1,21 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.cheesecake.ui.fragment.search.SearchViewModel" />
     </data>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/teams_recycler_view"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:padding="@dimen/spacing_custom"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:context="com.cheesecake.league.LeagueTeamsFragment" />
+        android:padding="16dp">
+
+
+        <EditText
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/lightGrey"
+            android:drawableStart="@drawable/magnifer"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/lato"
+            android:hint="@string/search_here"
+            android:paddingHorizontal="@dimen/font_size_16sp"
+            android:text="@={viewModel.searchText}"
+            android:textColor="@color/fontHeavy"
+            android:textColorHint="@color/lightGreyText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/search_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            app:items="@{viewModel.uiState.searchResult}"
+            android:padding="@dimen/spacing_custom"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_bar"
+            tools:context="com.cheesecake.league.LeagueTeamsFragment"
+            tools:listitem="@layout/item_team" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </layout>

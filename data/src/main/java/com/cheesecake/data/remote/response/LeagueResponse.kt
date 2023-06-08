@@ -1,11 +1,11 @@
 package com.cheesecake.data.remote.response
 
 
-import com.cheesecake.data.remote.models.LeagueTypeLogoDTO
+import com.cheesecake.data.remote.models.LeagueDto
 import com.google.gson.annotations.SerializedName
 
 data class LeagueResponse(
-    @SerializedName("league") val league: com.cheesecake.data.remote.models.LeagueTypeLogoDTO,
+    @SerializedName("league") val league: LeagueDto,
     @SerializedName("country") val country: CountryResponse,
     @SerializedName("seasons") val seasons: List<Season>
 ) {

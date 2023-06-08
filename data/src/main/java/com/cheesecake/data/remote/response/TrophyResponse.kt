@@ -13,3 +13,5 @@ data class TrophyResponse(
     @SerializedName("season")
     val season: String
 )
+
+

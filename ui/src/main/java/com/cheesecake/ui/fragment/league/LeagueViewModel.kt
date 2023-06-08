@@ -5,11 +5,9 @@ import com.cheesecake.domain.usecases.FavouriteLeagueUseCase
 import com.cheesecake.domain.usecases.GetLeagueByIdAndSeasonUseCase
 import com.cheesecake.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
 
 @HiltViewModel
 class LeagueViewModel @Inject constructor(
@@ -50,6 +48,4 @@ class LeagueViewModel @Inject constructor(
             }
         }
     }
-
-
 }
