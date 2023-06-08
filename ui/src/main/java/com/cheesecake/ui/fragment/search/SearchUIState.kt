@@ -7,13 +7,10 @@ data class SearchUIState(
     val searchTypes: SearchType? = null,
     val searchResult: List<TeamUIState> = emptyList(),
     val isLoading: Boolean = false,
-    val errors: List<Error> = emptyList()
+    val error: List<UIStateError> = emptyList()
 )
 
-data class Error(
-    val code: Int,
-    val message: String
-)
+
 
 
 
