@@ -8,6 +8,6 @@ class GetCoachTrophyUseCase@Inject constructor(
     private val footballRepository: IFootballRepository
 ) {
     suspend operator fun invoke(playerId:Int): List<TrophyEntity> {
-        return footballRepository.getT(playerId)
+        return footballRepository.getCoachTrophy(playerId)
     }
 }
