@@ -21,6 +21,10 @@ import com.cheesecake.data.remote.response.VenuesResponse
 
 import com.cheesecake.data.utils.FixtureStatus
 import com.cheesecake.data.utils.LeagueType
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.single
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -345,10 +349,6 @@ class RemoteDataSourceImp @Inject constructor(
         return wrapBaseResponse { service.getLeaguesById(leagueId) }
     }
 
-    override suspend fun getLeaguesByName(leagueName: String): List<com.cheesecake.data.remote.response.LeagueResponse> {
-        return wrapBaseResponse { service.getLeaguesByName(leagueName) }
-    }
-
     override suspend fun getLeaguesByCountryName(countryName: String): List<com.cheesecake.data.remote.response.LeagueResponse> {
         return wrapBaseResponse { service.getLeaguesByCountryName(countryName) }
     }
@@ -513,6 +513,10 @@ class RemoteDataSourceImp @Inject constructor(
         return wrapBaseResponse { service.getTeamsByName(name) }
     }
 
+    override suspend fun getLeaguesByName(leagueName: String): List<LeagueResponse> {
+        return wrapBaseResponse { service.getLeaguesByName(leagueName) }
+    }
+
     override suspend fun getTeamById(teamId: Int): List<TeamInformationResponse> {
         return wrapBaseResponse { service.getTeamById(teamId) }
     }
@@ -600,6 +604,24 @@ class RemoteDataSourceImp @Inject constructor(
             throw Throwable(" Not Success Request ")
         }
     }
+
+    private suspend fun <T> wrapFlowBaseResponse(
+        function: suspend () -> Flow<Response<BaseResponse<T>>>
+    ): Flow<List<T>> {
+        return flow {
+            function().collect { response ->
+                if (response.isSuccessful) {
+                    response.body()?.response?.let { responseBody ->
+                        emit(responseBody)
+                    }
+                } else {
+                    throw Throwable("Not Successful Request")
+                }
+            }
+        }
+    }
+
+
 
 
     private suspend fun <T> wrapBaseStaticResponse(

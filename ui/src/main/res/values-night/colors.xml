@@ -7,4 +7,6 @@
     <color name="fontHeavy">#E6F6F6F6</color>
     <color name="fontLight">#99F6F6F6</color>
     <color name="backLighter">#66F6F6F6</color>
+    <color name="lightGrey">#F6F6F6</color>
+
 </resources>
