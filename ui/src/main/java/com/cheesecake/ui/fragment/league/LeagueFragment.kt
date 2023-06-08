@@ -9,6 +9,7 @@ import com.cheesecake.ui.base.BaseFragment
 import com.cheesecake.ui.base.BaseFragmentsAdapter
 import com.cheesecake.ui.databinding.FragmentLeagueBinding
 import com.cheesecake.ui.fragment.leagueDetails.LeagueDetailsFragment
+import com.cheesecake.ui.fragment.leagueMatches.LeagueMatchesFragment
 import com.cheesecake.ui.fragment.leagueTeams.LeagueTeamsFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,7 +27,7 @@ class LeagueFragment : BaseFragment<FragmentLeagueBinding>() {
     private fun init() {
         val fragments = listOf(
             LeagueDetailsFragment(),
-            LeagueTeamsFragment(),
+            LeagueMatchesFragment(),
             LeagueTeamsFragment(),
         )
         val fragmentsAdapter = BaseFragmentsAdapter((activity as AppCompatActivity), fragments)
