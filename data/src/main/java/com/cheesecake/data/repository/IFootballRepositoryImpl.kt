@@ -3,6 +3,7 @@ package com.cheesecake.data.repository
 import com.cheesecake.data.repository.mappers.mapLocalDtoToEntity
 import com.cheesecake.data.repository.mappers.mapRemoteDtoToEntity
 import com.cheesecake.data.repository.mappers.mapToDomain
+import com.cheesecake.data.repository.mappers.mapToEntity
 import com.cheesecake.data.repository.mappers.mapToLocal
 import com.cheesecake.data.repository.mappers.toEntity
 import com.cheesecake.data.repository.mappers.toLocal
@@ -12,6 +13,7 @@ import com.cheesecake.domain.entity.PlayerStatisticsEntity
 import com.cheesecake.domain.entity.TeamEntity
 import com.cheesecake.domain.entity.TeamStandingEntity
 import com.cheesecake.domain.entity.TeamStatisticsEntity
+import com.cheesecake.domain.entity.TrophyEntity
 import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 

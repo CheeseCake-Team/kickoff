@@ -1,10 +1,10 @@
 package com.cheesecake.ui.fragment.search
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.usecases.GetLeagueByNameUseCase
 import com.cheesecake.domain.usecases.GetTeamByNameUseCase
-import com.cheesecake.ui.base.BaseViewModel
 import com.cheesecake.ui.mapper.toUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
@@ -19,7 +19,7 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(
     private val getLeagueByNameUseCase: GetLeagueByNameUseCase,
     private val getTeamByNameUseCase: GetTeamByNameUseCase
-) : BaseViewModel() {
+) : ViewModel() {
 
     val searchText = MutableLiveData("")
 
