@@ -10,7 +10,7 @@ import com.cheesecake.domain.entity.PlayerStatisticsEntity
 interface IFootballRepository {
     suspend fun getLeagueNameAndCountry(leagueId: Int, current: Boolean): List<LeagueEntity>
 
-    suspend fun getLeagueTopScorers(leagueId: Int, season: Int): List<PlayerEntity>
+    suspend fun getLeagueTopScorers(leagueId: Int, season: Int): List<PlayerStatisticsEntity>
 
     suspend fun getLocallyLeagueByIdAndSeason(leagueId: Int, leagueSeason: Int): LeagueEntity?
 

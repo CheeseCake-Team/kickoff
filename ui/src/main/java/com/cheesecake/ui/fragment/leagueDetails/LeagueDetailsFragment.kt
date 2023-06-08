@@ -18,6 +18,7 @@ class LeagueDetailsFragment: BaseFragment<FragmentLeagueDetailsBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerViewClubsScores.adapter = LeagueDetailsStandingAdapter()
+        binding.recyclerViewPlayersGoals.adapter = LeagueDetailsTopScorersAdapter()
     }
 
 }

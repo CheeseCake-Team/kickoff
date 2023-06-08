@@ -1,11 +1,6 @@
 package com.cheesecake.data.repository
 
 import com.cheesecake.data.remote.response.mapToDomain
-import com.cheesecake.data.repository.mappers.mapLocalDtoToEntity
-import com.cheesecake.data.repository.mappers.mapRemoteDtoToEntity
-import com.cheesecake.data.repository.mappers.mapToDomain
-import com.cheesecake.data.repository.mappers.mapToLocal
-import com.cheesecake.data.repository.mappers.toLocal
 import com.cheesecake.domain.entity.FixtureEntity
 import com.cheesecake.domain.entity.LeagueEntity
 import com.cheesecake.domain.entity.TeamEntity
