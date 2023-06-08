@@ -1,24 +1,21 @@
 package com.cheesecake.domain.usecases.trophies
-
-import com.cheesecake.data.models.dto.TrophyDTO
-import com.cheesecake.data.repository.trophies.TrophiesRepository
-import com.cheesecake.domain.mappers.trophies.TrophiesDtoDomain
-import com.cheesecake.domain.models.SingleTrophy
-import javax.inject.Inject
-
-class GetPlayerTrophiesUseCases
-@Inject constructor(private val TrophiesRepository: TrophiesRepository) {
-
-//    suspend operator fun invoke(playerId: Int): SingleTrophy {
-//        val dtoResponse = getPlayerTrophiesResponse(playerId)
-//        return mapResponseIntoShort(dtoResponse!!)
-//    }
 //
-//    private suspend fun getPlayerTrophiesResponse(playerId: Int): TrophyDTO? {
-//        return TrophiesRepository.getPlayerTrophies(playerId).body()?.response?.get(0)
-//    }
+//import com.cheesecake.data.repository.trophies.TrophiesRepository
+//import javax.inject.Inject
 //
-//    private fun mapResponseIntoShort(input: TrophyDTO): SingleTrophy {
-//        return TrophiesDtoDomain().map(input)
-//    }
-}
+//class GetPlayerTrophiesUseCases
+//@Inject constructor(private val TrophiesRepository: TrophiesRepository) {
+//
+////    suspend operator fun invoke(playerId: Int): Trophy {
+////        val dtoResponse = getPlayerTrophiesResponse(playerId)
+////        return mapResponseIntoShort(dtoResponse!!)
+////    }
+////
+////    private suspend fun getPlayerTrophiesResponse(playerId: Int): TrophyDTO? {
+////        return TrophiesRepository.getPlayerTrophies(playerId).body()?.response?.get(0)
+////    }
+////
+////    private fun mapResponseIntoShort(input: TrophyDTO): Trophy {
+////        return TrophiesDtoDomain().map(input)
+////    }
+//}

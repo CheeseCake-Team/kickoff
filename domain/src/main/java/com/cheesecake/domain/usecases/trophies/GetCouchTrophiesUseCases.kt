@@ -1,15 +1,12 @@
 package com.cheesecake.domain.usecases.trophies
 
-import com.cheesecake.data.models.dto.TrophyDTO
-import com.cheesecake.data.repository.trophies.TrophiesRepository
-import com.cheesecake.domain.mappers.trophies.TrophiesDtoDomain
-import com.cheesecake.domain.models.SingleTrophy
+import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
 class GetCouchTrophiesUseCases
-@Inject constructor(private val TrophiesRepository: TrophiesRepository) {
+@Inject constructor(private val iFootballRepository: IFootballRepository) {
 
-//    suspend operator fun invoke(coachId: Int): SingleTrophy {
+//    suspend operator fun invoke(coachId: Int): Trophy {
 //        val dtoResponse = getCoachTrophiesResponse(coachId)
 //        return mapResponseIntoShort(dtoResponse!!)
 //    }
@@ -18,7 +15,7 @@ class GetCouchTrophiesUseCases
 //        return TrophiesRepository.getCoachTrophies(coachId).body()?.response?.get(0)
 //    }
 //
-//    private fun mapResponseIntoShort(input: TrophyDTO): SingleTrophy {
+//    private fun mapResponseIntoShort(input: TrophyDTO): Trophy {
 //        return TrophiesDtoDomain().map(input)
 //    }
 }

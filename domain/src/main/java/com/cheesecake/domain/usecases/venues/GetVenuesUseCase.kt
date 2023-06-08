@@ -1,15 +1,12 @@
 package com.cheesecake.domain.usecases.venues
 
-import com.cheesecake.data.models.dto.VenuesDTO
-import com.cheesecake.data.repository.venues.VenuesRepository
-import com.cheesecake.domain.mappers.venues.VenuesDtoDomain
-import com.cheesecake.domain.models.SingleVenue
+import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
 class GetVenuesUseCase
-@Inject constructor(private val venuesRepository: VenuesRepository) {
+@Inject constructor(private val iFootballRepository: IFootballRepository) {
 
-//    suspend operator fun invoke(venueId: Int): SingleVenue {
+//    suspend operator fun invoke(venueId: Int): Venue {
 //        val dtoResponse = getVenuesResponse(venueId)
 //        return mapResponseIntoShort(dtoResponse!!)
 //    }
@@ -18,7 +15,7 @@ class GetVenuesUseCase
 //        return venuesRepository.getVenueById(venueId).body()?.response?.get(0)
 //    }
 //
-//    private fun mapResponseIntoShort(input: VenuesDTO): SingleVenue {
+//    private fun mapResponseIntoShort(input: VenuesDTO): Venue {
 //        return VenuesDtoDomain().map(input)
 //    }
 }

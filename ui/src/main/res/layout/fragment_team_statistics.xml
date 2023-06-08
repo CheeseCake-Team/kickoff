@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.cheesecake.ui.fragment.teamstatistics.TeamStatisticsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragment.TeamStatistics">
+
+
+        <TextView
+            android:id="@+id/text_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="64dp"
+            android:text="Data"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_played"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:text="Played"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_data"
+            />
+
+        <TextView
+            android:id="@+id/text_wins"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Wins"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_played"
+            android:layout_marginTop="32dp"
+
+            />
+
+        <TextView
+            android:id="@+id/text_loses"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Loses"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_wins"
+            android:layout_marginTop="32dp"
+            />
+
+        <TextView
+            android:id="@+id/text_sheet"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+
+            android:text="Clean sheet"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_loses"
+            android:layout_marginTop="32dp"
+            />
+
+        <TextView
+            android:id="@+id/text_failed"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+
+            android:text="Failed to score"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_sheet"
+            android:layout_marginTop="32dp"
+            />
+
+        <TextView
+            android:id="@+id/text_goals_for"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+
+            android:text="Goals for"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_failed"
+            android:layout_marginTop="32dp"
+            />
+
+        <TextView
+            android:id="@+id/text_goals_against"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Goals against"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_goals_for"
+            android:layout_marginTop="32dp"
+            />
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/recyclerform"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:padding="2dp"
+            android:paddingVertical="12dp"
+            android:visibility="visible"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_goals_against"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="16dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="32dp"
+            tools:listitem="@layout/item_team_form"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/recyclerStanding"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:padding="2dp"
+            android:visibility="visible"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="@id/text_goals_against"
+            app:layout_constraintTop_toBottomOf="@id/text_data"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="16dp"
+            app:layout_constraintStart_toEndOf="@id/text_played"
+            android:orientation="vertical"
+app:layout_constraintEnd_toEndOf="parent"
+
+            android:layout_marginTop="14dp"
+            tools:listitem="@layout/item_team_standing"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
