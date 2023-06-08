@@ -1,11 +1,6 @@
 package com.cheesecake.data.remote.response
 
 
-import com.cheesecake.data.remote.models.FixtureDTO
-import com.cheesecake.data.remote.models.LeagueCountrySeasonRoundDTO
-import com.cheesecake.data.remote.models.MatchesDTO
-import com.cheesecake.data.remote.models.ScoreBlockDTO
-import com.cheesecake.data.remote.models.TeamHomeAwayDTO
 import com.cheesecake.domain.entity.FixtureEntity
 import com.google.gson.annotations.SerializedName
 
@@ -27,11 +22,12 @@ fun FixtureResponse.mapToDomain(): FixtureEntity {
     return FixtureEntity(
         homeTeamName = this.teams.home.name,
         homeTeamLogo = this.league.logo,
-        homeTeamGoals = this.goals.home,
+        homeTeamGoals = this.goals.home.toString(),
         awayTeamName = this.teams.away.name,
         awayTeamLogo = this.teams.away.logo,
-        awayTeamGoals = this.goals.away,
+        awayTeamGoals = this.goals.away.toString(),
         matchTime = this.fixtureDTO.timestamp,
+        matchDate = this.fixtureDTO.date,
         isFinished = false
     )
 }
