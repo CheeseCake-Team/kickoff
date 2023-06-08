@@ -26,13 +26,16 @@
 
             <TextView
                 android:id="@+id/textView"
+                style="@style/bodyMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_medium"
-                style="@style/bodyMedium"
+                android:layout_marginEnd="8dp"
+                android:maxLength="14"
                 android:text="@{item.homeTeamName}"
                 android:textColor="@color/fontHeavy"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                app:layout_constraintEnd_toStartOf="@+id/imageView"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imageView"
                 tools:text="TextView" />
@@ -41,37 +44,38 @@
                 android:id="@+id/imageView"
                 android:layout_width="@dimen/team_image_size_24dp"
                 android:layout_height="@dimen/team_image_size_24dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginEnd="@dimen/spacing_medium"
                 app:imageUrl="@{item.homeTeamLogo}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textView2"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/textView"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView2"
+                style="@style/SubtitleMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/SubtitleMedium"
-                android:text="@{item.matchTime}"
                 android:textColor="@color/fontHeavy"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textView"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:matchScore="@{item}"
                 tools:text="TextView" />
 
             <TextView
                 android:id="@+id/textView3"
+                style="@style/bodyMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                style="@style/bodyMedium"
+                android:layout_marginStart="8dp"
+                android:maxLength="10"
                 android:text="@{item.awayTeamName}"
                 android:textColor="@color/fontHeavy"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/imageView2"
                 app:layout_constraintTop_toTopOf="@+id/imageView2"
                 tools:text="TextView" />
 
@@ -79,10 +83,10 @@
                 android:id="@+id/imageView2"
                 android:layout_width="@dimen/team_image_size_24dp"
                 android:layout_height="@dimen/team_image_size_24dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="@dimen/spacing_medium"
                 app:imageUrl="@{item.awayTeamLogo}"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/textView3"
+                app:layout_constraintStart_toEndOf="@+id/textView2"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

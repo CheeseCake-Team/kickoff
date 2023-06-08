@@ -5,9 +5,13 @@
 
     <data>
 
+        <import type="kotlin.Pair"/>
+        <import type="java.util.List"/>
+        <import type="com.cheesecake.domain.entity.FixtureEntity"/>
+
         <variable
             name="item"
-            type="com.cheesecake.domain.entity.FixtureEntity" />
+            type="Pair&lt;String,List&lt;FixtureEntity&gt;&gt;" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,8 +23,9 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{item.matchDate}"
-
+            android:text="@{item.first}"
+            style="@style/SubtitleMedium"
+            android:textColor="@color/fontHeavy"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="today" />
@@ -30,7 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_tiny"
             android:overScrollMode="never"
-            app:items=""
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:fixtureItems="@{item.second}"
             tools:listitem="@layout/item_head_to_head"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
