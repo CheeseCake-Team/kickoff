@@ -1,4 +1,4 @@
-package com.cheesecake.data.utils
+package com.cheesecake.data.remote.utils
 
 enum class FixtureEventType {
     GOAL, CARD, SUBST, VAR;

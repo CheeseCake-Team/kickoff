@@ -8,8 +8,7 @@ import com.cheesecake.ui.base.BaseFragment
 import com.cheesecake.ui.databinding.FragmentTeamsLeagueBinding
 
 class LeagueMatchesFragment : BaseFragment<FragmentTeamsLeagueBinding>() {
-    override val layoutIdFragment: Int
-        get() = R.layout.fragment_league_matches
+    override val layoutIdFragment = R.layout.fragment_league_matches
     override val viewModel: LeagueMatchesViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

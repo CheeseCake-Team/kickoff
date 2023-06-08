@@ -3,8 +3,7 @@ package com.cheesecake.ui.fragment.leagueTeams
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cheesecake.domain.entity.TeamEntity
-import com.cheesecake.domain.usecases.GetAllTeamsInLeagueWithSeason
+import com.cheesecake.domain.usecases.GetAllTeamsInLeagueWithSeasonUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,15 +13,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-data class LeagueTeamsUIState(
-    val isLoading: Boolean = true,
-    val data: List<TeamEntity> = emptyList(),
-    val isError: String = "Error"
-)
 
 @HiltViewModel
 class LeagueTeamsViewModel @Inject constructor(
-    private val getAllTeamsInLeagueWithSeason: GetAllTeamsInLeagueWithSeason
+    private val getAllTeamsInLeagueWithSeason: GetAllTeamsInLeagueWithSeasonUseCase
 ) : ViewModel() {
 
     private val _leagueTeamsUIState = MutableStateFlow(LeagueTeamsUIState())

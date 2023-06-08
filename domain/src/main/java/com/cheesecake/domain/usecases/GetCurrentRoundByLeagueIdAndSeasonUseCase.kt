@@ -3,7 +3,7 @@ package com.cheesecake.domain.usecases
 import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
-class GetCurrentRoundByLeagueIdAndSeason @Inject constructor(
+class GetCurrentRoundByLeagueIdAndSeasonUseCase @Inject constructor(
     private val footballRepository: IFootballRepository
 ) {
 

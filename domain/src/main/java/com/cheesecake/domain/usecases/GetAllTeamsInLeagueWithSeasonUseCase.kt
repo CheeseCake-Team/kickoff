@@ -4,7 +4,7 @@ import com.cheesecake.domain.entity.TeamEntity
 import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
-class GetAllTeamsInLeagueWithSeason @Inject constructor(
+class GetAllTeamsInLeagueWithSeasonUseCase @Inject constructor(
     private val footballRepository: IFootballRepository,
 ) {
 

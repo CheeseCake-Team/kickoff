@@ -10,8 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LeagueTeamsFragment : BaseFragment<FragmentTeamsLeagueBinding>() {
-    override val layoutIdFragment: Int
-        get() = R.layout.fragment_teams_league
+    override val layoutIdFragment = R.layout.fragment_teams_league
     override val viewModel: LeagueTeamsViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -11,14 +11,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-data class LeagueUIState(
-    val errorMessage: String = "error",
-    val isLoading: Boolean = true,
-    val seasonStartEndYear: String = "",
-    val imageUrl: String = "",
-    val leagueName: String = "",
-    val isFavourite: Boolean = false
-)
 
 @HiltViewModel
 class LeagueViewModel @Inject constructor(

@@ -5,6 +5,5 @@ import com.cheesecake.ui.R
 import com.cheesecake.ui.base.BaseAdapter
 
 class LeagueDetailsStandingAdapter():BaseAdapter<TeamStandingEntity>(null) {
-    override val layoutId: Int
-        get() = R.layout.item_club_scores
+    override val layoutId = R.layout.item_club_scores
 }

@@ -2,10 +2,10 @@ package com.cheesecake.ui.fragment.leagueDetails
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cheesecake.domain.usecases.GetCurrentRoundByLeagueIdAndSeason
+import com.cheesecake.domain.usecases.GetCurrentRoundByLeagueIdAndSeasonUseCase
 import com.cheesecake.domain.usecases.GetLeagueByIdAndSeasonUseCase
 import com.cheesecake.domain.usecases.GetTeamsStandingByLeagueIdAndSeasonUseCase
-import com.cheesecake.domain.usecases.GetTopScorersByLeagueIdAndSeason
+import com.cheesecake.domain.usecases.GetTopScorersByLeagueIdAndSeasonUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,9 +15,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LeagueDetailsViewModel @Inject constructor(
-    private val getCurrentRoundByLeagueIdAndSeason: GetCurrentRoundByLeagueIdAndSeason,
+    private val getCurrentRoundByLeagueIdAndSeason: GetCurrentRoundByLeagueIdAndSeasonUseCase,
     private val getTeamsStandingByLeagueIdAndSeasonUseCase: GetTeamsStandingByLeagueIdAndSeasonUseCase,
-    private val getTopScorersByLeagueIdAndSeason: GetTopScorersByLeagueIdAndSeason,
+    private val getTopScorersByLeagueIdAndSeason: GetTopScorersByLeagueIdAndSeasonUseCase,
     private val getLeagueByLeagueIdAndSeasonUseCase: GetLeagueByIdAndSeasonUseCase
 ): ViewModel() {
 
