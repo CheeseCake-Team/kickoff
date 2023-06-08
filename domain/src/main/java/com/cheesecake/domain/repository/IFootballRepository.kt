@@ -21,9 +21,7 @@ interface IFootballRepository {
 
     suspend fun updateOrInsertLeague(leagueEntity: LeagueEntity)
 
-    suspend fun getMatchesByLeagueIdAndSeason(
-        timeZone: String, leagueId: Int, Season: String
-    ): List<FixtureEntity>
+    suspend fun getMatchesByLeagueIdAndSeason(timeZone: String, leagueId: Int, Season: Int): List<FixtureEntity>
 
     suspend fun deleteLeagueById(leagueId: Int)
 

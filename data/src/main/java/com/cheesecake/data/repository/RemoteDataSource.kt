@@ -14,8 +14,8 @@ import com.cheesecake.data.remote.response.TeamStatisticsResponse
 import com.cheesecake.data.remote.response.TransferResponse
 import com.cheesecake.data.remote.response.TrophyResponse
 import com.cheesecake.data.remote.response.VenuesResponse
-import com.cheesecake.data.utils.FixtureStatus
-import com.cheesecake.data.utils.LeagueType
+import com.cheesecake.data.remote.utils.FixtureStatus
+import com.cheesecake.data.remote.utils.LeagueType
 
 
 interface RemoteDataSource {
@@ -75,36 +75,36 @@ interface RemoteDataSource {
     //region Fixtures
     suspend fun getFixtureById(
         timeZone: String, fixtureId: Int
-    ): List<com.cheesecake.data.remote.response.FixtureResponse>
+    ): List<FixtureResponse>
 
     suspend fun getFixtureBySeasonByTeamId(
         timeZone: String, season: String, TeamId: Int
-    ): List<com.cheesecake.data.remote.response.FixtureResponse>
+    ): List<FixtureResponse>
 
     suspend fun getFixturesBySeasonIdAndLeagueId(
-        timeZone: String, season: String, leagueId: Int
+        timeZone: String, season: Int, leagueId: Int
     ): List<FixtureResponse>
 
     suspend fun getFixturesByDate(
         timeZone: String, date: String
-    ): List<com.cheesecake.data.remote.response.FixtureResponse>
+    ): List<FixtureResponse>
 
 
     suspend fun getFixturesFromDate(
         timeZone: String, date: String
-    ): List<com.cheesecake.data.remote.response.FixtureResponse>
+    ): List<FixtureResponse>
 
     suspend fun getFixturesToDate(
         timeZone: String, date: String
-    ): List<com.cheesecake.data.remote.response.FixtureResponse>
+    ): List<FixtureResponse>
 
     suspend fun getFixturesFromDateToDate(
         timeZone: String, season: String, TeamId: Int, from: String, date: String
-    ): List<com.cheesecake.data.remote.response.FixtureResponse>
+    ): List<FixtureResponse>
 
     suspend fun getFixturesStatus(
         timeZone: String, fixtureStatusType: String
-    ): List<com.cheesecake.data.remote.response.FixtureResponse>
+    ): List<FixtureResponse>
     //endregion
     //region Head 2 Head
 

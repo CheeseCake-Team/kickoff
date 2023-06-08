@@ -2,10 +2,10 @@ package com.cheesecake.ui.fragment.leagueDetails
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cheesecake.domain.usecases.GetCurrentRoundByLeagueIdAndSeason
+import com.cheesecake.domain.usecases.GetCurrentRoundByLeagueIdAndSeasonUseCase
 import com.cheesecake.domain.usecases.GetLeagueByIdAndSeasonUseCase
 import com.cheesecake.domain.usecases.GetTeamsStandingByLeagueIdAndSeasonUseCase
-import com.cheesecake.domain.usecases.GetTopScorersByLeagueIdAndSeason
+import com.cheesecake.domain.usecases.GetTopScorersByLeagueIdAndSeasonUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,9 +15,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LeagueDetailsViewModel @Inject constructor(
-    private val getCurrentRoundByLeagueIdAndSeason: GetCurrentRoundByLeagueIdAndSeason,
+    private val getCurrentRoundByLeagueIdAndSeason: GetCurrentRoundByLeagueIdAndSeasonUseCase,
     private val getTeamsStandingByLeagueIdAndSeasonUseCase: GetTeamsStandingByLeagueIdAndSeasonUseCase,
-    private val getTopScorersByLeagueIdAndSeason: GetTopScorersByLeagueIdAndSeason,
+    private val getTopScorersByLeagueIdAndSeason: GetTopScorersByLeagueIdAndSeasonUseCase,
     private val getLeagueByLeagueIdAndSeasonUseCase: GetLeagueByIdAndSeasonUseCase
 ): ViewModel() {
 
@@ -34,11 +34,7 @@ class LeagueDetailsViewModel @Inject constructor(
     private fun getLeague() {
         viewModelScope.launch {
             getLeagueByLeagueIdAndSeasonUseCase(39, 2022)?.let { league ->
-                _leagueDetailsUIState.update {
-                    it.copy(
-                        country = league.country
-                    )
-                }
+                _leagueDetailsUIState.update { it.copy(country = league.country) }
             }
         }
     }
@@ -46,11 +42,7 @@ class LeagueDetailsViewModel @Inject constructor(
     private fun getTopScorers() {
         viewModelScope.launch {
             getTopScorersByLeagueIdAndSeason(39, 2022).let { scorers ->
-                _leagueDetailsUIState.update {
-                    it.copy(
-                        topPlayers = scorers.take(7), isLoading = false
-                    )
-                }
+                _leagueDetailsUIState.update { it.copy(topPlayers = scorers.take(7), isLoading = false) }
             }
         }
     }
@@ -72,13 +64,8 @@ class LeagueDetailsViewModel @Inject constructor(
     private fun getCurrentRound() {
         viewModelScope.launch {
             getCurrentRoundByLeagueIdAndSeason(39, 2022).apply {
-                _leagueDetailsUIState.update {
-                    it.copy(
-                        round = this
-                    )
-                }
+                _leagueDetailsUIState.update {  it.copy(round = this) }
             }
-
         }
     }
 

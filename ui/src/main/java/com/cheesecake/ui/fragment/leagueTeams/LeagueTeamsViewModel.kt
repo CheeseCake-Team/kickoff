@@ -1,50 +1,50 @@
 package com.cheesecake.ui.fragment.leagueTeams
 
 import android.util.Log
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.cheesecake.domain.usecases.GetAllTeamsInLeagueWithSeason
+import com.cheesecake.domain.entity.TeamEntity
 import com.cheesecake.ui.mapper.toUIModel
+import com.cheesecake.domain.usecases.GetAllTeamsInLeagueWithSeasonUseCase
+import com.cheesecake.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class LeagueTeamsViewModel @Inject constructor(
-    private val getAllTeamsInLeagueWithSeason: GetAllTeamsInLeagueWithSeason
-) : ViewModel() {
+    private val getAllTeamsInLeagueWithSeasonUseCase: GetAllTeamsInLeagueWithSeasonUseCase
+) : BaseViewModel<LeagueTeamsUIState>() {
 
-    private val _leagueTeamsUIState = MutableStateFlow(LeagueTeamsUIState())
-    val leagueTeamsUIState = _leagueTeamsUIState.asStateFlow()
+    override val uiState = LeagueTeamsUIState()
 
     init {
         getData()
     }
 
     private fun getData() {
-        viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                try {
-                    getAllTeamsInLeagueWithSeason(39, 2022).let { list ->
-                        _leagueTeamsUIState.update { teamUIState ->
-                            Log.i("getData: ", list.toString())
-                            teamUIState.copy(data = list.map { it.toUIModel() }, isLoading = false)
-                        }
-                    }
-                } catch (e: Exception) {
-                    _leagueTeamsUIState.update {
-                        it.copy(isError = e.message.toString())
-                    }
-                }
+        tryToExecute(
+            ::getAllTeamsInLeagueWithSeason,
+            ::onSuccess,
+            ::onError
+        )
+    }
+
+    private suspend fun getAllTeamsInLeagueWithSeason() =
+        getAllTeamsInLeagueWithSeasonUseCase(39, 2022)
+
+
+    private fun onSuccess(result: List<TeamEntity>) {
+        result.let { list ->
+            _state.update { teamUIState ->
+                Log.i("getData: ", list.toString())
+                teamUIState.copy(data = list.map { it.toUIModel() }, isLoading = false)
             }
         }
     }
 
+    private fun onError(e: Throwable) {
+        _state.update {
+            it.copy(isError = e.message.toString())
+        }
+    }
+
 }
-
-
