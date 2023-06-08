@@ -1,16 +1,21 @@
 package com.cheesecake.data.local
 
 import com.cheesecake.data.local.daos.LeagueDao
+import com.cheesecake.data.local.daos.PlayerDao
 import com.cheesecake.data.local.daos.TeamsDao
 import com.cheesecake.data.local.models.LeagueLocalDto
+import com.cheesecake.data.local.models.PlayerLocalDto
 import com.cheesecake.data.local.models.TeamLocalDto
 import com.cheesecake.data.repository.LocalDataSource
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class LocalDataSourceImp @Inject constructor(
     private val teamsDao: TeamsDao,
     private val leagueDao: LeagueDao,
-) : LocalDataSource {
+    private val playerDao: PlayerDao
+    ) : LocalDataSource {
+
 
     override fun getLocallyTeamsByIdAndSeason(leagueId: Int, season: Int): List<TeamLocalDto> {
         return teamsDao.getLocallyTeamsByIdAndSeason(leagueId, season)
@@ -24,13 +29,15 @@ class LocalDataSourceImp @Inject constructor(
         return teamsDao.getFavouriteTeams()
     }
 
+
+    override suspend fun deleteAllTeams() {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun updateOrInsertTeam(team: TeamLocalDto) {
         teamsDao.updateOrInsertTeam(team)
     }
 
-    override suspend fun deleteAllTeams() {
-        teamsDao.deleteAllTeams()
-    }
 
     override suspend fun getLeagueByIdAndSeason(leagueId: Int, leagueSeason: Int): LeagueLocalDto? {
         return leagueDao.getLeagueByIdAndSeason(leagueId, leagueSeason)
@@ -39,9 +46,27 @@ class LocalDataSourceImp @Inject constructor(
     override suspend fun updateOrInsertLeague(league: LeagueLocalDto) {
         leagueDao.updateOrInsertLeagueLocalDto(league)
     }
+    
+
 
     override suspend fun deleteLeagueById(leagueId: Int) {
         leagueDao.deleteLeagueById(leagueId)
+    }
+
+    override suspend fun deleteTeamById(teamId: Int) {
+        teamsDao.deleteTeamById(teamId)
+    }
+
+    override suspend fun deletePlayerById(playerId: Int) {
+        playerDao.deletePlayerById(playerId)
+    }
+
+    override suspend fun getFavouriteLeagues(): List<LeagueLocalDto> {
+        return leagueDao.getFavouriteLeague()
+    }
+
+    override suspend fun getFavoritePLayers(): List<PlayerLocalDto> {
+        return playerDao.getFavouritePlayers()
     }
 
 }

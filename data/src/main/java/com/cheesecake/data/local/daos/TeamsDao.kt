@@ -23,4 +23,7 @@ interface TeamsDao {
     @Query("SELECT * FROM team_table WHERE isFavourite = 1")
     suspend fun getFavouriteTeams(): List<TeamLocalDto>
 
+    @Query("DELETE FROM team_table WHERE teamId = :teamId")
+    suspend fun deleteTeamById(teamId: Int)
+
 }

@@ -100,4 +100,8 @@ class IFootballRepositoryImpl
         return  remoteDataSource.getStandingsByLeagueId(season,leagueId).mapRemoteDtoToEntity()
     }
 
+    override suspend fun getFavoriteTeams(): List<TeamEntity> {
+        return localDataSource.getFavouriteTeams().mapLocalDtoToEntity()
+    }
+
 }

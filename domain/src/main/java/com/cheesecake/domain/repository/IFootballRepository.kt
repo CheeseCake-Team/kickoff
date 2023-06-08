@@ -35,4 +35,6 @@ interface IFootballRepository {
 
     suspend fun getTeamsStandingByLeagueIdAndSeason(leagueId: Int, season: Int): List<TeamStandingEntity>
 
+    suspend fun getFavoriteTeams(): List<TeamEntity>
+
 }
