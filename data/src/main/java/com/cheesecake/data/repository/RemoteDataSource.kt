@@ -249,11 +249,11 @@ interface RemoteDataSource {
     //region leagues
     suspend fun getAllLeagues(
 
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+    ): List<LeagueResponse>
 
     suspend fun getLeaguesById(
         leagueId: Int
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+    ): List<LeagueResponse>
 
     suspend fun getLeaguesByName(
         leagueName: String
@@ -261,47 +261,47 @@ interface RemoteDataSource {
 
     suspend fun getLeaguesByCountryName(
         countryName: String
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+    ): List<LeagueResponse>
 
     suspend fun getLeaguesByCountryCode(
         countryName: String
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+    ): List<LeagueResponse>
 
     suspend fun getLeaguesOfSeason(
         season: Int
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+    ): List<LeagueResponse>
 
     suspend fun getLeagueByIdAndSeason(
         season: Int, leagueId: Int
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+    ): List<LeagueResponse>
 
     suspend fun getLeaguesByType(
         type: LeagueType
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+    ): List<LeagueResponse>
 
     suspend fun getLeaguesByTypeById(
         type: LeagueType, id: Int
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+    ): List<LeagueResponse>
 
     suspend fun getLeagueByTypeByIdBySeason(
         type: LeagueType, id: Int, season: Int
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+    ): List<LeagueResponse>
 
     suspend fun getCurrentActiveLeagues(
         current: Boolean
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+    ): List<LeagueResponse>
 
     suspend fun searchByLeagueName(
         name: String
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+    ): List<LeagueResponse>
 
     suspend fun getLeaguesSeasons(
 
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+    ): List<LeagueResponse>
 
     suspend fun getCurrentSeasonLeague(
         id: Int, current: Boolean
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+    ): List<LeagueResponse>
     //endregion
 
     //region players

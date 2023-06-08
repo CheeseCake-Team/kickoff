@@ -24,7 +24,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
         viewModel.searchInput.observe(viewLifecycleOwner) {
             lifecycleScope.launch {
-                Log.i( "onViewCreated: ", it.toString())
+                Log.i("onViewCreated: ", it.toString())
                 viewModel.onSearchInputChanged(it)
             }
         }

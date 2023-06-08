@@ -33,7 +33,7 @@ class LeagueDetailsViewModel @Inject constructor(
 
     private fun getLeague() {
         viewModelScope.launch {
-            getLeagueByLeagueIdAndSeasonUseCase(39, 2022)?.let { league ->
+            getLeagueByLeagueIdAndSeasonUseCase(39, 2022).let { league ->
                 _leagueDetailsUIState.update { it.copy(country = league.country) }
             }
         }
