@@ -1,6 +1,5 @@
 package com.cheesecake.data.repository
 
-import com.cheesecake.data.remote.response.mapToDomain
 import com.cheesecake.data.repository.mappers.mapLocalDtoToEntity
 import com.cheesecake.data.repository.mappers.mapRemoteDtoToEntity
 import com.cheesecake.data.repository.mappers.mapToDomain
@@ -66,7 +65,7 @@ class IFootballRepositoryImpl
     override suspend fun getMatchesByLeagueIdAndSeason(
         timeZone: String,
         leagueId: Int,
-        Season: String
+        Season: Int
     ): List<FixtureEntity> {
         return remoteDataSource.getFixturesBySeasonIdAndLeagueId(timeZone, Season, leagueId)
             .mapToDomain()

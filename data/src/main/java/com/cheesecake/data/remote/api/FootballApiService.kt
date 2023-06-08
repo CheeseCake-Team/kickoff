@@ -93,7 +93,7 @@ interface FootballApiService {
     @GET("fixtures")
     suspend fun getFixturesBySeasonIdAndLeagueId(
         @Query("timezone") timeZone: String,
-        @Query("season") season: String,
+        @Query("season") season: Int,
         @Query("league") leagueId: Int
     ): Response<BaseResponse<FixtureResponse>>
 

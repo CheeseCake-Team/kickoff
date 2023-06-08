@@ -23,7 +23,7 @@ interface IFootballRepository {
     suspend fun getMatchesByLeagueIdAndSeason(
         timeZone: String,
         leagueId: Int,
-        Season: String
+        Season: Int
     ): List<FixtureEntity>
 
     suspend fun deleteLeagueById(leagueId: Int)

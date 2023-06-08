@@ -81,7 +81,7 @@ interface RemoteDataSource {
     ): List<FixtureResponse>
 
     suspend fun getFixturesBySeasonIdAndLeagueId(
-        timeZone: String, season: String, leagueId: Int
+        timeZone: String, season: Int, leagueId: Int
     ): List<FixtureResponse>
 
     suspend fun getFixturesByDate(
