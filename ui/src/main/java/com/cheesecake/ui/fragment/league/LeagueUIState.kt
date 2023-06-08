@@ -1,4 +1,4 @@
-package com.cheesecake.ui.models
+package com.cheesecake.ui.fragment.league
 
 data class LeagueUIState(
     val errorMessage: String = "error",

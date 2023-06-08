@@ -1,4 +1,6 @@
-package com.cheesecake.ui.models
+package com.cheesecake.ui.fragment.leagueTeams
+
+import com.cheesecake.ui.models.TeamUIState
 
 data class LeagueTeamsUIState(
     val isLoading: Boolean = true,

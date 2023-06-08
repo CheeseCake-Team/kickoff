@@ -1,4 +1,4 @@
-package com.cheesecake.kickoff
+package com.cheesecake.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

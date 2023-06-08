@@ -1,8 +1,6 @@
 package com.cheesecake.ui.fragment.search
 
-import com.cheesecake.domain.entity.LeagueEntity
-import com.cheesecake.domain.entity.TeamEntity
-import com.cheesecake.ui.models.LeagueUIState
+import com.cheesecake.ui.fragment.league.LeagueUIState
 import com.cheesecake.ui.models.TeamUIState
 
 sealed class SearchResult {

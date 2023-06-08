@@ -9,14 +9,13 @@ import com.cheesecake.data.remote.response.SidelinedResponse
 import com.cheesecake.data.remote.response.SquadResponse
 import com.cheesecake.data.remote.response.StandingsResponse
 import com.cheesecake.data.remote.response.TeamCountriesResponse
-import com.cheesecake.data.remote.response.TeamInformationResponse
+import com.cheesecake.data.remote.response.TeamResponse
 import com.cheesecake.data.remote.response.TeamStatisticsResponse
 import com.cheesecake.data.remote.response.TransferResponse
 import com.cheesecake.data.remote.response.TrophyResponse
 import com.cheesecake.data.remote.response.VenuesResponse
 import com.cheesecake.data.utils.FixtureStatus
 import com.cheesecake.data.utils.LeagueType
-import kotlinx.coroutines.flow.Flow
 
 
 interface RemoteDataSource {
@@ -394,15 +393,15 @@ interface RemoteDataSource {
     //region teams
     suspend fun getTeamsByLeagueAndSeason(
         leagueId: Int, seasonId: Int
-    ): List<TeamInformationResponse>
+    ): List<TeamResponse>
 
     suspend fun getTeamsByName(
         name: String,
-    ): List<TeamInformationResponse>
+    ): List<TeamResponse>
 
     suspend fun getTeamById(
         teamId: Int
-    ): List<TeamInformationResponse>
+    ): List<TeamResponse>
 
     suspend fun getTeamStatistics(
         teamId: Int, season: Int, leagueId: Int

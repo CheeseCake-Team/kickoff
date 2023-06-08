@@ -11,7 +11,7 @@ import com.cheesecake.data.remote.response.SidelinedResponse
 import com.cheesecake.data.remote.response.SquadResponse
 import com.cheesecake.data.remote.response.StandingsResponse
 import com.cheesecake.data.remote.response.TeamCountriesResponse
-import com.cheesecake.data.remote.response.TeamInformationResponse
+import com.cheesecake.data.remote.response.TeamResponse
 import com.cheesecake.data.remote.response.TeamStatisticsResponse
 import com.cheesecake.data.remote.response.TransferResponse
 import com.cheesecake.data.remote.response.TrophyResponse
@@ -19,7 +19,6 @@ import com.cheesecake.data.remote.response.VenuesResponse
 
 import com.cheesecake.data.utils.FixtureStatus
 import com.cheesecake.data.utils.LeagueType
-import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -481,16 +480,16 @@ interface FootballApiService {
     @GET("teams")
     suspend fun getTeamsByLeagueAndSeason(
         @Query("league") leagueId: Int, @Query("season") seasonId: Int
-    ): Response<BaseResponse<TeamInformationResponse>> @GET("teams")
+    ): Response<BaseResponse<TeamResponse>> @GET("teams")
 
     suspend fun getTeamsByName(
         @Query("name") name: String
-    ): Response<BaseResponse<TeamInformationResponse>>
+    ): Response<BaseResponse<TeamResponse>>
 
     @GET("teams")
     suspend fun getTeamById(
         @Query("id") teamId: Int
-    ): Response<BaseResponse<TeamInformationResponse>>
+    ): Response<BaseResponse<TeamResponse>>
 
     @GET("teams/statistics")
     suspend fun getTeamStatistics(

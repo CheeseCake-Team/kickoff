@@ -13,7 +13,7 @@ import com.cheesecake.data.remote.response.SidelinedResponse
 import com.cheesecake.data.remote.response.SquadResponse
 import com.cheesecake.data.remote.response.StandingsResponse
 import com.cheesecake.data.remote.response.TeamCountriesResponse
-import com.cheesecake.data.remote.response.TeamInformationResponse
+import com.cheesecake.data.remote.response.TeamResponse
 import com.cheesecake.data.remote.response.TeamStatisticsResponse
 import com.cheesecake.data.remote.response.TransferResponse
 import com.cheesecake.data.remote.response.TrophyResponse
@@ -503,19 +503,19 @@ class RemoteDataSourceImp @Inject constructor(
     override suspend fun getTeamsByLeagueAndSeason(
         leagueId: Int,
         seasonId: Int
-    ): List<TeamInformationResponse> {
+    ): List<TeamResponse> {
         return wrapBaseResponse { service.getTeamsByLeagueAndSeason(leagueId, seasonId) }
     }
 
-    override suspend fun getTeamsByName(name: String): List<TeamInformationResponse> {
-        return wrapBaseResponse { service.getTeamsByName(name) }
+    override suspend fun getTeamsByName(teamName: String): List<TeamResponse> {
+        return wrapBaseResponse { service.getTeamsByName(teamName) }
     }
 
     override suspend fun getLeaguesByName(leagueName: String): List<LeagueResponse> {
         return wrapBaseResponse { service.getLeaguesByName(leagueName) }
     }
 
-    override suspend fun getTeamById(teamId: Int): List<TeamInformationResponse> {
+    override suspend fun getTeamById(teamId: Int): List<TeamResponse> {
         return wrapBaseResponse { service.getTeamById(teamId) }
     }
 

@@ -6,7 +6,6 @@ import com.cheesecake.domain.usecases.GetCurrentRoundByLeagueIdAndSeason
 import com.cheesecake.domain.usecases.GetLeagueByIdAndSeasonUseCase
 import com.cheesecake.domain.usecases.GetTeamsStandingByLeagueIdAndSeasonUseCase
 import com.cheesecake.domain.usecases.GetTopScorersByLeagueIdAndSeason
-import com.cheesecake.ui.models.LeagueDetailsUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

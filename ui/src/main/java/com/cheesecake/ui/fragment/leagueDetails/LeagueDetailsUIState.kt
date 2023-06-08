@@ -1,4 +1,4 @@
-package com.cheesecake.ui.models
+package com.cheesecake.ui.fragment.leagueDetails
 
 import com.cheesecake.domain.entity.PlayerStatisticsEntity
 import com.cheesecake.domain.entity.TeamStandingEntity
