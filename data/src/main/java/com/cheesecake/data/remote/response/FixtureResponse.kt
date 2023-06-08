@@ -1,6 +1,7 @@
 package com.cheesecake.data.remote.response
 
 
+import com.cheesecake.data.remote.utils.FixtureStatus
 import com.cheesecake.domain.entity.FixtureEntity
 import com.google.gson.annotations.SerializedName
 
@@ -28,7 +29,7 @@ fun FixtureResponse.mapToDomain(): FixtureEntity {
         awayTeamGoals = this.goals.away.toString(),
         matchTime = this.fixtureDTO.timestamp,
         matchDate = this.fixtureDTO.date,
-        isFinished = false
+        isFinished = this.fixtureDTO.status.short == FixtureStatus.MatchFinished.toString()
     )
 }
 
