@@ -4,21 +4,13 @@ import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.usecases.FavouriteLeagueUseCase
 import com.cheesecake.domain.usecases.GetLeagueByIdAndSeasonUseCase
 import com.cheesecake.ui.base.BaseViewModel
+import com.cheesecake.ui.models.LeagueUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
-data class LeagueUIState(
-    val errorMessage: String = "error",
-    val isLoading: Boolean = true,
-    val seasonStartEndYear: String = "",
-    val imageUrl: String = "",
-    val leagueName: String = "",
-    val isFavourite: Boolean = false
-)
 
 @HiltViewModel
 class LeagueViewModel @Inject constructor(
