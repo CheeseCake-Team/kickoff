@@ -1,6 +1,7 @@
 package com.cheesecake.ui.fragment.search
 
 import com.cheesecake.ui.models.TeamUIState
+import com.cheesecake.ui.models.UIStateError
 
 data class SearchUIState(
     val searchInput: String = "",

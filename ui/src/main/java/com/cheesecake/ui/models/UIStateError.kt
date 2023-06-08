@@ -1,4 +1,4 @@
-package com.cheesecake.ui.fragment.search
+package com.cheesecake.ui.models
 
 data class UIStateError(
     val code: Int,
