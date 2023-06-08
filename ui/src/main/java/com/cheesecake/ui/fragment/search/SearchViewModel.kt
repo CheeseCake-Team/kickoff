@@ -1,16 +1,19 @@
 package com.cheesecake.ui.fragment.search
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.usecases.GetLeagueByNameUseCase
 import com.cheesecake.domain.usecases.GetTeamByNameUseCase
+import com.cheesecake.ui.base.BaseViewModel
 import com.cheesecake.ui.mapper.toUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,52 +21,50 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val getLeagueByNameUseCase: GetLeagueByNameUseCase,
-    private val getTeamByNameUseCase: GetTeamByNameUseCase
-) : ViewModel() {
+    private val getTeamByNameUseCase: GetTeamByNameUseCase,
+) : BaseViewModel<SearchUIState>() {
 
-    val searchText = MutableLiveData("")
+    override val uiState: SearchUIState = SearchUIState()
 
-    private val _uiState = MutableStateFlow(SearchUIState())
-    val uiState: StateFlow<SearchUIState> = _uiState
+    val searchInput = MutableLiveData<String>()
 
+    private val searchInputFlow = MutableSharedFlow<String>()
 
     init {
-
-    }
-
-    @OptIn(FlowPreview::class)
-    suspend fun onSearchInputChanged(newSearchInput: String) {
-        _uiState.update { it.copy(searchInput = newSearchInput) }
-//        _uiState.update { it.copy(isLoading = true) }
         viewModelScope.launch {
-            try {
-                getTeamByNameUseCase(_uiState.value.searchInput)
-                    .debounce(3000)
-                    .collect { list ->
-                    _uiState.update { searchUIState ->
-                        searchUIState.copy(
-                            searchResult = list.map { it.toUIModel() }, isLoading = false
-                        )
+            searchInputFlow
+                .filter { it.isNotEmpty() }
+                .debounce(3000)
+                .distinctUntilChanged()
+                .collectLatest { debouncedInput ->
+                    try {
+                        delay(500)
+                        Log.i("onSearchInputChanged: ", "debounced before")
+                        getTeamByNameUseCase(debouncedInput).collect {
+                            _state.update { searchUIState ->
+                                searchUIState.copy(
+                                    searchResult = it.map { it.toUIModel() },
+                                    isLoading = false
+                                )
+                            }
+                            Log.i("onSearchInputChanged: ", "debounced after")
+                        }
+                    } catch (e: Exception) {
+                        _state.update { it.copy(error = emptyList()) }
                     }
                 }
-            } catch (e: Exception) {
-                _uiState.update { it.copy(error = emptyList())}
-            }
-
         }
-
     }
 
+    suspend fun onSearchInputChanged(newSearchInput: String) {
+        _state.update { it.copy(isLoading = true) }
+        _state.update { it.copy(searchInput = newSearchInput) }
+        searchInputFlow.emit(newSearchInput)
+    }
+
+
     suspend fun onSearch(searchInput: String) {
-        viewModelScope.launch {
-            getTeamByNameUseCase(searchInput).collect { list ->
-                _uiState.update { searchUIState ->
-                    searchUIState.copy(
-                        searchResult = list.map { it.toUIModel() }, isLoading = false
-                    )
-                }
-            }
-        }
+        TODO()
     }
 
     suspend fun onSelectSearchType(searchTypeUIState: SearchType) {
@@ -78,13 +79,9 @@ class SearchViewModel @Inject constructor(
         TODO()
     }
 
+
 }
 
-//private fun TeamEntity.toSearchResult(): SearchResult.Team {
-//    return SearchResult.Team(
-//         items =
-//    )
-//}
 
 
 

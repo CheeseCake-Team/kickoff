@@ -2,17 +2,12 @@ package com.cheesecake.ui.fragment.search
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import com.cheesecake.ui.R
 import com.cheesecake.ui.base.BaseFragment
 import com.cheesecake.ui.databinding.FragmentSearchBinding
-import com.cheesecake.ui.fragment.leagueTeams.TeamsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -27,7 +22,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         super.onViewCreated(view, savedInstanceState)
         binding.searchRecyclerView.adapter = SearchFragmentAdapter()
 
-        viewModel.searchText.observe(viewLifecycleOwner) {
+        viewModel.searchInput.observe(viewLifecycleOwner) {
             lifecycleScope.launch {
                 Log.i( "onViewCreated: ", it.toString())
                 viewModel.onSearchInputChanged(it)
