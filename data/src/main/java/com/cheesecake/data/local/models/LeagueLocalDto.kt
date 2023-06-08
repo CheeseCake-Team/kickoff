@@ -12,5 +12,6 @@ data class LeagueLocalDto(
     val leagueLogoUrl: String,
     val seasonStartYear: String,
     val seasonEndYear: String,
+    val country: String,
     val isFavourite: Boolean
 )

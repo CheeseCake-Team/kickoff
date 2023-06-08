@@ -12,6 +12,7 @@ fun LeagueResponse.mapRemoteDtoToEntity(): LeagueEntity = LeagueEntity(
     leagueLogo = this.league.logo,
     seasonStartYear = this.seasons.first().start.substring(0, 4),
     seasonEndYear = this.seasons.first().end.substring(0, 4),
+    country = this.country.name,
     isFavourite = false
 )
 
@@ -23,6 +24,7 @@ fun LeagueResponse.mapToLocal(): LeagueLocalDto = LeagueLocalDto(
     leagueLogoUrl = this.league.logo,
     seasonStartYear = this.seasons.first().start,
     seasonEndYear = this.seasons.first().end,
+    country = this.country.name,
     isFavourite = false
 )
 
@@ -34,6 +36,7 @@ fun LeagueLocalDto.mapRemoteDtoToEntity(): LeagueEntity = LeagueEntity(
     leagueLogo = leagueLogoUrl,
     seasonStartYear = seasonStartYear,
     seasonEndYear = seasonEndYear,
+    country = country,
     isFavourite = isFavourite
 )
 
@@ -45,6 +48,7 @@ fun LeagueEntity.toLocal(): LeagueLocalDto = LeagueLocalDto(
     leagueLogoUrl = leagueLogo,
     seasonStartYear = seasonStartYear,
     seasonEndYear = seasonEndYear,
+    country = country,
     isFavourite = isFavourite
 )
 

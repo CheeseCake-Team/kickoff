@@ -1,5 +1,6 @@
 package com.cheesecake.ui.fragment.leagueDetails
 
+import com.cheesecake.domain.entity.PlayerStatisticsEntity
 import com.cheesecake.domain.entity.TeamStandingEntity
 
 data class LeagueDetailsUIState(
@@ -7,7 +8,7 @@ data class LeagueDetailsUIState(
     val round: String = "",
     val teamsCount: String = "",
     val teamsStanding: List<TeamStandingEntity> = emptyList(),
-    val topPlayers: List<Any> = emptyList(),
+    val topPlayers: List<PlayerStatisticsEntity> = emptyList(),
     val isLoading: Boolean = true,
     val ErrorMessage: Boolean = true
 )

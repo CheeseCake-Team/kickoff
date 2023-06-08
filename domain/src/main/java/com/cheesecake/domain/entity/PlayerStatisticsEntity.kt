@@ -22,7 +22,8 @@ data class PlayerStatisticsEntity(
     val number: Any,
     val position: String,
     val rating: String,
-    val captain: Boolean
+    val captain: Boolean,
+    val goals: String
 )
 
 

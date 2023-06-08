@@ -1,11 +1,6 @@
 package com.cheesecake.data.repository
 
 import com.cheesecake.data.remote.response.mapToDomain
-import com.cheesecake.data.repository.mappers.mapLocalDtoToEntity
-import com.cheesecake.data.repository.mappers.mapRemoteDtoToEntity
-import com.cheesecake.data.repository.mappers.mapToDomain
-import com.cheesecake.data.repository.mappers.mapToLocal
-import com.cheesecake.data.repository.mappers.toLocal
 import com.cheesecake.domain.entity.FixtureEntity
 import com.cheesecake.domain.entity.LeagueEntity
 import com.cheesecake.domain.entity.TeamEntity
@@ -13,6 +8,8 @@ import com.cheesecake.domain.entity.TeamStandingEntity
 import com.cheesecake.data.repository.mappers.toEntity
 import com.cheesecake.domain.entity.TeamStatisticsEntity
 import com.cheesecake.domain.entity.PlayerStatisticsEntity
+import com.cheesecake.data.repository.mappers.*
+import com.cheesecake.domain.entity.*
 import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
@@ -29,11 +26,6 @@ class IFootballRepositoryImpl
     ): List<LeagueEntity> {
         return remoteDataSource.getCurrentSeasonLeague(leagueId, current).mapRemoteDtoToEntity()
     }
-
-    override suspend fun getLeagueStanding(leagueId: Int, season: Int): List<TeamStandingEntity> {
-        return remoteDataSource.getStandingsByLeagueId(season, leagueId).mapRemoteDtoToEntity()
-    }
-
 
     override suspend fun getLeagueTopScorers(leagueId: Int, season: Int): List<PlayerStatisticsEntity> {
         return remoteDataSource.getTopScorers(season, leagueId).mapToDomain()

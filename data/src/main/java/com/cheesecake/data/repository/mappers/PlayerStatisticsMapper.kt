@@ -24,7 +24,8 @@ fun PlayerResponse.mapToDomain(): PlayerStatisticsEntity {
         position = this.statistics.first().games.position,
         rating = this.statistics.first().games.rating,
         captain = this.statistics.first().games.captain,
-        photo = this.player.photo
+        photo = this.player.photo,
+        goals = this.statistics.first().goals.total.toString()
     )
 }
 
