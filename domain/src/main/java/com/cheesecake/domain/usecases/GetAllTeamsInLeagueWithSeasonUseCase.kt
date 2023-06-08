@@ -8,13 +8,11 @@ class GetAllTeamsInLeagueWithSeasonUseCase @Inject constructor(
     private val footballRepository: IFootballRepository,
 ) {
 
-    suspend operator fun invoke(leagueId: Int, leagueSeason: Int): List<TeamEntity> {
-        val localTeams = footballRepository.getLocallyTeamsByIdAndSeason(leagueId, leagueSeason)
-        if (localTeams.isEmpty()) {
-            val remoteTeams = footballRepository.getRemotelyTeamsByIdAndSeason(leagueId, leagueSeason)
-            footballRepository.updateOrInsertTeams(remoteTeams, leagueId, leagueSeason)
-        }
-        return footballRepository.getLocallyTeamsByIdAndSeason(leagueId, leagueSeason)
-    }
+    suspend operator fun invoke(leagueId: Int, leagueSeason: Int): List<TeamEntity> =
+        footballRepository.getLocallyTeamsByIdAndSeason(leagueId, leagueSeason)
+            .takeIf { it.isNotEmpty() }
+            ?: footballRepository.getRemotelyTeamsByIdAndSeason(leagueId, leagueSeason).also {
+                footballRepository.updateOrInsertTeams(it, leagueId, leagueSeason)
+            }
 
 }
