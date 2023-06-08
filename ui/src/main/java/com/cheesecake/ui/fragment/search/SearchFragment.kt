@@ -14,8 +14,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
-    override val layoutIdFragment: Int
-        get() = R.layout.fragment_search
+    override val layoutIdFragment = R.layout.fragment_search
     override val viewModel: SearchViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
