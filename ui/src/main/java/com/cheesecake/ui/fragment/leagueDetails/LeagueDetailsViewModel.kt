@@ -6,6 +6,8 @@ import com.cheesecake.domain.usecases.GetCurrentRoundByLeagueIdAndSeasonUseCase
 import com.cheesecake.domain.usecases.GetLeagueByIdAndSeasonUseCase
 import com.cheesecake.domain.usecases.GetTeamsStandingByLeagueIdAndSeasonUseCase
 import com.cheesecake.domain.usecases.GetTopScorersByLeagueIdAndSeasonUseCase
+import com.cheesecake.ui.base.BaseViewModel
+import com.cheesecake.ui.fragment.league.LeagueUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,8 +20,9 @@ class LeagueDetailsViewModel @Inject constructor(
     private val getCurrentRoundByLeagueIdAndSeason: GetCurrentRoundByLeagueIdAndSeasonUseCase,
     private val getTeamsStandingByLeagueIdAndSeasonUseCase: GetTeamsStandingByLeagueIdAndSeasonUseCase,
     private val getTopScorersByLeagueIdAndSeason: GetTopScorersByLeagueIdAndSeasonUseCase,
-    private val getLeagueByLeagueIdAndSeasonUseCase: GetLeagueByIdAndSeasonUseCase
-): ViewModel() {
+    private val getLeagueByLeagueIdAndSeasonUseCase: GetLeagueByIdAndSeasonUseCase,
+    override val uiState: LeagueDetailsUIState
+) : BaseViewModel<LeagueDetailsUIState>() {
 
     private val _leagueDetailsUIState = MutableStateFlow(LeagueDetailsUIState())
     val leagueDetailsUIState = _leagueDetailsUIState.asStateFlow()
@@ -31,25 +34,50 @@ class LeagueDetailsViewModel @Inject constructor(
         getTopScorers()
     }
 
+
     private fun getLeague() {
-        viewModelScope.launch {
-            getLeagueByLeagueIdAndSeasonUseCase(39, 2022).let { league ->
+        tryToExecute(
+            {
+                getLeagueByLeagueIdAndSeasonUseCase(39, 2022)
+            },
+            { league ->
+
                 _leagueDetailsUIState.update { it.copy(country = league.country) }
+            },
+            { error ->
+                _leagueDetailsUIState.update { it.copy( error.message.toString(), isLoading = false) }
+
+
             }
-        }
+        )
     }
+
 
     private fun getTopScorers() {
-        viewModelScope.launch {
-            getTopScorersByLeagueIdAndSeason(39, 2022).let { scorers ->
-                _leagueDetailsUIState.update { it.copy(topPlayers = scorers.take(7), isLoading = false) }
+        tryToExecute(
+            { getTopScorersByLeagueIdAndSeason(39, 2022) },
+            { scorers ->
+                _leagueDetailsUIState.update {
+                    it.copy(
+                        topPlayers = scorers.take(7),
+                        isLoading = false
+                    )
+                }
+            },
+            { error ->
+                _leagueDetailsUIState.update { it.copy( error.message.toString(), isLoading = false) }
+
             }
-        }
+        )
     }
 
+
     private fun getTeamStanding() {
-        viewModelScope.launch {
-            getTeamsStandingByLeagueIdAndSeasonUseCase(39, 2022).let { standings ->
+        tryToExecute(
+            {
+                getTeamsStandingByLeagueIdAndSeasonUseCase(39, 2022)
+            },
+            { standings ->
                 _leagueDetailsUIState.update {
                     it.copy(
                         teamsStanding = standings.take(4),
@@ -57,16 +85,29 @@ class LeagueDetailsViewModel @Inject constructor(
                         isLoading = false
                     )
                 }
+            },
+            { error ->
+                _leagueDetailsUIState.update { it.copy( error.message.toString(), isLoading = false) }
+
             }
-        }
+        )
     }
 
+
     private fun getCurrentRound() {
-        viewModelScope.launch {
-            getCurrentRoundByLeagueIdAndSeason(39, 2022).apply {
-                _leagueDetailsUIState.update {  it.copy(round = this) }
+        tryToExecute(
+            {
+                getCurrentRoundByLeagueIdAndSeason(39, 2022)
+            },
+            { round ->
+                _leagueDetailsUIState.update { it.copy(round = round) }
+            },
+            { error ->
+                _leagueDetailsUIState.update { it.copy( error.message.toString(), isLoading = false) }
+
             }
-        }
+        )
     }
+
 
 }

@@ -20,14 +20,10 @@ class LeagueMatchesViewModel @Inject constructor(
 
     private fun getData() {
         tryToExecute(
-            ::getPairsOfMatchesAndDateByLeagueIdAndSeason,
+            {getPairsOfMatchesAndDateByLeagueIdAndSeasonUseCase("Africa/Cairo", 39, 2022)},
             ::onSuccess,
             ::onError
         )
-    }
-
-    private suspend fun getPairsOfMatchesAndDateByLeagueIdAndSeason(): List<Pair<String, List<FixtureEntity>>> {
-        return getPairsOfMatchesAndDateByLeagueIdAndSeasonUseCase("Africa/Cairo", 39, 2022)
     }
 
     private fun onSuccess(result: List<Pair<String, List<FixtureEntity>>>) {
