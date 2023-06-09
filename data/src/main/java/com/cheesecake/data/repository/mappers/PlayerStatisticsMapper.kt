@@ -1,10 +1,11 @@
 package com.cheesecake.data.repository.mappers
 
-import com.cheesecake.data.remote.response.PlayerResponse
-import com.cheesecake.domain.entity.PlayerStatisticsEntity
+import com.cheesecake.data.remote.models.PlayerDTO
+import com.cheesecake.domain.entity.PlayerStatistics
 
-fun PlayerResponse.mapToEntity(): PlayerStatisticsEntity {
-    return PlayerStatisticsEntity(
+@JvmName("playerDTOToPlayerStatistics")
+fun PlayerDTO.toEntity(): PlayerStatistics {
+    return PlayerStatistics(
         id = this.player.id,
         name = this.player.name,
         firstname = this.player.firstname,
@@ -29,6 +30,7 @@ fun PlayerResponse.mapToEntity(): PlayerStatisticsEntity {
     )
 }
 
-fun List<PlayerResponse>.mapToEntity():List<PlayerStatisticsEntity>{
-    return this.map { it.mapToEntity() }
+@JvmName("playerDTOsToPlayersStatistics")
+fun List<PlayerDTO>.toEntity():List<PlayerStatistics>{
+    return this.map { it.toEntity() }
 }

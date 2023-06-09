@@ -1,7 +1,7 @@
 package com.cheesecake.ui.fragment.leagueTeams
 
 import android.util.Log
-import com.cheesecake.domain.entity.TeamEntity
+import com.cheesecake.domain.entity.Team
 import com.cheesecake.ui.mapper.toUIModel
 import com.cheesecake.domain.usecases.GetAllTeamsInLeagueWithSeasonUseCase
 import com.cheesecake.ui.base.BaseViewModel
@@ -22,7 +22,7 @@ class LeagueTeamsViewModel @Inject constructor(
 
     private fun getData() {
         tryToExecute(
-            ::getAllTeamsInLeagueWithSeason,
+            { getAllTeamsInLeagueWithSeason() },
             ::onSuccess,
             ::onError
         )
@@ -32,7 +32,7 @@ class LeagueTeamsViewModel @Inject constructor(
         getAllTeamsInLeagueWithSeasonUseCase(39, 2022)
 
 
-    private fun onSuccess(result: List<TeamEntity>) {
+    private fun onSuccess(result: List<Team>) {
         result.let { list ->
             _state.update { teamUIState ->
                 Log.i("getData: ", list.toString())

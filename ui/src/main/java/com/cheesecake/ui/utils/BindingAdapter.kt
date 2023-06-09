@@ -9,7 +9,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
-import com.cheesecake.domain.entity.FixtureEntity
+import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.ui.base.BaseAdapter
 import com.cheesecake.ui.fragment.leagueMatches.LeagueMatchesHeadToHeadAdapter
 
@@ -48,7 +48,7 @@ fun <T> setRecyclerItems(view: RecyclerView, items: List<T>?) {
 fun <T> setItems(view: RecyclerView, items: List<T>?) {
     items?.let {
         val adapter = LeagueMatchesHeadToHeadAdapter()
-        adapter.setItems(it as List<FixtureEntity>)
+        adapter.setItems(it as List<Fixture>)
         view.adapter = adapter
     }
 }
@@ -62,8 +62,8 @@ fun showLoading(view: ProgressBar, isShowing: Boolean?) {
 }
 
 @BindingAdapter("app:matchScore")
-fun TextView.setMatchScore(fixtureEntity: FixtureEntity?) {
-    fixtureEntity?.let {
+fun TextView.setMatchScore(fixture: Fixture?) {
+    fixture?.let {
         if (it.isFinished) this.text = "Finished\n  ${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
         else this.text = it.matchTime.toString()
     }

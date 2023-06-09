@@ -1,6 +1,6 @@
 package com.cheesecake.domain.usecases
 
-import com.cheesecake.domain.entity.FixtureEntity
+import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
@@ -12,7 +12,7 @@ class GetPairsOfMatchesAndDateByLeagueIdAndSeasonUseCase @Inject constructor(
         timeZone: String,
         leagueId: Int,
         Season: Int
-    ): List<Pair<String, List<FixtureEntity>>> {
+    ): List<Pair<String, List<Fixture>>> {
         return footballRepository.getMatchesByLeagueIdAndSeason(timeZone, leagueId, Season)
             .groupBy { it.matchDate }.toList().reversed()
     }

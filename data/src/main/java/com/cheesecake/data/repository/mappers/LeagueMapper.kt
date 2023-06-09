@@ -1,11 +1,11 @@
 package com.cheesecake.data.repository.mappers
 
-import com.cheesecake.data.local.models.LeagueLocalDto
-import com.cheesecake.data.remote.response.LeagueResponse
-import com.cheesecake.domain.entity.LeagueEntity
+import com.cheesecake.data.local.models.LeagueLocalDTO
+import com.cheesecake.data.remote.models.LeagueDTO
+import com.cheesecake.domain.entity.League
 
 
-fun LeagueResponse.mapRemoteDtoToEntity(): LeagueEntity = LeagueEntity(
+fun LeagueDTO.toEntity(): League = League(
     leagueId = this.league.id,
     leagueName = this.league.name,
     leagueSeason = this.seasons.first().year.toString(),
@@ -16,8 +16,8 @@ fun LeagueResponse.mapRemoteDtoToEntity(): LeagueEntity = LeagueEntity(
     isFavourite = false
 )
 
-
-fun LeagueResponse.mapToLocal(): LeagueLocalDto = LeagueLocalDto(
+@JvmName("leagueDTOToLeagueLocalDTO")
+fun LeagueDTO.toLocal(): LeagueLocalDTO = LeagueLocalDTO(
     leagueId = this.league.id,
     leagueName = this.league.name,
     leagueSeason = this.seasons.first().year.toString(),
@@ -28,8 +28,8 @@ fun LeagueResponse.mapToLocal(): LeagueLocalDto = LeagueLocalDto(
     isFavourite = false
 )
 
-
-fun LeagueLocalDto.mapRemoteDtoToEntity(): LeagueEntity = LeagueEntity(
+@JvmName("leagueLocalDTOToLeague")
+fun LeagueLocalDTO.toEntity(): League = League(
     leagueId = leagueId,
     leagueName = leagueName,
     leagueSeason = leagueSeason,
@@ -40,8 +40,8 @@ fun LeagueLocalDto.mapRemoteDtoToEntity(): LeagueEntity = LeagueEntity(
     isFavourite = isFavourite
 )
 
-
-fun LeagueEntity.toLocal(): LeagueLocalDto = LeagueLocalDto(
+@JvmName("leagueToLeagueLocalDTO")
+fun League.toLocal(): LeagueLocalDTO = LeagueLocalDTO(
     leagueId = leagueId,
     leagueName = leagueName,
     leagueSeason = leagueSeason,
@@ -52,13 +52,13 @@ fun LeagueEntity.toLocal(): LeagueLocalDto = LeagueLocalDto(
     isFavourite = isFavourite
 )
 
+@JvmName("leagueLocalDTOsToLeagues")
+fun List<LeagueLocalDTO>.toEntity(): List<League> = map { it.toEntity() }
 
-fun List<LeagueLocalDto>.mapLocalDtoToEntity(): List<LeagueEntity> = map { it.mapRemoteDtoToEntity() }
+@JvmName("leagueDTOsToLeagueLocalDTOs")
+fun List<LeagueDTO>.toLocal(): List<LeagueLocalDTO> = map { it.toLocal() }
 
-
-fun List<LeagueResponse>.mapToLocal(): List<LeagueLocalDto> = map { it.mapToLocal() }
-
-
-fun List<LeagueResponse>.mapRemoteDtoToEntity(): List<LeagueEntity> = map { it.mapRemoteDtoToEntity() }
+@JvmName("leagueDTOsToLeagues")
+fun List<LeagueDTO>.toEntity(): List<League> = map { it.toEntity() }
 
 

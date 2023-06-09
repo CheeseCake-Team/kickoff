@@ -1,6 +1,6 @@
 package com.cheesecake.ui.fragment.leagueMatches
 
-import com.cheesecake.domain.entity.FixtureEntity
+import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.usecases.GetPairsOfMatchesAndDateByLeagueIdAndSeasonUseCase
 import com.cheesecake.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,7 +26,7 @@ class LeagueMatchesViewModel @Inject constructor(
         )
     }
 
-    private fun onSuccess(result: List<Pair<String, List<FixtureEntity>>>) {
+    private fun onSuccess(result: List<Pair<String, List<Fixture>>>) {
         _state.update { it.copy(data = result, isLoading = false) }
     }
 

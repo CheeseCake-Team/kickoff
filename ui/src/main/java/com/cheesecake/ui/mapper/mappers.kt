@@ -1,9 +1,9 @@
 package com.cheesecake.ui.mapper
 
-import com.cheesecake.domain.entity.TeamEntity
+import com.cheesecake.domain.entity.Team
 import com.cheesecake.ui.models.TeamUIState
 
-fun TeamEntity.toUIModel(): TeamUIState {
+fun Team.toUIModel(): TeamUIState {
     return TeamUIState(
         teamId = this.teamId,
         teamName= this.teamName,

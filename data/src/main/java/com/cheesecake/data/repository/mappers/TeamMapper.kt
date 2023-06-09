@@ -1,11 +1,11 @@
 package com.cheesecake.data.repository.mappers
 
-import com.cheesecake.data.local.models.TeamLocalDto
-import com.cheesecake.data.remote.response.TeamResponse
-import com.cheesecake.domain.entity.TeamEntity
+import com.cheesecake.data.local.models.TeamLocalDTO
+import com.cheesecake.data.remote.models.TeamDTO
+import com.cheesecake.domain.entity.Team
 
-
-fun TeamResponse.mapRemoteDtoToEntity(): TeamEntity = TeamEntity(
+@JvmName("teamDTOToTeam")
+fun TeamDTO.toEntity(): Team = Team(
     teamId = this.team.id,
     teamName = this.team.name,
     founded = this.team.founded,
@@ -16,8 +16,8 @@ fun TeamResponse.mapRemoteDtoToEntity(): TeamEntity = TeamEntity(
     isFavourite = false
 )
 
-
-fun TeamEntity.toLocal(leagueId: Int, leagueSeason: Int): TeamLocalDto = TeamLocalDto(
+@JvmName("teamToTeamLocalDTO")
+fun Team.toLocal(leagueId: Int, leagueSeason: Int): TeamLocalDTO = TeamLocalDTO(
     teamId = teamId,
     leagueId = leagueId,
     season = leagueSeason,
@@ -30,18 +30,18 @@ fun TeamEntity.toLocal(leagueId: Int, leagueSeason: Int): TeamLocalDto = TeamLoc
     isFavourite = this.isFavourite
 )
 
-
-fun TeamLocalDto.mapLocalDtoToEntity(): TeamEntity = TeamEntity(
+@JvmName("teamLocalDTOToTeam")
+fun TeamLocalDTO.toEntity(): Team = Team(
     teamId, teamName, founded, teamCountry, venueCapacity, venueName, imageUrl, isFavourite
 )
 
+@JvmName("teamLocalDTOsToTeams")
+fun List<TeamLocalDTO>.toEntity(): List<Team> = map { it.toEntity() }
 
-fun List<TeamLocalDto>.mapLocalDtoToEntity(): List<TeamEntity> = map { it.mapLocalDtoToEntity() }
-
-
-fun List<TeamEntity>.mapToLocal(leagueId: Int, leagueSeason: Int): List<TeamLocalDto> =
+@JvmName("teamsToTeamsLocalDTO")
+fun List<Team>.toLocal(leagueId: Int, leagueSeason: Int): List<TeamLocalDTO> =
     map { it.toLocal(leagueId, leagueSeason) }
 
-
-fun List<TeamResponse>.mapRemoteDtoToEntity(): List<TeamEntity> =
-    map { it.mapRemoteDtoToEntity() }
+@JvmName("teamDTOsToTeams")
+fun List<TeamDTO>.toEntity(): List<Team> =
+    map { it.toEntity() }

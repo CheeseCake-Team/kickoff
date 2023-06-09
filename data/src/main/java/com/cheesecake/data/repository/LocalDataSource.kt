@@ -1,23 +1,23 @@
 package com.cheesecake.data.repository
 
-import com.cheesecake.data.local.models.LeagueLocalDto
-import com.cheesecake.data.local.models.TeamLocalDto
+import com.cheesecake.data.local.models.LeagueLocalDTO
+import com.cheesecake.data.local.models.TeamLocalDTO
 
 interface LocalDataSource {
 
-    fun getLocallyTeamsByIdAndSeason(leagueId: Int, season: Int): List<TeamLocalDto>
+    fun getLocallyTeamsByIdAndSeason(leagueId: Int, season: Int): List<TeamLocalDTO>
 
-    suspend fun updateOrInsertTeams(teams: List<TeamLocalDto>)
+    suspend fun updateOrInsertTeams(teams: List<TeamLocalDTO>)
 
-    suspend fun updateOrInsertTeam(team: TeamLocalDto)
+    suspend fun updateOrInsertTeam(team: TeamLocalDTO)
 
-    suspend fun getFavouriteTeams(): List<TeamLocalDto>
+    suspend fun getFavouriteTeams(): List<TeamLocalDTO>
 
     suspend fun deleteAllTeams()
 
-    suspend fun getLeagueByIdAndSeason(leagueId: Int, leagueSeason: Int): LeagueLocalDto?
+    suspend fun getLeagueByIdAndSeason(leagueId: Int, leagueSeason: Int): LeagueLocalDTO?
 
-    suspend fun updateOrInsertLeague(league: LeagueLocalDto)
+    suspend fun updateOrInsertLeague(league: LeagueLocalDTO)
 
     suspend fun deleteLeagueById(leagueId: Int)
 

@@ -1,18 +1,14 @@
 package com.cheesecake.ui.fragment.leagueDetails
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.usecases.GetCurrentRoundByLeagueIdAndSeasonUseCase
 import com.cheesecake.domain.usecases.GetLeagueByIdAndSeasonUseCase
 import com.cheesecake.domain.usecases.GetTeamsStandingByLeagueIdAndSeasonUseCase
 import com.cheesecake.domain.usecases.GetTopScorersByLeagueIdAndSeasonUseCase
 import com.cheesecake.ui.base.BaseViewModel
-import com.cheesecake.ui.fragment.league.LeagueUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,8 +17,9 @@ class LeagueDetailsViewModel @Inject constructor(
     private val getTeamsStandingByLeagueIdAndSeasonUseCase: GetTeamsStandingByLeagueIdAndSeasonUseCase,
     private val getTopScorersByLeagueIdAndSeason: GetTopScorersByLeagueIdAndSeasonUseCase,
     private val getLeagueByLeagueIdAndSeasonUseCase: GetLeagueByIdAndSeasonUseCase,
-    override val uiState: LeagueDetailsUIState
 ) : BaseViewModel<LeagueDetailsUIState>() {
+
+    override val uiState = LeagueDetailsUIState()
 
     private val _leagueDetailsUIState = MutableStateFlow(LeagueDetailsUIState())
     val leagueDetailsUIState = _leagueDetailsUIState.asStateFlow()

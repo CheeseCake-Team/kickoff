@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.cheesecake.domain.entity.FixtureEntity" />
+            type="com.cheesecake.domain.entity.Fixture" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -45,7 +45,7 @@
                 android:layout_width="@dimen/team_image_size_24dp"
                 android:layout_height="@dimen/team_image_size_24dp"
                 android:layout_marginEnd="@dimen/spacing_medium"
-                app:imageUrl="@{item.homeTeamLogo}"
+                app:imageUrl="@{item.homeTeamLogoUrl}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textView2"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -84,7 +84,7 @@
                 android:layout_width="@dimen/team_image_size_24dp"
                 android:layout_height="@dimen/team_image_size_24dp"
                 android:layout_marginStart="@dimen/spacing_medium"
-                app:imageUrl="@{item.awayTeamLogo}"
+                app:imageUrl="@{item.awayTeamLogoUrl}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView2"
                 app:layout_constraintTop_toTopOf="parent" />

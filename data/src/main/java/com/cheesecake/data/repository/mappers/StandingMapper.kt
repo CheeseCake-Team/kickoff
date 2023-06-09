@@ -1,10 +1,11 @@
 package com.cheesecake.data.repository.mappers
 
-import com.cheesecake.data.remote.response.StandingsResponse
-import com.cheesecake.domain.entity.TeamStandingEntity
+import com.cheesecake.data.remote.models.StandingsDTO
+import com.cheesecake.domain.entity.TeamStanding
 
-fun StandingsResponse.League.Standing.mapRemoteDtoToEntity(): TeamStandingEntity {
-    return TeamStandingEntity(
+@JvmName("teamStandingDTOToTeamStanding")
+fun StandingsDTO.League.Standing.toEntity(): TeamStanding {
+    return TeamStanding(
         teamId = this.team.id,
         form = this.form,
         logo = this.team.logo,
@@ -17,8 +18,9 @@ fun StandingsResponse.League.Standing.mapRemoteDtoToEntity(): TeamStandingEntity
     )
 }
 
-fun List<StandingsResponse>.mapRemoteDtoToEntity():List<TeamStandingEntity>{
+@JvmName("teamStandingsDTOsToTeamsStanding")
+fun List<StandingsDTO>.toEntity(): List<TeamStanding> {
     return this.first().league.standings.first().map { standingsResponse ->
-        standingsResponse.mapRemoteDtoToEntity()
+        standingsResponse.toEntity()
     }
 }

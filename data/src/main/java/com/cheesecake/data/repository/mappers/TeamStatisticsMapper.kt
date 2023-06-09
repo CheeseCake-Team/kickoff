@@ -1,10 +1,11 @@
 package com.cheesecake.data.repository.mappers
 
-import com.cheesecake.data.remote.response.TeamStatisticsResponse
+import com.cheesecake.data.remote.models.TeamStatisticsDTO
 import com.cheesecake.domain.entity.TeamStatisticsEntity
 import com.cheesecake.domain.entity.TeamStats
 
-fun TeamStatisticsResponse.toEntity(): TeamStatisticsEntity =
+@JvmName("teamStatisticsDTOToTeamStatisticsEntity")
+fun TeamStatisticsDTO.toEntity(): TeamStatisticsEntity =
     TeamStatisticsEntity(
         home = TeamStats(
             played = this.fixtures.played.home,

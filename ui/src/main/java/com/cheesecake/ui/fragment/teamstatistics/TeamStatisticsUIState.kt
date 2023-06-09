@@ -1,9 +1,9 @@
 package com.cheesecake.ui.fragment.teamstatistics
 
-import com.cheesecake.domain.entity.TeamEntity
+import com.cheesecake.domain.entity.Team
 
 data class TeamStatisticsUIState(
     val isLoading: Boolean = true,
-    val data: List<TeamEntity> = emptyList(),
+    val data: List<Team> = emptyList(),
     val isError: String = "Error"
 )

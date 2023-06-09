@@ -1,19 +1,14 @@
 package com.cheesecake.data.repository
 
-import com.cheesecake.data.repository.mappers.mapLocalDtoToEntity
-import com.cheesecake.data.repository.mappers.mapRemoteDtoToEntity
-import com.cheesecake.data.repository.mappers.mapToDomain
-import com.cheesecake.data.repository.mappers.mapToEntity
-import com.cheesecake.data.repository.mappers.mapToLocal
 import com.cheesecake.data.repository.mappers.toEntity
 import com.cheesecake.data.repository.mappers.toLocal
-import com.cheesecake.domain.entity.FixtureEntity
-import com.cheesecake.domain.entity.LeagueEntity
-import com.cheesecake.domain.entity.PlayerStatisticsEntity
-import com.cheesecake.domain.entity.TeamEntity
-import com.cheesecake.domain.entity.TeamStandingEntity
+import com.cheesecake.domain.entity.Fixture
+import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.PlayerStatistics
+import com.cheesecake.domain.entity.Team
+import com.cheesecake.domain.entity.TeamStanding
 import com.cheesecake.domain.entity.TeamStatisticsEntity
-import com.cheesecake.domain.entity.TrophyEntity
+import com.cheesecake.domain.entity.Trophy
 import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
@@ -26,45 +21,45 @@ class IFootballRepositoryImpl
     override suspend fun getLeagueNameAndCountry(
         leagueId: Int,
         current: Boolean
-    ): List<LeagueEntity> {
-        return remoteDataSource.getCurrentSeasonLeague(leagueId, current).mapRemoteDtoToEntity()
+    ): List<League> {
+        return remoteDataSource.getCurrentSeasonLeague(leagueId, current).toEntity()
     }
 
-    override suspend fun getLeagueTopScorers(leagueId: Int, season: Int): List<PlayerStatisticsEntity> {
-        return remoteDataSource.getTopScorers(season, leagueId).mapToEntity()
+    override suspend fun getLeagueTopScorers(leagueId: Int, season: Int): List<PlayerStatistics> {
+        return remoteDataSource.getTopScorers(season, leagueId).toEntity()
     }
 
     override suspend fun getLocallyLeagueByIdAndSeason(
         leagueId: Int,
         leagueSeason: Int
-    ): LeagueEntity? {
+    ): League? {
         return localDataSource.getLeagueByIdAndSeason(leagueId, leagueSeason)
-            ?.mapRemoteDtoToEntity()
+            ?.toEntity()
     }
 
-    override suspend fun getSinglePlayerCompact(season: String, teamId: Int): List<PlayerStatisticsEntity> {
-        return remoteDataSource.getPlayerBySeasonByTeamId(season, teamId).mapToEntity()
+    override suspend fun getSinglePlayerCompact(season: String, teamId: Int): List<PlayerStatistics> {
+        return remoteDataSource.getPlayerBySeasonByTeamId(season, teamId).toEntity()
     }
 
     override suspend fun getRemotelyLeagueByIdAndSeason(
         leagueId: Int,
         leagueSeason: Int
-    ): LeagueEntity {
+    ): League {
         return remoteDataSource.getLeagueByIdAndSeason(leagueId, leagueSeason).first()
-            .mapRemoteDtoToEntity()
+            .toEntity()
     }
 
-    override suspend fun updateOrInsertLeague(leagueEntity: LeagueEntity) {
-        localDataSource.updateOrInsertLeague(leagueEntity.toLocal())
+    override suspend fun updateOrInsertLeague(league: League) {
+        localDataSource.updateOrInsertLeague(league.toLocal())
     }
 
     override suspend fun getMatchesByLeagueIdAndSeason(
         timeZone: String,
         leagueId: Int,
         Season: Int
-    ): List<FixtureEntity> {
+    ): List<Fixture> {
         return remoteDataSource.getFixturesBySeasonIdAndLeagueId(timeZone, Season, leagueId)
-            .mapToDomain()
+            .toEntity()
     }
 
     override suspend fun deleteLeagueById(leagueId: Int) {
@@ -74,29 +69,29 @@ class IFootballRepositoryImpl
     override fun getLocallyTeamsByIdAndSeason(
         leagueId: Int,
         leagueSeason: Int
-    ): List<TeamEntity> {
+    ): List<Team> {
         return localDataSource.getLocallyTeamsByIdAndSeason(leagueId, leagueSeason)
-            .mapLocalDtoToEntity()
+            .toEntity()
     }
 
     override suspend fun getRemotelyTeamsByIdAndSeason(
         leagueId: Int,
         leagueSeason: Int
-    ): List<TeamEntity> {
+    ): List<Team> {
         return remoteDataSource.getTeamsByLeagueAndSeason(leagueId, leagueSeason)
-            .mapRemoteDtoToEntity()
+            .toEntity()
     }
 
     override suspend fun updateOrInsertTeams(
-        teamEntityEntities: List<TeamEntity>,
+        teamEntities: List<Team>,
         leagueId: Int,
         leagueSeason: Int
     ) {
-        localDataSource.updateOrInsertTeams(teamEntityEntities.mapToLocal(leagueId, leagueSeason))
+        localDataSource.updateOrInsertTeams(teamEntities.toLocal(leagueId, leagueSeason))
     }
 
-    override suspend fun getLeaguesByName(leagueName: String): List<LeagueEntity> {
-        return remoteDataSource.getLeaguesByName(leagueName).mapRemoteDtoToEntity()
+    override suspend fun getLeaguesByName(leagueName: String): List<League> {
+        return remoteDataSource.getLeaguesByName(leagueName).toEntity()
     }
 
 
@@ -107,12 +102,12 @@ class IFootballRepositoryImpl
     override suspend fun getTeamsStandingByLeagueIdAndSeason(
         leagueId: Int,
         season: Int
-    ): List<TeamStandingEntity> {
-        return remoteDataSource.getStandingsByLeagueId(season, leagueId).mapRemoteDtoToEntity()
+    ): List<TeamStanding> {
+        return remoteDataSource.getStandingsByLeagueId(season, leagueId).toEntity()
     }
 
-    override suspend fun getTeamsByName(teamName: String): List<TeamEntity> {
-        return remoteDataSource.getTeamsByName(teamName).mapRemoteDtoToEntity()
+    override suspend fun getTeamsByName(teamName: String): List<Team> {
+        return remoteDataSource.getTeamsByName(teamName).toEntity()
     }
 
     override suspend fun getTeamStatistics(
@@ -122,15 +117,15 @@ class IFootballRepositoryImpl
     ): TeamStatisticsEntity {
         return remoteDataSource.getTeamStatistics(teamId, season, leagueId).toEntity()
     }
-    override suspend fun getPlayerBySeasonByPlayerId(season: String, playerId: Int): PlayerStatisticsEntity {
-        return remoteDataSource.getPlayerBySeasonByPlayerId(season, playerId).first().mapToEntity()
+    override suspend fun getPlayerBySeasonByPlayerId(season: String, playerId: Int): PlayerStatistics {
+        return remoteDataSource.getPlayerBySeasonByPlayerId(season, playerId).first().toEntity()
     }
 
-    override suspend fun getPlayerTrophy(playerId: Int): List<TrophyEntity> {
-        return remoteDataSource.getPlayerTrophies(playerId).mapToEntity()
+    override suspend fun getPlayerTrophy(playerId: Int): List<Trophy> {
+        return remoteDataSource.getPlayerTrophies(playerId).toEntity()
     }
 
-    override suspend fun getCoachTrophy(coachId: Int): List<TrophyEntity> {
-        return remoteDataSource.getCoachTrophies(coachId).mapToEntity()
+    override suspend fun getCoachTrophy(coachId: Int): List<Trophy> {
+        return remoteDataSource.getCoachTrophies(coachId).toEntity()
     }
 }

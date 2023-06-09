@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.cheesecake.domain.entity.TeamStandingEntity" />
+            type="com.cheesecake.domain.entity.TeamStanding" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

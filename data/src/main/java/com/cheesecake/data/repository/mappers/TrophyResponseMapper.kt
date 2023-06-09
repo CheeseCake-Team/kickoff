@@ -1,10 +1,11 @@
 package com.cheesecake.data.repository.mappers
 
-import com.cheesecake.data.remote.response.TrophyResponse
-import com.cheesecake.domain.entity.TrophyEntity
+import com.cheesecake.data.remote.models.TrophyDTO
+import com.cheesecake.domain.entity.Trophy
 
-fun TrophyResponse.mapToEntity(): TrophyEntity {
-    return TrophyEntity(
+@JvmName("trophyDTOToTrophy")
+fun TrophyDTO.toEntity(): Trophy {
+    return Trophy(
         league,
         country,
         place,
@@ -12,6 +13,7 @@ fun TrophyResponse.mapToEntity(): TrophyEntity {
     )
 }
 
-fun List<TrophyResponse>.mapToEntity():List<TrophyEntity>{
-    return this.map { it.mapToEntity() }
+@JvmName("trophyDTOsToTrophies")
+fun List<TrophyDTO>.toEntity():List<Trophy>{
+    return this.map { it.toEntity() }
 }

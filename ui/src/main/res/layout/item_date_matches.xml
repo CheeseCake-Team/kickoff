@@ -7,11 +7,11 @@
 
         <import type="kotlin.Pair"/>
         <import type="java.util.List"/>
-        <import type="com.cheesecake.domain.entity.FixtureEntity"/>
+        <import type="com.cheesecake.domain.entity.Fixture"/>
 
         <variable
             name="item"
-            type="Pair&lt;String,List&lt;FixtureEntity&gt;&gt;" />
+            type="Pair&lt;String,List&lt;Fixture&gt;&gt;" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
