@@ -70,10 +70,8 @@ fun hideWhenLoading(view: View, isVisible: Boolean) {
 }
 
 @BindingAdapter(value = ["app:showNoResultFound"])
-fun <T>showWhenNoResult(view: FrameLayout, items: List<T>?) {
-    items.let {
-        view.isVisible = it!!.isEmpty()
-    }
+fun <T>showWhenNoResult(view: FrameLayout, isVisible: Boolean) {
+        view.isVisible = isVisible
 }
 
 @SuppressLint("SetTextI18n")

@@ -401,7 +401,7 @@ interface RemoteDataSource {
         leagueId: Int, seasonId: Int
     ): List<TeamDTO>
 
-    suspend fun getTeamsByName(
+    suspend fun getTeamsBySearch(
         name: String,
     ): List<TeamDTO>
 

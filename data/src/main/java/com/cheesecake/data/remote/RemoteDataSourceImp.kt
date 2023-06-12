@@ -1,5 +1,6 @@
 package com.cheesecake.data.remote
 
+import android.util.Log
 import com.cheesecake.data.remote.api.FootballApiService
 import com.cheesecake.data.remote.models.EventDTO
 import com.cheesecake.data.remote.models.FixtureStatisticsDTO
@@ -576,8 +577,10 @@ class RemoteDataSourceImp @Inject constructor(
         return wrapBaseResponse { service.getTeamsByLeagueAndSeason(leagueId, seasonId) }
     }
 
-    override suspend fun getTeamsByName(name: String): List<TeamDTO> {
-        return wrapBaseResponse { service.getTeamsByName(name) }
+    override suspend fun getTeamsBySearch(name: String): List<TeamDTO> {
+        val o = service.getTeamsBySearch(name)
+        Log.i("onSearchInputDataSource: ", wrapBaseResponse { service.getTeamsBySearch(name) }.toString())
+        return wrapBaseResponse { service.getTeamsBySearch(name) }
     }
 
     override suspend fun getLeaguesByName(leagueName: String): List<LeagueDTO> {

@@ -30,8 +30,8 @@ class SearchViewModel @Inject constructor(
 
     private val searchInputFlow = MutableSharedFlow<String>()
 
-    val isResultEmpty =
-        MutableStateFlow((state.value.isLoading && state.value.searchResult.isEmpty()))
+    val isResultEmptyOnly =
+        MutableStateFlow((!(state.value.isLoading)) && (state.value.searchResult.isEmpty()))
 
     init {
         initSearchProperties()
@@ -39,10 +39,7 @@ class SearchViewModel @Inject constructor(
 
     private fun initSearchProperties() {
         viewModelScope.launch {
-            searchInputFlow
-                .debounce(500)
-                .distinctUntilChanged()
-                .filter { it.isNotEmpty() }
+            searchInputFlow.debounce(500).distinctUntilChanged().filter { it.isNotEmpty() }
                 .collectLatest(::onSearching)
         }
     }
@@ -57,11 +54,12 @@ class SearchViewModel @Inject constructor(
 
     private fun onSearchSuccess(teamUIList: List<TeamUIState>) {
         Log.i("onSearchInputChanged: ", "debounced before")
+        Log.i("onSearchInputChanged: ", teamUIList.toString())
         _state.update { it.copy(searchResult = teamUIList, isLoading = false) }
     }
 
     private fun onSearchError(throwable: Throwable) {
-        Log.i("onSearchInputChanged: ", throwable.message.toString())
+        Log.i("onSearchInputError: ", throwable.message.toString())
         _state.update { it.copy(error = emptyList()) }
     }
 

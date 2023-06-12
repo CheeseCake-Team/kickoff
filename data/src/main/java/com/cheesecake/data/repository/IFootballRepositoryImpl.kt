@@ -1,5 +1,6 @@
 package com.cheesecake.data.repository
 
+import android.util.Log
 import com.cheesecake.data.repository.mappers.toEntity
 import com.cheesecake.data.repository.mappers.toLocal
 import com.cheesecake.domain.entity.Fixture
@@ -106,8 +107,8 @@ class IFootballRepositoryImpl
         return remoteDataSource.getStandingsByLeagueId(season, leagueId).toEntity()
     }
 
-    override suspend fun getTeamsByName(teamName: String): List<Team> {
-        return remoteDataSource.getTeamsByName(teamName).toEntity()
+    override suspend fun getTeamsBySearch(name: String): List<Team> {
+        return remoteDataSource.getTeamsBySearch(name).toEntity()
     }
 
     override suspend fun getTeamStatistics(

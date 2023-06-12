@@ -65,8 +65,7 @@
             android:id="@+id/frame_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:showNoResultFound="@{viewModel.state.searchResult}"
-            app:viewVisibilityInLoading="@{viewModel.state.loading}">
+            app:showNoResultFound="@{viewModel.isResultEmptyOnly}">
 
             <include
                 android:id="@+id/layout_included_no_result"
