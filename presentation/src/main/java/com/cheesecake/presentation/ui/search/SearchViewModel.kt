@@ -1,11 +1,13 @@
 package com.cheesecake.presentation.ui.search
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.usecases.GetLeagueByNameUseCase
 import com.cheesecake.domain.usecases.GetTeamByNameUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.mapper.toUIModel
+import com.cheesecake.presentation.models.TeamUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,42 +26,43 @@ class SearchViewModel @Inject constructor(
 ) : BaseViewModel<SearchUIState>(SearchUIState()) {
 
 
-    val searchInput = MutableStateFlow("")
+    val searchInput = MutableLiveData("")
 
     private val searchInputFlow = MutableSharedFlow<String>()
 
+    val isResultEmpty =
+        MutableStateFlow((state.value.isLoading && state.value.searchResult.isEmpty()))
+
     init {
-       initSearchProperties()
+        initSearchProperties()
     }
 
     private fun initSearchProperties() {
         viewModelScope.launch {
             searchInputFlow
-                .filter { it.isNotEmpty() }
+                .debounce(500)
                 .distinctUntilChanged()
-                .debounce(3000)
+                .filter { it.isNotEmpty() }
                 .collectLatest(::onSearching)
         }
     }
 
     private suspend fun onSearching(debouncedInput: String) {
-        try {
-            val teamUIList = getTeamList(debouncedInput).map { it.toUIModel() }
-            Log.i("onSearchInputChanged: ", "debounced before")
-            _state.update { it.copy(searchResult = teamUIList, isLoading = false) }
-//            .collect {
-//                _state.update { searchUIState ->
-//                    searchUIState.copy(
-//                        searchResult = it.map { it.toUIModel() },
-//                        isLoading = false
-//                    )
-//                }
-//                Log.i("onSearchInputChanged: ", "debounced after")
-//            }
-        } catch (e: Exception) {
-            _state.update { it.copy(error = emptyList()) }
-        }
+        tryToExecute(
+            { getTeamList(debouncedInput).map { it.toUIModel() } },
+            ::onSearchSuccess,
+            ::onSearchError
+        )
+    }
 
+    private fun onSearchSuccess(teamUIList: List<TeamUIState>) {
+        Log.i("onSearchInputChanged: ", "debounced before")
+        _state.update { it.copy(searchResult = teamUIList, isLoading = false) }
+    }
+
+    private fun onSearchError(throwable: Throwable) {
+        Log.i("onSearchInputChanged: ", throwable.message.toString())
+        _state.update { it.copy(error = emptyList()) }
     }
 
     suspend fun onSearchInputChanged(newSearchInput: String) {
