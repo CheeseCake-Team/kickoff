@@ -6,11 +6,11 @@
     <data>
         <variable
             name="listener"
-            type="com.cheesecake.ui.base.BaseInteractionListener" />
+            type="com.cheesecake.presentation.base.BaseInteractionListener" />
 
         <variable
             name="item"
-            type="com.cheesecake.ui.models.TeamUIState" />
+            type="com.cheesecake.presentation.models.TeamUIState" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

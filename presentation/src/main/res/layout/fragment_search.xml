@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.cheesecake.ui.ui.search.SearchViewModel" />
+            type="com.cheesecake.presentation.ui.search.SearchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

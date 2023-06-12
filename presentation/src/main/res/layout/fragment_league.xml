@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.cheesecake.ui.ui.league.LeagueViewModel" />
+            type="com.cheesecake.presentation.ui.league.LeagueViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

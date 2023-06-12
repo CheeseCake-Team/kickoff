@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace 'com.cheesecake.ui'
+    namespace 'com.cheesecake.presentation'
     compileSdk 33
 
     defaultConfig {

@@ -16,7 +16,7 @@
         android:theme="@style/Theme.Kickoff"
         tools:targetApi="31">
         <activity
-            android:name="com.cheesecake.ui.MainActivity"
+            android:name="com.cheesecake.presentation.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
