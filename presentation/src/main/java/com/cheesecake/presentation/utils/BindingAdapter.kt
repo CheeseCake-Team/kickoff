@@ -1,6 +1,9 @@
 package com.cheesecake.presentation.utils
 
+import android.annotation.SuppressLint
 import android.util.Log
+import android.view.View
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -54,13 +57,26 @@ fun <T> setItems(view: RecyclerView, items: List<T>?) {
 }
 
 @BindingAdapter(value = ["app:showLoading"])
-fun showLoading(view: ProgressBar, isShowing: Boolean?) {
-    isShowing?.let {
-        Log.i("showLoading: ", isShowing.toString())
-        view.isVisible = isShowing
+fun showLoading(view: View, isVisible: Boolean?) {
+    isVisible?.let {
+        Log.i("showLoading: ", isVisible.toString())
+        view.isVisible = isVisible
     }
 }
 
+@BindingAdapter(value = ["app:viewVisibilityInLoading"])
+fun hideWhenLoading(view: View, isVisible: Boolean) {
+    view.isVisible = !isVisible
+}
+
+@BindingAdapter(value = ["app:showNoResultFound"])
+fun <T>showWhenNoResult(view: FrameLayout, items: List<T>?) {
+    items.let {
+        view.isVisible = it!!.isEmpty()
+    }
+}
+
+@SuppressLint("SetTextI18n")
 @BindingAdapter("app:matchScore")
 fun TextView.setMatchScore(fixture: Fixture?) {
     fixture?.let {

@@ -65,8 +65,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    implementation "com.google.dagger:hilt-android:2.44"
-    kapt "com.google.dagger:hilt-compiler:2.44"
+    implementation 'com.google.dagger:hilt-android:2.46.1'
+    kapt 'com.google.dagger:hilt-compiler:2.46.1'
 
 
     implementation 'com.google.code.gson:gson:2.10.1'
@@ -87,7 +87,7 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0"
     implementation "androidx.cardview:cardview:1.0.0"
 
-    def nav_version = "2.5.3"
+    def nav_version = '2.6.0'
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
@@ -106,7 +106,7 @@ dependencies {
     implementation "androidx.work:work-multiprocess:$work_version"
 
     implementation 'com.github.bumptech.glide:glide:4.15.1'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.15.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.15.1'
 
 
     def lifecycle_version = "2.6.1"
@@ -116,17 +116,17 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-service:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-process:$lifecycle_version"
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1'
 
 
     implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.11")
     // define a BOM and its version
-    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.10.0"))
+    implementation(platform('com.squareup.okhttp3:okhttp-bom:5.0.0-alpha.11'))
 
     // define any required OkHttp artifacts without version
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
-    testImplementation("com.squareup.okhttp3:mockwebserver:4.10.0")
+    testImplementation('com.squareup.okhttp3:mockwebserver:5.0.0-alpha.11')
 
 }
 
