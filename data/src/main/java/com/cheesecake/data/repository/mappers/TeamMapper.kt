@@ -6,26 +6,26 @@ import com.cheesecake.domain.entity.Team
 
 @JvmName("teamDTOToTeam")
 fun TeamDTO.toEntity(): Team = Team(
-    teamId = this.team.id,
-    teamName = this.team.name,
-    founded = this.team.founded,
-    teamCountry = this.team.country,
-    venueCapacity = this.venue.capacity,
-    venueName = this.venue.name,
+    id = this.team.id,
+    name = this.team.name,
+    yearFounded = this.team.founded,
+    country = this.team.country,
+    stadiumCapacity = this.venue.capacity,
+    stadiumName = this.venue.name,
     imageUrl = this.team.logo,
     isFavourite = false
 )
 
 @JvmName("teamToTeamLocalDTO")
 fun Team.toLocal(leagueId: Int, leagueSeason: Int): TeamLocalDTO = TeamLocalDTO(
-    teamId = teamId,
+    teamId = id,
     leagueId = leagueId,
     season = leagueSeason,
-    teamName = this.teamName,
-    founded = this.founded,
-    teamCountry = this.teamCountry,
-    venueCapacity = this.venueCapacity,
-    venueName = this.venueName,
+    teamName = this.name,
+    founded = this.yearFounded,
+    teamCountry = this.country,
+    venueCapacity = this.stadiumCapacity,
+    venueName = this.stadiumName,
     imageUrl = this.imageUrl,
     isFavourite = this.isFavourite
 )
