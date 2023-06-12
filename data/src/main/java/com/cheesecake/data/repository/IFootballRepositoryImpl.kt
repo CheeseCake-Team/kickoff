@@ -1,14 +1,9 @@
 package com.cheesecake.data.repository
 
+import com.cheesecake.data.repository.mappers.toDomainEntity
 import com.cheesecake.data.repository.mappers.toEntity
 import com.cheesecake.data.repository.mappers.toLocal
-import com.cheesecake.domain.entity.Fixture
-import com.cheesecake.domain.entity.League
-import com.cheesecake.domain.entity.PlayerStatistics
-import com.cheesecake.domain.entity.Team
-import com.cheesecake.domain.entity.TeamStanding
-import com.cheesecake.domain.entity.TeamStatisticsEntity
-import com.cheesecake.domain.entity.Trophy
+import com.cheesecake.domain.entity.*
 import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
@@ -127,5 +122,12 @@ class IFootballRepositoryImpl
 
     override suspend fun getCoachTrophy(coachId: Int): List<Trophy> {
         return remoteDataSource.getCoachTrophies(coachId).toEntity()
+    }
+
+    override suspend fun getAllPlayersByTeamIdAndSeason(
+        season: String,
+        teamId: Int
+    ): List<TeamPlayers> {
+        return remoteDataSource.getPlayerBySeasonByTeamId(season,teamId).toDomainEntity()
     }
 }

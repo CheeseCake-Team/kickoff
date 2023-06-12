@@ -43,12 +43,9 @@ class LeagueDetailsViewModel @Inject constructor(
             },
             { error ->
                 _leagueDetailsUIState.update { it.copy( error.message.toString(), isLoading = false) }
-
-
             }
         )
     }
-
 
     private fun getTopScorers() {
         tryToExecute(
@@ -89,7 +86,6 @@ class LeagueDetailsViewModel @Inject constructor(
             }
         )
     }
-
 
     private fun getCurrentRound() {
         tryToExecute(
