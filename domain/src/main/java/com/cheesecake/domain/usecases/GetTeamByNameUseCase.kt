@@ -10,10 +10,8 @@ class GetTeamByNameUseCase @Inject constructor(
     private val repository: IFootballRepository
 ) {
 
-    suspend operator fun invoke(teamName: String): Flow<List<Team>> {
-        return flow {
-            emit(repository.getTeamsByName(teamName))
-        }
+    suspend operator fun invoke(teamName: String): List<Team> {
+        return repository.getTeamsByName(teamName)
     }
 
 }

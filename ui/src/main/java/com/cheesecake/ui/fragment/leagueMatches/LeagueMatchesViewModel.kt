@@ -9,10 +9,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LeagueMatchesViewModel @Inject constructor(
-    private val getPairsOfMatchesAndDateByLeagueIdAndSeasonUseCase: GetPairsOfMatchesAndDateByLeagueIdAndSeasonUseCase
-) : BaseViewModel<LeagueMatchesUIState>() {
+    private val getPairsOfMatchesAndDateByLeagueIdAndSeasonUseCase: GetPairsOfMatchesAndDateByLeagueIdAndSeasonUseCase,
+) : BaseViewModel<LeagueMatchesUIState>(LeagueMatchesUIState()) {
 
-    override val uiState = LeagueMatchesUIState()
 
     init {
         getData()
@@ -20,7 +19,7 @@ class LeagueMatchesViewModel @Inject constructor(
 
     private fun getData() {
         tryToExecute(
-            {getPairsOfMatchesAndDateByLeagueIdAndSeasonUseCase("Africa/Cairo", 39, 2022)},
+            { getPairsOfMatchesAndDateByLeagueIdAndSeasonUseCase("Africa/Cairo", 39, 2022) },
             ::onSuccess,
             ::onError
         )

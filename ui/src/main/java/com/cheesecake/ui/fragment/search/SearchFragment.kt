@@ -21,12 +21,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         super.onViewCreated(view, savedInstanceState)
         binding.searchRecyclerView.adapter = SearchFragmentAdapter()
 
-        viewModel.searchInput.observe(viewLifecycleOwner) {
-            lifecycleScope.launch {
-                Log.i("onViewCreated: ", it.toString())
-                viewModel.onSearchInputChanged(it)
-            }
-        }
+//        viewModel.searchInput.observe(viewLifecycleOwner) {
+//            lifecycleScope.launch {
+//                Log.i("onViewCreated: ", it.toString())
+//                viewModel.onSearchInputChanged(it)
+//            }
+//        }
     }
 
 }
