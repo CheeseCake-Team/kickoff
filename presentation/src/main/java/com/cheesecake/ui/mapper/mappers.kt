@@ -5,12 +5,12 @@ import com.cheesecake.ui.models.TeamUIState
 
 fun Team.toUIModel(): TeamUIState {
     return TeamUIState(
-        teamId = this.teamId,
-        teamName= this.teamName,
-        founded= this.founded,
-        teamCountry= this.teamCountry,
-        venueCapacity= this.venueCapacity,
-        venueName= this.venueName,
+        teamId = this.id,
+        teamName= this.name,
+        founded= this.yearFounded,
+        teamCountry= this.country,
+        venueCapacity= this.stadiumCapacity,
+        venueName= this.stadiumName,
         imageUrl= this.imageUrl,
         isFavourite= this.isFavourite,
     )
