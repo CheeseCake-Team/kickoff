@@ -10,8 +10,8 @@ fun TeamDTO.toEntity(): Team = Team(
     name = this.team.name,
     yearFounded = this.team.founded,
     country = this.team.country,
-    stadiumCapacity = this.venue.capacity,
-    stadiumName = this.venue.name,
+    stadiumCapacity = this.venue.capacity ?: 0,
+    stadiumName = this.venue.name ?: "Unknown Stadium",
     imageUrl = this.team.logo,
     isFavourite = false
 )

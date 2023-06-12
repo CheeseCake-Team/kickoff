@@ -15,7 +15,7 @@ data class TeamDTO(
         @SerializedName("name")
         val name: String,
         @SerializedName("code")
-        val code: String,
+        val code: String?,
         @SerializedName("country")
         val country: String,
         @SerializedName("founded")
@@ -28,19 +28,19 @@ data class TeamDTO(
 
     data class Venue(
         @SerializedName("id")
-        val id: Int,
+        val id: Int?,
         @SerializedName("name")
-        val name: String,
+        val name: String?,
         @SerializedName("address")
-        val address: String,
+        val address: String?,
         @SerializedName("city")
-        val city: String,
+        val city: String?,
         @SerializedName("capacity")
-        val capacity: Int,
+        val capacity: Int?,
         @SerializedName("surface")
-        val surface: String,
+        val surface: String?,
         @SerializedName("image")
-        val image: String
+        val image: String?
     )
 }
 
