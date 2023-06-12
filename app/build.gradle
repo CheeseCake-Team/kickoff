@@ -53,7 +53,7 @@ android {
 }
 
 dependencies {
-    api project(":ui")
+    api project(':presentation')
     api project(":domain")
     api project(":data")
 
