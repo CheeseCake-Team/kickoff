@@ -31,8 +31,9 @@ android {
     kotlinOptions {
         jvmTarget = '17'
     }
-    buildFeatures {
-        dataBinding true
+
+    buildFeatures{
+        dataBinding = true
     }
 }
 
@@ -46,8 +47,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    kaptAndroidTest 'androidx.databinding:databinding-compiler:8.0.2'
-    kaptTest "androidx.databinding:databinding-compiler:8.0.2"
+    def data_binding_version = "8.0.2"
+    kaptAndroidTest "androidx.databinding:databinding-compiler:$data_binding_version"
+    kaptTest "androidx.databinding:databinding-compiler:$data_binding_version"
 
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
 
@@ -56,13 +58,15 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0"
     implementation "androidx.cardview:cardview:1.0.0"
 
-    implementation "com.google.dagger:hilt-android:2.44"
-    kapt "com.google.dagger:hilt-compiler:2.44"
+    def dagger_hilt_version = "2.44"
+    implementation "com.google.dagger:hilt-android:$dagger_hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$dagger_hilt_version"
 
-    implementation 'com.github.bumptech.glide:glide:4.15.1'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.15.0'
+    def glide_version = "4.15.1"
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
 
-    def lifecycle_version = "2.6.1"
+    def lifecycle_version = '2.6.1'
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
@@ -73,6 +77,7 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
 
 }
+
 
 kapt {
     correctErrorTypes true
