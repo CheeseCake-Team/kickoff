@@ -6,7 +6,6 @@ import androidx.fragment.app.viewModels
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentFavoriteLeaguesBinding
-import com.cheesecake.presentation.ui.leagueMatches.LeagueMatchesDateMatchAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,6 +15,6 @@ class FavoriteLeaguesFragment : BaseFragment<FragmentFavoriteLeaguesBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.favoriteLeaguesRecyclerView.adapter = LeagueMatchesDateMatchAdapter()
+        binding.favoriteLeaguesRecyclerView.adapter = FavoriteLeaguesAdapter()
     }
 }
