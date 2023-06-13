@@ -24,7 +24,7 @@ class LocalDataSourceImp @Inject constructor(
         teamsDao.updateOrInsertTeams(teams)
     }
 
-    override suspend fun getFavouriteTeams(): List<TeamLocalDTO> {
+    override suspend fun getFavouriteTeams(): Flow<List<TeamLocalDTO>> {
         return teamsDao.getFavouriteTeams()
     }
 
@@ -56,11 +56,11 @@ class LocalDataSourceImp @Inject constructor(
         playerDao.deletePlayerById(playerId)
     }
 
-    override suspend fun getFavouriteLeagues(): List<LeagueLocalDto> {
-        return leagueDao.getFavouriteLeague()
+    override suspend fun getFavouriteLeagues(): Flow<List<LeagueLocalDTO>> {
+        return leagueDao.getFavouriteLeagues()
     }
 
-    override suspend fun getFavoritePLayers(): List<PlayerLocalDto> {
+    override suspend fun getFavoritePLayers(): Flow<List<PlayerLocalDto>> {
         return playerDao.getFavouritePlayers()
     }
 
