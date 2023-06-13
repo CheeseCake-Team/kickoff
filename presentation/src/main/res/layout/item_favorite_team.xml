@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="viewModel"
-            type="com.cheesecake.presentation.ui.favoriteTeams.FavoriteTeamsViewModel" />
+            name="item"
+            type="com.cheesecake.domain.entity.Team" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +19,7 @@
             android:layout_width="@dimen/team_image_size_48dp"
             android:layout_height="@dimen/team_image_size_48dp"
             android:layout_marginStart="16dp"
-            app:imageUrl="@{viewModel.state.imageUrl}"
+            app:imageUrl="@{item.imageUrl}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:text="@{viewModel.state.teamName}"
+            android:text="@{item.name}"
             android:textColor="@color/fontHeavy"
             app:layout_constraintBottom_toTopOf="@+id/text_view_team_contrary"
             app:layout_constraintEnd_toStartOf="@+id/button_favourites"
@@ -45,7 +45,7 @@
             style="@style/SubtitleSmall"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.state.teamName}"
+            android:text="@{item.country}"
             android:textColor="@color/fontLight"
             app:layout_constraintBottom_toBottomOf="@+id/text_view_favorite_team_icon"
             app:layout_constraintEnd_toEndOf="@+id/text_view_team_name"
@@ -60,8 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:button="@drawable/sl_favourite"
-            android:checked="@{viewModel.state.isFavourite}"
-            android:onClick="@{() -> viewModel.toggleFavourite()}"
+            android:checked="@{item.isFavourite}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
