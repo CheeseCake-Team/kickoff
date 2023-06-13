@@ -19,6 +19,6 @@ interface LeagueDao {
     suspend fun getLeagueByIdAndSeason(leagueId: Int, leagueSeason: Int): LeagueLocalDTO?
 
     @Query("SELECT * FROM league_table WHERE isFavourite = 1")
-    suspend fun getFavouriteLeagues(): Flow<List<LeagueLocalDTO>>
+    fun getFavouriteLeagues(): Flow<List<LeagueLocalDTO>>
 
 }

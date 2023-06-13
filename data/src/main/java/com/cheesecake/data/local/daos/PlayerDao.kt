@@ -19,7 +19,7 @@ interface PlayerDao {
     suspend fun deleteAllPlayers()
 
     @Query("SELECT * FROM player_table WHERE isFavourite = 1")
-    suspend fun getFavouritePlayers(): Flow<List<PlayerLocalDto>>
+    fun getFavouritePlayers(): Flow<List<PlayerLocalDto>>
 
     @Query("DELETE FROM player_table WHERE playerId = :playerId")
     suspend fun deletePlayerById(playerId: Int)
