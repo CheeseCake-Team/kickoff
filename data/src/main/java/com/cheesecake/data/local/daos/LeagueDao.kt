@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
 import com.cheesecake.data.local.models.LeagueLocalDTO
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface LeagueDao {
@@ -18,6 +19,6 @@ interface LeagueDao {
     suspend fun getLeagueByIdAndSeason(leagueId: Int, leagueSeason: Int): LeagueLocalDTO?
 
     @Query("SELECT * FROM league_table WHERE isFavourite = 1")
-    suspend fun getFavouriteLeague(): List<LeagueLocalDto>
+    suspend fun getFavouriteLeagues(): Flow<List<LeagueLocalDTO>>
 
 }
