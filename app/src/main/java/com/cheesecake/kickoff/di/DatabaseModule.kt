@@ -34,4 +34,9 @@ object DatabaseModule {
     fun provideLeagueDoa(kickoffDatabase: KickoffDatabase): LeagueDao =
         kickoffDatabase.getLeagueDao()
 
+    @Singleton
+    @Provides
+    fun providePlayerDoa(kickoffDatabase: KickoffDatabase): LeagueDao =
+        kickoffDatabase.getLeagueDao()
+
 }
