@@ -27,6 +27,9 @@ import com.cheesecake.data.remote.models.VenuesDTO
 import com.cheesecake.data.remote.utils.FixtureStatus
 import com.cheesecake.data.remote.utils.LeagueType
 import com.cheesecake.data.repository.RemoteDataSource
+import com.cheesecake.domain.KickoffException
+import kotlinx.coroutines.TimeoutCancellationException
+import kotlinx.coroutines.withTimeout
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -579,7 +582,10 @@ class RemoteDataSourceImp @Inject constructor(
 
     override suspend fun getTeamsBySearch(name: String): List<TeamDTO> {
         val o = service.getTeamsBySearch(name)
-        Log.i("onSearchInputDataSource: ", wrapBaseResponse { service.getTeamsBySearch(name) }.toString())
+        Log.i(
+            "onSearchInputDataSource: ",
+            wrapBaseResponse { service.getTeamsBySearch(name) }.toString()
+        )
         return wrapBaseResponse { service.getTeamsBySearch(name) }
     }
 
@@ -676,5 +682,43 @@ class RemoteDataSourceImp @Inject constructor(
     ): T {
         return response().takeIf { it.isSuccessful }?.body()?.response
             ?: throw Throwable("Not Success Request")
+    }
+
+
+    private suspend fun <T> wrapBaseResponseAndHandleError(
+        response: suspend () -> Response<BasePagingResponse<T>>
+    ): List<T> {
+        return try {
+            val apiResponse = withTimeout(5000) { response() }
+            if (apiResponse.isSuccessful) {
+                val responseBody = apiResponse.body()
+                responseBody?.response ?: throw KickoffException.NoDataFoundException()
+            } else {
+                throw KickoffException.InternalServerErrorException()
+            }
+        } catch (e: TimeoutCancellationException) {
+            throw KickoffException.TimeoutException()
+        } catch (e: Exception) {
+            throw KickoffException.NoInternetConnectionException()
+        }
+    }
+
+
+    private suspend fun <T> wrapBaseStaticResponseAndHandleError(
+        response: suspend () -> Response<BasePagingForStaticResponse<T>>
+    ): T {
+        return try {
+            val apiResponse = withTimeout(5000) { response() }
+            if (apiResponse.isSuccessful) {
+                val responseBody = apiResponse.body()
+                responseBody?.response ?: throw KickoffException.NoDataFoundException()
+            } else {
+                throw KickoffException.InternalServerErrorException()
+            }
+        } catch (e: TimeoutCancellationException) {
+            throw KickoffException.TimeoutException()
+        } catch (e: Exception) {
+            throw KickoffException.NoInternetConnectionException()
+        }
     }
 }
