@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/spacing_small"
+        android:backgroundTint="@color/cardSurface"
+        android:layout_marginBottom="@dimen/spacing_small">
+        
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="@dimen/spacing_medium"
+        android:paddingVertical="@dimen/spacing_small">
+        
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/image_player"
+        android:layout_width="@dimen/spacing_48dp"
+        android:layout_height="@dimen/spacing_48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:round="100dp"
+        tools:src="@drawable/player"
+        />
+
+        <TextView
+            android:id="@+id/text_view_player_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            app:layout_constraintStart_toEndOf="@id/image_player"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="@string/player_name"
+            style="@style/SubtitleMedium"
+            android:textColor="@color/fontHeavy"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/image_player"
+            app:layout_constraintEnd_toEndOf="@id/text_view_player_name"
+            app:layout_constraintTop_toBottomOf="@id/text_view_player_name"
+            tools:text="@string/player_country"
+            style="@style/SubtitleSmall"
+            android:textColor="@color/fontLight"
+            />
+
+
+        
+    </androidx.constraintlayout.widget.ConstraintLayout>
+        
+    </androidx.cardview.widget.CardView>
+</layout>
