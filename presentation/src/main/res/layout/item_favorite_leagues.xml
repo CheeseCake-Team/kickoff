@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.cheesecake.domain.entity.League" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/text_view_favorite_league_icon"
+            android:layout_width="@dimen/team_image_size_48dp"
+            android:layout_height="@dimen/team_image_size_48dp"
+            android:layout_marginStart="16dp"
+            app:imageUrl="@{item.leagueLogo}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/text_view_league_name"
+            style="@style/SubtitleMedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@{item.leagueName}"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintBottom_toTopOf="@+id/text_view_league_contrary"
+            app:layout_constraintEnd_toStartOf="@+id/button_favourites"
+            app:layout_constraintStart_toEndOf="@+id/text_view_favorite_league_icon"
+            app:layout_constraintTop_toTopOf="@+id/text_view_favorite_league_icon"
+            tools:text="Arsenal" />
+
+        <TextView
+            android:id="@+id/text_view_league_contrary"
+            style="@style/SubtitleSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{item.country}"
+            android:textColor="@color/fontLight"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_favorite_league_icon"
+            app:layout_constraintEnd_toEndOf="@+id/text_view_league_name"
+            app:layout_constraintStart_toStartOf="@+id/text_view_league_name"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_league_name"
+            tools:text="England" />
+
+        <CheckBox
+            android:id="@+id/button_favourites"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:button="@drawable/sl_favourite"
+            android:checked="@{item.isFavourite}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
