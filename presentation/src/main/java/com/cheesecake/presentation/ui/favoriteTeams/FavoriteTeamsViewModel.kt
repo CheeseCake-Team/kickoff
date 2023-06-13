@@ -9,9 +9,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
-class FavoriteTeamsViewModel(
+class FavoriteTeamsViewModel @Inject constructor(
     private val getFavoriteTeamsUseCase: GetFavoriteTeamsUseCase
 ) : BaseViewModel<FavoriteTeamUIState>(FavoriteTeamUIState()) {
 
