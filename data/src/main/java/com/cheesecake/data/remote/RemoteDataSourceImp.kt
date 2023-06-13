@@ -31,6 +31,7 @@ import com.cheesecake.domain.KickoffException
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.withTimeout
 import retrofit2.Response
+import java.net.ConnectException
 import javax.inject.Inject
 
 class RemoteDataSourceImp @Inject constructor(
@@ -673,21 +674,6 @@ class RemoteDataSourceImp @Inject constructor(
     private suspend fun <T> wrapBaseResponse(
         response: suspend () -> Response<BasePagingResponse<T>>
     ): List<T> {
-        return response().takeIf { it.isSuccessful }?.body()?.response
-            ?: throw Throwable("Not Success Request")
-    }
-
-    private suspend fun <T> wrapBaseStaticResponse(
-        response: suspend () -> Response<BasePagingForStaticResponse<T>>,
-    ): T {
-        return response().takeIf { it.isSuccessful }?.body()?.response
-            ?: throw Throwable("Not Success Request")
-    }
-
-
-    private suspend fun <T> wrapBaseResponseAndHandleError(
-        response: suspend () -> Response<BasePagingResponse<T>>
-    ): List<T> {
         return try {
             val apiResponse = withTimeout(5000) { response() }
             if (apiResponse.isSuccessful) {
@@ -704,7 +690,7 @@ class RemoteDataSourceImp @Inject constructor(
     }
 
 
-    private suspend fun <T> wrapBaseStaticResponseAndHandleError(
+    private suspend fun <T> wrapBaseStaticResponse(
         response: suspend () -> Response<BasePagingForStaticResponse<T>>
     ): T {
         return try {
@@ -717,7 +703,7 @@ class RemoteDataSourceImp @Inject constructor(
             }
         } catch (e: TimeoutCancellationException) {
             throw KickoffException.TimeoutException()
-        } catch (e: Exception) {
+        } catch (e: ConnectException) {
             throw KickoffException.NoInternetConnectionException()
         }
     }
