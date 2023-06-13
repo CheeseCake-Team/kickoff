@@ -18,6 +18,8 @@
             android:id="@+id/favorite_leagues_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:padding="@dimen/spacing_custom"
+            android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:items="@{viewModel.state.leagues}" />
 
