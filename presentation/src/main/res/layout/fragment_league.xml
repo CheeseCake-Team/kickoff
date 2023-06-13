@@ -7,14 +7,14 @@
 
         <variable
             name="viewModel"
-            type="com.cheesecake.presentation.ui.league.LeagueViewModel" />
+            type="com.cheesecake.presentation.screens.league.LeagueViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="false"
-        tools:context=".ui.league.LeagueFragment">
+        tools:context=".screens.league.LeagueFragment">
 
         <Button
             android:id="@+id/back_button"
