@@ -30,6 +30,7 @@ import com.cheesecake.data.repository.RemoteDataSource
 import com.cheesecake.domain.KickoffException
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.withTimeout
+import retrofit2.HttpException
 import retrofit2.Response
 import java.net.ConnectException
 import javax.inject.Inject
@@ -582,11 +583,6 @@ class RemoteDataSourceImp @Inject constructor(
     }
 
     override suspend fun getTeamsBySearch(name: String): List<TeamDTO> {
-        val o = service.getTeamsBySearch(name)
-        Log.i(
-            "onSearchInputDataSource: ",
-            wrapBaseResponse { service.getTeamsBySearch(name) }.toString()
-        )
         return wrapBaseResponse { service.getTeamsBySearch(name) }
     }
 
@@ -684,7 +680,7 @@ class RemoteDataSourceImp @Inject constructor(
             }
         } catch (e: TimeoutCancellationException) {
             throw KickoffException.TimeoutException()
-        } catch (e: Exception) {
+        } catch (e: ConnectException) {
             throw KickoffException.NoInternetConnectionException()
         }
     }
