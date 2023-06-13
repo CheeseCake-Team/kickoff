@@ -1,14 +1,14 @@
 package com.cheesecake.domain.usecases
 
-import com.cheesecake.domain.entity.PlayerEntity
-import com.cheesecake.domain.entity.TeamEntity
+import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.repository.IFootballRepository
+import kotlinx.coroutines.flow.Flow
 
-class GetAllFavoriteUseCase(
+class GetFavoriteTeamsUseCase(
     private val footballRepository: IFootballRepository,
 ) {
 
-    suspend operator fun invoke(): List<TeamEntity> {
+    suspend operator fun invoke(): Flow<List<Team>> {
         return footballRepository.getFavoriteTeams()
     }
 }
