@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.cheesecake.domain.entity.Fixture" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        style="@style/Widget.Material3.CardView.Filled"
+        android:layout_marginVertical="@dimen/spacing_tiny"
+        app:cardBackgroundColor="@color/cardSurface"
+        app:cardCornerRadius="4dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:id="@+id/textView"
+                style="@style/bodyMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:maxLength="14"
+                android:text="@{item.homeTeamName}"
+                android:textColor="@color/fontHeavy"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                app:layout_constraintEnd_toStartOf="@+id/imageView"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageView"
+                tools:text="TextView" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="@dimen/team_image_size_24dp"
+                android:layout_height="@dimen/team_image_size_24dp"
+                android:layout_marginEnd="@dimen/spacing_medium"
+                app:imageUrl="@{item.homeTeamLogoUrl}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/SubtitleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/fontHeavy"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:matchScore="@{item}"
+                tools:text="TextView" />
+
+            <TextView
+                android:id="@+id/textView3"
+                style="@style/bodyMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:maxLength="10"
+                android:text="@{item.awayTeamName}"
+                android:textColor="@color/fontHeavy"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintTop_toTopOf="@+id/imageView2"
+                tools:text="TextView" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="@dimen/team_image_size_24dp"
+                android:layout_height="@dimen/team_image_size_24dp"
+                android:layout_marginStart="@dimen/spacing_medium"
+                app:imageUrl="@{item.awayTeamLogoUrl}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

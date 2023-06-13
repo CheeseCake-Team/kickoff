@@ -5,15 +5,11 @@
     app:startDestination="@id/leagueFragment">
 
     <fragment
-        android:id="@+id/testFragment"
-        android:name="com.cheesecake.ui.fragment.leagueTeams.TestFragment"
-        android:label="TestFragment" />
-    <fragment
         android:id="@+id/leagueFragment"
-        android:name="com.cheesecake.ui.fragment.league.LeagueFragment"
+        android:name="com.cheesecake.presentation.ui.league.LeagueFragment"
         android:label="LeagueFragment" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.cheesecake.ui.fragment.search.SearchFragment"
+        android:name="com.cheesecake.presentation.ui.search.SearchFragment"
         android:label="SearchFragment" />
 </navigation>

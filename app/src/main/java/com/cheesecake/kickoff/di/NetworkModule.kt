@@ -2,6 +2,7 @@ package com.cheesecake.kickoff.di
 
 import com.cheesecake.data.remote.AuthInterceptor
 import com.cheesecake.data.remote.api.FootballApiService
+import com.cheesecake.kickoff.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,10 +17,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-
-    //TODO write api service provider injection
-
-
     @Singleton
     @Provides
     fun provideRetrofitService(retrofit: Retrofit): FootballApiService {
@@ -33,13 +30,12 @@ object NetworkModule {
         factory: GsonConverterFactory
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://v3.football.api-sports.io/")
+            .baseUrl(BuildConfig.BASE_URL)
             .client(client)
             .addConverterFactory(factory)
             .build()
     }
 
-    //TODO check how to import BuildConfigKey ???
     @Singleton
     @Provides
     fun provideOkHttpClient(
