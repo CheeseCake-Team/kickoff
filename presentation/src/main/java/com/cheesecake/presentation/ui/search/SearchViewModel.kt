@@ -52,6 +52,7 @@ class SearchViewModel @Inject constructor(
     }
 
     private suspend fun getSearchResult(input: String): SearchResult {
+        _state.update { it.copy(isLoading = true) }
         return when(searchType.value) {
             SearchType.TEAM -> {
                 SearchResult.Team(getTeamList(input).map { it.toUIModel() })
@@ -73,7 +74,6 @@ class SearchViewModel @Inject constructor(
     }
 
     private suspend fun onSearchInputChanged(newSearchInput: String) {
-        if (newSearchInput.isNotEmpty()) { _state.update { it.copy(isLoading = true) } }
         _state.update { it.copy(searchInput = newSearchInput) }
         searchInput.emit(newSearchInput)
     }
