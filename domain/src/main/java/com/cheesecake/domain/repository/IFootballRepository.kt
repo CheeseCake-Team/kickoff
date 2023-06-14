@@ -50,4 +50,8 @@ interface IFootballRepository {
 
     suspend fun getPlayerTrophy(playerId: Int): List<Trophy>
     suspend fun getCoachTrophy(coachId: Int): List<Trophy>
+
+    suspend fun getSquadOfTeam(teamId: Int): List<PlayerStatistics>
+
+     suspend fun getMatchesByTeamIdAndSeason(timeZone: String,season: Int, teamId: Int): List<Fixture>
 }
