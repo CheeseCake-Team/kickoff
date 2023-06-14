@@ -31,12 +31,13 @@
             tools:text="today" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/head_to_head_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_4"
             android:overScrollMode="never"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:fixtureItems="@{item.second}"
+            app:listItems="@{item.second}"
             tools:listitem="@layout/item_head_to_head"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 

@@ -10,6 +10,8 @@ import com.cheesecake.domain.entity.TeamStanding
 import com.cheesecake.domain.entity.TeamStatisticsEntity
 import com.cheesecake.domain.entity.Trophy
 import com.cheesecake.domain.repository.IFootballRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class IFootballRepositoryImpl
@@ -123,6 +125,14 @@ class IFootballRepositoryImpl
 
     override suspend fun getPlayerTrophy(playerId: Int): List<Trophy> {
         return remoteDataSource.getPlayerTrophies(playerId).toEntity()
+    }
+
+    override suspend fun getFavoriteTeams(): Flow<List<Team>> {
+        return localDataSource.getFavouriteTeams().map { it.toEntity() }
+    }
+
+    override suspend fun getFavoriteLeagues(): Flow<List<League>> {
+        return localDataSource.getFavouriteLeagues().map { it.toEntity() }
     }
 
     override suspend fun getCoachTrophy(coachId: Int): List<Trophy> {

@@ -28,5 +28,6 @@
     <string name="player_country">France</string>
     <string name="position">Goal Keeper</string>
     <string name="chelsea">Chelsea</string>
+    <string name="your_favorites">Your Favorites</string>
 
 </resources>
