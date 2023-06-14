@@ -12,7 +12,7 @@ class AuthInterceptor @Inject constructor() : Interceptor {
         val original = chain.request()
         val request = original.newBuilder()
             .header(API_HOST_HEADER, API_HOST_VALUE)
-            .header(API_KEY_HEADER, BuildConfig.my_private_key)
+            .header(API_KEY_HEADER,  BuildConfig.my_private_key)
             .build()
         return chain.proceed(request)
     }

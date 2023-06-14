@@ -97,4 +97,8 @@ class IFootballRepositoryImpl
         localDataSource.updateOrInsertTeams(teamEntityEntities.mapToLocal(leagueId, leagueSeason))
     }
 
+    override suspend fun getAllLeagues(): List<LeagueEntity> {
+        return remoteDataSource.getAllLeagues().mapRemoteDtoToEntity()
+    }
+
 }
