@@ -19,6 +19,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.presentation.base.BaseAdapter
 import com.cheesecake.presentation.ui.leagueMatches.LeagueMatchesHeadToHeadAdapter
+import com.cheesecake.presentation.ui.search.SearchResult
 import com.cheesecake.presentation.ui.search.SearchViewModel
 
 
@@ -52,6 +53,19 @@ fun <T> setRecyclerItems(view: RecyclerView, items: List<T>?) {
     }
 }
 
+@BindingAdapter(value = ["app:searchItems"])
+fun <T> setRecyclerItems(view: RecyclerView, items: SearchResult?) {
+    items?.let {
+        when(it) {
+            is SearchResult.Team -> {
+                (view.adapter as BaseAdapter<T>?)?.setItems(it.items as List<T>)
+            }
+            else -> {}
+        }
+
+    }
+}
+
 @BindingAdapter(value = ["app:fixtureItems"])
 fun <T> setItems(view: RecyclerView, items: List<T>?) {
     items?.let {
@@ -73,9 +87,12 @@ fun hideWhenLoading(view: View, isVisible: Boolean) {
 }
 
 @BindingAdapter(value = ["app:showNoResultFound"])
-fun <T> showWhenNoResult(view: FrameLayout, items: List<T>?) {
+fun <T> showWhenNoResult(view: FrameLayout, items: SearchResult?) {
     items?.let {
-        view.isVisible = items.isEmpty()
+        when(it) {
+            is SearchResult.Team -> { view.isVisible = it.items.isEmpty()}
+            is SearchResult.League -> { view.isVisible = it.items.isEmpty() }
+        }
     }
 }
 

@@ -1,13 +1,11 @@
 package com.cheesecake.presentation.ui.search
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.cheesecake.domain.usecases.GetLeagueByNameUseCase
+import com.cheesecake.domain.usecases.GetLeagueBySearchUseCase
 import com.cheesecake.domain.usecases.GetTeamByNameUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.mapper.toUIModel
-import com.cheesecake.presentation.models.TeamUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,14 +19,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val getLeagueByNameUseCase: GetLeagueByNameUseCase,
+    private val getLeagueList: GetLeagueBySearchUseCase,
     private val getTeamList: GetTeamByNameUseCase,
 ) : BaseViewModel<SearchUIState>(SearchUIState()) {
 
 
     val searchInput = MutableStateFlow("")
 
-    private val searchInputFlow = MutableSharedFlow<String>()
+
+    val searchType = MutableStateFlow(SearchType.TEAM)
 
 //    val isResultEmptyOnly =
 //        MutableStateFlow((!(state.value.isLoading)) && (state.value.searchResult.isEmpty()))
@@ -44,18 +43,28 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    private suspend fun onSearching(debouncedInput: String) {
+    private suspend fun onSearching(input: String) {
         tryToExecute(
-            { getTeamList(debouncedInput).map { it.toUIModel() } },
+            { getSearchResult(input) },
             ::onSearchSuccess,
             ::onSearchError
         )
     }
 
-    private fun onSearchSuccess(teamUIList: List<TeamUIState>) {
+    private suspend fun getSearchResult(input: String): SearchResult {
+        return when(searchType.value) {
+            SearchType.TEAM -> {
+                SearchResult.Team(getTeamList(input).map { it.toUIModel() })
+            }
+            else -> { TODO() }
+            //SearchType.LEAGUE -> getLeagueList(input)
+        }
+    }
+
+    private fun onSearchSuccess(items: SearchResult) {
         Log.i("onSearchInputChanged: ", "debounced before")
         Log.i("onSearchInputChanged: ", _state.value.isLoading.toString())
-        _state.update { it.copy(searchResult = teamUIList, isLoading = false) }
+        _state.update { it.copy(searchResult = items, isLoading = false) }
     }
 
     private fun onSearchError(throwable: Throwable) {

@@ -36,9 +36,9 @@ class LeagueViewModel @Inject constructor(
             getLeagueByIdAndSeasonUseCase(39, 2022).let { league ->
                 _state.update { uiState ->
                     uiState.copy(
-                        leagueName = league.leagueName,
+                        leagueName = league.name,
                         seasonStartEndYear = "${league.seasonStartYear}/${league.seasonEndYear}",
-                        imageUrl = league.leagueLogo,
+                        imageUrl = league.imageUrl,
                         isFavourite = league.isFavourite,
                         isLoading = false
                     )
