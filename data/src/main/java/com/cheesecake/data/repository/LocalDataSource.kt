@@ -1,7 +1,6 @@
 package com.cheesecake.data.repository
 
 import com.cheesecake.data.local.models.LeagueLocalDTO
-import com.cheesecake.data.local.models.PlayerLocalDto
 import com.cheesecake.data.local.models.TeamLocalDTO
 import kotlinx.coroutines.flow.Flow
 
@@ -17,8 +16,6 @@ interface LocalDataSource {
 
     suspend fun getFavouriteLeagues(): Flow<List<LeagueLocalDTO>>
 
-    suspend fun getFavoritePLayers(): Flow<List<PlayerLocalDto>>
-
     suspend fun deleteAllTeams()
 
     suspend fun getLeagueByIdAndSeason(leagueId: Int, leagueSeason: Int): LeagueLocalDTO?
@@ -28,8 +25,5 @@ interface LocalDataSource {
     suspend fun deleteLeagueById(leagueId: Int)
 
     suspend fun deleteTeamById(teamId: Int)
-
-    suspend fun deletePlayerById(playerId: Int)
-
 
 }

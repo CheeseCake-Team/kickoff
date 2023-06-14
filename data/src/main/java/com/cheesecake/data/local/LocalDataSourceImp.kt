@@ -1,10 +1,7 @@
 package com.cheesecake.data.local
 
-import com.cheesecake.data.local.daos.LeagueDao
-import com.cheesecake.data.local.daos.PlayerDao
-import com.cheesecake.data.local.daos.TeamsDao
+import com.cheesecake.data.local.daos.LeagueDao import com.cheesecake.data.local.daos.TeamsDao
 import com.cheesecake.data.local.models.LeagueLocalDTO
-import com.cheesecake.data.local.models.PlayerLocalDto
 import com.cheesecake.data.local.models.TeamLocalDTO
 import com.cheesecake.data.repository.LocalDataSource
 import kotlinx.coroutines.flow.Flow
@@ -13,7 +10,6 @@ import javax.inject.Inject
 class LocalDataSourceImp @Inject constructor(
     private val teamsDao: TeamsDao,
     private val leagueDao: LeagueDao,
-    private val playerDao: PlayerDao
 ) : LocalDataSource {
 
     override fun getLocallyTeamsByIdAndSeason(leagueId: Int, season: Int): List<TeamLocalDTO> {
@@ -52,16 +48,8 @@ class LocalDataSourceImp @Inject constructor(
         teamsDao.deleteTeamById(teamId)
     }
 
-    override suspend fun deletePlayerById(playerId: Int) {
-        playerDao.deletePlayerById(playerId)
-    }
-
     override suspend fun getFavouriteLeagues(): Flow<List<LeagueLocalDTO>> {
         return leagueDao.getFavouriteLeagues()
-    }
-
-    override suspend fun getFavoritePLayers(): Flow<List<PlayerLocalDto>> {
-        return playerDao.getFavouritePlayers()
     }
 
 }
