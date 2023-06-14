@@ -27,5 +27,6 @@
     <string name="no_result_found">No Result Found</string>
     <string name="player_country">France</string>
     <string name="position">Goal Keeper</string>
+    <string name="chelsea">Chelsea</string>
 
 </resources>
