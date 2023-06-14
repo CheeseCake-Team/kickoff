@@ -1,23 +1,27 @@
 package com.cheesecake.data.repository
 
-import com.cheesecake.data.remote.response.FixtureResponse
-import com.cheesecake.data.remote.response.LineupResponse
-import com.cheesecake.data.remote.response.PlayerResponse
-import com.cheesecake.data.remote.response.PredictionsResponse
-import com.cheesecake.data.remote.response.SidelinedResponse
-import com.cheesecake.data.remote.response.SquadResponse
-import com.cheesecake.data.remote.response.StandingsResponse
-import com.cheesecake.data.remote.response.TeamCountriesResponse
-import com.cheesecake.data.remote.response.TeamInformationResponse
-import com.cheesecake.data.remote.response.TeamStatisticsResponse
-import com.cheesecake.data.remote.response.TransferResponse
-import com.cheesecake.data.remote.response.TrophyResponse
-import com.cheesecake.data.remote.response.VenuesResponse
-import com.cheesecake.data.utils.FixtureStatus
-import com.cheesecake.data.utils.LeagueType
-import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Query
+import com.cheesecake.data.remote.models.CoachDTO
+import com.cheesecake.data.remote.models.EventDTO
+import com.cheesecake.data.remote.models.FixtureDTO
+import com.cheesecake.data.remote.models.FixtureStatisticsDTO
+import com.cheesecake.data.remote.models.FixturesDTO
+import com.cheesecake.data.remote.models.HeadToHeadDTO
+import com.cheesecake.data.remote.models.InjuriesDTO
+import com.cheesecake.data.remote.models.LeagueDTO
+import com.cheesecake.data.remote.models.LineupDTO
+import com.cheesecake.data.remote.models.PlayerDTO
+import com.cheesecake.data.remote.models.PredictionsDTO
+import com.cheesecake.data.remote.models.SidelinedDTO
+import com.cheesecake.data.remote.models.SquadDTO
+import com.cheesecake.data.remote.models.StandingsDTO
+import com.cheesecake.data.remote.models.TeamCountriesDTO
+import com.cheesecake.data.remote.models.TeamDTO
+import com.cheesecake.data.remote.models.TeamStatisticsDTO
+import com.cheesecake.data.remote.models.TransferDTO
+import com.cheesecake.data.remote.models.TrophyDTO
+import com.cheesecake.data.remote.models.VenuesDTO
+import com.cheesecake.data.remote.utils.FixtureStatus
+import com.cheesecake.data.remote.utils.LeagueType
 
 
 interface RemoteDataSource {
@@ -27,48 +31,47 @@ interface RemoteDataSource {
 
     suspend fun getCoachById(
         playerID: Int
-    ): List<com.cheesecake.data.remote.response.CoachResponse>
+    ): List<CoachDTO>
 
 
     suspend fun getCoachByTeam(
         teamID: Int
-    ): List<com.cheesecake.data.remote.response.CoachResponse>
+    ): List<CoachDTO>
 
 
     suspend fun getCoachBySearch(
         getCoachName: String
-    ): List<com.cheesecake.data.remote.response.CoachResponse>
+    ): List<CoachDTO>
     //endregion
 
     //region countries
 
-    suspend fun getAllCountries(): List<TeamCountriesResponse>
+    suspend fun getAllCountries(): List<TeamCountriesDTO>
 
 
     suspend fun getCountryByName(
         countryName: String
-    ): List<TeamCountriesResponse>
+    ): List<TeamCountriesDTO>
 
 
     suspend fun getCountryByCode(
         countryCode: String
-    ): List<TeamCountriesResponse>
+    ): List<TeamCountriesDTO>
 
 
     suspend fun searchInCountries(
         searchQuery: String
-    ): List<TeamCountriesResponse>
+    ): List<TeamCountriesDTO>
     //endregion
 
     //region fixtures
     //region Rounds
     suspend fun getFixtureRounds(
-        seasonId: Int,
-        leagueId: Int
+        seasonId: Int, leagueId: Int
     ): List<String>
 
 
-    suspend fun getFixtureRoundsCurrentOnly(
+    suspend fun getCurrentRoundByLeagueIdAndSeason(
         seasonId: Int,
         leagueId: Int,
         current: Boolean,
@@ -77,148 +80,107 @@ interface RemoteDataSource {
     //endregion
     //region Fixtures
     suspend fun getFixtureById(
-        timeZone: String,
-        fixtureId: Int
-    ): List<com.cheesecake.data.remote.response.FixtureResponse>
+        timeZone: String, fixtureId: Int
+    ): List<FixtureDTO>
 
     suspend fun getFixtureBySeasonByTeamId(
-        timeZone: String,
-        season: String,
-        TeamId: Int
-    ): List<com.cheesecake.data.remote.response.FixtureResponse>
+        timeZone: String, season: String, TeamId: Int
+    ): List<FixtureDTO>
 
     suspend fun getFixturesBySeasonIdAndLeagueId(
-        timeZone: String,
-        season: String,
-        leagueId: Int
-    ): List<FixtureResponse>
+        timeZone: String, season: Int, leagueId: Int
+    ): List<FixtureDTO>
 
     suspend fun getFixturesByDate(
-        timeZone: String,
-        date: String
-    ): List<com.cheesecake.data.remote.response.FixtureResponse>
+        timeZone: String, date: String
+    ): List<FixtureDTO>
 
 
     suspend fun getFixturesFromDate(
-        timeZone: String,
-        date: String
-    ): List<com.cheesecake.data.remote.response.FixtureResponse>
+        timeZone: String, date: String
+    ): List<FixtureDTO>
 
     suspend fun getFixturesToDate(
-        timeZone: String,
-        date: String
-    ): List<com.cheesecake.data.remote.response.FixtureResponse>
+        timeZone: String, date: String
+    ): List<FixtureDTO>
 
     suspend fun getFixturesFromDateToDate(
-        timeZone: String,
-        season: String,
-        TeamId: Int,
-        from: String,
-        date: String
-    ): List<com.cheesecake.data.remote.response.FixtureResponse>
+        timeZone: String, season: String, TeamId: Int, from: String, date: String
+    ): List<FixtureDTO>
 
     suspend fun getFixturesStatus(
-        timeZone: String,
-        fixtureStatusType: String
-    ): List<com.cheesecake.data.remote.response.FixtureResponse>
+        timeZone: String, fixtureStatusType: String
+    ): List<FixtureDTO>
     //endregion
     //region Head 2 Head
 
     suspend fun getHeadToHead(
-        teamsId: String,
-        seasonId: Int,
-        timeZone: String
-    ): List<com.cheesecake.data.remote.response.HeadToHeadResponse>
+        teamsId: String, seasonId: Int, timeZone: String
+    ): List<HeadToHeadDTO>
 
 
     suspend fun getHeadToHeadByDate(
-        teamsId: String,
-        date: String,
-        timeZone: String
-    ): List<com.cheesecake.data.remote.response.HeadToHeadResponse>
+        teamsId: String, date: String, timeZone: String
+    ): List<HeadToHeadDTO>
 
 
     suspend fun getHeadToHeadByStatus(
-        teamsId: String,
-        status: FixtureStatus,
-        seasonId: Int,
-        timeZone: String
-    ): List<com.cheesecake.data.remote.response.HeadToHeadResponse>
+        teamsId: String, status: FixtureStatus, seasonId: Int, timeZone: String
+    ): List<HeadToHeadDTO>
 
 
     suspend fun getHeadToHeadByFromAndTO(
-        teamsId: String,
-        from: String,
-        to: String,
-        seasonId: Int,
-        timeZone: String
-    ): List<com.cheesecake.data.remote.response.HeadToHeadResponse>
+        teamsId: String, from: String, to: String, seasonId: Int, timeZone: String
+    ): List<HeadToHeadDTO>
 
 
     suspend fun getHeadToHeadByLeague(
-        teamsId: String,
-        leagueId: Int,
-        seasonId: Int,
-        timeZone: String
-    ): List<com.cheesecake.data.remote.response.HeadToHeadResponse>
+        teamsId: String, leagueId: Int, seasonId: Int, timeZone: String
+    ): List<HeadToHeadDTO>
 
 
     suspend fun getHeadToHeadByByDateAndLeague(
-        teamsId: String,
-        leagueId: Int,
-        date: String,
-        timeZone: String
-    ): List<com.cheesecake.data.remote.response.HeadToHeadResponse>
+        teamsId: String, leagueId: Int, date: String, timeZone: String
+    ): List<HeadToHeadDTO>
 
 
     suspend fun getHeadToHeadByStatusAndLeague(
-        teamsId: String,
-        leagueId: Int,
-        status: FixtureStatus,
-        seasonId: Int,
-        timeZone: String
-    ): List<com.cheesecake.data.remote.response.HeadToHeadResponse>
+        teamsId: String, leagueId: Int, status: FixtureStatus, seasonId: Int, timeZone: String
+    ): List<HeadToHeadDTO>
 
 
     suspend fun getHeadToHeadByFromAndTOAndLeague(
-        teamsId: String,
-        leagueId: Int,
-        from: String,
-        to: String,
-        seasonId: Int,
-        timeZone: String
-    ): List<com.cheesecake.data.remote.response.HeadToHeadResponse>
+        teamsId: String, leagueId: Int, from: String, to: String, seasonId: Int, timeZone: String
+    ): List<HeadToHeadDTO>
     //endregion
     //region Statistics
 
     suspend fun getFixtureStatisticsByFixtureId(
         fixtureId: Int
-    ): List<com.cheesecake.data.remote.response.FixtureStatisticsResponse>
+    ): List<FixtureStatisticsDTO>
 
 
     suspend fun getFixtureStatisticsByFixtureIdByTeamId(
-        fixtureId: Int,
-        teamId: Int
-    ): List<com.cheesecake.data.remote.response.FixtureStatisticsResponse>
+        fixtureId: Int, teamId: Int
+    ): List<FixtureStatisticsDTO>
     //endregion
     //region Events
 
     suspend fun getFixtureEventsByFixtureId(
         fixtureId: Int
-    ): List<com.cheesecake.data.remote.response.EventResponse>
+    ): List<EventDTO>
 
 
     suspend fun getFixtureEventsByFixtureIdByTeamId(
-        fixtureId: Int,
-        teamId: Int
-    ): List<com.cheesecake.data.remote.response.EventResponse>
+        fixtureId: Int, teamId: Int
+    ): List<EventDTO>
 
 
     suspend fun getFixtureEventsByFixtureIdByTeamIdByPlayerId(
         fixtureId: Int,
         teamId: Int,
         playerId: Int,
-    ): List<com.cheesecake.data.remote.response.EventResponse>
+    ): List<EventDTO>
 
 
     suspend fun getFixtureEventsByFixtureIdByTeamIdByPlayerIdByType(
@@ -226,32 +188,31 @@ interface RemoteDataSource {
         teamId: Int,
         playerId: Int,
         fixtureEventType: String,
-    ): List<com.cheesecake.data.remote.response.EventResponse>
+    ): List<EventDTO>
+
     //endregion
     //region Lineups
     suspend fun getFixtureLineupsByFixtureId(
         fixtureId: Int
-    ): List<LineupResponse>
+    ): List<LineupDTO>
 
     suspend fun getFixtureLineupsByFixtureIdByTeamId(
-        fixtureId: Int,
-        teamId: Int
-    ): List<LineupResponse>
+        fixtureId: Int, teamId: Int
+    ): List<LineupDTO>
 
     suspend fun getFixtureLineupsByFixtureIdByPlayerId(
-        fixtureId: Int,
-        playerId: Int
-    ): List<LineupResponse>
+        fixtureId: Int, playerId: Int
+    ): List<LineupDTO>
 
     //endregion
     //region Players
     suspend fun getFixturePlayersByFixtureId(
         fixtureId: String
-    ): List<com.cheesecake.data.remote.response.FixturesResponse>
+    ): List<FixturesDTO>
+
     suspend fun getFixturePlayersByFixtureIdByTeamId(
-        fixtureId: Int,
-        teamId: Int
-    ): List<com.cheesecake.data.remote.response.FixturesResponse>
+        fixtureId: Int, teamId: Int
+    ): List<FixturesDTO>
 
     //endregion
     //endregion
@@ -260,221 +221,203 @@ interface RemoteDataSource {
 
     suspend fun getInjuriesByFixtureID(
         fixtureId: Int
-    ): List<com.cheesecake.data.remote.response.InjuriesResponse>
+    ): List<InjuriesDTO>
 
 
     suspend fun getInjuriesByLeagueIDAndSeason(
-        leagueId: Int,
-        season: Int
+        leagueId: Int, season: Int
 
-    ): List<com.cheesecake.data.remote.response.InjuriesResponse>
+    ): List<InjuriesDTO>
 
 
     suspend fun getInjuriesByTeamIDAndSeason(
-        teamId: Int,
-        season: Int
+        teamId: Int, season: Int
 
-    ): List<com.cheesecake.data.remote.response.InjuriesResponse>
+    ): List<InjuriesDTO>
 
 
     suspend fun getInjuriesByPlayerIDAndSeason(
-        playerId: Int,
-        season: Int
+        playerId: Int, season: Int
 
-    ): List<com.cheesecake.data.remote.response.InjuriesResponse>
+    ): List<InjuriesDTO>
 
 
     suspend fun getInjuriesByTimeZone(
         timeZone: String,
-    ): List<com.cheesecake.data.remote.response.InjuriesResponse>
+    ): List<InjuriesDTO>
 
 
     suspend fun getInjuriesByDate(
         date: String,
-    ): List<com.cheesecake.data.remote.response.InjuriesResponse>
+    ): List<InjuriesDTO>
     //endregion
 
     //region leagues
     suspend fun getAllLeagues(
 
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+    ): List<LeagueDTO>
 
     suspend fun getLeaguesById(
         leagueId: Int
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+    ): List<LeagueDTO>
 
     suspend fun getLeaguesByName(
         leagueName: String
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+    ): List<LeagueDTO>
 
     suspend fun getLeaguesByCountryName(
         countryName: String
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+    ): List<LeagueDTO>
 
     suspend fun getLeaguesByCountryCode(
         countryName: String
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+    ): List<LeagueDTO>
 
     suspend fun getLeaguesOfSeason(
         season: Int
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+    ): List<LeagueDTO>
 
     suspend fun getLeagueByIdAndSeason(
-        season: Int,
-        leagueId: Int
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+        season: Int, leagueId: Int
+    ): List<LeagueDTO>
 
     suspend fun getLeaguesByType(
         type: LeagueType
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+    ): List<LeagueDTO>
 
     suspend fun getLeaguesByTypeById(
-        type: LeagueType,
-        id: Int
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+        type: LeagueType, id: Int
+    ): List<LeagueDTO>
 
     suspend fun getLeagueByTypeByIdBySeason(
-        type: LeagueType,
-        id: Int,
-        season: Int
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+        type: LeagueType, id: Int, season: Int
+    ): List<LeagueDTO>
 
     suspend fun getCurrentActiveLeagues(
         current: Boolean
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+    ): List<LeagueDTO>
 
     suspend fun searchByLeagueName(
         name: String
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+    ): List<LeagueDTO>
 
     suspend fun getLeaguesSeasons(
 
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+    ): List<LeagueDTO>
 
     suspend fun getCurrentSeasonLeague(
-        id: Int,
-        current: Boolean
-    ): List<com.cheesecake.data.remote.response.LeagueResponse>
+        id: Int, current: Boolean
+    ): List<LeagueDTO>
     //endregion
 
     //region players
     suspend fun getPlayerBySeasonByPlayerId(
         season: String,
         playerId: Int,
-    ): List<PlayerResponse>
+    ): List<PlayerDTO>
 
     suspend fun getPlayerBySeasonByTeamId(
         season: String,
         teamId: Int,
-    ): List<PlayerResponse>
+    ): List<PlayerDTO>
 
     suspend fun getPlayerBySeasonByLeagueId(
-        season: String,
-        leagueId: Int
-    ): List<PlayerResponse>
+        season: String, leagueId: Int
+    ): List<PlayerDTO>
 
 
     suspend fun searchPlayerNameByTeamId(
-        playerName: String,
-        teamId: Int
-    ): List<PlayerResponse>
+        playerName: String, teamId: Int
+    ): List<PlayerDTO>
 
 
     suspend fun searchPlayerNameByLeagueId(
-        playerName: String,
-        leagueId: Int
-    ): List<PlayerResponse>
+        playerName: String, leagueId: Int
+    ): List<PlayerDTO>
 
     suspend fun getPlayerSeasons(): List<Int>
 
     suspend fun getSquadByPlayerId(
         playerId: Int
-    ): List<SquadResponse>
+    ): List<SquadDTO>
 
     suspend fun getSquadByTeamId(
         teamId: Int
-    ): List<SquadResponse>
+    ): List<SquadDTO>
 
     suspend fun getTopScorers(
-        seasonId: Int,
-        leagueId: Int
-    ): List<PlayerResponse>
+        seasonId: Int, leagueId: Int
+    ): List<PlayerDTO>
 
     suspend fun getTopAssists(
-        seasonId: Int,
-        leagueId: Int
-    ): List<PlayerResponse>
+        seasonId: Int, leagueId: Int
+    ): List<PlayerDTO>
 
 
     suspend fun getTopYellowCards(
-        seasonId: Int,
-        leagueId: Int
-    ): List<PlayerResponse>
+        seasonId: Int, leagueId: Int
+    ): List<PlayerDTO>
 
 
     suspend fun getTopRedCards(
-        seasonId: Int,
-        leagueId: Int
-    ): List<PlayerResponse>
+        seasonId: Int, leagueId: Int
+    ): List<PlayerDTO>
     //endregion
 
     //region predictions
     suspend fun getPredictionsByFixtureId(
         fixtureId: Int
-    ): List<PredictionsResponse>
+    ): List<PredictionsDTO>
     //endregion
 
     //region sidelined
     suspend fun getPlayerSidelined(
         playerId: Int
-    ): List<SidelinedResponse>
+    ): List<SidelinedDTO>
 
 
     suspend fun getCoachSidelined(
         coachId: Int
-    ): List<SidelinedResponse>
+    ): List<SidelinedDTO>
     //endregion
 
     //region standings
     suspend fun getStandingsByTeamId(
-        seasonId: Int,
-        teamId: Int
-    ): List<StandingsResponse>
+        seasonId: Int, teamId: Int
+    ): List<StandingsDTO>
 
     suspend fun getStandingsByLeagueId(
-        seasonId: Int,
-        leagueId: Int
-    ): List<StandingsResponse>
+        seasonId: Int, leagueId: Int
+    ): List<StandingsDTO>
 
     suspend fun getStandingsByTeamIdAndLeagueId(
-        seasonId: Int,
-        teamId: Int,
-        leagueId: Int
-    ): List<StandingsResponse>
+        seasonId: Int, teamId: Int, leagueId: Int
+    ): List<StandingsDTO>
 
     //endregion
 
     //region teams
     suspend fun getTeamsByLeagueAndSeason(
-        leagueId: Int,
-        seasonId: Int
-    ): List<TeamInformationResponse>
+        leagueId: Int, seasonId: Int
+    ): List<TeamDTO>
+
+    suspend fun getTeamsBySearch(
+        name: String,
+    ): List<TeamDTO>
 
     suspend fun getTeamById(
         teamId: Int
-    ): List<TeamInformationResponse>
+    ): List<TeamDTO>
 
     suspend fun getTeamStatistics(
-        teamId: Int,
-        season: Int,
-        leagueId: Int
-    ): TeamStatisticsResponse
+        teamId: Int, season: Int, leagueId: Int
+    ): TeamStatisticsDTO
 
     suspend fun getTeamSeasons(
         teamId: Int
     ): List<Int>
 
-    suspend fun getTeamCountries(): List<TeamCountriesResponse>
+    suspend fun getTeamCountries(): List<TeamCountriesDTO>
 
     //endregion
 
@@ -485,44 +428,44 @@ interface RemoteDataSource {
     //region transfers
     suspend fun getTransfersByPlayerId(
         playerId: Int
-    ): List<TransferResponse>
+    ): List<TransferDTO>
 
     suspend fun getTransfersByTeamId(
         teamId: Int
-    ): List<TransferResponse>
+    ): List<TransferDTO>
     //endregion
 
     //region trophies
     suspend fun getPlayerTrophies(
         playerId: Int
-    ): List<TrophyResponse>
+    ): List<TrophyDTO>
 
     suspend fun getCoachTrophies(
         coachId: Int
-    ): List<TrophyResponse>
+    ): List<TrophyDTO>
 
     //endregion
 
     //region venues
     suspend fun getVenueById(
         venueId: Int
-    ): List<VenuesResponse>
+    ): List<VenuesDTO>
 
     suspend fun getVenueByName(
         venueName: String
-    ): List<VenuesResponse>
+    ): List<VenuesDTO>
 
     suspend fun getVenuesByCityName(
         cityName: String
-    ): List<VenuesResponse>
+    ): List<VenuesDTO>
 
     suspend fun getVenuesByCountryName(
         countryName: String
-    ): List<VenuesResponse>
+    ): List<VenuesDTO>
 
     suspend fun searchVenue(
         name: String
-    ): List<VenuesResponse>
+    ): List<VenuesDTO>
 
     //endregion
 

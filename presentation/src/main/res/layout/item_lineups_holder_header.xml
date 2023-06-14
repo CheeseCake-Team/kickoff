@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.textview.MaterialTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/textview_holder_header"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/spacing_32"
+    android:background="@color/cardSurface"
+    android:gravity="center_vertical"
+    android:paddingStart="@dimen/spacing_16"
+    android:paddingEnd="@dimen/spacing_16"
+    android:textAllCaps="true"
+    android:layout_marginTop="@dimen/spacing_8"
+    android:textColor="@color/fontHeavy"
+    android:textSize="@dimen/font_size_14sp"
+    android:textStyle="bold"
+    tools:text="Coach" />

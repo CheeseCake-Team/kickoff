@@ -1,0 +1,347 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.cheesecake.presentation.screens.leagueDetails.LeagueDetailsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.cheesecake.league.LeagueDetailsFragment">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/text_view_country"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_36"
+                    android:fontFamily="@font/lato"
+                    android:text="@string/country"
+                    android:textColor="@color/fontLight"
+                    android:textSize="@dimen/font_size_12sp"
+                    app:layout_constraintEnd_toStartOf="@+id/text_view_rounds"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_view_country_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_8"
+                    android:fontFamily="@font/lato_medium"
+                    android:text="@{viewModel.leagueDetailsUIState.country}"
+                    android:textColor="@color/fontHeavy"
+                    android:textSize="@dimen/font_size_14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/text_view_country"
+                    app:layout_constraintStart_toStartOf="@+id/text_view_country"
+                    app:layout_constraintTop_toBottomOf="@id/text_view_country"
+                    tools:text="England" />
+
+
+                <TextView
+                    android:id="@+id/text_view_rounds"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_36"
+                    android:fontFamily="@font/lato"
+                    android:text="@string/rounds"
+                    android:textColor="@color/fontLight"
+                    android:textSize="@dimen/font_size_12sp"
+                    app:layout_constraintEnd_toStartOf="@+id/text_view_teams"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/text_view_country"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_view_round_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_8"
+                    android:fontFamily="@font/lato_medium"
+                    android:text="@{viewModel.leagueDetailsUIState.round}"
+                    android:textColor="@color/fontHeavy"
+                    android:textSize="@dimen/font_size_14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/text_view_rounds"
+                    app:layout_constraintStart_toStartOf="@+id/text_view_rounds"
+                    app:layout_constraintTop_toBottomOf="@id/text_view_rounds"
+                    tools:text="25" />
+
+                <TextView
+                    android:id="@+id/text_view_teams"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_36"
+                    android:fontFamily="@font/lato"
+                    android:text="@string/teams"
+                    android:textColor="@color/fontLight"
+                    android:textSize="@dimen/font_size_12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/text_view_rounds"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_view_teams_numbers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_8"
+                    android:fontFamily="@font/lato_medium"
+                    android:textColor="@color/fontHeavy"
+                    android:textSize="@dimen/font_size_14sp"
+                    android:text="@{viewModel.leagueDetailsUIState.teamsCount}"
+                    app:layout_constraintEnd_toEndOf="@+id/text_view_teams"
+                    app:layout_constraintStart_toStartOf="@+id/text_view_teams"
+                    app:layout_constraintTop_toBottomOf="@id/text_view_teams"
+                    tools:text="3/38" />
+
+                <TextView
+                    android:id="@+id/text_view_standing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_16"
+                    android:layout_marginTop="@dimen/spacing_36"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="@string/standing"
+                    android:textColor="@color/fontHeavy"
+                    android:textSize="@dimen/font_size_16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_country_name" />
+
+                <TextView
+                    android:id="@+id/text_view_standings_see_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/spacing_16"
+                    android:fontFamily="@font/lato_medium"
+                    android:text="@string/see_all"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="@dimen/font_size_12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_view_standing"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_standing" />
+
+                <TextView
+                    android:id="@+id/text_view_club"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_24"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="@string/Club"
+                    android:textColor="@color/fontHeavy"
+                    android:textSize="@dimen/font_size_12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/text_view_standing"
+                    app:layout_constraintStart_toStartOf="@+id/text_view_standing"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_standing" />
+
+
+                <TextView
+                    android:id="@+id/text_view_played_matches"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="@string/p"
+                    android:textColor="@color/fontHeavy"
+                    android:textSize="@dimen/font_size_12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/guideline5"
+                    app:layout_constraintStart_toStartOf="@+id/guideline5"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_club" />
+
+                <TextView
+                    android:id="@+id/text_view_wins"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="@string/w"
+                    android:textColor="@color/fontHeavy"
+                    android:textSize="@dimen/font_size_12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/guideline4"
+                    app:layout_constraintStart_toStartOf="@+id/guideline4"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_club" />
+
+                <TextView
+                    android:id="@+id/text_view_draws"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="@string/d"
+                    android:textColor="@color/fontHeavy"
+                    android:textSize="@dimen/font_size_12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/guideline3"
+                    app:layout_constraintStart_toStartOf="@+id/guideline3"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_club" />
+
+                <TextView
+                    android:id="@+id/text_view_loses"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="@string/l"
+                    android:textColor="@color/fontHeavy"
+                    android:textSize="@dimen/font_size_12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/guideline2"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_club" />
+
+                <TextView
+                    android:id="@+id/text_view_points"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="@string/points"
+                    android:textColor="@color/fontHeavy"
+                    android:textSize="@dimen/font_size_12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_view_club"
+                    app:layout_constraintEnd_toEndOf="@+id/guideline"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_club" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_clubs_scores"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing_16"
+                    android:layout_marginTop="@dimen/spacing_8"
+                    android:clipToPadding="false"
+                    android:overScrollMode="never"
+                    app:items="@{viewModel.leagueDetailsUIState.teamsStanding}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_club"
+                    tools:listitem="@layout/item_club_scores" />
+
+                <TextView
+                    android:id="@+id/text_view_goals_scored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_16"
+                    android:layout_marginTop="@dimen/spacing_24"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="@string/goals_scored"
+                    android:textColor="@color/fontHeavy"
+                    android:textSize="@dimen/font_size_16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recycler_view_clubs_scores" />
+
+                <TextView
+                    android:id="@+id/text_view_goals_see_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/spacing_16"
+                    android:fontFamily="@font/lato_medium"
+                    android:text="@string/see_all"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="@dimen/font_size_12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_view_goals_scored"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_goals_scored" />
+
+                <TextView
+                    android:id="@+id/text_view_player_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="@string/player_name"
+                    android:textColor="@color/fontHeavy"
+                    android:textSize="@dimen/font_size_12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/text_view_goals_scored"
+                    app:layout_constraintStart_toStartOf="@+id/text_view_goals_scored"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_goals_scored" />
+
+                <TextView
+                    android:id="@+id/text_view_goals"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="@string/goals"
+                    android:textColor="@color/fontHeavy"
+                    android:textSize="@dimen/font_size_12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_view_player_name"
+                    app:layout_constraintEnd_toEndOf="@+id/guideline"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_player_name" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_players_goals"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing_16"
+                    android:layout_marginTop="@dimen/spacing_8"
+                    android:clipToPadding="false"
+                    android:overScrollMode="never"
+                    app:items="@{viewModel.leagueDetailsUIState.topPlayers}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_player_name"
+                    tools:listitem="@layout/item_player_goals" />
+
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="44dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="88dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="118dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="148dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="178dp" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showLoading="@{viewModel.leagueDetailsUIState.loading}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
