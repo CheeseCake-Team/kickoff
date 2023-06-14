@@ -16,7 +16,7 @@
             android:clipToPadding="false"
             tools:listitem="@layout/item_team_players_positions"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:padding="@dimen/spacing_custom"
+            android:padding="12dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

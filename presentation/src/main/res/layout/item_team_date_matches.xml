@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/spacing_small">
+        android:layout_marginBottom="@dimen/spacing_8">
 
         <TextView
             android:id="@+id/text_date"
@@ -26,7 +26,7 @@
             layout="@layout/item_team_match"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_8"
             app:layout_constraintTop_toBottomOf="@+id/text_date" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
