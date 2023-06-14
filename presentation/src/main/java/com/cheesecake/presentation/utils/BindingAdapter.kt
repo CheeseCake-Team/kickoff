@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
@@ -14,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.presentation.base.BaseAdapter
-import com.cheesecake.presentation.ui.leagueMatches.LeagueMatchesHeadToHeadAdapter
+import com.cheesecake.presentation.screens.leagueMatches.LeagueMatchesHeadToHeadAdapter
 
 
 @BindingAdapter("app:imageUrl")

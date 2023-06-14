@@ -7,13 +7,13 @@
 
         <variable
             name="viewModel"
-            type="com.cheesecake.presentation.ui.teamstatistics.TeamStatisticsViewModel" />
+            type="com.cheesecake.presentation.screens.teamstatistics.TeamStatisticsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.TeamStatistics">
+        tools:context=".screens.TeamStatistics">
 
 
         <TextView

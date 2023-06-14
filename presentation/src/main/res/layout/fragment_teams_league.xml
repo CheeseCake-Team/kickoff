@@ -6,20 +6,20 @@
     <data>
         <variable
             name="viewModel"
-            type="com.cheesecake.presentation.ui.leagueTeams.LeagueTeamsViewModel" />
+            type="com.cheesecake.presentation.screens.leagueTeams.LeagueTeamsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.leagueTeams.TestFragment">
+        tools:context=".screens.leagueTeams.TestFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/teams_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:padding="@dimen/spacing_custom"
+            android:padding="@dimen/spacing_12"
             app:items="@{viewModel.state.data}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:context="com.cheesecake.league.LeagueTeamsFragment"
