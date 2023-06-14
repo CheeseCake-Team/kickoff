@@ -13,7 +13,8 @@ fun LeagueDTO.toEntity(): League = League(
     seasonStartYear = this.seasons.first().start.substring(0, 4),
     seasonEndYear = this.seasons.first().end.substring(0, 4),
     country = this.country.name,
-    isFavourite = false
+    isFavourite = false,
+    typeName = this.league.type
 )
 
 @JvmName("leagueDTOToLeagueLocalDTO")
@@ -25,7 +26,8 @@ fun LeagueDTO.toLocal(): LeagueLocalDTO = LeagueLocalDTO(
     seasonStartYear = this.seasons.first().start,
     seasonEndYear = this.seasons.first().end,
     country = this.country.name,
-    isFavourite = false
+    isFavourite = false,
+    typeName = league.type
 )
 
 @JvmName("leagueLocalDTOToLeague")
@@ -37,7 +39,8 @@ fun LeagueLocalDTO.toEntity(): League = League(
     seasonStartYear = seasonStartYear,
     seasonEndYear = seasonEndYear,
     country = country,
-    isFavourite = isFavourite
+    isFavourite = isFavourite,
+    typeName = typeName
 )
 
 @JvmName("leagueToLeagueLocalDTO")
@@ -49,7 +52,8 @@ fun League.toLocal(): LeagueLocalDTO = LeagueLocalDTO(
     seasonStartYear = seasonStartYear,
     seasonEndYear = seasonEndYear,
     country = country,
-    isFavourite = isFavourite
+    isFavourite = isFavourite,
+    typeName = typeName
 )
 
 @JvmName("leagueLocalDTOsToLeagues")

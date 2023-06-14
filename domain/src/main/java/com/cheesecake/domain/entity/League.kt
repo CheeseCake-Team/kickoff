@@ -6,6 +6,7 @@ data class League(
     val imageUrl: String,
     val season: String,
     val country: String,
+    val typeName: String,
     val seasonStartYear: String,
     val seasonEndYear: String,
     val isFavourite: Boolean = false

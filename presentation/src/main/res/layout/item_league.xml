@@ -10,7 +10,7 @@
 
         <variable
             name="item"
-            type="com.cheesecake.presentation.ui.leagueDetails.LeagueDetailsUIState" />
+            type="com.cheesecake.presentation.ui.search.LeagueSearchUIState" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -26,60 +26,60 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-<!--            <ImageView-->
-<!--                android:id="@+id/image_view_team_icon"-->
-<!--                android:layout_width="@dimen/team_image_size_24dp"-->
-<!--                android:layout_height="@dimen/team_image_size_24dp"-->
-<!--                android:layout_marginStart="@dimen/spacing_medium"-->
-<!--                app:imageUrl="@{item.imageUrl}"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                tools:srcCompat="@tools:sample/avatars"-->
-<!--                android:contentDescription="Team Logo" />-->
+            <ImageView
+                android:id="@+id/image_view_team_icon"
+                android:layout_width="@dimen/team_image_size_24dp"
+                android:layout_height="@dimen/team_image_size_24dp"
+                android:layout_marginStart="@dimen/spacing_medium"
+                app:imageUrl="@{item.imageUrl}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars"
+                android:contentDescription="Team Logo" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/text_view_team_name"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginHorizontal="@dimen/spacing_large"-->
-<!--                android:layout_marginTop="@dimen/spacing_medium"-->
-<!--                android:text="@{item.teamName}"-->
-<!--                android:textAppearance="@style/SubtitleMedium"-->
-<!--                android:textColor="@color/fontHeavy"-->
-<!--                app:layout_constraintBottom_toTopOf="@+id/text_view_established"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintHorizontal_bias="0.0"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/image_view_team_icon"-->
-<!--                app:layout_constraintTop_toTopOf="parent" />-->
+            <TextView
+                android:id="@+id/text_view_team_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_large"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:text="@{item.leagueName}"
+                android:textAppearance="@style/SubtitleMedium"
+                android:textColor="@color/fontHeavy"
+                app:layout_constraintBottom_toTopOf="@+id/text_view_established"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/image_view_team_icon"
+                app:layout_constraintTop_toTopOf="parent" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/text_view_established"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="@dimen/spacing_small"-->
-<!--                android:layout_marginEnd="@dimen/spacing_large"-->
-<!--                android:text="@{`Founded in` + item.founded + `,` + item.teamCountry}"-->
-<!--                android:textAppearance="@style/bodyMedium"-->
-<!--                android:textColor="@color/fontLight"-->
-<!--                app:layout_constraintBottom_toTopOf="@+id/text_view_venue_capacity"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/text_view_team_name"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/text_view_team_name" />-->
+            <TextView
+                android:id="@+id/text_view_established"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginEnd="@dimen/spacing_large"
+                android:text="@{item.countryName}"
+                android:textAppearance="@style/bodyMedium"
+                android:textColor="@color/fontLight"
+                app:layout_constraintBottom_toTopOf="@+id/text_view_venue_capacity"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/text_view_team_name"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_team_name" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/text_view_venue_capacity"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="@dimen/spacing_tiny"-->
-<!--                android:layout_marginBottom="@dimen/spacing_large"-->
-<!--                android:text="@{item.venueName + `(Capacity : ` + item.venueCapacity + `)`}"-->
-<!--                android:textAppearance="@style/bodyMedium"-->
-<!--                android:textColor="@color/fontLight"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="@+id/text_view_established"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/text_view_established"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/text_view_established" />-->
+            <TextView
+                android:id="@+id/text_view_venue_capacity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_tiny"
+                android:layout_marginBottom="@dimen/spacing_large"
+                android:text="@{item.typeName}"
+                android:textAppearance="@style/bodyMedium"
+                android:textColor="@color/fontLight"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/text_view_established"
+                app:layout_constraintStart_toStartOf="@+id/text_view_established"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_established" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

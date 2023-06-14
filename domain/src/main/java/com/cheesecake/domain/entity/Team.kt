@@ -10,3 +10,5 @@ data class Team(
     val imageUrl: String,
     val isFavourite: Boolean,
 )
+
+

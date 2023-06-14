@@ -19,11 +19,11 @@
             android:id="@+id/view_search_background"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:background="@color/cardSurface"
             app:layout_constraintBottom_toTopOf="@id/tab_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            android:background="@color/cardSurface"
             app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -68,12 +68,12 @@
             android:layout_height="0dp"
             android:clipToPadding="false"
             android:padding="@dimen/spacing_custom"
-            app:searchItems="@{viewModel.state.searchResult}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tab_layout"
+            app:searchItems="@{viewModel.state.searchResult}"
             app:viewVisibilityInLoading="@{viewModel.state.loading}"
             tools:context="com.cheesecake.league.LeagueTeamsFragment"
             tools:listitem="@layout/item_team" />

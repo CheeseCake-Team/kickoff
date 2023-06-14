@@ -3,7 +3,7 @@ package com.cheesecake.presentation.mapper
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.presentation.models.TeamUIState
 
-fun Team.toUIModel(): TeamUIState {
+fun Team.toUIState(): TeamUIState {
     return TeamUIState(
         teamId = this.id,
         teamName= this.name,

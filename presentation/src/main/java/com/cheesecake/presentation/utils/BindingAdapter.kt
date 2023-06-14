@@ -60,7 +60,9 @@ fun <T> setRecyclerItems(view: RecyclerView, items: SearchResult?) {
             is SearchResult.Team -> {
                 (view.adapter as BaseAdapter<T>?)?.setItems(it.items as List<T>)
             }
-            else -> {}
+            is SearchResult.League -> {
+                (view.adapter as BaseAdapter<T>?)?.setItems(it.items as List<T>)
+            }
         }
 
     }
@@ -96,12 +98,6 @@ fun <T> showWhenNoResult(view: FrameLayout, items: SearchResult?) {
     }
 }
 
-@BindingAdapter(value = ["app:onSearchInput"])
-fun <T> onSearchBarInput(view: EditText, onSearch: (input: String) -> Unit) {
-    view.doOnTextChanged { text, start, before, count ->
-        onSearch(text.toString())
-    }
-}
 
 @BindingAdapter("app:onSearchTextChanged")
 fun EditText.onSearchTextChanged(viewModel: SearchViewModel) {

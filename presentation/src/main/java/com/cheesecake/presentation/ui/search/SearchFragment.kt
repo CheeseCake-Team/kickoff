@@ -2,6 +2,7 @@ package com.cheesecake.presentation.ui.search
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
@@ -23,7 +24,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupStatusBar()
-        binding.searchRecyclerView.adapter = SearchFragmentAdapter()
+        binding.searchRecyclerView.adapter = SearchTeamAdapter()
         tabLayout = binding.tabLayout
         setUpTapLayout()
 
@@ -56,11 +57,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         when (selectedTabPosition) {
             0 -> {
                 viewModel.searchType.value = SearchType.TEAM
-                binding.searchRecyclerView.adapter = SearchFragmentAdapter()
+                Log.i( "getSearchFragment: " ,viewModel.searchType.value.toString())
+                binding.searchRecyclerView.adapter = SearchTeamAdapter()
             }
             1 -> {
                 viewModel.searchType.value = SearchType.LEAGUE
-                TODO()
+                Log.i( "getSearchFragment: " ,viewModel.searchType.value.toString())
+                binding.searchRecyclerView.adapter = SearchLeagueAdapter()
             }
         }
     }

@@ -5,9 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.usecases.GetLeagueBySearchUseCase
 import com.cheesecake.domain.usecases.GetTeamByNameUseCase
 import com.cheesecake.presentation.base.BaseViewModel
-import com.cheesecake.presentation.mapper.toUIModel
+import com.cheesecake.presentation.mapper.toUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
@@ -16,6 +15,7 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.math.log
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
@@ -25,8 +25,6 @@ class SearchViewModel @Inject constructor(
 
 
     val searchInput = MutableStateFlow("")
-
-
     val searchType = MutableStateFlow(SearchType.TEAM)
 
 //    val isResultEmptyOnly =
@@ -55,10 +53,13 @@ class SearchViewModel @Inject constructor(
         _state.update { it.copy(isLoading = true) }
         return when(searchType.value) {
             SearchType.TEAM -> {
-                SearchResult.Team(getTeamList(input).map { it.toUIModel() })
+                Log.i( "getSearchResult: " ,searchType.value.toString())
+                SearchResult.Team(getTeamList(input).map { it.toUIState() })
             }
-            else -> { TODO() }
-            //SearchType.LEAGUE -> getLeagueList(input)
+            SearchType.LEAGUE -> {
+                Log.i( "getSearchResult: " ,searchType.value.toString())
+                SearchResult.League(getLeagueList(input).map { it.toUIState() })
+            }
         }
     }
 
