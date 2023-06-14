@@ -114,7 +114,7 @@ class RemoteDataSourceImp @Inject constructor(
 
     override suspend fun getFixtureBySeasonByTeamId(
         timeZone: String,
-        season: String,
+        season: Int,
         TeamId: Int
     ): List<FixtureDTO> {
         return wrapBaseResponse { service.getFixturesBySeasonIdByTeamId(timeZone, season, TeamId) }
@@ -513,7 +513,7 @@ class RemoteDataSourceImp @Inject constructor(
         return wrapBaseResponse { service.getSquadByPlayerId(playerId) }
     }
 
-    override suspend fun getSquadByTeamId(teamId: Int): List<SquadDTO> {
+    override suspend fun getSquadByTeamId(teamId: Int): List<PlayerDTO> {
         return wrapBaseResponse { service.getSquadByTeamId(teamId) }
     }
 
