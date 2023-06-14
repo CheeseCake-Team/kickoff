@@ -10,6 +10,7 @@ import java.util.Locale
 @JvmName("fixtureDTOToFixture")
 fun FixtureDTO.toEntity(): Fixture {
     return Fixture(
+        id = this.fixtureDataDTO.id,
         homeTeamName = this.teams.home.name,
         homeTeamLogoUrl = this.teams.home.logo,
         homeTeamGoals = this.goals.home.toString(),
