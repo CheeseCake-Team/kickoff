@@ -93,7 +93,7 @@ interface FootballApiService {
     @GET("fixtures")
     suspend fun getFixturesBySeasonIdByTeamId(
         @Query("timezone") timeZone: String,
-        @Query("season") season: String,
+        @Query("season") season: Int,
         @Query("team") teamId: Int
     ): Response<BasePagingResponse<FixtureDTO>>
 
@@ -421,7 +421,7 @@ interface FootballApiService {
     @GET("players/squads")
     suspend fun getSquadByTeamId(
         @Query("team") teamId: Int
-    ): Response<BasePagingResponse<SquadDTO>>
+    ): Response<BasePagingResponse<PlayerDTO>>
 
     @GET("players/topscorers")
     suspend fun getTopScorers(
