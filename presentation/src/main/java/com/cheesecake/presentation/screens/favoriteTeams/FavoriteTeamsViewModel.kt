@@ -1,4 +1,4 @@
-package com.cheesecake.presentation.ui.favoriteTeams
+package com.cheesecake.presentation.screens.favoriteTeams
 
 
 import androidx.lifecycle.viewModelScope

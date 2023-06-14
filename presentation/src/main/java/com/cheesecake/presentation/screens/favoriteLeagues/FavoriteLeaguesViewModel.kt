@@ -1,10 +1,11 @@
-package com.cheesecake.presentation.ui.favoriteLeagues
+package com.cheesecake.presentation.screens.favoriteLeagues
 
 import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.usecases.FavouriteLeagueUseCase
 import com.cheesecake.domain.usecases.GetFavoriteLeaguesUseCase
 import com.cheesecake.presentation.base.BaseViewModel
+import com.cheesecake.presentation.mapper.toUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.update
@@ -30,16 +31,7 @@ class FavoriteLeaguesViewModel @Inject constructor(
             flow.collect { leagues ->
                 _state.update { favoriteLeaguesUIState ->
                     favoriteLeaguesUIState.copy(
-                        leagues = leagues.map {
-                            FavoriteLeagueUIState(
-                                id = it.leagueId,
-                                leagueName = it.leagueName,
-                                leagueCountry = it.country,
-                                imageUrl = it.leagueLogo,
-                                onFavorite = { toggleFavourite() },
-                                isFavourite = it.isFavourite,
-                            )
-                        },
+                        leagues = leagues.map { it.toUIState { toggleFavourite() } },
                         isLeaguesIsEmpty = leagues.isEmpty(),
                         isLoading = false
                     )

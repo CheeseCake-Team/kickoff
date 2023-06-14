@@ -1,4 +1,4 @@
-package com.cheesecake.presentation.ui.favoriteTeams
+package com.cheesecake.presentation.screens.favoriteTeams
 
 import android.os.Bundle
 import android.view.View
@@ -12,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class FavoriteTeamsFragment : BaseFragment<FragmentFavoriteTeamsBinding>() {
     override val layoutIdFragment = R.layout.fragment_favorite_teams
 
-    override val viewModel: FavoriteTeamsViewModel  by viewModels()
+    override val viewModel: FavoriteTeamsViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

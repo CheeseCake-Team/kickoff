@@ -1,4 +1,4 @@
-package com.cheesecake.presentation.ui.favoriteLeagues
+package com.cheesecake.presentation.screens.favoriteLeagues
 
 data class FavoriteLeagueUIState(
     val id: Int = 0,

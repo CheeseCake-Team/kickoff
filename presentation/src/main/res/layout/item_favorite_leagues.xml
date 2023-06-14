@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.cheesecake.presentation.ui.favoriteLeagues.FavoriteLeagueUIState" />
+            type="com.cheesecake.presentation.screens.favoriteLeagues.FavoriteLeagueUIState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,8 +16,8 @@
 
         <ImageView
             android:id="@+id/text_view_favorite_league_icon"
-            android:layout_width="@dimen/team_image_size_48dp"
-            android:layout_height="@dimen/team_image_size_48dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginStart="16dp"
             app:imageUrl="@{item.imageUrl}"
             app:layout_constraintBottom_toBottomOf="parent"

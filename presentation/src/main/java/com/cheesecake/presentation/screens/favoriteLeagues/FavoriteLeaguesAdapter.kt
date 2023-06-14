@@ -1,4 +1,4 @@
-package com.cheesecake.presentation.ui.favoriteLeagues
+package com.cheesecake.presentation.screens.favoriteLeagues
 
 import androidx.recyclerview.widget.DiffUtil
 import com.cheesecake.presentation.R

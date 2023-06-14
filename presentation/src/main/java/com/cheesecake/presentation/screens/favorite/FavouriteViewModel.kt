@@ -1,4 +1,4 @@
-package com.cheesecake.presentation.ui.favorite
+package com.cheesecake.presentation.screens.favorite
 
 import androidx.lifecycle.ViewModel
 
