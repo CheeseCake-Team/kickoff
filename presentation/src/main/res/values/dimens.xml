@@ -13,6 +13,7 @@
     <dimen name="spacing_36">36dp</dimen>
     <dimen name="spacing_48">48dp</dimen>
     <dimen name="spacing_56">56dp</dimen>
+    <dimen name="spacing_64">64dp</dimen>
     <dimen name="spacing_100">100dp</dimen>
 
     <!-- text sizes -->
@@ -21,5 +22,6 @@
     <dimen name="font_size_16sp">16sp</dimen>
     <dimen name="font_size_18sp">18sp</dimen>
     <dimen name="font_size_20sp">20sp</dimen>
+
 
 </resources>
