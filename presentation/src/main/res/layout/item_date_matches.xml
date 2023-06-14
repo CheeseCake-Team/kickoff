@@ -17,7 +17,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/spacing_tiny">
+        android:padding="@dimen/spacing_4">
 
         <TextView
             android:id="@+id/textView4"
@@ -34,7 +34,7 @@
             android:id="@+id/head_to_head_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_tiny"
+            android:layout_marginTop="@dimen/spacing_4"
             android:overScrollMode="never"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:listItems="@{item.second}"

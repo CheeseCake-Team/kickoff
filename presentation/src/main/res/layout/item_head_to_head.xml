@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         style="@style/Widget.Material3.CardView.Filled"
-        android:layout_marginVertical="@dimen/spacing_tiny"
+        android:layout_marginVertical="@dimen/spacing_4"
         app:cardBackgroundColor="@color/cardSurface"
         app:cardCornerRadius="4dp">
 
@@ -44,7 +44,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="@dimen/team_image_size_24dp"
                 android:layout_height="@dimen/team_image_size_24dp"
-                android:layout_marginEnd="@dimen/spacing_medium"
+                android:layout_marginEnd="@dimen/spacing_16"
                 app:imageUrl="@{item.homeTeamLogoUrl}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textView2"
@@ -83,7 +83,7 @@
                 android:id="@+id/imageView2"
                 android:layout_width="@dimen/team_image_size_24dp"
                 android:layout_height="@dimen/team_image_size_24dp"
-                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginStart="@dimen/spacing_16"
                 app:imageUrl="@{item.awayTeamLogoUrl}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView2"
