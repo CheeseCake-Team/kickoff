@@ -12,6 +12,8 @@
     <string name="goals">Goals</string>
     <string name="home">Home</string>
     <string name="search">Search</string>
+    <string name="plus_minus">+/-</string>
+    <string name="pts">PTS</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="country">country</string>
@@ -25,5 +27,6 @@
     <string name="search_here">Search here...</string>
     <string name="no_result_found_description">We couldn\'t find any results for your search\n Please check your input and try again</string>
     <string name="no_result_found">No Result Found</string>
+    <string name="premier_league">Premier League</string>
 
 </resources>
