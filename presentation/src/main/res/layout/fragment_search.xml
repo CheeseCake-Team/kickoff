@@ -13,15 +13,42 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:padding="16dp">
+        android:clipToPadding="false">
+
+        <View
+            android:id="@+id/view_search_background"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/tab_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@color/cardSurface"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            style="@style/Widget.Material3.TabLayout.Secondary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/cardSurface"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_bar"
+            app:tabGravity="fill"
+            app:tabMode="fixed" />
 
 
         <EditText
             android:id="@+id/search_bar"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:background="@color/lightGrey"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edittext_background_round"
             android:drawableStart="@drawable/magnifer"
             android:drawablePadding="8dp"
             android:fontFamily="@font/lato"
@@ -41,12 +68,12 @@
             android:layout_height="0dp"
             android:clipToPadding="false"
             android:padding="@dimen/spacing_custom"
-            app:items="@{viewModel.state.searchResult}"
+            app:searchItems="@{viewModel.state.searchResult}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_bar"
+            app:layout_constraintTop_toBottomOf="@id/tab_layout"
             app:viewVisibilityInLoading="@{viewModel.state.loading}"
             tools:context="com.cheesecake.league.LeagueTeamsFragment"
             tools:listitem="@layout/item_team" />
