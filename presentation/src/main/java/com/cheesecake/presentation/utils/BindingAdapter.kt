@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.presentation.base.BaseAdapter
-import com.cheesecake.presentation.ui.leagueMatches.LeagueMatchesHeadToHeadAdapter
+import com.cheesecake.presentation.base.BaseListAdapter
 
 
 @BindingAdapter("app:imageUrl")
@@ -47,12 +47,10 @@ fun <T> setRecyclerItems(view: RecyclerView, items: List<T>?) {
     }
 }
 
-@BindingAdapter(value = ["app:fixtureItems"])
+@BindingAdapter(value = ["app:listItems"])
 fun <T> setItems(view: RecyclerView, items: List<T>?) {
     items?.let {
-        val adapter = LeagueMatchesHeadToHeadAdapter()
-        adapter.setItems(it as List<Fixture>)
-        view.adapter = adapter
+        (view.adapter as BaseListAdapter<T>?)?.submitList(items)
     }
 }
 
