@@ -21,19 +21,21 @@
             android:padding="@dimen/spacing_custom"
             android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:items="@{viewModel.state.leagues}" />
+            app:listItems="@{viewModel.state.leagues}" />
 
         <ImageView
             android:id="@+id/no_favorite_found_image_view"
-            android:layout_width="175dp"
-            android:layout_height="175dp"
-            android:src="@color/fontLight"
-            app:showLoading="@{viewModel.state.leaguesIsEmpty}"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/no_favorite_found"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+            app:showLoading="@{viewModel.state.leaguesIsEmpty}" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/add_favorite_league_fab"
