@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.cheesecake.presentation.screens.standings.StandingsViewModel" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -97,10 +99,13 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_standings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_16"
+        app:items="@{viewModel.state.data}"
         app:layout_constraintTop_toBottomOf="@id/titleLinearLayout"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_standing"
         >
 
