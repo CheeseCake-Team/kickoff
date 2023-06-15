@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.cheesecake.domain.entity.PlayerStatistics" />
+            type="com.cheesecake.domain.entity.SquadPlayer" />
 
     </data>
 
@@ -53,10 +53,11 @@
                 style="@style/SubtitleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{item.nationality}"
+                android:text="@{`Player Number: ` + Integer.toString(item.number)}"
                 android:textColor="@color/fontLight"
-                app:layout_constraintEnd_toEndOf="@id/text_view_player_name"
-                app:layout_constraintStart_toEndOf="@id/image_player"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/text_view_player_name"
                 app:layout_constraintTop_toBottomOf="@id/text_view_player_name"
                 tools:text="@string/player_country" />
 
