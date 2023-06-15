@@ -91,6 +91,10 @@ class IFootballRepositoryImpl
         localDataSource.updateOrInsertTeams(teamEntities.toLocal(leagueId, leagueSeason))
     }
 
+    override suspend fun addTeamCountries(teamEntities: List<TeamCountry>) {
+        localDataSource.addTeamCountries(teamEntities.toLocal())
+    }
+
     override suspend fun getLeaguesByName(leagueName: String): List<League> {
         return remoteDataSource.getLeaguesByName(leagueName).toEntity()
     }
