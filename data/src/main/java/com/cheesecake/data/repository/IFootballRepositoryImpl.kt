@@ -3,6 +3,7 @@ package com.cheesecake.data.repository
 import android.util.Log
 import com.cheesecake.data.repository.mappers.toEntity
 import com.cheesecake.data.repository.mappers.toLocal
+import com.cheesecake.domain.entity.TeamCountry
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.entity.PlayerStatistics
@@ -18,6 +19,14 @@ class IFootballRepositoryImpl
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
 ) : IFootballRepository {
+
+    override suspend fun getRemoteCountries(): List<TeamCountry> {
+        return remoteDataSource.getCountries().toEntity()
+    }
+
+    override suspend fun getLocalCountries(): List<TeamCountry> {
+        return localDataSource.getLocalCountries().toEntity()
+    }
 
     override suspend fun getLeagueNameAndCountry(
         leagueId: Int,
