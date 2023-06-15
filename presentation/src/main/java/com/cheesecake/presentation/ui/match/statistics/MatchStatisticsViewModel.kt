@@ -1,9 +1,9 @@
 package com.cheesecake.presentation.ui.match.statistics
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.cheesecake.domain.entity.getAwayTeamPercentage
+import com.cheesecake.domain.entity.getHomeTeamPercentage
 import com.cheesecake.domain.usecases.GetFixtureStatisticsByFixtureIdUseCase
-import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
@@ -26,8 +26,8 @@ class MatchStatisticsViewModel @Inject constructor(
                             homeTeamValue = fixtureStatistics.homeTeamValue,
                             awayTeamValue = fixtureStatistics.awayTeamValue,
                             typeValue = fixtureStatistics.type,
-                            homeTeamPercentage = fixtureStatistics.homeTeamPercentage,
-                            awayTeamPercentage = fixtureStatistics.awayTeamPercentage
+                            homeTeamPercentage = fixtureStatistics.getHomeTeamPercentage(),
+                            awayTeamPercentage = fixtureStatistics.getAwayTeamPercentage()
 
                         )
                     })

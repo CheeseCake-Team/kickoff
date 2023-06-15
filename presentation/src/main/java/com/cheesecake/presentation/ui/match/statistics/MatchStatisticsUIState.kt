@@ -8,11 +8,8 @@ data class MatchStatisticsUIState(
 
 data class StatisticsItemUiState(
     val homeTeamValue: Int,
-
     val awayTeamValue: Int,
-
     val typeValue: String,
     val homeTeamPercentage : Int,
     val awayTeamPercentage : Int
-
 )
