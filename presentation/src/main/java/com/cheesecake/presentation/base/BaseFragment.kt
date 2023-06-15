@@ -34,4 +34,5 @@ abstract class BaseFragment<VDB : ViewDataBinding> : Fragment() {
             return root
         }
     }
+
 }

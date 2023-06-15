@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentFavoriteLeaguesBinding
-import com.cheesecake.presentation.screens.favorite.FavoriteFragmentDirections
+import com.cheesecake.presentation.utils.collect
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class FavoriteLeaguesFragment : BaseFragment<FragmentFavoriteLeaguesBinding>() {
@@ -25,16 +26,18 @@ class FavoriteLeaguesFragment : BaseFragment<FragmentFavoriteLeaguesBinding>() {
 
     private fun handleNavigation() {
         lifecycleScope.launch {
-            viewModel.favoriteLeaguesEvent.collect {
-                when(it?.getContentIfNotHandled()) {
-                    is NavigateEvent.NavigateToLeague -> {
-                        Navigation.findNavController(binding.root)
-                            .navigate(FavoriteFragmentDirections.actionFavoriteFragmentToLeagueFragment())
-                    }
-                    else -> Unit
-                }
+            collect(viewModel.favoriteLeaguesEvent) { event ->
+                event?.getContentIfNotHandled()?.let { onEvent(it) }
             }
         }
     }
 
+    private fun onEvent(event: NavigateEvent) {
+        when (event) {
+            is NavigateEvent.NavigateToLeague ->
+                findNavController().navigate()
+        }
+    }
 }
+
+
