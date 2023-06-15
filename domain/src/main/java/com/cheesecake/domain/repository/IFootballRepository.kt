@@ -1,5 +1,6 @@
 package com.cheesecake.domain.repository
 
+import com.cheesecake.domain.entity.TeamCountry
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.TeamStatisticsEntity
 import com.cheesecake.domain.entity.TeamStanding
@@ -31,6 +32,10 @@ interface IFootballRepository {
 
     suspend fun updateOrInsertTeams(
         teamEntities: List<Team>, leagueId: Int, leagueSeason: Int
+    )
+
+    suspend fun addTeamCountries(
+        teamEntities: List<TeamCountry>
     )
 
     suspend fun getLeaguesByName(leagueName: String): List<League>
