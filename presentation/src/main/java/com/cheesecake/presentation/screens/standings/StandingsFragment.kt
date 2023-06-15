@@ -9,8 +9,9 @@ import com.cheesecake.domain.usecases.GetAllTeamsInLeagueWithSeasonUseCase
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentStandingsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class StandingsFragment : BaseFragment<FragmentStandingsBinding>() {
     override val layoutIdFragment = R.layout.fragment_standings
     override val viewModel: StandingsViewModel by viewModels()

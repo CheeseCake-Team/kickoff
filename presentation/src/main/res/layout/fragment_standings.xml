@@ -103,12 +103,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_16"
-        app:items="@{viewModel.state.data}"
+        app:items="@{viewModel.standingUiState.data}"
         app:layout_constraintTop_toBottomOf="@id/titleLinearLayout"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_standing"
-
-        >
+        tools:listitem="@layout/item_standing">
     </androidx.recyclerview.widget.RecyclerView>
     <ProgressBar
         android:id="@+id/progressBar"
@@ -118,6 +116,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:showLoading="@{viewModel.state.loading}" />
+        app:showLoading="@{viewModel.standingUiState.loading}" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

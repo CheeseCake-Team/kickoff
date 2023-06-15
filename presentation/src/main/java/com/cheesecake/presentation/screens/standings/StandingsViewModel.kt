@@ -1,10 +1,10 @@
 package com.cheesecake.presentation.screens.standings
 
-import android.util.Log
-import com.cheesecake.domain.entity.TeamStanding
 import com.cheesecake.domain.usecases.GetTeamsStandingByLeagueIdAndSeasonUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
@@ -12,33 +12,29 @@ import javax.inject.Inject
 class StandingsViewModel @Inject constructor(
     private val getTeamsStandingByLeagueIdAndSeasonUseCase: GetTeamsStandingByLeagueIdAndSeasonUseCase
 ) : BaseViewModel<StandingsUiState>(StandingsUiState()){
-
+    private val _standingUiState = MutableStateFlow(StandingsUiState())
+    val standingUiState = _standingUiState.asStateFlow()
     init {
-        getData()
+        getTeamStanding()
     }
 
-    private fun getData() {
+    private fun getTeamStanding() {
         tryToExecute(
-          ::getTeamsStanding,
-          ::onSuccess,
-          ::onError,
-        )
-    }
+            {
+                getTeamsStandingByLeagueIdAndSeasonUseCase(39, 2022)
+            },
+            { standings ->
+                _standingUiState.update {
+                    it.copy(
+                        data = standings,
+                        isLoading = false
+                    )
+                }
+            },
+            { error ->
+                _standingUiState.update { it.copy( errorMessage = error.toString(), isLoading = false) }
 
-    private suspend fun getTeamsStanding() = getTeamsStandingByLeagueIdAndSeasonUseCase(20 , 2023)
-
-    private fun onSuccess(result: List<TeamStanding>){
-        result.let {list ->
-            _state.update { standingsUiState ->
-                Log.i("getData", list.toString())
-                standingsUiState.copy(data = list , isLoading = false)
             }
-        }
-    }
-
-    private fun onError(e: Throwable) {
-        _state.update {
-            it.copy(errorMessage = e.message.toString())
-        }
+        )
     }
 }
