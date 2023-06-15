@@ -5,17 +5,11 @@ import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseListAdapter
 
-class LeagueMatchesDateMatchAdapter :
-    BaseListAdapter<Pair<String, List<Fixture>>>(
-        DateMatchesDiffUtil(),
-        null
-    ) {
-    override val layoutId: Int
-        get() = R.layout.item_date_matches
-
+class LeagueMatchesDateMatchAdapter : BaseListAdapter<Pair<String, List<Fixture>>>(DateMatchesDiffUtil()) {
+    override val layoutId = R.layout.item_date_matches
 }
 
-class DateMatchesDiffUtil() : DiffUtil.ItemCallback<Pair<String, List<Fixture>>>() {
+class DateMatchesDiffUtil : DiffUtil.ItemCallback<Pair<String, List<Fixture>>>() {
 
     override fun areItemsTheSame(
         oldItem: Pair<String, List<Fixture>>,

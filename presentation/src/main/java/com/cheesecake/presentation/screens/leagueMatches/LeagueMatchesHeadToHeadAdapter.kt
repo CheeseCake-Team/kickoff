@@ -5,11 +5,8 @@ import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseListAdapter
 
-class LeagueMatchesHeadToHeadAdapter :
-    BaseListAdapter<Fixture>(FixtureDiffUtils(), null) {
-    override val layoutId: Int
-        get() = R.layout.item_head_to_head
-
+class LeagueMatchesHeadToHeadAdapter : BaseListAdapter<Fixture>(FixtureDiffUtils()) {
+    override val layoutId = R.layout.item_head_to_head
 }
 
 class FixtureDiffUtils : DiffUtil.ItemCallback<Fixture>() {

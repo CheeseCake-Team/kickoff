@@ -33,27 +33,20 @@ class FavoriteLeaguesViewModel @Inject constructor(
     }
 
     private fun onSuccess(flow: Flow<List<League>>) {
-        viewModelScope.launch {
-            flow.collect { leagues ->
-                _state.update { favoriteLeaguesUIState ->
-                    favoriteLeaguesUIState.copy(
-                        leagues = leagues.map { league ->
-                            league.toUIState(
-                                { toggleFavourite(league.leagueId, league.leagueSeason.toInt()) },
-                                { navigateToLeague(league.leagueId) }
-                            )
-                        },
-                        isLeaguesIsEmpty = leagues.isEmpty(),
-                        isLoading = false
+        collectFlow(flow) { leagues ->
+            copy(
+                leagues = leagues.map { league ->
+                    league.toUIState(
+                        { toggleFavourite(league.leagueId, league.leagueSeason.toInt()) },
+                        { navigateToLeague(league.leagueId) }
                     )
-                }
-            }
+                },
+                isLeaguesIsEmpty = leagues.isEmpty(),
+                isLoading = false
+            )
         }
     }
 
-    private fun navigateToLeague(leagueId: Int) {
-        _favoriteLeaguesEvent.update { Event(NavigateEvent.NavigateToLeague(leagueId)) }
-    }
 
     private fun onError(e: Throwable) {
         _state.update {
@@ -64,14 +57,15 @@ class FavoriteLeaguesViewModel @Inject constructor(
         }
     }
 
+    private fun navigateToLeague(leagueId: Int) {
+        _favoriteLeaguesEvent.update { Event(NavigateEvent.NavigateToLeague(leagueId)) }
+    }
+
+
     private fun toggleFavourite(leagueId: Int, leagueSeason: Int) {
         viewModelScope.launch {
             favoriteLeagueUseCase(leagueId, leagueSeason).toString()
         }
     }
 
-}
-
-sealed interface NavigateEvent {
-    data class NavigateToLeague(val leagueId: Int) : NavigateEvent
 }
