@@ -6,5 +6,6 @@ data class FavoriteLeagueUIState(
     val leagueName: String = "",
     val leagueCountry: String = "",
     val onFavorite: () -> Unit,
+    val onFavoriteLeagueClick: (Int) -> Unit,
     val isFavourite: Boolean = false
 )
