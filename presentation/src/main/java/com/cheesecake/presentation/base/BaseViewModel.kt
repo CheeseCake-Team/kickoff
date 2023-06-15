@@ -11,11 +11,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-abstract class BaseViewModel<STATE>(uiState: STATE) : ViewModel() {
+abstract class BaseViewModel<S, E>(uiState: S, uiEvent: E) : ViewModel() {
 
-    protected val _state: MutableStateFlow<STATE> by lazy { MutableStateFlow(uiState) }
-    val state: StateFlow<STATE> by lazy { _state.asStateFlow() }
+    protected val _state: MutableStateFlow<S> by lazy { MutableStateFlow(uiState) }
+    val state: StateFlow<S> by lazy { _state.asStateFlow() }
 
+    protected val _event: MutableStateFlow<E> by lazy { MutableStateFlow(uiEvent) }
+    val event: StateFlow<E> by lazy { _event.asStateFlow() }
 
     protected fun <T> tryToExecute(
         call: suspend () -> T,
@@ -34,7 +36,7 @@ abstract class BaseViewModel<STATE>(uiState: STATE) : ViewModel() {
 
     protected fun <T> collectFlow(
         flow: Flow<T>,
-        updateState: STATE.(T) -> STATE
+        updateState: S.(T) -> S
     ) {
         viewModelScope.launch {
             flow.collect { value ->
