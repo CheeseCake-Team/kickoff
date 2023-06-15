@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Kickoff.MySplash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/kick_off_logo</item>
+        <item name="postSplashScreenTheme">@style/Theme.Kickoff</item>
+    </style>
+</resources>
