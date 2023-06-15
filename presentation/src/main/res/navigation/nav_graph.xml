@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/leagueFragment">
+    app:startDestination="@id/favoriteFragment">
 
     <fragment
         android:id="@+id/leagueFragment"
@@ -12,4 +12,12 @@
         android:id="@+id/searchFragment"
         android:name="com.cheesecake.presentation.screens.search.SearchFragment"
         android:label="SearchFragment" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.cheesecake.presentation.screens.favorite.FavoriteFragment"
+        android:label="FavoriteFragment" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_leagueFragment"
+            app:destination="@id/leagueFragment" />
+    </fragment>
 </navigation>
