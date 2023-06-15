@@ -7,12 +7,14 @@
 
         <variable
             name="item"
-            type="com.cheesecake.domain.entity.Team" />
+            type="com.cheesecake.presentation.screens.favoriteTeams.FavoriteTeamItemUiState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> item.onFavoriteTeamClick.invoke(item.teamId)}"
+        >
 
         <ImageView
             android:id="@+id/text_view_favorite_team_icon"
@@ -60,7 +62,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:button="@drawable/sl_favourite"
-            android:checked="@{item.isFavourite}"
+            android:checked="@{item.isFavorite}"
+            android:onClick="@{() -> item.onFavoriteClick.invoke()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

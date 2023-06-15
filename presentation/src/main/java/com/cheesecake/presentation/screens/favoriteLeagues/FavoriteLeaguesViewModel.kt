@@ -9,8 +9,6 @@ import com.cheesecake.presentation.mapper.toUIState
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,10 +17,10 @@ import javax.inject.Inject
 class FavoriteLeaguesViewModel @Inject constructor(
     private val getFavoriteLeaguesUseCase: GetFavoriteLeaguesUseCase,
     private val favoriteLeagueUseCase: FavouriteLeagueUseCase
-) : BaseViewModel<FavoriteLeaguesUIState>(FavoriteLeaguesUIState()) {
-
-    private val _favoriteLeaguesEvent = MutableStateFlow<Event<NavigateEvent>?>(null)
-    val favoriteLeaguesEvent = _favoriteLeaguesEvent.asStateFlow()
+) : BaseViewModel<FavoriteLeaguesUIState, Event<FavoriteLeaguesNavigationEvent?>>(
+    FavoriteLeaguesUIState(),
+    Event<FavoriteLeaguesNavigationEvent?>(null)
+) {
 
     init {
         getFavoriteLeagues()
@@ -47,25 +45,18 @@ class FavoriteLeaguesViewModel @Inject constructor(
         }
     }
 
-
     private fun onError(e: Throwable) {
         _state.update {
-            it.copy(
-                errorMessage = e.localizedMessage ?: "Unknown error.",
-                isLoading = false
-            )
+            it.copy(errorMessage = e.localizedMessage ?: "Unknown error.", isLoading = false)
         }
     }
 
     private fun navigateToLeague(leagueId: Int) {
-        _favoriteLeaguesEvent.update { Event(NavigateEvent.NavigateToLeague(leagueId)) }
+        _event.update { Event(FavoriteLeaguesNavigationEvent.NavigateToLeague(leagueId)) }
     }
 
-
     private fun toggleFavourite(leagueId: Int, leagueSeason: Int) {
-        viewModelScope.launch {
-            favoriteLeagueUseCase(leagueId, leagueSeason).toString()
-        }
+        viewModelScope.launch { favoriteLeagueUseCase(leagueId, leagueSeason).toString() }
     }
 
 }

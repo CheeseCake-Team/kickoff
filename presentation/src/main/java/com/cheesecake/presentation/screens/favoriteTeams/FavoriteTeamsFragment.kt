@@ -16,8 +16,20 @@ class FavoriteTeamsFragment : BaseFragment<FragmentFavoriteTeamsBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = FavoriteTeamsAdapter()
-        binding.favoriteTeamsRecyclerView.adapter = adapter
+        binding.favoriteTeamsRecyclerView.adapter = FavoriteTeamsAdapter()
+    }
+
+    private fun handleNavigation() {
+        collect(viewModel.event) { event ->
+            event?.getContentIfNotHandled()?.let { onEvent(it) }
+        }
+    }
+
+    private fun onEvent(favoriteTeamsNavigationEvent: FavoriteTeamsNavigationEvent) {
+        when(favoriteTeamsNavigationEvent) {
+            is FavoriteTeamsNavigationEvent.NavigateToTeam -> {}
+            else -> Unit
+        }
     }
 
 }
