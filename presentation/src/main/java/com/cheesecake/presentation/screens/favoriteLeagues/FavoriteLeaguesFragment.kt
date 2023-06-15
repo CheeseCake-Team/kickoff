@@ -23,14 +23,14 @@ class FavoriteLeaguesFragment : BaseFragment<FragmentFavoriteLeaguesBinding>() {
     }
 
     private fun handleNavigation() {
-        collect(viewModel.favoriteLeaguesEvent) { event ->
+        collect(viewModel.event) { event ->
             event?.getContentIfNotHandled()?.let { onEvent(it) }
         }
     }
 
-    private fun onEvent(event: NavigateEvent) {
+    private fun onEvent(event: FavoriteLeaguesNavigationEvent) {
         when (event) {
-            is NavigateEvent.NavigateToLeague ->
+            is FavoriteLeaguesNavigationEvent.NavigateToLeague ->
                 findNavController().navigate(FavoriteFragmentDirections.actionFavoriteFragmentToLeagueFragment())
         }
     }
