@@ -5,7 +5,6 @@ data class MatchStatisticsUIState(
     val errorMessage: String = "error",
     val isLoading: Boolean = true
 )
-
 data class StatisticsItemUiState(
     val homeTeamValue: Int,
     val awayTeamValue: Int,
