@@ -10,6 +10,10 @@ import com.cheesecake.domain.entity.PlayerStatistics
 import com.cheesecake.domain.entity.Trophy
 
 interface IFootballRepository {
+    suspend fun getRemoteCountries():List<TeamCountry>
+
+    suspend fun getLocalCountries() : List<TeamCountry>
+
     suspend fun getLeagueNameAndCountry(leagueId: Int, current: Boolean): List<League>
 
     suspend fun getLeagueTopScorers(leagueId: Int, season: Int): List<PlayerStatistics>
