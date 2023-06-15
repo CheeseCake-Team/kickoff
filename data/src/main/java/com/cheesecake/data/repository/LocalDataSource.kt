@@ -24,4 +24,6 @@ interface LocalDataSource {
 
     suspend fun deleteLeagueById(leagueId: Int)
 
+    suspend fun getLocalCountries(): List<TeamCountriesLocalDTO>
+
 }
