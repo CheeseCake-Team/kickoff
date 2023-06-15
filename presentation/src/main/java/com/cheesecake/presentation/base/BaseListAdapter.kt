@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cheesecake.presentation.databinding.ItemDateMatchesBinding
 import com.cheesecake.presentation.databinding.ItemTeamPlayersPositionsBinding
 import com.cheesecake.presentation.screens.leagueMatches.LeagueMatchesHeadToHeadAdapter
-import com.cheesecake.presentation.screens.teamPlayers.TeamPLayersPositionsAdapter
+import com.cheesecake.presentation.screens.teamPlayers.TeamPlayerAdapter
 
 abstract class BaseListAdapter<T>(
     diffutils: DiffUtil.ItemCallback<T>,
@@ -44,7 +44,7 @@ abstract class BaseListAdapter<T>(
 
                 }
                 is ItemTeamPlayersPositionsBinding -> {
-                    binding.playersPositionRecycler.adapter = TeamPLayersPositionsAdapter()
+                    binding.playersPositionRecycler.adapter = TeamPlayerAdapter()
                 }
             }
 
