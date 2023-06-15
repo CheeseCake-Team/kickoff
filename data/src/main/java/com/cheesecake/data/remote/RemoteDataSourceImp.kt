@@ -54,7 +54,7 @@ class RemoteDataSourceImp @Inject constructor(
     //endregion
 
     //region countries
-    override suspend fun getAllCountries(): List<TeamCountriesDTO> {
+    override suspend fun getCountries(): List<TeamCountriesDTO> {
         return wrapBaseResponse { service.getAllCountries() }
     }
 

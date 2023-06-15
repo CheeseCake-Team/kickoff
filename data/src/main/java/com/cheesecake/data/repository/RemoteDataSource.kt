@@ -46,7 +46,7 @@ interface RemoteDataSource {
 
     //region countries
 
-    suspend fun getAllCountries(): List<TeamCountriesDTO>
+    suspend fun getCountries(): List<TeamCountriesDTO>
 
 
     suspend fun getCountryByName(
