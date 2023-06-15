@@ -11,17 +11,8 @@ class FavouriteLeagueUseCase @Inject constructor(
 
     suspend operator fun invoke(leagueId: Int, leagueSeason: Int): League {
         getLeagueByIdAndSeasonUseCase(leagueId, leagueSeason).let {
-            footballRepository.updateOrInsertLeague(
-                League(
-                    leagueId = it.leagueId,
-                    leagueName = it.leagueName,
-                    leagueLogo = it.leagueLogo,
-                    leagueSeason = it.leagueSeason,
-                    seasonStartYear = it.seasonStartYear,
-                    seasonEndYear = it.seasonEndYear,
-                    isFavourite = !it.isFavourite,
-                    country = it.country
-                )
+            footballRepository.updateOrInsertLeague(it
+
             )
         }
         return getLeagueByIdAndSeasonUseCase(leagueId, leagueSeason)

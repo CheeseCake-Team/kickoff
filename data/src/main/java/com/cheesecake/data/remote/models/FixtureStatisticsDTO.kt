@@ -13,6 +13,6 @@ data class FixtureStatisticsDTO(
         @SerializedName("type")
         val type: String,
         @SerializedName("value")
-        val value: Int
+        val value: String
     )
 }
