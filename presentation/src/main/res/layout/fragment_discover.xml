@@ -1,6 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.cheesecake.presentation.screens.discover.DiscoverViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_view_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/lato"
+            android:text="Discover teams"
+            android:textAppearance="@style/discover_team"
+            android:textSize="@dimen/font_size_16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_details"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="@dimen/spacing_16"
+            android:fontFamily="@font/lato"
+            android:text="Explore teams from around the world based on their countries."
+            android:textAppearance="@style/explore_team"
+            android:textSize="@dimen/font_size_12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/text_view_heading"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_heading" />
+
+        <EditText
+            android:id="@+id/edit_text_search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/lightGrey"
+            android:drawableStart="@drawable/magnifer"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/lato"
+            android:hint="@string/search_here"
+            android:paddingHorizontal="@dimen/font_size_16sp"
+            android:textColor="@color/fontHeavy"
+            android:textColorHint="@color/lightGreyText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_details" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_team_country"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:padding="@dimen/spacing_12"
+            app:items="@{viewModel.state.data}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_search_bar"
+            app:viewVisibilityInLoading="@{viewModel.state.loading}"
+            tools:context="com.cheesecake.discover.DiscoverFragment"
+            tools:listitem="@layout/item_country_team" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
