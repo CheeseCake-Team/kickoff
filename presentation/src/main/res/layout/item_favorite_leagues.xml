@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.cheesecake.presentation.screens.favoriteLeagues.FavoriteLeagueUIState" />
+            type="com.cheesecake.presentation.screens.favorite.favoriteLeagues.FavoriteLeagueUIState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

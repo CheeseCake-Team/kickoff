@@ -1,5 +1,6 @@
 package com.cheesecake.presentation.models
-open class Event<out T>(private val content: T) {
+
+open class Event<out T>(private val content: T? = null) {
 
     var hasBeenHandled = false
         private set

@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.cheesecake.presentation.screens.favoriteTeams.FavoriteTeamsViewModel" />
+            type="com.cheesecake.presentation.screens.favorite.favoriteTeams.FavoriteTeamsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".screens.favoriteTeams.FavoriteTeamsFragment">
+        tools:context=".screens.favorite.favoriteTeams.FavoriteTeamsFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/favorite_teams_recyclerView"

@@ -1,4 +1,4 @@
-package com.cheesecake.presentation.screens.teamstatistics
+package com.cheesecake.presentation.screens.league.leagueTeams
 
 import android.os.Bundle
 import android.view.View
@@ -6,13 +6,12 @@ import androidx.fragment.app.viewModels
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentTeamsLeagueBinding
-import com.cheesecake.presentation.screens.league.leagueTeams.TeamsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TestFragment : BaseFragment<FragmentTeamsLeagueBinding>() {
-    override val layoutIdFragment = R.layout.fragment_team_statistics
-    override val viewModel: TeamStatisticsViewModel by viewModels()
+class LeagueTeamsFragment : BaseFragment<FragmentTeamsLeagueBinding>() {
+    override val layoutIdFragment = R.layout.fragment_teams_league
+    override val viewModel: LeagueTeamsViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

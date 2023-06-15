@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.cheesecake.presentation.screens.favoriteTeams.FavoriteTeamItemUiState" />
+            type="com.cheesecake.presentation.screens.favorite.favoriteTeams.FavoriteTeamItemUiState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -63,7 +63,7 @@
             android:layout_marginEnd="16dp"
             android:button="@drawable/sl_favourite"
             android:checked="@{item.isFavorite}"
-            android:onClick="@{() -> item.onFavoriteClick.invoke()}"
+            android:onClick="@{() -> item.onFavoriteClick.invoke(item.teamId)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

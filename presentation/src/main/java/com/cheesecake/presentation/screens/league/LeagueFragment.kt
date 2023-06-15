@@ -8,9 +8,9 @@ import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.base.BaseFragmentsAdapter
 import com.cheesecake.presentation.databinding.FragmentLeagueBinding
-import com.cheesecake.presentation.screens.leagueDetails.LeagueDetailsFragment
-import com.cheesecake.presentation.screens.leagueMatches.LeagueMatchesFragment
-import com.cheesecake.presentation.screens.leagueTeams.LeagueTeamsFragment
+import com.cheesecake.presentation.screens.league.leagueDetails.LeagueDetailsFragment
+import com.cheesecake.presentation.screens.league.leagueMatches.LeagueMatchesFragment
+import com.cheesecake.presentation.screens.league.leagueTeams.LeagueTeamsFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 

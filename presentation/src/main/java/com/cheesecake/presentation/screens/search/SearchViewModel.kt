@@ -7,6 +7,7 @@ import com.cheesecake.domain.usecases.GetLeagueByNameUseCase
 import com.cheesecake.domain.usecases.GetTeamByNameUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.mapper.toUIModel
+import com.cheesecake.presentation.models.Event
 import com.cheesecake.presentation.models.TeamUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -23,7 +24,7 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(
     private val getLeagueByNameUseCase: GetLeagueByNameUseCase,
     private val getTeamList: GetTeamByNameUseCase,
-) : BaseViewModel<SearchUIState>(SearchUIState()) {
+) : BaseViewModel<SearchUIState,SearchEvents>(SearchUIState(), Event()) {
 
 
     val searchInput = MutableLiveData("")

@@ -1,7 +1,7 @@
 package com.cheesecake.presentation.mapper
 
 import com.cheesecake.domain.entity.Team
-import com.cheesecake.presentation.screens.favoriteTeams.FavoriteTeamItemUiState
+import com.cheesecake.presentation.screens.favorite.favoriteTeams.FavoriteTeamItemUiState
 
 
 @JvmName("teamToFavoriteTeamItemUiState")
