@@ -421,7 +421,7 @@ interface FootballApiService {
     @GET("players/squads")
     suspend fun getSquadByTeamId(
         @Query("team") teamId: Int
-    ): Response<BasePagingResponse<PlayerDTO>>
+    ): Response<BasePagingResponse<SquadDTO>>
 
     @GET("players/topscorers")
     suspend fun getTopScorers(

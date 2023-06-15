@@ -343,7 +343,7 @@ interface RemoteDataSource {
 
     suspend fun getSquadByTeamId(
         teamId: Int
-    ): List<PlayerDTO>
+    ): List<SquadDTO>
 
     suspend fun getTopScorers(
         seasonId: Int, leagueId: Int

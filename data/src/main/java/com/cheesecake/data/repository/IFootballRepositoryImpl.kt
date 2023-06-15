@@ -1,10 +1,12 @@
 package com.cheesecake.data.repository
 
+import android.util.Log
 import com.cheesecake.data.repository.mappers.toEntity
 import com.cheesecake.data.repository.mappers.toLocal
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.entity.PlayerStatistics
+import com.cheesecake.domain.entity.SquadPlayer
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.entity.TeamStanding
 import com.cheesecake.domain.entity.TeamStatisticsEntity
@@ -139,7 +141,7 @@ class IFootballRepositoryImpl
         return remoteDataSource.getCoachTrophies(coachId).toEntity()
     }
 
-    override suspend fun getSquadOfTeam(teamId: Int): List<PlayerStatistics> {
+    override suspend fun getSquadOfTeam(teamId: Int): List<SquadPlayer> {
         return remoteDataSource.getSquadByTeamId(teamId).toEntity()
     }
 
