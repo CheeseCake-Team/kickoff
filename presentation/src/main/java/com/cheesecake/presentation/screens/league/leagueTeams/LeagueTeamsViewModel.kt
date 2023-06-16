@@ -2,7 +2,7 @@ package com.cheesecake.presentation.screens.league.leagueTeams
 
 import android.util.Log
 import com.cheesecake.domain.entity.Team
-import com.cheesecake.presentation.mapper.toUIModel
+import com.cheesecake.presentation.mapper.toUIState
 import com.cheesecake.domain.usecases.GetAllTeamsInLeagueWithSeasonUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
@@ -35,7 +35,7 @@ class LeagueTeamsViewModel @Inject constructor(
         result.let { list ->
             _state.update { teamUIState ->
                 Log.i("getData: ", list.toString())
-                teamUIState.copy(data = list.map { it.toUIModel() }, isLoading = false)
+                teamUIState.copy(data = list.map { it.toUIState() }, isLoading = false)
             }
         }
     }

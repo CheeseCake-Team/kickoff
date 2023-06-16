@@ -11,9 +11,9 @@ fun League.toLeaguesUIState(
 ): FavoriteLeagueUIState =
     FavoriteLeagueUIState(
         id = this.leagueId,
-        leagueName = this.leagueName,
+        leagueName = this.name,
         leagueCountry = this.country,
-        imageUrl = this.leagueLogo,
+        imageUrl = this.imageUrl,
         isFavourite = this.isFavourite,
         onFavorite = onFavoriteButtonClick,
         onFavoriteLeagueClick = onFavoriteLeagueClick,
@@ -26,9 +26,9 @@ fun League.toUIState(
 ): LeagueUIState =
     LeagueUIState(
         leagueId = this.leagueId,
-        leagueName = this.leagueName,
+        leagueName = this.name,
         seasonStartEndYear = "${this.seasonStartYear}/${this.seasonEndYear}",
-        imageUrl = this.leagueLogo,
+        imageUrl = this.imageUrl,
         isFavourite = this.isFavourite,
         onLeagueFavoriteClick = onFavoriteButtonClick,
         OnBackClick = onBackClick,

@@ -1,5 +1,7 @@
 package com.cheesecake.presentation.models
 
+import com.cheesecake.domain.entity.Team
+
 data class TeamUIState (
     val teamId: Int,
     val teamName: String,
@@ -10,4 +12,3 @@ data class TeamUIState (
     val imageUrl: String,
     val isFavourite: Boolean,
 )
-

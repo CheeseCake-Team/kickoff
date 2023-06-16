@@ -43,7 +43,7 @@ class LeagueViewModel @Inject constructor(
             _state.update { uiState ->
                 uiState.copy {
                     league.toUIState(
-                        { toggleFavourite(it.leagueId, it.leagueSeason.toInt()) },
+                        { toggleFavourite(it.leagueId, it.season.toInt()) },
                         ::onBackClick
                     )
                 }
