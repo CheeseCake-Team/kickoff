@@ -9,6 +9,6 @@ data class LeagueUIState(
     val imageUrl: String = "",
     val leagueName: String = "",
     val isFavourite: Boolean = false,
-    val OnBackClick: () -> Unit = {},
-    val onLeagueFavoriteClick: ()-> Unit = {}
+    val onBackClick: () -> Unit = {},
+    val onLeagueFavoriteClick: (Int, Int)-> Unit = {i, s -> }
 )
