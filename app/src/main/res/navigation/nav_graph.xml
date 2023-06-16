@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/darkThem">
+    app:startDestination="@id/settingsFragment">
 
     <fragment
         android:id="@+id/leagueFragment"
@@ -13,11 +13,7 @@
         android:name="com.cheesecake.presentation.screens.search.SearchFragment"
         android:label="SearchFragment" />
     <fragment
-        android:id="@+id/darkThem"
-        android:name="com.cheesecake.presentation.screens.Settings.DarkThem"
-        android:label="DarkThem" />
-    <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.cheesecake.presentation.screens.Settings.SettingsFragment"
+        android:name="com.cheesecake.presentation.screens.settings.SettingsFragment"
         android:label="SettingsFragment" />
 </navigation>
