@@ -29,9 +29,7 @@ interface IFootballRepository {
 
     suspend fun getRemotelyTeamsByIdAndSeason(leagueId: Int, leagueSeason: Int): List<Team>
 
-    suspend fun updateOrInsertTeams(
-        teamEntities: List<Team>, leagueId: Int, leagueSeason: Int
-    )
+    suspend fun updateOrInsertTeams(teamEntities: List<Team>, leagueId: Int, leagueSeason: Int)
 
     suspend fun getLeaguesByName(leagueName: String): List<League>
 
@@ -39,10 +37,7 @@ interface IFootballRepository {
 
     suspend fun getCurrentRoundByIdAndSeason(leagueId: Int, season: Int): String?
 
-    suspend fun getTeamsStandingByLeagueIdAndSeason(
-        leagueId: Int,
-        season: Int
-    ): List<TeamStanding>
+    suspend fun getTeamsStandingByLeagueIdAndSeason(leagueId: Int, season: Int): List<TeamStanding>
 
     suspend fun getTeamStatistics(teamId: Int, season: Int, leagueId: Int): TeamStatisticsEntity
 
