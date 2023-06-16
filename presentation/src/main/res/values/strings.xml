@@ -25,5 +25,6 @@
     <string name="search_here">Search here...</string>
     <string name="no_result_found_description">We couldn\'t find any results for your search\n Please check your input and try again</string>
     <string name="no_result_found">No Result Found</string>
+    <string name="sub_title_string">Pick your preferred competition and experience the real live scores with us</string>
 
 </resources>

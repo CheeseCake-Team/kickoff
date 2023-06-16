@@ -30,8 +30,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="@dimen/team_image_size_48dp"
-            android:layout_height="@dimen/team_image_size_48dp"
+            android:layout_width="@dimen/spacing_48"
+            android:layout_height="@dimen/spacing_48"
             android:contentDescription="@string/league_loge"
             app:imageUrl="@{viewModel.state.imageUrl}"
             app:layout_constraintStart_toEndOf="@+id/back_button"

@@ -129,4 +129,8 @@ class IFootballRepositoryImpl
     override suspend fun getCoachTrophy(coachId: Int): List<Trophy> {
         return remoteDataSource.getCoachTrophies(coachId).toEntity()
     }
+
+    override suspend fun getAllLeagues(): List<League> {
+        return remoteDataSource.getAllLeagues().toEntity()
+    }
 }

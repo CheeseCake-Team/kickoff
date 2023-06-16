@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/leagueFragment">
+    app:startDestination="@id/favLeaguesSelectionFragment">
 
     <fragment
         android:id="@+id/leagueFragment"
@@ -12,4 +13,8 @@
         android:id="@+id/searchFragment"
         android:name="com.cheesecake.presentation.screens.search.SearchFragment"
         android:label="SearchFragment" />
+    <fragment
+        android:id="@+id/favLeaguesSelectionFragment"
+        android:name="com.cheesecake.presentation.screens.favLeaguesSelection.FavLeaguesSelectionFragment"
+        android:label="FavLeaguesSelectionFragment" />
 </navigation>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.cheesecake.presentation.screens.favLeaguesSelection.FavLeagueSelectionViewModel" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragment.favLeagueSelection.FavLeagueSelectionFragment">
+
+        <TextView
+            android:id="@+id/title_text_view"
+            style="@style/SubtitleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:text="Welcome to KickOff"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/sub_title_text_view"
+            style="@style/SubtitleLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_8"
+            android:text="@string/sub_title_string"
+            android:textColor="@color/backLighter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_text_view" />
+
+        <EditText
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:background="@color/lightGrey"
+            android:drawableStart="@drawable/magnifer"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/lato"
+            android:hint="Search your favourite competition"
+            android:paddingHorizontal="@dimen/font_size_16sp"
+            android:textColor="@color/fontHeavy"
+            android:textColorHint="@color/lightGreyText"
+            android:textSize="@dimen/font_size_14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sub_title_text_view" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/all_leagues_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/spacing_8"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:clipToPadding="true"
+            android:scrollbars="none"
+            app:items="@{viewModel.favLeagueSelectionUIState.allLeagues}"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_bar"
+            app:spanCount="3"
+            tools:listitem="@layout/item_select_fav" />
+
+        <View
+            android:id="@+id/view_frame"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/cardSurface"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/next_button"
+            style="@style/TitleMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_16"
+            android:text="Next"
+            android:textColor="@color/primaryColor"
+            app:layout_constraintBottom_toBottomOf="@id/view_frame"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/view_frame" />
+
+        <TextView
+            android:id="@+id/skip_button"
+            style="@style/TitleMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:text="Skip"
+            android:textColor="@color/backLighter"
+            app:layout_constraintBottom_toBottomOf="@id/view_frame"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/view_frame" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showLoading="@{viewModel.favLeagueSelectionUIState.loading}" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

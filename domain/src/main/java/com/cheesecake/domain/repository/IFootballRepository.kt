@@ -50,4 +50,6 @@ interface IFootballRepository {
 
     suspend fun getPlayerTrophy(playerId: Int): List<Trophy>
     suspend fun getCoachTrophy(coachId: Int): List<Trophy>
+
+    suspend fun getAllLeagues(): List<League>
 }
