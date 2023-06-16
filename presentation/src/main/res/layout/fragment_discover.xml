@@ -54,6 +54,7 @@
             android:fontFamily="@font/lato"
             android:hint="@string/search_here"
             android:paddingHorizontal="@dimen/font_size_16sp"
+            android:text="@={viewModel.search}"
             android:textColor="@color/fontHeavy"
             android:textColorHint="@color/lightGreyText"
             app:layout_constraintEnd_toEndOf="parent"
