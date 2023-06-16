@@ -5,11 +5,11 @@ import com.cheesecake.presentation.models.TeamUIState
 
 sealed class SearchResult {
     data class Team(
-        val items: List<TeamUIState>,
+        var items: List<TeamUIState>,
     ) : SearchResult()
 
     data class League(
-        val items: List<LeagueSearchUIState>,
+        var items: List<LeagueSearchUIState>,
     ) : SearchResult()
 
 }

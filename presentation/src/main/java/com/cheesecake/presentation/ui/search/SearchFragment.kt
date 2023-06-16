@@ -56,11 +56,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     private fun updateRecyclerView(selectedTabPosition: Int) {
         when (selectedTabPosition) {
             0 -> {
+                viewModel.resetSearchResult()
                 viewModel.searchType.value = SearchType.TEAM
                 Log.i( "getSearchFragment: " ,viewModel.searchType.value.toString())
                 binding.searchRecyclerView.adapter = SearchTeamAdapter()
             }
             1 -> {
+                viewModel.resetSearchResult()
                 viewModel.searchType.value = SearchType.LEAGUE
                 Log.i( "getSearchFragment: " ,viewModel.searchType.value.toString())
                 binding.searchRecyclerView.adapter = SearchLeagueAdapter()

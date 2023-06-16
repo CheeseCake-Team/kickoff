@@ -85,6 +85,17 @@ class SearchViewModel @Inject constructor(
         }
     }
 
+    fun resetSearchResult() {
+        when (searchType.value) {
+            SearchType.TEAM -> {
+                _state.update { it.copy(searchResult = SearchResult.Team(emptyList())) }
+            }
+            SearchType.LEAGUE -> {
+                _state.update { it.copy(searchResult = SearchResult.League(emptyList())) }
+            }
+        }
+    }
+
 
 
     suspend fun onSelectSearchType(searchTypeUIState: SearchType) {
