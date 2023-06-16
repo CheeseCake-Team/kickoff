@@ -1,6 +1,6 @@
 package com.cheesecake.presentation.screens.home
 
-data class DateMatchItemUIState(
+data class MatchItemUIState(
     val leagueId: Int = 0,
     val leagueSeason: Int = 0,
     val timeZone: String = "",

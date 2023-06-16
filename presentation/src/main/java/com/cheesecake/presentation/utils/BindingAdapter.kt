@@ -17,7 +17,7 @@ import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.presentation.base.BaseAdapter
 import com.cheesecake.presentation.screens.search.SearchViewModel
 import com.cheesecake.presentation.base.BaseListAdapter
-import com.cheesecake.presentation.screens.home.DateMatchItemUIState
+import com.cheesecake.presentation.screens.home.MatchItemUIState
 import com.cheesecake.presentation.screens.search.SearchResult
 
 
@@ -126,7 +126,7 @@ fun TextView.setMatchScore(fixture: Fixture?) {
 
 
 @BindingAdapter("app:scoreOrTime")
-fun TextView.setMatchScore(item: DateMatchItemUIState?) {
+fun TextView.setMatchScore(item: MatchItemUIState?) {
     item?.let {
         when(it.matchState ) {
             "FT" -> "Finished\n  ${it.homeTeamGoals}  -  ${it.awayTeamGoals}"

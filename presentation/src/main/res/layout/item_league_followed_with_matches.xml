@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="item"
             type="com.cheesecake.presentation.screens.home.FavoriteHomeItemUIState" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
+        style="@style/Widget.Material3.CardView.Filled"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_4"
         android:padding="@dimen/spacing_8"
-        style="@style/Widget.Material3.CardView.Filled"
-        app:cardBackgroundColor="@color/cardSurface"
-        >
+        app:cardBackgroundColor="@color/cardSurface">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -26,44 +26,45 @@
                 android:id="@+id/favorite_item_image_view"
                 android:layout_width="@dimen/team_image_size_48dp"
                 android:layout_height="@dimen/team_image_size_48dp"
-                app:circularImageUrl="@{item.imageUrl}"
                 android:layout_marginTop="@dimen/spacing_16"
+                app:circularImageUrl="@{item.imageUrl}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/favorite_title_text_view"
+                style="@style/bodyMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="@{item.title}"
-                tools:text="Primer League"
-                style="@style/bodyMedium"
                 android:textColor="@color/fontHeavy"
                 app:layout_constraintBottom_toBottomOf="@+id/favorite_item_image_view"
                 app:layout_constraintStart_toEndOf="@+id/favorite_item_image_view"
-                app:layout_constraintTop_toTopOf="@+id/favorite_item_image_view" />
+                app:layout_constraintTop_toTopOf="@+id/favorite_item_image_view"
+                tools:text="Primer League" />
 
             <View
                 android:id="@+id/divider2"
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/spacing_8"
                 android:layout_height="1dp"
+                android:layout_marginTop="@dimen/spacing_8"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintTop_toBottomOf="@+id/favorite_item_image_view"
                 tools:layout_editor_absoluteX="1dp" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/matches_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:paddingVertical="@dimen/spacing_4"
                 android:clipToPadding="false"
                 android:overScrollMode="never"
+                android:paddingVertical="@dimen/spacing_4"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@+id/divider2"
-                />
+                app:listItems="@{item.matches}"
+                tools:listitem="@layout/item_match" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

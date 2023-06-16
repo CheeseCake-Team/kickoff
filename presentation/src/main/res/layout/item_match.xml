@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.cheesecake.presentation.screens.home.DateMatchItemUIState" />
+            type="com.cheesecake.presentation.screens.home.MatchItemUIState" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         style="@style/Widget.Material3.CardView.Filled"
         android:layout_marginVertical="@dimen/spacing_4"
+        android:padding="@dimen/spacing_8"
         app:cardBackgroundColor="@color/cardSurface"
         app:cardCornerRadius="4dp">
 
