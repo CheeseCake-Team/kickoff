@@ -7,6 +7,7 @@ import com.cheesecake.data.local.models.LeagueLocalDTO
 import com.cheesecake.data.local.models.TeamCountriesLocalDTO
 import com.cheesecake.data.local.models.TeamLocalDTO
 import com.cheesecake.data.repository.LocalDataSource
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class LocalDataSourceImp @Inject constructor(
@@ -51,6 +52,11 @@ class LocalDataSourceImp @Inject constructor(
     override suspend fun getLocalCountries(): List<TeamCountriesLocalDTO> {
         return teamCountriesDao.getLocalCountries()
     }
+
+    override suspend fun getCountriesSearch(search: String): Flow<List<TeamCountriesLocalDTO>> {
+        return teamCountriesDao.getCountriesSearch(search)
+    }
+
 
     override suspend fun addTeamCountries(teams: List<TeamCountriesLocalDTO>) {
         teamCountriesDao.addTeamCountries(teams)
