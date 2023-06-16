@@ -21,7 +21,7 @@
             android:padding="@dimen/spacing_12"
             android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:items="@{viewModel.state.teams}" />
+            app:listItems="@{viewModel.state.teams}" />
 
         <ImageView
             android:id="@+id/no_favorite_found_image_view"
