@@ -30,5 +30,12 @@
     <string name="time_settings">Time Settings</string>
     <string name="theme_settings">Theme Settings</string>
     <string name="favourites">favourites</string>
+    <string name="change_the_time_settings_as_you_prefer">Change the time settings as you prefer</string>
+    <string name="change_your_time_format">Change your time format</string>
+    <string name="use_24_hour_format">Use 24 -hour format</string>
+    <string name="use_12_hour_format">Use 12 -hour format</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="light_mode">Light Mode</string>
+    <string name="choose_the_theme_you_like_to_see">Choose the theme you like to see</string>
 
 </resources>
