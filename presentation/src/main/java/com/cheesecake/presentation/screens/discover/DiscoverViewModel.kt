@@ -39,6 +39,24 @@ class DiscoverViewModel @Inject constructor(
         }
     }
 
+
+    private fun onSuccess(flow: Flow<List<TeamCountry>>) {
+        GlobalScope.launch {
+            flow.collect { list ->
+                list.let {
+                    _state.update { discoverTeamCountryUIState ->
+                        Log.i("getData search: ", it.toString())
+                        discoverTeamCountryUIState.copy(
+                            data = it.map { it.toUIModel() },
+                            isLoading = false
+                        )
+                    }
+                }
+            }
+        }
+
+    }
+
     private fun onError(e: Throwable) {
         _state.update {
             it.copy(isError = e.message.toString())
