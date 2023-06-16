@@ -112,8 +112,8 @@ class IFootballRepositoryImpl
         return remoteDataSource.getStandingsByLeagueId(season, leagueId).toEntity()
     }
 
-    override suspend fun getTeamsBySearch(name: String): List<Team> {
-        return remoteDataSource.getTeamsBySearch(name).toEntity()
+    override suspend fun getTeamsBySearch(teamName: String): List<Team> {
+        return remoteDataSource.getTeamsBySearch(teamName).toEntity()
     }
 
     override suspend fun getTeamStatistics(
