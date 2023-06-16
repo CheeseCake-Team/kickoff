@@ -10,9 +10,13 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-class DiscoverViewModel @Inject constructor(private val getTeamCountryUseCase: GetTeamCountryUseCase) :
+class DiscoverViewModel @Inject constructor(
+    private val getTeamCountryUseCase: GetTeamCountryUseCase,
+    private val getSearchTeamCountryUseCase: GetSearchTeamCountryUseCase,
+) :
     BaseViewModel<DiscoverTeamCountryUIState>(DiscoverTeamCountryUIState()) {
 
+    var search = MutableStateFlow<String?>(null)
 
     init {
         getData()
