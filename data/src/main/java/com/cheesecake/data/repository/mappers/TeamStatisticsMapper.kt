@@ -1,5 +1,3 @@
-package com.cheesecake.data.repository.mappers
-
 import com.cheesecake.data.remote.models.TeamStatisticsDTO
 import com.cheesecake.domain.entity.ScoreStats
 import com.cheesecake.domain.entity.TeamStatisticsEntity
@@ -48,5 +46,5 @@ import com.cheesecake.domain.entity.TeamStatisticsEntity
         )
     )
 
-private fun scoreStats(home: Int, away: Int, total: Int): ScoreStats =
-    ScoreStats(home, away, total)
+private fun scoreStats(home: Float, away: Float, total: Float): ScoreStats =
+    ScoreStats(home.toInt(), away.toInt(), total.toInt())
