@@ -12,6 +12,7 @@ import com.cheesecake.domain.entity.TeamStanding
 import com.cheesecake.domain.entity.TeamStatisticsEntity
 import com.cheesecake.domain.entity.Trophy
 import com.cheesecake.domain.repository.IFootballRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class IFootballRepositoryImpl
@@ -26,6 +27,10 @@ class IFootballRepositoryImpl
 
     override suspend fun getLocalCountries(): List<TeamCountry> {
         return localDataSource.getLocalCountries().toEntity()
+    }
+
+    override suspend fun getCountriesSearch(search: String): Flow<List<TeamCountry>> {
+        return localDataSource.getCountriesSearch(search).toEntity()
     }
 
     override suspend fun getLeagueNameAndCountry(
