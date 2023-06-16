@@ -8,11 +8,14 @@ import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.entity.PlayerStatistics
 import com.cheesecake.domain.entity.Trophy
+import kotlinx.coroutines.flow.Flow
 
 interface IFootballRepository {
     suspend fun getRemoteCountries():List<TeamCountry>
 
     suspend fun getLocalCountries() : List<TeamCountry>
+
+    suspend fun getCountriesSearch(search: String): Flow<List<TeamCountry>>
 
     suspend fun getLeagueNameAndCountry(leagueId: Int, current: Boolean): List<League>
 
