@@ -3,6 +3,7 @@ package com.cheesecake.data.repository
 import com.cheesecake.data.local.models.LeagueLocalDTO
 import com.cheesecake.data.local.models.TeamCountriesLocalDTO
 import com.cheesecake.data.local.models.TeamLocalDTO
+import kotlinx.coroutines.flow.Flow
 
 interface LocalDataSource {
 
@@ -25,5 +26,7 @@ interface LocalDataSource {
     suspend fun deleteLeagueById(leagueId: Int)
 
     suspend fun getLocalCountries(): List<TeamCountriesLocalDTO>
+
+    suspend fun getCountriesSearch(search: String): Flow<List<TeamCountriesLocalDTO>>
 
 }
