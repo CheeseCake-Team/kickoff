@@ -39,7 +39,10 @@ class IFootballRepositoryImpl
             ?.toEntity()
     }
 
-    override suspend fun getSinglePlayerCompact(season: String, teamId: Int): List<PlayerStatistics> {
+    override suspend fun getSinglePlayerCompact(
+        season: String,
+        teamId: Int
+    ): List<PlayerStatistics> {
         return remoteDataSource.getPlayerBySeasonByTeamId(season, teamId).toEntity()
     }
 
@@ -58,9 +61,9 @@ class IFootballRepositoryImpl
     override suspend fun getMatchesByLeagueIdAndSeason(
         timeZone: String,
         leagueId: Int,
-        Season: Int
+        season: Int
     ): List<Fixture> {
-        return remoteDataSource.getFixturesBySeasonIdAndLeagueId(timeZone, Season, leagueId)
+        return remoteDataSource.getFixturesBySeasonIdAndLeagueId(timeZone, season, leagueId)
             .toEntity()
     }
 
@@ -102,7 +105,8 @@ class IFootballRepositoryImpl
 
 
     override suspend fun getCurrentRoundByIdAndSeason(leagueId: Int, season: Int): String? {
-        return remoteDataSource.getCurrentRoundByLeagueIdAndSeason(leagueId, season, true).firstOrNull()
+        return remoteDataSource.getCurrentRoundByLeagueIdAndSeason(leagueId, season, true)
+            .firstOrNull()
     }
 
     override suspend fun getTeamsStandingByLeagueIdAndSeason(
@@ -123,7 +127,11 @@ class IFootballRepositoryImpl
     ): TeamStatisticsEntity {
         return remoteDataSource.getTeamStatistics(teamId, season, leagueId).toEntity()
     }
-    override suspend fun getPlayerBySeasonByPlayerId(season: String, playerId: Int): PlayerStatistics {
+
+    override suspend fun getPlayerBySeasonByPlayerId(
+        season: String,
+        playerId: Int
+    ): PlayerStatistics {
         return remoteDataSource.getPlayerBySeasonByPlayerId(season, playerId).first().toEntity()
     }
 
