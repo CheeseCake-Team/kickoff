@@ -16,9 +16,6 @@ class MatchStatisticsFragment : BaseFragment<FragmentMatchStatisticsBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerView.adapter = MatchStatisticsAdapter()
-
-
-
     }
 
 }
