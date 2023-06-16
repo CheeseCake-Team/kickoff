@@ -1,33 +1,60 @@
 package com.cheesecake.presentation.screens.teamstatistics
 
 import com.cheesecake.domain.entity.Team
+import com.cheesecake.domain.entity.TeamStatisticsEntity
 
 data class TeamStatisticsUIState(
-    val homePlayed: Int,
-    val homeWins: Int,
-    val homeLoses: Int,
-    val homeCleanSheet: Int,
-    val homeFailed: Int,
-    val homeGoalsFor: Int,
-    val homeGoalsAgainst: Int,
+    val homePlayed: Int = 0,
+    val homeWins: Int = 0,
+    val homeLoses: Int = 0,
+    val homeCleanSheet: Int = 0,
+    val homeFailed: Int = 0,
+    val homeGoalsFor: Int = 0,
+    val homeGoalsAgainst: Int = 0,
 
-    val awayPlayed: Int,
-    val awayWins: Int,
-    val awayLoses: Int,
-    val awayCleanSheet: Int,
-    val awayFailed: Int,
-    val awayGoalsFor: Int,
-    val awayGoalsAgainst: Int,
+    val awayPlayed: Int = 0,
+    val awayWins: Int = 0,
+    val awayLoses: Int = 0,
+    val awayCleanSheet: Int = 0,
+    val awayFailed: Int = 0,
+    val awayGoalsFor: Int = 0,
+    val awayGoalsAgainst: Int = 0,
 
-    val totalPlayed: Int,
-    val totalWins: Int,
-    val totalLoses: Int,
-    val totalCleanSheet: Int,
-    val totalFailed: Int,
-    val totalGoalsFor: Int,
-    val totalGoalsAgainst: Int,
+    val totalPlayed: Int = 0,
+    val totalWins: Int = 0,
+    val totalLoses: Int = 0,
+    val totalCleanSheet: Int = 0,
+    val totalFailed: Int = 0,
+    val totalGoalsFor: Int = 0,
+    val totalGoalsAgainst: Int = 0,
 
     val isLoading: Boolean = true,
     val data: List<Team> = emptyList(),
-    val isError: String = "Error"
+    val errorMessage: String = "Error"
 )
+
+fun TeamStatisticsEntity.toUIState(): TeamStatisticsUIState {
+    return TeamStatisticsUIState(
+        homePlayed = played.home,
+        homeWins = wins.home,
+        homeLoses = loses.home,
+        homeCleanSheet = cleanSheet.home,
+        homeFailed = failedToScore.home,
+        homeGoalsFor = goalsFor.home,
+        homeGoalsAgainst = goalsAgainst.home,
+        awayPlayed = played.away,
+        awayWins = wins.away,
+        awayLoses = loses.away,
+        awayCleanSheet = cleanSheet.away,
+        awayFailed = failedToScore.away,
+        awayGoalsFor = goalsFor.away,
+        awayGoalsAgainst = goalsAgainst.away,
+        totalPlayed = played.total,
+        totalWins = wins.total,
+        totalLoses = loses.total,
+        totalCleanSheet = cleanSheet.total,
+        totalFailed = failedToScore.total,
+        totalGoalsFor = goalsFor.total,
+        totalGoalsAgainst = goalsAgainst.total
+    )
+}
