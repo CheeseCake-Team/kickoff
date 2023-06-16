@@ -27,7 +27,12 @@ import com.cheesecake.data.remote.models.VenuesDTO
 import com.cheesecake.data.remote.utils.FixtureStatus
 import com.cheesecake.data.remote.utils.LeagueType
 import com.cheesecake.data.repository.RemoteDataSource
+import com.cheesecake.domain.KickoffException
+import kotlinx.coroutines.TimeoutCancellationException
+import kotlinx.coroutines.withTimeout
+import retrofit2.HttpException
 import retrofit2.Response
+import java.net.ConnectException
 import javax.inject.Inject
 
 class RemoteDataSourceImp @Inject constructor(
@@ -578,8 +583,6 @@ class RemoteDataSourceImp @Inject constructor(
     }
 
     override suspend fun getTeamsBySearch(name: String): List<TeamDTO> {
-        val o = service.getTeamsBySearch(name)
-        Log.i("onSearchInputDataSource: ", wrapBaseResponse { service.getTeamsBySearch(name) }.toString())
         return wrapBaseResponse { service.getTeamsBySearch(name) }
     }
 
@@ -667,14 +670,37 @@ class RemoteDataSourceImp @Inject constructor(
     private suspend fun <T> wrapBaseResponse(
         response: suspend () -> Response<BasePagingResponse<T>>
     ): List<T> {
-        return response().takeIf { it.isSuccessful }?.body()?.response
-            ?: throw Throwable("Not Success Request")
+        return try {
+            val apiResponse = withTimeout(5000) { response() }
+            if (apiResponse.isSuccessful) {
+                val responseBody = apiResponse.body()
+                responseBody?.response ?: throw KickoffException.NoDataFoundException()
+            } else {
+                throw KickoffException.InternalServerErrorException()
+            }
+        } catch (e: TimeoutCancellationException) {
+            throw KickoffException.TimeoutException()
+        } catch (e: ConnectException) {
+            throw KickoffException.NoInternetConnectionException()
+        }
     }
 
+
     private suspend fun <T> wrapBaseStaticResponse(
-        response: suspend () -> Response<BasePagingForStaticResponse<T>>,
+        response: suspend () -> Response<BasePagingForStaticResponse<T>>
     ): T {
-        return response().takeIf { it.isSuccessful }?.body()?.response
-            ?: throw Throwable("Not Success Request")
+        return try {
+            val apiResponse = withTimeout(5000) { response() }
+            if (apiResponse.isSuccessful) {
+                val responseBody = apiResponse.body()
+                responseBody?.response ?: throw KickoffException.NoDataFoundException()
+            } else {
+                throw KickoffException.InternalServerErrorException()
+            }
+        } catch (e: TimeoutCancellationException) {
+            throw KickoffException.TimeoutException()
+        } catch (e: ConnectException) {
+            throw KickoffException.NoInternetConnectionException()
+        }
     }
 }
