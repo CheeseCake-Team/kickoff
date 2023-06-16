@@ -56,7 +56,7 @@ class FavoriteLeaguesViewModel @Inject constructor(
     }
 
     private fun toggleFavourite(leagueId: Int, leagueSeason: Int) {
-        viewModelScope.launch { favoriteLeagueUseCase(leagueId, leagueSeason).toString() }
+        viewModelScope.launch { favoriteLeagueUseCase(leagueId, leagueSeason) }
     }
 
 }
