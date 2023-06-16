@@ -8,22 +8,37 @@ import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.base.BaseFragmentsAdapter
 import com.cheesecake.presentation.databinding.FragmentLeagueBinding
-import com.cheesecake.presentation.databinding.FragmentStandingsBinding
 import com.cheesecake.presentation.screens.leagueDetails.LeagueDetailsFragment
 import com.cheesecake.presentation.screens.leagueMatches.LeagueMatchesFragment
 import com.cheesecake.presentation.screens.leagueTeams.LeagueTeamsFragment
-import com.cheesecake.presentation.screens.standings.StandingsAdapter
-import com.cheesecake.presentation.screens.standings.StandingsViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LeagueFragment : BaseFragment<FragmentStandingsBinding>() {
-    override val layoutIdFragment = R.layout.fragment_standings
-    override val viewModel: StandingsViewModel by viewModels()
+class LeagueFragment : BaseFragment<FragmentLeagueBinding>() {
+    override val layoutIdFragment = R.layout.fragment_league
+    override val viewModel: LeagueViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.recyclerviewStandings.adapter = StandingsAdapter()
+        init()
     }
+
+    private fun init() {
+        val fragments = listOf(
+            LeagueDetailsFragment(),
+            LeagueMatchesFragment(),
+            LeagueTeamsFragment(),
+        )
+        val fragmentsAdapter = BaseFragmentsAdapter((activity as AppCompatActivity), fragments)
+        binding.leagueViewPager.adapter = fragmentsAdapter
+        TabLayoutMediator(binding.tabLayout, binding.leagueViewPager) { tab, position ->
+            when (position) {
+                0 -> tab.text = "Details"
+                1 -> tab.text = "Matches"
+                2 -> tab.text = "Teams"
+            }
+        }.attach()
+    }
+
 }
