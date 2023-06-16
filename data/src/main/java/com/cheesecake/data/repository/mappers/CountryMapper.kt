@@ -3,6 +3,8 @@ package com.cheesecake.data.repository.mappers
 import com.cheesecake.data.local.models.TeamCountriesLocalDTO
 import com.cheesecake.data.remote.models.TeamCountriesDTO
 import com.cheesecake.domain.entity.TeamCountry
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 @JvmName("teamCountryDTOToTeamCountry")
 fun TeamCountriesDTO.toEntity(): TeamCountry =
@@ -31,4 +33,8 @@ fun List<TeamCountriesDTO>.toEntity(): List<TeamCountry> = map { it.toEntity() }
 
 @JvmName("listOfTeamCountryLocalDTOToListOfTeamCountry")
 fun List<TeamCountriesLocalDTO>.toEntity(): List<TeamCountry> = map { it.toEntity() }
+
+
+@JvmName("flowListOfTeamCountryLocalDTOToFlowListOfTeamCountry")
+fun Flow<List<TeamCountriesLocalDTO>>.toEntity(): Flow<List<TeamCountry>> = map { it.toEntity() }
 
