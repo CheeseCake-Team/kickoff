@@ -14,7 +14,8 @@ fun StandingsDTO.League.Standing.toEntity(): TeamStanding {
         won = this.all.win.toString(),
         draw = this.all.draw.toString(),
         lose = this.all.lose.toString(),
-        points = this.points.toString()
+        points = this.points.toString(),
+        goals = "${this.all.goals.forX}:${this.all.goals.against}"
     )
 }
 

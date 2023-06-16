@@ -53,6 +53,7 @@
                 android:layout_height="wrap_content"
                 style="@style/textContentStandingFragment"
                 tools:text="19:21"
+                android:text="@{item.goals}"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/spacing_16" />
 
