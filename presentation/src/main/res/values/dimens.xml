@@ -22,5 +22,6 @@
     <dimen name="font_size_18sp">18sp</dimen>
     <dimen name="font_size_20sp">20sp</dimen>
     <dimen name="team_image_size_48dp">48dp</dimen>
+    <dimen name="team_image_size_24dp">24dp</dimen>
 
 </resources>
