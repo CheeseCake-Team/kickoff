@@ -1,19 +1,26 @@
 package com.cheesecake.presentation.utils
 
 import android.annotation.SuppressLint
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.presentation.base.BaseAdapter
+import com.cheesecake.presentation.ui.leagueMatches.LeagueMatchesHeadToHeadAdapter
+import com.cheesecake.presentation.ui.search.SearchResult
+import com.cheesecake.presentation.ui.search.SearchViewModel
 import com.cheesecake.presentation.base.BaseListAdapter
 
 
@@ -48,6 +55,22 @@ fun <T> setRecyclerItems(view: RecyclerView, items: List<T>?) {
 }
 
 @BindingAdapter(value = ["app:listItems"])
+@BindingAdapter(value = ["app:searchItems"])
+fun <T> setRecyclerItems(view: RecyclerView, items: SearchResult?) {
+    items?.let {
+        when(it) {
+            is SearchResult.Team -> {
+                (view.adapter as BaseAdapter<T>?)?.setItems(it.items as List<T>)
+            }
+            is SearchResult.League -> {
+                (view.adapter as BaseAdapter<T>?)?.setItems(it.items as List<T>)
+            }
+        }
+
+    }
+}
+
+@BindingAdapter(value = ["app:fixtureItems"])
 fun <T> setItems(view: RecyclerView, items: List<T>?) {
     items?.let {
         (view.adapter as BaseListAdapter<T>?)?.submitList(items)
@@ -56,10 +79,8 @@ fun <T> setItems(view: RecyclerView, items: List<T>?) {
 
 @BindingAdapter(value = ["app:showLoading"])
 fun showLoading(view: View, isVisible: Boolean?) {
-    isVisible?.let {
-        Log.i("showLoading: ", isVisible.toString())
-        view.isVisible = isVisible
-    }
+    view.isVisible = !(isVisible == null || isVisible == false)
+
 }
 
 @BindingAdapter(value = ["app:viewVisibilityInLoading"])
@@ -68,9 +89,29 @@ fun hideWhenLoading(view: View, isVisible: Boolean) {
 }
 
 @BindingAdapter(value = ["app:showNoResultFound"])
-fun <T>showWhenNoResult(view: FrameLayout, isVisible: Boolean) {
-        view.isVisible = isVisible
+fun <T> showWhenNoResult(view: FrameLayout, items: SearchResult?) {
+    items?.let {
+        when(it) {
+            is SearchResult.Team -> { view.isVisible = it.items.isEmpty()}
+            is SearchResult.League -> { view.isVisible = it.items.isEmpty() }
+        }
+    }
 }
+
+
+@BindingAdapter("app:onSearchTextChanged")
+fun EditText.onSearchTextChanged(viewModel: SearchViewModel) {
+    addTextChangedListener(object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            viewModel.onSearch(s.toString().trim())
+        }
+
+        override fun afterTextChanged(s: Editable?) {}
+    })
+}
+
 
 @SuppressLint("SetTextI18n")
 @BindingAdapter("app:matchScore")
