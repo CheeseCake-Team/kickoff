@@ -133,4 +133,8 @@ class IFootballRepositoryImpl
     override suspend fun getAllLeagues(): List<League> {
         return remoteDataSource.getAllLeagues().toEntity()
     }
+
+    override suspend fun addLeagueList(leagues: List<League>) {
+        localDataSource.addLeaguesList(leagues.map { it.toLocal() })
+    }
 }

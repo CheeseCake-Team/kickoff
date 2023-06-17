@@ -55,7 +55,7 @@ abstract class BaseAdapter<T>(private val listener: BaseInteractionListener?) :
     override fun getItemCount(): Int = itemss.size
 
 
-    class ItemViewHolder(val binding: ViewDataBinding) : BaseViewHolder(binding)
-    abstract class BaseViewHolder(binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root)
+    class ItemViewHolder(override val binding: ViewDataBinding) : BaseViewHolder(binding)
+    abstract class BaseViewHolder(open val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root)
 
 }

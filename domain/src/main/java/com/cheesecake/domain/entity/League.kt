@@ -8,5 +8,6 @@ data class League(
     val country: String,
     val seasonStartYear: String,
     val seasonEndYear: String,
-    val isFavourite: Boolean = false
+    val isFavourite: Boolean = false,
+    val isSelected: Boolean = false
 )

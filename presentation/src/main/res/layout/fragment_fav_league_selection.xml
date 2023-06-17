@@ -91,6 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/spacing_16"
             android:text="Next"
+            android:onClick="@{() -> viewModel.addToFavourite()}"
             android:textColor="@color/primaryColor"
             app:layout_constraintBottom_toBottomOf="@id/view_frame"
             app:layout_constraintEnd_toEndOf="parent"

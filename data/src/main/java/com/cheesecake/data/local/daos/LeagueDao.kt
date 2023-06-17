@@ -17,4 +17,8 @@ interface LeagueDao {
     @Query("SELECT * FROM league_table where leagueId = :leagueId And leagueSeason = :leagueSeason")
     suspend fun getLeagueByIdAndSeason(leagueId: Int, leagueSeason: Int): LeagueLocalDTO?
 
+    @Upsert
+    suspend fun insertLeagueList(LeaguesLocalDt0 : List<LeagueLocalDTO>)
+
+
 }

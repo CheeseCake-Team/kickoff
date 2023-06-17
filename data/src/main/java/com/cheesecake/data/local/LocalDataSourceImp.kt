@@ -44,4 +44,9 @@ class LocalDataSourceImp @Inject constructor(
         leagueDao.deleteLeagueById(leagueId)
     }
 
+    override suspend fun addLeaguesList(leagues: List<LeagueLocalDTO>) {
+        leagueDao.insertLeagueList(leagues)
+
+    }
+
 }

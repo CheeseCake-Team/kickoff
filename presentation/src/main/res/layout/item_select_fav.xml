@@ -4,22 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View" />
         <variable
             name="item"
-            type="com.cheesecake.domain.entity.League" />
+            type="com.cheesecake.presentation.screens.favLeaguesSelection.FavLeagueItemUIState" />
+
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/cardSurface"
-        android:layout_margin="@dimen/spacing_8"
-        app:cardCornerRadius="@dimen/spacing_8">
+        android:foreground="@drawable/selected_fav_item"
+        android:layout_margin="@dimen/spacing_8">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/cardSurface"
             android:paddingHorizontal="@dimen/spacing_24"
+            android:onClick="@{() ->item.onFavorite.invoke()}"
             android:paddingVertical="@dimen/spacing_24">
 
             <com.google.android.material.imageview.ShapeableImageView
@@ -28,7 +31,7 @@
                 android:layout_height="0dp"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
-                app:imageUrl="@{item.leagueLogo}"
+                app:imageUrl="@{item.imageUrl}"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +53,7 @@
                 tools:text="Name" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.cardview.widget.CardView>
 </layout>
