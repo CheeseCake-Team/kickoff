@@ -41,7 +41,10 @@ class IFootballRepositoryImpl
             ?.toEntity()
     }
 
-    override suspend fun getSinglePlayerCompact(season: String, teamId: Int): List<PlayerStatistics> {
+    override suspend fun getSinglePlayerCompact(
+        season: String,
+        teamId: Int
+    ): List<PlayerStatistics> {
         return remoteDataSource.getPlayerBySeasonByTeamId(season, teamId).toEntity()
     }
 
@@ -100,7 +103,8 @@ class IFootballRepositoryImpl
 
 
     override suspend fun getCurrentRoundByIdAndSeason(leagueId: Int, season: Int): String? {
-        return remoteDataSource.getCurrentRoundByLeagueIdAndSeason(leagueId, season, true).firstOrNull()
+        return remoteDataSource.getCurrentRoundByLeagueIdAndSeason(leagueId, season, true)
+            .firstOrNull()
     }
 
     override suspend fun getTeamsStandingByLeagueIdAndSeason(
@@ -121,7 +125,11 @@ class IFootballRepositoryImpl
     ): TeamStatisticsEntity {
         return remoteDataSource.getTeamStatistics(teamId, season, leagueId).toEntity()
     }
-    override suspend fun getPlayerBySeasonByPlayerId(season: String, playerId: Int): PlayerStatistics {
+
+    override suspend fun getPlayerBySeasonByPlayerId(
+        season: String,
+        playerId: Int
+    ): PlayerStatistics {
         return remoteDataSource.getPlayerBySeasonByPlayerId(season, playerId).first().toEntity()
     }
 
@@ -152,6 +160,18 @@ class IFootballRepositoryImpl
     ): List<Fixture> {
         return remoteDataSource.getFixtureBySeasonByTeamId(timeZone, teamId, season).toEntity()
     }
+
+//    override suspend fun getLocallyTeamById(teamId: Int) : Team? {
+//        return localDataSource.getTeamById(teamId)?.toEntity()
+//    }
+
+    override suspend fun getRemotelyTeam(teamId: Int): Team {
+        return remoteDataSource.getTeamById(teamId).first().toEntity()
+    }
+
+//    override suspend fun updateOrInsertTeam(team: Team) {
+//        return localDataSource.updateOrInsertTeam(team.toLocal())
+//    }
 
 
 }

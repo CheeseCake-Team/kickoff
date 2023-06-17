@@ -10,7 +10,7 @@ import com.cheesecake.presentation.screens.leagueTeams.TeamsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TestFragment : BaseFragment<FragmentTeamsLeagueBinding>() {
+class TeamStatisticsFragment : BaseFragment<FragmentTeamsLeagueBinding>() {
     override val layoutIdFragment = R.layout.fragment_team_statistics
     override val viewModel: TeamStatisticsViewModel by viewModels()
 
