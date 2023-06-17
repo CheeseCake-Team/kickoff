@@ -1,3 +1,8 @@
 package com.cheesecake.presentation.screens.search
 
-sealed interface SearchEvents
+import com.cheesecake.presentation.screens.home.HomeNavigationEvent
+
+sealed interface SearchEvents{
+    object LeagueClickEvent : SearchEvents
+    object TeamClickEvent : SearchEvents
+}

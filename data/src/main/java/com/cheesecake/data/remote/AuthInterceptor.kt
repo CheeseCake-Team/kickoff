@@ -19,7 +19,7 @@ class AuthInterceptor @Inject constructor() : Interceptor {
 
     companion object {
         const val API_HOST_HEADER = "x-rapidapi-host"
-        const val API_HOST_VALUE = "v3.football.api-sports.io"
+        const val API_HOST_VALUE = "api-football-v1.p.rapidapi.com/v3"
         const val API_KEY_HEADER = "x-rapidapi-key"
     }
 }

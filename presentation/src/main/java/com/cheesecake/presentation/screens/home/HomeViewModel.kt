@@ -1,8 +1,10 @@
 package com.cheesecake.presentation.screens.home
 
 import android.util.Log
+import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.usecases.FavouriteLeagueUseCase
 import com.cheesecake.domain.usecases.GetFavoriteLeaguesMatchesByDateUseCase
 import com.cheesecake.domain.usecases.GetNextThirtyDaysUseCase
 import com.cheesecake.presentation.base.BaseViewModel
@@ -10,6 +12,7 @@ import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import java.util.Date
 import javax.inject.Inject
 
@@ -17,9 +20,16 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getNextThirtyDaysUseCase: GetNextThirtyDaysUseCase,
     private val getFavoriteLeaguesMatchesByDateUseCase: GetFavoriteLeaguesMatchesByDateUseCase,
+    private val favouriteLeagueUseCase: FavouriteLeagueUseCase
+
 ) : BaseViewModel<HomeUIState, HomeNavigationEvent>(HomeUIState(), Event()) {
 
     init {
+        viewModelScope.launch {
+            favouriteLeagueUseCase(39, 2023)
+            favouriteLeagueUseCase(39, 2022)
+            favouriteLeagueUseCase(75, 2023)
+        }
         getDateMatches(getNextThirtyDaysUseCase().first())
         tryToExecute({ getNextThirtyDaysUseCase() }, ::onSuccessDate, ::onError)
     }
@@ -46,7 +56,10 @@ class HomeViewModel @Inject constructor(
 
     private fun onSuccessFavourites(f: Flow<List<Pair<League, List<Fixture>>>>) {
         collectFlow(f) { pair ->
-            copy(isLoading = false, favoriteItems = pair.toHomeFavouriteUiState())
+            copy(
+                isLoading = false,
+                favoriteItems = pair.toHomeFavouriteUiState(::onLeagueClicked, ::onMatchClicked)
+            )
         }
     }
 
@@ -55,5 +68,13 @@ class HomeViewModel @Inject constructor(
             it.copy(errorMessage = e.localizedMessage ?: "Unknown error.", isLoading = false)
         }
         Log.d("TAG", e.message.toString())
+    }
+
+    private fun onMatchClicked() {
+        _event.update { Event(HomeNavigationEvent.MatchClickedEvent) }
+    }
+
+    private fun onLeagueClicked() {
+        _event.update { Event(HomeNavigationEvent.LeagueClickEvent) }
     }
 }

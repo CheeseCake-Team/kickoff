@@ -5,19 +5,19 @@ import com.cheesecake.domain.entity.Team
 import com.cheesecake.presentation.models.TeamUIState
 import com.cheesecake.presentation.screens.home.MatchItemUIState
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.TimeZone
 
 
 fun Team.toUIState(): TeamUIState {
     return TeamUIState(
         teamId = this.id,
-        teamName= this.name,
-        founded= this.yearFounded,
-        teamCountry= this.country,
-        venueCapacity= this.stadiumCapacity,
-        venueName= this.stadiumName,
-        imageUrl= this.imageUrl,
-        isFavourite= this.isFavourite,
+        teamName = this.name,
+        founded = this.yearFounded,
+        teamCountry = this.country,
+        venueCapacity = this.stadiumCapacity,
+        venueName = this.stadiumName,
+        imageUrl = this.imageUrl,
+        isFavourite = this.isFavourite,
     )
 }
 
@@ -41,7 +41,7 @@ fun Team.toUIState(): TeamUIState {
 //    )
 //}
 
-fun Fixture.toMatchUIState(): MatchItemUIState {
+fun Fixture.toMatchUIState(onclick: () -> Unit): MatchItemUIState {
     val formatter = SimpleDateFormat("HH:mm")
     val formattedMatchTime = formatter.format(this.matchDate)
 //    val timeFormat = SimpleDateFormat("HH:mm", Locale.ENGLISH)
@@ -59,10 +59,10 @@ fun Fixture.toMatchUIState(): MatchItemUIState {
         homeTeamGoals = homeTeamGoals?.toIntOrNull() ?: 0,
         awayTeamGoals = awayTeamGoals?.toIntOrNull() ?: 0,
         homeTeamImageUrl = homeTeamLogoUrl,
-        awayTeamImageUrl = awayTeamLogoUrl
+        awayTeamImageUrl = awayTeamLogoUrl,
+        onclick = onclick
     )
 }
-
 
 
 //data class MatchItemUIState(

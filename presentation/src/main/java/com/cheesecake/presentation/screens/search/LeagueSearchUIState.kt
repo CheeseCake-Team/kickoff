@@ -6,14 +6,16 @@ data class LeagueSearchUIState(
     val typeName: String = "Unknown",
     val imageUrl: String = "",
     val leagueName: String = "Unknown",
-    val countryName: String = "Unknown"
+    val countryName: String = "Unknown",
+    val onclick: () -> Unit = {},
 )
 
-fun League.toUIState(): LeagueSearchUIState {
+fun League.toUIState(onclick: () -> Unit): LeagueSearchUIState {
     return LeagueSearchUIState(
         typeName = this.typeName,
         imageUrl = this.imageUrl,
         leagueName = this.name,
-        countryName = country
+        countryName = country,
+        onclick = onclick
     )
 }

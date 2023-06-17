@@ -7,6 +7,7 @@ import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentSearchBinding
@@ -28,6 +29,26 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         tabLayout = binding.tabLayout
         setUpTapLayout()
 
+        handleNavigation()
+
+    }
+
+    private fun handleNavigation() {
+        collect(viewModel.event) { event ->
+            event.getContentIfNotHandled()?.let { onEvent(it) }
+        }
+    }
+
+    private fun onEvent(event: SearchEvents) {
+        when (event) {
+            SearchEvents.LeagueClickEvent -> findNavController().navigate(
+                SearchFragmentDirections.actionSearchFragmentToLeagueFragment()
+            )
+
+            SearchEvents.TeamClickEvent -> {
+                
+            }
+        }
     }
 
     private fun setupStatusBar() {
@@ -58,13 +79,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             0 -> {
                 viewModel.resetSearchResult()
                 viewModel.searchType.value = SearchType.TEAM
-                Log.i( "getSearchFragment: " ,viewModel.searchType.value.toString())
+                Log.i("getSearchFragment: ", viewModel.searchType.value.toString())
                 binding.searchRecyclerView.adapter = SearchTeamAdapter()
             }
+
             1 -> {
                 viewModel.resetSearchResult()
                 viewModel.searchType.value = SearchType.LEAGUE
-                Log.i( "getSearchFragment: " ,viewModel.searchType.value.toString())
+                Log.i("getSearchFragment: ", viewModel.searchType.value.toString())
                 binding.searchRecyclerView.adapter = SearchLeagueAdapter()
             }
         }
