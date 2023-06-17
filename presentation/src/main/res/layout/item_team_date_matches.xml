@@ -4,7 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="kotlin.Pair"/>
+        <import type="java.util.List"/>
+        <import type="com.cheesecake.domain.entity.Fixture"/>
 
+        <variable
+            name="item"
+            type="Pair&lt;String,List&lt;Fixture&gt;&gt;" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +26,9 @@
             android:textColor="@color/fontHeavy"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="today" />
+            tools:text="today"
+            android:text="@{item.first}"
+            />
 
         <include
             layout="@layout/item_team_match"

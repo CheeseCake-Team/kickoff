@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cheesecake.presentation.databinding.ItemDateMatchesBinding
+import com.cheesecake.presentation.databinding.ItemTeamDateMatchesBinding
+import com.cheesecake.presentation.databinding.ItemTeamMatchBinding
 import com.cheesecake.presentation.databinding.ItemTeamPlayersPositionsBinding
 import com.cheesecake.presentation.screens.leagueMatches.LeagueMatchesHeadToHeadAdapter
 import com.cheesecake.presentation.screens.teamPlayers.TeamPlayerAdapter
@@ -38,14 +40,17 @@ abstract class BaseListAdapter<T>(
             binding.setVariable(androidx.databinding.library.baseAdapters.BR.item, currentItem)
             binding.setVariable(androidx.databinding.library.baseAdapters.BR.listener, listener)
 
-            when(binding) {
+            when (binding) {
                 is ItemDateMatchesBinding -> {
                     binding.headToHeadRecyclerView.adapter = LeagueMatchesHeadToHeadAdapter()
 
                 }
+
                 is ItemTeamPlayersPositionsBinding -> {
                     binding.playersPositionRecycler.adapter = TeamPlayerAdapter()
                 }
+
+
             }
 
         }

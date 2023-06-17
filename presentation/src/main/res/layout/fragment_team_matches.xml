@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.cheesecake.presentation.screens.teamMatches.TeamMatchesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +20,8 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:padding="@dimen/spacing_12"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:listItems="@{viewModel.state.data}"/>
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -28,6 +31,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            />
+            app:showLoading="@{viewModel.state.loading}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
