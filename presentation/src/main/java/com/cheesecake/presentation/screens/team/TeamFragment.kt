@@ -32,16 +32,16 @@ class TeamFragment: BaseFragment<FragmentTeamBinding>() {
 
     private fun init() {
         val fragments = listOf(
-            TeamStatisticsFragment(),
-            TeamMatchFragment(),
+            TeamPlayerFragment(),
+            TeamPlayerFragment(),
             TeamPlayerFragment(),
         )
         val fragmentsAdapter = BaseFragmentsAdapter((activity as AppCompatActivity), fragments)
         binding.teamViewPager.adapter = fragmentsAdapter
         TabLayoutMediator(binding.tabLayout, binding.teamViewPager) { tab, position ->
             when (position) {
-                0 -> tab.text = "Statistics"
-                1 -> tab.text = "Matches"
+                0 -> tab.text = "Players"
+                1 -> tab.text = "Players"
                 2 -> tab.text = "Players"
             }
         }.attach()
