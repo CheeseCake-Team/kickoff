@@ -4,6 +4,8 @@ import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
 import com.cheesecake.data.local.models.TeamLocalDTO
+import kotlinx.coroutines.flow.Flow
+
 
 @Dao
 interface TeamsDao {
@@ -21,6 +23,9 @@ interface TeamsDao {
     suspend fun deleteAllTeams()
 
     @Query("SELECT * FROM team_table WHERE isFavourite = 1")
-    suspend fun getFavouriteTeams(): List<TeamLocalDTO>
+    fun getFavouriteTeams(): Flow<List<TeamLocalDTO>>
+
+    @Query("DELETE FROM team_table WHERE teamId = :teamId")
+    suspend fun deleteTeamById(teamId: Int)
 
 }

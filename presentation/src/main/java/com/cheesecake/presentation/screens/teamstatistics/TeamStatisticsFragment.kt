@@ -6,7 +6,7 @@ import androidx.fragment.app.viewModels
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentTeamsLeagueBinding
-import com.cheesecake.presentation.screens.leagueTeams.TeamsAdapter
+import com.cheesecake.presentation.screens.league.leagueTeams.TeamsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

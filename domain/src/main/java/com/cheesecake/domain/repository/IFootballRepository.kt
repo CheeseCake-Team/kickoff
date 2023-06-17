@@ -4,7 +4,6 @@ import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.TeamStatisticsEntity
 import com.cheesecake.domain.entity.TeamStanding
 import com.cheesecake.domain.entity.League
-import com.cheesecake.domain.entity.Match
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.entity.PlayerStatistics
 import com.cheesecake.domain.entity.Trophy
@@ -22,7 +21,7 @@ interface IFootballRepository {
 
     suspend fun updateOrInsertLeague(league: League)
 
-    suspend fun getMatchesByLeagueIdAndSeason(timeZone: String, leagueId: Int, Season: Int): List<Fixture>
+    suspend fun getMatchesByLeagueIdAndSeason(timeZone: String, leagueId: Int, season: Int): List<Fixture>
 
     suspend fun deleteLeagueById(leagueId: Int)
 
@@ -33,6 +32,8 @@ interface IFootballRepository {
     suspend fun updateOrInsertTeams(teamEntities: List<Team>, leagueId: Int, leagueSeason: Int)
 
     suspend fun getLeaguesByName(leagueName: String): List<League>
+
+    suspend fun getLeaguesBySearch(leagueName: String): List<League>
 
     suspend fun getTeamsBySearch(teamName: String): List<Team>
 
@@ -49,4 +50,9 @@ interface IFootballRepository {
     suspend fun getCoachTrophy(coachId: Int): List<Trophy>
 
     suspend fun getMatchDetails(teamsId: String, seasonId: Int, timeZone: String): Match
+
+    suspend fun getFavoriteTeams(): Flow<List<Team>>
+
+    suspend fun getFavoriteLeagues(): Flow<List<League>>
+
 }

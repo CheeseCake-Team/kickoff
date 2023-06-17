@@ -8,5 +8,5 @@
     <color name="fontLight">#99F6F6F6</color>
     <color name="backLighter">#66F6F6F6</color>
     <color name="lightGrey">#F6F6F6</color>
-
+    <color name="date_item_background">#181928</color>
 </resources>
