@@ -7,6 +7,7 @@ import com.cheesecake.domain.usecases.GetSearchTeamCountryUseCase
 import com.cheesecake.domain.usecases.GetTeamCountryUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.mapper.toUIModel
+import com.cheesecake.presentation.models.Event
 import com.cheesecake.presentation.models.TeamCountryUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.GlobalScope
@@ -25,7 +26,10 @@ class DiscoverViewModel @Inject constructor(
     private val getTeamCountryUseCase: GetTeamCountryUseCase,
     private val getSearchTeamCountryUseCase: GetSearchTeamCountryUseCase,
 ) :
-    BaseViewModel<DiscoverTeamCountryUIState>(DiscoverTeamCountryUIState()) {
+    BaseViewModel<DiscoverTeamCountryUIState, DiscoverTeamCountryEvents>(
+        DiscoverTeamCountryUIState(),
+        Event()
+    ) {
 
     var searchInput = MutableStateFlow(" ")
 
@@ -85,8 +89,6 @@ class DiscoverViewModel @Inject constructor(
             it.copy(isError = e.message.toString())
         }
     }
-
-
 
 
 }

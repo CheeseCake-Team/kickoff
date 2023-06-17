@@ -1,0 +1,3 @@
+package com.cheesecake.presentation.screens.discover
+
+sealed interface DiscoverTeamCountryEvents
