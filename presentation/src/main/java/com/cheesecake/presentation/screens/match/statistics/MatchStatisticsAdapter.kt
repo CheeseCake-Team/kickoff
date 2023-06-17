@@ -23,6 +23,12 @@ class MatchStatisticsAdapter : BaseAdapter<StatisticsItemUiState>(null) {
                         R.color.primaryColor
                     )
                 )
+                val fontLight = ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                        root.context,
+                        R.color.fontLight
+                    )
+                )
                 this as ItemStatisticsBinding
                 when {
                     currentItem.homeTeamPercentage == currentItem.awayTeamPercentage -> {
@@ -30,11 +36,15 @@ class MatchStatisticsAdapter : BaseAdapter<StatisticsItemUiState>(null) {
                         progressBarAwayTeam.progressTintList = primaryColor
                     }
 
-                    currentItem.homeTeamPercentage < currentItem.awayTeamPercentage -> progressBarAwayTeam.progressTintList =
-                        primaryColor
+                    currentItem.homeTeamPercentage < currentItem.awayTeamPercentage -> {
+                        progressBarHomeTeam.progressTintList = fontLight
+                        progressBarAwayTeam.progressTintList = primaryColor
+                    }
 
-                    else -> progressBarHomeTeam.progressTintList =
-                        primaryColor
+                    else ->{
+                        progressBarHomeTeam.progressTintList = primaryColor
+                        progressBarAwayTeam.progressTintList = fontLight
+                    }
                 }
             }
         }
