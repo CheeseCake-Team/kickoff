@@ -1,4 +1,4 @@
-package com.cheesecake.presentation.ui.match
+package com.cheesecake.presentation.screens.match
 
 import android.os.Bundle
 import android.view.View
@@ -18,8 +18,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class MatchFragment : BaseFragment<FragmentMatchBinding>() {
     override val layoutIdFragment = R.layout.fragment_match
     override val viewModel: MatchViewModel by viewModels()
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
