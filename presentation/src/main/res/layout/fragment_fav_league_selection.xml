@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_16"
             android:layout_marginTop="@dimen/spacing_8"
-            android:text="@string/sub_title_string"
+            android:text="adfafda"
             android:textColor="@color/backLighter"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title_text_view" />
@@ -67,11 +67,12 @@
             android:layout_marginTop="@dimen/spacing_16"
             android:clipToPadding="true"
             android:scrollbars="none"
-            app:items="@{viewModel.favLeagueSelectionUIState.allLeagues}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/view_frame"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_bar"
+            app:listItems="@{viewModel.favLeagueSelectionUIState.leaguesItems}"
             app:spanCount="3"
             tools:listitem="@layout/item_select_fav" />
 
@@ -91,7 +92,6 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/spacing_16"
             android:text="Next"
-            android:onClick="@{() -> viewModel.addToFavourite()}"
             android:textColor="@color/primaryColor"
             app:layout_constraintBottom_toBottomOf="@id/view_frame"
             app:layout_constraintEnd_toEndOf="parent"

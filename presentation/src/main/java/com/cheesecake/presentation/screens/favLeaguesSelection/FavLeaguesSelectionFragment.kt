@@ -1,6 +1,7 @@
 package com.cheesecake.presentation.screens.favLeaguesSelection
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.cheesecake.presentation.R
@@ -16,5 +17,10 @@ class FavLeaguesSelectionFragment : BaseFragment<FragmentFavLeagueSelectionBindi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.allLeaguesRecyclerView.adapter = FavLeagueSelectionAdapter()
+
+        binding.nextButton.setOnClickListener {
+            viewModel.addToFavourite()
+        }
+
     }
 }

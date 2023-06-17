@@ -5,7 +5,7 @@ import com.cheesecake.presentation.screens.favLeaguesSelection.FavLeagueItemUISt
 
 @JvmName("leagueToLeaguesUIState")
 fun League.toFavLeagueItemUIState(
-    onFavoriteLeagueClick: (FavLeagueItemUIState) -> Unit
+    onFavoriteLeagueClick: (Int) -> Unit
 ): FavLeagueItemUIState {
     return FavLeagueItemUIState(
         leagueId = this.leagueId,
@@ -21,9 +21,7 @@ fun League.toFavLeagueItemUIState(
     )
 }
 
-fun FavLeagueItemUIState.toLeague(
-
-): League{
+fun FavLeagueItemUIState.toLeague(): League{
     return League(
         leagueId = this.leagueId,
         imageUrl = this.imageUrl,
@@ -33,6 +31,6 @@ fun FavLeagueItemUIState.toLeague(
         typeName = this.typeName,
         seasonStartYear = this.seasonStartYear,
         seasonEndYear = this.seasonEndYear,
-        isFavourite = !isSelected
+        isFavourite = isSelected
     )
 }

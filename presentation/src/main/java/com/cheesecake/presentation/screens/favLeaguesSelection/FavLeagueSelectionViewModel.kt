@@ -1,7 +1,6 @@
 package com.cheesecake.presentation.screens.favLeaguesSelection
 
-import androidx.lifecycle.viewModelScope
-import com.cheesecake.domain.KickoffException
+import android.util.Log
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.usecases.AddFavouriteLeagueListUseCase
 import com.cheesecake.domain.usecases.GetLeagueListUseCase
@@ -9,14 +8,11 @@ import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.mapper.toFavLeagueItemUIState
 import com.cheesecake.presentation.mapper.toLeague
 import com.cheesecake.presentation.models.Event
-import com.cheesecake.presentation.screens.league.LeagueNavigationEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,61 +27,55 @@ class FavLeagueSelectionViewModel @Inject constructor(
     private val _favLeagueSelectionUIState = MutableStateFlow(FavLeagueSelectionUIState())
     val favLeagueSelectionUIState = _favLeagueSelectionUIState.asStateFlow()
 
-    private val _selectedLeagues = MutableStateFlow<List<League>>(emptyList())
-    val selectedLeagues: StateFlow<List<League>> = _selectedLeagues
-
     init {
         getAllLeagues()
     }
 
     private fun getAllLeagues() {
+        tryToExecute({ GetLeagueListUseCase() }, ::onLeaguesSuccess, ::onLeagueError)
+    }
+
+    private fun onLeagueError(e: Throwable) {
+        _favLeagueSelectionUIState.update {
+            it.copy(errorMessage = e.message.toString(), isLoading = false)
+        }
+    }
+
+    private fun onLeaguesSuccess(leagues: List<League>) {
+        _favLeagueSelectionUIState.update {
+            it.copy(
+                leaguesItems = leagues.map { league ->
+                    league.toFavLeagueItemUIState { onFavouriteLeagueSelect(league.leagueId) }
+                },
+                isLoading = false
+            )
+        }
+    }
+
+    private fun onFavouriteLeagueSelect(leagueId: Int) {
+        _favLeagueSelectionUIState.update { favLeagueSelectionUIState ->
+            favLeagueSelectionUIState.selectedLeagues.find { it.leagueId == leagueId }?.let {
+                val index = favLeagueSelectionUIState.selectedLeagues.indexOf(it)
+                favLeagueSelectionUIState.selectedLeagues.removeAt(index)
+                it.copy(isFavourite = false)
+            }?: run {
+                val league = favLeagueSelectionUIState.leaguesItems.find { it.leagueId == leagueId }
+                favLeagueSelectionUIState.selectedLeagues.add(league?.toLeague()!!.copy(isFavourite = true))
+            }
+            favLeagueSelectionUIState.copy(
+                selectedLeagues = favLeagueSelectionUIState.selectedLeagues,
+            )
+        }
+    }
+
+    fun addToFavourite() {
         tryToExecute(
             {
-                GetLeagueListUseCase()
-            },
-            { leagues ->
-                _favLeagueSelectionUIState.update {
-                    it.copy(
-                        allLeagues = leagues.map {
-                            it.toFavLeagueItemUIState {
-                                onFavouriteLeagueSelect(
-                                    it
-                                )
-                            }
-                        },
-                        isLoading = false
-                    )
-
+                _favLeagueSelectionUIState.collect {
+                    AddFavouriteLeagueListUseCase(it.selectedLeagues)
                 }
-            },
-            { error ->
-                _favLeagueSelectionUIState.update {
-                    it.copy(
-                        errorMessage = error.message.toString(),
-                        isLoading = false
-                    )
-                }
-            }
-        )
-    }
 
-    fun onFavouriteLeagueSelect(favleagueItem: FavLeagueItemUIState) {
-
-        val league = favleagueItem.toLeague()
-        val currentSelectedLeagues = _selectedLeagues.value.toMutableList()
-        if (currentSelectedLeagues.contains(league)) {
-            currentSelectedLeagues.remove(league)
-        } else {
-            currentSelectedLeagues.add(league)
-        }
-        _selectedLeagues.value = currentSelectedLeagues
-//        favleagueItem.copy { it.isSelected = true }
-    }
-
-    private fun addToFavourite() {
-        val selectedItems = selectedLeagues.value
-        tryToExecute(
-            { AddFavouriteLeagueListUseCase(selectedItems) }, ::onAddSuccess, ::onError
+            }, ::onAddSuccess, ::onError
         )
     }
 

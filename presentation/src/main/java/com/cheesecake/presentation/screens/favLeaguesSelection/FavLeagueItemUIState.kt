@@ -10,5 +10,5 @@ data class FavLeagueItemUIState(
     val seasonStartYear: String= "",
     val seasonEndYear: String ="",
     val isSelected: Boolean = false,
-    val onFavorite: (FavLeagueItemUIState) -> Unit,
+    val onFavorite: (Int) -> Unit,
 )
