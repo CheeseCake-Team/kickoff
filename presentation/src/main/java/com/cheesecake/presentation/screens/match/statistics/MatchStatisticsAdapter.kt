@@ -25,13 +25,16 @@ class MatchStatisticsAdapter : BaseAdapter<StatisticsItemUiState>(null) {
                 )
                 this as ItemStatisticsBinding
                 when {
-                    currentItem.homeTeamPercentage >= currentItem.awayTeamPercentage -> {
+                    currentItem.homeTeamPercentage == currentItem.awayTeamPercentage -> {
                         progressBarHomeTeam.progressTintList = primaryColor
-                        if (currentItem.homeTeamPercentage == currentItem.awayTeamPercentage) progressBarAwayTeam.progressTintList =
-                            primaryColor
+                        progressBarAwayTeam.progressTintList = primaryColor
                     }
 
-                    else -> progressBarAwayTeam.progressTintList = primaryColor
+                    currentItem.homeTeamPercentage < currentItem.awayTeamPercentage -> progressBarAwayTeam.progressTintList =
+                        primaryColor
+
+                    else -> progressBarHomeTeam.progressTintList =
+                        primaryColor
                 }
             }
         }
