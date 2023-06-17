@@ -26,5 +26,7 @@
     <string name="no_result_found_description">We couldn\'t find any results for your search\n Please check your input and try again</string>
     <string name="no_result_found">No Result Found</string>
     <string name="your_favorites">Your Favorites</string>
+    <string name="discover">Discover</string>
+    <string name="settings">Settings</string>
 
 </resources>
