@@ -7,6 +7,7 @@ import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.entity.PlayerStatistics
 import com.cheesecake.domain.entity.Trophy
+import kotlinx.coroutines.flow.Flow
 
 interface IFootballRepository {
     suspend fun getLeagueNameAndCountry(leagueId: Int, current: Boolean): List<League>
@@ -21,7 +22,7 @@ interface IFootballRepository {
 
     suspend fun updateOrInsertLeague(league: League)
 
-    suspend fun getMatchesByLeagueIdAndSeason(timeZone: String, leagueId: Int, Season: Int): List<Fixture>
+    suspend fun getMatchesByLeagueIdAndSeason(timeZone: String, leagueId: Int, season: Int): List<Fixture>
 
     suspend fun deleteLeagueById(leagueId: Int)
 
@@ -34,6 +35,8 @@ interface IFootballRepository {
     )
 
     suspend fun getLeaguesByName(leagueName: String): List<League>
+
+    suspend fun getLeaguesBySearch(leagueName: String): List<League>
 
     suspend fun getTeamsBySearch(teamName: String): List<Team>
 
@@ -49,5 +52,11 @@ interface IFootballRepository {
     suspend fun getPlayerBySeasonByPlayerId(season: String, playerId: Int): PlayerStatistics
 
     suspend fun getPlayerTrophy(playerId: Int): List<Trophy>
+
     suspend fun getCoachTrophy(coachId: Int): List<Trophy>
+
+    suspend fun getFavoriteTeams(): Flow<List<Team>>
+
+    suspend fun getFavoriteLeagues(): Flow<List<League>>
+
 }

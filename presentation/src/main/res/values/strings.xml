@@ -37,5 +37,6 @@
     <string name="dark_mode">Dark Mode</string>
     <string name="light_mode">Light Mode</string>
     <string name="choose_the_theme_you_like_to_see">Choose the theme you like to see</string>
+    <string name="your_favorites">Your Favorites</string>
 
 </resources>
