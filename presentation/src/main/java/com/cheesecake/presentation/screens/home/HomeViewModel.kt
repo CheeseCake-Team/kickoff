@@ -21,7 +21,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         getDateMatches(getNextThirtyDaysUseCase().first())
-        tryToExecute({ getNextThirtyDaysUseCase() }, ::onSuccessDate, ::onErrorDate)
+        tryToExecute({ getNextThirtyDaysUseCase() }, ::onSuccessDate, ::onError)
     }
 
     private fun onSuccessDate(dates: List<Date>) {
@@ -36,24 +36,21 @@ class HomeViewModel @Inject constructor(
     private fun onClickDate(date: Date) {
         getDateMatches(date)
     }
+
     private fun getDateMatches(date: Date) {
         tryToExecute({
             getFavoriteLeaguesMatchesByDateUseCase(date, "Africa/Cairo")
-        }, ::onSuccessFavourites, ::onErrorFavourites)
+        }, ::onSuccessFavourites, ::onError)
     }
 
-
-    private fun onErrorDate(throwable: Throwable) {
-
-    }
 
     private fun onSuccessFavourites(f: Flow<List<Pair<League, List<Fixture>>>>) {
-        collectFlow(f){pair ->
-            copy(isLoading = false, favoriteItems = pair.toHomeFavouriteUiState() )
+        collectFlow(f) { pair ->
+            copy(isLoading = false, favoriteItems = pair.toHomeFavouriteUiState())
         }
     }
 
-    private fun onErrorFavourites(e: Throwable) {
+    private fun onError(e: Throwable) {
         _state.update {
             it.copy(errorMessage = e.localizedMessage ?: "Unknown error.", isLoading = false)
         }
