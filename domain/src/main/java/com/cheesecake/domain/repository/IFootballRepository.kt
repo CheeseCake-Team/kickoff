@@ -1,6 +1,7 @@
 package com.cheesecake.domain.repository
 
 import com.cheesecake.domain.entity.Fixture
+import com.cheesecake.domain.entity.FixtureStatistics
 import com.cheesecake.domain.entity.TeamStatisticsEntity
 import com.cheesecake.domain.entity.TeamStanding
 import com.cheesecake.domain.entity.League
@@ -8,6 +9,7 @@ import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.entity.PlayerStatistics
 import com.cheesecake.domain.entity.SquadPlayer
 import com.cheesecake.domain.entity.Trophy
+import com.cheesecake.domain.entity.Match
 import kotlinx.coroutines.flow.Flow
 
 interface IFootballRepository {
@@ -23,7 +25,7 @@ interface IFootballRepository {
 
     suspend fun updateOrInsertLeague(league: League)
 
-    suspend fun getMatchesByLeagueIdAndSeason(timeZone: String, leagueId: Int, Season: Int): List<Fixture>
+    suspend fun getMatchesByLeagueIdAndSeason(timeZone: String, leagueId: Int, season: Int): List<Fixture>
 
     suspend fun deleteLeagueById(leagueId: Int)
 
@@ -31,20 +33,17 @@ interface IFootballRepository {
 
     suspend fun getRemotelyTeamsByIdAndSeason(leagueId: Int, leagueSeason: Int): List<Team>
 
-    suspend fun updateOrInsertTeams(
-        teamEntities: List<Team>, leagueId: Int, leagueSeason: Int
-    )
+    suspend fun updateOrInsertTeams(teamEntities: List<Team>, leagueId: Int, leagueSeason: Int)
 
     suspend fun getLeaguesByName(leagueName: String): List<League>
+
+    suspend fun getLeaguesBySearch(leagueName: String): List<League>
 
     suspend fun getTeamsBySearch(teamName: String): List<Team>
 
     suspend fun getCurrentRoundByIdAndSeason(leagueId: Int, season: Int): String?
 
-    suspend fun getTeamsStandingByLeagueIdAndSeason(
-        leagueId: Int,
-        season: Int
-    ): List<TeamStanding>
+    suspend fun getTeamsStandingByLeagueIdAndSeason(leagueId: Int, season: Int): List<TeamStanding>
 
     suspend fun getTeamStatistics(teamId: Int, season: Int, leagueId: Int): TeamStatisticsEntity
 
@@ -53,6 +52,8 @@ interface IFootballRepository {
     suspend fun getPlayerTrophy(playerId: Int): List<Trophy>
 
     suspend fun getCoachTrophy(coachId: Int): List<Trophy>
+
+    suspend fun getMatchDetails(teamsId: String, seasonId: Int, timeZone: String): Match
 
     suspend fun getFavoriteTeams(): Flow<List<Team>>
 
@@ -67,4 +68,5 @@ interface IFootballRepository {
     suspend fun getRemotelyTeam(teamId: Int): Team
 
 //    suspend fun updateOrInsertTeam(team: Team)
+    suspend fun getFixtureStatisticsByFixtureId(fixtureId: Int): List<FixtureStatistics>
 }

@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.cheesecake.presentation.screens.leagueMatches.LeagueMatchesViewModel" />
+            type="com.cheesecake.presentation.screens.league.leagueMatches.LeagueMatchesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".screens.leagueMatches.LeagueMatchesFragment">
+        tools:context=".screens.league.leagueMatches.LeagueMatchesFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/matches_recycler_view"

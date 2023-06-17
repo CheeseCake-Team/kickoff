@@ -4,7 +4,9 @@ import android.util.Log
 import com.cheesecake.data.repository.mappers.toEntity
 import com.cheesecake.data.repository.mappers.toLocal
 import com.cheesecake.domain.entity.Fixture
+import com.cheesecake.domain.entity.FixtureStatistics
 import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.Match
 import com.cheesecake.domain.entity.PlayerStatistics
 import com.cheesecake.domain.entity.SquadPlayer
 import com.cheesecake.domain.entity.Team
@@ -63,9 +65,9 @@ class IFootballRepositoryImpl
     override suspend fun getMatchesByLeagueIdAndSeason(
         timeZone: String,
         leagueId: Int,
-        Season: Int
+        season: Int
     ): List<Fixture> {
-        return remoteDataSource.getFixturesBySeasonIdAndLeagueId(timeZone, Season, leagueId)
+        return remoteDataSource.getFixturesBySeasonIdAndLeagueId(timeZone, season, leagueId)
             .toEntity()
     }
 
@@ -101,6 +103,10 @@ class IFootballRepositoryImpl
         return remoteDataSource.getLeaguesByName(leagueName).toEntity()
     }
 
+    override suspend fun getLeaguesBySearch(leagueName: String): List<League> {
+        return remoteDataSource.getLeaguesBySearch(leagueName).toEntity()
+    }
+
 
     override suspend fun getCurrentRoundByIdAndSeason(leagueId: Int, season: Int): String? {
         return remoteDataSource.getCurrentRoundByLeagueIdAndSeason(leagueId, season, true)
@@ -114,8 +120,8 @@ class IFootballRepositoryImpl
         return remoteDataSource.getStandingsByLeagueId(season, leagueId).toEntity()
     }
 
-    override suspend fun getTeamsBySearch(name: String): List<Team> {
-        return remoteDataSource.getTeamsBySearch(name).toEntity()
+    override suspend fun getTeamsBySearch(teamName: String): List<Team> {
+        return remoteDataSource.getTeamsBySearch(teamName).toEntity()
     }
 
     override suspend fun getTeamStatistics(
@@ -147,6 +153,13 @@ class IFootballRepositoryImpl
 
     override suspend fun getCoachTrophy(coachId: Int): List<Trophy> {
         return remoteDataSource.getCoachTrophies(coachId).toEntity()
+    }
+    override suspend fun getFixtureStatisticsByFixtureId(fixtureId: Int): List<FixtureStatistics> {
+        return remoteDataSource.getFixtureStatisticsByFixtureId(fixtureId).toEntity()
+    }
+
+    override suspend fun getMatchDetails(teamsId: String, seasonId: Int, timeZone: String): Match {
+        return remoteDataSource.getHeadToHead(teamsId, seasonId, timeZone).first().toEntity()
     }
 
     override suspend fun getSquadOfTeam(teamId: Int): List<SquadPlayer> {

@@ -8,6 +8,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cheesecake.presentation.databinding.ItemDateMatchesBinding
+import com.cheesecake.presentation.databinding.ItemLeagueFollowedWithMatchesBinding
+import com.cheesecake.presentation.screens.home.MatchesAdapter
+import com.cheesecake.presentation.screens.league.leagueMatches.LeagueMatchesHeadToHeadAdapter
+import androidx.databinding.library.baseAdapters.BR
 import com.cheesecake.presentation.databinding.ItemTeamDateMatchesBinding
 import com.cheesecake.presentation.databinding.ItemTeamMatchBinding
 import com.cheesecake.presentation.databinding.ItemTeamPlayersPositionsBinding
@@ -16,7 +20,6 @@ import com.cheesecake.presentation.screens.teamPlayers.TeamPlayerAdapter
 
 abstract class BaseListAdapter<T>(
     diffutils: DiffUtil.ItemCallback<T>,
-    private val listener: BaseInteractionListener?
 ) : ListAdapter<T, BaseListAdapter.BaseViewHolder<T>>(diffutils) {
 
     abstract val layoutId: Int
@@ -31,19 +34,21 @@ abstract class BaseListAdapter<T>(
 
     override fun onBindViewHolder(holder: BaseViewHolder<T>, position: Int) {
         val currentItem = getItem(position)
-        holder.bind(currentItem, listener)
+        holder.bind(currentItem)
     }
 
     open class BaseViewHolder<T>(private val binding: ViewDataBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(currentItem: T, listener: BaseInteractionListener?) {
-            binding.setVariable(androidx.databinding.library.baseAdapters.BR.item, currentItem)
-            binding.setVariable(androidx.databinding.library.baseAdapters.BR.listener, listener)
+        fun bind(currentItem: T) {
+            binding.setVariable(BR.item, currentItem)
 
-            when (binding) {
+            when(binding) {
                 is ItemDateMatchesBinding -> {
                     binding.headToHeadRecyclerView.adapter = LeagueMatchesHeadToHeadAdapter()
 
+                }
+                is ItemLeagueFollowedWithMatchesBinding -> {
+                    binding.matchesRecyclerView.adapter = MatchesAdapter()
                 }
 
                 is ItemTeamPlayersPositionsBinding -> {

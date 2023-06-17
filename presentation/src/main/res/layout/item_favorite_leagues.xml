@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="item"
-            type="com.cheesecake.presentation.screens.favoriteLeagues.FavoriteLeagueUIState" />
+            type="com.cheesecake.presentation.screens.favorite.favoriteLeagues.FavoriteLeagueUIState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> item.onFavoriteLeagueClick.invoke(item.id)}">
 
         <ImageView
             android:id="@+id/text_view_favorite_league_icon"

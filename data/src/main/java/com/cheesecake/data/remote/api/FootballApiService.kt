@@ -327,6 +327,12 @@ interface FootballApiService {
         @Query("name") leagueName: String
     ): Response<BasePagingResponse<LeagueDTO>>
 
+
+    @GET("leagues")
+    suspend fun getLeaguesBySearch(
+        @Query("search") leagueName: String
+    ): Response<BasePagingResponse<LeagueDTO>>
+
     @GET("leagues")
     suspend fun getLeaguesByCountryName(
         @Query("country") countryName: String

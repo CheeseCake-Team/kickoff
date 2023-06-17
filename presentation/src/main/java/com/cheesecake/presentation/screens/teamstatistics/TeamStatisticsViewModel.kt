@@ -14,5 +14,4 @@ class TeamStatisticsViewModel @Inject constructor(
     private val _teamStatisticsUIState = MutableStateFlow(TeamStatisticsUIState())
     val teamStatisticsUIState = _teamStatisticsUIState.asStateFlow()
 
-
 }

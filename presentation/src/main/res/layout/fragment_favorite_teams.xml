@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.cheesecake.presentation.screens.favoriteTeams.FavoriteTeamsViewModel" />
+            type="com.cheesecake.presentation.screens.favorite.favoriteTeams.FavoriteTeamsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".screens.favoriteTeams.FavoriteTeamsFragment">
+        tools:context=".screens.favorite.favoriteTeams.FavoriteTeamsFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/favorite_teams_recyclerView"
@@ -21,7 +21,7 @@
             android:padding="@dimen/spacing_12"
             android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:items="@{viewModel.state.teams}" />
+            app:listItems="@{viewModel.state.teams}" />
 
         <ImageView
             android:id="@+id/no_favorite_found_image_view"

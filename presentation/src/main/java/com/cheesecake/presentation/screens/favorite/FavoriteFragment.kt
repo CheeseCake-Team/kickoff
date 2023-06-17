@@ -10,8 +10,8 @@ import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.base.BaseFragmentsAdapter
 import com.cheesecake.presentation.databinding.FragmentFavoriteBinding
-import com.cheesecake.presentation.screens.favoriteLeagues.FavoriteLeaguesFragment
-import com.cheesecake.presentation.screens.favoriteTeams.FavoriteTeamsFragment
+import com.cheesecake.presentation.screens.favorite.favoriteLeagues.FavoriteLeaguesFragment
+import com.cheesecake.presentation.screens.favorite.favoriteTeams.FavoriteTeamsFragment
 import com.google.android.material.tabs.TabLayoutMediator
 
 class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {

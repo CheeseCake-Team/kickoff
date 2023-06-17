@@ -9,5 +9,6 @@
     <color name="backLighter">#66272727</color>
     <color name="lightGrey">#F6F6F6</color>
     <color name="lightGreyText">#66272727</color>
+    <color name="date_item_background">#FFFFFF</color>
 
 </resources>
