@@ -14,12 +14,11 @@ import javax.inject.Inject
 class MatchViewModel
 @Inject constructor(
     private val getMatchDetailsUseCase: GetMatchDetailsUseCase,
-) : BaseViewModel<MatchUIState,MatchEvents>(MatchUIState(), Event()) {
+) : BaseViewModel<MatchUIState, MatchEvents>(MatchUIState(), Event()) {
 
     init {
         getMatch()
     }
-
 
     private fun getMatch() {
         viewModelScope.launch {
@@ -36,7 +35,8 @@ class MatchViewModel
                         matchState = match.matchState
                     )
                 }
-                Log.i("Mujtaba", "getMatch: ${_state.value}")}
+                Log.i("Mujtaba", "getMatch: ${_state.value}")
+            }
         }
     }
 

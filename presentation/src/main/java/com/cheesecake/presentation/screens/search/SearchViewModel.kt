@@ -7,6 +7,7 @@ import com.cheesecake.domain.usecases.GetTeamByNameUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.mapper.toUIState
 import com.cheesecake.presentation.models.Event
+import com.cheesecake.presentation.screens.home.HomeNavigationEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -55,7 +56,7 @@ class SearchViewModel @Inject constructor(
             }
             SearchType.LEAGUE -> {
                 Log.i( "getSearchResult: " ,searchType.value.toString())
-                SearchResult.League(getLeagueList(input).map { it.toUIState() })
+                SearchResult.League(getLeagueList(input).map { it.toUIState(::onLeagueClicked) })
             }
         }
     }
@@ -105,6 +106,13 @@ class SearchViewModel @Inject constructor(
 
     suspend fun onInternetDisconnected() {
         TODO()
+    }
+
+    private fun onLeagueClicked() {
+        _event.update { Event(SearchEvents.LeagueClickEvent) }
+    }
+   private fun onTeamClicked() {
+        _event.update { Event(SearchEvents.TeamClickEvent) }
     }
 
 }

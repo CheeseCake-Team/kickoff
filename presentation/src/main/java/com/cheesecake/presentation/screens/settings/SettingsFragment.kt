@@ -3,6 +3,7 @@ package com.cheesecake.presentation.screens.settings
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentSettingsBinding
@@ -18,6 +19,9 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
         binding.cardViewThemeSettings.setOnClickListener {
             val darkThemeFragment = DarkTheme()
             darkThemeFragment.show(childFragmentManager, darkThemeFragment.tag)
+        }
+        binding.cardViewFavourites.setOnClickListener {
+            findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToFavoriteFragment())
         }
     }
 }
