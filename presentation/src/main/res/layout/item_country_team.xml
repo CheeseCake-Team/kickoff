@@ -28,8 +28,8 @@
 
             <androidx.constraintlayout.utils.widget.ImageFilterView
                 android:id="@+id/image_view_country_icon"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="@dimen/team_image_size_24dp"
+                android:layout_height="@dimen/team_image_size_24dp"
                 android:layout_marginVertical="@dimen/spacing_8"
                 android:layout_marginStart="@dimen/spacing_16"
                 app:imageUrl="@{item.flag}"

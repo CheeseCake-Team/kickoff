@@ -15,6 +15,7 @@ import com.cheesecake.domain.entity.TeamStatisticsEntity
 import com.cheesecake.domain.entity.Trophy
 import com.cheesecake.domain.repository.IFootballRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 import javax.inject.Inject
 
