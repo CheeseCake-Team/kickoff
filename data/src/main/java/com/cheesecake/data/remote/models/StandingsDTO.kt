@@ -21,7 +21,9 @@ data class StandingsDTO(
         @SerializedName("season")
         val season: Int,
         @SerializedName("standings")
-        val standings: List<List<Standing>>
+        val standings: List<List<Standing>>,
+        @SerializedName("goals")
+        val goals : GoalsForAgainstDTO
     ) {
         data class Standing(
             @SerializedName("rank")
@@ -47,7 +49,8 @@ data class StandingsDTO(
             @SerializedName("away")
             val away: StandingsMatchStatisticsDTO,
             @SerializedName("update")
-            val update: String
+            val update: String,
+
         )
     }
 }

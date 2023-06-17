@@ -265,6 +265,10 @@ interface RemoteDataSource {
         leagueName: String
     ): List<LeagueDTO>
 
+    suspend fun getLeaguesBySearch(
+        leagueName: String
+    ): List<LeagueDTO>
+
     suspend fun getLeaguesByCountryName(
         countryName: String
     ): List<LeagueDTO>

@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
 import com.cheesecake.data.local.models.LeagueLocalDTO
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface LeagueDao {
@@ -20,5 +21,8 @@ interface LeagueDao {
     @Upsert
     suspend fun insertLeagueList(LeaguesLocalDt0 : List<LeagueLocalDTO>)
 
+
+    @Query("SELECT * FROM league_table WHERE isFavourite = 1")
+    fun getFavouriteLeagues(): Flow<List<LeagueLocalDTO>>
 
 }

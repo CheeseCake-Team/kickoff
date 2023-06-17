@@ -12,6 +12,8 @@
     <string name="goals">Goals</string>
     <string name="home">Home</string>
     <string name="search">Search</string>
+    <string name="plus_minus">+/-</string>
+    <string name="pts">PTS</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="country">country</string>
@@ -25,6 +27,24 @@
     <string name="search_here">Search here...</string>
     <string name="no_result_found_description">We couldn\'t find any results for your search\n Please check your input and try again</string>
     <string name="no_result_found">No Result Found</string>
-    <string name="sub_title_string">Pick your preferred competition and experience the real live scores with us</string>
+    <string name="settings_more"><![CDATA[Settings & More]]></string>
+    <string name="notifications_settings">Notifications Settings</string>
+    <string name="time_settings">Time Settings</string>
+    <string name="theme_settings">Theme Settings</string>
+    <string name="favourites">favourites</string>
+    <string name="change_the_time_settings_as_you_prefer">Change the time settings as you prefer</string>
+    <string name="change_your_time_format">Change your time format</string>
+    <string name="use_24_hour_format">Use 24 -hour format</string>
+    <string name="use_12_hour_format">Use 12 -hour format</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="light_mode">Light Mode</string>
+    <string name="choose_the_theme_you_like_to_see">Choose the theme you like to see</string>
+    <string name="match_overview">Match Overview</string>
+    <string name="hyphen">-</string>
+    <string name="team_logo">Team logo</string>
+    <string name="premier_league">Premier League</string>
+    <string name="your_favorites">Your Favorites</string>
+    <string name="discover">Discover</string>
+    <string name="settings">Settings</string>
 
 </resources>

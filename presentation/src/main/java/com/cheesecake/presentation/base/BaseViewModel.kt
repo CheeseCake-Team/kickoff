@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-
 abstract class BaseViewModel<S, E>(uiState: S, uiEvent: Event<E>) : ViewModel() {
 
     protected val _state: MutableStateFlow<S> by lazy { MutableStateFlow(uiState) }
