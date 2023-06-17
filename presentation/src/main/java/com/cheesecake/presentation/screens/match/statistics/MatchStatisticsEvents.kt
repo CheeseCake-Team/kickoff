@@ -1,0 +1,3 @@
+package com.cheesecake.presentation.screens.match.statistics
+
+sealed interface MatchStatisticsEvents

@@ -9,5 +9,6 @@ data class TeamStanding(
     val won: String,
     val draw: String,
     val lose: String,
-    val points: String
+    val points: String,
+    val goals: String
 )

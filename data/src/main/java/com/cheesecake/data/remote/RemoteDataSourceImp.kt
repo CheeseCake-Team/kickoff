@@ -30,7 +30,9 @@ import com.cheesecake.data.repository.RemoteDataSource
 import com.cheesecake.domain.KickoffException
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.withTimeout
+import retrofit2.HttpException
 import retrofit2.Response
+import java.net.ConnectException
 import javax.inject.Inject
 
 class RemoteDataSourceImp @Inject constructor(
@@ -581,16 +583,16 @@ class RemoteDataSourceImp @Inject constructor(
     }
 
     override suspend fun getTeamsBySearch(name: String): List<TeamDTO> {
-        val o = service.getTeamsBySearch(name)
-        Log.i(
-            "onSearchInputDataSource: ",
-            wrapBaseResponse { service.getTeamsBySearch(name) }.toString()
-        )
         return wrapBaseResponse { service.getTeamsBySearch(name) }
     }
 
     override suspend fun getLeaguesByName(leagueName: String): List<LeagueDTO> {
         return wrapBaseResponse { service.getLeaguesByName(leagueName) }
+    }
+
+    override suspend fun getLeaguesBySearch(leagueName: String): List<LeagueDTO> {
+        return wrapBaseResponse { service.getLeaguesBySearch(leagueName) }
+
     }
 
     override suspend fun getTeamById(teamId: Int): List<TeamDTO> {
@@ -666,26 +668,7 @@ class RemoteDataSourceImp @Inject constructor(
         return wrapBaseResponse { service.searchVenue(name) }
     }
 
-
-    //endregion
-
-
     private suspend fun <T> wrapBaseResponse(
-        response: suspend () -> Response<BasePagingResponse<T>>
-    ): List<T> {
-        return response().takeIf { it.isSuccessful }?.body()?.response
-            ?: throw Throwable("Not Success Request")
-    }
-
-    private suspend fun <T> wrapBaseStaticResponse(
-        response: suspend () -> Response<BasePagingForStaticResponse<T>>,
-    ): T {
-        return response().takeIf { it.isSuccessful }?.body()?.response
-            ?: throw Throwable("Not Success Request")
-    }
-
-
-    private suspend fun <T> wrapBaseResponseAndHandleError(
         response: suspend () -> Response<BasePagingResponse<T>>
     ): List<T> {
         return try {
@@ -698,13 +681,12 @@ class RemoteDataSourceImp @Inject constructor(
             }
         } catch (e: TimeoutCancellationException) {
             throw KickoffException.TimeoutException()
-        } catch (e: Exception) {
+        } catch (e: ConnectException) {
             throw KickoffException.NoInternetConnectionException()
         }
     }
 
-
-    private suspend fun <T> wrapBaseStaticResponseAndHandleError(
+    private suspend fun <T> wrapBaseStaticResponse(
         response: suspend () -> Response<BasePagingForStaticResponse<T>>
     ): T {
         return try {
@@ -717,7 +699,7 @@ class RemoteDataSourceImp @Inject constructor(
             }
         } catch (e: TimeoutCancellationException) {
             throw KickoffException.TimeoutException()
-        } catch (e: Exception) {
+        } catch (e: ConnectException) {
             throw KickoffException.NoInternetConnectionException()
         }
     }

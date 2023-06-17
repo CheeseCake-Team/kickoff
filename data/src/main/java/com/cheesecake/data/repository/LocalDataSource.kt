@@ -15,7 +15,9 @@ interface LocalDataSource {
 
     suspend fun updateOrInsertTeam(team: TeamLocalDTO)
 
-    suspend fun getFavouriteTeams(): List<TeamLocalDTO>
+    suspend fun getFavouriteTeams(): Flow<List<TeamLocalDTO>>
+
+    suspend fun getFavouriteLeagues(): Flow<List<LeagueLocalDTO>>
 
     suspend fun deleteAllTeams()
 
@@ -28,5 +30,7 @@ interface LocalDataSource {
     suspend fun getLocalCountries(): List<TeamCountriesLocalDTO>
 
     suspend fun getCountriesSearch(search: String): Flow<List<TeamCountriesLocalDTO>>
+
+    suspend fun deleteTeamById(teamId: Int)
 
 }

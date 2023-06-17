@@ -24,43 +24,55 @@ class LocalDataSourceImp @Inject constructor(
         teamsDao.updateOrInsertTeams(teams)
     }
 
+    override suspend fun getFavouriteTeams(): Flow<List<TeamLocalDTO>> {
 
-    override suspend fun getFavouriteTeams(): List<TeamLocalDTO> {
-        return teamsDao.getFavouriteTeams()
+        override suspend fun getFavouriteTeams(): List<TeamLocalDTO> {
+            return teamsDao.getFavouriteTeams()
+        }
+
+        override suspend fun updateOrInsertTeam(team: TeamLocalDTO) {
+            teamsDao.updateOrInsertTeam(team)
+        }
+
+        override suspend fun deleteAllTeams() {
+            teamsDao.deleteAllTeams()
+        }
+
+        override suspend fun getLeagueByIdAndSeason(
+            leagueId: Int,
+            leagueSeason: Int,
+        ): LeagueLocalDTO? {
+            return leagueDao.getLeagueByIdAndSeason(leagueId, leagueSeason)
+        }
+
+        override suspend fun updateOrInsertLeague(league: LeagueLocalDTO) {
+            leagueDao.updateOrInsertLeagueLocalDto(league)
+        }
+
+        override suspend fun deleteLeagueById(leagueId: Int) {
+            leagueDao.deleteLeagueById(leagueId)
+        }
+
+        override suspend fun getLocalCountries(): List<TeamCountriesLocalDTO> {
+            return teamCountriesDao.getLocalCountries()
+        }
+
+        override suspend fun getCountriesSearch(search: String): Flow<List<TeamCountriesLocalDTO>> {
+            return teamCountriesDao.getCountriesSearch(search)
+        }
+
+
+        override suspend fun addTeamCountries(teams: List<TeamCountriesLocalDTO>) {
+            teamCountriesDao.addTeamCountries(teams)
+        }
+
+
+        override suspend fun deleteTeamById(teamId: Int) {
+            teamsDao.deleteTeamById(teamId)
+        }
+
+        override suspend fun getFavouriteLeagues(): Flow<List<LeagueLocalDTO>> {
+            return leagueDao.getFavouriteLeagues()
+        }
+
     }
-
-    override suspend fun updateOrInsertTeam(team: TeamLocalDTO) {
-        teamsDao.updateOrInsertTeam(team)
-    }
-
-    override suspend fun deleteAllTeams() {
-        teamsDao.deleteAllTeams()
-    }
-
-    override suspend fun getLeagueByIdAndSeason(leagueId: Int, leagueSeason: Int): LeagueLocalDTO? {
-        return leagueDao.getLeagueByIdAndSeason(leagueId, leagueSeason)
-    }
-
-    override suspend fun updateOrInsertLeague(league: LeagueLocalDTO) {
-        leagueDao.updateOrInsertLeagueLocalDto(league)
-    }
-
-    override suspend fun deleteLeagueById(leagueId: Int) {
-        leagueDao.deleteLeagueById(leagueId)
-    }
-
-    override suspend fun getLocalCountries(): List<TeamCountriesLocalDTO> {
-        return teamCountriesDao.getLocalCountries()
-    }
-
-    override suspend fun getCountriesSearch(search: String): Flow<List<TeamCountriesLocalDTO>> {
-        return teamCountriesDao.getCountriesSearch(search)
-    }
-
-
-    override suspend fun addTeamCountries(teams: List<TeamCountriesLocalDTO>) {
-        teamCountriesDao.addTeamCountries(teams)
-    }
-
-
-}
