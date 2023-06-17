@@ -6,6 +6,9 @@ import com.cheesecake.domain.entity.Fixture
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 @JvmName("fixtureDTOToFixture")
 fun FixtureDTO.toEntity(): Fixture {
@@ -18,12 +21,26 @@ fun FixtureDTO.toEntity(): Fixture {
         awayTeamName = this.teams.away.name,
         awayTeamLogoUrl = this.teams.away.logo,
         awayTeamGoals = this.goals.away.toString(),
-        matchTime = "this.fixtureDataDTO.date.substring(11, 16)",
-//        matchDate = formatDate(this.fixtureDataDTO.date.substring(0, 10)),
-        matchDate = this.fixtureDataDTO.date,
-        isFinished = this.fixtureDataDTO.status.short == FixtureStatus.MatchFinished.toString()
+        matchTime = this.fixtureDataDTO.date?.toString(),
+        matchDate = this.fixtureDataDTO.date ?: Date(),
+        isFinished = this.fixtureDataDTO.status.short == FixtureStatus.MatchFinished.toString(),
+        leagueSeason = this.league.season
     )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @JvmName("fixtureDTOsToFixtures")
 fun List<FixtureDTO>.toEntity(): List<Fixture> {
     return this.map { it.toEntity() }

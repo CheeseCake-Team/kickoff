@@ -5,7 +5,7 @@ import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseListAdapter
 
 class MatchesAdapter: BaseListAdapter<MatchItemUIState>(MatchItemUIStateDiffUtil()){
-    override val layoutId = R.layout.item_league_followed_with_matches
+    override val layoutId = R.layout.item_match
 }
 
 class MatchItemUIStateDiffUtil: DiffUtil.ItemCallback<MatchItemUIState>() {

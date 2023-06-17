@@ -1,13 +1,9 @@
 package com.cheesecake.presentation.screens.favorite.favoriteLeagues
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.usecases.FavouriteLeagueUseCase
-import com.cheesecake.domain.usecases.GetFavoriteLeaguesMatchesByDateUseCase
 import com.cheesecake.domain.usecases.GetFavoriteLeaguesUseCase
-import com.cheesecake.domain.usecases.GetNextThirtyDaysUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.mapper.toLeaguesUIState
 import com.cheesecake.presentation.models.Event

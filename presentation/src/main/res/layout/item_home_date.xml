@@ -15,8 +15,9 @@
         style="@style/Widget.Material3.CardView.Filled"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@{item.selected ? @color/primaryColor : @color/date_item_background}"
-        android:layout_margin="@dimen/spacing_4">
+        android:onClick=""
+        android:layout_margin="@dimen/spacing_4"
+        app:cardBackgroundColor="@{item.selected ? @color/primaryColor : @color/date_item_background}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
@@ -31,6 +32,7 @@
                 android:layout_marginTop="@dimen/spacing_8"
                 android:layout_marginEnd="@dimen/spacing_8"
                 android:text="@{item.month}"
+                android:textColor="@{item.selected ? @color/onPrimaryColor : @color/fontHeavy}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -42,12 +44,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/spacing_8"
-                android:text="@{Integer.toString(item.day)}"
+                android:text="@{item.day}"
+                android:textColor="@{item.selected ? @color/onPrimaryColor : @color/fontHeavy}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/month_text_view"
                 app:layout_constraintStart_toStartOf="@+id/month_text_view"
                 app:layout_constraintTop_toBottomOf="@+id/month_text_view"
                 tools:text="12" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

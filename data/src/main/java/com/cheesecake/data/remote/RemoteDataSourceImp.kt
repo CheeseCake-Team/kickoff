@@ -668,10 +668,6 @@ class RemoteDataSourceImp @Inject constructor(
         return wrapBaseResponse { service.searchVenue(name) }
     }
 
-
-    //endregion
-
-
     private suspend fun <T> wrapBaseResponse(
         response: suspend () -> Response<BasePagingResponse<T>>
     ): List<T> {
@@ -689,7 +685,6 @@ class RemoteDataSourceImp @Inject constructor(
             throw KickoffException.NoInternetConnectionException()
         }
     }
-
 
     private suspend fun <T> wrapBaseStaticResponse(
         response: suspend () -> Response<BasePagingForStaticResponse<T>>
