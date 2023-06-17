@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
-            type="com.cheesecake.presentation.ui.match.MatchViewModel" />
+            type="com.cheesecake.presentation.screens.match.MatchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="false"
-        tools:context=".ui.match.MatchFragment">
+        tools:context=".screens.match.MatchFragment">
 
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="@dimen/spacing_32"
             app:layout_constraintTop_toBottomOf="@+id/match_state" />
 
         <androidx.viewpager2.widget.ViewPager2
@@ -28,104 +29,129 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tab_layout"
-            app:layout_constraintVertical_bias="1.0">
+            app:layout_constraintTop_toBottomOf="@+id/tab_layout">
 
         </androidx.viewpager2.widget.ViewPager2>
 
-        <ImageView
-            android:id="@+id/left_team_image"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="16dp"
+        <Button
+            android:id="@+id/back_button"
+            style="?attr/materialIconButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_16"
+            app:icon="@drawable/ic_back"
+            app:iconTint="@color/fontHeavy"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/match_overview"
-            tools:srcCompat="@drawable/Chelsea"
-            android:contentDescription="@string/team_logo" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/match_overview"
+            style="@style/TitleMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/spacing_20"
             android:text="@string/match_overview"
+            android:textColor="@color/fontHeavy"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/right_team_image"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="64dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/match_overview"
+            android:id="@+id/away_team_image"
+            android:layout_width="@dimen/spacing_32"
+            android:layout_height="@dimen/spacing_32"
             android:contentDescription="@string/team_logo"
-            tools:srcCompat="@drawable/Leicester" />
+            app:imageUrl="@{viewModel.state.awayTeamLogoUrl}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/hyphen"
+            app:layout_constraintTop_toTopOf="@+id/home_team_image" />
 
-        <TextView
-            android:id="@+id/left_team_goals"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            app:layout_constraintBottom_toBottomOf="@+id/hyphen"
-            app:layout_constraintStart_toEndOf="@+id/left_team_image"
-            app:layout_constraintTop_toTopOf="@+id/hyphen"
-            app:layout_constraintVertical_bias="0.526"
-            tools:text="0" />
-
-        <TextView
-            android:id="@+id/right_team_goals"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintBottom_toBottomOf="@+id/hyphen"
-            app:layout_constraintEnd_toStartOf="@+id/right_team_image"
-            app:layout_constraintTop_toTopOf="@+id/hyphen"
-            app:layout_constraintVertical_bias="0.526"
-            tools:text="0" />
+        <ImageView
+            android:id="@+id/home_team_image"
+            android:layout_width="@dimen/spacing_32"
+            android:layout_height="@dimen/spacing_32"
+            android:layout_marginTop="@dimen/spacing_32"
+            android:contentDescription="@string/team_logo"
+            app:imageUrl="@{viewModel.state.homeTeamLogoUrl}"
+            app:layout_constraintEnd_toStartOf="@+id/hyphen"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/match_overview" />
 
         <TextView
             android:id="@+id/hyphen"
+            style="@style/TitleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/hyphen"
-            android:textSize="28sp"
-            app:layout_constraintBottom_toBottomOf="@+id/left_team_image"
-            app:layout_constraintEnd_toStartOf="@+id/right_team_image"
-            app:layout_constraintStart_toEndOf="@+id/left_team_image"
-            app:layout_constraintTop_toTopOf="@+id/left_team_image" />
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintBottom_toBottomOf="@+id/home_team_image"
+            app:layout_constraintEnd_toStartOf="@+id/away_team_image"
+            app:layout_constraintStart_toEndOf="@+id/home_team_image"
+            app:layout_constraintTop_toTopOf="@+id/home_team_image" />
+
+        <TextView
+            android:id="@+id/away_team_goals"
+            style="@style/TitleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintBottom_toBottomOf="@+id/hyphen"
+            app:layout_constraintEnd_toStartOf="@+id/hyphen"
+            app:layout_constraintStart_toEndOf="@+id/home_team_image"
+            app:layout_constraintTop_toTopOf="@+id/hyphen"
+            app:text="@{String.valueOf(viewModel.state.homeTeamGoals)}"
+            tools:text="0" />
+
+        <TextView
+            android:id="@+id/home_team_goals"
+            style="@style/TitleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintBottom_toBottomOf="@+id/hyphen"
+            app:layout_constraintEnd_toStartOf="@+id/away_team_image"
+            app:layout_constraintStart_toEndOf="@+id/hyphen"
+            app:layout_constraintTop_toTopOf="@+id/hyphen"
+            app:text="@{String.valueOf(viewModel.state.awayTeamGoals)}"
+            tools:text="0" />
 
         <TextView
             android:id="@+id/match_state"
+            style="@style/TitleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/right_team_name"
-            app:layout_constraintStart_toStartOf="@+id/left_team_name"
-            app:layout_constraintTop_toBottomOf="@+id/left_team_name"
+            android:layout_marginTop="@dimen/spacing_8"
+            android:text="@{viewModel.state.matchState}"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintEnd_toEndOf="@+id/away_team_name"
+            app:layout_constraintStart_toStartOf="@+id/home_team_name"
+            app:layout_constraintTop_toBottomOf="@+id/home_team_name"
             tools:text="Finished" />
 
         <TextView
-            android:id="@+id/right_team_name"
+            android:id="@+id/away_team_name"
+            style="@style/TitleMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            tools:text="Leicester"
-            app:layout_constraintEnd_toEndOf="@+id/right_team_image"
-            app:layout_constraintStart_toStartOf="@+id/right_team_image"
-            app:layout_constraintTop_toBottomOf="@+id/right_team_image" />
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintEnd_toEndOf="@+id/away_team_image"
+            app:layout_constraintStart_toStartOf="@+id/away_team_image"
+            app:layout_constraintTop_toTopOf="@+id/home_team_name"
+            app:text="@{viewModel.state.awayTeamName}"
+            tools:text="Leicester" />
 
         <TextView
-            android:id="@+id/left_team_name"
+            android:id="@+id/home_team_name"
+            style="@style/TitleMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            tools:text="Chelsea"
-            app:layout_constraintEnd_toEndOf="@+id/left_team_image"
-            app:layout_constraintStart_toStartOf="@+id/left_team_image"
-            app:layout_constraintTop_toBottomOf="@+id/left_team_image" />
+            android:layout_marginTop="@dimen/spacing_8"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintEnd_toEndOf="@+id/home_team_image"
+            app:layout_constraintStart_toStartOf="@+id/home_team_image"
+            app:layout_constraintTop_toBottomOf="@+id/home_team_image"
+            app:text="@{viewModel.state.homeTeamName}"
+            tools:text="Chelsea" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
