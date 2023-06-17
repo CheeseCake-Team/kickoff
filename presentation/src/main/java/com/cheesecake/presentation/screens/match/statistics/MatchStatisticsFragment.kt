@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentMatchStatisticsBinding
+import com.cheesecake.presentation.screens.match.statistics.MatchStatisticsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

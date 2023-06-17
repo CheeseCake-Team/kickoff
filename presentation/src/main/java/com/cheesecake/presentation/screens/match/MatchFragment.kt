@@ -8,8 +8,8 @@ import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.base.BaseFragmentsAdapter
 import com.cheesecake.presentation.databinding.FragmentMatchBinding
-import com.cheesecake.presentation.ui.match.events.MatchEventFragment
-import com.cheesecake.presentation.ui.match.lineup.MatchLineupFragment
+import com.cheesecake.presentation.screens.match.events.MatchEventFragment
+import com.cheesecake.presentation.screens.match.lineup.MatchLineupFragment
 import com.cheesecake.presentation.ui.match.statistics.MatchStatisticsFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint

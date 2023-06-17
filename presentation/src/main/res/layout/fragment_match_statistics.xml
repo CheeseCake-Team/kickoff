@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.cheesecake.presentation.ui.match.statistics.MatchStatisticsViewModel" />
+            type="com.cheesecake.presentation.screens.match.statistics.MatchStatisticsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

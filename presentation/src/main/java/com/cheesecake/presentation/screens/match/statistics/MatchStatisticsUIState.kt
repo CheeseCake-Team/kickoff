@@ -1,4 +1,4 @@
-package com.cheesecake.presentation.ui.match.statistics
+package com.cheesecake.presentation.screens.match.statistics
 
 data class MatchStatisticsUIState(
     val statisticsItem: List<StatisticsItemUiState> = emptyList(),

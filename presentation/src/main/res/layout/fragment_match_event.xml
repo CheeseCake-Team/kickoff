@@ -9,7 +9,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.match.events.MatchEventFragment">
+        tools:context=".screens.match.events.MatchEventFragment">
 
         <!-- TODO: Update blank fragment layout -->
         <TextView

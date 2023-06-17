@@ -1,4 +1,4 @@
-package com.cheesecake.presentation.ui.match.lineup
+package com.cheesecake.presentation.screens.match.lineup
 
 data class MatchLineupUIState(
     val errorMessage: String = "error",

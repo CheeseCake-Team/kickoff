@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/matchFragment">
 
     <fragment
         android:id="@+id/leagueFragment"
@@ -24,4 +24,8 @@
         android:id="@+id/homeFragment"
         android:name="com.cheesecake.presentation.screens.home.HomeFragment"
         android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/matchFragment"
+        android:name="com.cheesecake.presentation.screens.match.MatchFragment"
+        android:label="MatchFragment" />
 </navigation>

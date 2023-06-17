@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseAdapter
 import com.cheesecake.presentation.databinding.ItemStatisticsBinding
+import com.cheesecake.presentation.screens.match.statistics.StatisticsItemUiState
 
 class MatchStatisticsAdapter : BaseAdapter<StatisticsItemUiState>(null) {
     override val layoutId = R.layout.item_statistics

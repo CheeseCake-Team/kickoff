@@ -1,4 +1,4 @@
-package com.cheesecake.presentation.ui.match.events
+package com.cheesecake.presentation.screens.match.events
 
 data class MatchEventUIState(
     val errorMessage: String = "error",

@@ -5,6 +5,7 @@
     <dimen name="spacing_4">4dp</dimen>
     <dimen name="spacing_8">8dp</dimen>
     <dimen name="spacing_12">12dp</dimen>
+    <dimen name="spacing_14">14dp</dimen>
     <dimen name="spacing_16">16dp</dimen>
     <dimen name="spacing_20">20dp</dimen>
     <dimen name="spacing_24">24dp</dimen>
@@ -12,6 +13,7 @@
     <dimen name="spacing_36">36dp</dimen>
     <dimen name="spacing_56">56dp</dimen>
 
+    <dimen name="team_image_size_48dp">48dp</dimen>
     <!-- text sizes -->
     <dimen name="font_size_12sp">12sp</dimen>
     <dimen name="font_size_14sp">14sp</dimen>
