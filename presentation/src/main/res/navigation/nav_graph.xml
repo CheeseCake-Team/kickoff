@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/leagueFragment"
+        android:name="com.cheesecake.presentation.screens.league.LeagueFragment"
+        android:label="LeagueFragment" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.cheesecake.presentation.screens.search.SearchFragment"
+        android:label="SearchFragment" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.cheesecake.presentation.screens.favorite.FavoriteFragment"
+        android:label="FavoriteFragment" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_leagueFragment"
+            app:destination="@id/leagueFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.cheesecake.presentation.screens.home.HomeFragment"
+        android:label="HomeFragment" />
+</navigation>

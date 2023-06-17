@@ -7,13 +7,14 @@ import com.cheesecake.domain.entity.League
 
 fun LeagueDTO.toEntity(): League = League(
     leagueId = this.league.id,
-    leagueName = this.league.name,
-    leagueSeason = this.seasons.first().year.toString(),
-    leagueLogo = this.league.logo,
+    name = this.league.name,
+    season = this.seasons.first().year.toString(),
+    imageUrl = this.league.logo,
     seasonStartYear = this.seasons.first().start.substring(0, 4),
     seasonEndYear = this.seasons.first().end.substring(0, 4),
     country = this.country.name,
-    isFavourite = false
+    isFavourite = false,
+    typeName = this.league.type
 )
 
 @JvmName("leagueDTOToLeagueLocalDTO")
@@ -25,31 +26,34 @@ fun LeagueDTO.toLocal(): LeagueLocalDTO = LeagueLocalDTO(
     seasonStartYear = this.seasons.first().start,
     seasonEndYear = this.seasons.first().end,
     country = this.country.name,
-    isFavourite = false
+    isFavourite = false,
+    typeName = league.type
 )
 
 @JvmName("leagueLocalDTOToLeague")
 fun LeagueLocalDTO.toEntity(): League = League(
     leagueId = leagueId,
-    leagueName = leagueName,
-    leagueSeason = leagueSeason,
-    leagueLogo = leagueLogoUrl,
+    name = leagueName,
+    season = leagueSeason,
+    imageUrl = leagueLogoUrl,
     seasonStartYear = seasonStartYear,
     seasonEndYear = seasonEndYear,
     country = country,
-    isFavourite = isFavourite
+    isFavourite = isFavourite,
+    typeName = typeName
 )
 
 @JvmName("leagueToLeagueLocalDTO")
 fun League.toLocal(): LeagueLocalDTO = LeagueLocalDTO(
     leagueId = leagueId,
-    leagueName = leagueName,
-    leagueSeason = leagueSeason,
-    leagueLogoUrl = leagueLogo,
+    leagueName = name,
+    leagueSeason = season,
+    leagueLogoUrl = imageUrl,
     seasonStartYear = seasonStartYear,
     seasonEndYear = seasonEndYear,
     country = country,
-    isFavourite = isFavourite
+    isFavourite = isFavourite,
+    typeName = typeName
 )
 
 @JvmName("leagueLocalDTOsToLeagues")
