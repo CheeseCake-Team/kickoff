@@ -7,7 +7,9 @@ import com.cheesecake.domain.usecases.AddFavouriteLeagueListUseCase
 import com.cheesecake.domain.usecases.GetLeagueListUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.mapper.toFavLeagueItemUIState
+import com.cheesecake.presentation.mapper.toLeague
 import com.cheesecake.presentation.models.Event
+import com.cheesecake.presentation.screens.league.LeagueNavigationEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,14 +23,16 @@ import javax.inject.Inject
 class FavLeagueSelectionViewModel @Inject constructor(
     private val GetLeagueListUseCase: GetLeagueListUseCase,
     private val AddFavouriteLeagueListUseCase: AddFavouriteLeagueListUseCase
-): BaseViewModel<FavLeagueSelectionUIState, FavLeagueSelectionNavigationEvent>(FavLeagueSelectionUIState(), Event()) {
+) : BaseViewModel<FavLeagueSelectionUIState, FavLeagueSelectionNavigationEvent>(
+    FavLeagueSelectionUIState(),
+    Event()
+) {
 
     private val _favLeagueSelectionUIState = MutableStateFlow(FavLeagueSelectionUIState())
     val favLeagueSelectionUIState = _favLeagueSelectionUIState.asStateFlow()
 
     private val _selectedLeagues = MutableStateFlow<List<League>>(emptyList())
     val selectedLeagues: StateFlow<List<League>> = _selectedLeagues
-
 
     init {
         getAllLeagues()
@@ -42,9 +46,16 @@ class FavLeagueSelectionViewModel @Inject constructor(
             { leagues ->
                 _favLeagueSelectionUIState.update {
                     it.copy(
-                        allLeagues = leagues,
+                        allLeagues = leagues.map {
+                            it.toFavLeagueItemUIState {
+                                onFavouriteLeagueSelect(
+                                    it
+                                )
+                            }
+                        },
                         isLoading = false
                     )
+
                 }
             },
             { error ->
@@ -54,12 +65,13 @@ class FavLeagueSelectionViewModel @Inject constructor(
                         isLoading = false
                     )
                 }
-
             }
         )
     }
 
-    fun selectLeague(league: League) {
+    fun onFavouriteLeagueSelect(favleagueItem: FavLeagueItemUIState) {
+
+        val league = favleagueItem.toLeague()
         val currentSelectedLeagues = _selectedLeagues.value.toMutableList()
         if (currentSelectedLeagues.contains(league)) {
             currentSelectedLeagues.remove(league)
@@ -67,38 +79,23 @@ class FavLeagueSelectionViewModel @Inject constructor(
             currentSelectedLeagues.add(league)
         }
         _selectedLeagues.value = currentSelectedLeagues
-
-        _favLeagueSelectionUIState.update { state ->
-            state.copy(allLeagues = state.allLeagues.map { leagueItem ->
-                if (leagueItem.leagueId == league.leagueId) {
-                    leagueItem.copy(isSelected = !leagueItem.isSelected)
-                } else {
-                    leagueItem
-                }
-            })
-        }
+//        favleagueItem.copy { it.isSelected = true }
     }
 
     private fun addToFavourite() {
         val selectedItems = selectedLeagues.value
         tryToExecute(
-            { AddFavouriteLeagueListUseCase(selectedItems) }, ::onSuccess, ::onError
+            { AddFavouriteLeagueListUseCase(selectedItems) }, ::onAddSuccess, ::onError
         )
     }
 
-    private fun onSuccess() {
-        val selectedLeagues = _selectedLeagues.value
-         _favLeagueSelectionUIState.value.allLeagues.map { league ->
-            league.toFavLeagueItemUIState(selectedLeagues) { selectLeague(league)}
-        }
+    private fun onAddSuccess(boolean: Boolean) {
+        _event.update { Event(FavLeagueSelectionNavigationEvent.NavigateToFavTeamsSelection) }
     }
 
     private fun onError(e: Throwable) {
         _state.update {
             it.copy(errorMessage = e.localizedMessage ?: "Unknown error.", isLoading = false)
         }
-    }
-
-    private fun navigateToTeamSelectionFragment() {
     }
 }

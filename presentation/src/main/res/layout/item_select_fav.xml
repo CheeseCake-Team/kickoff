@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View" />
         <variable
             name="item"
             type="com.cheesecake.presentation.screens.favLeaguesSelection.FavLeagueItemUIState" />
@@ -14,7 +13,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:foreground="@drawable/selected_fav_item"
+        android:foreground="@{item.selected ? @drawable/selected_fav_item : @color/transparent }"
         android:layout_margin="@dimen/spacing_8">
 
         <androidx.constraintlayout.widget.ConstraintLayout

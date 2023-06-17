@@ -8,7 +8,9 @@ class AddFavouriteLeagueListUseCase @Inject constructor(
     private val leagueRepository: IFootballRepository
 ) {
 
-    suspend operator fun invoke(leagues: List<League>) {
+    suspend operator fun invoke(leagues: List<League>) : Boolean {
         leagueRepository.addLeagueList(leagues)
+        return true
     }
+
 }
