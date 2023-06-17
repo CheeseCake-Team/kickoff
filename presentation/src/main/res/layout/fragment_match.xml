@@ -124,8 +124,8 @@
             android:layout_marginTop="@dimen/spacing_8"
             android:text="@{viewModel.state.matchState}"
             android:textColor="@color/fontHeavy"
-            app:layout_constraintEnd_toEndOf="@+id/away_team_name"
-            app:layout_constraintStart_toStartOf="@+id/home_team_name"
+            app:layout_constraintEnd_toEndOf="@+id/hyphen"
+            app:layout_constraintStart_toStartOf="@+id/hyphen"
             app:layout_constraintTop_toBottomOf="@+id/home_team_name"
             tools:text="Finished" />
 
