@@ -7,6 +7,9 @@
         <variable
             name="item"
             type="com.cheesecake.domain.entity.TeamStanding" />
+        <variable
+            name="viewModel"
+            type="com.cheesecake.presentation.screens.standings.StandingsViewModel" />
     </data>
 
     <LinearLayout
@@ -23,9 +26,10 @@
 
             <TextView
                 android:id="@+id/textview_serial_num"
-                android:layout_width="wrap_content"
+                android:layout_width="14dp"
                 android:layout_height="wrap_content"
-                tools:text="1"
+                tools:text="12"
+                android:text=""
                 style="@style/textContentStandingFragment"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/spacing_16" />
@@ -36,20 +40,20 @@
                 android:layout_height="28dp"
                 app:imageUrl="@{item.logo}"
                 android:src="@drawable/arsenal_fc"
-                android:layout_marginStart="@dimen/font_size_18sp" />
+                android:layout_marginStart="18dp" />
 
             <TextView
                 android:id="@+id/textview_played"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/spacing_16"
                 android:layout_height="wrap_content"
                 style="@style/textContentStandingFragment"
                 tools:text="3"
                 android:text="@{item.played}"
                 android:layout_gravity="center"
-                android:layout_marginStart="@dimen/spacing_100" />
+                android:layout_marginStart="70dp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/spacing_32"
                 android:layout_height="wrap_content"
                 style="@style/textContentStandingFragment"
                 tools:text="19:21"
@@ -59,18 +63,18 @@
 
             <TextView
                 android:id="@+id/textview_points"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/spacing_16"
                 android:layout_height="wrap_content"
                 style="@style/textContentStandingFragment"
                 tools:text="10"
                 android:text="@{item.points}"
                 android:layout_gravity="center"
-                android:layout_marginStart="@dimen/spacing_32" />
+                android:layout_marginStart="@dimen/spacing_24" />
 
             <TextView
                 android:id="@+id/textview_won"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/spacing_16"
                 style="@style/textContentStandingFragment"
                 tools:text="27"
                 android:text="@{item.won}"
@@ -80,7 +84,7 @@
             <TextView
                 android:id="@+id/textview_draw"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/spacing_16"
                 style="@style/textContentStandingFragment"
                 tools:text="18"
                 android:text="@{item.draw}"
@@ -89,13 +93,13 @@
 
             <TextView
                 android:id="@+id/text_view_lose"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/spacing_16"
                 android:layout_height="wrap_content"
                 style="@style/textContentStandingFragment"
                 tools:text="4"
                 android:text="@{item.lose}"
                 android:layout_gravity="center"
-                android:layout_marginStart="@dimen/spacing_16" />
+                android:layout_marginStart="@dimen/spacing_24" />
         </LinearLayout>
 
         <View

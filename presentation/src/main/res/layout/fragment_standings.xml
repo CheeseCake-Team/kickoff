@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/p"
-            android:layout_marginStart="105dp"
+            android:layout_marginStart="84dp"
             style="@style/textTitleStandingsFragment"
             />
           <TextView
@@ -101,10 +101,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_standings"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:clipToPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="@dimen/spacing_16"
         app:items="@{viewModel.standingUiState.data}"
         app:layout_constraintTop_toBottomOf="@id/titleLinearLayout"
+        android:layout_marginBottom="@dimen/spacing_16"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_standing">
     </androidx.recyclerview.widget.RecyclerView>
