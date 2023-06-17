@@ -42,6 +42,8 @@ fun Team.toUIState(): TeamUIState {
 //}
 
 fun Fixture.toMatchUIState(): MatchItemUIState {
+    val formatter = SimpleDateFormat("HH:mm")
+    val formattedMatchTime = formatter.format(this.matchDate)
 //    val timeFormat = SimpleDateFormat("HH:mm", Locale.ENGLISH)
 //    val formattedMatchTime = matchTime?.let { timeFormat.parse(it)
 //        ?.let { it1 -> timeFormat.format(it1) } } ?: ""
@@ -51,7 +53,7 @@ fun Fixture.toMatchUIState(): MatchItemUIState {
         leagueSeason = leagueSeason,
         timeZone = TimeZone.getDefault().id,
         matchState = if (isFinished) "Finished" else "Upcoming",
-        matchTime = "formattedMatchTime",
+        matchTime = formattedMatchTime,
         homeTeamName = homeTeamName,
         awayTeamName = awayTeamName,
         homeTeamGoals = homeTeamGoals?.toIntOrNull() ?: 0,
