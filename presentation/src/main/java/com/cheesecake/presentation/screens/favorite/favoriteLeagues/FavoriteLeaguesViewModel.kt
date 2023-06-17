@@ -1,9 +1,13 @@
 package com.cheesecake.presentation.screens.favorite.favoriteLeagues
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
+import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.usecases.FavouriteLeagueUseCase
+import com.cheesecake.domain.usecases.GetFavoriteLeaguesMatchesByDateUseCase
 import com.cheesecake.domain.usecases.GetFavoriteLeaguesUseCase
+import com.cheesecake.domain.usecases.GetNextThirtyDaysUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.mapper.toLeaguesUIState
 import com.cheesecake.presentation.models.Event
@@ -16,17 +20,12 @@ import javax.inject.Inject
 @HiltViewModel
 class FavoriteLeaguesViewModel @Inject constructor(
     private val getFavoriteLeaguesUseCase: GetFavoriteLeaguesUseCase,
-    private val favoriteLeagueUseCase: FavouriteLeagueUseCase
-) : BaseViewModel<FavoriteLeaguesUIState, FavoriteLeaguesNavigationEvent>(
-    FavoriteLeaguesUIState(),
-    Event()
+    private val favoriteLeagueUseCase: FavouriteLeagueUseCase,
+    ) : BaseViewModel<FavoriteLeaguesUIState, FavoriteLeaguesNavigationEvent>(
+    FavoriteLeaguesUIState(), Event()
 ) {
 
     init {
-        getFavoriteLeagues()
-    }
-
-    private fun getFavoriteLeagues() {
         tryToExecute({ getFavoriteLeaguesUseCase() }, ::onSuccess, ::onError)
     }
 
@@ -34,13 +33,12 @@ class FavoriteLeaguesViewModel @Inject constructor(
         collectFlow(flow) { leagues ->
             copy(
                 leagues = leagues.map { league ->
-                    league.toLeaguesUIState(
-                        { toggleFavourite(league.leagueId, league.season.toInt()) },
-                        { navigateToLeague(league.leagueId) }
-                    )
-                },
-                isLeaguesIsEmpty = leagues.isEmpty(),
-                isLoading = false
+                    league.toLeaguesUIState({
+                        toggleFavourite(
+                            league.leagueId, league.season.toInt()
+                        )
+                    }, { navigateToLeague(league.leagueId) })
+                }, isLeaguesIsEmpty = leagues.isEmpty(), isLoading = false
             )
         }
     }

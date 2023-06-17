@@ -18,7 +18,7 @@ class LeagueViewModel @Inject constructor(
 ) : BaseViewModel<LeagueUIState, LeagueNavigationEvent>(LeagueUIState(), Event()) {
 
     init {
-        getLeague(39, 2022)
+        getLeague(75, 2023)
     }
 
     private fun toggleFavourite(leagueId: Int, leagueSeason: Int) {
@@ -70,6 +70,7 @@ class LeagueViewModel @Inject constructor(
                 isLoading = false
             )
         }
+
     }
 
 }

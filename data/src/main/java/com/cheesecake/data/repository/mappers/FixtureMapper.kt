@@ -11,14 +11,16 @@ import java.util.Locale
 fun FixtureDTO.toEntity(): Fixture {
     return Fixture(
         id = this.fixtureDataDTO.id,
+        leagueName = this.league.name,
         homeTeamName = this.teams.home.name,
         homeTeamLogoUrl = this.teams.home.logo,
         homeTeamGoals = this.goals.home.toString(),
         awayTeamName = this.teams.away.name,
         awayTeamLogoUrl = this.teams.away.logo,
         awayTeamGoals = this.goals.away.toString(),
-        matchTime = this.fixtureDataDTO.date.substring(11, 16),
-        matchDate = formatDate(this.fixtureDataDTO.date.substring(0, 10)),
+        matchTime = "this.fixtureDataDTO.date.substring(11, 16)",
+//        matchDate = formatDate(this.fixtureDataDTO.date.substring(0, 10)),
+        matchDate = this.fixtureDataDTO.date,
         isFinished = this.fixtureDataDTO.status.short == FixtureStatus.MatchFinished.toString()
     )
 }

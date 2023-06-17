@@ -6,6 +6,7 @@ import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
+import java.util.Date
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,7 +27,7 @@ class LeagueMatchesViewModel @Inject constructor(
         )
     }
 
-    private fun onSuccess(result: List<Pair<String, List<Fixture>>>) {
+    private fun onSuccess(result: List<Pair<Date, List<Fixture>>>) {
         _state.update { it.copy(data = result, isLoading = false) }
     }
 

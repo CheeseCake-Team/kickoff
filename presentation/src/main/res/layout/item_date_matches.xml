@@ -7,11 +7,12 @@
 
         <import type="kotlin.Pair"/>
         <import type="java.util.List"/>
+        <import type="java.util.Date"/>
         <import type="com.cheesecake.domain.entity.Fixture"/>
 
         <variable
             name="item"
-            type="Pair&lt;String,List&lt;Fixture&gt;&gt;" />
+            type="Pair&lt;Date,List&lt;Fixture&gt;&gt;" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +24,7 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{item.first}"
+            android:text="@{String.valueOf(item.first)}"
             style="@style/SubtitleMedium"
             android:textColor="@color/fontHeavy"
             app:layout_constraintStart_toStartOf="parent"
