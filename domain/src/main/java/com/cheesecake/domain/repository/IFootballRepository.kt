@@ -55,4 +55,5 @@ interface IFootballRepository {
 
     suspend fun getFavoriteLeagues(): Flow<List<League>>
 
+    suspend fun getFixtureStatisticsByFixtureId(fixtureId: Int): List<FixtureStatistics>
 }

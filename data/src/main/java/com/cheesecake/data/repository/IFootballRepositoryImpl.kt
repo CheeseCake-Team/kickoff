@@ -1,8 +1,10 @@
 package com.cheesecake.data.repository
 
+import android.util.Log
 import com.cheesecake.data.repository.mappers.toEntity
 import com.cheesecake.data.repository.mappers.toLocal
 import com.cheesecake.domain.entity.Fixture
+import com.cheesecake.domain.entity.FixtureStatistics
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.entity.Match
 import com.cheesecake.domain.entity.PlayerStatistics
@@ -150,6 +152,9 @@ class IFootballRepositoryImpl
 
     override suspend fun getCoachTrophy(coachId: Int): List<Trophy> {
         return remoteDataSource.getCoachTrophies(coachId).toEntity()
+    }
+    override suspend fun getFixtureStatisticsByFixtureId(fixtureId: Int): List<FixtureStatistics> {
+        return remoteDataSource.getFixtureStatisticsByFixtureId(fixtureId).toEntity()
     }
 
     override suspend fun getMatchDetails(teamsId: String, seasonId: Int, timeZone: String): Match {
