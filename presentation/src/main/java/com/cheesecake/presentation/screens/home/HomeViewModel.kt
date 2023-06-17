@@ -33,15 +33,15 @@ class HomeViewModel @Inject constructor(
         Log.i("onSuccessDate: ", _state.value.dateItems.toString())
     }
 
+    private fun onClickDate(date: Date) {
+        getDateMatches(date)
+    }
     private fun getDateMatches(date: Date) {
         tryToExecute({
             getFavoriteLeaguesMatchesByDateUseCase(date, "Africa/Cairo")
         }, ::onSuccessFavourites, ::onErrorFavourites)
     }
 
-    private fun onClickDate(date: Date) {
-        getDateMatches(date)
-    }
 
     private fun onErrorDate(throwable: Throwable) {
 
