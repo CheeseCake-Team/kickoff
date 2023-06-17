@@ -4,6 +4,7 @@ import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.TeamStatisticsEntity
 import com.cheesecake.domain.entity.TeamStanding
 import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.Match
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.entity.PlayerStatistics
 import com.cheesecake.domain.entity.Trophy
@@ -44,5 +45,8 @@ interface IFootballRepository {
     suspend fun getPlayerBySeasonByPlayerId(season: String, playerId: Int): PlayerStatistics
 
     suspend fun getPlayerTrophy(playerId: Int): List<Trophy>
+
     suspend fun getCoachTrophy(coachId: Int): List<Trophy>
+
+    suspend fun getMatchDetails(teamsId: String, seasonId: Int, timeZone: String): Match
 }
