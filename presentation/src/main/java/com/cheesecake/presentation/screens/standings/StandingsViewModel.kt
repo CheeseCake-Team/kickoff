@@ -2,6 +2,7 @@ package com.cheesecake.presentation.screens.standings
 
 import com.cheesecake.domain.usecases.GetTeamsStandingByLeagueIdAndSeasonUseCase
 import com.cheesecake.presentation.base.BaseViewModel
+import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -11,7 +12,7 @@ import javax.inject.Inject
 @HiltViewModel
 class StandingsViewModel @Inject constructor(
     private val getTeamsStandingByLeagueIdAndSeasonUseCase: GetTeamsStandingByLeagueIdAndSeasonUseCase
-) : BaseViewModel<StandingsUiState>(StandingsUiState()){
+) : BaseViewModel<StandingsUiState , StandingNavigationEvent>(StandingsUiState() , Event()){
     private val _standingUiState = MutableStateFlow(StandingsUiState())
     val standingUiState = _standingUiState.asStateFlow()
     init {
