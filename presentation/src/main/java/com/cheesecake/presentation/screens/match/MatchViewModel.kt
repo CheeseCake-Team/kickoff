@@ -22,8 +22,7 @@ class MatchViewModel
 
     private fun getMatch() {
         viewModelScope.launch {
-            getMatchDetailsUseCase("33-34", 2022, "Africa/Cairo").let { match ->
-                Log.i("Mujtaba", "getMatch: ${match}")
+            getMatchDetailsUseCase("33-34", "2022-10-16", "Africa/Cairo").let { match ->
                 _state.update { uiState ->
                     uiState.copy(
                         homeTeamName = match.homeTeamName,
@@ -35,7 +34,6 @@ class MatchViewModel
                         matchState = match.matchState
                     )
                 }
-                Log.i("Mujtaba", "getMatch: ${_state.value}")
             }
         }
     }
