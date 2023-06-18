@@ -25,12 +25,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textview_premier_league"
+            android:id="@+id/text_view_country_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_16"
             android:layout_marginTop="@dimen/spacing_16"
-            android:text="@string/premier_league"
+            android:text="@string/country_name"
             android:textColor="@color/fontHeavy"
             android:textSize="@dimen/font_size_20sp"
             app:layout_constraintStart_toEndOf="@id/button_back"
@@ -42,8 +42,8 @@
             android:text="@string/standing"
             android:textColor="@color/fontHeavy"
             android:textSize="@dimen/font_size_16sp"
-            app:layout_constraintStart_toStartOf="@id/textview_premier_league"
-            app:layout_constraintTop_toBottomOf="@id/textview_premier_league" />
+            app:layout_constraintStart_toStartOf="@id/text_view_country_name"
+            app:layout_constraintTop_toBottomOf="@id/text_view_country_name" />
 
 
         <com.google.android.material.tabs.TabLayout
