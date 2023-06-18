@@ -2,7 +2,7 @@ package com.cheesecake.data.repository.mappers
 
 import com.cheesecake.data.remote.models.FixtureStatisticsDTO
 import com.cheesecake.domain.entity.FixtureStatistics
-
+@JvmName("FixtureStatisticsDTOToFixtureStatistics")
 fun List<FixtureStatisticsDTO>.toEntity(): List<FixtureStatistics> =
     this[0].statistics.indices.map { i ->
         val type = this[0].statistics[i].type
