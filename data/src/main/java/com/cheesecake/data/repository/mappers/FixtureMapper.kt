@@ -1,12 +1,10 @@
 package com.cheesecake.data.repository.mappers
 
-import  com.cheesecake.data.remote.models.FixtureDTO
+import com.cheesecake.data.remote.models.FixtureDTO
 import com.cheesecake.data.remote.utils.FixtureStatus
 import com.cheesecake.domain.entity.Fixture
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.Locale
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -14,6 +12,7 @@ import java.util.*
 fun FixtureDTO.toEntity(): Fixture {
     return Fixture(
         id = this.fixtureDataDTO.id,
+        matchId = "${this.teams.home.id}-${this.teams.away.id}",
         leagueName = this.league.name,
         homeTeamName = this.teams.home.name,
         homeTeamLogoUrl = this.teams.home.logo,
@@ -27,18 +26,6 @@ fun FixtureDTO.toEntity(): Fixture {
         leagueSeason = this.league.season
     )
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 @JvmName("fixtureDTOsToFixtures")

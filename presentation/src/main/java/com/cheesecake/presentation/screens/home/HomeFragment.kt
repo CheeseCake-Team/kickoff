@@ -30,8 +30,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun onEvent(event: HomeEvents) {
         val action = when (event) {
-            HomeEvents.MatchClickedEvent ->
-                HomeFragmentDirections.actionHomeFragmentToMatchFragment()
+            is HomeEvents.MatchClickedEvent ->
+                HomeFragmentDirections.actionHomeFragmentToMatchFragment(
+                    event.matchId,
+                    event.season,
+                    event.date
+                )
 
             is HomeEvents.LeagueClickEvent -> HomeFragmentDirections
                 .actionHomeFragmentToLeagueFragment(event.leagueId, event.season)

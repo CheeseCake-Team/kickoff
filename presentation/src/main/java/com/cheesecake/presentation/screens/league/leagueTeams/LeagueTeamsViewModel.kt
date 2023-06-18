@@ -16,7 +16,6 @@ import javax.inject.Inject
 class LeagueTeamsViewModel @Inject constructor(
     private val getAllTeamsInLeagueWithSeasonUseCase: GetAllTeamsInLeagueWithSeasonUseCase,
     savedStateHandle: SavedStateHandle,
-
     ) : BaseViewModel<LeagueTeamsUIState,LeagueTeamsEvent>(LeagueTeamsUIState(), Event()) {
     private val leagueArg = LeagueArgs(savedStateHandle)
 

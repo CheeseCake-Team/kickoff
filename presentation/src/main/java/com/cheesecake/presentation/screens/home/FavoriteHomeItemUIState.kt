@@ -14,7 +14,7 @@ data class FavoriteHomeItemUIState(
 )
 
 fun List<Pair<League, List<Fixture>>>.toHomeFavouriteUiState(
-    onMatchClick: () -> Unit,
+    onMatchClick: (matchId: String, season: Int, date: String) -> Unit,
     onLeagueClick: (leagueId: Int, season: Int) -> Unit
 ): List<FavoriteHomeItemUIState> {
     return this.map {

@@ -1,13 +1,14 @@
-package com.cheesecake.presentation.ui.match.statistics
+package com.cheesecake.presentation.screens.match.statistics
 
-import android.os.Bundle
+ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentMatchStatisticsBinding
-import com.cheesecake.presentation.screens.match.statistics.MatchStatisticsViewModel
-import dagger.hilt.android.AndroidEntryPoint
+ import com.cheesecake.presentation.screens.match.statistics.MatchStatisticsArgs.Companion.FIXTURE_ID_ARG
+ import com.cheesecake.presentation.ui.match.statistics.MatchStatisticsAdapter
+ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MatchStatisticsFragment : BaseFragment<FragmentMatchStatisticsBinding>() {
@@ -19,4 +20,12 @@ class MatchStatisticsFragment : BaseFragment<FragmentMatchStatisticsBinding>() {
         binding.recyclerView.adapter = MatchStatisticsAdapter()
     }
 
+    companion object {
+        @JvmStatic
+        fun newInstance(fixtureId: Int) = MatchStatisticsFragment().apply {
+            arguments = Bundle().apply {
+                putInt(FIXTURE_ID_ARG, fixtureId)
+            }
+        }
+    }
 }

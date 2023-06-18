@@ -4,6 +4,7 @@ import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.presentation.models.TeamUIState
 import com.cheesecake.presentation.screens.home.MatchItemUIState
+import com.cheesecake.presentation.utils.toFormattedString
 import java.text.SimpleDateFormat
 import java.util.TimeZone
 
@@ -21,38 +22,17 @@ fun Team.toUIState(): TeamUIState {
     )
 }
 
-//fun Fixture.toMatchUIState(): MatchItemUIState {
-//    val timeFormat = SimpleDateFormat("HH:mm", Locale.ENGLISH)
-//    val formattedMatchTime = matchDate.let { timeFormat.parse(it.toString())
-//        ?.let { it1 -> timeFormat.format(it1) } } ?: ""
-//
-//    return MatchItemUIState(
-//        leagueId = id,
-//        leagueSeason = leagueSeason,
-//        timeZone = TimeZone.getDefault().id,
-//        matchState = if (isFinished) "Finished" else "Upcoming",
-//        matchTime = formattedMatchTime,
-//        homeTeamName = homeTeamName,
-//        awayTeamName = awayTeamName,
-//        homeTeamGoals = homeTeamGoals?.toIntOrNull() ?: 0,
-//        awayTeamGoals = awayTeamGoals?.toIntOrNull() ?: 0,
-//        homeTeamImageUrl = homeTeamLogoUrl,
-//        awayTeamImageUrl = awayTeamLogoUrl
-//    )
-//}
-
-fun Fixture.toMatchUIState(onclick: () -> Unit): MatchItemUIState {
+fun Fixture.toMatchUIState(onclick: (matchId: String, season: Int, date: String) -> Unit): MatchItemUIState {
     val formatter = SimpleDateFormat("HH:mm")
     val formattedMatchTime = formatter.format(this.matchDate)
-//    val timeFormat = SimpleDateFormat("HH:mm", Locale.ENGLISH)
-//    val formattedMatchTime = matchTime?.let { timeFormat.parse(it)
-//        ?.let { it1 -> timeFormat.format(it1) } } ?: ""
 
     return MatchItemUIState(
         leagueId = id,
+        matchId = matchId,
         leagueSeason = leagueSeason,
         timeZone = TimeZone.getDefault().id,
         matchState = if (isFinished) "Finished" else "Upcoming",
+        matchDate = matchDate.toFormattedString(),
         matchTime = formattedMatchTime,
         homeTeamName = homeTeamName,
         awayTeamName = awayTeamName,
@@ -63,33 +43,3 @@ fun Fixture.toMatchUIState(onclick: () -> Unit): MatchItemUIState {
         onclick = onclick
     )
 }
-
-
-//data class MatchItemUIState(
-//    val leagueId: Int = 0,
-//    val leagueSeason: Int = 0,
-//    val timeZone: String = "",
-//    val matchState: String = "",
-//    val matchTime: String = "",
-//    val homeTeamName: String = "",
-//    val awayTeamName: String = "",
-//    val homeTeamGoals: Int = 0,
-//    val awayTeamGoals: Int = 0,
-//    val homeTeamImageUrl: String = "",
-//    val awayTeamImageUrl: String = ""
-//)
-//
-//data class Fixture(
-//    val id: Int,
-//    val leagueName: String,
-//    val homeTeamName: String,
-//    val homeTeamLogoUrl: String,
-//    val homeTeamGoals: String?,
-//    val awayTeamName: String,
-//    val awayTeamLogoUrl: String,
-//    val awayTeamGoals: String?,
-//    val matchTime: String?,
-//    val matchDate: Date,
-//    val isFinished: Boolean = false
-//)
-
