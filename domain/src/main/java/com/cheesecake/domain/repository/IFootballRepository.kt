@@ -1,6 +1,7 @@
 package com.cheesecake.domain.repository
 
 import com.cheesecake.domain.entity.Fixture
+import com.cheesecake.domain.entity.FixtureEvents
 import com.cheesecake.domain.entity.FixtureStatistics
 import com.cheesecake.domain.entity.TeamStatisticsEntity
 import com.cheesecake.domain.entity.TeamStanding
@@ -59,4 +60,5 @@ interface IFootballRepository {
     suspend fun getFavoriteLeagues(): Flow<List<League>>
 
     suspend fun getFixtureStatisticsByFixtureId(fixtureId: Int): List<FixtureStatistics>
+    suspend fun getFixtureEventByFixtureId(fixtureId: Int): List<FixtureEvents>
 }
