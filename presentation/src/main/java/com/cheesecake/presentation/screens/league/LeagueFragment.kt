@@ -27,10 +27,11 @@ class LeagueFragment : BaseFragment<FragmentLeagueBinding>() {
     }
 
     private fun init() {
+        val leagueArgs = viewModel.leagueArgs
         val fragments = listOf(
-            LeagueDetailsFragment(),
-            LeagueMatchesFragment(),
-            LeagueTeamsFragment(),
+            LeagueDetailsFragment.newInstance(leagueArgs.leagueId, leagueArgs.season),
+            LeagueMatchesFragment.newInstance(leagueArgs.leagueId, leagueArgs.season),
+            LeagueTeamsFragment.newInstance(leagueArgs.leagueId, leagueArgs.season),
         )
         val fragmentsAdapter = BaseFragmentsAdapter((activity as AppCompatActivity), fragments)
         binding.leagueViewPager.adapter = fragmentsAdapter

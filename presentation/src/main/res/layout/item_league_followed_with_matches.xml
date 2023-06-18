@@ -14,6 +14,7 @@
         style="@style/Widget.Material3.CardView.Filled"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{()-> item.onclick.invoke(item.leagueId,item.season)}"
         android:layout_margin="@dimen/spacing_4"
         android:padding="@dimen/spacing_8"
         app:cardBackgroundColor="@color/cardSurface">

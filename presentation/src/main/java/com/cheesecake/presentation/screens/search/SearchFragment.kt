@@ -41,13 +41,15 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     private fun onEvent(event: SearchEvents) {
         when (event) {
-            SearchEvents.LeagueClickEvent -> findNavController().navigate(
-                SearchFragmentDirections.actionSearchFragmentToLeagueFragment()
-            )
+//            SearchEvents.LeagueClickEvent -> findNavController().navigate(
+//                SearchFragmentDirections.actionSearchFragmentToLeagueFragment()
+//            )
 
             SearchEvents.TeamClickEvent -> {
                 
             }
+
+            else -> {}
         }
     }
 

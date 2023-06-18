@@ -7,7 +7,6 @@ import com.cheesecake.domain.usecases.GetTeamByNameUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.mapper.toUIState
 import com.cheesecake.presentation.models.Event
-import com.cheesecake.presentation.screens.home.HomeNavigationEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
