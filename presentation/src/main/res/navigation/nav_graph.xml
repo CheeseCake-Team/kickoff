@@ -11,6 +11,12 @@
         <action
             android:id="@+id/action_leagueFragment_to_matchFragment"
             app:destination="@id/matchFragment" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <argument
+            android:name="season"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
