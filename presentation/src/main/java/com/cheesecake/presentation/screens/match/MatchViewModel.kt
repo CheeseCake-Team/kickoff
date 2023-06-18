@@ -26,6 +26,7 @@ class MatchViewModel
                 _state.update { uiState ->
                     uiState.copy(
                         homeTeamName = match.homeTeamName,
+                        matchId = match.matchId,
                         homeTeamLogoUrl = match.homeTeamLogoUrl,
                         homeTeamGoals = match.homeTeamGoals,
                         awayTeamName = match.awayTeamName,
