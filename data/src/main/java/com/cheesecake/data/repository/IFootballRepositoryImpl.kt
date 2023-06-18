@@ -157,7 +157,7 @@ class IFootballRepositoryImpl
         return remoteDataSource.getFixtureStatisticsByFixtureId(fixtureId).toEntity()
     }
 
-    override suspend fun getMatchDetails(teamsId: String, seasonId: Int, timeZone: String): Match {
-        return remoteDataSource.getHeadToHead(teamsId, seasonId, timeZone).first().toEntity()
+    override suspend fun getMatchDetails(teamsId: String, date: String, timeZone: String): Match {
+        return remoteDataSource.getHeadToHeadByDate(teamsId, date, timeZone).first().toEntity()
     }
 }
