@@ -14,26 +14,13 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/background"
         android:fitsSystemWindows="false"
         app:layoutDescription="@xml/fragment_match_scene"
         tools:context=".screens.match.MatchFragment">
 
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_32"
-            app:layout_constraintTop_toBottomOf="@+id/match_state" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/match_view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tab_layout">
-
-        </androidx.viewpager2.widget.ViewPager2>
 
         <Button
             android:id="@+id/back_button"
@@ -157,5 +144,20 @@
             app:layout_constraintTop_toBottomOf="@+id/home_team_image"
             app:text="@{viewModel.state.homeTeamName}"
             tools:text="Chelsea" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background"
+            android:layout_marginTop="@dimen/spacing_32"
+            app:layout_constraintTop_toBottomOf="@+id/match_state" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/match_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tab_layout"/>
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
