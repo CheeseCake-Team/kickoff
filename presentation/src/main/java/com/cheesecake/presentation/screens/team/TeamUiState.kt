@@ -1,6 +1,6 @@
 package com.cheesecake.presentation.screens.team
 
-data class TeamUiState(
+data class TeamUIState(
     val errorMessage: String = "error",
     val isLoading: Boolean = true,
     val imageUrl: String = "",

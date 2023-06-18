@@ -3,13 +3,14 @@ package com.cheesecake.presentation.screens.teamPlayers
 import com.cheesecake.domain.entity.SquadPlayer
 import com.cheesecake.domain.usecases.GetTeamSquadByIdUseCase
 import com.cheesecake.presentation.base.BaseViewModel
+import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 @HiltViewModel
 class TeamPlayerViewModel @Inject constructor(
     private val getTeamSquadByIdUseCase: GetTeamSquadByIdUseCase) :
-    BaseViewModel<TeamPlayerUIState>(TeamPlayerUIState()){
+    BaseViewModel<TeamPlayerUIState, TeamPlayersNavigationEvent>(TeamPlayerUIState(), Event()){
 
     init {
         getData()

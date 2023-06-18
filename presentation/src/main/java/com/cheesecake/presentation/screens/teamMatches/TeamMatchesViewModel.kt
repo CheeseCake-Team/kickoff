@@ -3,8 +3,10 @@ package com.cheesecake.presentation.screens.teamMatches
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.usecases.GetPairsOfMatchesAndDateByTeamIdAndSeasonUseCase
 import com.cheesecake.presentation.base.BaseViewModel
+import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
+import java.util.Date
 import javax.inject.Inject
 
 @HiltViewModel
@@ -12,7 +14,7 @@ class TeamMatchesViewModel @Inject constructor(
     private val getPairsOfMatchesAndDateByTeamIdAndSeasonUseCase:
     GetPairsOfMatchesAndDateByTeamIdAndSeasonUseCase
 )
-    : BaseViewModel<TeamMatchesUIState>(TeamMatchesUIState()){
+    : BaseViewModel<TeamMatchesUIState, TeamMatchesNavigationEvent>(TeamMatchesUIState(), Event()){
 
     init {
         getData()
@@ -26,7 +28,7 @@ class TeamMatchesViewModel @Inject constructor(
         )
     }
 
-    private fun onSuccess(result: List<Pair<String, List<Fixture>>>) {
+    private fun onSuccess(result: List<Fixture>) {
         _state.update { it.copy(data = result, isLoading = false) }
     }
 

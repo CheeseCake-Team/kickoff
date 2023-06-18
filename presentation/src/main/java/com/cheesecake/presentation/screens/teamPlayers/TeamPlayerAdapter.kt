@@ -7,7 +7,7 @@ import com.cheesecake.presentation.base.BaseListAdapter
 
 class TeamPlayerAdapter: BaseListAdapter<SquadPlayer>(
     PlayerDiffUtils(),
-    null
+
 ) {
     override val layoutId = R.layout.item_team_player
 }

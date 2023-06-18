@@ -30,7 +30,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="today"
-                android:text="@{item.matchDate}"
+                android:text="@{item.matchDate.toString()}"
                 />
 
             <ImageView
@@ -60,22 +60,22 @@
                 android:id="@+id/divider"
                 android:layout_width="380dp"
                 android:layout_height="0.5dp"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="@dimen/spacing_8"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/text_match_state"
-                android:layout_marginVertical="@dimen/spacing_8"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/image_league" />
 
             <TextView
                 android:id="@+id/text_home_team_name"
                 style="@style/bodyMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="@dimen/spacing_8"
+                android:layout_marginVertical="@dimen/spacing_8"
                 android:maxLength="14"
                 android:textColor="@color/fontHeavy"
                 app:layout_constraintBottom_toBottomOf="@+id/image_home_team"
                 app:layout_constraintEnd_toStartOf="@+id/image_home_team"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintTop_toTopOf="@+id/image_home_team"
                 tools:text="@string/chelsea"
                 android:text="@{item.homeTeamName}"/>
@@ -84,11 +84,12 @@
                 android:id="@+id/image_home_team"
                 android:layout_width="@dimen/spacing_24"
                 android:layout_height="@dimen/spacing_24"
-                android:layout_marginEnd="@dimen/spacing_8"
-                app:layout_constraintTop_toBottomOf="@id/divider"
+                android:layout_marginEnd="@dimen/spacing_24"
+                app:imageUrl="@{item.homeTeamLogoUrl}"
                 app:layout_constraintEnd_toStartOf="@+id/text_match_state"
-                tools:src="@drawable/chelsea"
-                app:imageUrl="@{item.homeTeamLogoUrl}"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider"
+                tools:src="@drawable/chelsea" />
 
             <TextView
                 android:id="@+id/text_match_state"
@@ -99,8 +100,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:text="TextView"
-                app:matchScore="@{item}"/>
+                app:layout_constraintTop_toTopOf="@+id/divider"
+                app:matchScore="@{item}"
+                tools:text="TextView" />
 
             <TextView
                 android:id="@+id/text_away_team_name"
@@ -109,24 +111,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_8"
                 android:maxLength="10"
+                android:text="@{item.awayTeamName}"
                 android:textColor="@color/fontHeavy"
                 app:layout_constraintBottom_toBottomOf="@+id/image_away_team"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/image_away_team"
                 app:layout_constraintTop_toTopOf="@+id/image_away_team"
-                tools:text="Arsenal"
-                android:text="@{item.awayTeamName}"/>
+                tools:text="Arsenal" />
 
             <ImageView
                 android:id="@+id/image_away_team"
                 android:layout_width="@dimen/spacing_24"
                 android:layout_height="@dimen/spacing_24"
                 android:layout_marginStart="@dimen/spacing_24"
+                app:imageUrl="@{item.awayTeamLogoUrl}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/text_match_state"
-                tools:src="@drawable/arsenal"
-                app:imageUrl="@{item.awayTeamLogoUrl}"/>
+                app:layout_constraintTop_toBottomOf="@+id/divider"
+                tools:src="@drawable/arsenal" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>

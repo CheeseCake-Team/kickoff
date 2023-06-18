@@ -8,7 +8,6 @@ import com.cheesecake.presentation.base.BaseListAdapter
 
 class TeamPLayersPositionsAdapter : BaseListAdapter<Pair<String,List<SquadPlayer>>>(
     DateTeamPlayersPositionDiffUtil(),
-    null
 ){
     override val layoutId = R.layout.item_team_players_positions
 }
