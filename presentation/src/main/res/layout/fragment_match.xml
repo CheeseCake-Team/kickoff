@@ -10,10 +10,12 @@
             type="com.cheesecake.presentation.screens.match.MatchViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="false"
+        app:layoutDescription="@xml/fragment_match_scene"
         tools:context=".screens.match.MatchFragment">
 
 
@@ -62,6 +64,7 @@
             android:layout_width="@dimen/spacing_32"
             android:layout_height="@dimen/spacing_32"
             android:contentDescription="@string/team_logo"
+            android:scaleType="fitXY"
             app:imageUrl="@{viewModel.state.awayTeamLogoUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/hyphen"
@@ -73,6 +76,7 @@
             android:layout_height="@dimen/spacing_32"
             android:layout_marginTop="@dimen/spacing_32"
             android:contentDescription="@string/team_logo"
+            android:scaleType="fitXY"
             app:imageUrl="@{viewModel.state.homeTeamLogoUrl}"
             app:layout_constraintEnd_toStartOf="@+id/hyphen"
             app:layout_constraintStart_toStartOf="parent"
@@ -153,5 +157,5 @@
             app:layout_constraintTop_toBottomOf="@+id/home_team_image"
             app:text="@{viewModel.state.homeTeamName}"
             tools:text="Chelsea" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
