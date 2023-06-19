@@ -91,7 +91,7 @@
             app:nestedSearchItems="@{item.items}"
 
             tools:listitem="@layout/item_league" />
-        <!--            app:listItems="@{item.countryName}"-->
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
