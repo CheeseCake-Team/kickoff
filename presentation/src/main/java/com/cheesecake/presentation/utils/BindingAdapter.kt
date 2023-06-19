@@ -111,10 +111,6 @@ fun hideWhenLoading(view: View, isVisible: Boolean) {
 fun <T> showWhenNoResult(view: FrameLayout, items: List<SearchResult>?) {
     items?.let {
         view.isVisible = it.isEmpty()
-//        when(it) {
-//            is SearchResult.Team -> { view.isVisible = it.items.isEmpty()}
-//            is SearchResult.League -> { view.isVisible = it.items.isEmpty() }
-//        }
     }
 }
 

@@ -74,6 +74,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:showLoading="@{viewModel.state.loading}" />
 
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
