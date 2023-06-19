@@ -87,13 +87,13 @@
             android:elevation="@dimen/spacing_12"
             app:cardCornerRadius="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/card_view_away_team_event"
-            app:layout_constraintStart_toEndOf="@+id/card_view_home_team_event"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="20dp" />
 
         </androidx.cardview.widget.CardView>
 
