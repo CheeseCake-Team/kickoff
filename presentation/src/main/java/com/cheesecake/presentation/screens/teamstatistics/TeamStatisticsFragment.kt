@@ -13,5 +13,9 @@ class TeamStatisticsFragment : BaseFragment<FragmentTeamStatisticsBinding>() {
     override val layoutIdFragment = R.layout.fragment_team_statistics
     override val viewModel: TeamStatisticsViewModel by viewModels()
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.teamsRecyclerView.adapter = TeamsAdapter()
+    }
 
 }

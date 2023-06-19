@@ -1,5 +1,4 @@
 package com.cheesecake.domain.entity
-
 data class TeamStatisticsEntity(
     val played: ScoreStats,
     val wins: ScoreStats,

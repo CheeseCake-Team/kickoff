@@ -1,6 +1,5 @@
 package com.cheesecake.data.remote
 
-import android.util.Log
 import com.cheesecake.data.remote.api.FootballApiService
 import com.cheesecake.data.remote.models.EventDTO
 import com.cheesecake.data.remote.models.FixtureStatisticsDTO
@@ -30,7 +29,6 @@ import com.cheesecake.data.repository.RemoteDataSource
 import com.cheesecake.domain.KickoffException
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.withTimeout
-import retrofit2.HttpException
 import retrofit2.Response
 import java.net.ConnectException
 import javax.inject.Inject
@@ -114,7 +112,7 @@ class RemoteDataSourceImp @Inject constructor(
 
     override suspend fun getFixtureBySeasonByTeamId(
         timeZone: String,
-        season: String,
+        season: Int,
         TeamId: Int
     ): List<FixtureDTO> {
         return wrapBaseResponse { service.getFixturesBySeasonIdByTeamId(timeZone, season, TeamId) }

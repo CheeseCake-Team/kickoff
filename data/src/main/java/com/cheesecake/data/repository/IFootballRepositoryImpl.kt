@@ -9,6 +9,7 @@ import com.cheesecake.domain.entity.FixtureStatistics
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.entity.Match
 import com.cheesecake.domain.entity.PlayerStatistics
+import com.cheesecake.domain.entity.SquadPlayer
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.entity.TeamStanding
 import com.cheesecake.domain.entity.TeamStatisticsEntity
@@ -162,4 +163,30 @@ class IFootballRepositoryImpl
     override suspend fun getMatchDetails(teamsId: String, date: String, timeZone: String): Match {
         return remoteDataSource.getHeadToHeadByDate(teamsId, date, timeZone).first().toEntity()
     }
+
+    override suspend fun getSquadOfTeam(teamId: Int): List<SquadPlayer> {
+        return remoteDataSource.getSquadByTeamId(teamId).toEntity()
+    }
+
+    override suspend fun getMatchesByTeamIdAndSeason(
+        timeZone: String,
+        teamId: Int,
+        season: Int
+    ): List<Fixture> {
+        return remoteDataSource.getFixtureBySeasonByTeamId(timeZone, teamId, season).toEntity()
+    }
+
+//    override suspend fun getLocallyTeamById(teamId: Int) : Team? {
+//        return localDataSource.getTeamById(teamId)?.toEntity()
+//    }
+
+    override suspend fun getRemotelyTeam(teamId: Int): Team {
+        return remoteDataSource.getTeamById(teamId).first().toEntity()
+    }
+
+//    override suspend fun updateOrInsertTeam(team: Team) {
+//        return localDataSource.updateOrInsertTeam(team.toLocal())
+//    }
+
+
 }

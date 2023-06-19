@@ -1,6 +1,7 @@
 package com.cheesecake.data.local
 
-import com.cheesecake.data.local.daos.LeagueDao import com.cheesecake.data.local.daos.TeamsDao
+import com.cheesecake.data.local.daos.LeagueDao
+import com.cheesecake.data.local.daos.TeamsDao
 import com.cheesecake.data.local.models.LeagueLocalDTO
 import com.cheesecake.data.local.models.TeamLocalDTO
 import com.cheesecake.data.repository.LocalDataSource
@@ -48,8 +49,13 @@ class LocalDataSourceImp @Inject constructor(
         teamsDao.deleteTeamById(teamId)
     }
 
+//    override suspend fun getTeamById(teamId: Int): TeamLocalDTO? {
+//        return teamsDao.getLeagueById(teamId)
+//    }
+
     override suspend fun getFavouriteLeagues(): Flow<List<LeagueLocalDTO>> {
         return leagueDao.getFavouriteLeagues()
     }
+
 
 }
