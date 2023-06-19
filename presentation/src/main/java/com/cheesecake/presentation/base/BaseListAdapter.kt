@@ -12,10 +12,8 @@ import com.cheesecake.presentation.databinding.ItemLeagueFollowedWithMatchesBind
 import com.cheesecake.presentation.screens.home.MatchesAdapter
 import com.cheesecake.presentation.screens.league.leagueMatches.LeagueMatchesHeadToHeadAdapter
 import androidx.databinding.library.baseAdapters.BR
-import com.cheesecake.presentation.databinding.ItemTeamDateMatchesBinding
 import com.cheesecake.presentation.databinding.ItemTeamMatchBinding
 import com.cheesecake.presentation.databinding.ItemTeamPlayersPositionsBinding
-import com.cheesecake.presentation.screens.leagueMatches.LeagueMatchesHeadToHeadAdapter
 import com.cheesecake.presentation.screens.teamPlayers.TeamPlayerAdapter
 import com.cheesecake.presentation.databinding.ItemSearchLeagueBinding
 import com.cheesecake.presentation.screens.search.SearchLeagueAdapter
@@ -44,10 +42,11 @@ abstract class BaseListAdapter<T>(
         fun bind(currentItem: T) {
             binding.setVariable(BR.item, currentItem)
 
-            when(binding) {
+            when (binding) {
                 is ItemDateMatchesBinding -> {
                     binding.headToHeadRecyclerView.adapter = LeagueMatchesHeadToHeadAdapter()
                 }
+
                 is ItemLeagueFollowedWithMatchesBinding -> {
                     binding.matchesRecyclerView.adapter = MatchesAdapter()
                 }

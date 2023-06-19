@@ -1,5 +1,6 @@
 package com.cheesecake.domain.entity
 data class TeamStatisticsEntity(
+   val form :List<String>,
     val played: ScoreStats,
     val wins: ScoreStats,
     val draws: ScoreStats,

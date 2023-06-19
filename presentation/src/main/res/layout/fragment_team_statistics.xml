@@ -486,6 +486,39 @@
             app:layout_constraintStart_toStartOf="@id/text_total"
 
             app:layout_constraintTop_toTopOf="@id/text_goals_against" />
+        <TextView
+            android:id="@+id/text_form"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:text="Form"
+            android:textColor="@color/fontHeavy"
+app:layout_constraintStart_toStartOf="@id/text_data"
+       app:layout_constraintTop_toBottomOf="@id/text_goals_against"
+
+            android:layout_marginTop="24dp"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/recycler_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:padding="2dp"
+            android:paddingVertical="12dp"
+            android:visibility="visible"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_form"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="16dp"
+            tools:listitem="@layout/item_team_form"
+            app:listItems="@{viewModel.state.form}"
+
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

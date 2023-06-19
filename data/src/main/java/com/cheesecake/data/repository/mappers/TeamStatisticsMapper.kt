@@ -2,8 +2,11 @@ import com.cheesecake.data.remote.models.TeamStatisticsDTO
 import com.cheesecake.domain.entity.ScoreStats
 import com.cheesecake.domain.entity.TeamStatisticsEntity
 
-@JvmName("teamStatisticsDTOToTeamStatisticsEntity")fun TeamStatisticsDTO.toEntity(): TeamStatisticsEntity =
+@JvmName("teamStatisticsDTOToTeamStatisticsEntity")
+fun TeamStatisticsDTO.toEntity(): TeamStatisticsEntity =
     TeamStatisticsEntity(
+
+        form = this.form.map { it.toString() },
         played = scoreStats(
             this.fixtures.played.home,
             this.fixtures.played.away,
@@ -25,14 +28,14 @@ import com.cheesecake.domain.entity.TeamStatisticsEntity
             this.fixtures.loses.total
         ),
         cleanSheet = scoreStats(
-            this.fixtures.played.home,
-            this.fixtures.played.away,
-            this.fixtures.played.total
-        ),
-        failedToScore = scoreStats(
             this.cleanSheet.home,
             this.cleanSheet.away,
             this.cleanSheet.total
+        ),
+        failedToScore = scoreStats(
+            this.failedToScore.home,
+            this.failedToScore.away,
+            this.failedToScore.total
         ),
         goalsFor = scoreStats(
             this.goals.goalsFor.total.home,

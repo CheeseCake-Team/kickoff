@@ -12,6 +12,7 @@ class TeamPlayerAdapter: BaseListAdapter<SquadPlayer>(
     override val layoutId = R.layout.item_team_player
 }
 
+
 class PlayerDiffUtils : DiffUtil.ItemCallback<SquadPlayer>() {
     override fun areItemsTheSame(oldItem: SquadPlayer, newItem: SquadPlayer): Boolean =
         oldItem.id == newItem.id
