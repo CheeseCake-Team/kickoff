@@ -7,7 +7,6 @@ import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.mapper.toUIModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -16,34 +15,37 @@ import javax.inject.Inject
 class DiscoverViewModel @Inject constructor(
     private val getTeamCountryUseCase: GetTeamCountryUseCase,
     private val getSearchTeamCountryUseCase: GetSearchTeamCountryUseCase,
-) :
-    BaseViewModel<DiscoverTeamCountryUIState, DiscoverTeamCountryEvents>(
-        DiscoverTeamCountryUIState(),
-        Event()
-    ) {
-
-    val searchInput = MutableStateFlow(" ")
+) : BaseViewModel<DiscoverTeamCountryUIState, DiscoverTeamCountryEvents>(
+    DiscoverTeamCountryUIState(),
+    Event()
+) {
 
     init {
         getData()
     }
 
     private fun applySearch(searchQuery: String) {
-        tryToExecute({ getSearchTeamCountryUseCase(searchQuery) }, ::onSuccess, ::onError)
+        tryToExecute({ getSearchTeamCountryUseCase(searchQuery) }, ::onSearchSuccess, ::onError)
     }
 
     private fun getData() {
-        if (searchInput.value.isEmpty()) {
-            tryToExecute({ getTeamCountryUseCase() }, ::onSuccess, ::onError)
-        } else {
-            applySearch(searchInput.value)
+        collectFlow(state.value.searchInput) {
+            if (it.isBlank() || it.isEmpty()) {
+                tryToExecute({ getTeamCountryUseCase() }, ::onSuccess, ::onError)
+            } else {
+                applySearch(it)
+            }
+            state.value
         }
     }
 
     private fun onSuccess(result: List<TeamCountry>) {
         result.let { list ->
             _state.update { discoverTeamCountryUIState ->
-                discoverTeamCountryUIState.copy(data = list.map { it.toUIModel(::onClick) }, isLoading = false)
+                discoverTeamCountryUIState.copy(
+                    data = list.map { it.toUIModel(::onClick) },
+                    isLoading = false
+                )
             }
         }
     }
@@ -53,7 +55,7 @@ class DiscoverViewModel @Inject constructor(
     }
 
 
-    private fun onSuccess(flow: Flow<List<TeamCountry>>) {
+    private fun onSearchSuccess(flow: Flow<List<TeamCountry>>) {
         collectFlow(flow) { list ->
             copy(data = list.map { it.toUIModel(::onClick) }, isLoading = false)
         }
