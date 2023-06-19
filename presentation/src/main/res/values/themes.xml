@@ -73,5 +73,10 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">#66272727</item>
     </style>
+
+    <style name="CircleImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
     
 </resources>

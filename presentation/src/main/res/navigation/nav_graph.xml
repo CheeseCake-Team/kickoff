@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/discoverFragment">
 
     <fragment
         android:id="@+id/leagueFragment"
@@ -32,4 +32,20 @@
         android:id="@+id/settingsFragment"
         android:name="com.cheesecake.presentation.screens.settings.SettingsFragment"
         android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/favLeaguesSelectionFragment2"
+        android:name="com.cheesecake.presentation.screens.favLeaguesSelection.FavLeaguesSelectionFragment"
+        android:label="FavLeaguesSelectionFragment" />
+    <fragment
+        android:id="@+id/discoverFragment"
+        android:name="com.cheesecake.presentation.screens.discover.DiscoverFragment"
+        android:label="DiscoverFragment" >
+        <action
+            android:id="@+id/action_discoverFragment_to_countryFragment"
+            app:destination="@id/countryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/countryFragment"
+        android:name="com.cheesecake.presentation.screens.country.CountryFragment"
+        android:label="CountryFragment" />
 </navigation>

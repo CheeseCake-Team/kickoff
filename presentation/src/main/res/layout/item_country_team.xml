@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:layout_margin="@dimen/spacing_4"
+        android:onClick="@{() -> item.onClick.invoke(item.name)}"
         app:cardBackgroundColor="@color/cardSurface"
         app:cardCornerRadius="@dimen/spacing_8">
 
@@ -24,18 +25,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-
-            <androidx.constraintlayout.utils.widget.ImageFilterView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/image_view_country_icon"
                 android:layout_width="@dimen/team_image_size_24dp"
                 android:layout_height="@dimen/team_image_size_24dp"
                 android:layout_marginVertical="@dimen/spacing_8"
                 android:layout_marginStart="@dimen/spacing_16"
-                app:imageUrl="@{item.flag}"
+                android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:loadSVG="@{item.flag}"
+                app:shapeAppearanceOverlay="@style/CircleImageView" />
 
             <TextView
                 android:id="@+id/text_view_name"
@@ -49,7 +50,6 @@
                 app:layout_constraintVertical_bias="0.6" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </com.google.android.material.card.MaterialCardView>
 

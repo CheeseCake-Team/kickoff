@@ -1,6 +1,9 @@
 package com.cheesecake.presentation.utils
 
+import android.R
 import android.annotation.SuppressLint
+import android.graphics.drawable.PictureDrawable
+import android.net.Uri
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -8,17 +11,21 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.StreamEncoder
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.presentation.base.BaseAdapter
-import com.cheesecake.presentation.screens.search.SearchViewModel
 import com.cheesecake.presentation.base.BaseListAdapter
 import com.cheesecake.presentation.screens.home.MatchItemUIState
 import com.cheesecake.presentation.screens.search.SearchResult
+import com.cheesecake.presentation.screens.search.SearchViewModel
+import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
+import java.io.InputStream
 
 
 @BindingAdapter("app:imageUrl")
@@ -40,15 +47,30 @@ fun <T> setItems(view: RecyclerView, items: List<T>?) {
 }
 @BindingAdapter("app:circularImageUrl")
 fun ImageView.setCircularImageFromUrl(imageUri: String?) {
-    imageUri.let {
+    imageUri?.let {
         Glide.with(this)
             .load(it)
             .centerCrop()
             .transform(CircleCrop())
             .into(this)
     }
+
     //val imageUrl = imageUri.takeIf { !it.isNullOrEmpty() && !it.contains("image_not_available") } ?: R.drawable.no_image
 }
+
+@BindingAdapter("app:loadSVG")
+fun ImageView.setSvgImageFromUrl(imageUri: String?) {
+    imageUri?.let {
+        GlideToVectorYou
+            .init()
+            .with(this.context)
+            .load(it.toUri(), this);
+    }
+
+    //val imageUrl = imageUri.takeIf { !it.isNullOrEmpty() && !it.contains("image_not_available") } ?: R.drawable.no_image
+}
+
+
 
 @BindingAdapter(value = ["app:items"])
 fun <T> setRecyclerItems(view: RecyclerView, items: List<T>?) {

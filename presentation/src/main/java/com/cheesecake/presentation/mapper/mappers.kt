@@ -24,10 +24,11 @@ fun Team.toUIState(): TeamUIState {
 }
 
 
-fun TeamCountry.toUIModel(): TeamCountryUIState {
+fun TeamCountry.toUIModel(onClick: (String) -> Unit): TeamCountryUIState {
     return TeamCountryUIState(
         name = name,
-        flag = flag
+        flag = flag,
+        onClick = onClick
     )
 }
 

@@ -1,24 +1,15 @@
 package com.cheesecake.presentation.screens.discover
 
-import android.util.Log
-import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.TeamCountry
 import com.cheesecake.domain.usecases.GetSearchTeamCountryUseCase
 import com.cheesecake.domain.usecases.GetTeamCountryUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.mapper.toUIModel
 import com.cheesecake.presentation.models.Event
-import com.cheesecake.presentation.models.TeamCountryUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,57 +22,41 @@ class DiscoverViewModel @Inject constructor(
         Event()
     ) {
 
-    var searchInput = MutableStateFlow(" ")
+    val searchInput = MutableStateFlow(" ")
 
     init {
         getData()
     }
 
-    private fun applySearch() {
-        tryToExecute(
-            { getSearchTeamCountryUseCase(search = searchInput.value) },
-            ::onSuccess,
-            ::onError
-        )
-
+    private fun applySearch(searchQuery: String) {
+        tryToExecute({ getSearchTeamCountryUseCase(searchQuery) }, ::onSuccess, ::onError)
     }
 
     private fun getData() {
-        tryToExecute(
-            { getTeamCountryUseCase() },
-            ::onSuccess,
-            ::onError
-        )
+        if (searchInput.value.isEmpty()) {
+            tryToExecute({ getTeamCountryUseCase() }, ::onSuccess, ::onError)
+        } else {
+            applySearch(searchInput.value)
+        }
     }
 
     private fun onSuccess(result: List<TeamCountry>) {
         result.let { list ->
             _state.update { discoverTeamCountryUIState ->
-                Log.i("getData: ", list.toString())
-                discoverTeamCountryUIState.copy(
-                    data = list.map { it.toUIModel() },
-                    isLoading = false
-                )
+                discoverTeamCountryUIState.copy(data = list.map { it.toUIModel(::onClick) }, isLoading = false)
             }
         }
     }
 
+    private fun onClick(countryName: String) {
+        _event.update { Event(DiscoverTeamCountryEvents.NavigateToCountry(countryName)) }
+    }
+
 
     private fun onSuccess(flow: Flow<List<TeamCountry>>) {
-        GlobalScope.launch {
-            flow.collect { list ->
-                list.let {
-                    _state.update { discoverTeamCountryUIState ->
-                        Log.i("getData search: ", it.toString())
-                        discoverTeamCountryUIState.copy(
-                            data = it.map { it.toUIModel() },
-                            isLoading = false
-                        )
-                    }
-                }
-            }
+        collectFlow(flow) { list ->
+            copy(data = list.map { it.toUIModel(::onClick) }, isLoading = false)
         }
-
     }
 
     private fun onError(e: Throwable) {
@@ -89,6 +64,5 @@ class DiscoverViewModel @Inject constructor(
             it.copy(isError = e.message.toString())
         }
     }
-
 
 }
