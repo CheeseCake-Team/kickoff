@@ -19,7 +19,7 @@ class TeamPlayersViewModel @Inject constructor(
 
     private fun getData() {
         tryToExecute(
-            { getTeamSquadByIdUseCase(15) },
+            { getTeamSquadByIdUseCase(34) },
             ::onSuccess,
             ::onError
         )
