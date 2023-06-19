@@ -590,9 +590,8 @@ class RemoteDataSourceImp @Inject constructor(
         return wrapBaseResponse { service.getLeaguesByName(leagueName) }
     }
 
-    override suspend fun getLeaguesBySearch(leagueName: String): Pair<Int,List<LeagueDTO>> {
-        return wrapBaseResponseForSearch { service.getLeaguesBySearch(leagueName) }
-
+    override suspend fun getLeaguesBySearch(leagueName: String): List<LeagueDTO> {
+        return wrapBaseResponse { service.getLeaguesBySearch(leagueName) }
     }
 
     override suspend fun getTeamById(teamId: Int): List<TeamDTO> {
@@ -686,25 +685,6 @@ class RemoteDataSourceImp @Inject constructor(
         }
     }
 
-    private suspend fun <T> wrapBaseResponseForSearch(
-        response: suspend () -> Response<BasePagingResponse<T>>
-    ): Pair<Int, List<T>> {
-        return try {
-            val apiResponse = withTimeout(5000) { response() }
-            if (apiResponse.isSuccessful) {
-                val responseBody = apiResponse.body()
-                (responseBody?.results
-                    ?: throw KickoffException.NoDataFoundException()) to (responseBody?.response
-                    ?: throw KickoffException.NoDataFoundException())
-            } else {
-                throw KickoffException.InternalServerErrorException()
-            }
-        } catch (e: TimeoutCancellationException) {
-            throw KickoffException.TimeoutException()
-        } catch (e: ConnectException) {
-            throw KickoffException.NoInternetConnectionException()
-        }
-    }
 
     private suspend fun <T> wrapBaseStaticResponse(
         response: suspend () -> Response<BasePagingForStaticResponse<T>>

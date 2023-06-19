@@ -18,7 +18,6 @@ import com.cheesecake.presentation.base.BaseAdapter
 import com.cheesecake.presentation.screens.search.SearchViewModel
 import com.cheesecake.presentation.base.BaseListAdapter
 import com.cheesecake.presentation.screens.home.MatchItemUIState
-import com.cheesecake.presentation.screens.search.LeagueSearchUIState
 import com.cheesecake.presentation.screens.search.SearchAdapter
 import com.cheesecake.presentation.screens.search.SearchResult
 
@@ -126,7 +125,7 @@ fun EditText.onSearchTextChanged(viewModel: SearchViewModel) {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            viewModel.onSearch(s.toString().trim())
+            viewModel.onQueryChange(s.toString().trim())
         }
 
         override fun afterTextChanged(s: Editable?) {}

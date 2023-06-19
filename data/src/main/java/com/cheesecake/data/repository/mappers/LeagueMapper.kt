@@ -67,22 +67,3 @@ fun List<LeagueDTO>.toLocal(): List<LeagueLocalDTO> = map { it.toLocal() }
 @JvmName("leagueDTOsToLeagues")
 fun List<LeagueDTO>.toEntity(): List<League> = map { it.toEntity() }
 
-@JvmName("leagueDTOsToLeagues")
-fun Pair<Int, List<LeagueDTO>>.toEntity(): List<League> {
-    return this.second.map {
-        League(
-            leagueId = it.league.id,
-            name = it.league.name,
-            season = it.seasons.first().year.toString(),
-            imageUrl = it.league.logo,
-            seasonStartYear = it.seasons.first().start,
-            seasonEndYear = it.seasons.first().end,
-            countryName = it.country.name,
-            isFavourite = false,
-            leagueTypeName = it.league.type,
-            leagueCount = this.first
-        )
-    }
-}
-
-
