@@ -12,7 +12,7 @@ class MatchStatisticsAdapter : BaseAdapter<StatisticsItemUiState>(null) {
     override val layoutId = R.layout.item_statistics
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        val currentItem = items[position]
+        val currentItem = itemss[position]
         if (holder is ItemViewHolder) {
             with(holder.binding) {
                 setVariable(androidx.databinding.library.baseAdapters.BR.item, currentItem)
