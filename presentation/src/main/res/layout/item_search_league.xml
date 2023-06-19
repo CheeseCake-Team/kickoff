@@ -7,68 +7,92 @@
 
         <variable
             name="item"
-            type="com.cheesecake.presentation.screens.search.LeagueSearchUIState" />
+            type="com.cheesecake.presentation.screens.search.SearchResult.League" />
     </data>
 
-    <com.google.android.material.card.MaterialCardView
-        style="@style/Widget.Material3.CardView.Filled"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_4"
-        android:padding="@dimen/spacing_8"
-        app:cardBackgroundColor="@color/cardSurface">
-        <!--        android:onClick="@{()-> item.onclick.invoke(item.leagueId,item.season)}"-->
+        android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_header"
+            style="@style/Widget.Material3.CardView.Filled"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_4"
+            android:layout_marginTop="@dimen/spacing_4"
+            app:cardBackgroundColor="@color/cardSurface"
+            app:cardCornerRadius="@dimen/spacing_8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/text_view_leagues_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_8"
-                android:layout_marginTop="@dimen/spacing_16"
-                android:fontFamily="@font/lato"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/spacing_8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Leagues" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/text_view_leagues_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/lato"
-                android:text="@{`(`+item.leagueCount+`)`}"
-                app:layout_constraintBottom_toBottomOf="@+id/text_view_leagues_label"
-                app:layout_constraintStart_toEndOf="@+id/text_view_leagues_label"
-                app:layout_constraintTop_toTopOf="@+id/text_view_leagues_label"
-                tools:text="(45)" />
+                <TextView
+                    android:id="@+id/text_view_leagues_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_8"
+                    android:fontFamily="@font/lato"
+                    android:text="@string/leagues"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Leagues" />
 
-            <View
-                android:id="@+id/divider2"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/spacing_8"
-                android:background="?android:attr/listDivider"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_leagues_label"
-                tools:layout_editor_absoluteX="1dp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_search_leagues"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:overScrollMode="never"
-                android:paddingVertical="@dimen/spacing_4"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@+id/divider2"
+                <TextView
+                    android:id="@+id/text_view_leagues_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/lato"
+                    android:text="@{`(`+String.valueOf(item.items.size())+`)`}"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_view_leagues_label"
+                    app:layout_constraintStart_toEndOf="@+id/text_view_leagues_label"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_leagues_label"
+                    tools:text="(45)" />
 
-                tools:listitem="@layout/item_league" />
-            <!--            app:listItems="@{item.countryName}"-->
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/text_view_view_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+                    android:gravity="center"
+                    android:onClick="@{() -> item.onViewAllClick.invoke()}"
+                    android:text="@string/view_more"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_view_leagues_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_leagues_label" />
 
-    </com.google.android.material.card.MaterialCardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_search_leagues"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingVertical="@dimen/spacing_4"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@+id/card_header"
+            app:nestedSearchItems="@{item.items}"
+
+            tools:listitem="@layout/item_league" />
+        <!--            app:listItems="@{item.countryName}"-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </layout>

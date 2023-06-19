@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.usecases.GetLeagueBySearchUseCase
 import com.cheesecake.domain.usecases.GetTeamByNameUseCase
 import com.cheesecake.presentation.base.BaseViewModel
-import com.cheesecake.presentation.mapper.toUIState
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,11 +20,11 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(
     private val getLeagueList: GetLeagueBySearchUseCase,
     private val getTeamList: GetTeamByNameUseCase,
-) : BaseViewModel<SearchUIState,SearchEvents>(SearchUIState(), Event()) {
+) : BaseViewModel<SearchUIState, SearchEvents>(SearchUIState(), Event()) {
 
+    private val searchItems = mutableListOf<SearchResult>()
 
     val searchInput = MutableStateFlow("")
-    val searchType = MutableStateFlow(SearchType.TEAM)
 
     init {
         initSearchProperties()
@@ -46,21 +45,18 @@ class SearchViewModel @Inject constructor(
         )
     }
 
-    private suspend fun getSearchResult(input: String): SearchResult {
+    private suspend fun getSearchResult(input: String): List<SearchResult> {
         _state.update { it.copy(isLoading = true) }
-        return when(searchType.value) {
-            SearchType.TEAM -> {
-                Log.i( "getSearchResult: " ,searchType.value.toString())
-                SearchResult.Team(getTeamList(input).map { it.toUIState() })
-            }
-            SearchType.LEAGUE -> {
-                Log.i( "getSearchResult: " ,searchType.value.toString())
-                SearchResult.League(getLeagueList(input).map { it.toUIState(::onLeagueClicked) })
-            }
-        }
+        searchItems.clear()
+        searchItems.add(SearchResult.League((::onVewAllLClicked),getLeagueList(input).map {
+            it.toSearchUIState(::onLeagueClicked,)
+        }))
+        searchItems.add(SearchResult.Team(getTeamList(input).map { it.toSearchUIState() }))
+        Log.i("getSearchResult:notcleared ", searchItems.toString())
+        return searchItems
     }
 
-    private fun onSearchSuccess(items: SearchResult) {
+    private fun onSearchSuccess(items: List<SearchResult>) {
         Log.i("onSearchInputChanged: ", "debounced before")
         Log.i("onSearchInputChanged: ", _state.value.isLoading.toString())
         _state.update { it.copy(searchResult = items, isLoading = false) }
@@ -82,17 +78,17 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    fun resetSearchResult() {
-        when (searchType.value) {
-            SearchType.TEAM -> {
-                _state.update { it.copy(searchResult = SearchResult.Team(emptyList())) }
-            }
-            SearchType.LEAGUE -> {
-                _state.update { it.copy(searchResult = SearchResult.League(emptyList())) }
-            }
-        }
+    private fun onLeagueClicked(id: Int, season: Int) {
+        _event.update { Event(SearchEvents.LeagueClickEvent(id, season)) }
     }
 
+    private fun onVewAllLClicked() {
+        _event.update { Event(SearchEvents.ViewAllLClickEvent(searchInput.value)) }
+    }
+
+    private fun onTeamClicked() {
+        _event.update { Event(SearchEvents.TeamClickEvent) }
+    }
 
 
     suspend fun onSelectSearchType(searchTypeUIState: SearchType) {
@@ -105,13 +101,6 @@ class SearchViewModel @Inject constructor(
 
     suspend fun onInternetDisconnected() {
         TODO()
-    }
-
-    private fun onLeagueClicked() {
-        _event.update { Event(SearchEvents.LeagueClickEvent) }
-    }
-   private fun onTeamClicked() {
-        _event.update { Event(SearchEvents.TeamClickEvent) }
     }
 
 }

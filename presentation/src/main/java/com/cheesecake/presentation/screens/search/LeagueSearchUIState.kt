@@ -9,19 +9,22 @@ data class LeagueSearchUIState(
     val countryName: String = "Unknown",
     val season: Int = 0,
     val leagueId: Int = 0,
-    val onclick: () -> Unit = {},
+    val onclick: (Int,Int) -> Unit,
     val leagueCount: Int = 0
 )
 
-fun League.toUIState(onclick: () -> Unit): LeagueSearchUIState {
+fun League.toSearchUIState(onclick: (id: Int, season: Int) -> Unit): LeagueSearchUIState {
     return LeagueSearchUIState(
         leagueTypeName = this.leagueTypeName,
         imageUrl = this.imageUrl,
         leagueName = this.name,
         countryName = this.countryName,
-        onclick = onclick,
+        onclick =  { id, season -> onclick(id, season) },
         season = this.season.toInt(),
         leagueId = this.leagueId,
         leagueCount = this.leagueCount
     )
 }
+
+
+

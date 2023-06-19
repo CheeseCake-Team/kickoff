@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_searchFragment_to_leagueFragment"
             app:destination="@id/leagueFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_leaguesSearchFragment"
+            app:destination="@id/leaguesSearchFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
@@ -66,5 +69,16 @@
         <action
             android:id="@+id/action_settingsFragment_to_favoriteFragment"
             app:destination="@id/favoriteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/leaguesSearchFragment"
+        android:name="com.cheesecake.presentation.screens.search.viewAll.leagues.LeaguesSearchFragment"
+        android:label="LeaguesSearchFragment" >
+        <argument
+            android:name="searchInput"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_leaguesSearchFragment_to_leagueFragment"
+            app:destination="@id/leagueFragment" />
     </fragment>
 </navigation>

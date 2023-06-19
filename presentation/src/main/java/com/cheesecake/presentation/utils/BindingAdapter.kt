@@ -18,6 +18,8 @@ import com.cheesecake.presentation.base.BaseAdapter
 import com.cheesecake.presentation.screens.search.SearchViewModel
 import com.cheesecake.presentation.base.BaseListAdapter
 import com.cheesecake.presentation.screens.home.MatchItemUIState
+import com.cheesecake.presentation.screens.search.LeagueSearchUIState
+import com.cheesecake.presentation.screens.search.SearchAdapter
 import com.cheesecake.presentation.screens.search.SearchResult
 
 
@@ -45,20 +47,20 @@ fun ImageView.setCircularImageFromUrl(imageUri: String?) {
 }
 
 
-@BindingAdapter(value = ["app:searchItems"])
-fun <T> setRecyclerItems(view: RecyclerView, items: SearchResult?) {
-    items?.let {
-        when(it) {
-            is SearchResult.Team -> {
-                (view.adapter as BaseAdapter<T>?)?.setItems(it.items as List<T>)
-            }
-            is SearchResult.League -> {
-                (view.adapter as BaseAdapter<T>?)?.setItems(it.items as List<T>)
-            }
-        }
-
-    }
-}
+//@BindingAdapter(value = ["app:searchItems"])
+//fun <T> setRecyclerItems(view: RecyclerView, items: SearchResult?) {
+//    items?.let {
+//        when(it) {
+//            is SearchResult.Team -> {
+//                (view.adapter as BaseAdapter<T>?)?.setItems(it.items as List<T>)
+//            }
+//            is SearchResult.League -> {
+//                (view.adapter as BaseAdapter<T>?)?.setItems(it.items as List<T>)
+//            }
+//        }
+//
+//    }
+//}
 
 @BindingAdapter(value = ["app:listItems"])
 fun <T> setListItems(view: RecyclerView, items: List<T>?) {
@@ -74,6 +76,27 @@ fun <T> setRecyclerItems(view: RecyclerView, items: List<T>?) {
     }
 }
 
+@BindingAdapter(value = ["app:nestedSearchItems"])
+fun <T> setNestedSearchRecyclerItems(view: RecyclerView, items: List<T>?) {
+    items?.let {
+        (view.adapter as BaseAdapter<T>?)?.setItems(it.take(6))
+    }
+}
+
+@BindingAdapter(value = ["app:searchItems"])
+fun setSearchItems(view: RecyclerView, items: List<SearchResult>?) {
+    items?.let {
+        (view.adapter as SearchAdapter).setItems(it)
+    }
+}
+
+//@BindingAdapter(value = ["app:searchLeagueItems"])
+//fun setSearchLeagueItems(view: RecyclerView, items: List<LeagueSearchUIState>?) {
+//    items?.let {
+//        (view.adapter as SearchAdapter).setItems(it)
+//    }
+//}
+
 @BindingAdapter(value = ["app:showLoading"])
 fun showLoading(view: View, isVisible: Boolean?) {
     view.isVisible = !(isVisible == null || isVisible == false)
@@ -86,12 +109,13 @@ fun hideWhenLoading(view: View, isVisible: Boolean) {
 }
 
 @BindingAdapter(value = ["app:showNoResultFound"])
-fun <T> showWhenNoResult(view: FrameLayout, items: SearchResult?) {
+fun <T> showWhenNoResult(view: FrameLayout, items: List<SearchResult>?) {
     items?.let {
-        when(it) {
-            is SearchResult.Team -> { view.isVisible = it.items.isEmpty()}
-            is SearchResult.League -> { view.isVisible = it.items.isEmpty() }
-        }
+        view.isVisible = it.isEmpty()
+//        when(it) {
+//            is SearchResult.Team -> { view.isVisible = it.items.isEmpty()}
+//            is SearchResult.League -> { view.isVisible = it.items.isEmpty() }
+//        }
     }
 }
 

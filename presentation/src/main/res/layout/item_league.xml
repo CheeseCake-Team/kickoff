@@ -6,10 +6,6 @@
     <data>
 
         <variable
-            name="listener"
-            type="com.cheesecake.presentation.base.BaseInteractionListener" />
-
-        <variable
             name="item"
             type="com.cheesecake.presentation.screens.search.LeagueSearchUIState" />
     </data>
@@ -20,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_margin="@dimen/spacing_4"
+        android:onClick="@{() -> item.onclick.invoke(item.leagueId,item.season)}"
         app:cardBackgroundColor="@color/cardSurface"
         app:cardCornerRadius="@dimen/spacing_8">
 
