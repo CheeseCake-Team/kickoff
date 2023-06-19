@@ -32,12 +32,6 @@ fun ImageView.setImageFromUrl(imageUri: String?) {
     //val imageUrl = imageUri.takeIf { !it.isNullOrEmpty() && !it.contains("image_not_available") } ?: R.drawable.no_image
 }
 
-@BindingAdapter(value = ["app:listItems"])
-fun <T> setItems(view: RecyclerView, items: List<T>?) {
-    items?.let {
-        (view.adapter as BaseListAdapter<T>?)?.submitList(items)
-    }
-}
 @BindingAdapter("app:circularImageUrl")
 fun ImageView.setCircularImageFromUrl(imageUri: String?) {
     imageUri.let {
@@ -50,12 +44,6 @@ fun ImageView.setCircularImageFromUrl(imageUri: String?) {
     //val imageUrl = imageUri.takeIf { !it.isNullOrEmpty() && !it.contains("image_not_available") } ?: R.drawable.no_image
 }
 
-@BindingAdapter(value = ["app:items"])
-fun <T> setRecyclerItems(view: RecyclerView, items: List<T>?) {
-    items?.let {
-        (view.adapter as BaseAdapter<T>?)?.setItems(it)
-    }
-}
 
 @BindingAdapter(value = ["app:searchItems"])
 fun <T> setRecyclerItems(view: RecyclerView, items: SearchResult?) {
@@ -72,12 +60,19 @@ fun <T> setRecyclerItems(view: RecyclerView, items: SearchResult?) {
     }
 }
 
-//@BindingAdapter(value = ["app:fixtureItems"])
-//fun <T> setItems(view: RecyclerView, items: List<T>?) {
-//    items?.let {
-//        (view.adapter as BaseListAdapter<T>?)?.submitList(items)
-//    }
-//}
+@BindingAdapter(value = ["app:listItems"])
+fun <T> setListItems(view: RecyclerView, items: List<T>?) {
+    items?.let {
+        (view.adapter as BaseListAdapter<T>?)?.submitList(items)
+    }
+}
+
+@BindingAdapter(value = ["app:items"])
+fun <T> setRecyclerItems(view: RecyclerView, items: List<T>?) {
+    items?.let {
+        (view.adapter as BaseAdapter<T>?)?.setItems(it)
+    }
+}
 
 @BindingAdapter(value = ["app:showLoading"])
 fun showLoading(view: View, isVisible: Boolean?) {

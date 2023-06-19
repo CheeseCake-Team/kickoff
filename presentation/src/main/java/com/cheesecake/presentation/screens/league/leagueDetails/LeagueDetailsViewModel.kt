@@ -44,7 +44,7 @@ class LeagueDetailsViewModel @Inject constructor(
             },
             { league ->
 
-                _leagueDetailsUIState.update { it.copy(country = league.country) }
+                _leagueDetailsUIState.update { it.copy(country = league.countryName) }
             },
             { error ->
                 _leagueDetailsUIState.update {

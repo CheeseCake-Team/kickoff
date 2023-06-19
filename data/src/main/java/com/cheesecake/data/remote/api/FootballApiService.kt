@@ -31,8 +31,6 @@ import retrofit2.http.Query
 
 interface FootballApiService {
 
-    //region coachs
-
     @GET("coachs")
     suspend fun getCoachById(
         @Query("id") playerID: Int

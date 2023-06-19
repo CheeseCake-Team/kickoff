@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_4"
                 android:layout_marginBottom="@dimen/spacing_16"
-                android:text="@{item.typeName}"
+                android:text="@{String.valueOf(item.leagueCount)}"
                 android:textAppearance="@style/bodyMedium"
                 android:textColor="@color/fontLight"
                 app:layout_constraintBottom_toBottomOf="parent"

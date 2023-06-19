@@ -20,8 +20,9 @@ class FavouriteLeagueUseCase @Inject constructor(
                     seasonStartYear = it.seasonStartYear,
                     seasonEndYear = it.seasonEndYear,
                     isFavourite = !it.isFavourite,
-                    country = it.country,
-                    typeName = it.typeName
+                    countryName = it.countryName,
+                    leagueTypeName = it.leagueTypeName,
+                    leagueCount = 1
                 )
             )
         }

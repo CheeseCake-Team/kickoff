@@ -7,6 +7,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.abaferastech.marvelapp.ui.base.BaseDiffUtil
+import androidx.databinding.library.baseAdapters.BR
 
 
 interface BaseInteractionListener
@@ -14,13 +15,13 @@ interface BaseInteractionListener
 abstract class BaseAdapter<T>(private val listener: BaseInteractionListener?) :
     RecyclerView.Adapter<BaseAdapter.BaseViewHolder>() {
 
-    var itemss = emptyList<T>()
+    var items = emptyList<T>()
     abstract val layoutId: Int
 
     open fun setItems(newItems: List<T>) {
         val diffResult =
-            DiffUtil.calculateDiff(BaseDiffUtil(itemss, newItems, ::areItemsSame, ::areContentSame))
-        itemss = newItems
+            DiffUtil.calculateDiff(BaseDiffUtil(items, newItems, ::areItemsSame, ::areContentSame))
+        items = newItems
         diffResult.dispatchUpdatesTo(this)
     }
 
@@ -40,19 +41,19 @@ abstract class BaseAdapter<T>(private val listener: BaseInteractionListener?) :
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        val currentItem = itemss[position]
+        val currentItem = items[position]
         when (holder) {
             is ItemViewHolder -> {
                 holder.binding.apply {
-                    setVariable(androidx.databinding.library.baseAdapters.BR.item, currentItem)
-                    setVariable(androidx.databinding.library.baseAdapters.BR.listener, listener)
+                    setVariable(BR.item, currentItem)
+                    setVariable(BR.listener, listener)
 
                 }
             }
         }
     }
 
-    override fun getItemCount(): Int = itemss.size
+    override fun getItemCount(): Int = items.size
 
 
     class ItemViewHolder(val binding: ViewDataBinding) : BaseViewHolder(binding)

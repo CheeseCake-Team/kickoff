@@ -12,9 +12,10 @@ fun LeagueDTO.toEntity(): League = League(
     imageUrl = this.league.logo,
     seasonStartYear = this.seasons.first().start.substring(0, 4),
     seasonEndYear = this.seasons.first().end.substring(0, 4),
-    country = this.country.name,
+    countryName = this.country.name,
     isFavourite = false,
-    typeName = this.league.type
+    leagueTypeName = this.league.type,
+    leagueCount = 1
 )
 
 @JvmName("leagueDTOToLeagueLocalDTO")
@@ -38,9 +39,10 @@ fun LeagueLocalDTO.toEntity(): League = League(
     imageUrl = leagueLogoUrl,
     seasonStartYear = seasonStartYear,
     seasonEndYear = seasonEndYear,
-    country = country,
+    countryName = country,
     isFavourite = isFavourite,
-    typeName = typeName
+    leagueTypeName = typeName,
+    leagueCount = 1
 )
 
 @JvmName("leagueToLeagueLocalDTO")
@@ -51,9 +53,9 @@ fun League.toLocal(): LeagueLocalDTO = LeagueLocalDTO(
     leagueLogoUrl = imageUrl,
     seasonStartYear = seasonStartYear,
     seasonEndYear = seasonEndYear,
-    country = country,
+    country = countryName,
     isFavourite = isFavourite,
-    typeName = typeName
+    typeName = leagueTypeName
 )
 
 @JvmName("leagueLocalDTOsToLeagues")
@@ -64,5 +66,23 @@ fun List<LeagueDTO>.toLocal(): List<LeagueLocalDTO> = map { it.toLocal() }
 
 @JvmName("leagueDTOsToLeagues")
 fun List<LeagueDTO>.toEntity(): List<League> = map { it.toEntity() }
+
+@JvmName("leagueDTOsToLeagues")
+fun Pair<Int, List<LeagueDTO>>.toEntity(): List<League> {
+    return this.second.map {
+        League(
+            leagueId = it.league.id,
+            name = it.league.name,
+            season = it.seasons.first().year.toString(),
+            imageUrl = it.league.logo,
+            seasonStartYear = it.seasons.first().start,
+            seasonEndYear = it.seasons.first().end,
+            countryName = it.country.name,
+            isFavourite = false,
+            leagueTypeName = it.league.type,
+            leagueCount = this.first
+        )
+    }
+}
 
 

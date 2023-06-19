@@ -26,9 +26,6 @@ import com.cheesecake.data.remote.utils.LeagueType
 
 interface RemoteDataSource {
 
-
-    //region coaches
-
     suspend fun getCoachById(
         playerID: Int
     ): List<CoachDTO>
@@ -267,7 +264,7 @@ interface RemoteDataSource {
 
     suspend fun getLeaguesBySearch(
         leagueName: String
-    ): List<LeagueDTO>
+    ): Pair<Int,List<LeagueDTO>>
 
     suspend fun getLeaguesByCountryName(
         countryName: String
