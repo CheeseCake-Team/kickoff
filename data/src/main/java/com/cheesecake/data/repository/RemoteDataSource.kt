@@ -84,7 +84,7 @@ interface RemoteDataSource {
     ): List<FixtureDTO>
 
     suspend fun getFixtureBySeasonByTeamId(
-        timeZone: String, season: String, TeamId: Int
+        timeZone: String, season: Int, TeamId: Int
     ): List<FixtureDTO>
 
     suspend fun getFixturesBySeasonIdAndLeagueId(

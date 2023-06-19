@@ -62,4 +62,8 @@ interface IFootballRepository {
     suspend fun getFixtureStatisticsByFixtureId(fixtureId: Int): List<FixtureStatistics>
 
     suspend fun getSquadOfTeam(teamId: Int): List<SquadPlayer>
+
+    suspend fun getMatchesByTeamIdAndSeason(timeZone: String, season: Int, teamId: Int): List<Fixture>
+
+    suspend fun getRemotelyTeam(teamId: Int): Team
 }

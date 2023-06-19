@@ -114,7 +114,7 @@ class RemoteDataSourceImp @Inject constructor(
 
     override suspend fun getFixtureBySeasonByTeamId(
         timeZone: String,
-        season: String,
+        season: Int,
         TeamId: Int
     ): List<FixtureDTO> {
         return wrapBaseResponse { service.getFixturesBySeasonIdByTeamId(timeZone, season, TeamId) }
