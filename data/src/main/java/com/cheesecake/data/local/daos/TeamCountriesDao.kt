@@ -15,7 +15,7 @@ interface TeamCountriesDao {
     @Insert
     suspend fun addTeamCountries(teams: List<TeamCountriesLocalDTO>)
 
-    @Query("SELECT * FROM team_country_table WHERE name LIKE :search ")
+    @Query("SELECT * FROM team_country_table WHERE name LIKE '%' || :search || '%'")
     fun getCountriesSearch(search: String): Flow<List<TeamCountriesLocalDTO>>
 
 }
