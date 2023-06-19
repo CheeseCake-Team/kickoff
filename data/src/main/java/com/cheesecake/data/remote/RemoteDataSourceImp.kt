@@ -590,6 +590,10 @@ class RemoteDataSourceImp @Inject constructor(
         return wrapBaseResponse { service.getLeaguesByName(leagueName) }
     }
 
+    override suspend fun getLeaguesBySearch(leagueName: String): List<LeagueDTO> {
+        return wrapBaseResponse { service.getLeaguesBySearch(leagueName) }
+    }
+
     override suspend fun getTeamById(teamId: Int): List<TeamDTO> {
         return wrapBaseResponse { service.getTeamById(teamId) }
     }
@@ -662,10 +666,6 @@ class RemoteDataSourceImp @Inject constructor(
     override suspend fun searchVenue(name: String): List<VenuesDTO> {
         return wrapBaseResponse { service.searchVenue(name) }
     }
-
-
-    //endregion
-
 
     private suspend fun <T> wrapBaseResponse(
         response: suspend () -> Response<BasePagingResponse<T>>

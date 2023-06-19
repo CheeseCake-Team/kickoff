@@ -13,15 +13,26 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:padding="16dp">
+        android:clipToPadding="false">
 
+        <View
+            android:id="@+id/view_search_background"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/cardSurface"
+            app:layout_constraintBottom_toTopOf="@id/search_recycler_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/search_bar"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:background="@color/lightGrey"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edittext_background_round"
             android:drawableStart="@drawable/magnifer"
             android:drawablePadding="8dp"
             android:fontFamily="@font/lato"
@@ -32,20 +43,22 @@
             android:textColorHint="@color/lightGreyText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:onSearchTextChanged="@{viewModel}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/search_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="16dp"
             android:clipToPadding="false"
             android:padding="@dimen/spacing_12"
-            app:items="@{viewModel.state.searchResult}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_bar"
+            app:searchItems="@{viewModel.state.searchResult}"
             app:viewVisibilityInLoading="@{viewModel.state.loading}"
             tools:context="com.cheesecake.league.LeagueTeamsFragment"
             tools:listitem="@layout/item_team" />
@@ -54,30 +67,13 @@
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:showLoading="@{viewModel.state.loading}" />
 
-
-        <FrameLayout
-            android:id="@+id/frame_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:showNoResultFound="@{viewModel.isResultEmptyOnly}">
-
-            <include
-                android:id="@+id/layout_included_no_result"
-                layout="@layout/included_no_result_found"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5" />
-
-        </FrameLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

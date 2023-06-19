@@ -16,17 +16,12 @@ import javax.inject.Inject
 @HiltViewModel
 class FavoriteLeaguesViewModel @Inject constructor(
     private val getFavoriteLeaguesUseCase: GetFavoriteLeaguesUseCase,
-    private val favoriteLeagueUseCase: FavouriteLeagueUseCase
-) : BaseViewModel<FavoriteLeaguesUIState, FavoriteLeaguesNavigationEvent>(
-    FavoriteLeaguesUIState(),
-    Event()
+    private val favoriteLeagueUseCase: FavouriteLeagueUseCase,
+    ) : BaseViewModel<FavoriteLeaguesUIState, FavoriteLeaguesNavigationEvent>(
+    FavoriteLeaguesUIState(), Event()
 ) {
 
     init {
-        getFavoriteLeagues()
-    }
-
-    private fun getFavoriteLeagues() {
         tryToExecute({ getFavoriteLeaguesUseCase() }, ::onSuccess, ::onError)
     }
 
@@ -34,13 +29,12 @@ class FavoriteLeaguesViewModel @Inject constructor(
         collectFlow(flow) { leagues ->
             copy(
                 leagues = leagues.map { league ->
-                    league.toLeaguesUIState(
-                        { toggleFavourite(league.leagueId, league.leagueSeason.toInt()) },
-                        { navigateToLeague(league.leagueId) }
-                    )
-                },
-                isLeaguesIsEmpty = leagues.isEmpty(),
-                isLoading = false
+                    league.toLeaguesUIState({
+                        toggleFavourite(
+                            league.leagueId, league.season.toInt()
+                        )
+                    }, { navigateToLeague(league.leagueId) })
+                }, isLeaguesIsEmpty = leagues.isEmpty(), isLoading = false
             )
         }
     }
@@ -56,7 +50,7 @@ class FavoriteLeaguesViewModel @Inject constructor(
     }
 
     private fun toggleFavourite(leagueId: Int, leagueSeason: Int) {
-        viewModelScope.launch { favoriteLeagueUseCase(leagueId, leagueSeason).toString() }
+        viewModelScope.launch { favoriteLeagueUseCase(leagueId, leagueSeason) }
     }
 
 }

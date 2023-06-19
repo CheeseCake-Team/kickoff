@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_16"
             android:layout_marginTop="8dp"
+            android:onClick="@{() -> viewModel.state.onBackClick.invoke()}"
             app:icon="@drawable/ic_back"
             app:iconTint="@color/fontHeavy"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,8 +30,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="@dimen/team_image_size_48dp"
-            android:layout_height="@dimen/team_image_size_48dp"
+            android:layout_width="@dimen/spacing_48"
+            android:layout_height="48dp"
             android:contentDescription="@string/league_loge"
             app:imageUrl="@{viewModel.state.imageUrl}"
             app:layout_constraintStart_toEndOf="@+id/back_button"
@@ -69,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/spacing_16"
-            android:onClick="@{() -> viewModel.toggleFavourite(viewModel.state.leagueId,viewModel.state.leagueSeason)}"
+            android:onClick="@{() -> viewModel.state.onLeagueFavoriteClick.invoke(viewModel.state.leagueId, viewModel.state.leagueSeason)}"
             android:checked="@{viewModel.state.isFavourite}"
             android:button="@drawable/sl_favourite"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"

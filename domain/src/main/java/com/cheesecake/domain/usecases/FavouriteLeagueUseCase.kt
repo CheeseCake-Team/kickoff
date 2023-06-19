@@ -14,13 +14,15 @@ class FavouriteLeagueUseCase @Inject constructor(
             footballRepository.updateOrInsertLeague(
                 League(
                     leagueId = it.leagueId,
-                    leagueName = it.leagueName,
-                    leagueLogo = it.leagueLogo,
-                    leagueSeason = it.leagueSeason,
+                    name = it.name,
+                    imageUrl = it.imageUrl,
+                    season = it.season,
                     seasonStartYear = it.seasonStartYear,
                     seasonEndYear = it.seasonEndYear,
                     isFavourite = !it.isFavourite,
-                    country = it.country
+                    countryName = it.countryName,
+                    leagueTypeName = it.leagueTypeName,
+                    leagueCount = 1
                 )
             )
         }

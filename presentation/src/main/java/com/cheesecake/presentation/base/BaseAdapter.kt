@@ -7,6 +7,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.abaferastech.marvelapp.ui.base.BaseDiffUtil
+import androidx.databinding.library.baseAdapters.BR
 
 
 interface BaseInteractionListener
@@ -44,9 +45,7 @@ abstract class BaseAdapter<T>(private val listener: BaseInteractionListener?) :
         when (holder) {
             is ItemViewHolder -> {
                 holder.binding.apply {
-                    setVariable(androidx.databinding.library.baseAdapters.BR.item, currentItem)
-                    setVariable(androidx.databinding.library.baseAdapters.BR.listener, listener)
-
+                    setVariable(BR.item, currentItem)
                 }
             }
         }

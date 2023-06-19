@@ -1,6 +1,7 @@
 package com.cheesecake.data.remote.models
 
 import com.google.gson.annotations.SerializedName
+import java.util.Date
 
 data class FixtureDataDTO(
     @SerializedName("id")
@@ -10,7 +11,7 @@ data class FixtureDataDTO(
     @SerializedName("timezone")
     val timezone: String,
     @SerializedName("date")
-    val date: String,
+    val date: Date,
     @SerializedName("timestamp")
     val timestamp: Int,
     @SerializedName("periods")

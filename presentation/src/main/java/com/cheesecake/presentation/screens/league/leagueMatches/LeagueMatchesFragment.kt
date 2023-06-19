@@ -6,6 +6,8 @@ import androidx.fragment.app.viewModels
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentLeagueMatchesBinding
+import com.cheesecake.presentation.screens.league.LeagueArgs
+import com.cheesecake.presentation.screens.league.leagueDetails.LeagueDetailsFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,6 +18,15 @@ class LeagueMatchesFragment : BaseFragment<FragmentLeagueMatchesBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.matchesRecyclerView.adapter = LeagueMatchesDateMatchAdapter()
+    }
+    companion object {
+        @JvmStatic
+        fun newInstance(leagueID: Int, season: Int) = LeagueMatchesFragment().apply {
+            arguments = Bundle().apply {
+                putInt(LeagueArgs.LEAGUE_ID_ARG, leagueID)
+                putInt(LeagueArgs.SEASON_ARG, season)
+            }
+        }
     }
 }
 

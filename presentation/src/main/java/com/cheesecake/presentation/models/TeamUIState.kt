@@ -1,6 +1,6 @@
 package com.cheesecake.presentation.models
 
-data class TeamUIState (
+data class TeamUIState(
     val teamId: Int,
     val teamName: String,
     val founded: Int,
@@ -9,5 +9,5 @@ data class TeamUIState (
     val venueName: String,
     val imageUrl: String,
     val isFavourite: Boolean,
+//    val onclick: () -> Unit = {},
 )
-

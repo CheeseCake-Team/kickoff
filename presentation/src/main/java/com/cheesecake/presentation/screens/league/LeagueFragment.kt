@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.base.BaseFragmentsAdapter
@@ -21,14 +22,16 @@ class LeagueFragment : BaseFragment<FragmentLeagueBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        handleNavigation()
         init()
     }
 
     private fun init() {
+        val leagueArgs = viewModel.leagueArgs
         val fragments = listOf(
-            LeagueDetailsFragment(),
-            LeagueMatchesFragment(),
-            LeagueTeamsFragment(),
+            LeagueDetailsFragment.newInstance(leagueArgs.leagueId, leagueArgs.season),
+            LeagueMatchesFragment.newInstance(leagueArgs.leagueId, leagueArgs.season),
+            LeagueTeamsFragment.newInstance(leagueArgs.leagueId, leagueArgs.season),
         )
         val fragmentsAdapter = BaseFragmentsAdapter((activity as AppCompatActivity), fragments)
         binding.leagueViewPager.adapter = fragmentsAdapter
@@ -39,6 +42,20 @@ class LeagueFragment : BaseFragment<FragmentLeagueBinding>() {
                 2 -> tab.text = "Teams"
             }
         }.attach()
+    }
+
+    private fun handleNavigation() {
+        collect(viewModel.event) { event ->
+            event.getContentIfNotHandled()?.let { onEvent(it) }
+        }
+    }
+
+    private fun onEvent(event: LeagueNavigationEvent) {
+        when (event) {
+            is LeagueNavigationEvent.NavigateBack -> {
+                findNavController().navigateUp()
+            }
+        }
     }
 
 }
