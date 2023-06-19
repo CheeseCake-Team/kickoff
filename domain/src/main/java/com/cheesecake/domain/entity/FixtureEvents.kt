@@ -5,7 +5,8 @@ data class FixtureEvents(
     val teamId: Int,
     val playerId: Int,
     val playerName: String,
-    val SubstituentPlayer: String?,
+    val SubstituentPlayerId: String?,
+    val SubstituentPlayerName: String?,
     val type: String,
     val detail: String?
 )
