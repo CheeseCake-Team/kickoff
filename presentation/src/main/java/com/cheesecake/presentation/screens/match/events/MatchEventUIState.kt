@@ -15,7 +15,8 @@ data class ItemEventUIState(
     val playerName: String = "",
     val SubstituentPlayerId: String? = "",
     val SubstituentPlayerName: String?= "",
-    val type: String = "",
+    val longType: String = "",
+    val shortType: String = "",
     val detail: String? = ""
 )
 
@@ -27,7 +28,8 @@ fun List<FixtureEvents>.toUIState(): List<ItemEventUIState>{
         playerName = it.playerName,
         SubstituentPlayerId = it.SubstituentPlayerId,
         SubstituentPlayerName = it.SubstituentPlayerName,
-        type = it.type,
+        shortType = it.shortType,
+        longType = it.longType,
         detail = it.detail
     ) }
 }

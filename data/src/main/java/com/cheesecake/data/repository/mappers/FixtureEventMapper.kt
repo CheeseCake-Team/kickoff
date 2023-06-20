@@ -14,7 +14,8 @@ fun EventDTO.toEntity(): FixtureEvents {
         playerName = this.player.name,
         SubstituentPlayerId = this.assist.name,
         SubstituentPlayerName = this.assist.name,
-        type = this.detail,
+        shortType = this.type,
+        longType = this.detail,
         detail = this.comments
     )
 }
