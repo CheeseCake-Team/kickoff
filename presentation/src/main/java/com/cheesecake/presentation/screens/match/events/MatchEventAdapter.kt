@@ -8,7 +8,7 @@ import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseAdapter
 import com.cheesecake.presentation.databinding.ItemMatchEventBinding
 
-class MatchEventAdapter(val matchId: String = "33-34") : BaseAdapter<ItemEventUIState>(null) {
+class MatchEventAdapter(val homeTeamId: Int = 33,val awayTeamId: Int = 34) : BaseAdapter<ItemEventUIState>(null) {
     override val layoutId = R.layout.item_match_event
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
@@ -18,9 +18,7 @@ class MatchEventAdapter(val matchId: String = "33-34") : BaseAdapter<ItemEventUI
                 setVariable(androidx.databinding.library.baseAdapters.BR.item, currentItem)
 
                 this as ItemMatchEventBinding
-                Log.e("TAG", "onSuccess:$currentItem ")
 
-                Log.d("TAGGGG", "$currentItem")
                 when (currentItem.eventType) {
 
                     EventType.PENALTY -> {
@@ -78,15 +76,13 @@ class MatchEventAdapter(val matchId: String = "33-34") : BaseAdapter<ItemEventUI
                         textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
                     }
                 }
-
-                val teamIds = matchId.split("-")
                 when (currentItem.teamId) {
-                    teamIds[0].toInt() -> {
+                    homeTeamId -> {
                         cardViewHomeTeamEvent.isVisible = true
                         cardViewAwayTeamEvent.visibility = View.GONE
                     }
 
-                    teamIds[1].toInt() -> {
+                    awayTeamId -> {
                         cardViewHomeTeamEvent.visibility = View.GONE
                         cardViewAwayTeamEvent.isVisible = true
                     }
