@@ -23,7 +23,7 @@ class MatchEventViewModel @Inject constructor(
 
     private fun getMatchEvents() {
         tryToExecute(
-            { getFixtureEventByFixtureIdUseCase(215662) },
+            { getFixtureEventByFixtureIdUseCase(157201) },
             ::onSuccess,
             ::onError
         )
