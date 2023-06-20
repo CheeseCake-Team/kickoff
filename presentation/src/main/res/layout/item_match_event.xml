@@ -13,14 +13,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="@dimen/spacing_16">
+        android:layout_marginVertical="@dimen/spacing_8">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_view_home_team_event"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:backgroundTint="@color/cardSurface"
             app:cardCornerRadius="@dimen/spacing_8"
+            android:layout_marginVertical="@dimen/spacing_8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/card_view_match_event_type"
             app:layout_constraintStart_toStartOf="parent"
@@ -103,8 +104,9 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/card_view_away_team_event"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:backgroundTint="@color/cardSurface"
+            android:layout_marginVertical="@dimen/spacing_8"
             app:cardCornerRadius="@dimen/spacing_8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
