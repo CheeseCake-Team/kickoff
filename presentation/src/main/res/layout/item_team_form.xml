@@ -12,24 +12,24 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/image_view_card_image"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
-        android:background="@color/date_item_background"
-        app:cardCornerRadius="16dp">
+        android:background="@color/cardSurface"
+        app:cardCornerRadius="24dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/card_view_card_item"
-            android:layout_width="32dp"
-            android:layout_height="32dp">
+            android:layout_width="48dp"
+            android:layout_height="48dp">
 
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/card_img_holder"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/backLighter"
+                android:background="@color/cardSurface"
                 android:scaleType="centerCrop"
                 />
 
@@ -37,7 +37,7 @@
                 android:id="@+id/text_view_text_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/lato"
+                android:fontFamily="@font/lato_bold"
                 android:gravity="center"
                 android:textAllCaps="true"
                 android:textColor="@color/fontHeavy"
