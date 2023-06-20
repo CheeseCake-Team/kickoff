@@ -18,23 +18,10 @@ class MatchEventAdapter(val matchId: String = "33-34") : BaseAdapter<ItemEventUI
                 setVariable(androidx.databinding.library.baseAdapters.BR.item, currentItem)
 
                 this as ItemMatchEventBinding
-                Log.d("TAGGGG","$currentItem")
+                Log.e("TAG", "onSuccess:$currentItem ")
+
+                Log.d("TAGGGG", "$currentItem")
                 when (currentItem.eventType) {
-
-                    EventType.NORMAL_GOAL -> {
-                        imageViewEventType.setImageResource(R.drawable.ic_football)
-                        textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
-                        textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
-
-
-                    }
-
-                    EventType.OWN_GOAL -> {
-                        imageViewEventType.setImageResource(R.drawable.ic_football)
-                        textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
-                        textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
-
-                    }
 
                     EventType.PENALTY -> {
                         imageViewEventType.setImageResource(R.drawable.ic_penalty)
@@ -84,72 +71,13 @@ class MatchEventAdapter(val matchId: String = "33-34") : BaseAdapter<ItemEventUI
                         textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
 
                     }
+
+                    else -> {
+                        imageViewEventType.setImageResource(R.drawable.ic_football)
+                        textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
+                        textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
+                    }
                 }
-//                when {
-//                    currentItem.longType == "Normal Goal" -> {
-//                        imageViewEventType.setImageResource(R.drawable.ic_football)
-//                        textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
-//                        textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
-//
-//
-//                    }
-//
-//                    currentItem.longType == "Own Goal" -> {
-//                        imageViewEventType.setImageResource(R.drawable.ic_football)
-//                        textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
-//                        textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
-//
-//                    }
-//
-//                    currentItem.longType == "Penalty" -> {
-//                        imageViewEventType.setImageResource(R.drawable.ic_penalty)
-//                        textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
-//                        textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
-//
-//                    }
-//
-//                    currentItem.longType == "Missed Penalty" -> {
-//                        imageViewEventType.setImageResource(R.drawable.ic_miss_penalty)
-//                        textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
-//                        textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
-//
-//                    }
-//
-//                    currentItem.longType == "Yellow Card" -> {
-//                        imageViewEventType.setImageResource(R.drawable.ic_yellowcard)
-//                        textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
-//                        textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
-//
-//                    }
-//
-//                    currentItem.longType == "Red Card" -> {
-//                        imageViewEventType.setImageResource(R.drawable.ic_redcard)
-//                        textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
-//                        textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
-//
-//                    }
-//
-//                    currentItem.shortType == "subst" -> {
-//                        imageViewEventType.setImageResource(R.drawable.ic_substitution)
-//                        textViewHomeTeamSubstituentPlayerName.isVisible = true
-//                        textViewAwayTeamSubstituentPlayerName.isVisible = true
-//
-//                    }
-//
-//                    currentItem.longType == "Goal cancelled" -> {
-//                        imageViewEventType.setImageResource(R.drawable.ic_goal_cancelled)
-//                        textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
-//                        textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
-//
-//                    }
-//
-//                    currentItem.longType == "Penalty confirmed" -> {
-//                        imageViewEventType.setImageResource(R.drawable.ic_penaltyconfierm)
-//                        textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
-//                        textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
-//
-//                    }
-//                }
 
                 val teamIds = matchId.split("-")
                 when (currentItem.teamId) {

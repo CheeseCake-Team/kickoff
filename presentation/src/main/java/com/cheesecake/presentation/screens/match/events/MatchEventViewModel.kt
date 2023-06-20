@@ -1,7 +1,6 @@
 package com.cheesecake.presentation.screens.match.events
 
 import android.util.Log
-import androidx.lifecycle.SavedStateHandle
 import com.cheesecake.domain.entity.FixtureEvents
 import com.cheesecake.domain.usecases.GetFixtureEventByFixtureIdUseCase
 import com.cheesecake.presentation.base.BaseViewModel
@@ -31,9 +30,8 @@ class MatchEventViewModel @Inject constructor(
     }
 
     private fun onSuccess(fixtureEvents: List<FixtureEvents>) {
-        Log.d("TAGGGG","$fixtureEvents")
         _state.update {
-
+            Log.e("TAG", "onSuccess:$it ")
             it.copy(
                 isLoading = false,
                 data = fixtureEvents.toUIState()
@@ -49,5 +47,6 @@ class MatchEventViewModel @Inject constructor(
                 isLoading = false
             )
         }
+        Log.e("TAG", "onError: ${e.message.toString()}", )
     }
 }

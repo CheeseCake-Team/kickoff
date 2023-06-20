@@ -42,13 +42,7 @@ fun toEventType(type: String, detail: String): EventType {
                 else -> throw IllegalArgumentException("Invalid event title: $detail")
             }
         }
-        "Subst" -> {
-            if (detail.startsWith("Substitution")) {
-                EventType.SUBST
-            } else {
-                throw IllegalArgumentException("Invalid event title: $detail")
-            }
-        }
+
         "Var" -> {
             when (detail) {
                 "Goal cancelled" -> EventType.GOAL_CANCELLED
@@ -56,7 +50,7 @@ fun toEventType(type: String, detail: String): EventType {
                 else -> throw IllegalArgumentException("Invalid event title: $detail")
             }
         }
-        else -> throw IllegalArgumentException("Invalid event type: $type")
+        else ->  EventType.SUBST
     }
 }
 
