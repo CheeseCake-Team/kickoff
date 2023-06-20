@@ -26,24 +26,23 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
 
     private fun init() {
         val fragments = mutableListOf<Fragment>()
-        viewModel.fixtureId.observe(viewLifecycleOwner) {
-            fragments.addAll(
-                listOf(
-                    MatchStatisticsFragment.newInstance(it!!),
-                    MatchEventFragment(),
-                    MatchLineupFragment(),
-                )
+        fragments.addAll(
+            listOf(
+                MatchStatisticsFragment.newInstance(821),
+                MatchEventFragment(),
+                MatchLineupFragment(),
             )
-            val fragmentsAdapter = BaseFragmentsAdapter((activity as AppCompatActivity), fragments)
-            binding.matchViewPager.adapter = fragmentsAdapter
-            TabLayoutMediator(binding.tabLayout, binding.matchViewPager) { tab, position ->
-                when (position) {
-                    0 -> tab.text = "Statistics"
-                    1 -> tab.text = "Events"
-                    2 -> tab.text = "Lineup"
-                }
-            }.attach()
-        }
+        )
+        val fragmentsAdapter = BaseFragmentsAdapter((activity as AppCompatActivity), fragments)
+        binding.matchViewPager.adapter = fragmentsAdapter
+        TabLayoutMediator(binding.tabLayout, binding.matchViewPager) { tab, position ->
+            when (position) {
+                0 -> tab.text = "Statistics"
+                1 -> tab.text = "Events"
+                2 -> tab.text = "Lineup"
+            }
+        }.attach()
+
 
 
     }

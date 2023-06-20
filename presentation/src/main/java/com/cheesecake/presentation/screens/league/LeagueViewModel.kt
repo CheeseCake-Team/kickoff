@@ -8,6 +8,8 @@ import com.cheesecake.domain.usecases.GetLeagueByIdAndSeasonUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,13 +18,21 @@ import javax.inject.Inject
 class LeagueViewModel @Inject constructor(
     private val getLeagueByIdAndSeasonUseCase: GetLeagueByIdAndSeasonUseCase,
     private val favouriteLeagueUseCase: FavouriteLeagueUseCase,
+    private val leagueArgs :LeagueNavigationArgs,
     savedStateHandle: SavedStateHandle,
 ) : BaseViewModel<LeagueUIState, LeagueNavigationEvent>(LeagueUIState(), Event()) {
 
-    val leagueArgs = LeagueNavigationArgs(savedStateHandle)
+//    private val leagueArgs = LeagueNavigationArgs(savedStateHandle)
+
+    private val _leagueId = MutableStateFlow(leagueArgs.leagueId)
+    val leagueId: StateFlow<Int> = _leagueId
 
     init {
-        getLeague(leagueArgs.leagueId, leagueArgs.season)
+        tryToExecute(
+            { getLeagueByIdAndSeasonUseCase(leagueArgs.leagueId, leagueArgs.season) },
+            ::onSuccess,
+            ::onError
+        )
     }
 
     private fun toggleFavourite(leagueId: Int, leagueSeason: Int) {
@@ -33,13 +43,6 @@ class LeagueViewModel @Inject constructor(
         }
     }
 
-    private fun getLeague(leagueId: Int, leagueSeason: Int) {
-        tryToExecute(
-            { getLeagueByIdAndSeasonUseCase(leagueId, leagueSeason) },
-            ::onSuccess,
-            ::onError
-        )
-    }
 
     private fun onSuccess(league: League) {
         league.let {
@@ -60,6 +63,8 @@ class LeagueViewModel @Inject constructor(
                     onBackClick = { onBackClick() }
                 )
             }
+
+
         }
     }
 

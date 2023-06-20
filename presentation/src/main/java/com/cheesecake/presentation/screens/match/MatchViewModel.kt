@@ -9,6 +9,9 @@ import com.cheesecake.domain.usecases.GetMatchDetailsUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
@@ -16,19 +19,14 @@ import javax.inject.Inject
 class MatchViewModel
 @Inject constructor(
     private val getMatchDetailsUseCase: GetMatchDetailsUseCase,
-    savedStateHandle: SavedStateHandle,
+    matchArgs: MatchArgs
 ) : BaseViewModel<MatchUIState, MatchEvents>(MatchUIState(), Event()) {
 
-    private val matchArgs = MatchArgs(savedStateHandle)
 
-    private val _fixtureId = MutableLiveData<Int>()
-    val fixtureId: LiveData<Int> = _fixtureId
+    private val _matchId = MutableStateFlow(matchArgs.matchId)
+    val matchId: StateFlow<String> = _matchId.asStateFlow()
 
     init {
-        getMatch()
-    }
-
-    private fun getMatch() {
         tryToExecute(
             { getMatchDetailsUseCase(matchArgs.matchId, matchArgs.date, "Africa/Cairo") },
             ::onSuccess,
@@ -50,7 +48,7 @@ class MatchViewModel
             )
         }
         Log.d("TAG", "getMatch:${match.fixtureId} ")
-        _fixtureId.postValue(match.fixtureId)
+//        _fixtureId.postValue(match.fixtureId)
 
     }
 

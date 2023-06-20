@@ -1,8 +1,9 @@
 package com.cheesecake.presentation.screens.match
 
 import androidx.lifecycle.SavedStateHandle
+import javax.inject.Inject
 
-class MatchArgs(savedStateHandle: SavedStateHandle) {
+class MatchArgs @Inject constructor(savedStateHandle: SavedStateHandle) {
     val matchId: String = savedStateHandle[MATCH_ID_ARG]
         ?: MatchFragmentArgs.fromSavedStateHandle(savedStateHandle).matchId
 

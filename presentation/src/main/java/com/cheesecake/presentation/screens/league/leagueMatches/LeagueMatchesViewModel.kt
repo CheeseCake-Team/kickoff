@@ -18,19 +18,23 @@ class LeagueMatchesViewModel @Inject constructor(
 
     ) : BaseViewModel<LeagueMatchesUIState, LeagueMatchesEvent>(LeagueMatchesUIState(), Event()) {
 
-    private val leagueArg = LeagueArgs(savedStateHandle)
+    private val leagueArgs = LeagueArgs(savedStateHandle)
 
     init {
-        getData()
-    }
-
-    private fun getData() {
         tryToExecute(
-            { getPairsOfMatchesAndDateByLeagueIdAndSeasonUseCase("Africa/Cairo",  leagueArg.leagueId,  leagueArg.season) },
+            {
+                getPairsOfMatchesAndDateByLeagueIdAndSeasonUseCase(
+                    "Africa/Cairo",
+                    leagueArgs.leagueId,
+                    leagueArgs.season
+                )
+            },
             ::onSuccess,
             ::onError
         )
+
     }
+
 
     private fun onSuccess(result: List<Pair<Date, List<Fixture>>>) {
         _state.update { it.copy(data = result, isLoading = false) }

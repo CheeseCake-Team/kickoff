@@ -17,22 +17,15 @@ class LeagueTeamsViewModel @Inject constructor(
     private val getAllTeamsInLeagueWithSeasonUseCase: GetAllTeamsInLeagueWithSeasonUseCase,
     savedStateHandle: SavedStateHandle,
     ) : BaseViewModel<LeagueTeamsUIState,LeagueTeamsEvent>(LeagueTeamsUIState(), Event()) {
-    private val leagueArg = LeagueArgs(savedStateHandle)
+    private val leagueArgs = LeagueArgs(savedStateHandle)
 
     init {
-        getData()
-    }
-
-    private fun getData() {
         tryToExecute(
-            { getAllTeamsInLeagueWithSeason() },
+            { getAllTeamsInLeagueWithSeasonUseCase(leagueArgs.leagueId, leagueArgs.season) },
             ::onSuccess,
             ::onError
         )
     }
-
-    private suspend fun getAllTeamsInLeagueWithSeason() =
-        getAllTeamsInLeagueWithSeasonUseCase( leagueArg.leagueId,  leagueArg.season)
 
 
     private fun onSuccess(result: List<Team>) {
