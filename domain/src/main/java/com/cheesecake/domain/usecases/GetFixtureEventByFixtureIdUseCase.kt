@@ -6,5 +6,5 @@ import javax.inject.Inject
 class GetFixtureEventByFixtureIdUseCase @Inject constructor(
     private val footballRepository: IFootballRepository,
 ){
-    suspend operator fun invoke(fixtureId : Int) = footballRepository.getFixtureEventByFixtureId(fixtureId)
+    suspend operator fun invoke(fixtureId : Int) = footballRepository.getFixtureEventByFixtureId(fixtureId).reversed()
 }
