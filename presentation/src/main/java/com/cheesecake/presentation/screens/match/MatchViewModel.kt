@@ -28,7 +28,7 @@ class MatchViewModel
 
     init {
         tryToExecute(
-            { getMatchDetailsUseCase(matchArgs.matchId, matchArgs.date, "Africa/Cairo") },
+            { getMatchDetailsUseCase("33-34","2019-12-26", "Africa/Cairo") },
             ::onSuccess,
             ::onError
         )

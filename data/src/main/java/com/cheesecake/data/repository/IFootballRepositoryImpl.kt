@@ -5,6 +5,7 @@ import com.cheesecake.data.remote.models.LeagueDTO
 import com.cheesecake.data.repository.mappers.toEntity
 import com.cheesecake.data.repository.mappers.toLocal
 import com.cheesecake.domain.entity.Fixture
+import com.cheesecake.domain.entity.FixtureEvents
 import com.cheesecake.domain.entity.FixtureStatistics
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.entity.Match
@@ -156,6 +157,10 @@ class IFootballRepositoryImpl
     }
     override suspend fun getFixtureStatisticsByFixtureId(fixtureId: Int): List<FixtureStatistics> {
         return remoteDataSource.getFixtureStatisticsByFixtureId(fixtureId).toEntity()
+    }
+
+    override suspend fun getFixtureEventByFixtureId(fixtureId: Int): List<FixtureEvents> {
+        return remoteDataSource.getFixtureEventsByFixtureId(fixtureId).toEntity()
     }
 
     override suspend fun getMatchDetails(teamsId: String, date: String, timeZone: String): Match {
