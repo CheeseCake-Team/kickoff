@@ -11,7 +11,7 @@ import com.cheesecake.presentation.base.BaseFragmentsAdapter
 import com.cheesecake.presentation.databinding.FragmentTeamBinding
 import com.cheesecake.presentation.screens.team.teamMatches.TeamMatchesFragment
 import com.cheesecake.presentation.screens.team.teamPlayers.TeamPlayersFragment
-import com.cheesecake.presentation.screens.teamstatistics.TeamStatisticsFragment
+import com.cheesecake.presentation.screens.team.teamstatistics.TeamStatisticsFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 

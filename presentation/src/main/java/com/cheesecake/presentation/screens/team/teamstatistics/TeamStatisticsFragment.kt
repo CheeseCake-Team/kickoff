@@ -1,4 +1,4 @@
-package com.cheesecake.presentation.screens.teamstatistics
+package com.cheesecake.presentation.screens.team.teamstatistics
 
 import android.os.Bundle
 import android.view.View

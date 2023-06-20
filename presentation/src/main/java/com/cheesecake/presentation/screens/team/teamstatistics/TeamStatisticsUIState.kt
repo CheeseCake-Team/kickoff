@@ -1,4 +1,4 @@
-package com.cheesecake.presentation.screens.teamstatistics
+package com.cheesecake.presentation.screens.team.teamstatistics
 
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.entity.TeamStatisticsEntity

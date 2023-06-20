@@ -1,3 +1,0 @@
-package com.cheesecake.presentation.screens.teamstatistics
-
-sealed interface TeamStatisticsEvent
