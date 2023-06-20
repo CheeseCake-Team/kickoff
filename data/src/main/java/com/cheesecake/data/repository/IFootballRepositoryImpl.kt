@@ -1,7 +1,6 @@
 package com.cheesecake.data.repository
 
 import android.util.Log
-import com.cheesecake.data.remote.models.LeagueDTO
 import com.cheesecake.data.repository.mappers.toEntity
 import com.cheesecake.data.repository.mappers.toLocal
 import com.cheesecake.domain.entity.Fixture
@@ -19,6 +18,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import toEntity
 import javax.inject.Inject
+
 
 class IFootballRepositoryImpl
 @Inject constructor(
@@ -131,6 +131,7 @@ class IFootballRepositoryImpl
         season: Int,
         leagueId: Int
     ): TeamStatisticsEntity {
+
         return remoteDataSource.getTeamStatistics(teamId, season, leagueId).toEntity()
     }
 
@@ -153,10 +154,6 @@ class IFootballRepositoryImpl
         return localDataSource.getFavouriteLeagues().map { it.toEntity() }
     }
 
-    override suspend fun getSquadOfTeam(teamId: Int): List<SquadPlayer> {
-        return remoteDataSource.getSquadByTeamId(teamId).toEntity()
-    }
-
     override suspend fun getCoachTrophy(coachId: Int): List<Trophy> {
         return remoteDataSource.getCoachTrophies(coachId).toEntity()
     }
@@ -164,8 +161,13 @@ class IFootballRepositoryImpl
         return remoteDataSource.getFixtureStatisticsByFixtureId(fixtureId).toEntity()
     }
 
-    override suspend fun getMatchDetails(teamsId: String, date: String, timeZone: String): Match {
-        return remoteDataSource.getHeadToHeadByDate(teamsId, date, timeZone).first().toEntity()
+    override suspend fun getMatchDetails(teamsId: String,date:  String, timeZone: String): Match {
+        return remoteDataSource.getHeadToHead(teamsId, date, timeZone).first().toEntity()
+    }
+
+
+    override suspend fun getSquadOfTeam(teamId: Int): List<SquadPlayer> {
+        return remoteDataSource.getSquadByTeamId(teamId).toEntity()
     }
 
     override suspend fun getMatchesByTeamIdAndSeason(
@@ -179,6 +181,4 @@ class IFootballRepositoryImpl
     override suspend fun getRemotelyTeam(teamId: Int): Team {
         return remoteDataSource.getTeamById(teamId).first().toEntity()
     }
-
-
 }

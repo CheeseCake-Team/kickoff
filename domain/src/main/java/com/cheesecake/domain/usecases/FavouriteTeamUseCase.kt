@@ -11,7 +11,7 @@ class FavouriteTeamUseCase@Inject constructor(
 
     suspend operator fun invoke(teamId: Int): Team {
       getTeamByIdUseCase(teamId).let {
-            footballRepository.updateOrInsertTeam(
+           /* footballRepository.updateOrInsertTeam(
                 Team(
                     id = it.id,
                     name = it.name,
@@ -23,7 +23,7 @@ class FavouriteTeamUseCase@Inject constructor(
                     isFavourite = !it.isFavourite,
             )
             )
-        }
+        */}
         return getTeamByIdUseCase(teamId)
     }
 }

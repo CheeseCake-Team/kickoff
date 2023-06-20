@@ -112,7 +112,7 @@ interface RemoteDataSource {
     //region Head 2 Head
 
     suspend fun getHeadToHead(
-        teamsId: String, seasonId: Int, timeZone: String
+        teamsId: String, date: String, timeZone: String
     ): List<HeadToHeadDTO>
 
 

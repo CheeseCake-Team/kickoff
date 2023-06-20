@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/searchFragment">
+    app:startDestination="@id/teamFragment">
 
     <fragment
         android:id="@+id/leagueFragment"
@@ -81,4 +81,8 @@
             android:id="@+id/action_leaguesSearchFragment_to_leagueFragment"
             app:destination="@id/leagueFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/teamFragment"
+        android:name="com.cheesecake.presentation.screens.team.TeamFragment"
+        android:label="TeamFragment" />
 </navigation>
