@@ -1,7 +1,9 @@
 package com.cheesecake.presentation.screens.match.events
 
+import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
+import com.cheesecake.domain.entity.EventType
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseAdapter
 import com.cheesecake.presentation.databinding.ItemMatchEventBinding
@@ -16,69 +18,64 @@ class MatchEventAdapter(val matchId: String = "33-34") : BaseAdapter<ItemEventUI
                 setVariable(androidx.databinding.library.baseAdapters.BR.item, currentItem)
 
                 this as ItemMatchEventBinding
-                when {
-                    currentItem.longType == "Normal Goal" -> {
-                        imageViewEventType.setImageResource(R.drawable.ic_football)
-                        textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
-                        textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
+                Log.e("TAG", "onSuccess:$currentItem ")
 
+                Log.d("TAGGGG", "$currentItem")
+                when (currentItem.eventType) {
 
-                    }
-
-                    currentItem.longType == "Own Goal" -> {
-                        imageViewEventType.setImageResource(R.drawable.ic_football)
-                        textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
-                        textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
-
-                    }
-
-                    currentItem.longType == "Penalty" -> {
+                    EventType.PENALTY -> {
                         imageViewEventType.setImageResource(R.drawable.ic_penalty)
                         textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
                         textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
 
                     }
 
-                    currentItem.longType == "Missed Penalty" -> {
-                        imageViewEventType.setImageResource(R.drawable.ic_missed_penalty)
+                    EventType.MISSED_PENALTY -> {
+                        imageViewEventType.setImageResource(R.drawable.ic_miss_penalty)
                         textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
                         textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
 
                     }
 
-                    currentItem.longType == "Yellow Card" -> {
+                    EventType.YELLOW_CARD -> {
                         imageViewEventType.setImageResource(R.drawable.ic_yellowcard)
                         textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
                         textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
 
                     }
 
-                    currentItem.longType == "Red Card" -> {
+                    EventType.RED_CARD -> {
                         imageViewEventType.setImageResource(R.drawable.ic_redcard)
                         textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
                         textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
 
                     }
 
-                    currentItem.shortType == "subst" -> {
+                    EventType.SUBST -> {
                         imageViewEventType.setImageResource(R.drawable.ic_substitution)
                         textViewHomeTeamSubstituentPlayerName.isVisible = true
                         textViewAwayTeamSubstituentPlayerName.isVisible = true
 
                     }
 
-                    currentItem.longType == "Goal cancelled" -> {
+                    EventType.GOAL_CANCELLED -> {
                         imageViewEventType.setImageResource(R.drawable.ic_goal_cancelled)
                         textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
                         textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
 
                     }
 
-                    currentItem.longType == "Penalty confirmed" -> {
-                        imageViewEventType.setImageResource(R.drawable.ic_penalty_confirmed)
+                    EventType.PENALTY_CONFIRMED -> {
+                        imageViewEventType.setImageResource(R.drawable.ic_penaltyconfierm)
                         textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
                         textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
 
+                    }
+
+                    else -> {
+                        imageViewEventType.setImageResource(R.drawable.ic_football)
+                        textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
+                        textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
                     }
                 }
 
@@ -88,6 +85,7 @@ class MatchEventAdapter(val matchId: String = "33-34") : BaseAdapter<ItemEventUI
                         cardViewHomeTeamEvent.isVisible = true
                         cardViewAwayTeamEvent.visibility = View.GONE
                     }
+
                     teamIds[1].toInt() -> {
                         cardViewHomeTeamEvent.visibility = View.GONE
                         cardViewAwayTeamEvent.isVisible = true
