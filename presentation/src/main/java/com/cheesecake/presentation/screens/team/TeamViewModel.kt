@@ -1,6 +1,8 @@
 package com.cheesecake.presentation.screens.team
 
 import androidx.lifecycle.viewModelScope
+import com.cheesecake.domain.entity.Team
+import com.cheesecake.domain.usecases.FavouriteTeamUseCase
 import com.cheesecake.domain.usecases.GetTeamByIdUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
@@ -12,23 +14,58 @@ import javax.inject.Inject
 @HiltViewModel
 class TeamViewModel @Inject constructor(
     private val getTeamByIdUseCase: GetTeamByIdUseCase,
+    private val favouriteTeamUseCase: FavouriteTeamUseCase
 ) : BaseViewModel<TeamUIState, TeamNavigationEvent>(TeamUIState(), Event()) {
 
-    init {
-        getTeam()
-    }
 
-    private fun getTeam() {
+    init {
+        getTeam(30)
+    }
+    private fun toggleFavourite(teamId: Int) {
         viewModelScope.launch {
-            getTeamByIdUseCase(34).let { team ->
-                _state.update { uiState ->
-                    uiState.copy(
-                        imageUrl = team.imageUrl,
-                        teamName = team.name,
-                        country = team.country
-                    )
-                }
+            favouriteTeamUseCase(teamId).let {
+                _state.update { uiState -> uiState.copy(isFavourite = it.isFavourite) }
             }
         }
+    }
+
+    private fun getTeam(teamId: Int) {
+        tryToExecute(
+            { getTeamByIdUseCase(teamId) },
+            ::onSuccess,
+            ::onError
+        )
+    }
+    private fun onSuccess(team: Team) {
+        team.let {
+            _state.update { teamUiState ->
+                teamUiState.copy(
+                    teamId = it.id,
+                    teamName = it.name,
+                    country = it.country,
+                    imageUrl = it.imageUrl,
+                    isFavourite = it.isFavourite,
+                    onTeamFavoriteClick = { teamId->
+                        toggleFavourite(
+                            teamId,
+                        )
+                    },
+                    onBackClick = { onBackClick() }
+                )
+            }
+        }
+    }
+
+    private fun onBackClick() {
+        _event.update { Event(TeamNavigationEvent.NavigateBack) }
+    }
+    private fun onError(e: Throwable) {
+        _state.update {
+            it.copy(
+                errorMessage = e.localizedMessage ?: "Unknown error.",
+                isLoading = false
+            )
+        }
+
     }
 }

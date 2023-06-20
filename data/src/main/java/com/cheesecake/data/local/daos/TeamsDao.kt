@@ -28,4 +28,6 @@ interface TeamsDao {
     @Query("DELETE FROM team_table WHERE teamId = :teamId")
     suspend fun deleteTeamById(teamId: Int)
 
+    @Query("SELECT * FROM team_table where teamId = :teamId ")
+    suspend fun getTeamById(teamId: Int): TeamLocalDTO?
 }
