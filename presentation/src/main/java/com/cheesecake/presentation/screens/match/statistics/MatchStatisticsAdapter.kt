@@ -46,6 +46,9 @@ class MatchStatisticsAdapter : BaseAdapter<StatisticsItemUiState>(null) {
                         progressBarAwayTeam.progressTintList = fontLight
                     }
                 }
+                val backgroundColors = listOf(R.color.cardSurface, R.color.transparent)
+                val setPositionBackgroundColor = backgroundColors[position % backgroundColors.size]
+                holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, setPositionBackgroundColor))
             }
         }
     }
