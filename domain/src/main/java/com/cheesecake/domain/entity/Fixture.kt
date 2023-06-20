@@ -15,5 +15,7 @@ data class Fixture(
     val matchTime: String?,
     val matchDate: Date,
     val isFinished: Boolean = false,
-    val leagueSeason: Int
+    val leagueSeason: Int,
+    val leagueLogoUrl: String,
+
 )

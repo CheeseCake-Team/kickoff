@@ -57,5 +57,4 @@ class LocalDataSourceImp @Inject constructor(
         return leagueDao.getFavouriteLeagues()
     }
 
-
 }

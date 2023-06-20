@@ -14,8 +14,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/Widget.Material3.CardView.Filled"
+        app:cardBackgroundColor="@color/cardSurface"
         android:layout_marginBottom="@dimen/spacing_8"
-        android:backgroundTint="@color/cardSurface"
         app:cardCornerRadius="@dimen/spacing_8">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,7 +34,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:round="100dp"
                 tools:src="@drawable/player"
-                app:imageUrl="@{item.photo}"
+                app:imageUrl="@{item.imageUrl}"
                 />
 
             <TextView

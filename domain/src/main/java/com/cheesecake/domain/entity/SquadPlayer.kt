@@ -6,5 +6,5 @@ data class SquadPlayer(
     val age: Int,
     val number: Int,
     val position: String,
-    val photo: String
+    val ImageUrl: String
 )

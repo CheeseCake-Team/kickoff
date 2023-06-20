@@ -153,6 +153,10 @@ class IFootballRepositoryImpl
         return localDataSource.getFavouriteLeagues().map { it.toEntity() }
     }
 
+    override suspend fun getSquadOfTeam(teamId: Int): List<SquadPlayer> {
+        return remoteDataSource.getSquadByTeamId(teamId).toEntity()
+    }
+
     override suspend fun getCoachTrophy(coachId: Int): List<Trophy> {
         return remoteDataSource.getCoachTrophies(coachId).toEntity()
     }
@@ -164,29 +168,17 @@ class IFootballRepositoryImpl
         return remoteDataSource.getHeadToHeadByDate(teamsId, date, timeZone).first().toEntity()
     }
 
-    override suspend fun getSquadOfTeam(teamId: Int): List<SquadPlayer> {
-        return remoteDataSource.getSquadByTeamId(teamId).toEntity()
-    }
-
     override suspend fun getMatchesByTeamIdAndSeason(
         timeZone: String,
-        teamId: Int,
-        season: Int
+        season: Int,
+        teamId: Int
     ): List<Fixture> {
-        return remoteDataSource.getFixtureBySeasonByTeamId(timeZone, teamId, season).toEntity()
+        return remoteDataSource.getFixtureBySeasonByTeamId(timeZone, season, teamId).toEntity()
     }
-
-//    override suspend fun getLocallyTeamById(teamId: Int) : Team? {
-//        return localDataSource.getTeamById(teamId)?.toEntity()
-//    }
 
     override suspend fun getRemotelyTeam(teamId: Int): Team {
         return remoteDataSource.getTeamById(teamId).first().toEntity()
     }
-
-//    override suspend fun updateOrInsertTeam(team: Team) {
-//        return localDataSource.updateOrInsertTeam(team.toLocal())
-//    }
 
 
 }

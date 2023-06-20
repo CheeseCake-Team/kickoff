@@ -10,6 +10,7 @@ import com.cheesecake.domain.entity.PlayerStatistics
 import com.cheesecake.domain.entity.SquadPlayer
 import com.cheesecake.domain.entity.Trophy
 import com.cheesecake.domain.entity.Match
+import com.cheesecake.domain.entity.SquadPlayer
 import kotlinx.coroutines.flow.Flow
 
 interface IFootballRepository {
@@ -69,4 +70,12 @@ interface IFootballRepository {
 
 //    suspend fun updateOrInsertTeam(team: Team)
     suspend fun getFixtureStatisticsByFixtureId(fixtureId: Int): List<FixtureStatistics>
+
+    suspend fun getSquadOfTeam(teamId: Int): List<SquadPlayer>
+
+    suspend fun getMatchesByTeamIdAndSeason(timeZone: String, season: Int, teamId: Int): List<Fixture>
+
+    suspend fun getRemotelyTeam(teamId: Int): Team
+
+   // suspend fun updateOrInsertTeam(team: Team)
 }

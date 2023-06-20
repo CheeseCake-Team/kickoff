@@ -26,8 +26,4 @@ interface LocalDataSource {
 
     suspend fun deleteTeamById(teamId: Int)
 
-//    suspend fun getTeamById(teamId: Int): TeamLocalDTO?
-
-
-
 }

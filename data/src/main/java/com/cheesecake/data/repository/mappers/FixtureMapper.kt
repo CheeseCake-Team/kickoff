@@ -23,7 +23,8 @@ fun FixtureDTO.toEntity(): Fixture {
         matchTime = this.fixtureDataDTO.date?.toString(),
         matchDate = this.fixtureDataDTO.date ?: Date(),
         isFinished = this.fixtureDataDTO.status.short == FixtureStatus.MatchFinished.toString(),
-        leagueSeason = this.league.season
+        leagueSeason = this.league.season,
+        leagueLogoUrl = this.league.logo
     )
 }
 

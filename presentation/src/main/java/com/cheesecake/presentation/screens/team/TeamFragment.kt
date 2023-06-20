@@ -9,15 +9,15 @@ import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.base.BaseFragmentsAdapter
 import com.cheesecake.presentation.databinding.FragmentTeamBinding
-import com.cheesecake.presentation.screens.teamPlayers.TeamPlayerFragment
+import com.cheesecake.presentation.screens.team.teamMatches.TeamMatchesFragment
+import com.cheesecake.presentation.screens.team.teamPlayers.TeamPlayersFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class TeamFragment: BaseFragment<FragmentTeamBinding>() {
     override val layoutIdFragment = R.layout.fragment_team
-    override val viewModel: ViewModel by viewModels()
+    override val viewModel: TeamViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,17 +26,17 @@ class TeamFragment: BaseFragment<FragmentTeamBinding>() {
 
     private fun init() {
         val fragments = listOf(
-            TeamPlayerFragment(),
-            TeamPlayerFragment(),
-            TeamPlayerFragment(),
+            TeamPlayersFragment(),
+            TeamMatchesFragment(),
+            TeamPlayersFragment(),
         )
         val fragmentsAdapter = BaseFragmentsAdapter((activity as AppCompatActivity), fragments)
         binding.teamViewPager.adapter = fragmentsAdapter
         TabLayoutMediator(binding.tabLayout, binding.teamViewPager) { tab, position ->
             when (position) {
                 0 -> tab.text = "Players"
-                1 -> tab.text = "Players"
-                2 -> tab.text = "Players"
+                1 -> tab.text = "Matches"
+                2 -> tab.text = "Statistic"
             }
         }.attach()
     }

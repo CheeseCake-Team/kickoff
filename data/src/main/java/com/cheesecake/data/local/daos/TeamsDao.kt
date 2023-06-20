@@ -31,5 +31,4 @@ interface TeamsDao {
 
     @Query("SELECT * FROM team_table where teamId = :teamId ")
     suspend fun getTeamById(teamId: Int): TeamLocalDTO?
-
 }
