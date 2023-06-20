@@ -26,21 +26,21 @@ class MatchEventAdapter(val matchId: String = "33-34") : BaseAdapter<ItemEventUI
                     }
 
                     currentItem.longType == "Own Goal" -> {
-                        imageViewEventType.setImageResource(R.drawable.ic_bell)
+                        imageViewEventType.setImageResource(R.drawable.ic_football)
                         textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
                         textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
 
                     }
 
                     currentItem.longType == "Penalty" -> {
-                        imageViewEventType.setImageResource(R.drawable.ic_bell)
+                        imageViewEventType.setImageResource(R.drawable.ic_penalty)
                         textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
                         textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
 
                     }
 
                     currentItem.longType == "Missed Penalty" -> {
-                        imageViewEventType.setImageResource(R.drawable.ic_bell)
+                        imageViewEventType.setImageResource(R.drawable.ic_missed_penalty)
                         textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
                         textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
 
@@ -68,14 +68,14 @@ class MatchEventAdapter(val matchId: String = "33-34") : BaseAdapter<ItemEventUI
                     }
 
                     currentItem.longType == "Goal cancelled" -> {
-                        imageViewEventType.setImageResource(R.drawable.ic_bell)
+                        imageViewEventType.setImageResource(R.drawable.ic_goal_cancelled)
                         textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
                         textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
 
                     }
 
                     currentItem.longType == "Penalty confirmed" -> {
-                        imageViewEventType.setImageResource(R.drawable.ic_bell)
+                        imageViewEventType.setImageResource(R.drawable.ic_penalty_confirmed)
                         textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
                         textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
 
