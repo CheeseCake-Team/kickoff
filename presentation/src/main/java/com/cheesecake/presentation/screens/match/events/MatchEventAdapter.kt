@@ -31,21 +31,21 @@ class MatchEventAdapter(val matchId: String = "33-34") : BaseAdapter<ItemEventUI
                     }
 
                     EventType.MISSED_PENALTY -> {
-                        imageViewEventType.setImageResource(R.drawable.ic_miss_penalty)
+                        imageViewEventType.setImageResource(R.drawable.ic_missed_penalty)
                         textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
                         textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
 
                     }
 
                     EventType.YELLOW_CARD -> {
-                        imageViewEventType.setImageResource(R.drawable.ic_yellowcard)
+                        imageViewEventType.setImageResource(R.drawable.ic_yellow_card)
                         textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
                         textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
 
                     }
 
                     EventType.RED_CARD -> {
-                        imageViewEventType.setImageResource(R.drawable.ic_redcard)
+                        imageViewEventType.setImageResource(R.drawable.ic_red_card)
                         textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
                         textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
 
@@ -66,7 +66,7 @@ class MatchEventAdapter(val matchId: String = "33-34") : BaseAdapter<ItemEventUI
                     }
 
                     EventType.PENALTY_CONFIRMED -> {
-                        imageViewEventType.setImageResource(R.drawable.ic_penaltyconfierm)
+                        imageViewEventType.setImageResource(R.drawable.ic_penalty_confirmed)
                         textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
                         textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
 
