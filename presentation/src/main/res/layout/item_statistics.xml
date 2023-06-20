@@ -17,8 +17,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/spacing_48"
-            android:background="@color/cardSurface">
+            android:layout_height="@dimen/spacing_48">
 
             <TextView
                 android:id="@+id/text_view_home_team_value"
