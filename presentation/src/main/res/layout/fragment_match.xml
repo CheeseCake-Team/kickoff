@@ -119,7 +119,7 @@
 
         <TextView
             android:id="@+id/away_team_name"
-            style="@style/TitleMedium"
+            style="@style/TitleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/fontHeavy"
@@ -131,7 +131,7 @@
 
         <TextView
             android:id="@+id/home_team_name"
-            style="@style/TitleMedium"
+            style="@style/TitleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_8"
