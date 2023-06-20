@@ -1,5 +1,6 @@
 package com.cheesecake.presentation.screens.match.events
 
+import com.cheesecake.domain.entity.EventType
 import com.cheesecake.domain.entity.FixtureEvents
 
 data class MatchEventUIState(
@@ -13,10 +14,9 @@ data class ItemEventUIState(
     val teamId: Int= 0,
     val playerId: Int = 0,
     val playerName: String = "",
-    val SubstituentPlayerId: String? = "",
-    val SubstituentPlayerName: String?= "",
-    val longType: String = "",
-    val shortType: String = "",
+    val substituentPlayerId: String? = "",
+    val substituentPlayerName: String?= "",
+    val eventType: EventType ,
     val detail: String? = ""
 )
 
@@ -26,10 +26,9 @@ fun List<FixtureEvents>.toUIState(): List<ItemEventUIState>{
         teamId = it.teamId,
         playerId = it.playerId,
         playerName = it.playerName,
-        SubstituentPlayerId = it.SubstituentPlayerId,
-        SubstituentPlayerName = it.SubstituentPlayerName,
-        shortType = it.shortType,
-        longType = it.longType,
+        substituentPlayerId = it.substituentPlayerId,
+        substituentPlayerName = it.substituentPlayerName,
+        eventType = it.eventType,
         detail = it.detail
     ) }
 }

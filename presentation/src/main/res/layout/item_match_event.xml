@@ -64,6 +64,7 @@
                 <TextView
                     android:id="@+id/text_view_home_team_substituent_player_name"
                     style="@style/bodyMedium"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_4"
@@ -87,8 +88,8 @@
             android:elevation="@dimen/spacing_12"
             app:cardCornerRadius="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
@@ -147,6 +148,7 @@
                 <TextView
                     android:id="@+id/text_view_away_team_substituent_player_name"
                     style="@style/bodyMedium"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_4"
