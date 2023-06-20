@@ -1,9 +1,6 @@
 package com.cheesecake.presentation.screens.match
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
 import com.cheesecake.domain.entity.Match
 import com.cheesecake.domain.usecases.GetMatchDetailsUseCase
 import com.cheesecake.presentation.base.BaseViewModel
@@ -23,12 +20,15 @@ class MatchViewModel
 ) : BaseViewModel<MatchUIState, MatchEvents>(MatchUIState(), Event()) {
 
 
-    private val _matchId = MutableStateFlow(matchArgs.matchId)
-    val matchId: StateFlow<String> = _matchId.asStateFlow()
+    private val _matchId: MutableStateFlow<String> = MutableStateFlow(matchArgs.matchId)
+    val matchId: StateFlow<String> get() = _matchId
+
+    private val _fixtureId: MutableStateFlow<Int?> = MutableStateFlow(null)
+    val fixtureId: StateFlow<Int?> get() = _fixtureId
 
     init {
         tryToExecute(
-            { getMatchDetailsUseCase("33-34","2019-12-26", "Africa/Cairo") },
+            { getMatchDetailsUseCase(matchArgs.matchId,matchArgs.date, "Africa/Cairo") },
             ::onSuccess,
             ::onError
         )
@@ -47,9 +47,7 @@ class MatchViewModel
                 matchState = match.matchState
             )
         }
-        Log.d("TAG", "getMatch:${match.fixtureId} ")
-//        _fixtureId.postValue(match.fixtureId)
-
+        _fixtureId.value = match.fixtureId
     }
 
     private fun onError(e: Throwable) {
