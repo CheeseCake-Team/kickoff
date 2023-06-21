@@ -15,11 +15,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.presentation.base.BaseAdapter
-import com.cheesecake.presentation.screens.search.SearchViewModel
 import com.cheesecake.presentation.base.BaseListAdapter
 import com.cheesecake.presentation.screens.home.MatchItemUIState
 import com.cheesecake.presentation.screens.search.SearchAdapter
 import com.cheesecake.presentation.screens.search.SearchResult
+import com.cheesecake.presentation.screens.search.SearchViewModel
 
 
 @BindingAdapter("app:imageUrl")
@@ -104,7 +104,10 @@ fun showLoading(view: View, isVisible: Boolean?) {
 
 @BindingAdapter(value = ["app:viewVisibilityInLoading"])
 fun hideWhenLoading(view: View, isVisible: Boolean) {
-    view.isVisible = !isVisible
+    when (isVisible) {
+        true -> View.VISIBLE
+        else -> View.INVISIBLE
+    }
 }
 
 @BindingAdapter(value = ["app:showNoResultFound"])
@@ -142,7 +145,7 @@ fun TextView.setMatchScore(fixture: Fixture?) {
 @BindingAdapter("app:scoreOrTime")
 fun TextView.setMatchScore(item: MatchItemUIState?) {
     item?.let {
-        when(it.matchState ) {
+        when (it.matchState) {
             "FT" -> "Finished\n  ${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
             else -> this.text = it.matchTime
         }
