@@ -2,6 +2,7 @@ package com.cheesecake.domain.repository
 
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.FixtureEvents
+import com.cheesecake.domain.entity.FixtureLineup
 import com.cheesecake.domain.entity.FixtureStatistics
 import com.cheesecake.domain.entity.TeamStatisticsEntity
 import com.cheesecake.domain.entity.TeamStanding
@@ -61,4 +62,6 @@ interface IFootballRepository {
 
     suspend fun getFixtureStatisticsByFixtureId(fixtureId: Int): List<FixtureStatistics>
     suspend fun getFixtureEventByFixtureId(fixtureId: Int): List<FixtureEvents>
+
+    suspend fun getFixtureLineupByFixtureId(fixtureId: Int): List<FixtureLineup>
 }
