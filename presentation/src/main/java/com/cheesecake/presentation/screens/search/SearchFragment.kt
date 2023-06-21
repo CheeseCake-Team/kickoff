@@ -10,6 +10,8 @@ import androidx.navigation.fragment.findNavController
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentSearchBinding
+import com.cheesecake.presentation.screens.search.adapters.SearchAdapter
+import com.cheesecake.presentation.screens.search.models.SearchEvents
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -42,7 +44,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
             is SearchEvents.ViewAllLClickEvent -> {
                 SearchFragmentDirections.actionSearchFragmentToLeaguesSearchFragment(
-                    viewModel.searchInput.value
+                    viewModel.state.value.searchInput
                 )
             }
 

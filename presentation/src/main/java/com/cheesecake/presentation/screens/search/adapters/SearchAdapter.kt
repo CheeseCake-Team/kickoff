@@ -1,14 +1,14 @@
-package com.cheesecake.presentation.screens.search
+package com.cheesecake.presentation.screens.search.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.abaferastech.marvelapp.ui.base.BaseDiffUtil
 import com.cheesecake.presentation.databinding.ItemSearchLeagueBinding
 import com.cheesecake.presentation.databinding.ItemSearchTeamBinding
 import androidx.databinding.library.baseAdapters.BR
+import com.cheesecake.presentation.screens.search.models.SearchResult
 
 
 class SearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

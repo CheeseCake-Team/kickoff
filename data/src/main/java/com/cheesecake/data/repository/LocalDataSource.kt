@@ -1,6 +1,7 @@
 package com.cheesecake.data.repository
 
 import com.cheesecake.data.local.models.LeagueLocalDTO
+import com.cheesecake.data.local.models.RecentSearchLocalDTO
 import com.cheesecake.data.local.models.TeamLocalDTO
 import kotlinx.coroutines.flow.Flow
 
@@ -25,5 +26,9 @@ interface LocalDataSource {
     suspend fun deleteLeagueById(leagueId: Int)
 
     suspend fun deleteTeamById(teamId: Int)
+
+    suspend fun getRecentSearches(): List<RecentSearchLocalDTO>
+
+    suspend fun updateOrInsertRecentSearches(recent: RecentSearchLocalDTO)
 
 }

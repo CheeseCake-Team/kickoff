@@ -3,13 +3,11 @@ package com.cheesecake.presentation.screens.search.viewAll.leagues
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentLeaguesSearchBinding
-import com.cheesecake.presentation.screens.search.SearchEvents
-import com.cheesecake.presentation.screens.search.SearchFragmentDirections
+import com.cheesecake.presentation.screens.search.models.SearchEvents
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

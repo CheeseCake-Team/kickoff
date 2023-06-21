@@ -1,6 +1,7 @@
-package com.cheesecake.presentation.screens.search
+package com.cheesecake.presentation.screens.search.adapters
 
 import androidx.recyclerview.widget.DiffUtil
+import com.cheesecake.presentation.screens.search.models.SearchResult
 
 open class SearchDiffUtil(
     private val oldList: List<SearchResult>,

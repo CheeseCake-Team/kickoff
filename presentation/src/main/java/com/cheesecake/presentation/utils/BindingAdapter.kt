@@ -17,8 +17,8 @@ import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.presentation.base.BaseAdapter
 import com.cheesecake.presentation.base.BaseListAdapter
 import com.cheesecake.presentation.screens.home.MatchItemUIState
-import com.cheesecake.presentation.screens.search.SearchAdapter
-import com.cheesecake.presentation.screens.search.SearchResult
+import com.cheesecake.presentation.screens.search.adapters.SearchAdapter
+import com.cheesecake.presentation.screens.search.models.SearchResult
 import com.cheesecake.presentation.screens.search.SearchViewModel
 
 

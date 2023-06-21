@@ -1,4 +1,4 @@
-package com.cheesecake.presentation.screens.search
+package com.cheesecake.presentation.screens.search.models
 
 sealed class SearchResult {
     data class Team(

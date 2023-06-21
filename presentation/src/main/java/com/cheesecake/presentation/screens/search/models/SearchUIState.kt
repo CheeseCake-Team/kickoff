@@ -1,13 +1,11 @@
-package com.cheesecake.presentation.screens.search
-
-import com.cheesecake.presentation.models.UIStateError
+package com.cheesecake.presentation.screens.search.models
 
 data class SearchUIState(
     val searchInput: String = "",
     val searchTypes: SearchType? = null,
     val searchResult: List<SearchResult>? = null,
     val isLoading: Boolean = false,
-    val error: List<UIStateError> = emptyList()
+    val error: String = ""
 )
 
 

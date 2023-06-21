@@ -1,7 +1,5 @@
 package com.cheesecake.data.repository
 
-import android.util.Log
-import com.cheesecake.data.remote.models.LeagueDTO
 import com.cheesecake.data.repository.mappers.toEntity
 import com.cheesecake.data.repository.mappers.toLocal
 import com.cheesecake.domain.entity.Fixture
@@ -9,6 +7,7 @@ import com.cheesecake.domain.entity.FixtureStatistics
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.entity.Match
 import com.cheesecake.domain.entity.PlayerStatistics
+import com.cheesecake.domain.entity.RecentSearch
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.entity.TeamStanding
 import com.cheesecake.domain.entity.TeamStatisticsEntity
@@ -154,6 +153,7 @@ class IFootballRepositoryImpl
     override suspend fun getCoachTrophy(coachId: Int): List<Trophy> {
         return remoteDataSource.getCoachTrophies(coachId).toEntity()
     }
+
     override suspend fun getFixtureStatisticsByFixtureId(fixtureId: Int): List<FixtureStatistics> {
         return remoteDataSource.getFixtureStatisticsByFixtureId(fixtureId).toEntity()
     }
@@ -161,4 +161,15 @@ class IFootballRepositoryImpl
     override suspend fun getMatchDetails(teamsId: String, date: String, timeZone: String): Match {
         return remoteDataSource.getHeadToHeadByDate(teamsId, date, timeZone).first().toEntity()
     }
+
+    override suspend fun getRecentSearches(): List<RecentSearch> {
+        return localDataSource.getRecentSearches().map { it.toEntity() }
+    }
+
+    override suspend fun updateOrInsertRecentSearch(recent: RecentSearch) {
+        localDataSource.updateOrInsertRecentSearches(recent.toLocal())
+    }
+
+
+
 }

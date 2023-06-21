@@ -1,4 +1,4 @@
-package com.cheesecake.presentation.screens.search
+package com.cheesecake.presentation.screens.search.models
 
 sealed interface SearchEvents{
     data class LeagueClickEvent(val leagueId: Int, val season: Int) : SearchEvents
