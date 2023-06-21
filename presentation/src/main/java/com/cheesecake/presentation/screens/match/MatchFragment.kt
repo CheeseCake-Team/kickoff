@@ -1,6 +1,7 @@
 package com.cheesecake.presentation.screens.match
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -32,9 +33,10 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
         val fragments = mutableListOf<Fragment>()
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.fixtureId.combine(viewModel.matchId) { fixtureId, matchId ->
-                val matchStatisticsFragment = MatchStatisticsFragment.newInstance(fixtureId!!)
-                val matchEventFragment = MatchEventFragment()
+            viewModel.args.observe(viewLifecycleOwner) {
+
+                val matchStatisticsFragment = MatchStatisticsFragment.newInstance(it.fixtureId)
+                val matchEventFragment = MatchEventFragment.newInstance(it.fixtureId,it.homeTeamId,it.awayTeamId)
                 val matchLineupFragment = MatchLineupFragment()
 
                 fragments.addAll(
@@ -54,7 +56,7 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
                         2 -> tab.text = "Lineup"
                     }
                 }.attach()
-            }.collect()
+            }
         }
     }
 }

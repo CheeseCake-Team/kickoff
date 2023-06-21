@@ -20,11 +20,11 @@ class MatchStatisticsViewModel @Inject constructor(
     MatchStatisticsUIState(),
     Event()
 ) {
-    val matchStatisticsArgs = MatchStatisticsArgs(savedStateHandle)
+    private val matchStatisticsArgs = MatchStatisticsArgs(savedStateHandle)
 
     init {
         tryToExecute(
-            { getFixtureStatisticsByFixtureId(215662) },
+            { getFixtureStatisticsByFixtureId(matchStatisticsArgs.fixtureId) },
             ::onSuccess,
             ::onError
         )

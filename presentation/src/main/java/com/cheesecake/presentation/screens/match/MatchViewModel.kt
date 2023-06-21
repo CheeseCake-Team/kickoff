@@ -1,14 +1,13 @@
 package com.cheesecake.presentation.screens.match
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.cheesecake.domain.entity.Match
 import com.cheesecake.domain.usecases.GetMatchDetailsUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
@@ -16,19 +15,16 @@ import javax.inject.Inject
 class MatchViewModel
 @Inject constructor(
     private val getMatchDetailsUseCase: GetMatchDetailsUseCase,
-    matchArgs: MatchArgs
+    matchArgs: MatchNavigationArgs
 ) : BaseViewModel<MatchUIState, MatchEvents>(MatchUIState(), Event()) {
 
+    private val _args = MutableLiveData<Args>()
+    val args: LiveData<Args> = _args
 
-    private val _matchId: MutableStateFlow<String> = MutableStateFlow(matchArgs.matchId)
-    val matchId: StateFlow<String> get() = _matchId
-
-    private val _fixtureId: MutableStateFlow<Int?> = MutableStateFlow(null)
-    val fixtureId: StateFlow<Int?> get() = _fixtureId
 
     init {
         tryToExecute(
-            { getMatchDetailsUseCase(matchArgs.matchId,matchArgs.date, "Africa/Cairo") },
+            { getMatchDetailsUseCase(matchArgs.matchId, matchArgs.date, "Africa/Cairo") },
             ::onSuccess,
             ::onError
         )
@@ -38,7 +34,6 @@ class MatchViewModel
         _state.update { uiState ->
             uiState.copy(
                 homeTeamName = match.homeTeamName,
-                matchId = match.matchId,
                 homeTeamLogoUrl = match.homeTeamLogoUrl,
                 homeTeamGoals = match.homeTeamGoals,
                 awayTeamName = match.awayTeamName,
@@ -47,7 +42,8 @@ class MatchViewModel
                 matchState = match.matchState
             )
         }
-        _fixtureId.value = match.fixtureId
+        Log.d("TAG", "onSuccess match: $match")
+        _args.postValue(Args(match.fixtureId, match.homeTeamId, match.awayTeamId))
     }
 
     private fun onError(e: Throwable) {
@@ -61,3 +57,9 @@ class MatchViewModel
     }
 
 }
+
+data class Args(
+    val fixtureId: Int = 0,
+    val homeTeamId: Int = 0,
+    val awayTeamId: Int = 0
+)
