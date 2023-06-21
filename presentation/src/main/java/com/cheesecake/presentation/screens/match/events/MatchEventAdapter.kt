@@ -20,7 +20,11 @@ class MatchEventAdapter(val homeTeamId: Int = 33,val awayTeamId: Int = 34) : Bas
                 this as ItemMatchEventBinding
 
                 when (currentItem.eventType) {
-
+                    EventType.OWN_GOAL -> {
+                        imageViewEventType.setImageResource(R.drawable.ic_own_goal)
+                        textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
+                        textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
+                    }
                     EventType.PENALTY -> {
                         imageViewEventType.setImageResource(R.drawable.ic_penalty)
                         textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
