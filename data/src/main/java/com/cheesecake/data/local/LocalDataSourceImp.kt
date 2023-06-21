@@ -49,9 +49,9 @@ class LocalDataSourceImp @Inject constructor(
         teamsDao.deleteTeamById(teamId)
     }
 
-//    override suspend fun getTeamById(teamId: Int): TeamLocalDTO? {
-//        return teamsDao.getLeagueById(teamId)
-//    }
+    override suspend fun getTeamById(teamId: Int): TeamLocalDTO? {
+        return teamsDao.getTeamById(teamId)
+    }
 
     override suspend fun getFavouriteLeagues(): Flow<List<LeagueLocalDTO>> {
         return leagueDao.getFavouriteLeagues()

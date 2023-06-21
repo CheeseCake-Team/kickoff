@@ -9,9 +9,9 @@ class FavouriteTeamUseCase@Inject constructor(
     private val footballRepository: IFootballRepository,
     private val getTeamByIdUseCase: GetTeamByIdUseCase) {
 
-    suspend operator fun invoke(teamId: Int): Team {
-      getTeamByIdUseCase(teamId).let {
-           /* footballRepository.updateOrInsertTeam(
+    suspend operator fun invoke(teamId: Int, leagueId: Int, season: Int): Team {
+        getTeamByIdUseCase(teamId).let {
+            footballRepository.updateOrInsertTeam(
                 Team(
                     id = it.id,
                     name = it.name,
@@ -21,9 +21,9 @@ class FavouriteTeamUseCase@Inject constructor(
                     stadiumName = it.stadiumName,
                     imageUrl = it.imageUrl,
                     isFavourite = !it.isFavourite,
+                )
             )
-            )
-        */}
+        }
         return getTeamByIdUseCase(teamId)
     }
 }

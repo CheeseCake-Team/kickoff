@@ -181,4 +181,8 @@ class IFootballRepositoryImpl
     override suspend fun getRemotelyTeam(teamId: Int): Team {
         return remoteDataSource.getTeamById(teamId).first().toEntity()
     }
+
+    override suspend fun updateOrInsertTeam(team: Team, leagueId: Int, season: Int) {
+        return localDataSource.updateOrInsertTeam(team.toLocal(leagueId, season))
+    }
 }

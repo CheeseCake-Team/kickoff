@@ -67,11 +67,7 @@ interface IFootballRepository {
 
     suspend fun getRemotelyTeam(teamId: Int): Team
 
-//    suspend fun updateOrInsertTeam(team: Team)
+    suspend fun updateOrInsertTeam(team: Team, leagueId: Int, season: Int)
     suspend fun getFixtureStatisticsByFixtureId(fixtureId: Int): List<FixtureStatistics>
 
-
-
-
-   // suspend fun updateOrInsertTeam(team: Team)
 }
