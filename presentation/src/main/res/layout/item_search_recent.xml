@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="item"
-            type="com.cheesecake.presentation.screens.search.models.SearchResult.League" />
+            type="com.cheesecake.presentation.screens.homeSearch.HomeSearchData.RecentSearches" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,33 +42,19 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_8"
                     android:fontFamily="@font/lato"
-                    android:text="@string/leagues"
+                    android:text="@string/recent_search"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Leagues" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
-
-                <TextView
-                    android:id="@+id/text_view_leagues_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:fontFamily="@font/lato"
-                    android:text="@{`(`+String.valueOf(item.items.size())+`)`}"
-                    app:layout_constraintBottom_toBottomOf="@+id/text_view_leagues_label"
-                    app:layout_constraintStart_toEndOf="@+id/text_view_leagues_label"
-                    app:layout_constraintTop_toTopOf="@+id/text_view_leagues_label"
-                    tools:text="(45)" />
 
                 <TextView
                     android:id="@+id/text_view_view_more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
                     android:gravity="center"
-                    android:onClick="@{() -> item.onViewAllClick.invoke()}"
-                    android:text="@string/view_more"
+                    android:onClick="@{() -> item.onClickDeleteAll.invoke()}"
+                    android:text="@string/delete_all"
                     app:layout_constraintBottom_toBottomOf="@+id/text_view_leagues_label"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/text_view_leagues_label" />
@@ -86,13 +71,10 @@
             android:clipToPadding="false"
             android:overScrollMode="never"
             android:paddingVertical="@dimen/spacing_4"
+            android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@+id/card_header"
-            app:nestedSearchItems="@{item.items}"
-
-            tools:listitem="@layout/item_league" />
+            app:nestedSearchItems="@{item.items}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </layout>

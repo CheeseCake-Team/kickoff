@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.cheesecake.presentation.screens.search.SearchViewModel" />
+            type="com.cheesecake.presentation.screens.homeSearch.HomeSearchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,14 +37,12 @@
             android:drawablePadding="8dp"
             android:fontFamily="@font/lato"
             android:hint="@string/search_here"
-            android:singleLine="true"
             android:paddingHorizontal="@dimen/font_size_16sp"
             android:textColor="@color/fontHeavy"
             android:textColorHint="@color/lightGreyText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:onSearchTextChanged="@{viewModel}" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/search_recycler_view"
@@ -58,7 +56,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_bar"
-            app:searchItems="@{viewModel.state.searchResult}"
             app:viewVisibilityInLoading="@{viewModel.state.loading}"
             tools:context="com.cheesecake.league.LeagueTeamsFragment"
             tools:listitem="@layout/item_team" />
@@ -73,6 +70,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:showLoading="@{viewModel.state.loading}" />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

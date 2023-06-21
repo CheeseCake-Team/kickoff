@@ -81,4 +81,12 @@
             android:id="@+id/action_leaguesSearchFragment_to_leagueFragment"
             app:destination="@id/leagueFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/homeSearchFragment"
+        android:name="com.cheesecake.presentation.screens.homeSearch.HomeSearchFragment"
+        android:label="HomeSearchFragment" >
+        <action
+            android:id="@+id/action_homeSearchFragment_to_leagueFragment"
+            app:destination="@id/leagueFragment" />
+    </fragment>
 </navigation>

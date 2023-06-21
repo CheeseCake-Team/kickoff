@@ -48,5 +48,7 @@
     <string name="settings">Settings</string>
     <string name="view_more">View more</string>
     <string name="leagues">Leagues</string>
+    <string name="recent_search">Recent Search</string>
+    <string name="delete_all">Delete all</string>
 
 </resources>
