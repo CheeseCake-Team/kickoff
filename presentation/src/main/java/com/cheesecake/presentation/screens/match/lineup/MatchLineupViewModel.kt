@@ -1,13 +1,10 @@
 package com.cheesecake.presentation.screens.match.lineup
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import com.cheesecake.domain.entity.FixtureLineup
-import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.usecases.GetFixtureLineupByFixtureIdUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
-import com.google.android.material.color.utilities.MaterialDynamicColors.onError
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
@@ -28,10 +25,17 @@ class MatchLineupViewModel @Inject constructor(
         )
 
     }
-    private fun onSuccess(getFixtureId:List <FixtureLineup>)   {
-        Log.d("TAAAAAAG","$getFixtureId")
+
+    private fun onSuccess(getFixtureId: List<FixtureLineup>) {
+        _state.update {
+            it.copy(
+                data = getFixtureId.toUIState(),
+                isLoading = false
+            )
+        }
 
     }
+
     private fun onError(e: Throwable) {
         _state.update {
             it.copy(
