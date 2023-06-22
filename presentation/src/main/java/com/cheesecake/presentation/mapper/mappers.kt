@@ -2,30 +2,29 @@ package com.cheesecake.presentation.mapper
 
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.Team
-import com.cheesecake.domain.entity.TeamCountry
-import com.cheesecake.presentation.models.TeamCountryUIState
+import com.cheesecake.domain.entity.Country
+import com.cheesecake.presentation.models.CountryItemUIState
 import com.cheesecake.presentation.models.TeamUIState
 import com.cheesecake.presentation.screens.home.MatchItemUIState
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-fun Team.toUIState(): TeamUIState {
+fun Team.toTeamUIState(onClick: () -> Unit): TeamUIState {
     return TeamUIState(
-        teamId = this.id,
         teamName = this.name,
         founded = this.yearFounded,
         teamCountry = this.country,
         venueCapacity = this.stadiumCapacity,
         venueName = this.stadiumName,
         imageUrl = this.imageUrl,
-        isFavourite = this.isFavourite,
+        onTeamClick = onClick
     )
 }
 
 
-fun TeamCountry.toUIModel(onClick: (String) -> Unit): TeamCountryUIState {
-    return TeamCountryUIState(
+fun Country.toUIModel(onClick: () -> Unit): CountryItemUIState {
+    return CountryItemUIState(
         name = name,
         flag = flag,
         onClick = onClick
