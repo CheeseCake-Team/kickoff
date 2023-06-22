@@ -421,7 +421,9 @@ interface RemoteDataSource {
         teamId: Int
     ): List<Int>
 
-    suspend fun getTeamCountries(): List<TeamCountriesDTO>
+    suspend fun getTeamsByCountryName(
+        countryName: String
+    ): List<TeamDTO>
 
     //endregion
 
