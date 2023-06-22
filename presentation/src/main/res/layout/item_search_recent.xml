@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="item"
             type="com.cheesecake.presentation.screens.homeSearch.HomeSearchData.RecentSearches" />
@@ -18,10 +19,10 @@
             style="@style/Widget.Material3.CardView.Filled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_4"
-            android:layout_marginTop="@dimen/spacing_4"
+            app:cardCornerRadius="0dp"
+            android:layout_marginTop="@dimen/spacing_16"
+            app:viewVisibilityOnItems="@{item.items}"
             app:cardBackgroundColor="@color/cardSurface"
-            app:cardCornerRadius="@dimen/spacing_8"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -52,6 +53,7 @@
                     android:id="@+id/text_view_view_more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/spacing_8"
                     android:gravity="center"
                     android:onClick="@{() -> item.onClickDeleteAll.invoke()}"
                     android:text="@string/delete_all"
@@ -65,16 +67,17 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_search_leagues"
+            android:id="@+id/recycler_view_recent_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
-            android:overScrollMode="never"
-            android:paddingVertical="@dimen/spacing_4"
             android:orientation="horizontal"
+            android:overScrollMode="never"
+            android:paddingHorizontal="@dimen/spacing_16"
+            app:items="@{item.items}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@+id/card_header"
-            app:nestedSearchItems="@{item.items}" />
+            tools:listitem="@layout/item_recent_search" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

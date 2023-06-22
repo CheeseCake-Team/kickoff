@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.cheesecake.presentation.screens.homeSearch.RecentSearchUIState" />
+    </data>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view"
+        style="@style/Widget.Material3.CardView.Filled"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="@dimen/spacing_8"
+        android:layout_marginEnd="@dimen/spacing_8"
+        app:cardBackgroundColor="@color/cardSurface"
+        app:cardCornerRadius="@dimen/spacing_8">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--            <ImageView-->
+            <!--                android:id="@+id/button_delete"-->
+            <!--                style="?attr/materialIconButtonFilledTonalStyle"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:onClick="@{() -> item.onClickDelete.invoke(item.id)}"-->
+            <!--                android:src="@drawable/cancel_fill0_wght400_grad0_opsz48"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintHorizontal_bias="0.5"-->
+            <!--                app:layout_constraintStart_toEndOf="@+id/image_view_team_icon"-->
+            <!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+            <ImageView
+                android:id="@+id/image_view_team_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:layout_marginHorizontal="@dimen/spacing_16"
+                android:contentDescription="@string/team_logo"
+                app:imageUrl="@{item.imageUrl}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/text_view_team_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato"
+                android:padding="@dimen/spacing_8"
+                android:text="@{item.title}"
+                android:textSize="12sp"
+                android:textAppearance="@style/SubtitleMedium"
+                android:textColor="@color/fontHeavy"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_view_team_icon"
+                app:layout_constraintVertical_chainStyle="spread_inside"
+                tools:text="Barcelona" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>
