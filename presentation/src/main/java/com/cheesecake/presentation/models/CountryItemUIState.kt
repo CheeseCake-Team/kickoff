@@ -1,7 +1,7 @@
 package com.cheesecake.presentation.models
 
-data class TeamCountryUIState(
+data class CountryItemUIState(
     val name: String,
     val flag: String,
-    val onClick: (String) -> Unit
+    val onClick: () -> Unit
 )
