@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?><!-- item_player.xml -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="item"
+            type="com.cheesecake.presentation.screens.match.lineup.PlayerItemUiState" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="270">
+
+
+        <ImageView
+            android:id="@+id/playerImageView"
+            android:layout_width="24dp"
+            android:layout_height="18dp"
+            android:background="@android:color/transparent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/player_shirt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/playerNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(item.playerNumber)}"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="#FFFFFF"
+            android:textSize="6sp"
+            app:layout_constraintBottom_toBottomOf="@id/playerImageView"
+            app:layout_constraintEnd_toEndOf="@id/playerImageView"
+            app:layout_constraintStart_toStartOf="@id/playerImageView"
+            app:layout_constraintTop_toTopOf="@id/playerImageView" />
+
+        <TextView
+            android:id="@+id/playerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{item.playerName}"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="#000000"
+            android:textSize="6sp"
+            android:background="#A6FFFFFF"
+            android:singleLine="true"
+            app:layout_constraintEnd_toEndOf="@+id/playerImageView"
+            app:layout_constraintStart_toStartOf="@+id/playerImageView"
+            app:layout_constraintTop_toBottomOf="@+id/playerImageView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
+
+
+
+
+

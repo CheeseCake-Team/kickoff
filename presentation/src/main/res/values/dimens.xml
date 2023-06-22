@@ -18,6 +18,12 @@
     <dimen name="spacing_64">64dp</dimen>
     <dimen name="spacing_100">100dp</dimen>
     <dimen name="team_image_size_48dp">48dp</dimen>
+    <dimen name="player_margin_horizontal">4dp</dimen>
+    <dimen name="player_margin_vertical">8dp</dimen>
+    <dimen name="player_v">4dp</dimen>
+    <dimen name="player_margin">8dp</dimen>
+
+
 
     <!-- text sizes -->
     <dimen name="font_size_12sp">12sp</dimen>
