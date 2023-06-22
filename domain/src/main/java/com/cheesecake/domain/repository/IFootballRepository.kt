@@ -25,7 +25,11 @@ interface IFootballRepository {
 
     suspend fun updateOrInsertLeague(league: League)
 
-    suspend fun getMatchesByLeagueIdAndSeason(timeZone: String, leagueId: Int, season: Int): List<Fixture>
+    suspend fun getMatchesByLeagueIdAndSeason(
+        timeZone: String,
+        leagueId: Int,
+        season: Int
+    ): List<Fixture>
 
     suspend fun deleteLeagueById(leagueId: Int)
 
@@ -61,7 +65,12 @@ interface IFootballRepository {
 
     suspend fun getFixtureStatisticsByFixtureId(fixtureId: Int): List<FixtureStatistics>
 
-    suspend fun getRecentSearches(): List<RecentSearch>
+    fun getRecentSearches(): Flow<List<RecentSearch>>
 
     suspend fun updateOrInsertRecentSearch(recent: RecentSearch)
+
+    suspend fun deleteRecentSearchById(recentId: Int)
+
+    suspend fun deleteRecentSearches()
+
 }

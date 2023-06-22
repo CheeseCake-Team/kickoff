@@ -7,7 +7,7 @@ import androidx.navigation.fragment.findNavController
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentLeaguesSearchBinding
-import com.cheesecake.presentation.screens.search.models.SearchEvents
+import com.cheesecake.presentation.screens.search.SearchEvents
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

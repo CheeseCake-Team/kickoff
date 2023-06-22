@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
 import com.cheesecake.data.local.models.RecentSearchLocalDTO
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface RecentSearchDao {
@@ -18,6 +19,6 @@ interface RecentSearchDao {
     suspend fun deleteRecentSearches()
 
     @Query("SELECT * FROM recentSearch_table")
-    suspend fun getAllRecentSearches(): List<RecentSearchLocalDTO>
+    fun getAllRecentSearches(): Flow<List<RecentSearchLocalDTO>>
 
 }

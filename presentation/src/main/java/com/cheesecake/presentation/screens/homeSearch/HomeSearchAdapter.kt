@@ -1,35 +1,26 @@
 package com.cheesecake.presentation.screens.homeSearch
 
-import com.cheesecake.presentation.screens.search.adapters.SearchDiffUtil
-import com.cheesecake.presentation.screens.search.adapters.SearchLeagueAdapter
-import com.cheesecake.presentation.screens.search.adapters.SearchTeamAdapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.ViewDataBinding
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
-import com.cheesecake.presentation.databinding.ItemSearchLeagueBinding
-import com.cheesecake.presentation.databinding.ItemSearchTeamBinding
 import androidx.databinding.library.baseAdapters.BR
-import com.cheesecake.presentation.screens.search.models.SearchResult
+import com.cheesecake.presentation.base.BaseAdapter
+import com.cheesecake.presentation.databinding.ItemSearchRecentBinding
 
+class HomeSearchAdapter : BaseAdapter<HomeSearchData>(null) {
 
-class HomeSearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    override val layoutId: Int = 0
 
-    private var itemList = emptyList<SearchResult>()
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return LeagueViewHolder(
-            ItemSearchLeagueBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
+        return RecentSearchViewHolder(
+            ItemSearchRecentBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
     }
 
-
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         when (holder) {
-            is LeagueViewHolder -> holder.bind(itemList[position] as SearchResult.League)
+            is RecentSearchViewHolder -> holder.bind(itemList[position] as HomeSearchData.RecentSearches)
         }
     }
 
@@ -44,31 +35,13 @@ class HomeSearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 //        }
 //    }
 
-    abstract class BaseViewHolder(binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root)
-
-    class LeagueViewHolder(private val binding: ItemSearchLeagueBinding) : BaseViewHolder(binding) {
-        fun bind(league: SearchResult.League) {
-            binding.setVariable(BR.item, league)
-            binding.recyclerViewSearchLeagues.adapter = SearchLeagueAdapter()
+    class RecentSearchViewHolder(private val binding: ItemSearchRecentBinding) :
+        BaseViewHolder(binding) {
+        fun bind(recent: HomeSearchData.RecentSearches) {
+            binding.setVariable(BR.item, recent)
+            binding.recyclerViewRecentSearch.adapter = RecentSearchAdapter()
         }
     }
-
-    fun setItems(newItems: List<SearchResult>) {
-        val diffResult =
-            DiffUtil.calculateDiff(
-                SearchDiffUtil(
-                    itemList,
-                    newItems,
-                    ::areItemsSame,
-                    ::areContentSame
-                )
-            )
-        itemList = newItems
-        diffResult.dispatchUpdatesTo(this)
-    }
-
-    private fun areItemsSame(oldItem: SearchResult, newItem: SearchResult) = oldItem == newItem
-    private fun areContentSame(oldPosition: SearchResult, newPosition: SearchResult) = true
 
     companion object {
         const val TYPE_RECENT = 0

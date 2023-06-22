@@ -5,7 +5,7 @@ import com.cheesecake.domain.usecases.GetLeagueBySearchUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import com.cheesecake.presentation.screens.search.models.LeagueSearchUIState
-import com.cheesecake.presentation.screens.search.models.SearchEvents
+import com.cheesecake.presentation.screens.search.SearchEvents
 import com.cheesecake.presentation.screens.search.models.toSearchUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
@@ -45,8 +45,8 @@ class LeaguesSearchViewModel @Inject constructor(
         _state.update { it.copy(error = emptyList()) }
     }
 
-    private fun onLeagueClicked(id:Int, season:Int) {
-        _event.update { Event(SearchEvents.LeagueClickEvent(id,season)) }
+    private fun onLeagueClicked(league: LeagueSearchUIState) {
+        _event.update { Event(SearchEvents.LeagueClickEvent(league.leagueId,league.season)) }
     }
 
 }

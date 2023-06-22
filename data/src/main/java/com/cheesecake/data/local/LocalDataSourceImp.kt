@@ -56,12 +56,20 @@ class LocalDataSourceImp @Inject constructor(
         return leagueDao.getFavouriteLeagues()
     }
 
-    override suspend fun getRecentSearches(): List<RecentSearchLocalDTO> {
+    override fun getRecentSearches(): Flow<List<RecentSearchLocalDTO>> {
         return searchDao.getAllRecentSearches()
     }
 
     override suspend fun updateOrInsertRecentSearches(recent: RecentSearchLocalDTO) {
         searchDao.updateOrInsertRecentSearch(recent)
+    }
+
+    override suspend fun deleteRecentSearchById(recentId: Int) {
+        searchDao.deleteRecentSearchById(recentId)
+    }
+
+    override suspend fun deleteRecentSearches() {
+        searchDao.deleteRecentSearches()
     }
 
 

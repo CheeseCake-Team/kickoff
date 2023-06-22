@@ -1,6 +1,8 @@
 package com.cheesecake.presentation.screens.search.models
 
 import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.RecentSearch
+import com.cheesecake.domain.entity.RecentSearchType
 
 data class LeagueSearchUIState(
     val leagueTypeName: String = "Unknown",
@@ -9,11 +11,11 @@ data class LeagueSearchUIState(
     val countryName: String = "Unknown",
     val season: Int = 0,
     val leagueId: Int = 0,
-    val onclick: (Int,Int) -> Unit,
+    val onclick: (LeagueSearchUIState) -> Unit,
     val leagueCount: Int = 0
 )
 
-fun List<League>.toSearchUIState(onclick: (Int,Int) -> Unit): List<LeagueSearchUIState> {
+fun List<League>.toSearchUIState(onclick: (LeagueSearchUIState) -> Unit): List<LeagueSearchUIState> {
     return map{
         LeagueSearchUIState(
             leagueTypeName = it.leagueTypeName,
@@ -27,6 +29,13 @@ fun List<League>.toSearchUIState(onclick: (Int,Int) -> Unit): List<LeagueSearchU
         )
     }
 }
+
+fun LeagueSearchUIState.toRecentSearch() = RecentSearch(
+    id = this.leagueId,
+    title = this.leagueName,
+    imageUrl = this.imageUrl,
+    type = RecentSearchType.LEAGUE,
+)
 
 
 

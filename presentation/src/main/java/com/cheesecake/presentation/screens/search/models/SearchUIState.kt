@@ -5,7 +5,8 @@ data class SearchUIState(
     val searchTypes: SearchType? = null,
     val searchResult: List<SearchResult>? = null,
     val isLoading: Boolean = false,
-    val error: String = ""
+    val error: String = "",
+    val onClickSearchBar: (() -> Unit)? = null
 )
 
 
