@@ -5,10 +5,9 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
+import com.cheesecake.presentation.base.BaseFragmentsAdapter
 import com.cheesecake.presentation.databinding.FragmentCountryBinding
-import com.cheesecake.presentation.databinding.FragmentDiscoverBinding
-import com.cheesecake.presentation.screens.discover.DiscoverCountryAdapter
-import com.google.android.material.tabs.TabLayout
+import com.cheesecake.presentation.screens.country.countryTeams.CountryTeamsFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,6 +18,14 @@ class CountryFragment : BaseFragment<FragmentCountryBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val fragmentsAdapter = BaseFragmentsAdapter(
+            requireActivity(),
+            listOf(
+                CountryTeamsFragment()
+            )
+        )
+        binding.countryViewPager.adapter = fragmentsAdapter
 
         TabLayoutMediator(binding.tabLayout, binding.countryViewPager) { tab, position ->
             when (position) {
