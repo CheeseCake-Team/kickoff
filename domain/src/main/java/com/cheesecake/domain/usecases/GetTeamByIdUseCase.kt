@@ -8,6 +8,7 @@ class GetTeamByIdUseCase@Inject constructor(
     private val footballRepository: IFootballRepository,
 ) {
     suspend operator fun invoke(teamId: Int): Team{
-        return footballRepository.getRemotelyTeam(teamId)
+        return footballRepository.getLocallyTeamById(teamId)?:
+        footballRepository.getRemotelyTeam(teamId)
     }
 }

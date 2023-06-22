@@ -14,6 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class TeamViewModel @Inject constructor(
     private val favouriteTeamUseCase: FavouriteTeamUseCase,
+    private val getTeamByIdUseCase: GetTeamByIdUseCase
 ) : BaseViewModel<TeamUIState, TeamNavigationEvent>(TeamUIState(), Event()) {
 
     init {
