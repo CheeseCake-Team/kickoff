@@ -167,8 +167,6 @@ class IFootballRepositoryImpl
 
     override suspend fun getMatchDetails(homeTeamId: Int,awayTeamId: Int, date: String, timeZone: String): Match {
         return remoteDataSource.getHeadToHeadByDate("$homeTeamId-$awayTeamId", date, timeZone).first().toEntity()
-    override suspend fun getMatchDetails(teamsId: String,date:  String, timeZone: String): Match {
-        return remoteDataSource.getHeadToHead(teamsId, date, timeZone).first().toEntity()
     }
 
 
@@ -191,4 +189,9 @@ class IFootballRepositoryImpl
     override suspend fun updateOrInsertTeam(team: Team, leagueId: Int, season: Int) {
         return localDataSource.updateOrInsertTeam(team.toLocal(leagueId, season))
     }
+
+    override suspend fun getLocallyTeamById(teamId: Int): Team?{
+        return localDataSource.getTeamById(teamId)?.toEntity()
+    }
+
 }

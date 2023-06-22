@@ -62,7 +62,11 @@ interface IFootballRepository {
 
     suspend fun getSquadOfTeam(teamId: Int): List<SquadPlayer>
 
-     suspend fun getMatchesByTeamIdAndSeason(timeZone: String,season: Int, teamId: Int): List<Fixture>
+    suspend fun getMatchesByTeamIdAndSeason(
+        timeZone: String,
+        season: Int,
+        teamId: Int
+    ): List<Fixture>
 
     suspend fun getLocallyTeamById(teamId: Int): Team?
 
