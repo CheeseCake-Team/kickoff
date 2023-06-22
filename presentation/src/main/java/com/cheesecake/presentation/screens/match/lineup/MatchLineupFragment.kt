@@ -17,24 +17,18 @@ import dagger.hilt.android.AndroidEntryPoint
 class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
     override val layoutIdFragment = R.layout.fragment_match_lineup
     override val viewModel: MatchLineupViewModel by viewModels()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         collect(viewModel.state) {
             if (!it.isLoading) {
-
-                val firstTeamLineup = it.data.homeTeamLineup
-                populateLineup(firstTeamLineup, binding.homeTeamContainer)
-                rotateLineup(binding.homeTeamContainer, 90f)
-                val secondTeamLineup = it.data.awayTeamLineup
-                populateLineupReverse(secondTeamLineup, binding.awayTeamContainer)
+                val firstTeamLineup = it.data.awayTeamLineup
+                populateLineup(firstTeamLineup, binding.awayTeamContainer)
                 rotateLineup(binding.awayTeamContainer, 90f)
-
-
+                val secondTeamLineup = it.data.homeTeamLineup
+                populateLineupReverse(secondTeamLineup, binding.homeTeamContainer)
+                rotateLineup(binding.homeTeamContainer, 90f)
             }
-
-
         }
     }
 
@@ -44,18 +38,15 @@ class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
 
     private fun populateLineup(lineup: FixtureLineupUiState, container: LinearLayout) {
         val formation = lineup.formation.split("-").map { it.toInt() }
-        val cellWidth = 200
         container.removeAllViews()
 
-        // Add goalkeeper row
         val goalkeeper = lineup.playerItemUiState.firstOrNull { it.playerPosition == "G" }
         if (goalkeeper != null) {
             val goalkeeperRow = createPlayerRow(goalkeeper, R.drawable.ic_shirt_blue)
             container.addView(goalkeeperRow)
         }
 
-        // Add player rows
-        var playerIndex = 1 // Start from index 1 to skip the goalkeeper
+        var playerIndex = 1
         for (playersInRow in formation) {
             val playerRow = LinearLayout(requireContext()).apply {
                 layoutParams = LinearLayout.LayoutParams(
@@ -78,11 +69,9 @@ class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
 
     private fun populateLineupReverse(lineup: FixtureLineupUiState, container: LinearLayout) {
         val formation = lineup.formation.split("-").map { it.toInt() }
-        val cellWidth = 200
         container.removeAllViews()
 
-        // Add player rows in reverse order
-        var playerIndex = lineup.playerItemUiState.lastIndex // Start from the last index
+        var playerIndex = lineup.playerItemUiState.lastIndex
         for (playersInRow in formation) {
             val playerRow = LinearLayout(requireContext()).apply {
                 layoutParams = LinearLayout.LayoutParams(
@@ -100,7 +89,6 @@ class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
             container.addView(playerRow)
         }
 
-        // Add goalkeeper row at the bottom
         val goalkeeper = lineup.playerItemUiState.firstOrNull { it.playerPosition == "G" }
         if (goalkeeper != null) {
             val goalkeeperRow = createPlayerRow(goalkeeper, R.drawable.ic_shirt_red)
@@ -116,16 +104,14 @@ class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
         playerNumber.text = player.playerNumber.toString()
         playerImageView.setImageResource(playerShirt)
 
-        // Apply margins to the view
         val params = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         ).apply {
-            val marginV = resources.getDimensionPixelSize(R.dimen.spacing_4)
+            val marginHorizontal = resources.getDimensionPixelSize(R.dimen.spacing_4)
 
-            val margin = resources.getDimensionPixelSize(R.dimen.spacing_8)
-            setMargins(marginV, margin, marginV, margin)
-            // You can adjust the values accordingly.
+            val marginVertical = resources.getDimensionPixelSize(R.dimen.spacing_8)
+            setMargins(marginHorizontal, marginVertical, marginHorizontal, marginVertical)
         }
         view.layoutParams = params
 
