@@ -65,7 +65,7 @@
                 android:paddingVertical="@dimen/spacing_4"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@+id/divider2"
-                app:listItems="@{item.matches}"
+                app:items="@{item.matches}"
                 tools:listitem="@layout/item_match" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

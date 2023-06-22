@@ -163,7 +163,7 @@ class IFootballRepositoryImpl
         return remoteDataSource.getFixtureEventsByFixtureId(fixtureId).toEntity()
     }
 
-    override suspend fun getMatchDetails(teamsId: String, date: String, timeZone: String): Match {
-        return remoteDataSource.getHeadToHeadByDate(teamsId, date, timeZone).first().toEntity()
+    override suspend fun getMatchDetails(homeTeamId: Int,awayTeamId: Int, date: String, timeZone: String): Match {
+        return remoteDataSource.getHeadToHeadByDate("$homeTeamId-$awayTeamId", date, timeZone).first().toEntity()
     }
 }

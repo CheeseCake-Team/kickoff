@@ -12,7 +12,8 @@ import java.util.*
 fun FixtureDTO.toEntity(): Fixture {
     return Fixture(
         id = this.fixtureDataDTO.id,
-        matchId = "${this.teams.home.id}-${this.teams.away.id}",
+        homeTeamID =this.teams.home.id ,
+        awayTeamID = this.teams.away.id,
         leagueName = this.league.name,
         homeTeamName = this.teams.home.name,
         homeTeamLogoUrl = this.teams.home.logo,

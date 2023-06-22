@@ -53,10 +53,10 @@
         android:name="com.cheesecake.presentation.screens.match.MatchFragment"
         android:label="MatchFragment" >
         <argument
-            android:name="matchId"
-            app:argType="string" />
+            android:name="homeTeamId"
+            app:argType="integer" />
         <argument
-            android:name="season"
+            android:name="awayTeamId"
             app:argType="integer" />
         <argument
             android:name="data"

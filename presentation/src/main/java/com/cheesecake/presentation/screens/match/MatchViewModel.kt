@@ -21,10 +21,16 @@ class MatchViewModel
     private val _args = MutableLiveData<Args>()
     val args: LiveData<Args> = _args
 
-
     init {
         tryToExecute(
-            { getMatchDetailsUseCase(matchArgs.matchId, matchArgs.date, "Africa/Cairo") },
+            {
+                getMatchDetailsUseCase(
+                    matchArgs.homeTeamId,
+                    matchArgs.awayTeamId,
+                    matchArgs.date,
+                    "Africa/Cairo"
+                )
+            },
             ::onSuccess,
             ::onError
         )

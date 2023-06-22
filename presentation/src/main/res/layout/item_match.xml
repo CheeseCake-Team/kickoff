@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/spacing_4"
         android:padding="@dimen/spacing_8"
-        android:onClick="@{()-> item.onclick.invoke(item.matchId,item.leagueSeason,item.matchDate)}"
+        android:onClick="@{()-> item.onclick.invoke()}"
         app:cardBackgroundColor="@color/cardSurface"
         app:cardCornerRadius="4dp">
 

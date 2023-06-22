@@ -53,7 +53,7 @@ interface IFootballRepository {
 
     suspend fun getCoachTrophy(coachId: Int): List<Trophy>
 
-    suspend fun getMatchDetails(teamsId: String, date: String, timeZone: String): Match
+    suspend fun getMatchDetails(homeTeamId: Int,awayTeamId: Int, date: String, timeZone: String): Match
 
     suspend fun getFavoriteTeams(): Flow<List<Team>>
 

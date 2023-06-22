@@ -17,7 +17,7 @@ class LeagueMatchesFragment : BaseFragment<FragmentLeagueMatchesBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.matchesRecyclerView.adapter = LeagueMatchesDateMatchAdapter()
+        binding.matchesRecyclerView.adapter = DateMatchesAdapter()
     }
     companion object {
         @JvmStatic
