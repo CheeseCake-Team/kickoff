@@ -1,9 +1,8 @@
 package com.cheesecake.data.repository
 
-import android.util.Log
 import com.cheesecake.data.repository.mappers.toEntity
 import com.cheesecake.data.repository.mappers.toLocal
-import com.cheesecake.domain.entity.TeamCountry
+import com.cheesecake.domain.entity.Country
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.FixtureStatistics
 import com.cheesecake.domain.entity.League
@@ -25,15 +24,15 @@ class IFootballRepositoryImpl
     private val localDataSource: LocalDataSource,
 ) : IFootballRepository {
 
-    override suspend fun getRemoteCountries(): List<TeamCountry> {
+    override suspend fun getRemoteCountries(): List<Country> {
         return remoteDataSource.getCountries().toEntity()
     }
 
-    override suspend fun getLocalCountries(): List<TeamCountry> {
+    override suspend fun getLocalCountries(): List<Country> {
         return localDataSource.getLocalCountries().toEntity()
     }
 
-    override suspend fun getCountriesSearch(search: String): Flow<List<TeamCountry>> {
+    override suspend fun getCountriesSearch(search: String): Flow<List<Country>> {
         return localDataSource.getCountriesSearch(search).toEntity()
     }
 
@@ -112,8 +111,8 @@ class IFootballRepositoryImpl
         localDataSource.updateOrInsertTeams(teamEntities.toLocal(leagueId, leagueSeason))
     }
 
-    override suspend fun addTeamCountries(teamEntities: List<TeamCountry>) {
-        localDataSource.addTeamCountries(teamEntities.toLocal())
+    override suspend fun updateOrInsertCountries(countries: List<Country>) {
+        localDataSource.addTeamCountries(countries.toLocal())
     }
 
     override suspend fun getLeaguesByName(leagueName: String): List<League> {
@@ -124,6 +123,9 @@ class IFootballRepositoryImpl
         return remoteDataSource.getLeaguesBySearch(leagueName).toEntity()
     }
 
+    override suspend fun getLeaguesByCountryName(countryName: String): List<League> {
+        return remoteDataSource.getLeaguesByCountryName(countryName).toEntity()
+    }
 
     override suspend fun getCurrentRoundByIdAndSeason(leagueId: Int, season: Int): String? {
         return remoteDataSource.getCurrentRoundByLeagueIdAndSeason(leagueId, season, true)
@@ -173,6 +175,10 @@ class IFootballRepositoryImpl
     }
     override suspend fun getFixtureStatisticsByFixtureId(fixtureId: Int): List<FixtureStatistics> {
         return remoteDataSource.getFixtureStatisticsByFixtureId(fixtureId).toEntity()
+    }
+
+    override suspend fun getTeamsByCountryName(countryName: String): List<Team> {
+        return remoteDataSource.getTeamsByCountryName(countryName).toEntity()
     }
 
     override suspend fun getMatchDetails(teamsId: String, seasonId: Int, timeZone: String): Match {

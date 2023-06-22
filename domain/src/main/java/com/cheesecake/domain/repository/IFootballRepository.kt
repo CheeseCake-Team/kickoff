@@ -1,6 +1,6 @@
 package com.cheesecake.domain.repository
 
-import com.cheesecake.domain.entity.TeamCountry
+import com.cheesecake.domain.entity.Country
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.FixtureStatistics
 import com.cheesecake.domain.entity.TeamStatisticsEntity
@@ -13,11 +13,11 @@ import com.cheesecake.domain.entity.Match
 import kotlinx.coroutines.flow.Flow
 
 interface IFootballRepository {
-    suspend fun getRemoteCountries():List<TeamCountry>
+    suspend fun getRemoteCountries():List<Country>
 
-    suspend fun getLocalCountries() : List<TeamCountry>
+    suspend fun getLocalCountries() : List<Country>
 
-    suspend fun getCountriesSearch(search: String): Flow<List<TeamCountry>>
+    suspend fun getCountriesSearch(search: String): Flow<List<Country>>
 
     suspend fun getLeagueNameAndCountry(leagueId: Int, current: Boolean): List<League>
 
@@ -41,13 +41,13 @@ interface IFootballRepository {
 
     suspend fun updateOrInsertTeams(teamEntities: List<Team>, leagueId: Int, leagueSeason: Int)
 
-    suspend fun addTeamCountries(
-        teamEntities: List<TeamCountry>
-    )
+    suspend fun updateOrInsertCountries(countries: List<Country>)
 
     suspend fun getLeaguesByName(leagueName: String): List<League>
 
     suspend fun getLeaguesBySearch(leagueName: String): List<League>
+
+    suspend fun getLeaguesByCountryName(countryName: String): List<League>
 
     suspend fun getTeamsBySearch(teamName: String): List<Team>
 
@@ -70,4 +70,6 @@ interface IFootballRepository {
     suspend fun getFavoriteLeagues(): Flow<List<League>>
 
     suspend fun getFixtureStatisticsByFixtureId(fixtureId: Int): List<FixtureStatistics>
+
+    suspend fun getTeamsByCountryName(countryName: String): List<Team>
 }
