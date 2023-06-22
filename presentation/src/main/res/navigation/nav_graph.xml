@@ -47,5 +47,9 @@
     <fragment
         android:id="@+id/countryFragment"
         android:name="com.cheesecake.presentation.screens.country.CountryFragment"
-        android:label="CountryFragment" />
+        android:label="CountryFragment" >
+        <argument
+            android:name="countryName"
+            app:argType="string" />
+    </fragment>
 </navigation>

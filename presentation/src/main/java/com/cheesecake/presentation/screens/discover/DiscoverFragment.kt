@@ -31,7 +31,9 @@ class DiscoverFragment : BaseFragment<FragmentDiscoverBinding>() {
     private fun onEvent(event: DiscoverTeamCountryEvents) {
         when (event) {
             is DiscoverTeamCountryEvents.NavigateToCountry ->
-                findNavController().navigate(DiscoverFragmentDirections.actionDiscoverFragmentToCountryFragment())
+                findNavController().navigate(
+                    DiscoverFragmentDirections.actionDiscoverFragmentToCountryFragment(event.CountryName)
+                )
         }
     }
 
