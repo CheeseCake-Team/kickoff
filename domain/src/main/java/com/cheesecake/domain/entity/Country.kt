@@ -1,6 +1,6 @@
 package com.cheesecake.domain.entity
 
-data class TeamCountry(
+data class Country(
     val name: String,
     val flag: String,
 )
