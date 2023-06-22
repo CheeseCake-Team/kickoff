@@ -1,7 +1,6 @@
 package com.cheesecake.data.repository
 
 import android.util.Log
-import com.cheesecake.data.remote.models.LeagueDTO
 import com.cheesecake.data.repository.mappers.toEntity
 import com.cheesecake.data.repository.mappers.toLocal
 import com.cheesecake.domain.entity.Fixture
@@ -10,6 +9,7 @@ import com.cheesecake.domain.entity.FixtureStatistics
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.entity.Match
 import com.cheesecake.domain.entity.PlayerStatistics
+import com.cheesecake.domain.entity.SquadPlayer
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.entity.TeamStanding
 import com.cheesecake.domain.entity.TeamStatisticsEntity
@@ -17,7 +17,9 @@ import com.cheesecake.domain.entity.Trophy
 import com.cheesecake.domain.repository.IFootballRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import toEntity
 import javax.inject.Inject
+
 
 class IFootballRepositoryImpl
 @Inject constructor(
@@ -165,5 +167,28 @@ class IFootballRepositoryImpl
 
     override suspend fun getMatchDetails(homeTeamId: Int,awayTeamId: Int, date: String, timeZone: String): Match {
         return remoteDataSource.getHeadToHeadByDate("$homeTeamId-$awayTeamId", date, timeZone).first().toEntity()
+    override suspend fun getMatchDetails(teamsId: String,date:  String, timeZone: String): Match {
+        return remoteDataSource.getHeadToHead(teamsId, date, timeZone).first().toEntity()
+    }
+
+
+    override suspend fun getSquadOfTeam(teamId: Int): List<SquadPlayer> {
+        return remoteDataSource.getSquadByTeamId(teamId).toEntity()
+    }
+
+    override suspend fun getMatchesByTeamIdAndSeason(
+        timeZone: String,
+        season: Int,
+        teamId: Int
+    ): List<Fixture> {
+        return remoteDataSource.getFixtureBySeasonByTeamId(timeZone, season, teamId).toEntity()
+    }
+
+    override suspend fun getRemotelyTeam(teamId: Int): Team {
+        return remoteDataSource.getTeamById(teamId).first().toEntity()
+    }
+
+    override suspend fun updateOrInsertTeam(team: Team, leagueId: Int, season: Int) {
+        return localDataSource.updateOrInsertTeam(team.toLocal(leagueId, season))
     }
 }
