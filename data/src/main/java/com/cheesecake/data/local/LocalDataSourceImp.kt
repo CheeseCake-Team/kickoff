@@ -1,7 +1,10 @@
 package com.cheesecake.data.local
 
-import com.cheesecake.data.local.daos.LeagueDao import com.cheesecake.data.local.daos.TeamsDao
+import com.cheesecake.data.local.daos.LeagueDao
+import com.cheesecake.data.local.daos.TeamCountriesDao
+import com.cheesecake.data.local.daos.TeamsDao
 import com.cheesecake.data.local.models.LeagueLocalDTO
+import com.cheesecake.data.local.models.TeamCountriesLocalDTO
 import com.cheesecake.data.local.models.TeamLocalDTO
 import com.cheesecake.data.repository.LocalDataSource
 import kotlinx.coroutines.flow.Flow
@@ -10,6 +13,7 @@ import javax.inject.Inject
 class LocalDataSourceImp @Inject constructor(
     private val teamsDao: TeamsDao,
     private val leagueDao: LeagueDao,
+    private val teamCountriesDao: TeamCountriesDao,
 ) : LocalDataSource {
 
     override fun getLocallyTeamsByIdAndSeason(leagueId: Int, season: Int): List<TeamLocalDTO> {
@@ -32,7 +36,10 @@ class LocalDataSourceImp @Inject constructor(
         teamsDao.deleteAllTeams()
     }
 
-    override suspend fun getLeagueByIdAndSeason(leagueId: Int, leagueSeason: Int): LeagueLocalDTO? {
+    override suspend fun getLeagueByIdAndSeason(
+        leagueId: Int,
+        leagueSeason: Int,
+    ): LeagueLocalDTO? {
         return leagueDao.getLeagueByIdAndSeason(leagueId, leagueSeason)
     }
 
@@ -43,6 +50,20 @@ class LocalDataSourceImp @Inject constructor(
     override suspend fun deleteLeagueById(leagueId: Int) {
         leagueDao.deleteLeagueById(leagueId)
     }
+
+    override suspend fun getLocalCountries(): List<TeamCountriesLocalDTO> {
+        return teamCountriesDao.getLocalCountries()
+    }
+
+    override suspend fun getCountriesSearch(search: String): Flow<List<TeamCountriesLocalDTO>> {
+        return teamCountriesDao.getCountriesSearch(search)
+    }
+
+
+    override suspend fun addTeamCountries(teams: List<TeamCountriesLocalDTO>) {
+        teamCountriesDao.addTeamCountries(teams)
+    }
+
 
     override suspend fun deleteTeamById(teamId: Int) {
         teamsDao.deleteTeamById(teamId)

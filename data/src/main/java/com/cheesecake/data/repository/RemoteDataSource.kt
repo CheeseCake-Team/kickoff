@@ -43,7 +43,7 @@ interface RemoteDataSource {
 
     //region countries
 
-    suspend fun getAllCountries(): List<TeamCountriesDTO>
+    suspend fun getCountries(): List<TeamCountriesDTO>
 
 
     suspend fun getCountryByName(
@@ -418,7 +418,9 @@ interface RemoteDataSource {
         teamId: Int
     ): List<Int>
 
-    suspend fun getTeamCountries(): List<TeamCountriesDTO>
+    suspend fun getTeamsByCountryName(
+        countryName: String
+    ): List<TeamDTO>
 
     //endregion
 

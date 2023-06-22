@@ -511,8 +511,9 @@ interface FootballApiService {
         @Query("team") teamId: Int
     ): Response<BasePagingResponse<Int>>
 
-    @GET("teams/countries")
-    suspend fun getTeamCountries(): Response<BasePagingResponse<TeamCountriesDTO>>
+    @GET("teams")
+    suspend fun getTeamsByCountryName(@Query("country") countryName: String): Response<BasePagingResponse<TeamDTO>>
+
     //endregion
 
     //region timezone

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.cheesecake.presentation.models.CountryItemUIState" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view"
+        style="@style/Widget.Material3.CardView.Filled"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_margin="@dimen/spacing_4"
+        android:onClick="@{() -> item.onClick.invoke()}"
+        app:cardBackgroundColor="@color/cardSurface"
+        app:cardCornerRadius="@dimen/spacing_8">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/image_view_country_icon"
+                android:layout_width="@dimen/team_image_size_24dp"
+                android:layout_height="@dimen/team_image_size_24dp"
+                android:layout_marginVertical="@dimen/spacing_8"
+                android:layout_marginStart="@dimen/spacing_16"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:loadSVG="@{item.flag}"
+                app:shapeAppearanceOverlay="@style/CircleImageView" />
+
+            <TextView
+                android:id="@+id/text_view_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_8"
+                android:text="@{item.name}"
+                app:layout_constraintBottom_toBottomOf="@+id/image_view_country_icon"
+                app:layout_constraintStart_toEndOf="@+id/image_view_country_icon"
+                app:layout_constraintTop_toTopOf="@+id/image_view_country_icon"
+                app:layout_constraintVertical_bias="0.6" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

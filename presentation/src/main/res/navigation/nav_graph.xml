@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/searchFragment">
+    app:startDestination="@id/discoverFragment">
 
     <fragment
         android:id="@+id/leagueFragment"
@@ -79,6 +79,33 @@
             app:argType="string" />
         <action
             android:id="@+id/action_leaguesSearchFragment_to_leagueFragment"
+            app:destination="@id/leagueFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favLeaguesSelectionFragment2"
+        android:name="com.cheesecake.presentation.screens.favLeaguesSelection.FavLeaguesSelectionFragment"
+        android:label="FavLeaguesSelectionFragment" />
+    <fragment
+        android:id="@+id/discoverFragment"
+        android:name="com.cheesecake.presentation.screens.discover.DiscoverFragment"
+        android:label="DiscoverFragment" >
+        <action
+            android:id="@+id/action_discoverFragment_to_countryFragment"
+            app:destination="@id/countryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/countryFragment"
+        android:name="com.cheesecake.presentation.screens.country.CountryFragment"
+        android:label="CountryFragment" >
+        <argument
+            android:name="countryName"
+            app:argType="string" />
+        <argument
+            android:name="imageUrl"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_countryFragment_to_leagueFragment"
             app:destination="@id/leagueFragment" />
     </fragment>
 </navigation>

@@ -3,6 +3,7 @@ package com.cheesecake.kickoff.di
 import android.content.Context
 import androidx.room.Room
 import com.cheesecake.data.local.daos.LeagueDao
+import com.cheesecake.data.local.daos.TeamCountriesDao
 import com.cheesecake.data.local.daos.TeamsDao
 import com.cheesecake.data.local.database.KickoffDatabase
 import dagger.Module
@@ -33,5 +34,10 @@ object DatabaseModule {
     @Provides
     fun provideLeagueDoa(kickoffDatabase: KickoffDatabase): LeagueDao =
         kickoffDatabase.getLeagueDao()
+
+    @Singleton
+    @Provides
+    fun provideTeamCountriesDao(kickoffDatabase: KickoffDatabase): TeamCountriesDao =
+        kickoffDatabase.getTeamCountriesDao()
 
 }
