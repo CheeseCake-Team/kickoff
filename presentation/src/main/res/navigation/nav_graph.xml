@@ -88,6 +88,9 @@
         <action
             android:id="@+id/action_homeSearchFragment_to_leagueFragment"
             app:destination="@id/leagueFragment" />
+        <action
+            android:id="@+id/action_homeSearchFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
 
     <fragment
