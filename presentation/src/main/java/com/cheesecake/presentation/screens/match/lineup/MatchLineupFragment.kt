@@ -1,6 +1,7 @@
 package com.cheesecake.presentation.screens.match.lineup
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,6 @@ import com.cheesecake.domain.entity.PlayerLineup
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentMatchLineupBinding
-import com.cheesecake.presentation.screens.match.lineup.MatchLineupViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,12 +25,19 @@ class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         collect(viewModel.state){
-            val firstTeamLineup = it.data.homeTeamLineup
-            populateLineup(firstTeamLineup, binding.homeTeamContainer)
-            rotateLineup(binding.homeTeamContainer, 90f)
-            val secondTeamLineup = it.data.awayTeamLineup
-            populateLineupReverse(secondTeamLineup, binding.awayTeamContainer)
-            rotateLineup(binding.awayTeamContainer, 90f)
+            if (!it.isLoading){
+
+                val firstTeamLineup = it.data.homeTeamLineup
+                populateLineup(firstTeamLineup, binding.homeTeamContainer)
+                rotateLineup(binding.homeTeamContainer, 90f)
+                val secondTeamLineup = it.data.awayTeamLineup
+                populateLineupReverse(secondTeamLineup, binding.awayTeamContainer)
+                rotateLineup(binding.awayTeamContainer, 90f)
+                Log.d("TAAAAAAAAAAg","$firstTeamLineup")
+                Log.d("TAAAAAAAAAAg","$secondTeamLineup")
+
+
+            }
 
 
         }
