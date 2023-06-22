@@ -1,8 +1,8 @@
 package com.cheesecake.presentation.screens.discover
 
-import com.cheesecake.domain.entity.TeamCountry
+import com.cheesecake.domain.entity.Country
 import com.cheesecake.domain.usecases.GetSearchTeamCountryUseCase
-import com.cheesecake.domain.usecases.GetTeamCountryUseCase
+import com.cheesecake.domain.usecases.GetCountriesUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.mapper.toUIModel
 import com.cheesecake.presentation.models.Event
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DiscoverViewModel @Inject constructor(
-    private val getTeamCountryUseCase: GetTeamCountryUseCase,
+    private val getCountriesUseCase: GetCountriesUseCase,
     private val getSearchTeamCountryUseCase: GetSearchTeamCountryUseCase,
 ) : BaseViewModel<DiscoverTeamCountryUIState, DiscoverTeamCountryEvents>(
     DiscoverTeamCountryUIState(),
@@ -31,7 +31,7 @@ class DiscoverViewModel @Inject constructor(
     private fun getData() {
         collectFlow(state.value.searchInput) {
             if (it.isBlank() || it.isEmpty()) {
-                tryToExecute({ getTeamCountryUseCase() }, ::onSuccess, ::onError)
+                tryToExecute({ getCountriesUseCase() }, ::onSuccess, ::onError)
             } else {
                 applySearch(it)
             }
@@ -39,25 +39,26 @@ class DiscoverViewModel @Inject constructor(
         }
     }
 
-    private fun onSuccess(result: List<TeamCountry>) {
+    private fun onSuccess(result: List<Country>) {
         result.let { list ->
             _state.update { discoverTeamCountryUIState ->
                 discoverTeamCountryUIState.copy(
-                    data = list.map { it.toUIModel(::onClick) },
+                    data = list.map { it.toUIModel { ::onClick.invoke(it.name, it.flag) } },
                     isLoading = false
                 )
             }
         }
     }
 
-    private fun onClick(countryName: String) {
-        _event.update { Event(DiscoverTeamCountryEvents.NavigateToCountry(countryName)) }
+    private fun onClick(countryName: String, imageUrl: String) {
+        _event.update { Event(DiscoverTeamCountryEvents.NavigateToCountry(countryName, imageUrl)) }
     }
 
 
-    private fun onSearchSuccess(flow: Flow<List<TeamCountry>>) {
+    private fun onSearchSuccess(flow: Flow<List<Country>>) {
         collectFlow(flow) { list ->
-            copy(data = list.map { it.toUIModel(::onClick) }, isLoading = false, isNoResult = list.isEmpty())
+            copy(data = list.map { it.toUIModel{ ::onClick.invoke(it.name, it.flag) } },
+                isLoading = false, isNoResult = list.isEmpty())
         }
     }
 

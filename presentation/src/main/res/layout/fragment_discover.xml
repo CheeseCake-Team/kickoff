@@ -84,7 +84,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider3"
             app:listItems="@{viewModel.state.data}"
-            tools:listitem="@layout/item_country_team" />
+            tools:listitem="@layout/item_country" />
 
         <View
             android:id="@+id/divider3"

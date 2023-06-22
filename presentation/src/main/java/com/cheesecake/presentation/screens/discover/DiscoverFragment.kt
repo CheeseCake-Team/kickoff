@@ -7,7 +7,6 @@ import androidx.navigation.fragment.findNavController
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentDiscoverBinding
-import com.cheesecake.presentation.screens.country.CountryFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,7 +31,7 @@ class DiscoverFragment : BaseFragment<FragmentDiscoverBinding>() {
         when (event) {
             is DiscoverTeamCountryEvents.NavigateToCountry ->
                 findNavController().navigate(
-                    DiscoverFragmentDirections.actionDiscoverFragmentToCountryFragment(event.CountryName)
+                    DiscoverFragmentDirections.actionDiscoverFragmentToCountryFragment(event.CountryName, event.imageUrl)
                 )
         }
     }
