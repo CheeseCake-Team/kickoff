@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/searchFragment">
+    app:startDestination="@id/homeSearchFragment">
 
     <fragment
         android:id="@+id/leagueFragment"
@@ -88,5 +88,8 @@
         <action
             android:id="@+id/action_homeSearchFragment_to_leagueFragment"
             app:destination="@id/leagueFragment" />
+        <action
+            android:id="@+id/action_homeSearchFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
 </navigation>
