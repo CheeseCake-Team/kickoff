@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.cheesecake.presentation.models.TeamCountryUIState" />
+            type="com.cheesecake.presentation.models.CountryItemUIState" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:layout_margin="@dimen/spacing_4"
-        android:onClick="@{() -> item.onClick.invoke(item.name)}"
+        android:onClick="@{() -> item.onClick.invoke()}"
         app:cardBackgroundColor="@color/cardSurface"
         app:cardCornerRadius="@dimen/spacing_8">
 
