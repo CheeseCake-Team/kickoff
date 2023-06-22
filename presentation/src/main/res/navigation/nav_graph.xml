@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/matchLineupFragment">
 
     <fragment
         android:id="@+id/leagueFragment"
@@ -67,4 +67,8 @@
             android:id="@+id/action_settingsFragment_to_favoriteFragment"
             app:destination="@id/favoriteFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/matchLineupFragment"
+        android:name="com.cheesecake.presentation.screens.match.lineup.MatchLineupFragment"
+        android:label="MatchLineupFragment" />
 </navigation>

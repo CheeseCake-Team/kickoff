@@ -33,8 +33,6 @@ class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
                 val secondTeamLineup = it.data.awayTeamLineup
                 populateLineupReverse(secondTeamLineup, binding.awayTeamContainer)
                 rotateLineup(binding.awayTeamContainer, 90f)
-                Log.d("TAAAAAAAAAAg","$firstTeamLineup")
-                Log.d("TAAAAAAAAAAg","$secondTeamLineup")
 
 
             }
@@ -128,9 +126,9 @@ class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         ).apply {
-            val marginV = resources.getDimensionPixelSize(R.dimen.player_v)
+            val marginV = resources.getDimensionPixelSize(R.dimen.spacing_4)
 
-            val margin = resources.getDimensionPixelSize(R.dimen.player_margin)
+            val margin = resources.getDimensionPixelSize(R.dimen.spacing_8)
             setMargins(marginV, margin, marginV, margin)
             // You can adjust the values accordingly.
         }
