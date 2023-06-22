@@ -57,7 +57,7 @@ class DiscoverViewModel @Inject constructor(
 
     private fun onSearchSuccess(flow: Flow<List<TeamCountry>>) {
         collectFlow(flow) { list ->
-            copy(data = list.map { it.toUIModel(::onClick) }, isLoading = false)
+            copy(data = list.map { it.toUIModel(::onClick) }, isLoading = false, isNoResult = list.isEmpty())
         }
     }
 
