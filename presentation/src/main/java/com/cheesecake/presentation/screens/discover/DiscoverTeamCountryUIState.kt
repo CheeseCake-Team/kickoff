@@ -8,5 +8,6 @@ data class DiscoverTeamCountryUIState(
     val isLoading: Boolean = true,
     val searchInput: MutableStateFlow<String> = MutableStateFlow(""),
     val data: List<TeamCountryUIState> = emptyList(),
+    val isNoResult: Boolean = false,
     val isError: String = "Error"
 )
