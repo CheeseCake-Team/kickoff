@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.usecases.GetLeagueBySearchUseCase
 import com.cheesecake.domain.usecases.GetTeamByNameUseCase
 import com.cheesecake.presentation.base.BaseViewModel
-import com.cheesecake.presentation.mapper.toUIState
+import com.cheesecake.presentation.mapper.toTeamUIState
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -51,7 +51,7 @@ class SearchViewModel @Inject constructor(
         return when(searchType.value) {
             SearchType.TEAM -> {
                 Log.i( "getSearchResult: " ,searchType.value.toString())
-                SearchResult.Team(getTeamList(input).map { it.toUIState() })
+                SearchResult.Team(getTeamList(input).map { it.toTeamUIState({}) })
             }
             SearchType.LEAGUE -> {
                 Log.i( "getSearchResult: " ,searchType.value.toString())
