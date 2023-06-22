@@ -1,4 +1,4 @@
-package com.cheesecake.presentation.screens.search
+package com.cheesecake.presentation.screens.search.models
 
 import com.cheesecake.domain.entity.Team
 

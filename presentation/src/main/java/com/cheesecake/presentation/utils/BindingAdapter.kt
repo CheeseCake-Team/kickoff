@@ -22,6 +22,11 @@ import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.presentation.base.BaseAdapter
 import com.cheesecake.presentation.base.BaseListAdapter
 import com.cheesecake.presentation.screens.home.MatchItemUIState
+import com.cheesecake.presentation.screens.homeSearch.HomeSearchAdapter
+import com.cheesecake.presentation.screens.homeSearch.HomeSearchData
+import com.cheesecake.presentation.screens.search.adapters.SearchAdapter
+import com.cheesecake.presentation.screens.search.models.SearchResult
+import com.cheesecake.presentation.screens.search.SearchViewModel
 import com.cheesecake.presentation.screens.search.SearchAdapter
 import com.cheesecake.presentation.screens.search.SearchResult
 import com.cheesecake.presentation.screens.search.SearchViewModel
@@ -49,7 +54,6 @@ fun ImageView.setCircularImageFromUrl(imageUri: String?) {
             .transform(CircleCrop())
             .into(this)
     }
-
     //val imageUrl = imageUri.takeIf { !it.isNullOrEmpty() && !it.contains("image_not_available") } ?: R.drawable.no_image
 }
 
@@ -62,7 +66,11 @@ fun ImageView.setSvgImageFromUrl(imageUri: String?) {
             .load(it.toUri(), this);
     }
 
-    //val imageUrl = imageUri.takeIf { !it.isNullOrEmpty() && !it.contains("image_not_available") } ?: R.drawable.no_image
+@BindingAdapter(value = ["app:listItems"])
+fun <T> setListItems(view: RecyclerView, items: List<T>?) {
+    items?.let {
+        (view.adapter as BaseListAdapter<T>?)?.submitList(items)
+    }
 }
 
 @BindingAdapter(value = ["app:items"])
@@ -79,23 +87,19 @@ fun <T> setNestedSearchRecyclerItems(view: RecyclerView, items: List<T>?) {
     }
 }
 
-@BindingAdapter(value = ["app:searchItems"])
-fun setSearchItems(view: RecyclerView, items: List<SearchResult>?) {
-    items?.let {
-        (view.adapter as SearchAdapter).setItems(it)
-    }
-}
-
-
 @BindingAdapter(value = ["app:showLoading"])
 fun showLoading(view: View, isVisible: Boolean?) {
     view.isVisible = !(isVisible == null || isVisible == false)
+}
 
+@BindingAdapter(value = ["app:viewVisibilityOnItems"])
+fun <T> hideIfItemsEmpty(view: View, items: List<T>) {
+    view.isVisible = items.isNotEmpty()
 }
 
 @BindingAdapter(value = ["app:viewVisibilityInLoading"])
 fun hideWhenLoading(view: View, isVisible: Boolean) {
-    view.isVisible = !isVisible
+    if (isVisible) view.visibility = View.INVISIBLE else view.visibility = View.VISIBLE
 }
 
 @BindingAdapter(value = ["app:showNoResultFound"])
@@ -104,7 +108,6 @@ fun <T> showWhenNoResult(view: FrameLayout, items: List<SearchResult>?) {
         view.isVisible = it.isEmpty()
     }
 }
-
 
 @BindingAdapter("app:onSearchTextChanged")
 fun EditText.onSearchTextChanged(viewModel: SearchViewModel) {
@@ -133,7 +136,7 @@ fun TextView.setMatchScore(fixture: Fixture?) {
 @BindingAdapter("app:scoreOrTime")
 fun TextView.setMatchScore(item: MatchItemUIState?) {
     item?.let {
-        when(it.matchState ) {
+        when (it.matchState) {
             "FT" -> "Finished\n  ${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
             else -> this.text = it.matchTime
         }

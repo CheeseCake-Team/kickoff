@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.cheesecake.presentation.screens.search.LeagueSearchUIState" />
+            type="com.cheesecake.presentation.screens.search.models.LeagueSearchUIState" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_margin="@dimen/spacing_4"
-        android:onClick="@{() -> item.onclick.invoke(item.leagueId,item.season)}"
+        android:onClick="@{() -> item.onclick.invoke(item)}"
         app:cardBackgroundColor="@color/cardSurface"
         app:cardCornerRadius="@dimen/spacing_8">
 

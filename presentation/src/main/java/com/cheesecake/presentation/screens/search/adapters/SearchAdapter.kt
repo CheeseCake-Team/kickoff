@@ -1,22 +1,23 @@
-package com.cheesecake.presentation.screens.search
+package com.cheesecake.presentation.screens.search.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.abaferastech.marvelapp.ui.base.BaseDiffUtil
 import com.cheesecake.presentation.databinding.ItemSearchLeagueBinding
 import com.cheesecake.presentation.databinding.ItemSearchTeamBinding
 import androidx.databinding.library.baseAdapters.BR
+import com.cheesecake.presentation.base.BaseAdapter
+import com.cheesecake.presentation.base.BaseDiffUtil
+import com.cheesecake.presentation.screens.search.models.SearchResult
 
 
-class SearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SearchAdapter : BaseAdapter<SearchResult>(null) {
 
+    override val layoutId: Int = 0
 
-    private var itemList = emptyList<SearchResult>()
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return when (viewType) {
             TYPE_LEAGUE -> LeagueViewHolder(
                 ItemSearchLeagueBinding.inflate(
@@ -32,7 +33,7 @@ class SearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         when (holder) {
             is LeagueViewHolder -> holder.bind(itemList[position] as SearchResult.League)
             is TeamViewHolder -> holder.bind(itemList[position] as SearchResult.Team)
@@ -45,12 +46,8 @@ class SearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return when (itemList[position]) {
             is SearchResult.Team -> TYPE_TEAM
             is SearchResult.League -> TYPE_LEAGUE
-            else -> throw IllegalArgumentException("invalid")
-
         }
     }
-
-    abstract class BaseViewHolder(binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root)
 
     class LeagueViewHolder(private val binding: ItemSearchLeagueBinding) : BaseViewHolder(binding) {
         fun bind(league: SearchResult.League) {
@@ -65,16 +62,6 @@ class SearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             binding.recyclerViewSearchLeagues.adapter = SearchTeamAdapter()
         }
     }
-
-    fun setItems(newItems: List<SearchResult>) {
-        val diffResult =
-            DiffUtil.calculateDiff(SearchDiffUtil(itemList, newItems, ::areItemsSame, ::areContentSame))
-        itemList = newItems
-        diffResult.dispatchUpdatesTo(this)
-    }
-
-    private fun areItemsSame(oldItem: SearchResult, newItem: SearchResult) = oldItem == newItem
-    private fun areContentSame(oldPosition: SearchResult, newPosition: SearchResult) = true
 
     companion object {
         const val TYPE_LEAGUE = 0

@@ -51,5 +51,7 @@
     <string name="explore_teams_from_around_the_world_based_on_their_countries">Explore teams from around the world based on their countries.</string>
     <string name="view_more">View more</string>
     <string name="leagues">Leagues</string>
+    <string name="recent_search">Recent Search</string>
+    <string name="delete_all">Delete all</string>
 
 </resources>

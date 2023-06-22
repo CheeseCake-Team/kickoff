@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.cheesecake.presentation.screens.search.SearchViewModel" />
+            type="com.cheesecake.presentation.screens.homeSearch.HomeSearchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,51 +20,41 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/cardSurface"
-            app:layout_constraintBottom_toTopOf="@id/recycler_view_search"
+            app:layout_constraintBottom_toTopOf="@id/recycler_view_home_search"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/back_button"
-            style="?attr/materialIconButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_8"
-            android:layout_marginTop="@dimen/spacing_8"
-            android:onClick="@{() -> viewModel.onClickBack()}"
-            app:icon="@drawable/ic_back"
-            app:iconTint="@color/fontHeavy"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <EditText
             android:id="@+id/edit_text_search"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginStart="@dimen/spacing_8"
-            android:layout_marginEnd="@dimen/spacing_16"
+            android:layout_marginHorizontal="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_8"
+            android:focusable="false"
             android:background="@drawable/edittext_background_round"
-            android:focusable="true"
+            android:clickable="true"
+            android:drawableStart="@drawable/magnifer"
+            android:drawablePadding="8dp"
             android:fontFamily="@font/lato"
-            android:paddingHorizontal="@dimen/spacing_16"
-            android:singleLine="true"
+            android:hint="@string/search_here"
+            android:inputType="none"
+            android:onClick="@{()-> viewModel.onClickSearchBar()}"
+            android:paddingHorizontal="@dimen/font_size_16sp"
             android:textColor="@color/fontHeavy"
             android:textColorHint="@color/lightGreyText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/back_button"
-            app:layout_constraintTop_toTopOf="@+id/back_button"
-            app:onSearchTextChanged="@{viewModel}" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_search"
+            android:id="@+id/recycler_view_home_search"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/spacing_8"
             android:clipToPadding="false"
-            android:padding="@dimen/spacing_12"
-            app:items="@{viewModel.state.searchResult}"
+            app:items="@{viewModel.state.data}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +62,7 @@
             app:layout_constraintTop_toBottomOf="@id/edit_text_search"
             app:viewVisibilityInLoading="@{viewModel.state.loading}"
             tools:context="com.cheesecake.league.LeagueTeamsFragment"
-            tools:listitem="@layout/item_team" />
+            tools:listitem="@layout/item_search_recent" />
 
         <ProgressBar
             android:id="@+id/progressBar"
