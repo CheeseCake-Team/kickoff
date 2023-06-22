@@ -1,10 +1,7 @@
 package com.cheesecake.presentation.screens.league.leagueMatches
 
-import androidx.recyclerview.widget.DiffUtil
-import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseAdapter
-import com.cheesecake.presentation.base.BaseListAdapter
 import com.cheesecake.presentation.databinding.ItemHeadToHeadBinding
 
 class LeagueMatchesHeadToHeadAdapter : BaseAdapter<ItemHeadToHeadBinding>(null) {

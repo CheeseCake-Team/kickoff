@@ -38,8 +38,6 @@ fun List<Pair<String, List<Fixture>>>.toUIState(onclick: (Int,Int, String) -> Un
 @JvmName("toMatchItemUIStateList")
 fun List<Fixture>.toUIState(onclick: (Int,Int, String) -> Unit): List<MatchItemUIState> {
     return map { fixture ->
-        Log.d("TAG", "toUIState11:${fixture.matchDate.toStanderDateString()} ")
-
         MatchItemUIState(
             homeTeamName = fixture.homeTeamName,
             homeTeamLogoUrl = fixture.homeTeamLogoUrl,

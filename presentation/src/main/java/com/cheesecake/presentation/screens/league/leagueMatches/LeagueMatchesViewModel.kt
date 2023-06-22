@@ -1,15 +1,14 @@
 package com.cheesecake.presentation.screens.league.leagueMatches
 
+import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.usecases.GetPairsOfMatchesAndDateByLeagueIdAndSeasonUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
-import com.cheesecake.presentation.screens.home.HomeEvents
 import com.cheesecake.presentation.screens.league.LeagueArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
-import java.util.Date
 import javax.inject.Inject
 
 @HiltViewModel

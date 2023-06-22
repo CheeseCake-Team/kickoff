@@ -32,7 +32,7 @@ fun List<Pair<League, List<Fixture>>>.toHomeFavouriteUiState(
                     onMatchClick(
                         fixture.homeTeamID,
                         fixture.awayTeamID,
-                        fixture.matchDate.toString()
+                        fixture.matchDate.toStanderDateString()
                     )
                 }
             }
