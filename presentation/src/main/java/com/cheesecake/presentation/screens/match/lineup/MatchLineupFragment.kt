@@ -24,27 +24,29 @@ class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val firstTeamLineup = createFirstTeamLineup()
-        populateLineup(firstTeamLineup, binding.homeTeamContainer)
-        rotateLineup(binding.homeTeamContainer, 90f)
-        val secondTeamLineup = createSecondTeamLineup()
-        populateLineupReverse(secondTeamLineup, binding.awayTeamContainer)
-        rotateLineup(binding.awayTeamContainer, 90f)
+        collect(viewModel.state){
+            val firstTeamLineup = it.data.homeTeamLineup
+            populateLineup(firstTeamLineup, binding.homeTeamContainer)
+            rotateLineup(binding.homeTeamContainer, 90f)
+            val secondTeamLineup = it.data.awayTeamLineup
+            populateLineupReverse(secondTeamLineup, binding.awayTeamContainer)
+            rotateLineup(binding.awayTeamContainer, 90f)
 
 
+        }
     }
 
     private fun rotateLineup(container: LinearLayout, degrees: Float) {
         container.rotation = degrees
     }
 
-    private fun populateLineup(lineup: FixtureLineup, container: LinearLayout) {
+    private fun populateLineup(lineup: FixtureLineupUiState, container: LinearLayout) {
         val formation = lineup.formation.split("-").map { it.toInt() }
         val cellWidth = 200
         container.removeAllViews()
 
         // Add goalkeeper row
-        val goalkeeper = lineup.playerLineup.firstOrNull { it.playerPosition == "G" }
+        val goalkeeper = lineup.playerItemUiState.firstOrNull { it.playerPosition == "G" }
         if (goalkeeper != null) {
             val goalkeeperRow = createPlayerRow(goalkeeper, R.drawable.player_shirt)
             container.addView(goalkeeperRow)
@@ -61,7 +63,7 @@ class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
                 gravity = Gravity.CENTER
             }
             for (i in 0 until playersInRow) {
-                val player = lineup.playerLineup[playerIndex]
+                val player = lineup.playerItemUiState[playerIndex]
                 playerIndex++
                 val playerView = createPlayerView(player, R.drawable.player_shirt)
                 playerRow.addView(playerView)
@@ -72,13 +74,13 @@ class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
 
     }
 
-    private fun populateLineupReverse(lineup: FixtureLineup, container: LinearLayout) {
+    private fun populateLineupReverse(lineup: FixtureLineupUiState, container: LinearLayout) {
         val formation = lineup.formation.split("-").map { it.toInt() }
         val cellWidth = 200
         container.removeAllViews()
 
         // Add player rows in reverse order
-        var playerIndex = lineup.playerLineup.lastIndex // Start from the last index
+        var playerIndex = lineup.playerItemUiState.lastIndex // Start from the last index
         for (playersInRow in formation) {
             val playerRow = LinearLayout(requireContext()).apply {
                 layoutParams = LinearLayout.LayoutParams(
@@ -88,7 +90,7 @@ class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
                 gravity = Gravity.CENTER
             }
             for (i in 0 until playersInRow) {
-                val player = lineup.playerLineup[playerIndex]
+                val player = lineup.playerItemUiState[playerIndex]
                 playerIndex--
                 val playerView = createPlayerView(player, R.drawable.ic_red)
                 playerRow.addView(playerView)
@@ -97,14 +99,14 @@ class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
         }
 
         // Add goalkeeper row at the bottom
-        val goalkeeper = lineup.playerLineup.firstOrNull { it.playerPosition == "G" }
+        val goalkeeper = lineup.playerItemUiState.firstOrNull { it.playerPosition == "G" }
         if (goalkeeper != null) {
             val goalkeeperRow = createPlayerRow(goalkeeper, R.drawable.ic_red)
             container.addView(goalkeeperRow)
         }
     }
 
-    private fun createPlayerView(player: PlayerLineup, playerShirt: Int): View {
+    private fun createPlayerView(player: PlayerItemUiState, playerShirt: Int): View {
         val view = LayoutInflater.from(requireContext()).inflate(R.layout.item_player, null, false)
         val playerNumber: TextView = view.findViewById(R.id.playerNumber)
         val playerImageView: ImageView = view.findViewById(R.id.playerImageView)
@@ -130,7 +132,7 @@ class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
         return view
     }
 
-    private fun createPlayerRow(player: PlayerLineup, playerShirt: Int): LinearLayout {
+    private fun createPlayerRow(player: PlayerItemUiState, playerShirt: Int): LinearLayout {
         val playerRow = LinearLayout(requireContext()).apply {
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
