@@ -51,5 +51,11 @@
         <argument
             android:name="countryName"
             app:argType="string" />
+        <argument
+            android:name="imageUrl"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_countryFragment_to_leagueFragment"
+            app:destination="@id/leagueFragment" />
     </fragment>
 </navigation>
