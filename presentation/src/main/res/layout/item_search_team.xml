@@ -13,8 +13,8 @@
         style="@style/Widget.Material3.CardView.Filled"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_4"
         android:padding="@dimen/spacing_8"
+        android:layout_marginTop="@dimen/spacing_8"
         app:cardBackgroundColor="@color/cardSurface">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,14 +45,6 @@
                 app:layout_constraintTop_toTopOf="@+id/text_view_leagues_label"
                 tools:text="(45)" />
 
-            <View
-                android:id="@+id/divider2"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/spacing_8"
-                android:background="?android:attr/listDivider"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_leagues_label"
-                tools:layout_editor_absoluteX="1dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_search_leagues"
@@ -60,9 +52,9 @@
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
                 android:overScrollMode="never"
-                android:paddingVertical="@dimen/spacing_4"
+                android:paddingVertical="@dimen/spacing_8"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@+id/divider2"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_leagues_label"
                 app:nestedSearchItems="@{item.items}"
                 tools:listitem="@layout/item_league" />
 
