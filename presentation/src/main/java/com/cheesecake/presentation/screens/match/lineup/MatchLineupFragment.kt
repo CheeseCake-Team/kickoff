@@ -71,7 +71,7 @@ class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
     }
 
     private fun populateLineupReverse(lineup: TeamData, container: LinearLayout) {
-        val formation = lineup.formation.split("-").map { it.toInt() }
+        val formation = lineup.formation.split("-").map { it.toInt() }.reversed()
         container.removeAllViews()
 
         var playerIndex = lineup.playerItemUiState.lastIndex
