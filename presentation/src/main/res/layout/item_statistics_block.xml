@@ -14,8 +14,7 @@
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/cardSurface"
         style="@style/Widget.Material3.CardView.Filled"
-        android:layout_marginVertical="@dimen/spacing_4"
-        android:layout_marginHorizontal="@dimen/spacing_16"
+        android:layout_margin="@dimen/spacing_4"
         app:cardCornerRadius="@dimen/spacing_8">
 
         <androidx.constraintlayout.widget.ConstraintLayout
