@@ -9,6 +9,7 @@ import com.cheesecake.domain.entity.PlayerLineup
 fun LineupDTO.toEntity(): FixtureLineup {
     return FixtureLineup(
         teamId = this.team.id,
+        teamName = this.team.name,
         teamLogoUrl = this.team.logo,
         coachId = this.coach.id,
         coachName = this.coach.name,

@@ -2,6 +2,7 @@ package com.cheesecake.domain.entity
 
 data class FixtureLineup(
     val teamId: Int,
+    val teamName: String,
     val teamLogoUrl: String,
     val coachId: Int,
     val coachName: String,

@@ -17,6 +17,7 @@ data class TeamsLineups(
 )
 
 data class FixtureLineupUiState(
+    val teamName: String = "",
     val teamLogoUrl: String = "",
     val coachName: String = "",
     val formation: String = "",
@@ -41,6 +42,7 @@ fun List<FixtureLineup>.toUIState(): TeamsLineups {
 
 fun FixtureLineup.toUIState(): FixtureLineupUiState {
     return FixtureLineupUiState(
+        teamName = teamName,
         teamLogoUrl = teamLogoUrl,
         coachName = coachName,
         formation = formation,

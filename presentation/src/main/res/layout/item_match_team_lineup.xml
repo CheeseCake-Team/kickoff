@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="item"
             type="com.cheesecake.presentation.screens.match.lineup.FixtureLineupUiState" />
@@ -15,17 +16,51 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/onPrimaryColor">
+
+            <ImageView
+                android:id="@+id/image_view_team_image"
+                android:layout_width="@dimen/team_image_size_24dp"
+                android:layout_height="@dimen/team_image_size_24dp"
+                android:layout_marginStart="@dimen/spacing_16"
+                android:layout_marginTop="@dimen/spacing_16"
+                app:imageUrl="@{item.teamLogoUrl}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_view_team_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_8"
+                android:layout_marginEnd="@dimen/spacing_8"
+                android:text="@{item.teamName}"
+                app:layout_constraintBottom_toBottomOf="@+id/image_view_team_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_view_team_image"
+                app:layout_constraintTop_toTopOf="@+id/image_view_team_image" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/spacing_8"
+                android:background="@color/backLighter"
+                android:elevation="@dimen/spacing_1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_team_name" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_view_coach"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_16"
+                android:layout_marginTop="@dimen/spacing_12"
                 android:backgroundTint="@color/cardSurface"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/divider">
 
                 <TextView
                     style="@style/SubtitleSmall"
@@ -81,9 +116,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/card_view_starter_players"
-                tools:listitem="@layout/item_match_players"
+                app:listitems="@{item.playerItemUiState}"
                 tools:itemCount="2"
-                app:listitems="@{item.playerItemUiState}" />
+                tools:listitem="@layout/item_match_players" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_view_substitutes_players"
@@ -115,9 +150,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="parent"
+                app:listItems="@{item.substitutesPlayers}"
                 tools:itemCount="2"
-                tools:listitems="@layout/item_match_players"
-                app:listitems="@{item.substitutesPlayers}" />
+                tools:listitem="@layout/item_match_players" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
