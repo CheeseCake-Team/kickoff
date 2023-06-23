@@ -118,25 +118,12 @@
         <action
             android:id="@+id/action_countryFragment_to_leagueFragment"
             app:destination="@id/leagueFragment" />
+        <action
+            android:id="@+id/action_countryFragment_to_teamFragment"
+            app:destination="@id/teamFragment" />
     </fragment>
     <fragment
         android:id="@+id/teamFragment"
         android:name="com.cheesecake.presentation.screens.team.TeamFragment"
         android:label="TeamFragment" />
-    <fragment
-        android:id="@+id/countryLeaguesFragment"
-        android:name="com.cheesecake.presentation.screens.country.countryLeagues.CountryLeaguesFragment"
-        android:label="CountryLeaguesFragment" >
-        <action
-            android:id="@+id/action_countryLeaguesFragment_to_leagueFragment"
-            app:destination="@id/leagueFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/countryTeamsFragment"
-        android:name="com.cheesecake.presentation.screens.country.countryTeams.CountryTeamsFragment"
-        android:label="CountryTeamsFragment" >
-        <action
-            android:id="@+id/action_countryTeamsFragment_to_teamFragment"
-            app:destination="@id/teamFragment" />
-    </fragment>
 </navigation>
