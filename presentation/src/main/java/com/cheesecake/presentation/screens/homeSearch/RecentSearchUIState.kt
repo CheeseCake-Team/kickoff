@@ -12,19 +12,19 @@ class RecentSearchUIState(
     val title: String,
     val type: RecentSearchType,
 //    val onClickItem: (RecentSearchUIState) -> Unit,
-    val onClickDelete: () -> Unit
+//    val onClickDelete: () -> Unit
 )
 
 fun RecentSearch.toUIState(
 //    onClickItem: (RecentSearchUIState) -> Unit,
-    onClickDelete: () -> Unit
+//    onClickDelete: () -> Unit
 ) = RecentSearchUIState(
     id = this.id,
     title = this.title,
     imageUrl = this.imageUrl,
     type = this.type,
 //    onClickItem = onClickItem,
-    onClickDelete = onClickDelete
+//    onClickDelete = onClickDelete
 )
 
 fun RecentSearchUIState.toEntity() = RecentSearch(
