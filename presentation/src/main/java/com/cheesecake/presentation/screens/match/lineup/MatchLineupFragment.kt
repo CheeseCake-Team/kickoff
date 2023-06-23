@@ -108,10 +108,8 @@ class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         ).apply {
-            val marginHorizontal = resources.getDimensionPixelSize(R.dimen.spacing_4)
-
-            val marginVertical = resources.getDimensionPixelSize(R.dimen.spacing_8)
-            setMargins(marginHorizontal, marginVertical, marginHorizontal, marginVertical)
+            val margin = resources.getDimensionPixelSize(R.dimen.spacing_4)
+            setMargins(margin, margin, margin, margin)
         }
         view.layoutParams = params
 
