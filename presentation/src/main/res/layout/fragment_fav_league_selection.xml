@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_16"
             android:layout_marginTop="@dimen/spacing_8"
-            android:text="adfafda"
+            android:text="Pick your preferred competition and experience the real live scores with us"
             android:textColor="@color/backLighter"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title_text_view" />
@@ -50,6 +50,7 @@
             android:drawableStart="@drawable/magnifer"
             android:drawablePadding="8dp"
             android:fontFamily="@font/lato"
+            app:onSearchTextChanged="@{viewModel}"
             android:hint="Search your favourite competition"
             android:paddingHorizontal="@dimen/font_size_16sp"
             android:textColor="@color/fontHeavy"

@@ -18,6 +18,7 @@ import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseAdapter
 import com.cheesecake.presentation.base.BaseListAdapter
+import com.cheesecake.presentation.screens.favLeaguesSelection.FavLeagueSelectionViewModel
 import com.cheesecake.presentation.screens.home.MatchItemUIState
 import com.cheesecake.presentation.screens.search.SearchViewModel
 import com.cheesecake.presentation.screens.search.models.SearchResult
@@ -102,6 +103,19 @@ fun <T> showWhenNoResult(view: FrameLayout, items: List<SearchResult>?) {
 
 @BindingAdapter("app:onSearchTextChanged")
 fun EditText.onSearchTextChanged(viewModel: SearchViewModel) {
+    addTextChangedListener(object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            viewModel.onQueryChange(s.toString().trim())
+        }
+
+        override fun afterTextChanged(s: Editable?) {}
+    })
+}
+
+@BindingAdapter("app:onSearchTextChanged")
+fun EditText.onSearchTextChanged(viewModel: FavLeagueSelectionViewModel) {
     addTextChangedListener(object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 

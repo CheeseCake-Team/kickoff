@@ -13,13 +13,13 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@{item.selected ? @color/primaryColor : @color/onPrimaryColor }"
+        app:foreground="@{item.selected ? @drawable/selected_fav_item : @drawable/normal_fav_item }"
         android:layout_margin="@dimen/spacing_8">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/cardSurface"
+            android:background="@color/onPrimaryColor"
             android:paddingHorizontal="@dimen/spacing_24"
             android:onClick="@{() ->item.onFavorite.invoke(item.leagueId)}"
             android:paddingVertical="@dimen/spacing_24">
