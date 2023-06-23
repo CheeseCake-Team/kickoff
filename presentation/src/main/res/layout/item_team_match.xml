@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/spacing_8"
             android:layout_marginStart="@dimen/spacing_8"
-            android:text="@{item.matchDate.toString()}"
+            android:text="@{item.matchDate.toString().substring(0, 11)}"
             android:textColor="@color/fontHeavy"
             tools:text="today" />
 

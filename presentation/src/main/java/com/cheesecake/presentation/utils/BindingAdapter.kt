@@ -112,7 +112,7 @@ fun EditText.onSearchTextChanged(viewModel: SearchViewModel) {
 fun TextView.setMatchScore(fixture: Fixture?) {
     fixture?.let {
         if (it.isFinished) this.text = "Finished\n  ${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
-        else this.text = it.matchTime.toString()
+        else this.text = it.matchDate.toStanderTimeString()
     }
 }
 
