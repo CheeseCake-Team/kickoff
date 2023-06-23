@@ -27,6 +27,8 @@
     <string name="search_here">Search here...</string>
     <string name="no_result_found_description">We couldn\'t find any results for your search\n Please check your input and try again</string>
     <string name="no_result_found">No Result Found</string>
+
+    <string name="chelsea">Chelsea</string>
     <string name="settings_more"><![CDATA[Settings & More]]></string>
     <string name="notifications_settings">Notifications Settings</string>
     <string name="time_settings">Time Settings</string>
@@ -53,5 +55,10 @@
     <string name="leagues">Leagues</string>
     <string name="recent_search">Recent Search</string>
     <string name="delete_all">Delete all</string>
+    <string name="position">Position</string>
+    <string name="player_country">Player country</string>
+    <string name="league_image">League Image</string>
+    <string name="club_name">club name</string>
+    <string name="finished">Finished</string>
 
 </resources>

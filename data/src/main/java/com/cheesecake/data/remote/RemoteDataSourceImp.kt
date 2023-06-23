@@ -112,7 +112,7 @@ class RemoteDataSourceImp @Inject constructor(
 
     override suspend fun getFixtureBySeasonByTeamId(
         timeZone: String,
-        season: String,
+        season: Int,
         TeamId: Int
     ): List<FixtureDTO> {
         return wrapBaseResponse { service.getFixturesBySeasonIdByTeamId(timeZone, season, TeamId) }
@@ -173,10 +173,10 @@ class RemoteDataSourceImp @Inject constructor(
     //region Head 2 Head
     override suspend fun getHeadToHead(
         teamsId: String,
-        seasonId: Int,
+        date: String,
         timeZone: String
     ): List<HeadToHeadDTO> {
-        return wrapBaseResponse { service.getHeadToHead(teamsId, seasonId, timeZone) }
+        return wrapBaseResponse { service.getHeadToHeadByDate(teamsId, date, timeZone) }
     }
 
     override suspend fun getHeadToHeadByDate(

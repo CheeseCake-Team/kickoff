@@ -19,10 +19,8 @@ class LeagueViewModel @Inject constructor(
     private val getLeagueByIdAndSeasonUseCase: GetLeagueByIdAndSeasonUseCase,
     private val favouriteLeagueUseCase: FavouriteLeagueUseCase,
     private val leagueArgs :LeagueNavigationArgs,
-    savedStateHandle: SavedStateHandle,
 ) : BaseViewModel<LeagueUIState, LeagueNavigationEvent>(LeagueUIState(), Event()) {
 
-//    private val leagueArgs = LeagueNavigationArgs(savedStateHandle)
 
     private val _leagueId = MutableStateFlow(leagueArgs.leagueId)
     val leagueId: StateFlow<Int> = _leagueId

@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.model.StreamEncoder
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.cheesecake.domain.entity.Fixture
+import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseAdapter
 import com.cheesecake.presentation.base.BaseListAdapter
 import com.cheesecake.presentation.screens.home.MatchItemUIState
@@ -29,6 +30,7 @@ import com.cheesecake.presentation.screens.search.models.SearchResult
 import com.cheesecake.presentation.screens.search.SearchViewModel
 import com.cheesecake.presentation.screens.search.SearchAdapter
 import com.cheesecake.presentation.screens.search.SearchResult
+import com.cheesecake.presentation.screens.search.SearchViewModel
 import com.cheesecake.presentation.screens.search.SearchViewModel
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import java.io.InputStream
@@ -130,6 +132,28 @@ fun TextView.setMatchScore(fixture: Fixture?) {
         if (it.isFinished) this.text = "Finished\n  ${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
         else this.text = it.matchTime.toString()
     }
+}
+
+@BindingAdapter("app:setMatchState")
+fun TextView.setMatchState(isFinished: Boolean) {
+    if (isFinished)
+        text = resources.getString(R.string.finished)
+    else isVisible = false
+}
+
+@BindingAdapter(
+    "app:isFinished", "app:time", "app:homeTeamGoals", "app:awayTeamGoals",
+    requireAll = true
+)
+fun TextView.setTimeOrResult(
+    isFinished: Boolean,
+    time: String,
+    homeTeamGoals: Int,
+    awayTeamGoals: Int
+) {
+    text = if (isFinished)
+        "$homeTeamGoals  -  $awayTeamGoals"
+    else time
 }
 
 

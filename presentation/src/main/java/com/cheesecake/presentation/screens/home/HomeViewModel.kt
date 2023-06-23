@@ -73,8 +73,8 @@ class HomeViewModel @Inject constructor(
         Log.d("TAG", e.message.toString())
     }
 
-    private fun onMatchClicked(matchId: String, season: Int, date: String) {
-        _event.update { Event(HomeEvents.MatchClickedEvent(matchId, season, date)) }
+    private fun onMatchClicked(homeTeamId: Int, awayTeamId: Int, date: String) {
+        _event.update { Event(HomeEvents.MatchClickedEvent(homeTeamId, awayTeamId, date)) }
     }
 
     private fun onLeagueClicked(leagueId: Int, season: Int) {

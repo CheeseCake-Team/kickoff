@@ -3,8 +3,8 @@ package com.cheesecake.presentation.screens.league
 import androidx.lifecycle.SavedStateHandle
 
 class LeagueArgs(savedStateHandle: SavedStateHandle) {
-    val leagueId: Int = savedStateHandle[LEAGUE_ID_ARG] ?: 0
-    val season: Int = savedStateHandle[SEASON_ARG] ?: 0
+    val leagueId: Int = checkNotNull(savedStateHandle[LEAGUE_ID_ARG])
+    val season: Int = checkNotNull(savedStateHandle[SEASON_ARG])
 
     companion object{
         const val LEAGUE_ID_ARG = "leagueID"

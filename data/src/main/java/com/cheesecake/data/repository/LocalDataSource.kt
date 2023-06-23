@@ -44,4 +44,6 @@ interface LocalDataSource {
 
     suspend fun deleteRecentSearches()
 
+    suspend fun getTeamById(teamId: Int): TeamLocalDTO?
+
 }

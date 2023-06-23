@@ -4,9 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import androidx.databinding.library.baseAdapters.BR
+import com.cheesecake.presentation.databinding.ItemDateMatchesBinding
+import com.cheesecake.presentation.screens.league.leagueMatches.LeagueMatchesHeadToHeadAdapter
 
 
 interface BaseInteractionListener
@@ -45,6 +47,12 @@ abstract class BaseAdapter<T>(private val listener: BaseInteractionListener?) :
             is ItemViewHolder -> {
                 holder.binding.apply {
                     setVariable(BR.item, currentItem)
+
+                    when (this) {
+                        is ItemDateMatchesBinding -> {
+                            headToHeadRecyclerView.adapter = LeagueMatchesHeadToHeadAdapter()
+                        }
+                    }
                 }
             }
         }

@@ -6,6 +6,8 @@ import com.cheesecake.data.local.daos.TeamsDao
 import com.cheesecake.data.local.daos.LeagueDao
 import com.cheesecake.data.local.daos.TeamCountriesDao
 import com.cheesecake.data.local.daos.TeamsDao
+import com.cheesecake.data.local.daos.LeagueDao
+import com.cheesecake.data.local.daos.TeamsDao
 import com.cheesecake.data.local.models.LeagueLocalDTO
 import com.cheesecake.data.local.models.RecentSearchLocalDTO
 import com.cheesecake.data.local.models.TeamCountriesLocalDTO
@@ -69,6 +71,10 @@ class LocalDataSourceImp @Inject constructor(
 
     override suspend fun deleteTeamById(teamId: Int) {
         teamsDao.deleteTeamById(teamId)
+    }
+
+    override suspend fun getTeamById(teamId: Int): TeamLocalDTO? {
+        return teamsDao.getTeamById(teamId)
     }
 
     override suspend fun getFavouriteLeagues(): Flow<List<LeagueLocalDTO>> {
