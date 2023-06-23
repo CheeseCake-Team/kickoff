@@ -19,6 +19,7 @@ class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
     override val viewModel: MatchLineupViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.recyclerViewTeamsLineup.adapter = ItemMatchTeamLineupAdapter()
 
         collect(viewModel.state) {
             if (!it.isLoading) {

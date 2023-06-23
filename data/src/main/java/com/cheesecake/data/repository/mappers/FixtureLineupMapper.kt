@@ -24,15 +24,15 @@ fun LineupDTO.toEntity(): FixtureLineup {
 fun List<LineupDTO>.toEntity(): List<FixtureLineup> {
     return map { it.toEntity() }
 }
-
+@JvmName("StartXIToPlayerLineup")
 fun List<LineupDTO.StartXI>.toEntity(): List<PlayerLineup> {
     return map { it.player.toEntity() }
 }
-
+@JvmName("SubstituteToPlayerLineup")
 fun List<LineupDTO.Substitute>.toEntity(): List<PlayerLineup> {
     return map { it.player.toEntity() }
 }
-
+@JvmName("PlayerPosGridDTOToPlayerLineup")
 fun PlayerPosGridDTO.toEntity(): PlayerLineup {
     return PlayerLineup(
         playerId = this.id,

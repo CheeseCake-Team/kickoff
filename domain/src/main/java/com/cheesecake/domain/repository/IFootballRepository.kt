@@ -5,23 +5,23 @@ import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.FixtureEvents
 import com.cheesecake.domain.entity.FixtureLineup
 import com.cheesecake.domain.entity.FixtureStatistics
-import com.cheesecake.domain.entity.TeamStatisticsEntity
-import com.cheesecake.domain.entity.TeamStanding
 import com.cheesecake.domain.entity.League
-import com.cheesecake.domain.entity.Team
-import com.cheesecake.domain.entity.PlayerStatistics
-import com.cheesecake.domain.entity.SquadPlayer
-import com.cheesecake.domain.entity.Trophy
 import com.cheesecake.domain.entity.Match
 import com.cheesecake.domain.entity.Player
+import com.cheesecake.domain.entity.PlayerStatistics
 import com.cheesecake.domain.entity.RecentSearch
+import com.cheesecake.domain.entity.SquadPlayer
+import com.cheesecake.domain.entity.Team
+import com.cheesecake.domain.entity.TeamStanding
+import com.cheesecake.domain.entity.TeamStatisticsEntity
+import com.cheesecake.domain.entity.Trophy
 import kotlinx.coroutines.flow.Flow
 
 interface IFootballRepository {
 
-    suspend fun getRemoteCountries():List<Country>
+    suspend fun getRemoteCountries(): List<Country>
 
-    suspend fun getLocalCountries() : List<Country>
+    suspend fun getLocalCountries(): List<Country>
 
     suspend fun getCountriesSearch(search: String): Flow<List<Country>>
 
@@ -37,7 +37,11 @@ interface IFootballRepository {
 
     suspend fun updateOrInsertLeague(league: League)
 
-    suspend fun getMatchesByLeagueIdAndSeason(timeZone: String, leagueId: Int, season: Int): List<Fixture>
+    suspend fun getMatchesByLeagueIdAndSeason(
+        timeZone: String,
+        leagueId: Int,
+        season: Int
+    ): List<Fixture>
 
     suspend fun deleteLeagueById(leagueId: Int)
 
@@ -69,7 +73,12 @@ interface IFootballRepository {
 
     suspend fun getCoachTrophy(coachId: Int): List<Trophy>
 
-    suspend fun getMatchDetails(teamsId: String, date: String, timeZone: String): Match
+    suspend fun getMatchDetails(
+        homeTeamId: Int,
+        awayTeamId: Int,
+        date: String,
+        timeZone: String
+    ): Match
 
     suspend fun getFavoriteTeams(): Flow<List<Team>>
 

@@ -76,11 +76,12 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_teams_lineup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_24"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
-            app:listItems="@{viewModel.state.data}"/>
+            app:items="@{viewModel.state.teams}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
