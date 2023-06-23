@@ -11,7 +11,7 @@
         android:icon="@drawable/magnifer"/>
 
     <item
-        android:id="@+id/eventsFragment"
+        android:id="@+id/discoverFragment"
         android:title="Ball"
         android:icon="@drawable/ball"/>
     <item

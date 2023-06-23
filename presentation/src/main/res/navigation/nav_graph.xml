@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/discoverFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/leagueFragment"
@@ -118,6 +118,9 @@
         <action
             android:id="@+id/action_countryFragment_to_leagueFragment"
             app:destination="@id/leagueFragment" />
+        <action
+            android:id="@+id/action_countryFragment_to_teamFragment"
+            app:destination="@id/teamFragment" />
     </fragment>
     <fragment
         android:id="@+id/teamFragment"

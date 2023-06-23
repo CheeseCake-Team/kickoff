@@ -17,7 +17,7 @@
         android:layout_margin="@dimen/spacing_4"
         android:onClick="@{() -> item.onLeagueClick.invoke()}"
         app:cardBackgroundColor="@color/cardSurface"
-        app:cardCornerRadius="@dimen/cardview_default_radius">
+        app:cardCornerRadius="@dimen/spacing_8">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -55,15 +55,15 @@
                 android:id="@+id/text_view_established"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_8"
                 android:layout_marginEnd="@dimen/spacing_16"
+                android:layout_marginBottom="@dimen/spacing_16"
                 android:text="@{item.seasonStartEndYear}"
                 android:textAppearance="@style/bodyMedium"
                 android:textColor="@color/fontLight"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="@dimen/spacing_8"
                 app:layout_constraintHorizontal_bias="0.5"
-                android:layout_marginBottom="@dimen/spacing_16"
                 app:layout_constraintStart_toStartOf="@+id/text_view_league_name"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_league_name" />
 
