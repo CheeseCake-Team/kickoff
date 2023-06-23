@@ -46,5 +46,8 @@
     <string name="your_favorites">Your Favorites</string>
     <string name="discover">Discover</string>
     <string name="settings">Settings</string>
+    <string name="coach">Coach</string>
+    <string name="starter_players">Starter Players</string>
+    <string name="substitutes_players">substitutes players</string>
 
 </resources>

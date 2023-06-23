@@ -6,16 +6,19 @@ import com.cheesecake.domain.entity.PlayerLineup
 data class MatchLineupUIState(
     val errorMessage: String = "error",
     val isLoading: Boolean = true,
-    val data: HomeAwayTeams = HomeAwayTeams()
-
+    val data: TeamsLineups = TeamsLineups(),
 )
 
-data class HomeAwayTeams(
+data class TeamsLineups(
     val homeTeamLineup: FixtureLineupUiState = FixtureLineupUiState(),
     val awayTeamLineup: FixtureLineupUiState = FixtureLineupUiState(),
+    val homeTeamSubstitutesPlayers: List<PlayerItemUiState> = emptyList(),
+    val awayTeamSubstitutesPlayers: List<PlayerItemUiState> = emptyList()
 )
 
 data class FixtureLineupUiState(
+    val teamLogoUrl: String = "",
+    val coachName: String = "",
     val formation: String = "",
     val playerItemUiState: List<PlayerItemUiState> = emptyList()
 )
@@ -26,17 +29,22 @@ data class PlayerItemUiState(
     val playerPosition: String = ""
 )
 
-fun List<FixtureLineup>.toUIState(): HomeAwayTeams {
-    return HomeAwayTeams(
+fun List<FixtureLineup>.toUIState(): TeamsLineups {
+    return TeamsLineups(
         homeTeamLineup = first().toUIState(),
-        awayTeamLineup = last().toUIState()
+        awayTeamLineup = last().toUIState(),
+        homeTeamSubstitutesPlayers = first().substitutesPlayers.toUIState(),
+        awayTeamSubstitutesPlayers = last().substitutesPlayers.toUIState()
     )
 }
 
 
 fun FixtureLineup.toUIState(): FixtureLineupUiState {
     return FixtureLineupUiState(
-        formation = formation, playerItemUiState = playerLineup.toUIState()
+        teamLogoUrl = teamLogoUrl,
+        coachName = coachName,
+        formation = formation,
+        playerItemUiState = playerLineup.toUIState()
     )
 }
 

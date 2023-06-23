@@ -9,24 +9,30 @@ import com.cheesecake.domain.entity.PlayerLineup
 fun LineupDTO.toEntity(): FixtureLineup {
     return FixtureLineup(
         teamId = this.team.id,
+        teamLogoUrl = this.team.logo,
         coachId = this.coach.id,
         coachName = this.coach.name,
         coachImageUrl = this.coach.photo,
         formation = this.formation,
-        playerLineup = this.startXI.toEntity()
-
+        playerLineup = this.startXI.toEntity(),
+        substitutesPlayers = this.substitutes.toEntity()
     )
 }
+
 @JvmName("LineupDTOsToFixtureLineups")
 fun List<LineupDTO>.toEntity(): List<FixtureLineup> {
     return map { it.toEntity() }
 }
 
 fun List<LineupDTO.StartXI>.toEntity(): List<PlayerLineup> {
-return map {  it.player.toEntity() }
+    return map { it.player.toEntity() }
 }
 
-fun PlayerPosGridDTO.toEntity(): PlayerLineup{
+fun List<LineupDTO.Substitute>.toEntity(): List<PlayerLineup> {
+    return map { it.player.toEntity() }
+}
+
+fun PlayerPosGridDTO.toEntity(): PlayerLineup {
     return PlayerLineup(
         playerId = this.id,
         playerName = this.name,
