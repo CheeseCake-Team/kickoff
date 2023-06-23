@@ -17,9 +17,9 @@ data class TeamDTO(
         @SerializedName("code")
         val code: String?,
         @SerializedName("country")
-        val country: String,
+        val country: String?,
         @SerializedName("founded")
-        val founded: Int,
+        val founded: Int?,
         @SerializedName("national")
         val national: Boolean,
         @SerializedName("logo")

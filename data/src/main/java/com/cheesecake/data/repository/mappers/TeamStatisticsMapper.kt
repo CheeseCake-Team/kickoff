@@ -1,40 +1,53 @@
-package com.cheesecake.data.repository.mappers
-
 import com.cheesecake.data.remote.models.TeamStatisticsDTO
+import com.cheesecake.domain.entity.ScoreStats
 import com.cheesecake.domain.entity.TeamStatisticsEntity
-import com.cheesecake.domain.entity.TeamStats
 
 @JvmName("teamStatisticsDTOToTeamStatisticsEntity")
 fun TeamStatisticsDTO.toEntity(): TeamStatisticsEntity =
     TeamStatisticsEntity(
-        home = TeamStats(
-            played = this.fixtures.played.home,
-            wins = this.fixtures.wins.home,
-            draws = this.fixtures.draws.home,
-            loses = this.fixtures.loses.home,
-            cleanSheet = this.fixtures.played.home,
-            failedToScore = this.cleanSheet.home,
-            goalsFor = this.goals.goalsFor.total.home,
-            goalsAgainst = this.goals.goalsAgainst.total.home,
+
+        form = this.form.map { it.toString() },
+        played = scoreStats(
+            this.fixtures.played.home,
+            this.fixtures.played.away,
+            this.fixtures.played.total
         ),
-        away = TeamStats(
-            played = this.fixtures.played.away,
-            wins = this.fixtures.wins.away,
-            draws = this.fixtures.draws.away,
-            loses = this.fixtures.loses.away,
-            cleanSheet = this.fixtures.played.away,
-            failedToScore = this.cleanSheet.away,
-            goalsFor = this.goals.goalsFor.total.away,
-            goalsAgainst = this.goals.goalsAgainst.total.away,
+        wins = scoreStats(
+            this.fixtures.wins.home,
+            this.fixtures.wins.away,
+            this.fixtures.wins.total
         ),
-        total = TeamStats(
-            played = this.fixtures.played.total,
-            wins = this.fixtures.wins.total,
-            draws = this.fixtures.draws.total,
-            loses = this.fixtures.loses.total,
-            cleanSheet = this.fixtures.played.total,
-            failedToScore = this.cleanSheet.total,
-            goalsFor = this.goals.goalsFor.total.total,
-            goalsAgainst = this.goals.goalsAgainst.total.total,
+        draws = scoreStats(
+            this.fixtures.draws.home,
+            this.fixtures.draws.away,
+            this.fixtures.draws.total
+        ),
+        loses = scoreStats(
+            this.fixtures.loses.home,
+            this.fixtures.loses.away,
+            this.fixtures.loses.total
+        ),
+        cleanSheet = scoreStats(
+            this.cleanSheet.home,
+            this.cleanSheet.away,
+            this.cleanSheet.total
+        ),
+        failedToScore = scoreStats(
+            this.failedToScore.home,
+            this.failedToScore.away,
+            this.failedToScore.total
+        ),
+        goalsFor = scoreStats(
+            this.goals.goalsFor.total.home,
+            this.goals.goalsFor.total.away,
+            this.goals.goalsFor.total.total
+        ),
+        goalsAgainst = scoreStats(
+            this.goals.goalsAgainst.total.home,
+            this.goals.goalsAgainst.total.away,
+            this.goals.goalsAgainst.total.total
         )
     )
+
+private fun scoreStats(home: Float, away: Float, total: Float): ScoreStats =
+    ScoreStats(home.toInt(), away.toInt(), total.toInt())

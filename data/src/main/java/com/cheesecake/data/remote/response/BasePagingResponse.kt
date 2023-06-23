@@ -9,7 +9,9 @@ data class BasePagingResponse<T>(
     @SerializedName("paging")
     val paging: Paging,
     @SerializedName("response")
-    val response: List<T>
+    val response: List<T>,
+    @SerializedName("results")
+    val results: Int?
 ) {
     data class Paging(
         @SerializedName("current")

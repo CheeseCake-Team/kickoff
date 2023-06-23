@@ -2,17 +2,9 @@ package com.cheesecake.presentation.screens.home
 
 import androidx.recyclerview.widget.DiffUtil
 import com.cheesecake.presentation.R
+import com.cheesecake.presentation.base.BaseAdapter
 import com.cheesecake.presentation.base.BaseListAdapter
 
-class MatchesAdapter: BaseListAdapter<MatchItemUIState>(MatchItemUIStateDiffUtil()){
+class MatchesAdapter: BaseAdapter<MatchItemUIState>(null){
     override val layoutId = R.layout.item_match
-}
-
-class MatchItemUIStateDiffUtil: DiffUtil.ItemCallback<MatchItemUIState>() {
-    override fun areItemsTheSame(oldItem: MatchItemUIState, newItem: MatchItemUIState): Boolean =
-        oldItem.leagueId == newItem.leagueId && newItem.leagueSeason == oldItem.leagueSeason
-
-    override fun areContentsTheSame(oldItem: MatchItemUIState, newItem: MatchItemUIState): Boolean =
-        oldItem == newItem
-
 }

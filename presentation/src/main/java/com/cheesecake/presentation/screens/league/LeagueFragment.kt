@@ -22,25 +22,29 @@ class LeagueFragment : BaseFragment<FragmentLeagueBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         handleNavigation()
         init()
     }
 
     private fun init() {
-        val fragments = listOf(
-            LeagueDetailsFragment(),
-            LeagueMatchesFragment(),
-            LeagueTeamsFragment(),
-        )
-        val fragmentsAdapter = BaseFragmentsAdapter((activity as AppCompatActivity), fragments)
-        binding.leagueViewPager.adapter = fragmentsAdapter
-        TabLayoutMediator(binding.tabLayout, binding.leagueViewPager) { tab, position ->
-            when (position) {
-                0 -> tab.text = "Details"
-                1 -> tab.text = "Matches"
-                2 -> tab.text = "Teams"
-            }
-        }.attach()
+        collect(viewModel.leagueId){
+            val fragments = listOf(
+                LeagueDetailsFragment.newInstance(it, 2022),
+                LeagueMatchesFragment.newInstance(it, 2022),
+                LeagueTeamsFragment.newInstance(it, 2022),
+            )
+            val fragmentsAdapter = BaseFragmentsAdapter((activity as AppCompatActivity), fragments)
+            binding.leagueViewPager.adapter = fragmentsAdapter
+            TabLayoutMediator(binding.tabLayout, binding.leagueViewPager) { tab, position ->
+                when (position) {
+                    0 -> tab.text = "Details"
+                    1 -> tab.text = "Matches"
+                    2 -> tab.text = "Teams"
+                }
+            }.attach()
+        }
+
     }
 
     private fun handleNavigation() {

@@ -1,4 +1,4 @@
-package com.abaferastech.marvelapp.ui.base
+package com.cheesecake.presentation.base
 
 import androidx.recyclerview.widget.DiffUtil
 

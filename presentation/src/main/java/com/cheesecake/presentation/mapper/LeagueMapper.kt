@@ -11,7 +11,7 @@ fun League.toLeaguesUIState(
     FavoriteLeagueUIState(
         id = this.leagueId,
         leagueName = this.name,
-        leagueCountry = this.country,
+        leagueCountry = this.countryName,
         imageUrl = this.imageUrl,
         isFavourite = this.isFavourite,
         onFavorite = onFavoriteButtonClick,

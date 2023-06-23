@@ -7,6 +7,8 @@
     <color name="fontHeavy">#E6F6F6F6</color>
     <color name="fontLight">#99F6F6F6</color>
     <color name="backLighter">#66F6F6F6</color>
-    <color name="lightGrey">#F6F6F6</color>
+    <color name="lightGrey">#1A1A1A</color>
+    <color name="lightGreyText">#66F6F6F6</color>
     <color name="date_item_background">#181928</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>
