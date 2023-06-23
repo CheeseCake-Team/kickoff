@@ -10,22 +10,21 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TeamMatchesViewModel @Inject constructor(
-    private val getPairsOfMatchesAndDateByTeamIdAndSeasonUseCase:
-    GetTeamMatchesByTeamIdAndSeasonUseCase
-)
-    : BaseViewModel<TeamMatchesUIState, TeamMatchesNavigationEvent>(TeamMatchesUIState(), Event()){
+    private val getPairsOfMatchesAndDateByTeamIdAndSeasonUseCase: GetTeamMatchesByTeamIdAndSeasonUseCase,
+    teamMatchesArgs: TeamMatchesArgs
+) : BaseViewModel<TeamMatchesUIState, TeamMatchesNavigationEvent>(TeamMatchesUIState(), Event()) {
 
     init {
-        getData()
+        tryToExecute(
+            {
+                getPairsOfMatchesAndDateByTeamIdAndSeasonUseCase(
+                    "Africa/Cairo", teamMatchesArgs.teamId, 2022
+                )
+            }, ::onSuccess, ::onError
+        )
+
     }
 
-    private fun getData() {
-        tryToExecute(
-            { getPairsOfMatchesAndDateByTeamIdAndSeasonUseCase("Africa/Cairo", 34, 2022) },
-            ::onSuccess,
-            ::onError
-        )
-    }
 
     private fun onSuccess(result: List<Fixture>) {
         _state.update { it.copy(data = result, isLoading = false) }

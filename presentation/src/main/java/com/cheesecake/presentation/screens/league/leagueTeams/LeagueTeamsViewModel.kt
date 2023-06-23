@@ -3,7 +3,6 @@ package com.cheesecake.presentation.screens.league.leagueTeams
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import com.cheesecake.domain.entity.Team
-import com.cheesecake.presentation.mapper.toTeamUIState
 import com.cheesecake.domain.usecases.GetAllTeamsInLeagueWithSeasonUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
@@ -16,7 +15,7 @@ import javax.inject.Inject
 class LeagueTeamsViewModel @Inject constructor(
     private val getAllTeamsInLeagueWithSeasonUseCase: GetAllTeamsInLeagueWithSeasonUseCase,
     savedStateHandle: SavedStateHandle,
-    ) : BaseViewModel<LeagueTeamsUIState,LeagueTeamsEvent>(LeagueTeamsUIState(), Event()) {
+) : BaseViewModel<LeagueTeamsUIState, LeagueTeamsEvent>(LeagueTeamsUIState(), Event()) {
     private val leagueArgs = LeagueArgs(savedStateHandle)
 
     init {
@@ -32,19 +31,19 @@ class LeagueTeamsViewModel @Inject constructor(
         result.let { list ->
             _state.update { teamUIState ->
                 Log.i("getData: ", list.toString())
-                teamUIState.copy(data = list.map { it.toTeamUIState { onTeamClick(it.id) } }, isLoading = false)
+                teamUIState.copy(data = list.toUIState(::onTeamClicked), isLoading = false)
             }
         }
-    }
-
-    private fun onTeamClick(teamId: Int) {
-
     }
 
     private fun onError(e: Throwable) {
         _state.update {
             it.copy(isError = e.message.toString())
         }
+    }
+
+    private fun onTeamClicked(teamId: Int) {
+        _event.update { Event(LeagueTeamsEvent.TeamClickEvent(teamId)) }
     }
 
 }
