@@ -12,8 +12,8 @@ fun League.toFavLeagueItemUIState(
         imageUrl = this.imageUrl,
         leagueName = this.name,
         season = this.season,
-        country = this.country,
-        typeName = this.typeName,
+        country = this.countryName,
+        typeName = this.leagueTypeName,
         seasonStartYear = this.seasonStartYear,
         seasonEndYear = this.seasonEndYear,
         isSelected = this.isFavourite,
@@ -27,10 +27,11 @@ fun FavLeagueItemUIState.toLeague(): League{
         imageUrl = this.imageUrl,
         name = this.leagueName,
         season = this.season,
-        country = this.country,
-        typeName = this.typeName,
+        countryName = this.country,
+        leagueTypeName = this.typeName,
         seasonStartYear = this.seasonStartYear,
         seasonEndYear = this.seasonEndYear,
-        isFavourite = isSelected
+        leagueCount = this.leagueCount,
+        isFavourite = this.isSelected
     )
 }

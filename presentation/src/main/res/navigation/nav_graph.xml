@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/favLeaguesSelectionFragment2">
 
     <fragment
         android:id="@+id/leagueFragment"
@@ -95,7 +95,7 @@
 
     <fragment
         android:id="@+id/favLeaguesSelectionFragment2"
-        android:name="com.cheesecake.presentation.screens.favorite.favoriteLeagues.FavoriteLeaguesFragment"
+        android:name="com.cheesecake.presentation.screens.favLeaguesSelection.FavLeaguesSelectionFragment"
         android:label="FavLeaguesSelectionFragment" />
     <fragment
         android:id="@+id/discoverFragment"
