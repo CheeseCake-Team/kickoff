@@ -12,6 +12,6 @@ data class PlayerPosGridDTO(
     @SerializedName("pos")
     val pos: String,
     @SerializedName("grid")
-    val grid: Int?
+    val grid: String?
 )
 

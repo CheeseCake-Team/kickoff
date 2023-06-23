@@ -6,13 +6,14 @@ import com.cheesecake.data.repository.mappers.toSinglePlayer
 import com.cheesecake.domain.entity.Country
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.FixtureEvents
+import com.cheesecake.domain.entity.FixtureLineup
 import com.cheesecake.domain.entity.FixtureStatistics
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.entity.Match
 import com.cheesecake.domain.entity.Player
 import com.cheesecake.domain.entity.PlayerStatistics
-import com.cheesecake.domain.entity.SquadPlayer
 import com.cheesecake.domain.entity.RecentSearch
+import com.cheesecake.domain.entity.SquadPlayer
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.entity.TeamStanding
 import com.cheesecake.domain.entity.TeamStatisticsEntity
@@ -191,8 +192,14 @@ class IFootballRepositoryImpl
         return remoteDataSource.getFixtureEventsByFixtureId(fixtureId).toEntity()
     }
 
-    override suspend fun getMatchDetails(homeTeamId: Int,awayTeamId: Int, date: String, timeZone: String): Match {
-        return remoteDataSource.getHeadToHeadByDate("$homeTeamId-$awayTeamId", date, timeZone).first().toEntity()
+    override suspend fun getMatchDetails(
+        homeTeamId: Int,
+        awayTeamId: Int,
+        date: String,
+        timeZone: String
+    ): Match {
+        return remoteDataSource.getHeadToHeadByDate("$homeTeamId-$awayTeamId", date, timeZone)
+            .first().toEntity()
     }
 
 
@@ -216,7 +223,11 @@ class IFootballRepositoryImpl
         return localDataSource.updateOrInsertTeam(team.toLocal(leagueId, season))
     }
 
-    override suspend fun getLocallyTeamById(teamId: Int): Team?{
+    override suspend fun getFixtureLineupByFixtureId(fixtureId: Int): List<FixtureLineup> {
+        return remoteDataSource.getFixtureLineupsByFixtureId(fixtureId).toEntity()
+    }
+
+    override suspend fun getLocallyTeamById(teamId: Int): Team? {
         return localDataSource.getTeamById(teamId)?.toEntity()
     }
 
@@ -238,7 +249,8 @@ class IFootballRepositoryImpl
     }
 
     override suspend fun getPlayerSingle(seasonId: Int, playerId: Int): Player {
-        return remoteDataSource.getPlayerBySeasonByPlayerId(seasonId.toString(),playerId).first()
+        return remoteDataSource.getPlayerBySeasonByPlayerId(seasonId.toString(), playerId)
+            .first()
             .toSinglePlayer()
     }
 
@@ -246,7 +258,8 @@ class IFootballRepositoryImpl
         seasonId: Int,
         playerId: Int
     ): PlayerStatistics {
-        return remoteDataSource.getPlayerBySeasonByPlayerId(seasonId.toString(), playerId).first().toEntity()
+        return remoteDataSource.getPlayerBySeasonByPlayerId(seasonId.toString(), playerId)
+            .first().toEntity()
     }
 
 }
