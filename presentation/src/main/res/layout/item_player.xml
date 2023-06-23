@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:text="@{String.valueOf(item.playerNumber)}"
             android:textAppearance="?android:textAppearanceMedium"
-            android:textColor="@color/fontHeavy"
+            android:textColor="#E6F6F6F6"
             style="@style/bodySmall"
             app:layout_constraintBottom_toBottomOf="@id/playerImageView"
             app:layout_constraintEnd_toEndOf="@id/playerImageView"
