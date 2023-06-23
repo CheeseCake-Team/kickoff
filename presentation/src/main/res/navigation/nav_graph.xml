@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/playerFragment">
 
     <fragment
         android:id="@+id/leagueFragment"
@@ -126,4 +126,13 @@
         android:id="@+id/teamFragment"
         android:name="com.cheesecake.presentation.screens.team.TeamFragment"
         android:label="TeamFragment" />
+    <fragment
+        android:id="@+id/playerFragment"
+        android:name="com.cheesecake.presentation.screens.player.PlayerFragment"
+        android:label="PlayerFragment" >
+        <argument
+            android:name="playerId"
+            app:argType="integer"
+            android:defaultValue="276" />
+    </fragment>
 </navigation>

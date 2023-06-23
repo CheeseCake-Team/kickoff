@@ -12,6 +12,7 @@ import com.cheesecake.domain.entity.PlayerStatistics
 import com.cheesecake.domain.entity.SquadPlayer
 import com.cheesecake.domain.entity.Trophy
 import com.cheesecake.domain.entity.Match
+import com.cheesecake.domain.entity.Player
 import com.cheesecake.domain.entity.RecentSearch
 import kotlinx.coroutines.flow.Flow
 
@@ -96,8 +97,11 @@ interface IFootballRepository {
 
     suspend fun deleteRecentSearches()
 
-
     suspend fun getTeamsByCountryName(countryName: String): List<Team>
 
     suspend fun getFixtureEventByFixtureId(fixtureId: Int): List<FixtureEvents>
+
+    suspend fun getPlayerSingle(seasonId: Int, playerId: Int): Player
+
+    suspend fun getPlayerFullStatistics(seasonId: Int, playerId: Int): PlayerStatistics
 }

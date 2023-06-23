@@ -60,5 +60,6 @@
     <string name="league_image">League Image</string>
     <string name="club_name">club name</string>
     <string name="finished">Finished</string>
+    <string name="personal_info">Personal Info</string>
 
 </resources>

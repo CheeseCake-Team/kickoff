@@ -13,9 +13,11 @@ import com.cheesecake.presentation.screens.home.MatchesAdapter
 import com.cheesecake.presentation.screens.league.leagueMatches.LeagueMatchesHeadToHeadAdapter
 import androidx.databinding.library.baseAdapters.BR
 import com.cheesecake.presentation.databinding.ItemSearchLeagueBinding
+import com.cheesecake.presentation.databinding.ItemStatisticsBlockBinding
 import com.cheesecake.presentation.screens.search.adapters.SearchLeagueAdapter
 import com.cheesecake.presentation.databinding.ItemTeamMatchBinding
 import com.cheesecake.presentation.databinding.ItemTeamPlayersPositionsBinding
+import com.cheesecake.presentation.screens.player.playerStatistics.SectionItemAdapter
 import com.cheesecake.presentation.screens.team.teamPlayers.TeamPlayersAdapter
 
 abstract class BaseListAdapter<T>(
@@ -51,6 +53,9 @@ abstract class BaseListAdapter<T>(
                 }
                 is ItemTeamPlayersPositionsBinding -> {
                     binding.playersPositionRecycler.adapter = TeamPlayersAdapter()
+                }
+                is ItemStatisticsBlockBinding -> {
+                    binding.recyclerBlock.adapter = SectionItemAdapter()
                 }
             }
 
