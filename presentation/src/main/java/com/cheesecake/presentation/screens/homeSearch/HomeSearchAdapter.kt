@@ -26,16 +26,7 @@ class HomeSearchAdapter : BaseAdapter<HomeSearchData>(null) {
 
     override fun getItemCount(): Int = itemList.size
 
-//    override fun getItemViewType(position: Int): Int {
-//        return when (itemList[position]) {
-//            is SearchResult.Team -> TYPE_RECENT
-//            is SearchResult.League -> TYPE_PLAYER
-//            else -> throw IllegalArgumentException("invalid")
-//
-//        }
-//    }
-
-    class RecentSearchViewHolder(private val binding: ItemSearchRecentBinding) :
+    class RecentSearchViewHolder(override val binding: ItemSearchRecentBinding) :
         BaseViewHolder(binding) {
         fun bind(recent: HomeSearchData.RecentSearches) {
             binding.setVariable(BR.item, recent)

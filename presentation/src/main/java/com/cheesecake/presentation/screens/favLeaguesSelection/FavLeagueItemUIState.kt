@@ -9,6 +9,7 @@ data class FavLeagueItemUIState(
     val typeName: String= "",
     val seasonStartYear: String= "",
     val seasonEndYear: String ="",
+    val leagueCount: Int = 0,
     val isSelected: Boolean = false,
     val onFavorite: (Int) -> Unit,
 )

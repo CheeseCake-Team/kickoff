@@ -12,7 +12,8 @@ import java.util.*
 fun FixtureDTO.toEntity(): Fixture {
     return Fixture(
         id = this.fixtureDataDTO.id,
-        matchId = "${this.teams.home.id}-${this.teams.away.id}",
+        homeTeamID =this.teams.home.id ,
+        awayTeamID = this.teams.away.id,
         leagueName = this.league.name,
         homeTeamName = this.teams.home.name,
         homeTeamLogoUrl = this.teams.home.logo,
@@ -23,7 +24,8 @@ fun FixtureDTO.toEntity(): Fixture {
         matchTime = this.fixtureDataDTO.date?.toString(),
         matchDate = this.fixtureDataDTO.date ?: Date(),
         isFinished = this.fixtureDataDTO.status.short == FixtureStatus.MatchFinished.toString(),
-        leagueSeason = this.league.season
+        leagueSeason = this.league.season,
+        leagueLogoUrl = this.league.logo
     )
 }
 

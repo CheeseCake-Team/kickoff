@@ -43,7 +43,7 @@ interface RemoteDataSource {
 
     //region countries
 
-    suspend fun getAllCountries(): List<TeamCountriesDTO>
+    suspend fun getCountries(): List<TeamCountriesDTO>
 
 
     suspend fun getCountryByName(
@@ -81,7 +81,7 @@ interface RemoteDataSource {
     ): List<FixtureDTO>
 
     suspend fun getFixtureBySeasonByTeamId(
-        timeZone: String, season: String, TeamId: Int
+        timeZone: String, season: Int, TeamId: Int
     ): List<FixtureDTO>
 
     suspend fun getFixturesBySeasonIdAndLeagueId(
@@ -112,7 +112,7 @@ interface RemoteDataSource {
     //region Head 2 Head
 
     suspend fun getHeadToHead(
-        teamsId: String, seasonId: Int, timeZone: String
+        teamsId: String, date: String, timeZone: String
     ): List<HeadToHeadDTO>
 
 
@@ -418,7 +418,9 @@ interface RemoteDataSource {
         teamId: Int
     ): List<Int>
 
-    suspend fun getTeamCountries(): List<TeamCountriesDTO>
+    suspend fun getTeamsByCountryName(
+        countryName: String
+    ): List<TeamDTO>
 
     //endregion
 

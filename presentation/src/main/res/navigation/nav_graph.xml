@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/homeSearchFragment">
+    app:startDestination="@id/favLeaguesSelectionFragment2">
 
     <fragment
         android:id="@+id/leagueFragment"
@@ -53,10 +53,10 @@
         android:name="com.cheesecake.presentation.screens.match.MatchFragment"
         android:label="MatchFragment" >
         <argument
-            android:name="matchId"
-            app:argType="string" />
+            android:name="homeTeamId"
+            app:argType="integer" />
         <argument
-            android:name="season"
+            android:name="awayTeamId"
             app:argType="integer" />
         <argument
             android:name="data"
@@ -92,4 +92,38 @@
             android:id="@+id/action_homeSearchFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/favLeaguesSelectionFragment2"
+        android:name="com.cheesecake.presentation.screens.favLeaguesSelection.FavLeaguesSelectionFragment"
+        android:label="FavLeaguesSelectionFragment" />
+    <fragment
+        android:id="@+id/discoverFragment"
+        android:name="com.cheesecake.presentation.screens.discover.DiscoverFragment"
+        android:label="DiscoverFragment" >
+        <action
+            android:id="@+id/action_discoverFragment_to_countryFragment"
+            app:destination="@id/countryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/countryFragment"
+        android:name="com.cheesecake.presentation.screens.country.CountryFragment"
+        android:label="CountryFragment" >
+        <argument
+            android:name="countryName"
+            app:argType="string" />
+        <argument
+            android:name="imageUrl"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_countryFragment_to_leagueFragment"
+            app:destination="@id/leagueFragment" />
+        <action
+            android:id="@+id/action_countryFragment_to_teamFragment"
+            app:destination="@id/teamFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/teamFragment"
+        android:name="com.cheesecake.presentation.screens.team.TeamFragment"
+        android:label="TeamFragment" />
 </navigation>

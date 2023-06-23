@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="listener"
+            type="com.cheesecake.ui.base.BaseInteractionListener" />
+
+        <variable
+            name="item"
+            type="com.cheesecake.domain.models.Team" />
+    </data>
+
+    <com.google.android.material.internal.BaselineLayout
+        android:id="@+id/line"
+        android:layout_width="300dp"
+        android:layout_height="2dp"
+        android:background="@color/fontHeavy"
+        android:orientation="vertical" />
+</layout>
+

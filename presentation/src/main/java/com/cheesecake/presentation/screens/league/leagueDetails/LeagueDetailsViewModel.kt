@@ -27,20 +27,20 @@ class LeagueDetailsViewModel @Inject constructor(
     val leagueDetailsUIState = _leagueDetailsUIState.asStateFlow()
 
 
-    private val leagueArg = LeagueArgs(savedStateHandle)
+    private val leagueArgs = LeagueArgs(savedStateHandle)
 
     init {
-        getLeague()
-        getCurrentRound()
-        getTeamStanding()
-        getTopScorers()
+        getLeague(leagueArgs.leagueId, leagueArgs.season)
+        getCurrentRound(leagueArgs.leagueId, leagueArgs.season)
+        getTeamStanding(leagueArgs.leagueId, leagueArgs.season)
+        getTopScorers(leagueArgs.leagueId, leagueArgs.season)
     }
 
 
-    private fun getLeague() {
+    private fun getLeague(leagueId: Int, season: Int) {
         tryToExecute(
             {
-                getLeagueByLeagueIdAndSeasonUseCase( leagueArg.leagueId,  leagueArg.season)
+                getLeagueByLeagueIdAndSeasonUseCase(leagueId, season)
             },
             { league ->
 
@@ -60,9 +60,9 @@ class LeagueDetailsViewModel @Inject constructor(
     }
 
 
-    private fun getTopScorers() {
+    private fun getTopScorers(leagueId: Int, season: Int) {
         tryToExecute(
-            { getTopScorersByLeagueIdAndSeason( leagueArg.leagueId,  leagueArg.season) },
+            { getTopScorersByLeagueIdAndSeason(leagueId, season) },
             { scorers ->
                 _leagueDetailsUIState.update {
                     it.copy(
@@ -84,10 +84,10 @@ class LeagueDetailsViewModel @Inject constructor(
     }
 
 
-    private fun getTeamStanding() {
+    private fun getTeamStanding(leagueId: Int, season: Int) {
         tryToExecute(
             {
-                getTeamsStandingByLeagueIdAndSeasonUseCase( leagueArg.leagueId,  leagueArg.season)
+                getTeamsStandingByLeagueIdAndSeasonUseCase(leagueId, season)
             },
             { standings ->
                 _leagueDetailsUIState.update {
@@ -111,10 +111,10 @@ class LeagueDetailsViewModel @Inject constructor(
     }
 
 
-    private fun getCurrentRound() {
+    private fun getCurrentRound(leagueId: Int, season: Int) {
         tryToExecute(
             {
-                getCurrentRoundByLeagueIdAndSeason( leagueArg.leagueId,  leagueArg.season)
+                getCurrentRoundByLeagueIdAndSeason(leagueId, season)
             },
             { round ->
                 _leagueDetailsUIState.update { it.copy(round = round) }

@@ -1,6 +1,5 @@
 package com.cheesecake.data.remote
 
-import android.util.Log
 import com.cheesecake.data.remote.api.FootballApiService
 import com.cheesecake.data.remote.models.EventDTO
 import com.cheesecake.data.remote.models.FixtureStatisticsDTO
@@ -30,7 +29,6 @@ import com.cheesecake.data.repository.RemoteDataSource
 import com.cheesecake.domain.KickoffException
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.withTimeout
-import retrofit2.HttpException
 import retrofit2.Response
 import java.net.ConnectException
 import javax.inject.Inject
@@ -56,7 +54,7 @@ class RemoteDataSourceImp @Inject constructor(
     //endregion
 
     //region countries
-    override suspend fun getAllCountries(): List<TeamCountriesDTO> {
+    override suspend fun getCountries(): List<TeamCountriesDTO> {
         return wrapBaseResponse { service.getAllCountries() }
     }
 
@@ -114,7 +112,7 @@ class RemoteDataSourceImp @Inject constructor(
 
     override suspend fun getFixtureBySeasonByTeamId(
         timeZone: String,
-        season: String,
+        season: Int,
         TeamId: Int
     ): List<FixtureDTO> {
         return wrapBaseResponse { service.getFixturesBySeasonIdByTeamId(timeZone, season, TeamId) }
@@ -175,10 +173,10 @@ class RemoteDataSourceImp @Inject constructor(
     //region Head 2 Head
     override suspend fun getHeadToHead(
         teamsId: String,
-        seasonId: Int,
+        date: String,
         timeZone: String
     ): List<HeadToHeadDTO> {
-        return wrapBaseResponse { service.getHeadToHead(teamsId, seasonId, timeZone) }
+        return wrapBaseResponse { service.getHeadToHeadByDate(teamsId, date, timeZone) }
     }
 
     override suspend fun getHeadToHeadByDate(
@@ -418,10 +416,6 @@ class RemoteDataSourceImp @Inject constructor(
         return wrapBaseResponse { service.getLeaguesById(leagueId) }
     }
 
-    override suspend fun getLeaguesByCountryName(countryName: String): List<LeagueDTO> {
-        return wrapBaseResponse { service.getLeaguesByCountryName(countryName) }
-    }
-
     override suspend fun getLeaguesByCountryCode(countryName: String): List<LeagueDTO> {
         return wrapBaseResponse { service.getLeaguesByCountryCode(countryName) }
     }
@@ -610,8 +604,8 @@ class RemoteDataSourceImp @Inject constructor(
         return wrapBaseResponse { service.getTeamSeasons(teamId) }
     }
 
-    override suspend fun getTeamCountries(): List<TeamCountriesDTO> {
-        return wrapBaseResponse { service.getTeamCountries() }
+    override suspend fun getTeamsByCountryName(countryName: String ): List<TeamDTO> {
+        return wrapBaseResponse { service.getTeamsByCountryName(countryName) }
     }
 
     //endregion
@@ -665,6 +659,10 @@ class RemoteDataSourceImp @Inject constructor(
 
     override suspend fun searchVenue(name: String): List<VenuesDTO> {
         return wrapBaseResponse { service.searchVenue(name) }
+    }
+
+    override suspend fun getLeaguesByCountryName(countryName: String): List<LeagueDTO> {
+        return wrapBaseResponse { service.getLeaguesByCountryName(countryName) }
     }
 
     private suspend fun <T> wrapBaseResponse(

@@ -2,7 +2,7 @@ package com.cheesecake.data.repository.mappers
 
 import com.cheesecake.data.remote.models.FixtureStatisticsDTO
 import com.cheesecake.domain.entity.FixtureStatistics
-
+@JvmName("FixtureStatisticsDTOToFixtureStatistics")
 fun List<FixtureStatisticsDTO>.toEntity(): List<FixtureStatistics> {
     if (this.isEmpty())
         throw Exception()

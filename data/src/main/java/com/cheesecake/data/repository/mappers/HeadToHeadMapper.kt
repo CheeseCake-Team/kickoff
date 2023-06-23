@@ -7,10 +7,11 @@ import com.cheesecake.domain.entity.Match
 fun HeadToHeadDTO.toEntity(): Match {
     return Match(
         fixtureId = this.fixtureDataDTO.id,
-        matchId = "${this.teams.home.id}-${this.teams.away.id}",
+        homeTeamId = this.teams.home.id,
         homeTeamName = this.teams.home.name,
         homeTeamLogoUrl = this.teams.home.logo,
         homeTeamGoals = this.goals.home,
+        awayTeamId = this.teams.away.id,
         awayTeamName = this.teams.away.name,
         awayTeamLogoUrl = this.teams.away.logo,
         awayTeamGoals = this.goals.away,

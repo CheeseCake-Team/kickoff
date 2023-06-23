@@ -7,15 +7,16 @@
 
         <variable
             name="item"
-            type="com.cheesecake.domain.entity.Fixture" />
+            type="com.cheesecake.presentation.screens.league.leagueMatches.MatchItemUIState" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_view"
+        style="@style/Widget.Material3.CardView.Filled"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        style="@style/Widget.Material3.CardView.Filled"
         android:layout_marginVertical="@dimen/spacing_4"
+        android:onClick="@{()->item.onclick.invoke()}"
         app:cardBackgroundColor="@color/cardSurface"
         app:cardCornerRadius="4dp">
 
@@ -56,11 +57,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/fontHeavy"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:matchScore="@{item}"
+                app:setMatchState="@{item.finished}"
+                tools:text="TextView" />
+
+            <TextView
+                android:id="@+id/textView9"
+                style="@style/SubtitleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/fontHeavy"
+                app:awayTeamGoals="@{item.awayTeamGoals}"
+                app:homeTeamGoals="@{ item.homeTeamGoals}"
+                app:isFinished="@{item.finished}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.501"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                app:time="@{ item.matchTime}"
                 tools:text="TextView" />
 
             <TextView

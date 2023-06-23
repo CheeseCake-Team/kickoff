@@ -10,6 +10,6 @@
     <color name="lightGrey">#F6F6F6</color>
     <color name="lightGreyText">#66272727</color>
     <color name="date_item_background">#FFFFFF</color>
-    <color name="transparent">#00FFFFFF</color>
+    <color name="transparent">#00000000</color>
 
 </resources>
