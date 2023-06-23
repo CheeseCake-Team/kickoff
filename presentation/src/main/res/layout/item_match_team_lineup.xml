@@ -4,11 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-        <variable
-            name="dataItem"
-            type="com.cheesecake.presentation.screens.match.lineup.MatchLineupUIState" />
-
         <variable
             name="item"
             type="com.cheesecake.presentation.screens.match.lineup.FixtureLineupUiState" />
@@ -86,8 +81,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/card_view_starter_players"
+                tools:listitem="@layout/item_match_players"
                 tools:itemCount="2"
-                tools:listitem="@{dataItem.data.homeTeamLineup}" />
+                app:listitems="@{item.playerItemUiState}" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_view_substitutes_players"
@@ -120,7 +116,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="parent"
                 tools:itemCount="2"
-                tools:listitem="@{dataItem.data.homeTeamSubstitutesPlayers}" />
+                tools:listitems="@layout/item_match_players"
+                app:listitems="@{item.substitutesPlayers}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
