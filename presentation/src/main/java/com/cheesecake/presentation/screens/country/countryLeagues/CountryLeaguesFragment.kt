@@ -3,9 +3,11 @@ package com.cheesecake.presentation.screens.country.countryLeagues
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentCountryLeaguesBinding
+import com.cheesecake.presentation.screens.country.CountryFragmentDirections
 import com.cheesecake.presentation.screens.country.countryTeams.CountryTeamsArgs
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,7 +33,12 @@ class CountryLeaguesFragment : BaseFragment<FragmentCountryLeaguesBinding>() {
     private fun onEvent(event: CountryLeaguesNavigationEvent) {
         when (event) {
             is CountryLeaguesNavigationEvent.NavigateToLeague -> {
-                TODO("You should Navigate here and you have the id and season")
+                findNavController()
+                    .navigate(
+                        CountryFragmentDirections.actionCountryFragmentToLeagueFragment(
+                            event.leagueId, event.leagueSeason
+                        )
+                    )
             }
         }
     }
