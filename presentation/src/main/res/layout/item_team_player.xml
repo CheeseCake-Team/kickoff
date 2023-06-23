@@ -7,13 +7,14 @@
 
         <variable
             name="item"
-            type="com.cheesecake.domain.entity.SquadPlayer" />
+            type="com.cheesecake.presentation.screens.team.teamPlayers.SquadPlayerItemUIState" />
 
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{() -> item.onClick.invoke()}"
         style="@style/Widget.Material3.CardView.Filled"
         app:cardBackgroundColor="@color/cardSurface"
         android:layout_marginBottom="@dimen/spacing_8"

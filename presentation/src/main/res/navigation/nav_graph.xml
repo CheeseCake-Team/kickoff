@@ -132,6 +132,9 @@
         <argument
             android:name="teamId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_teamFragment_to_playerFragment"
+            app:destination="@id/playerFragment" />
     </fragment>
 
     <fragment

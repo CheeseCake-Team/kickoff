@@ -3,10 +3,12 @@ package com.cheesecake.presentation.mapper
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.entity.Country
 import com.cheesecake.domain.entity.PlayerStatistics
+import com.cheesecake.domain.entity.SquadPlayer
 import com.cheesecake.presentation.models.CountryItemUIState
 import com.cheesecake.presentation.models.TeamUIState
 import com.cheesecake.presentation.screens.player.playerStatistics.PlayerDataItemUIState
 import com.cheesecake.presentation.screens.player.playerStatistics.PlayerSectionItemUIState
+import com.cheesecake.presentation.screens.team.teamPlayers.SquadPlayerItemUIState
 
 
 fun Team.toTeamUIState(onClick: () -> Unit): TeamUIState {
@@ -64,3 +66,8 @@ fun PlayerStatistics.toPlayerStatisticsUIModel(): List<PlayerSectionItemUIState>
     )
 }
 
+fun SquadPlayer.mapIt(onClick: () -> Unit): SquadPlayerItemUIState {
+    return SquadPlayerItemUIState(
+        name, ImageUrl ,number, onClick
+    )
+}

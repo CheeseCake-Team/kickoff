@@ -5,22 +5,22 @@ import com.cheesecake.domain.entity.SquadPlayer
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseListAdapter
 
-class TeamPLayersPositionsAdapter
-: BaseListAdapter<Pair<String, List<SquadPlayer>>>(
+public class TeamPlayersPositionsAdapter
+: BaseListAdapter<Pair<String, List<SquadPlayerItemUIState>>>(
 DateTeamPlayersPositionDiffUtil(),
 ){
     override val layoutId = R.layout.item_team_players_positions
 }
-class DateTeamPlayersPositionDiffUtil() : DiffUtil.ItemCallback<Pair<String, List<SquadPlayer>>>() {
+class DateTeamPlayersPositionDiffUtil() : DiffUtil.ItemCallback<Pair<String, List<SquadPlayerItemUIState>>>() {
 
     override fun areItemsTheSame(
-        oldItem: Pair<String, List<SquadPlayer>>,
-        newItem: Pair<String, List<SquadPlayer>>
+        oldItem: Pair<String, List<SquadPlayerItemUIState>>,
+        newItem: Pair<String, List<SquadPlayerItemUIState>>
     ): Boolean = oldItem.first == newItem.first
 
     override fun areContentsTheSame(
-        oldItem: Pair<String, List<SquadPlayer>>,
-        newItem: Pair<String, List<SquadPlayer>>
+        oldItem: Pair<String, List<SquadPlayerItemUIState>>,
+        newItem: Pair<String, List<SquadPlayerItemUIState>>
     ): Boolean = oldItem.second == newItem.second
 
 }
