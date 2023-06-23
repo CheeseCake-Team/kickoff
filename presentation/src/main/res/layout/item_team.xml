@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.cheesecake.presentation.screens.league.leagueTeams.TeamUIState" />
+            type="com.cheesecake.presentation.models.TeamUIState" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -14,7 +14,7 @@
         style="@style/Widget.Material3.CardView.Filled"
         android:layout_width="match_parent"
         android:layout_height="90dp"
-        android:onClick="@{()->item.onclick.invoke()}"
+        android:onClick="@{()->item.onTeamClick.invoke()}"
         android:layout_margin="@dimen/spacing_4"
         app:cardBackgroundColor="@color/cardSurface"
         app:cardCornerRadius="@dimen/spacing_8">

@@ -33,7 +33,7 @@ class CountryTeamsFragment : BaseFragment<FragmentCountryTeamsBinding>() {
         when (event) {
             is CountryTeamsNavigationEvent.NavigateToTeam -> {
                 findNavController().navigate(
-                    CountryFragmentDirections.actionCountryFragmentToLeagueFragment(event.teamId, 2022)
+                    CountryFragmentDirections.actionCountryFragmentToTeamFragment(event.teamId)
                 )
             }
         }
