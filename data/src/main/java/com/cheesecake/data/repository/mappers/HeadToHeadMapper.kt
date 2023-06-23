@@ -6,6 +6,8 @@ import com.cheesecake.domain.entity.Match
 @JvmName("HeadToHeadDTOToMatches")
 fun HeadToHeadDTO.toEntity(): Match {
     return Match(
+        fixtureId = this.fixtureDataDTO.id,
+        matchId = "${this.teams.home.id}-${this.teams.away.id}",
         homeTeamName = this.teams.home.name,
         homeTeamLogoUrl = this.teams.home.logo,
         homeTeamGoals = this.goals.home,

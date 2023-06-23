@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/homeSearchFragment">
 
     <fragment
         android:id="@+id/leagueFragment"
@@ -11,6 +11,12 @@
         <action
             android:id="@+id/action_leagueFragment_to_matchFragment"
             app:destination="@id/matchFragment" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <argument
+            android:name="season"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -19,6 +25,9 @@
         <action
             android:id="@+id/action_searchFragment_to_leagueFragment"
             app:destination="@id/leagueFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_leaguesSearchFragment"
+            app:destination="@id/leaguesSearchFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
@@ -42,7 +51,17 @@
     <fragment
         android:id="@+id/matchFragment"
         android:name="com.cheesecake.presentation.screens.match.MatchFragment"
-        android:label="MatchFragment" />
+        android:label="MatchFragment" >
+        <argument
+            android:name="matchId"
+            app:argType="string" />
+        <argument
+            android:name="season"
+            app:argType="integer" />
+        <argument
+            android:name="data"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.cheesecake.presentation.screens.settings.SettingsFragment"
@@ -50,5 +69,27 @@
         <action
             android:id="@+id/action_settingsFragment_to_favoriteFragment"
             app:destination="@id/favoriteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/leaguesSearchFragment"
+        android:name="com.cheesecake.presentation.screens.search.viewAll.leagues.LeaguesSearchFragment"
+        android:label="LeaguesSearchFragment" >
+        <argument
+            android:name="searchInput"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_leaguesSearchFragment_to_leagueFragment"
+            app:destination="@id/leagueFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeSearchFragment"
+        android:name="com.cheesecake.presentation.screens.homeSearch.HomeSearchFragment"
+        android:label="HomeSearchFragment" >
+        <action
+            android:id="@+id/action_homeSearchFragment_to_leagueFragment"
+            app:destination="@id/leagueFragment" />
+        <action
+            android:id="@+id/action_homeSearchFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
 </navigation>

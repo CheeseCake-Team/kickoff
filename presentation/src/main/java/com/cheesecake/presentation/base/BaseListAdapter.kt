@@ -12,6 +12,8 @@ import com.cheesecake.presentation.databinding.ItemLeagueFollowedWithMatchesBind
 import com.cheesecake.presentation.screens.home.MatchesAdapter
 import com.cheesecake.presentation.screens.league.leagueMatches.LeagueMatchesHeadToHeadAdapter
 import androidx.databinding.library.baseAdapters.BR
+import com.cheesecake.presentation.databinding.ItemSearchLeagueBinding
+import com.cheesecake.presentation.screens.search.adapters.SearchLeagueAdapter
 
 abstract class BaseListAdapter<T>(
     diffutils: DiffUtil.ItemCallback<T>,
@@ -43,6 +45,9 @@ abstract class BaseListAdapter<T>(
                 }
                 is ItemLeagueFollowedWithMatchesBinding -> {
                     binding.matchesRecyclerView.adapter = MatchesAdapter()
+                }
+                is ItemSearchLeagueBinding -> {
+                    binding.recyclerViewSearchLeagues.adapter = SearchLeagueAdapter()
                 }
             }
 

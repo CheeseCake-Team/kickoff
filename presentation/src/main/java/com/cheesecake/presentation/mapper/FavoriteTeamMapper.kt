@@ -8,13 +8,14 @@ import com.cheesecake.presentation.screens.favorite.favoriteTeams.FavoriteTeamIt
 fun Team.toUIState(
     onFavoriteButtonClick: (Int) -> Unit,
     onFavoriteLeagueClick: (Int) -> Unit
-): FavoriteTeamItemUiState =
-    FavoriteTeamItemUiState(
+): FavoriteTeamItemUiState {
+    return FavoriteTeamItemUiState(
         teamId = this.id,
         name = this.name,
-        country = this.country,
+        country = this.country ?: "Unknown",
         imageUrl = this.imageUrl,
         isFavorite = this.isFavourite,
         onFavoriteClick = onFavoriteButtonClick,
         onFavoriteTeamClick = onFavoriteLeagueClick,
     )
+}

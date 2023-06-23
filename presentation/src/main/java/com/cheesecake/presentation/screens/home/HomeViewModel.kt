@@ -22,7 +22,7 @@ class HomeViewModel @Inject constructor(
     private val getFavoriteLeaguesMatchesByDateUseCase: GetFavoriteLeaguesMatchesByDateUseCase,
     private val favouriteLeagueUseCase: FavouriteLeagueUseCase
 
-) : BaseViewModel<HomeUIState, HomeNavigationEvent>(HomeUIState(), Event()) {
+) : BaseViewModel<HomeUIState, HomeEvents>(HomeUIState(), Event()) {
 
     init {
         viewModelScope.launch {
@@ -58,7 +58,10 @@ class HomeViewModel @Inject constructor(
         collectFlow(f) { pair ->
             copy(
                 isLoading = false,
-                favoriteItems = pair.toHomeFavouriteUiState(::onLeagueClicked, ::onMatchClicked)
+                favoriteItems = pair.toHomeFavouriteUiState(
+                    onLeagueClick = ::onLeagueClicked,
+                    onMatchClick = ::onMatchClicked
+                )
             )
         }
     }
@@ -70,11 +73,11 @@ class HomeViewModel @Inject constructor(
         Log.d("TAG", e.message.toString())
     }
 
-    private fun onMatchClicked() {
-        _event.update { Event(HomeNavigationEvent.MatchClickedEvent) }
+    private fun onMatchClicked(matchId: String, season: Int, date: String) {
+        _event.update { Event(HomeEvents.MatchClickedEvent(matchId, season, date)) }
     }
 
-    private fun onLeagueClicked() {
-        _event.update { Event(HomeNavigationEvent.LeagueClickEvent) }
+    private fun onLeagueClicked(leagueId: Int, season: Int) {
+        _event.update { Event(HomeEvents.LeagueClickEvent(leagueId, season)) }
     }
 }

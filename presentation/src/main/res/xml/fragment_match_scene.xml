@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1000">
+        <OnSwipe
+            app:dragDirection="dragUp"
+            app:touchAnchorId="@id/home_team_image" />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+
+            <Constraint
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_32"
+                app:layout_constraintTop_toBottomOf="@+id/match_state" />
+
+            <Constraint
+                android:id="@+id/match_view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tab_layout">
+
+            </Constraint>
+
+            <Constraint
+                android:id="@+id/back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_16"
+                android:layout_marginTop="@dimen/spacing_16"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Constraint
+                android:id="@+id/match_overview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Constraint
+                android:id="@+id/away_team_image"
+                android:layout_width="@dimen/spacing_32"
+                android:layout_height="@dimen/spacing_32"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/hyphen"
+                app:layout_constraintTop_toTopOf="@+id/home_team_image" />
+
+            <Constraint
+                android:id="@+id/home_team_image"
+                android:layout_width="@dimen/spacing_32"
+                android:layout_height="@dimen/spacing_32"
+                android:layout_marginTop="@dimen/spacing_32"
+                app:layout_constraintEnd_toStartOf="@+id/hyphen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/match_overview" />
+
+            <Constraint
+                android:id="@+id/hyphen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/home_team_image"
+                app:layout_constraintEnd_toStartOf="@+id/away_team_image"
+                app:layout_constraintStart_toEndOf="@+id/home_team_image"
+                app:layout_constraintTop_toTopOf="@+id/home_team_image" />
+
+            <Constraint
+                android:id="@+id/away_team_goals"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/hyphen"
+                app:layout_constraintEnd_toStartOf="@+id/hyphen"
+                app:layout_constraintStart_toEndOf="@+id/home_team_image"
+                app:layout_constraintTop_toTopOf="@+id/hyphen" />
+
+            <Constraint
+                android:id="@+id/home_team_goals"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/hyphen"
+                app:layout_constraintEnd_toStartOf="@+id/away_team_image"
+                app:layout_constraintStart_toEndOf="@+id/hyphen"
+                app:layout_constraintTop_toTopOf="@+id/hyphen" />
+
+            <Constraint
+                android:id="@+id/match_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_8"
+                app:layout_constraintEnd_toEndOf="@+id/hyphen"
+                app:layout_constraintStart_toStartOf="@+id/hyphen"
+                app:layout_constraintTop_toBottomOf="@+id/home_team_name" />
+
+            <Constraint
+                android:id="@+id/away_team_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/away_team_image"
+                app:layout_constraintStart_toStartOf="@+id/away_team_image"
+                app:layout_constraintTop_toTopOf="@+id/home_team_name" />
+
+            <Constraint
+                android:id="@+id/home_team_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_8"
+                app:layout_constraintEnd_toEndOf="@+id/home_team_image"
+                app:layout_constraintStart_toStartOf="@+id/home_team_image"
+                app:layout_constraintTop_toBottomOf="@+id/home_team_image" />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+
+        <Constraint
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_32"
+            app:layout_constraintTop_toBottomOf="@+id/hyphen" />
+
+        <Constraint
+            android:id="@+id/match_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tab_layout">
+
+        </Constraint>
+
+            <Constraint
+                android:id="@+id/back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_16"
+                android:layout_marginTop="@dimen/spacing_16"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Constraint
+                android:id="@+id/match_overview"
+                android:visibility="gone" />
+
+            <Constraint
+                android:id="@+id/away_team_image"
+                android:layout_width="@dimen/spacing_32"
+                android:layout_height="@dimen/spacing_32"
+                app:layout_constraintBottom_toBottomOf="@id/home_team_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/hyphen"
+                app:layout_constraintTop_toTopOf="@+id/home_team_image" />
+
+            <Constraint
+                android:id="@+id/home_team_image"
+                android:layout_width="@dimen/spacing_32"
+                android:layout_height="@dimen/spacing_32"
+                android:layout_marginTop="@dimen/spacing_32"
+                app:layout_constraintBottom_toBottomOf="@id/back_button"
+                app:layout_constraintEnd_toStartOf="@+id/hyphen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/back_button" />
+
+            <Constraint
+                android:id="@+id/hyphen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/home_team_image"
+                app:layout_constraintEnd_toStartOf="@+id/away_team_image"
+                app:layout_constraintStart_toEndOf="@+id/home_team_image"
+                app:layout_constraintTop_toTopOf="@+id/home_team_image" />
+
+
+            <Constraint
+                android:id="@+id/away_team_goals"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/hyphen"
+                app:layout_constraintEnd_toStartOf="@+id/hyphen"
+                app:layout_constraintStart_toEndOf="@+id/home_team_image"
+                app:layout_constraintTop_toTopOf="@+id/hyphen" />
+
+            <Constraint
+                android:id="@+id/home_team_goals"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/hyphen"
+                app:layout_constraintEnd_toStartOf="@+id/away_team_image"
+                app:layout_constraintStart_toEndOf="@+id/hyphen"
+                app:layout_constraintTop_toTopOf="@+id/hyphen" />
+
+            <Constraint
+                android:id="@+id/match_state"
+                android:visibility="gone" />
+
+            <Constraint
+                android:id="@+id/away_team_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/away_team_image"
+                app:layout_constraintStart_toStartOf="@+id/away_team_image"
+                app:layout_constraintTop_toTopOf="@+id/home_team_name"
+                android:visibility="gone" />
+
+            <Constraint
+                android:id="@+id/home_team_name"
+                android:visibility="gone" />
+
+    </ConstraintSet>
+</MotionScene>

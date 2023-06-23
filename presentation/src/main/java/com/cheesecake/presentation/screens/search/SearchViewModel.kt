@@ -3,14 +3,17 @@ package com.cheesecake.presentation.screens.search
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.usecases.GetLeagueBySearchUseCase
-import com.cheesecake.domain.usecases.GetTeamByNameUseCase
+import com.cheesecake.domain.usecases.GetTeamBySearchUseCase
+import com.cheesecake.domain.usecases.SaveRecentSearchUseCase
 import com.cheesecake.presentation.base.BaseViewModel
-import com.cheesecake.presentation.mapper.toUIState
 import com.cheesecake.presentation.models.Event
-import com.cheesecake.presentation.screens.home.HomeNavigationEvent
+import com.cheesecake.presentation.screens.search.models.LeagueSearchUIState
+import com.cheesecake.presentation.screens.search.models.SearchResult
+import com.cheesecake.presentation.screens.search.models.SearchUIState
+import com.cheesecake.presentation.screens.search.models.toRecentSearch
+import com.cheesecake.presentation.screens.search.models.toSearchUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
@@ -21,12 +24,11 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val getLeagueList: GetLeagueBySearchUseCase,
-    private val getTeamList: GetTeamByNameUseCase,
-) : BaseViewModel<SearchUIState,SearchEvents>(SearchUIState(), Event()) {
+    private val getTeamList: GetTeamBySearchUseCase,
+    private val saveRecentSearch: SaveRecentSearchUseCase
+) : BaseViewModel<SearchUIState, SearchEvents>(SearchUIState(), Event()) {
 
-
-    val searchInput = MutableStateFlow("")
-    val searchType = MutableStateFlow(SearchType.TEAM)
+    private val searchInput = MutableStateFlow(_state.value.searchInput)
 
     init {
         initSearchProperties()
@@ -34,85 +36,67 @@ class SearchViewModel @Inject constructor(
 
     private fun initSearchProperties() {
         viewModelScope.launch {
-            searchInput.debounce(500).distinctUntilChanged().filter { it.isNotEmpty() }
-                .collectLatest(::onSearching)
+            searchInput.debounce(1000).distinctUntilChanged().filter { it.isNotEmpty() }
+                .collect(::tryToSearch)
         }
     }
 
-    private suspend fun onSearching(input: String) {
+    private suspend fun tryToSearch(input: String) {
         tryToExecute(
-            { getSearchResult(input) },
-            ::onSearchSuccess,
-            ::onSearchError
+            { getSearchResult(input) }, ::onSearchSuccess, ::onSearchError
         )
     }
 
-    private suspend fun getSearchResult(input: String): SearchResult {
+    private suspend fun getSearchResult(input: String): List<SearchResult> {
         _state.update { it.copy(isLoading = true) }
-        return when(searchType.value) {
-            SearchType.TEAM -> {
-                Log.i( "getSearchResult: " ,searchType.value.toString())
-                SearchResult.Team(getTeamList(input).map { it.toUIState() })
-            }
-            SearchType.LEAGUE -> {
-                Log.i( "getSearchResult: " ,searchType.value.toString())
-                SearchResult.League(getLeagueList(input).map { it.toUIState(::onLeagueClicked) })
-            }
+        return mutableListOf<SearchResult>().apply {
+            add(
+                SearchResult.League(
+                    ::onClickViewAll,
+                    getLeagueList(input).toSearchUIState(::onClickLeague))
+            )
+            add(SearchResult.Team(getTeamList(input).map { it.toSearchUIState() }))
         }
     }
 
-    private fun onSearchSuccess(items: SearchResult) {
-        Log.i("onSearchInputChanged: ", "debounced before")
-        Log.i("onSearchInputChanged: ", _state.value.isLoading.toString())
+    private fun onSearchSuccess(items: List<SearchResult>) {
         _state.update { it.copy(searchResult = items, isLoading = false) }
     }
 
     private fun onSearchError(throwable: Throwable) {
-        Log.i("onSearchInputError: ", throwable.message.toString())
-        _state.update { it.copy(error = emptyList()) }
+        _state.update { it.copy(error = throwable.message.toString(), isLoading = false) }
+        Log.i("onSearchError: ", _state.value.error)
     }
 
-    private suspend fun onSearchInputChanged(newSearchInput: String) {
-        _state.update { it.copy(searchInput = newSearchInput) }
-        searchInput.emit(newSearchInput)
-    }
 
-    fun onSearch(input: String) {
+    fun onQueryChange(input: String) {
         viewModelScope.launch {
-            onSearchInputChanged(input)
+            _state.update { it.copy(searchInput = input) }
+            searchInput.emit(input)
         }
     }
 
-    fun resetSearchResult() {
-        when (searchType.value) {
-            SearchType.TEAM -> {
-                _state.update { it.copy(searchResult = SearchResult.Team(emptyList())) }
-            }
-            SearchType.LEAGUE -> {
-                _state.update { it.copy(searchResult = SearchResult.League(emptyList())) }
-            }
+    private fun onClickLeague(league: LeagueSearchUIState) {
+        viewModelScope.launch {
+            saveRecentSearch(league.toRecentSearch())
         }
+        _event.update { Event(SearchEvents.LeagueClickEvent(league.leagueId, league.season)) }
     }
 
-
-
-    suspend fun onSelectSearchType(searchTypeUIState: SearchType) {
-        TODO()
+    private fun onClickViewAll() {
+        _event.update { Event(SearchEvents.ViewAllLClickEvent(_state.value.searchInput)) }
     }
 
-    suspend fun onSelect(resultUIState: SearchResult) {
-        TODO()
+    private fun onClickTeam(id:Int, season:Int) {
+        _event.update { Event(SearchEvents.TeamClickEvent(id,season)) }
+    }
+
+    fun onClickBack() {
+        _event.update { Event(SearchEvents.BackClickEvent) }
     }
 
     suspend fun onInternetDisconnected() {
         TODO()
-    }
-
-    private fun onLeagueClicked() {
-        _event.update { Event(SearchEvents.LeagueClickEvent) }
-    }
-   private fun onTeamClicked() {
-        _event.update { Event(SearchEvents.TeamClickEvent) }
     }
 
 }

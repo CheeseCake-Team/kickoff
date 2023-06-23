@@ -592,7 +592,6 @@ class RemoteDataSourceImp @Inject constructor(
 
     override suspend fun getLeaguesBySearch(leagueName: String): List<LeagueDTO> {
         return wrapBaseResponse { service.getLeaguesBySearch(leagueName) }
-
     }
 
     override suspend fun getTeamById(teamId: Int): List<TeamDTO> {
@@ -685,6 +684,7 @@ class RemoteDataSourceImp @Inject constructor(
             throw KickoffException.NoInternetConnectionException()
         }
     }
+
 
     private suspend fun <T> wrapBaseStaticResponse(
         response: suspend () -> Response<BasePagingForStaticResponse<T>>

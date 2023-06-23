@@ -1,5 +1,6 @@
 package com.cheesecake.presentation.screens.league
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.usecases.FavouriteLeagueUseCase
@@ -14,11 +15,14 @@ import javax.inject.Inject
 @HiltViewModel
 class LeagueViewModel @Inject constructor(
     private val getLeagueByIdAndSeasonUseCase: GetLeagueByIdAndSeasonUseCase,
-    private val favouriteLeagueUseCase: FavouriteLeagueUseCase
+    private val favouriteLeagueUseCase: FavouriteLeagueUseCase,
+    savedStateHandle: SavedStateHandle,
 ) : BaseViewModel<LeagueUIState, LeagueNavigationEvent>(LeagueUIState(), Event()) {
 
+    val leagueArgs = LeagueNavigationArgs(savedStateHandle)
+
     init {
-        getLeague(75, 2023)
+        getLeague(leagueArgs.leagueId, leagueArgs.season)
     }
 
     private fun toggleFavourite(leagueId: Int, leagueSeason: Int) {

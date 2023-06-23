@@ -1,4 +1,4 @@
-package com.cheesecake.presentation.screens.search
+package com.cheesecake.presentation.screens.search.adapters
 
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseAdapter

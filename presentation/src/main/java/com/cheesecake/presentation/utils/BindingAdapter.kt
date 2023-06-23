@@ -15,10 +15,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.presentation.base.BaseAdapter
-import com.cheesecake.presentation.screens.search.SearchViewModel
 import com.cheesecake.presentation.base.BaseListAdapter
 import com.cheesecake.presentation.screens.home.MatchItemUIState
-import com.cheesecake.presentation.screens.search.SearchResult
+import com.cheesecake.presentation.screens.homeSearch.HomeSearchAdapter
+import com.cheesecake.presentation.screens.homeSearch.HomeSearchData
+import com.cheesecake.presentation.screens.search.adapters.SearchAdapter
+import com.cheesecake.presentation.screens.search.models.SearchResult
+import com.cheesecake.presentation.screens.search.SearchViewModel
 
 
 @BindingAdapter("app:imageUrl")
@@ -32,12 +35,6 @@ fun ImageView.setImageFromUrl(imageUri: String?) {
     //val imageUrl = imageUri.takeIf { !it.isNullOrEmpty() && !it.contains("image_not_available") } ?: R.drawable.no_image
 }
 
-@BindingAdapter(value = ["app:listItems"])
-fun <T> setItems(view: RecyclerView, items: List<T>?) {
-    items?.let {
-        (view.adapter as BaseListAdapter<T>?)?.submitList(items)
-    }
-}
 @BindingAdapter("app:circularImageUrl")
 fun ImageView.setCircularImageFromUrl(imageUri: String?) {
     imageUri.let {
@@ -50,6 +47,29 @@ fun ImageView.setCircularImageFromUrl(imageUri: String?) {
     //val imageUrl = imageUri.takeIf { !it.isNullOrEmpty() && !it.contains("image_not_available") } ?: R.drawable.no_image
 }
 
+
+//@BindingAdapter(value = ["app:searchItems"])
+//fun <T> setRecyclerItems(view: RecyclerView, items: SearchResult?) {
+//    items?.let {
+//        when(it) {
+//            is SearchResult.Team -> {
+//                (view.adapter as BaseAdapter<T>?)?.setItems(it.items as List<T>)
+//            }
+//            is SearchResult.League -> {
+//                (view.adapter as BaseAdapter<T>?)?.setItems(it.items as List<T>)
+//            }
+//        }
+//
+//    }
+//}
+
+@BindingAdapter(value = ["app:listItems"])
+fun <T> setListItems(view: RecyclerView, items: List<T>?) {
+    items?.let {
+        (view.adapter as BaseListAdapter<T>?)?.submitList(items)
+    }
+}
+
 @BindingAdapter(value = ["app:items"])
 fun <T> setRecyclerItems(view: RecyclerView, items: List<T>?) {
     items?.let {
@@ -57,46 +77,32 @@ fun <T> setRecyclerItems(view: RecyclerView, items: List<T>?) {
     }
 }
 
-@BindingAdapter(value = ["app:searchItems"])
-fun <T> setRecyclerItems(view: RecyclerView, items: SearchResult?) {
+@BindingAdapter(value = ["app:nestedSearchItems"])
+fun <T> setNestedSearchRecyclerItems(view: RecyclerView, items: List<T>?) {
     items?.let {
-        when(it) {
-            is SearchResult.Team -> {
-                (view.adapter as BaseAdapter<T>?)?.setItems(it.items as List<T>)
-            }
-            is SearchResult.League -> {
-                (view.adapter as BaseAdapter<T>?)?.setItems(it.items as List<T>)
-            }
-        }
-
+        (view.adapter as BaseAdapter<T>?)?.setItems(it.take(6))
     }
 }
-
-//@BindingAdapter(value = ["app:fixtureItems"])
-//fun <T> setItems(view: RecyclerView, items: List<T>?) {
-//    items?.let {
-//        (view.adapter as BaseListAdapter<T>?)?.submitList(items)
-//    }
-//}
 
 @BindingAdapter(value = ["app:showLoading"])
 fun showLoading(view: View, isVisible: Boolean?) {
     view.isVisible = !(isVisible == null || isVisible == false)
+}
 
+@BindingAdapter(value = ["app:viewVisibilityOnItems"])
+fun <T> hideIfItemsEmpty(view: View, items: List<T>) {
+    view.isVisible = items.isNotEmpty()
 }
 
 @BindingAdapter(value = ["app:viewVisibilityInLoading"])
 fun hideWhenLoading(view: View, isVisible: Boolean) {
-    view.isVisible = !isVisible
+    if (isVisible) view.visibility = View.INVISIBLE else view.visibility = View.VISIBLE
 }
 
 @BindingAdapter(value = ["app:showNoResultFound"])
-fun <T> showWhenNoResult(view: FrameLayout, items: SearchResult?) {
+fun <T> showWhenNoResult(view: FrameLayout, items: List<SearchResult>?) {
     items?.let {
-        when(it) {
-            is SearchResult.Team -> { view.isVisible = it.items.isEmpty()}
-            is SearchResult.League -> { view.isVisible = it.items.isEmpty() }
-        }
+        view.isVisible = it.isEmpty()
     }
 }
 
@@ -107,7 +113,7 @@ fun EditText.onSearchTextChanged(viewModel: SearchViewModel) {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            viewModel.onSearch(s.toString().trim())
+            viewModel.onQueryChange(s.toString().trim())
         }
 
         override fun afterTextChanged(s: Editable?) {}
@@ -128,7 +134,7 @@ fun TextView.setMatchScore(fixture: Fixture?) {
 @BindingAdapter("app:scoreOrTime")
 fun TextView.setMatchScore(item: MatchItemUIState?) {
     item?.let {
-        when(it.matchState ) {
+        when (it.matchState) {
             "FT" -> "Finished\n  ${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
             else -> this.text = it.matchTime
         }

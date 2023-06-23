@@ -1,7 +1,10 @@
 package com.cheesecake.data.repository
 
+import androidx.room.Query
 import com.cheesecake.data.local.models.LeagueLocalDTO
+import com.cheesecake.data.local.models.RecentSearchLocalDTO
 import com.cheesecake.data.local.models.TeamLocalDTO
+import com.cheesecake.domain.entity.RecentSearch
 import kotlinx.coroutines.flow.Flow
 
 interface LocalDataSource {
@@ -27,5 +30,13 @@ interface LocalDataSource {
     suspend fun addLeaguesList(leagues : List<LeagueLocalDTO>)
 
     suspend fun deleteTeamById(teamId: Int)
+
+    fun getRecentSearches(): Flow<List<RecentSearchLocalDTO>>
+
+    suspend fun updateOrInsertRecentSearches(recent: RecentSearchLocalDTO)
+
+    suspend fun deleteRecentSearchById(recentId: Int)
+
+    suspend fun deleteRecentSearches()
 
 }

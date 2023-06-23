@@ -1,13 +1,12 @@
-package com.cheesecake.presentation.screens.search
-
-import com.cheesecake.presentation.models.TeamUIState
+package com.cheesecake.presentation.screens.search.models
 
 sealed class SearchResult {
     data class Team(
-        var items: List<TeamUIState>,
+        var items: List<TeamSearchUIState>,
     ) : SearchResult()
 
     data class League(
+        val onViewAllClick: () -> Unit,
         var items: List<LeagueSearchUIState>,
     ) : SearchResult()
 

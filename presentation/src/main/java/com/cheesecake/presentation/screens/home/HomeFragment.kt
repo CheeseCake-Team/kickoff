@@ -28,16 +28,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
-    private fun onEvent(event: HomeNavigationEvent) {
-        when (event) {
-            HomeNavigationEvent.LeagueClickEvent -> findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToLeagueFragment()
-            )
+    private fun onEvent(event: HomeEvents) {
+        val action = when (event) {
+            is HomeEvents.MatchClickedEvent ->
+                HomeFragmentDirections.actionHomeFragmentToMatchFragment(
+                    event.matchId,
+                    event.season,
+                    event.date
+                )
 
-            HomeNavigationEvent.MatchClickedEvent -> findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToMatchFragment()
-            )
-
+            is HomeEvents.LeagueClickEvent -> HomeFragmentDirections
+                .actionHomeFragmentToLeagueFragment(event.leagueId, event.season)
         }
+        findNavController().navigate(action)
     }
 }

@@ -5,9 +5,10 @@ data class League(
     val name: String,
     val imageUrl: String,
     val season: String,
-    val country: String,
-    val typeName: String,
+    val countryName: String,
+    val leagueTypeName: String,
     val seasonStartYear: String,
     val seasonEndYear: String,
+    val leagueCount: Int,
     val isFavourite: Boolean = false
 )
