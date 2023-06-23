@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/spacing_8"
+        app:viewVisibilityOnItems="@{item.items}"
         android:layout_marginTop="@dimen/spacing_8"
         app:cardBackgroundColor="@color/cardSurface">
 
@@ -39,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:fontFamily="@font/lato"
-                android:text="@{`(`+String.valueOf(item.items.size())+`)`}"
+                android:text="@{`(`+String.valueOf(item.itemsSize)+`)`}"
                 app:layout_constraintBottom_toBottomOf="@+id/text_view_leagues_label"
                 app:layout_constraintStart_toEndOf="@+id/text_view_leagues_label"
                 app:layout_constraintTop_toTopOf="@+id/text_view_leagues_label"
@@ -55,8 +56,8 @@
                 android:paddingVertical="@dimen/spacing_8"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_leagues_label"
-                app:nestedSearchItems="@{item.items}"
-                tools:listitem="@layout/item_league" />
+                app:items="@{item.items}"
+                tools:listitem="@layout/item_team_search_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

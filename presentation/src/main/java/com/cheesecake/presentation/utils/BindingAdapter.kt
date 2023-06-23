@@ -71,13 +71,6 @@ fun <T> setRecyclerItems(view: RecyclerView, items: List<T>?) {
     }
 }
 
-@BindingAdapter(value = ["app:nestedSearchItems"])
-fun <T> setNestedSearchRecyclerItems(view: RecyclerView, items: List<T>?) {
-    items?.let {
-        (view.adapter as BaseAdapter<T>?)?.setItems(it.take(6))
-    }
-}
-
 @BindingAdapter(value = ["app:showLoading"])
 fun showLoading(view: View, isVisible: Boolean?) {
     view.isVisible = !(isVisible == null || isVisible == false)
@@ -88,7 +81,7 @@ fun <T> hideIfItemsEmpty(view: View, items: List<T>) {
     view.isVisible = items.isNotEmpty()
 }
 
-@BindingAdapter(value = ["app:viewVisibilityInLoading"])
+@BindingAdapter(value = ["app:viewVisibility"])
 fun hideWhenLoading(view: View, isVisible: Boolean) {
     if (isVisible) view.visibility = View.INVISIBLE else view.visibility = View.VISIBLE
 }

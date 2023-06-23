@@ -26,7 +26,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:items="@{viewModel.state.items}"
-            app:viewVisibilityInLoading="@{viewModel.state.loading}"
+            app:viewVisibility="@{viewModel.state.loading}"
             tools:context="com.cheesecake.league.LeagueTeamsFragment"
             tools:listitem="@layout/item_team" />
 

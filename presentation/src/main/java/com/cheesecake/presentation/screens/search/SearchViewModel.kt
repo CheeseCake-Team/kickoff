@@ -51,17 +51,23 @@ class SearchViewModel @Inject constructor(
     private suspend fun getSearchResult(input: String): List<SearchResult> {
         _state.update { it.copy(isLoading = true) }
         return mutableListOf<SearchResult>().apply {
+            val leaguesItems = getLeagueList(input).toSearchUIState(::onClickLeague)
+            val teamsItems = getTeamList(input).map { it.toTeamUIState {} }
             add(
-                SearchResult.League(
-                    ::onClickViewAll,
-                    getLeagueList(input).toSearchUIState(::onClickLeague))
+                SearchResult.League(::onClickViewAll, leaguesItems.take(6), leaguesItems.size)
             )
-            add(SearchResult.Team(getTeamList(input).map { it.toTeamUIState { onClickTeam(it.id, 2022) } }))
+            add(SearchResult.Team(teamsItems.take(6), teamsItems.size))
         }
     }
 
     private fun onSearchSuccess(items: List<SearchResult>) {
-        _state.update { it.copy(searchResult = items, isLoading = false) }
+        _state.update {
+            it.copy(
+                searchResult = items,
+                isLoading = false,
+                isResultEmpty = getIfResultEmpty(items)
+            )
+        }
     }
 
     private fun onSearchError(throwable: Throwable) {
@@ -69,6 +75,14 @@ class SearchViewModel @Inject constructor(
         Log.i("onSearchError: ", _state.value.error)
     }
 
+    private fun getIfResultEmpty(items: List<SearchResult>): Boolean {
+        return items.all {
+            when (it) {
+                is SearchResult.League -> it.items.isEmpty()
+                is SearchResult.Team -> it.items.isEmpty()
+            }
+        }
+    }
 
     fun onQueryChange(input: String) {
         viewModelScope.launch {
@@ -88,8 +102,8 @@ class SearchViewModel @Inject constructor(
         _event.update { Event(SearchEvents.ViewAllLClickEvent(_state.value.searchInput)) }
     }
 
-    private fun onClickTeam(id:Int, season:Int) {
-        _event.update { Event(SearchEvents.TeamClickEvent(id,season)) }
+    private fun onClickTeam(id: Int, season: Int) {
+        _event.update { Event(SearchEvents.TeamClickEvent(id, season)) }
     }
 
     fun onClickBack() {
