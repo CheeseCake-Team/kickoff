@@ -5,6 +5,7 @@ import com.cheesecake.domain.entity.FixtureLineup
 import com.cheesecake.domain.usecases.GetFixtureLineupByFixtureIdUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
+import com.cheesecake.presentation.screens.match.statistics.MatchStatisticsArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
@@ -17,9 +18,10 @@ class MatchLineupViewModel @Inject constructor(
     MatchLineupUIState(),
     Event()
 ) {
+    private val matchLineupsArgs = MatchLineupsArgs(savedStateHandle)
     init {
         tryToExecute(
-            { getFixtureLineupByFixtureId(157201) },
+            { getFixtureLineupByFixtureId(matchLineupsArgs.fixtureId) },
             ::onSuccess,
             ::onError
         )

@@ -11,6 +11,8 @@ import androidx.fragment.app.viewModels
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentMatchLineupBinding
+import com.cheesecake.presentation.screens.match.statistics.MatchStatisticsArgs
+import com.cheesecake.presentation.screens.match.statistics.MatchStatisticsFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -130,5 +132,12 @@ class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
         return playerRow
     }
 
-
+    companion object {
+        @JvmStatic
+        fun newInstance(fixtureId: Int) = MatchLineupFragment().apply {
+            arguments = Bundle().apply {
+                putInt(MatchLineupsArgs.FIXTURE_ID_ARG, fixtureId)
+            }
+        }
+    }
 }

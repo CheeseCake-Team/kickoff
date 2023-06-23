@@ -37,7 +37,7 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
 
                 val matchStatisticsFragment = MatchStatisticsFragment.newInstance(it.fixtureId)
                 val matchEventFragment = MatchEventFragment.newInstance(it.fixtureId,it.homeTeamId,it.awayTeamId)
-                val matchLineupFragment = MatchLineupFragment()
+                val matchLineupFragment = MatchLineupFragment.newInstance(it.fixtureId)
 
                 fragments.addAll(
                     listOf(
