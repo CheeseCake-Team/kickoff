@@ -1,45 +1,66 @@
 package com.cheesecake.presentation.mapper
 
-import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.Team
+import com.cheesecake.domain.entity.Country
+import com.cheesecake.domain.entity.PlayerStatistics
+import com.cheesecake.presentation.models.CountryItemUIState
 import com.cheesecake.presentation.models.TeamUIState
-import com.cheesecake.presentation.screens.home.MatchItemUIState
-import com.cheesecake.presentation.utils.toFormattedString
-import java.text.SimpleDateFormat
-import java.util.TimeZone
+import com.cheesecake.presentation.screens.player.playerStatistics.PlayerDataItemUIState
+import com.cheesecake.presentation.screens.player.playerStatistics.PlayerSectionItemUIState
 
 
-fun Team.toUIState(): TeamUIState {
+fun Team.toTeamUIState(onClick: () -> Unit): TeamUIState {
     return TeamUIState(
-        teamId = this.id,
         teamName = this.name,
         founded = this.yearFounded,
         teamCountry = this.country,
         venueCapacity = this.stadiumCapacity,
         venueName = this.stadiumName,
         imageUrl = this.imageUrl,
-        isFavourite = this.isFavourite,
+        onTeamClick = onClick
     )
 }
 
-fun Fixture.toMatchUIState(onclick: (matchId: String, season: Int, date: String) -> Unit): MatchItemUIState {
-    val formatter = SimpleDateFormat("HH:mm")
-    val formattedMatchTime = formatter.format(this.matchDate)
 
-    return MatchItemUIState(
-        leagueId = id,
-        matchId = matchId,
-        leagueSeason = leagueSeason,
-        timeZone = TimeZone.getDefault().id,
-        matchState = if (isFinished) "Finished" else "Upcoming",
-        matchDate = matchDate.toFormattedString(),
-        matchTime = formattedMatchTime,
-        homeTeamName = homeTeamName,
-        awayTeamName = awayTeamName,
-        homeTeamGoals = homeTeamGoals?.toIntOrNull() ?: 0,
-        awayTeamGoals = awayTeamGoals?.toIntOrNull() ?: 0,
-        homeTeamImageUrl = homeTeamLogoUrl,
-        awayTeamImageUrl = awayTeamLogoUrl,
-        onclick = onclick
+fun Country.toUIModel(onClick: () -> Unit): CountryItemUIState {
+    return CountryItemUIState(
+        name = name,
+        flag = flag,
+        onClick = onClick
     )
 }
+
+fun PlayerStatistics.toPlayerStatisticsUIModel(): List<PlayerSectionItemUIState> {
+    return listOf(
+        PlayerSectionItemUIState(
+            "Personal Info", listOf(
+                PlayerDataItemUIState("Name", this.name),
+                PlayerDataItemUIState("Age", this.age.toString()),
+                PlayerDataItemUIState("Birth Date", this.date),
+                PlayerDataItemUIState("Birth Place", this.place),
+                PlayerDataItemUIState("Birth Country", this.country),
+                PlayerDataItemUIState("Nationality", this.nationality),
+                PlayerDataItemUIState("Height", this.height),
+                PlayerDataItemUIState("Weight", this.weight),
+                PlayerDataItemUIState("Injured", this.injured.toString()),
+                PlayerDataItemUIState("Rating", this.rating),
+                PlayerDataItemUIState("Captain", this.country)
+            )
+        ),
+        PlayerSectionItemUIState(
+            "Games Info", listOf(
+                PlayerDataItemUIState("Appearances", appearences.toString()),
+                PlayerDataItemUIState("Lineups", lineups.toString()),
+                PlayerDataItemUIState("Minutes", minutes.toString()),
+                PlayerDataItemUIState("Number", number.toString()),
+                PlayerDataItemUIState("Position", position),
+            )
+        ),
+        PlayerSectionItemUIState(
+            "Goals Info", listOf(
+                PlayerDataItemUIState("goals", goals),
+            )
+        )
+    )
+}
+

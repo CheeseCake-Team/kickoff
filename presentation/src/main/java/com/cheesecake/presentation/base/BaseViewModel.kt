@@ -35,6 +35,21 @@ abstract class BaseViewModel<S, E>(uiState: S, uiEvent: Event<E>) : ViewModel() 
         }
     }
 
+    protected fun <T> tryToExecuteSuspend(
+        call: () -> T,
+        onSuccess: suspend (T) -> Unit,
+        onError: (Throwable) -> Unit,
+        dispatcher: CoroutineDispatcher = Dispatchers.IO
+    ) {
+        viewModelScope.launch(dispatcher) {
+            try {
+                onSuccess(call.invoke())
+            } catch (throwable: Throwable) {
+                onError(throwable)
+            }
+        }
+    }
+
     protected fun <T> collectFlow(
         flow: Flow<T>,
         updateState: S.(T) -> S

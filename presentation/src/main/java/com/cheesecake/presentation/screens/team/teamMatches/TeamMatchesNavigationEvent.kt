@@ -1,0 +1,3 @@
+package com.cheesecake.presentation.screens.team.teamMatches
+
+sealed interface TeamMatchesNavigationEvent

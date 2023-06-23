@@ -8,7 +8,7 @@ class GetMatchDetailsUseCase @Inject constructor(
     private val footballRepository: IFootballRepository
 ) {
 
-    suspend operator fun invoke(teamsId: String, date: String, timeZone: String): Match {
-        return footballRepository.getMatchDetails(teamsId, date, timeZone)
+    suspend operator fun invoke(homeTeamId: Int,awayTeamId: Int, date: String, timeZone: String): Match {
+        return footballRepository.getMatchDetails(homeTeamId,awayTeamId, date, timeZone)
     }
 }

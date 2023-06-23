@@ -1,6 +1,7 @@
 package com.cheesecake.data.repository.mappers
 
 import com.cheesecake.data.remote.models.PlayerDTO
+import com.cheesecake.domain.entity.Player
 import com.cheesecake.domain.entity.PlayerStatistics
 
 @JvmName("playerDTOToPlayerStatistics")
@@ -33,4 +34,14 @@ fun PlayerDTO.toEntity(): PlayerStatistics {
 @JvmName("playerDTOsToPlayersStatistics")
 fun List<PlayerDTO>.toEntity():List<PlayerStatistics>{
     return this.map { it.toEntity() }
+}
+
+@JvmName("playerDTOToPlayerSingle")
+fun PlayerDTO.toSinglePlayer(): Player {
+    return Player(
+        this.player.id,
+        this.player.name,
+        this.player.photo,
+        this.statistics[0].team.name
+    )
 }

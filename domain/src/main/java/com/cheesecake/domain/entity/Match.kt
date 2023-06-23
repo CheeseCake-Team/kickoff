@@ -2,7 +2,6 @@ package com.cheesecake.domain.entity
 
 data class Match (
     val fixtureId: Int,
-    val matchId: String,
     val homeTeamId: Int,
     val homeTeamName: String,
     val homeTeamLogoUrl: String,

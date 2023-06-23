@@ -1,9 +1,10 @@
 package com.cheesecake.presentation.screens.search
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
@@ -11,26 +12,22 @@ import androidx.navigation.fragment.findNavController
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentSearchBinding
-import com.google.android.material.tabs.TabLayout
+import com.cheesecake.presentation.screens.search.adapters.SearchAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>() {
-    private lateinit var tabLayout: TabLayout
     override val layoutIdFragment = R.layout.fragment_search
     override val viewModel: SearchViewModel by viewModels()
-
 
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupStatusBar()
-        binding.searchRecyclerView.adapter = SearchTeamAdapter()
-        tabLayout = binding.tabLayout
-        setUpTapLayout()
-
+        setSearchFocus()
         handleNavigation()
-
+        binding.recyclerViewSearch.adapter = SearchAdapter()
     }
 
     private fun handleNavigation() {
@@ -41,15 +38,29 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     private fun onEvent(event: SearchEvents) {
         when (event) {
-//            SearchEvents.LeagueClickEvent -> findNavController().navigate(
-//                SearchFragmentDirections.actionSearchFragmentToLeagueFragment()
-//            )
-
-            SearchEvents.TeamClickEvent -> {
-                
+            is SearchEvents.LeagueClickEvent -> {
+                findNavController().navigate(
+                    SearchFragmentDirections.actionSearchFragmentToLeagueFragment(
+                        event.leagueId, event.season
+                    )
+                )
             }
 
-            else -> {}
+            is SearchEvents.ViewAllLClickEvent -> {
+                findNavController().navigate(
+                    SearchFragmentDirections.actionSearchFragmentToLeaguesSearchFragment(
+                        viewModel.state.value.searchInput
+                    )
+                )
+            }
+
+            is SearchEvents.BackClickEvent -> {
+                findNavController().navigateUp()
+            }
+
+            else -> {
+                throw (Throwable())
+            }
         }
     }
 
@@ -58,40 +69,24 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         requireActivity().window.statusBarColor = statusBarColor
     }
 
-    private fun setUpTapLayout() {
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                val selectedTabPosition = tab.position
-                updateRecyclerView(selectedTabPosition)
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {}
-            override fun onTabReselected(tab: TabLayout.Tab?) {}
-        })
-
-        tabLayout.addTab(tabLayout.newTab().setText("Teams"))
-        tabLayout.addTab(tabLayout.newTab().setText("Leagues"))
-
-        tabLayout.getTabAt(0)?.select()
-
+    override fun onResume() {
+        super.onResume()
+        requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav_bar).visibility =
+            View.GONE
     }
 
-    private fun updateRecyclerView(selectedTabPosition: Int) {
-        when (selectedTabPosition) {
-            0 -> {
-                viewModel.resetSearchResult()
-                viewModel.searchType.value = SearchType.TEAM
-                Log.i("getSearchFragment: ", viewModel.searchType.value.toString())
-                binding.searchRecyclerView.adapter = SearchTeamAdapter()
-            }
+    override fun onPause() {
+        super.onPause()
+        requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav_bar).visibility =
+            View.VISIBLE
+    }
 
-            1 -> {
-                viewModel.resetSearchResult()
-                viewModel.searchType.value = SearchType.LEAGUE
-                Log.i("getSearchFragment: ", viewModel.searchType.value.toString())
-                binding.searchRecyclerView.adapter = SearchLeagueAdapter()
-            }
-        }
+    private fun setSearchFocus() {
+        val searchEditText = binding.editTextSearch
+        searchEditText.requestFocus()
+        val inputManager =
+            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputManager.showSoftInput(searchEditText, InputMethodManager.SHOW_IMPLICIT)
     }
 
 }
