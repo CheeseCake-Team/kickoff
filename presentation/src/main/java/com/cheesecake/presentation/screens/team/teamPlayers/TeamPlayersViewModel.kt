@@ -9,21 +9,21 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 @HiltViewModel
 class TeamPlayersViewModel @Inject constructor(
-    private val getTeamSquadByIdUseCase: GetTeamSquadByIdUseCase
+    private val getTeamSquadByIdUseCase: GetTeamSquadByIdUseCase,
+    teamPlayersArgs:TeamPlayersArgs
 ) :
     BaseViewModel<TeamPlayersUIState, TeamPLayerNavigationEvent>(TeamPlayersUIState(), Event()){
 
     init {
-        getData()
-    }
-
-    private fun getData() {
         tryToExecute(
-            { getTeamSquadByIdUseCase(34) },
+            { getTeamSquadByIdUseCase(teamPlayersArgs.teamId) },
             ::onSuccess,
             ::onError
         )
+
     }
+
+
 
     private fun onSuccess(result: List<Pair<String, List<SquadPlayer>>>) {
         _state.update { it.copy(data = result, isLoading = false) }

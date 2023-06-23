@@ -14,12 +14,18 @@ import javax.inject.Inject
 @HiltViewModel
 class TeamViewModel @Inject constructor(
     private val favouriteTeamUseCase: FavouriteTeamUseCase,
-    private val getTeamByIdUseCase: GetTeamByIdUseCase
+    private val getTeamByIdUseCase: GetTeamByIdUseCase,
+    val teamNavigationArgs: TeamNavigationArgs
 ) : BaseViewModel<TeamUIState, TeamNavigationEvent>(TeamUIState(), Event()) {
 
     init {
-        getTeam(30)
+        tryToExecute(
+            { getTeamByIdUseCase(teamNavigationArgs.teamId) },
+            ::onSuccess,
+            ::onError
+        )
     }
+
     private fun toggleFavourite(teamId: Int) {
         viewModelScope.launch {
             favouriteTeamUseCase(teamId).let {
@@ -28,13 +34,6 @@ class TeamViewModel @Inject constructor(
         }
     }
 
-    private fun getTeam(teamId: Int) {
-        tryToExecute(
-            { getTeamByIdUseCase(teamId) },
-            ::onSuccess,
-            ::onError
-        )
-    }
     private fun onSuccess(team: Team) {
         team.let {
             _state.update { teamUiState ->
@@ -44,7 +43,7 @@ class TeamViewModel @Inject constructor(
                     country = it.country,
                     imageUrl = it.imageUrl,
                     isFavourite = it.isFavourite,
-                    onTeamFavoriteClick = { teamId->
+                    onTeamFavoriteClick = { teamId ->
                         toggleFavourite(
                             teamId,
                         )
@@ -58,6 +57,7 @@ class TeamViewModel @Inject constructor(
     private fun onBackClick() {
         _event.update { Event(TeamNavigationEvent.NavigateBack) }
     }
+
     private fun onError(e: Throwable) {
         _state.update {
             it.copy(

@@ -26,10 +26,11 @@ class TeamFragment: BaseFragment<FragmentTeamBinding>() {
     }
 
     private fun init() {
+        val teamId = viewModel.teamNavigationArgs.teamId
         val fragments = listOf(
-            TeamPlayersFragment(),
-            TeamMatchesFragment(),
-            TeamStatisticsFragment(),
+            TeamPlayersFragment.newInstance(teamId),
+            TeamMatchesFragment.newInstance(teamId),
+            TeamStatisticsFragment.newInstance(teamId),
         )
         val fragmentsAdapter = BaseFragmentsAdapter((activity as AppCompatActivity), fragments)
         binding.teamViewPager.adapter = fragmentsAdapter

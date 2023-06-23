@@ -15,6 +15,7 @@
         style="@style/Widget.Material3.CardView.Filled"
         android:layout_width="match_parent"
         android:layout_height="55dp"
+        android:onClick="@{()->item.onclick.invoke()}"
         android:layout_margin="@dimen/spacing_4"
         app:cardBackgroundColor="@color/cardSurface"
         app:cardCornerRadius="@dimen/spacing_8">
