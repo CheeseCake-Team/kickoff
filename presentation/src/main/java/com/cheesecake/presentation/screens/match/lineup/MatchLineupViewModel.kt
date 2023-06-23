@@ -30,6 +30,7 @@ class MatchLineupViewModel @Inject constructor(
         _state.update {
             it.copy(
                 data = getFixtureId.toUIState(),
+                teams = getFixtureId.toTeamsUIState(),
                 isLoading = false
             )
         }

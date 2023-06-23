@@ -6,22 +6,24 @@ import com.cheesecake.domain.entity.PlayerLineup
 data class MatchLineupUIState(
     val errorMessage: String = "error",
     val isLoading: Boolean = true,
+    val teams: List<TeamData> = emptyList(),
     val data: TeamsLineups = TeamsLineups(),
 )
 
 data class TeamsLineups(
-    val homeTeamLineup: FixtureLineupUiState = FixtureLineupUiState(),
-    val awayTeamLineup: FixtureLineupUiState = FixtureLineupUiState(),
+    val homeTeamLineup: TeamData = TeamData(),
+    val awayTeamLineup: TeamData = TeamData(),
     val homeTeamSubstitutesPlayers: List<PlayerItemUiState> = emptyList(),
     val awayTeamSubstitutesPlayers: List<PlayerItemUiState> = emptyList()
 )
 
-data class FixtureLineupUiState(
+data class TeamData(
     val teamName: String = "",
     val teamLogoUrl: String = "",
     val coachName: String = "",
     val formation: String = "",
-    val playerItemUiState: List<PlayerItemUiState> = emptyList()
+    val playerItemUiState: List<PlayerItemUiState> = emptyList(),
+    val substitutesPlayers: List<PlayerItemUiState> = emptyList()
 )
 
 data class PlayerItemUiState(
@@ -39,14 +41,29 @@ fun List<FixtureLineup>.toUIState(): TeamsLineups {
     )
 }
 
+fun List<FixtureLineup>.toTeamsUIState(): List<TeamData> {
+    return map {
+        TeamData(
+            teamName = it.teamName,
+            teamLogoUrl = it.teamLogoUrl,
+            coachName = it.coachName,
+            formation = it.formation,
+            playerItemUiState = it.playerLineup.toUIState(),
+            substitutesPlayers = it.substitutesPlayers.toUIState()
 
-fun FixtureLineup.toUIState(): FixtureLineupUiState {
-    return FixtureLineupUiState(
+        )
+    }
+}
+
+
+fun FixtureLineup.toUIState(): TeamData {
+    return TeamData(
         teamName = teamName,
         teamLogoUrl = teamLogoUrl,
         coachName = coachName,
         formation = formation,
-        playerItemUiState = playerLineup.toUIState()
+        playerItemUiState = playerLineup.toUIState(),
+        substitutesPlayers = substitutesPlayers.toUIState(),
     )
 }
 

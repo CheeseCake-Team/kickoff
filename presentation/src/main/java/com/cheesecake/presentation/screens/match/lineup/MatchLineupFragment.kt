@@ -36,7 +36,7 @@ class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
         container.rotation = degrees
     }
 
-    private fun populateLineup(lineup: FixtureLineupUiState, container: LinearLayout) {
+    private fun populateLineup(lineup: TeamData, container: LinearLayout) {
         val formation = lineup.formation.split("-").map { it.toInt() }
         container.removeAllViews()
 
@@ -67,7 +67,7 @@ class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
 
     }
 
-    private fun populateLineupReverse(lineup: FixtureLineupUiState, container: LinearLayout) {
+    private fun populateLineupReverse(lineup: TeamData, container: LinearLayout) {
         val formation = lineup.formation.split("-").map { it.toInt() }
         container.removeAllViews()
 
