@@ -16,7 +16,7 @@ class PlayerViewModel @Inject constructor(
 
     init {
         tryToExecute(
-            { getPlayerUseCase(2022, 276 /*playerNavigationArgs.playerId*/) },
+            { getPlayerUseCase(2022, playerNavigationArgs.playerId) },
             ::onSuccess,
             ::onError
         )
