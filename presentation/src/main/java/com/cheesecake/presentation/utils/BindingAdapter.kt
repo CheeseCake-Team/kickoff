@@ -1,9 +1,6 @@
 package com.cheesecake.presentation.utils
 
-import android.R
 import android.annotation.SuppressLint
-import android.graphics.drawable.PictureDrawable
-import android.net.Uri
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -16,24 +13,15 @@ import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.model.StreamEncoder
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseAdapter
 import com.cheesecake.presentation.base.BaseListAdapter
 import com.cheesecake.presentation.screens.home.MatchItemUIState
-import com.cheesecake.presentation.screens.homeSearch.HomeSearchAdapter
-import com.cheesecake.presentation.screens.homeSearch.HomeSearchData
-import com.cheesecake.presentation.screens.search.adapters.SearchAdapter
+import com.cheesecake.presentation.screens.search.SearchViewModel
 import com.cheesecake.presentation.screens.search.models.SearchResult
-import com.cheesecake.presentation.screens.search.SearchViewModel
-import com.cheesecake.presentation.screens.search.SearchAdapter
-import com.cheesecake.presentation.screens.search.SearchResult
-import com.cheesecake.presentation.screens.search.SearchViewModel
-import com.cheesecake.presentation.screens.search.SearchViewModel
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
-import java.io.InputStream
 
 
 @BindingAdapter("app:imageUrl")
@@ -67,6 +55,7 @@ fun ImageView.setSvgImageFromUrl(imageUri: String?) {
             .with(this.context)
             .load(it.toUri(), this);
     }
+}
 
 @BindingAdapter(value = ["app:listItems"])
 fun <T> setListItems(view: RecyclerView, items: List<T>?) {
@@ -156,6 +145,12 @@ fun TextView.setTimeOrResult(
     else time
 }
 
+@BindingAdapter(value = ["app:listItems"])
+fun <T> setItems(view: RecyclerView, items: List<T>?) {
+    items?.let {
+        (view.adapter as BaseListAdapter<T>?)?.submitList(items)
+    }
+}
 
 @BindingAdapter("app:scoreOrTime")
 fun TextView.setMatchScore(item: MatchItemUIState?) {

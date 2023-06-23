@@ -6,6 +6,7 @@ import com.cheesecake.domain.usecases.GetLeagueBySearchUseCase
 import com.cheesecake.domain.usecases.GetTeamBySearchUseCase
 import com.cheesecake.domain.usecases.SaveRecentSearchUseCase
 import com.cheesecake.presentation.base.BaseViewModel
+import com.cheesecake.presentation.mapper.toTeamUIState
 import com.cheesecake.presentation.models.Event
 import com.cheesecake.presentation.screens.search.models.LeagueSearchUIState
 import com.cheesecake.presentation.screens.search.models.SearchResult
@@ -55,7 +56,7 @@ class SearchViewModel @Inject constructor(
                     ::onClickViewAll,
                     getLeagueList(input).toSearchUIState(::onClickLeague))
             )
-            add(SearchResult.Team(getTeamList(input).map { it.toSearchUIState() }))
+            add(SearchResult.Team(getTeamList(input).map { it.toTeamUIState { onClickTeam(it.id, 2022) } }))
         }
     }
 

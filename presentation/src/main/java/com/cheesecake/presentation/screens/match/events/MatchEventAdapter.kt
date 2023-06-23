@@ -1,6 +1,5 @@
 package com.cheesecake.presentation.screens.match.events
 
-import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import com.cheesecake.domain.entity.EventType
@@ -12,7 +11,7 @@ class MatchEventAdapter(private val homeTeamId: Int, private val awayTeamId: Int
     override val layoutId = R.layout.item_match_event
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        val currentItem = itemss[position]
+        val currentItem = itemList[position]
         if (holder is ItemViewHolder) {
             with(holder.binding) {
                 setVariable(androidx.databinding.library.baseAdapters.BR.item, currentItem)

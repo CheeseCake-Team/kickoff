@@ -1,8 +1,10 @@
 package com.cheesecake.presentation.screens.search.models
 
+import com.cheesecake.presentation.models.TeamUIState
+
 sealed class SearchResult {
     data class Team(
-        var items: List<TeamSearchUIState>,
+        var items: List<TeamUIState>,
     ) : SearchResult()
 
     data class League(
