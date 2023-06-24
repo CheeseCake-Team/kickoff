@@ -2,6 +2,7 @@ package com.cheesecake.presentation.screens.search
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
+import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.usecases.GetLeagueBySearchUseCase
 import com.cheesecake.domain.usecases.GetTeamBySearchUseCase
 import com.cheesecake.domain.usecases.SaveRecentSearchUseCase
@@ -52,6 +53,7 @@ class SearchViewModel @Inject constructor(
         _state.update { it.copy(isLoading = true) }
         return mutableListOf<SearchResult>().apply {
             val leaguesItems = getLeagueList(input).toSearchUIState(::onClickLeague)
+
             val teamsItems = getTeamList(input).map { it.toTeamUIState {} }
             add(
                 SearchResult.League(::onClickViewAll, leaguesItems.take(6), leaguesItems.size)
@@ -88,11 +90,11 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    private fun onClickLeague(league: LeagueSearchUIState) {
+    private fun onClickLeague(league: League) {
         viewModelScope.launch {
             saveRecentSearch(league.toRecentSearch())
         }
-        _event.update { Event(SearchEvents.LeagueClickEvent(league.leagueId, league.season)) }
+        _event.update { Event(SearchEvents.LeagueClickEvent(league.leagueId, league.season.toInt())) }
     }
 
     private fun onClickViewAll() {
