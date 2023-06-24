@@ -13,10 +13,8 @@ data class Fixture(
     val awayTeamLogoUrl: String,
     val awayTeamGoals: String?,
     val awayTeamID: Int,
-    val matchTime: String?,
     val matchDate: Date,
-    val isFinished: Boolean = false,
     val leagueSeason: Int,
     val leagueLogoUrl: String,
-
+    val matchState: String
 )
