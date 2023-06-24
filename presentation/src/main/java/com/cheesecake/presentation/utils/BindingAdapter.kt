@@ -135,7 +135,7 @@ fun TextView.setTimeOrResult(
 ) {
     text = if (isFinished)
         "$homeTeamGoals  -  $awayTeamGoals"
-    else time
+    else time.substring(12,17)
 }
 
 @BindingAdapter(value = ["app:listItems"])
