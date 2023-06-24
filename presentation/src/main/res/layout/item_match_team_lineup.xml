@@ -113,10 +113,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_8"
+                app:items="@{item.playerItemUiState}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/card_view_starter_players"
-                app:items="@{item.playerItemUiState}"
                 tools:itemCount="2"
                 tools:listitem="@layout/item_match_players" />
 
@@ -147,10 +148,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_8"
+                app:items="@{item.substitutesPlayers}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="parent"
-                app:items="@{item.substitutesPlayers}"
                 tools:itemCount="2"
                 tools:listitem="@layout/item_match_players" />
 
