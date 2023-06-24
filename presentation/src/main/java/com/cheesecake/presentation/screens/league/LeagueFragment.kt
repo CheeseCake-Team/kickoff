@@ -2,7 +2,6 @@ package com.cheesecake.presentation.screens.league
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.cheesecake.presentation.R
@@ -34,7 +33,8 @@ class LeagueFragment : BaseFragment<FragmentLeagueBinding>() {
                 LeagueMatchesFragment.newInstance(it, 2022),
                 LeagueTeamsFragment.newInstance(it, 2022),
             )
-            val fragmentsAdapter = BaseFragmentsAdapter((activity as AppCompatActivity), fragments)
+            val fragmentsAdapter = BaseFragmentsAdapter(childFragmentManager,
+                requireActivity().lifecycle,fragments)
             binding.leagueViewPager.adapter = fragmentsAdapter
             TabLayoutMediator(binding.tabLayout, binding.leagueViewPager) { tab, position ->
                 when (position) {

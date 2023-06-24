@@ -26,8 +26,8 @@ class CountryFragment : BaseFragment<FragmentCountryBinding>() {
 
     private fun init() {
         val fragmentsAdapter = BaseFragmentsAdapter(
-            requireActivity(),
-            listOf(
+            childFragmentManager,
+            requireActivity().lifecycle, listOf(
                 CountryTeamsFragment.newInstance(viewModel.countryNavigationArgs.countryName),
                 CountryLeaguesFragment.newInstance(viewModel.countryNavigationArgs.countryName)
             )

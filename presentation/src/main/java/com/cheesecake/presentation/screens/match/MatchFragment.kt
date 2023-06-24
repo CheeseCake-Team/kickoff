@@ -1,9 +1,7 @@
 package com.cheesecake.presentation.screens.match
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -16,8 +14,6 @@ import com.cheesecake.presentation.screens.match.lineup.MatchLineupFragment
 import com.cheesecake.presentation.screens.match.statistics.MatchStatisticsFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -47,7 +43,10 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
                     )
                 )
 
-                val fragmentsAdapter = BaseFragmentsAdapter((activity as AppCompatActivity), fragments)
+                val fragmentsAdapter = BaseFragmentsAdapter(
+                    childFragmentManager,
+                    requireActivity().lifecycle, fragments
+                )
                 binding.matchViewPager.adapter = fragmentsAdapter
                 TabLayoutMediator(binding.tabLayout, binding.matchViewPager) { tab, position ->
                     when (position) {

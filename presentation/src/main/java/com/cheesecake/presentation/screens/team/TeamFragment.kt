@@ -2,9 +2,7 @@ package com.cheesecake.presentation.screens.team
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.base.BaseFragmentsAdapter
@@ -32,7 +30,8 @@ class TeamFragment: BaseFragment<FragmentTeamBinding>() {
             TeamMatchesFragment.newInstance(teamId),
             TeamStatisticsFragment.newInstance(teamId),
         )
-        val fragmentsAdapter = BaseFragmentsAdapter((activity as AppCompatActivity), fragments)
+        val fragmentsAdapter = BaseFragmentsAdapter(childFragmentManager,
+            requireActivity().lifecycle, fragments)
         binding.teamViewPager.adapter = fragmentsAdapter
         TabLayoutMediator(binding.tabLayout, binding.teamViewPager) { tab, position ->
             when (position) {
