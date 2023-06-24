@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="false"
+        android:background="@color/appBar"
         app:layoutDescription="@xml/fragment_match_scene"
         tools:context=".screens.match.MatchFragment">
 
@@ -147,6 +148,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_40"
+            android:background="@color/appBar"
+            app:tabIndicatorColor="@color/primaryColor"
+            app:tabRippleColor="@color/onPrimaryColor"
+            app:tabSelectedTextColor="@color/primaryColor"
             app:layout_constraintTop_toBottomOf="@+id/home_team_name" />
 
         <androidx.viewpager2.widget.ViewPager2
