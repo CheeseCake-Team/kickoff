@@ -35,23 +35,18 @@ class TeamViewModel @Inject constructor(
     }
 
     private fun onSuccess(team: Team) {
-        team.let {
-            _state.update { teamUiState ->
-                teamUiState.copy(
-                    teamId = it.id,
-                    teamName = it.name,
-                    country = it.country,
-                    imageUrl = it.imageUrl,
-                    isFavourite = it.isFavourite,
-                    onTeamFavoriteClick = { teamId ->
-                        toggleFavourite(
-                            teamId,
-                        )
-                    },
-                    onBackClick = { onBackClick() }
-                )
-            }
+        _state.update { teamUiState ->
+            teamUiState.copy(
+                teamId = team.id,
+                teamName = team.name,
+                country = team.country,
+                imageUrl = team.imageUrl,
+                isFavourite = team.isFavourite,
+                onTeamFavoriteClick = { toggleFavourite(team.id) },
+                onBackClick = { onBackClick() }
+            )
         }
+
     }
 
     private fun onBackClick() {

@@ -1,6 +1,7 @@
 package com.cheesecake.presentation.screens.search.viewAll.leagues
 
 import androidx.lifecycle.SavedStateHandle
+import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.usecases.GetLeagueBySearchUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
@@ -45,8 +46,8 @@ class LeaguesSearchViewModel @Inject constructor(
         _state.update { it.copy(error = emptyList()) }
     }
 
-    private fun onLeagueClicked(league: LeagueSearchUIState) {
-        _event.update { Event(SearchEvents.LeagueClickEvent(league.leagueId,league.season)) }
+    private fun onLeagueClicked(league: League) {
+        _event.update { Event(SearchEvents.LeagueClickEvent(league.leagueId,league.season.toInt())) }
     }
 
 }

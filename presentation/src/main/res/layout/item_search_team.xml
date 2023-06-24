@@ -25,7 +25,7 @@
                 android:id="@+id/text_view_leagues_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_8"
+                android:layout_marginStart="@dimen/spacing_16"
                 android:layout_marginTop="@dimen/spacing_16"
                 android:text="@string/teams"
                 android:fontFamily="@font/lato"
@@ -45,6 +45,18 @@
                 app:layout_constraintTop_toTopOf="@+id/text_view_leagues_label"
                 tools:text="(45)" />
 
+
+            <TextView
+                android:id="@+id/text_view_view_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+                android:gravity="center"
+                android:layout_marginEnd="@dimen/spacing_8"
+                android:text="@string/view_more"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_leagues_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/text_view_leagues_label" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_search_leagues"
