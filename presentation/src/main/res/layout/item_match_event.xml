@@ -20,12 +20,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginVertical="@dimen/spacing_8"
-            android:layout_marginEnd="@dimen/spacing_32"
+            android:layout_marginHorizontal="@dimen/spacing_8"
             android:backgroundTint="@color/cardSurface"
             app:cardCornerRadius="@dimen/spacing_8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/card_view_match_event_type"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -107,12 +106,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginVertical="@dimen/spacing_8"
-            android:layout_marginStart="@dimen/spacing_32"
+            android:layout_marginHorizontal="@dimen/spacing_8"
             android:backgroundTint="@color/cardSurface"
             app:cardCornerRadius="@dimen/spacing_8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/card_view_match_event_type"
             app:layout_constraintTop_toTopOf="parent">
 
