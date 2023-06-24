@@ -16,6 +16,8 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        changeStatusBarColor(R.color.sitting_state_bar_color)
+
         binding.cardViewThemeSettings.setOnClickListener {
             val darkThemeFragment = DarkTheme()
             darkThemeFragment.show(childFragmentManager, darkThemeFragment.tag)
