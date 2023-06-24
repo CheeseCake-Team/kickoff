@@ -16,8 +16,8 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image_view_country_icon"
-            android:layout_width="@dimen/team_image_size_24dp"
-            android:layout_height="@dimen/team_image_size_24dp"
+            android:layout_width="@dimen/spacing_28"
+            android:layout_height="@dimen/spacing_28"
             android:layout_marginVertical="@dimen/spacing_8"
             android:layout_marginStart="8dp"
             android:scaleType="centerCrop"
@@ -59,7 +59,7 @@
             android:layout_marginStart="@dimen/spacing_16"
             android:elevation="@dimen/spacing_1"
             android:text="@{viewModel.state.countryName}"
-            android:textAppearance="@style/TitleLarge"
+            android:textAppearance="@style/SubtitleLarge"
             android:textColor="@color/fontHeavy"
             app:layout_constraintStart_toEndOf="@id/image_view_country_icon"
             app:layout_constraintTop_toTopOf="@+id/back_button" />
@@ -69,7 +69,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:elevation="@dimen/spacing_1"
-            android:text="@{`Explore teams and leagues in ` + viewModel.state.countryName}"
+            android:layout_marginTop="@dimen/spacing_8"
+            android:text="@{`Explore teams and championship in ` + viewModel.state.countryName}"
             android:textAppearance="@style/bodySmall"
             android:textColor="@color/backLighter"
             app:layout_constraintEnd_toEndOf="parent"
