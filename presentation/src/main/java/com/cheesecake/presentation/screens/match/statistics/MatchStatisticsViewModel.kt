@@ -37,6 +37,7 @@ class MatchStatisticsViewModel @Inject constructor(
                     homeTeamValue = fixtureStatistics.homeTeamValue,
                     awayTeamValue = fixtureStatistics.awayTeamValue,
                     typeValue = fixtureStatistics.type,
+                    statisticsType =fixtureStatistics.statisticsType,
                     homeTeamPercentage = fixtureStatistics.getHomeTeamPercentage(),
                     awayTeamPercentage = fixtureStatistics.getAwayTeamPercentage()
                 )
