@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.cheesecake.presentation.databinding.ItemDateMatchesBinding
 import com.cheesecake.presentation.databinding.ItemMatchTeamLineupBinding
-import com.cheesecake.presentation.screens.league.leagueMatches.LeagueMatchesHeadToHeadAdapter
 import com.cheesecake.presentation.screens.match.lineup.ItemMatchPlayersAdapter
 
 
@@ -51,9 +50,6 @@ abstract class BaseAdapter<T>(private val listener: BaseInteractionListener?) :
                     setVariable(BR.item, currentItem)
 
                     when (this) {
-                        is ItemDateMatchesBinding -> {
-                            headToHeadRecyclerView.adapter = LeagueMatchesHeadToHeadAdapter()
-                        }
                         is ItemMatchTeamLineupBinding ->{
                             recyclerViewStarterPlayers.adapter = ItemMatchPlayersAdapter()
                             recyclerViewSubstitutesPlayers.adapter = ItemMatchPlayersAdapter()
