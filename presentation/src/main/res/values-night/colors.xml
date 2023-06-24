@@ -2,7 +2,9 @@
 <resources>
     <color name="primaryColor">#2A4A98</color>
     <color name="onPrimaryColor">#FFFFFF</color>
-    <color name="cardSurface">#2E2F3E</color>
+    <color name="cardSurface">#000000</color>
+    <color name="tableLabel">#2E2F3E</color>
+    <color name="appBar">#EAEDF3</color>
     <color name="background">#181928</color>
     <color name="fontHeavy">#E6F6F6F6</color>
     <color name="fontLight">#99F6F6F6</color>
