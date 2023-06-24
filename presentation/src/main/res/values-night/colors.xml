@@ -13,4 +13,6 @@
     <color name="lightGreyText">#66F6F6F6</color>
     <color name="date_item_background">#181928</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="sitting_state_bar_color">#1c1b1f</color>
 </resources>
+

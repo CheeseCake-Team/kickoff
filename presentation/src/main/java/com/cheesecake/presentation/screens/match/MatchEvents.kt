@@ -1,3 +1,5 @@
 package com.cheesecake.presentation.screens.match
 
-sealed interface MatchEvents
+sealed interface MatchEvents {
+    object  BackClickEvent: MatchEvents
+}

@@ -28,6 +28,7 @@
             android:layout_marginStart="@dimen/spacing_16"
             android:layout_marginTop="@dimen/spacing_16"
             app:icon="@drawable/ic_back"
+            android:onClick="@{()->viewModel.state.onBackClick.invoke()}"
             app:iconTint="@color/fontHeavy"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
