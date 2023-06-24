@@ -3,6 +3,7 @@ package com.cheesecake.presentation.screens.team.teamMatches
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.usecases.GetTeamMatchesByTeamIdAndSeasonUseCase
 import com.cheesecake.presentation.base.BaseViewModel
+import com.cheesecake.presentation.mapper.toTeamMatchItemUIState
 import com.cheesecake.presentation.models.Event
 import com.cheesecake.presentation.screens.home.HomeEvents
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -28,7 +29,14 @@ class TeamMatchesViewModel @Inject constructor(
 
 
     private fun onSuccess(result: List<Fixture>) {
-        _state.update { it.copy(data = result, isLoading = false) }
+        _state.update {
+            it.copy(
+                data = result.map { fixture ->
+                    fixture.toTeamMatchItemUIState()
+                },
+                isLoading = false
+            )
+        }
     }
 
     private fun onError(error: Throwable) {
@@ -36,7 +44,9 @@ class TeamMatchesViewModel @Inject constructor(
     }
 
     private fun onMatchClicked(homeTeamId: Int, awayTeamId: Int, date: String) {
-        _event.update { Event(TeamMatchesNavigationEvent.MatchClickedEvent(homeTeamId, awayTeamId, date)) }
+        _event.update {
+            Event(TeamMatchesNavigationEvent.MatchClickedEvent(homeTeamId, awayTeamId, date))
+        }
     }
 
 }

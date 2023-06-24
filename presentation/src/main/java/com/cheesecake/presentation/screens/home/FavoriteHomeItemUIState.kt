@@ -2,6 +2,7 @@ package com.cheesecake.presentation.screens.home
 
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.League
+import com.cheesecake.presentation.mapper.toMatchUIState
 import com.cheesecake.presentation.utils.toStanderDateString
 import com.cheesecake.presentation.utils.toStanderTimeString
 import java.text.SimpleDateFormat
@@ -39,20 +40,4 @@ fun List<Pair<League, List<Fixture>>>.toHomeFavouriteUiState(
         )
     }
 
-}
-
-fun Fixture.toMatchUIState(onclick: () -> Unit): MatchItemUIState {
-    return MatchItemUIState(
-        timeZone = TimeZone.getDefault().id,
-        matchState = if (isFinished) "Finished" else "Upcoming",
-        matchDate = matchDate.toStanderDateString(),
-        matchTime = this.matchDate.toStanderTimeString(),
-        homeTeamName = homeTeamName,
-        awayTeamName = awayTeamName,
-        homeTeamGoals = homeTeamGoals?.toIntOrNull() ?: 0,
-        awayTeamGoals = awayTeamGoals?.toIntOrNull() ?: 0,
-        homeTeamImageUrl = homeTeamLogoUrl,
-        awayTeamImageUrl = awayTeamLogoUrl,
-        onclick =  onclick
-    )
 }

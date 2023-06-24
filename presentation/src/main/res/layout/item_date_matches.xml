@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.cheesecake.presentation.screens.league.leagueMatches.DateMatchesItem" />
+            type="com.cheesecake.presentation.screens.league.leagueMatches.DateMatchesItemUIState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,7 +32,7 @@
             android:layout_marginTop="@dimen/spacing_4"
             android:overScrollMode="never"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:items="@{item.matches}"
+            app:listItems="@{item.matches}"
             tools:listitem="@layout/item_head_to_head"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
