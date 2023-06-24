@@ -54,7 +54,7 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
                 TabLayoutMediator(binding.tabLayout, binding.matchViewPager) { tab, position ->
                     when (position) {
                         0 -> tab.text = "Statistics"
-                        1 -> tab.text = "timeline"
+                        1 -> tab.text = "Timeline"
                         2 -> tab.text = "Lineup"
                     }
                 }.attach()
