@@ -28,7 +28,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_4"
-                app:viewVisibilityOnItems="@{item.items}"
                 android:layout_marginTop="@dimen/spacing_4"
                 app:cardBackgroundColor="@color/cardSurface"
                 app:cardCornerRadius="@dimen/spacing_8"

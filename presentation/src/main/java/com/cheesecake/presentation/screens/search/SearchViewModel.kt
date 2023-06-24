@@ -77,10 +77,7 @@ class SearchViewModel @Inject constructor(
 
     private fun getIfResultEmpty(items: List<SearchResult>): Boolean {
         return items.all {
-            when (it) {
-                is SearchResult.League -> it.items.isEmpty()
-                is SearchResult.Team -> it.items.isEmpty()
-            }
+            it.list.isEmpty()
         }
     }
 

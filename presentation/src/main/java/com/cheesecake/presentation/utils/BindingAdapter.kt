@@ -9,6 +9,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.net.toUri
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -83,7 +84,17 @@ fun <T> hideIfItemsEmpty(view: View, items: List<T>) {
 
 @BindingAdapter(value = ["app:viewVisibility"])
 fun hideWhenLoading(view: View, isVisible: Boolean) {
-    if (isVisible) view.visibility = View.INVISIBLE else view.visibility = View.VISIBLE
+//    view.isInvisible  = !isVisible
+    if (isVisible)
+        view.visibility = View.INVISIBLE
+    else view.visibility = View.VISIBLE
+}
+@BindingAdapter(value = ["app:viewVisibilitysss"])
+fun hideWhenLoadings(view: View, isVisible: Boolean) {
+    view.isInvisible  = !isVisible
+//    if (isVisible)
+//        view.visibility = View.INVISIBLE
+//    else view.visibility = View.VISIBLE
 }
 
 @BindingAdapter(value = ["app:showNoResultFound"])

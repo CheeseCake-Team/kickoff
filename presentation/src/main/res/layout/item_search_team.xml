@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/spacing_8"
-        app:viewVisibilityOnItems="@{item.items}"
         android:layout_marginTop="@dimen/spacing_8"
         app:cardBackgroundColor="@color/cardSurface">
 
