@@ -1,6 +1,5 @@
 package com.cheesecake.presentation.utils
 
-import android.annotation.SuppressLint
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -15,8 +14,6 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
-import com.cheesecake.domain.entity.Fixture
-import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseAdapter
 import com.cheesecake.presentation.base.BaseListAdapter
 import com.cheesecake.presentation.screens.home.MatchItemUIState
@@ -117,38 +114,6 @@ fun EditText.onSearchTextChanged(viewModel: SearchViewModel) {
     })
 }
 
-
-@SuppressLint("SetTextI18n")
-@BindingAdapter("app:matchScore")
-fun TextView.setMatchScore(fixture: Fixture?) {
-    fixture?.let {
-        if (it.isFinished) this.text = "Finished\n  ${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
-        else this.text = it.matchDate.toStanderTimeString()
-    }
-}
-
-@BindingAdapter("app:setMatchState")
-fun TextView.setMatchState(isFinished: Boolean) {
-    if (isFinished)
-        text = resources.getString(R.string.finished)
-    else isVisible = false
-}
-
-@BindingAdapter(
-    "app:isFinished", "app:time", "app:homeTeamGoals", "app:awayTeamGoals",
-    requireAll = true
-)
-fun TextView.setTimeOrResult(
-    isFinished: Boolean,
-    time: String,
-    homeTeamGoals: Int,
-    awayTeamGoals: Int
-) {
-    text = if (isFinished)
-        "$homeTeamGoals  -  $awayTeamGoals"
-    else time.substring(12,17)
-}
-
 @BindingAdapter(value = ["app:listItems"])
 fun <T> setItems(view: RecyclerView, items: List<T>?) {
     items?.let {
@@ -159,9 +124,14 @@ fun <T> setItems(view: RecyclerView, items: List<T>?) {
 @BindingAdapter("app:scoreOrTime")
 fun TextView.setMatchScore(item: MatchItemUIState?) {
     item?.let {
-        when (it.matchState) {
-            "FT" -> "Finished\n  ${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
-            else -> this.text = it.matchTime
+        this.text = when (it.matchState) {
+            "FT" -> "Finished\n${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
+            "LIVE" -> "Live\n${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
+            "CANC" -> "Match cancelled"
+            "2H" -> "Second half\n${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
+            "1H" -> "First half\n${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
+            "ET" -> "Extra time\n${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
+            else -> it.matchTime
         }
     }
 }
