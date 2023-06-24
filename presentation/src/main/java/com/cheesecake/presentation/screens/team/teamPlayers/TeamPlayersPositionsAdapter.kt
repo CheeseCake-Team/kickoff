@@ -5,7 +5,7 @@ import com.cheesecake.domain.entity.SquadPlayer
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseListAdapter
 
-public class TeamPlayersPositionsAdapter
+ class TeamPlayersPositionsAdapter
 : BaseListAdapter<Pair<String, List<SquadPlayerItemUIState>>>(
 DateTeamPlayersPositionDiffUtil(),
 ){
