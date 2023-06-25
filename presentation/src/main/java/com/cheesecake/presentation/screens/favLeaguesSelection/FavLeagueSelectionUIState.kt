@@ -1,12 +1,13 @@
 package com.cheesecake.presentation.screens.favLeaguesSelection
 
-import com.cheesecake.domain.entity.League
+import kotlinx.coroutines.flow.MutableStateFlow
 
 data class FavLeagueSelectionUIState (
     val leaguesItems: List<FavLeagueItemUIState> = emptyList(),
-    val selectedLeagues: MutableList<League> = mutableListOf(),
-    val searchInput : String = "",
     val searchResult: List<FavLeagueItemUIState>? = emptyList(),
+    val searchInput : MutableStateFlow<String> = MutableStateFlow(""),
     val isLoading: Boolean = true,
-    val errorMessage: String = ""
+    val errorMessage: String = "",
+    val onNextClick: () -> Unit = { },
+    val onSkipClick: () -> Unit = { }
 )
