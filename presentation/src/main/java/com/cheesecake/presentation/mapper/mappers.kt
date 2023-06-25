@@ -44,7 +44,7 @@ fun PlayerStatistics.toPlayerStatisticsUIModel(): List<PlayerSectionItemUIState>
                 PlayerDataItemUIState("Name", this.name),
                 PlayerDataItemUIState("Age", this.age.toString()),
                 PlayerDataItemUIState("Birth Date", this.date),
-                PlayerDataItemUIState("Birth Place", this.place),
+                PlayerDataItemUIState("Birth Place", this.place ?: "Not assigned"),
                 PlayerDataItemUIState("Birth Country", this.country),
                 PlayerDataItemUIState("Nationality", this.nationality),
                 PlayerDataItemUIState("Height", this.height),
