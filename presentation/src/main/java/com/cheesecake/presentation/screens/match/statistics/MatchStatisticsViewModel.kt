@@ -2,6 +2,7 @@ package com.cheesecake.presentation.screens.match.statistics
 
 import androidx.lifecycle.SavedStateHandle
 import com.cheesecake.domain.entity.FixtureStatistics
+import com.cheesecake.domain.entity.StatisticsType
 import com.cheesecake.domain.entity.getAwayTeamPercentage
 import com.cheesecake.domain.entity.getHomeTeamPercentage
 import com.cheesecake.domain.usecases.GetFixtureStatisticsByFixtureIdUseCase
@@ -33,18 +34,33 @@ class MatchStatisticsViewModel @Inject constructor(
 
     private fun onSuccess(statistics: List<FixtureStatistics>) {
         _state.update { ms ->
-            ms.copy(statisticsItem = statistics.map { fixtureStatistics ->
-                StatisticsItemUiState(
-                    homeTeamValue = fixtureStatistics.homeTeamValue,
-                    awayTeamValue = fixtureStatistics.awayTeamValue,
-                    typeValue = fixtureStatistics.type,
-                    statisticsType =fixtureStatistics.statisticsType,
-                    homeTeamPercentage = fixtureStatistics.getHomeTeamPercentage(),
-                    awayTeamPercentage = fixtureStatistics.getAwayTeamPercentage()
-                )
-            })
+            ms.copy(statisticsItem = statistics.toUIState())
         }
     }
+
+    private fun List<FixtureStatistics>.toUIState(): List<StatisticsItemUiState> =
+        map { fixtureStatistics ->
+            val type: String = when(fixtureStatistics.statisticsType){
+                StatisticsType.ACCURATE_PASSES ->  "Accurate Passes"
+                StatisticsType.ACCURATE_PASSES_PERCENTAGE ->  "Passes Accuracy %"
+                StatisticsType.EXPECTED_GOALS ->  "Expected Goals"
+                else ->  fixtureStatistics.type
+            }
+            val homeTeamPercentage: Int = when(fixtureStatistics.statisticsType){
+                StatisticsType.ACCURATE_PASSES_PERCENTAGE ->  fixtureStatistics.homeTeamValue
+                else ->  fixtureStatistics.getHomeTeamPercentage()}
+            val awayTeamPercentage: Int = when(fixtureStatistics.statisticsType){
+                StatisticsType.ACCURATE_PASSES_PERCENTAGE ->  fixtureStatistics.awayTeamValue
+                else ->  fixtureStatistics.getAwayTeamPercentage()}
+            StatisticsItemUiState(
+                homeTeamValue = fixtureStatistics.homeTeamValue,
+                awayTeamValue = fixtureStatistics.awayTeamValue,
+                typeValue = type,
+                statisticsType = fixtureStatistics.statisticsType,
+                homeTeamPercentage = homeTeamPercentage,
+                awayTeamPercentage = awayTeamPercentage
+            )
+        }
 
     private fun onError(e: Throwable) {
         _state.update {

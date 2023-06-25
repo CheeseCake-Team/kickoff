@@ -31,38 +31,100 @@ class MatchStatisticsAdapter : BaseAdapter<StatisticsItemUiState>(null) {
                     )
                 )
                 this as ItemStatisticsBinding
-                if (currentItem.statisticsType == StatisticsType.UNKNOWN) {
-                    when {
-                        currentItem.homeTeamPercentage == currentItem.awayTeamPercentage -> {
-                            progressBarHomeTeam.progressTintList = primaryColor
-                            progressBarAwayTeam.progressTintList = primaryColor
-                        }
+                when (currentItem.statisticsType) {
+                    StatisticsType.UNKNOWN -> {
+                        when {
+                            currentItem.homeTeamPercentage == currentItem.awayTeamPercentage -> {
+                                progressBarHomeTeam.progressTintList = primaryColor
+                                progressBarAwayTeam.progressTintList = primaryColor
+                            }
 
-                        currentItem.homeTeamPercentage < currentItem.awayTeamPercentage -> {
-                            progressBarHomeTeam.progressTintList = fontLight
-                            progressBarAwayTeam.progressTintList = primaryColor
-                        }
+                            currentItem.homeTeamPercentage < currentItem.awayTeamPercentage -> {
+                                progressBarHomeTeam.progressTintList = fontLight
+                                progressBarAwayTeam.progressTintList = primaryColor
+                            }
 
-                        else -> {
-                            progressBarHomeTeam.progressTintList = primaryColor
-                            progressBarAwayTeam.progressTintList = fontLight
+                            else -> {
+                                progressBarHomeTeam.progressTintList = primaryColor
+                                progressBarAwayTeam.progressTintList = fontLight
+                            }
                         }
                     }
-                } else {
-                    when {
-                        currentItem.homeTeamPercentage == currentItem.awayTeamPercentage -> {
-                            progressBarHomeTeam.progressTintList = primaryColor
-                            progressBarAwayTeam.progressTintList = primaryColor
-                        }
 
-                        currentItem.homeTeamPercentage < currentItem.awayTeamPercentage -> {
-                            progressBarHomeTeam.progressTintList = primaryColor
-                            progressBarAwayTeam.progressTintList = fontLight
-                        }
+                    StatisticsType.ACCURATE_PASSES -> {
+                        when {
+                            currentItem.homeTeamPercentage == currentItem.awayTeamPercentage -> {
+                                progressBarHomeTeam.progressTintList = primaryColor
+                                progressBarAwayTeam.progressTintList = primaryColor
+                            }
 
-                        else -> {
-                            progressBarHomeTeam.progressTintList = fontLight
-                            progressBarAwayTeam.progressTintList = primaryColor
+                            currentItem.homeTeamPercentage < currentItem.awayTeamPercentage -> {
+                                progressBarHomeTeam.progressTintList = fontLight
+                                progressBarAwayTeam.progressTintList = primaryColor
+                            }
+
+                            else -> {
+                                progressBarHomeTeam.progressTintList = primaryColor
+                                progressBarAwayTeam.progressTintList = fontLight
+                            }
+                        }
+                    }
+
+                    StatisticsType.ACCURATE_PASSES_PERCENTAGE -> {
+                        progressBarHomeTeam.progress = currentItem.homeTeamValue
+                        progressBarAwayTeam.progress = currentItem.awayTeamValue
+                        when {
+                            currentItem.homeTeamPercentage == currentItem.awayTeamPercentage -> {
+                                progressBarHomeTeam.progressTintList = primaryColor
+                                progressBarAwayTeam.progressTintList = primaryColor
+                            }
+
+                            currentItem.homeTeamPercentage < currentItem.awayTeamPercentage -> {
+                                progressBarHomeTeam.progressTintList = fontLight
+                                progressBarAwayTeam.progressTintList = primaryColor
+                            }
+
+                            else -> {
+                                progressBarHomeTeam.progressTintList = primaryColor
+                                progressBarAwayTeam.progressTintList = fontLight
+                            }
+                        }
+                    }
+                    StatisticsType.EXPECTED_GOALS -> {
+                        when {
+                            currentItem.homeTeamPercentage == currentItem.awayTeamPercentage -> {
+                                progressBarHomeTeam.progressTintList = primaryColor
+                                progressBarAwayTeam.progressTintList = primaryColor
+                            }
+
+                            currentItem.homeTeamPercentage < currentItem.awayTeamPercentage -> {
+                                progressBarHomeTeam.progressTintList = fontLight
+                                progressBarAwayTeam.progressTintList = primaryColor
+                            }
+
+                            else -> {
+                                progressBarHomeTeam.progressTintList = primaryColor
+                                progressBarAwayTeam.progressTintList = fontLight
+                            }
+                        }
+                    }
+
+                    else -> {
+                        when {
+                            currentItem.homeTeamPercentage == currentItem.awayTeamPercentage -> {
+                                progressBarHomeTeam.progressTintList = primaryColor
+                                progressBarAwayTeam.progressTintList = primaryColor
+                            }
+
+                            currentItem.homeTeamPercentage < currentItem.awayTeamPercentage -> {
+                                progressBarHomeTeam.progressTintList = primaryColor
+                                progressBarAwayTeam.progressTintList = fontLight
+                            }
+
+                            else -> {
+                                progressBarHomeTeam.progressTintList = fontLight
+                                progressBarAwayTeam.progressTintList = primaryColor
+                            }
                         }
                     }
                 }

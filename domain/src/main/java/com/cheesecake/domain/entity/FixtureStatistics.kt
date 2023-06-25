@@ -18,13 +18,17 @@ private fun FixtureStatistics.getTotalValue(): Int {
 }
 
 enum class StatisticsType {
-    Fouls, YELLOW_CARD, RED_CARD, UNKNOWN;
+    Fouls, YELLOW_CARD, RED_CARD, OFF_SIDES, ACCURATE_PASSES, ACCURATE_PASSES_PERCENTAGE, EXPECTED_GOALS, UNKNOWN;
 
     override fun toString(): String {
         return when (this) {
             Fouls -> "Fouls"
             YELLOW_CARD -> "Yellow Cards"
             RED_CARD -> "Red Cards"
+            OFF_SIDES -> "Offsides"
+            ACCURATE_PASSES -> "Passes accurate"
+            ACCURATE_PASSES_PERCENTAGE -> "Passes %"
+            EXPECTED_GOALS -> "expected_goals"
             UNKNOWN -> "Unknown"
         }
     }

@@ -25,6 +25,10 @@ fun toStatisticsType(type: String): StatisticsType {
         "Fouls" -> StatisticsType.Fouls
         "Yellow Cards" -> StatisticsType.YELLOW_CARD
         "Red Cards" -> StatisticsType.RED_CARD
+        "Offsides" -> StatisticsType.OFF_SIDES
+        "Passes accurate" -> StatisticsType.ACCURATE_PASSES
+        "Passes %" -> StatisticsType.ACCURATE_PASSES_PERCENTAGE
+        "expected_goals" -> StatisticsType.EXPECTED_GOALS
         else -> StatisticsType.UNKNOWN
     }
 }
