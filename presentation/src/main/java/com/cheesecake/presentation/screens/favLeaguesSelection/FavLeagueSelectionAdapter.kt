@@ -1,15 +1,11 @@
 package com.cheesecake.presentation.screens.favLeaguesSelection
 
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
-import com.cheesecake.domain.entity.League
 import com.cheesecake.presentation.R
-import com.cheesecake.presentation.base.BaseAdapter
 import com.cheesecake.presentation.base.BaseListAdapter
-import com.cheesecake.presentation.databinding.ItemSelectFavBinding
 
 class FavLeagueSelectionAdapter : BaseListAdapter<FavLeagueItemUIState>(FavLeagueItemUIStateDiffUtil()) {
-    override val layoutId = R.layout.item_select_fav
+    override val layoutId = R.layout.item_select_fav_league
 }
 
 class FavLeagueItemUIStateDiffUtil: DiffUtil.ItemCallback<FavLeagueItemUIState>(){

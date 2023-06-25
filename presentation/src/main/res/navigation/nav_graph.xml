@@ -96,7 +96,11 @@
     <fragment
         android:id="@+id/favLeaguesSelectionFragment2"
         android:name="com.cheesecake.presentation.screens.favLeaguesSelection.FavLeaguesSelectionFragment"
-        android:label="FavLeaguesSelectionFragment" />
+        android:label="FavLeaguesSelectionFragment" >
+        <action
+            android:id="@+id/action_favLeaguesSelectionFragment2_to_favTeamsSelectionFragment"
+            app:destination="@id/favTeamsSelectionFragment" />
+    </fragment>
     <fragment
         android:id="@+id/discoverFragment"
         android:name="com.cheesecake.presentation.screens.discover.DiscoverFragment"
@@ -126,4 +130,8 @@
         android:id="@+id/teamFragment"
         android:name="com.cheesecake.presentation.screens.team.TeamFragment"
         android:label="TeamFragment" />
+    <fragment
+        android:id="@+id/favTeamsSelectionFragment"
+        android:name="com.cheesecake.presentation.screens.favTeamsSelection.FavTeamsSelectionFragment"
+        android:label="FavTeamsSelectionFragment" />
 </navigation>

@@ -6,8 +6,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "team_table")
 data class TeamLocalDTO(
     @PrimaryKey val teamId: Int,
-    val leagueId: Int,
-    val season: Int,
     val teamName: String,
     val founded: Int,
     val teamCountry: String,

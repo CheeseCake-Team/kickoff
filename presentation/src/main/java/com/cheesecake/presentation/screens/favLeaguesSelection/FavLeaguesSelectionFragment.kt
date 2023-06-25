@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentFavLeagueSelectionBinding
+import com.cheesecake.presentation.screens.favorite.FavoriteFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,8 +30,8 @@ class FavLeaguesSelectionFragment : BaseFragment<FragmentFavLeagueSelectionBindi
     private fun onEvent(event: FavLeagueSelectionNavigationEvent) {
         when (event) {
             is FavLeagueSelectionNavigationEvent.NavigateToFavTeamsSelection ->
-                //findNavController().navigate()
-                TODO("The navigation to favoriteTeamSelectionFragment should be here")
+              findNavController().navigate(FavLeaguesSelectionFragmentDirections
+                  .actionFavLeaguesSelectionFragment2ToFavTeamsSelectionFragment())
         }
     }
 
