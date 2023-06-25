@@ -19,6 +19,7 @@ class MatchLineupViewModel @Inject constructor(
     Event()
 ) {
     private val matchLineupsArgs = MatchLineupsArgs(savedStateHandle)
+    val matchState = matchLineupsArgs.state
     init {
         tryToExecute(
             { getFixtureLineupByFixtureId(matchLineupsArgs.fixtureId) },
