@@ -78,7 +78,7 @@
         android:name="com.cheesecake.presentation.screens.search.viewAll.leagues.LeaguesSearchFragment"
         android:label="LeaguesSearchFragment" >
         <argument
-            android:name="searchInput"
+            android:name="searchQuery"
             app:argType="string" />
         <action
             android:id="@+id/action_leaguesSearchFragment_to_leagueFragment"

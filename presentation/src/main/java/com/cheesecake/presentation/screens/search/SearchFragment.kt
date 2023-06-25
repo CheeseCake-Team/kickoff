@@ -13,6 +13,7 @@ import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentSearchBinding
 import com.cheesecake.presentation.screens.search.adapters.SearchAdapter
+import com.cheesecake.presentation.screens.search.models.SearchType
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -49,7 +50,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             is SearchEvents.ViewAllLClickEvent -> {
                 findNavController().navigate(
                     SearchFragmentDirections.actionSearchFragmentToLeaguesSearchFragment(
-                        viewModel.state.value.searchInput
+                        viewModel.state.value.searchQuery
                     )
                 )
             }

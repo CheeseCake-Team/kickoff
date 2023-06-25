@@ -11,11 +11,10 @@ data class TeamSearchUIState(
     val venueName: String,
     val imageUrl: String,
     val isFavourite: Boolean,
-    val teamsCount: Int
-//    val onclick: () -> Unit = {},
+    val onClick: () -> Unit ,
 )
 
-fun Team.toSearchUIState(): TeamSearchUIState {
+fun Team.toSearchUIState(onClick: () -> Unit): TeamSearchUIState {
     return TeamSearchUIState(
         teamId = this.id,
         teamName = this.name,
@@ -25,6 +24,10 @@ fun Team.toSearchUIState(): TeamSearchUIState {
         venueName = this.stadiumName,
         imageUrl = this.imageUrl,
         isFavourite = this.isFavourite,
-        teamsCount = 0
+        onClick = onClick
     )
+}
+
+fun List<Team>.toSearchUIState(onClick: (Team) -> Unit): List<TeamSearchUIState> {
+    return this.map {it.toSearchUIState { onClick(it)}}
 }
