@@ -15,12 +15,7 @@ data class LeagueSearchUIState(
     val leagueCount: Int = 0
 )
 
-data class RecentSearchUIState(
-    val title: String = "",
-    val imageUrl: String = "",
-    val type: RecentSearchType = RecentSearchType.UNKNOWN,
-    val onclick: () -> Unit = {}
-)
+
 
 fun List<League>.toSearchUIState(onclick: (League) -> Unit): List<LeagueSearchUIState> {
     return map {
@@ -37,16 +32,4 @@ fun List<League>.toSearchUIState(onclick: (League) -> Unit): List<LeagueSearchUI
     }
 }
 
-fun League.toRecentSearch() = RecentSearch(
-    id = this.leagueId,
-    title = this.name,
-    imageUrl = this.imageUrl,
-    type = RecentSearchType.LEAGUE,
-)
 
-fun RecentSearch.toUIState(onclick: (Int) -> Unit): RecentSearchUIState = RecentSearchUIState(
-    title = title,
-    imageUrl = imageUrl,
-    type = type,
-    onclick = { onclick(id) }
-)

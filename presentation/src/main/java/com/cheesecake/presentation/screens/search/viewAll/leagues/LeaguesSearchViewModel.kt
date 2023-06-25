@@ -15,13 +15,8 @@ import javax.inject.Inject
 @HiltViewModel
 class LeaguesSearchViewModel @Inject constructor(
     private val getLeagueList: GetLeagueBySearchUseCase,
-    state: SavedStateHandle
+    private val args: LeaguesSearchNavigationArgs
 ) : BaseViewModel<AllLeaguesUIState, SearchEvents>(AllLeaguesUIState(), Event()) {
-
-
-    private val args = state.let {
-        LeaguesSearchFragmentArgs.fromSavedStateHandle(it)
-    }
 
     init {
         initLeagueList()
@@ -43,7 +38,7 @@ class LeaguesSearchViewModel @Inject constructor(
     }
 
     private fun onSearchError(throwable: Throwable) {
-        _state.update { it.copy(error = emptyList()) }
+        _state.update { it.copy(error = throwable.message.toString()) }
     }
 
     private fun onLeagueClicked(league: League) {

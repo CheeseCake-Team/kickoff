@@ -6,6 +6,6 @@ import com.cheesecake.presentation.screens.search.models.LeagueSearchUIState
 data class AllLeaguesUIState(
     val isLoading: Boolean = false,
     val items: List<LeagueSearchUIState> = emptyList(),
-    val error: List<UIStateError> = emptyList()
+    val error: String = ""
 )
 

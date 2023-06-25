@@ -3,6 +3,7 @@ package com.cheesecake.presentation.screens.search
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.usecases.GetLeagueBySearchUseCase
 import com.cheesecake.domain.usecases.GetTeamBySearchUseCase
 import com.cheesecake.domain.usecases.SaveRecentSearchUseCase
@@ -14,6 +15,7 @@ import com.cheesecake.presentation.screens.search.models.LeagueSearchUIState
 import com.cheesecake.presentation.screens.search.models.SearchResult
 import com.cheesecake.presentation.screens.search.models.SearchType
 import com.cheesecake.presentation.screens.search.models.SearchUIState
+import com.cheesecake.presentation.screens.search.models.TeamSearchUIState
 import com.cheesecake.presentation.screens.search.models.toRecentSearch
 import com.cheesecake.presentation.screens.search.models.toSearchUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -56,7 +58,7 @@ class SearchViewModel @Inject constructor(
         return mutableListOf<SearchResult>().apply {
             val leaguesItems = getLeagueList(input).toSearchUIState(::onClickLeague)
 
-            val teamsItems = getTeamList(input).map { it.toTeamUIState {} }
+            val teamsItems = getTeamList(input).toSearchUIState(::onClickTeam)
             add(
                 SearchResult.League(::onClickViewAll, leaguesItems.take(6), leaguesItems.size)
             )
@@ -92,20 +94,22 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    private fun onClickLeague(league: League) {
-        viewModelScope.launch {
-            saveRecentSearch(league.toRecentSearch())
-        }
-        _event.update { Event(SearchEvents.LeagueClickEvent(league.leagueId, league.season.toInt())) }
-    }
-
-
     private fun onClickViewAll(type: SearchType) {
         _event.update { Event(SearchEvents.ViewAllLClickEvent(_state.value.searchQuery,type)) }
     }
 
-    private fun onClickTeam(id: Int, season: Int) {
-        _event.update { Event(SearchEvents.TeamClickEvent(id)) }
+    private fun onClickLeague(league: League) {
+        viewModelScope.launch {
+            saveRecentSearch(league.toRecentSearch())
+            _event.update { Event(SearchEvents.LeagueClickEvent(league.leagueId, league.season.toInt())) }
+        }
+    }
+
+    private fun onClickTeam(team:Team) {
+        viewModelScope.launch {
+            saveRecentSearch(team.toRecentSearch())
+            _event.update { Event(SearchEvents.TeamClickEvent(team.id)) }
+        }
     }
 
     fun onClickBack() {
