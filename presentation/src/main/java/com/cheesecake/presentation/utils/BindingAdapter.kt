@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.cheesecake.domain.entity.Fixture
+import com.cheesecake.domain.entity.Match
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseAdapter
 import com.cheesecake.presentation.base.BaseListAdapter
@@ -151,6 +152,17 @@ fun TextView.setMatchScore(item: MatchItemUIState?) {
         when (it.matchState) {
             "FT" -> "Finished\n  ${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
             else -> this.text = it.matchTime
+        }
+    }
+}
+
+@SuppressLint("SetTextI18n")
+@BindingAdapter("app:matchUpComing")
+fun matchUpComing(view: View, state: String?) {
+    state?.let {
+        when (it){
+            "Not Started"-> view.visibility = View.VISIBLE
+            else -> view.visibility = View.GONE
         }
     }
 }
