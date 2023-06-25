@@ -12,11 +12,14 @@
     <dimen name="spacing_28">28dp</dimen>
     <dimen name="spacing_32">32dp</dimen>
     <dimen name="spacing_36">36dp</dimen>
+    <dimen name="spacing_40">40dp</dimen>
     <dimen name="spacing_48">48dp</dimen>
     <dimen name="spacing_56">56dp</dimen>
     <dimen name="spacing_64">64dp</dimen>
     <dimen name="spacing_100">100dp</dimen>
     <dimen name="team_image_size_48dp">48dp</dimen>
+
+
 
     <!-- text sizes -->
     <dimen name="font_size_12sp">12sp</dimen>

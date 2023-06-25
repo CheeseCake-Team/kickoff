@@ -1,14 +1,15 @@
 package com.cheesecake.presentation.screens.league.leagueDetails
 
+import android.util.Log
+import androidx.lifecycle.SavedStateHandle
 import com.cheesecake.domain.usecases.GetCurrentRoundByLeagueIdAndSeasonUseCase
 import com.cheesecake.domain.usecases.GetLeagueByIdAndSeasonUseCase
 import com.cheesecake.domain.usecases.GetTeamsStandingByLeagueIdAndSeasonUseCase
 import com.cheesecake.domain.usecases.GetTopScorersByLeagueIdAndSeasonUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
+import com.cheesecake.presentation.screens.league.LeagueArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
@@ -18,92 +19,112 @@ class LeagueDetailsViewModel @Inject constructor(
     private val getTeamsStandingByLeagueIdAndSeasonUseCase: GetTeamsStandingByLeagueIdAndSeasonUseCase,
     private val getTopScorersByLeagueIdAndSeason: GetTopScorersByLeagueIdAndSeasonUseCase,
     private val getLeagueByLeagueIdAndSeasonUseCase: GetLeagueByIdAndSeasonUseCase,
-) : BaseViewModel<LeagueDetailsUIState,LeagueDetailsEvents>(LeagueDetailsUIState(), Event()) {
+    savedStateHandle: SavedStateHandle,
+) : BaseViewModel<LeagueDetailsUIState, LeagueDetailsEvents>(LeagueDetailsUIState(), Event()) {
 
-    private val _leagueDetailsUIState = MutableStateFlow(LeagueDetailsUIState())
-    val leagueDetailsUIState = _leagueDetailsUIState.asStateFlow()
+    private val leagueArgs = LeagueArgs(savedStateHandle)
 
     init {
-        getLeague()
-        getCurrentRound()
-        getTeamStanding()
-        getTopScorers()
+        getLeague(leagueArgs.leagueId, leagueArgs.season)
+        getCurrentRound(leagueArgs.leagueId, leagueArgs.season)
+        getTeamStanding(leagueArgs.leagueId, leagueArgs.season)
+        getTopScorers(leagueArgs.leagueId, leagueArgs.season)
     }
 
-
-    private fun getLeague() {
+    private fun getLeague(leagueId: Int, season: Int) {
         tryToExecute(
             {
-                getLeagueByLeagueIdAndSeasonUseCase(39, 2022)
+                getLeagueByLeagueIdAndSeasonUseCase(leagueId, season)
             },
             { league ->
-
-                _leagueDetailsUIState.update { it.copy(country = league.country) }
+                _state.update { it.copy(country = league.countryName) }
             },
             { error ->
-                _leagueDetailsUIState.update { it.copy( error.message.toString(), isLoading = false) }
-
-
+                _state.update {
+                    it.copy(
+                        errorMessage = error.localizedMessage ?: "Unknown error",
+                        isLoading = false
+                    )
+                }
             }
         )
     }
 
-
-    private fun getTopScorers() {
+    private fun getTopScorers(leagueId: Int, season: Int) {
         tryToExecute(
-            { getTopScorersByLeagueIdAndSeason(39, 2022) },
+            { getTopScorersByLeagueIdAndSeason(leagueId, season) },
             { scorers ->
-                _leagueDetailsUIState.update {
-                    it.copy(
-                        topPlayers = scorers.take(7),
+                _state.update { leagueDetailsUIState ->
+                    Log.e("getTopScorers: ", scorers.toString())
+                    leagueDetailsUIState.copy(
+                        topPlayers = scorers.takeIf { it.isNotEmpty() }?.take(7) ?: emptyList(),
+                        isTopPlayersEmpty = scorers.isEmpty(),
                         isLoading = false
                     )
                 }
             },
             { error ->
-                _leagueDetailsUIState.update { it.copy( error.message.toString(), isLoading = false) }
+                _state.update {
+                    Log.e("getTopScorers: ", error.message.toString())
+                    it.copy(
+                        isTopPlayersEmpty = true,
+                        errorMessage = error.localizedMessage ?: "Unknown error",
+                        isLoading = false
+                    )
+                }
 
             }
         )
     }
 
-
-    private fun getTeamStanding() {
+    private fun getTeamStanding(leagueId: Int, season: Int) {
         tryToExecute(
             {
-                getTeamsStandingByLeagueIdAndSeasonUseCase(39, 2022)
+                getTeamsStandingByLeagueIdAndSeasonUseCase(leagueId, season)
             },
             { standings ->
-                _leagueDetailsUIState.update {
-                    it.copy(
-                        teamsStanding = standings.take(4),
+                _state.update { leagueDetailsUIState ->
+                    Log.e("getTeamStanding: ", standings.toString())
+                    leagueDetailsUIState.copy(
+                        teamsStanding =  standings.take(4),
                         teamsCount = standings.size.toString(),
+                        isTeamsStandingEmpty = standings.isEmpty(),
                         isLoading = false
                     )
                 }
             },
             { error ->
-                _leagueDetailsUIState.update { it.copy( error.message.toString(), isLoading = false) }
+                _state.update {
+                    Log.e("getTeamStanding: ", error.message.toString())
+                    it.copy(
+                        isTeamsStandingEmpty = true,
+                        errorMessage = error.localizedMessage ?: "Unknown error",
+                        isLoading = false
+                    )
+                }
 
             }
         )
     }
 
 
-    private fun getCurrentRound() {
+    private fun getCurrentRound(leagueId: Int, season: Int) {
         tryToExecute(
             {
-                getCurrentRoundByLeagueIdAndSeason(39, 2022)
+                getCurrentRoundByLeagueIdAndSeason(leagueId, season)
             },
             { round ->
-                _leagueDetailsUIState.update { it.copy(round = round) }
+                _state.update { it.copy(round = round) }
             },
             { error ->
-                _leagueDetailsUIState.update { it.copy( error.message.toString(), isLoading = false) }
-
+                _state.update {
+                    it.copy(
+                        errorMessage = error.localizedMessage ?: "Unknown error",
+                        isLoading = false
+                    )
+                }
             }
         )
     }
-
 
 }

@@ -31,8 +31,6 @@ import retrofit2.http.Query
 
 interface FootballApiService {
 
-    //region coachs
-
     @GET("coachs")
     suspend fun getCoachById(
         @Query("id") playerID: Int
@@ -93,7 +91,7 @@ interface FootballApiService {
     @GET("fixtures")
     suspend fun getFixturesBySeasonIdByTeamId(
         @Query("timezone") timeZone: String,
-        @Query("season") season: String,
+        @Query("season") season: Int,
         @Query("team") teamId: Int
     ): Response<BasePagingResponse<FixtureDTO>>
 
@@ -513,8 +511,9 @@ interface FootballApiService {
         @Query("team") teamId: Int
     ): Response<BasePagingResponse<Int>>
 
-    @GET("teams/countries")
-    suspend fun getTeamCountries(): Response<BasePagingResponse<TeamCountriesDTO>>
+    @GET("teams")
+    suspend fun getTeamsByCountryName(@Query("country") countryName: String): Response<BasePagingResponse<TeamDTO>>
+
     //endregion
 
     //region timezone

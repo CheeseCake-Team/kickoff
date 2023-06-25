@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.cheesecake.presentation.screens.team.teamMatches.TeamMatchItemUIState" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_date"
+            style="@style/SubtitleMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/spacing_8"
+            android:layout_marginStart="@dimen/spacing_8"
+            android:text="@{item.matchItemUIState.matchDate}"
+            android:textColor="@color/fontHeavy"
+            tools:text="today" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/spacing_8"
+            style="@style/Widget.Material3.CardView.Filled"
+            app:cardBackgroundColor="@color/cardSurface"
+            app:cardCornerRadius="@dimen/spacing_8">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/image_league"
+                    android:layout_width="@dimen/spacing_24"
+                    android:layout_height="@dimen/spacing_24"
+                    android:layout_marginVertical="@dimen/spacing_8"
+                    android:layout_marginStart="@dimen/spacing_8"
+                    android:contentDescription="@string/league_image"
+                    android:src="@drawable/premier"
+                    app:circularImageUrl="@{item.leagueImageUrl}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/bodyMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_8"
+                    android:text="@{item.leagueName}"
+                    android:textColor="@color/fontHeavy"
+                    app:layout_constraintBottom_toBottomOf="@id/image_league"
+                    app:layout_constraintStart_toEndOf="@id/image_league"
+                    app:layout_constraintTop_toTopOf="@id/image_league"
+                    tools:text="@string/premier_league" />
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/divider"
+                    android:layout_width="360dp"
+                    android:layout_height="0.3dp"
+                    android:layout_marginVertical="@dimen/spacing_8"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/image_league" />
+
+
+                <TextView
+                    android:id="@+id/text_home_team_name"
+                    style="@style/bodyMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/spacing_8"
+                    android:layout_marginEnd="@dimen/spacing_8"
+                    android:maxLength="14"
+                    android:text="@{item.matchItemUIState.homeTeamName}"
+                    android:textColor="@color/fontHeavy"
+                    app:layout_constraintBottom_toBottomOf="@+id/image_home_team"
+                    app:layout_constraintEnd_toStartOf="@+id/image_home_team"
+                    app:layout_constraintTop_toTopOf="@+id/image_home_team"
+                    tools:text="@string/Club" />
+
+                <ImageView
+                    android:id="@+id/image_home_team"
+                    android:layout_width="@dimen/spacing_24"
+                    android:layout_height="@dimen/spacing_24"
+                    android:layout_marginEnd="@dimen/spacing_24"
+                    android:contentDescription="@string/club_name"
+                    app:imageUrl="@{item.matchItemUIState.homeTeamImageUrl}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/text_match_state"
+                    app:layout_constraintTop_toBottomOf="@id/divider"
+                    tools:src="@drawable/chelsea" />
+
+                <TextView
+                    android:id="@+id/text_match_state"
+                    style="@style/SubtitleMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/fontHeavy"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/divider"
+                    android:textAlignment="center"
+                    app:scoreOrTime="@{item.matchItemUIState}"
+                    tools:text="TextView" />
+
+                <TextView
+                    android:id="@+id/text_away_team_name"
+                    style="@style/bodyMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_8"
+                    android:maxLength="10"
+                    android:text="@{item.matchItemUIState.awayTeamName}"
+                    android:textColor="@color/fontHeavy"
+                    app:layout_constraintBottom_toBottomOf="@+id/image_away_team"
+                    app:layout_constraintStart_toEndOf="@+id/image_away_team"
+                    app:layout_constraintTop_toTopOf="@+id/image_away_team"
+                    tools:text="Arsenal" />
+
+                <ImageView
+                    android:id="@+id/image_away_team"
+                    android:layout_width="@dimen/spacing_24"
+                    android:layout_height="@dimen/spacing_24"
+                    android:layout_marginStart="@dimen/spacing_24"
+                    android:contentDescription="@string/club_name"
+                    app:imageUrl="@{item.matchItemUIState.awayTeamImageUrl}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/text_match_state"
+                    app:layout_constraintTop_toBottomOf="@+id/divider"
+                    tools:src="@drawable/arsenal_fc" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</layout>

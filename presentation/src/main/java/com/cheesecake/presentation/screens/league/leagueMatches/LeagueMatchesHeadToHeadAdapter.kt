@@ -1,19 +1,19 @@
 package com.cheesecake.presentation.screens.league.leagueMatches
 
 import androidx.recyclerview.widget.DiffUtil
-import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseListAdapter
+import com.cheesecake.presentation.screens.home.MatchItemUIState
 
-class LeagueMatchesHeadToHeadAdapter : BaseListAdapter<Fixture>(FixtureDiffUtils()) {
+class LeagueMatchesHeadToHeadAdapter : BaseListAdapter<MatchItemUIState>(MatchItemUIStateDiffUtil()) {
     override val layoutId = R.layout.item_head_to_head
 }
 
-class FixtureDiffUtils : DiffUtil.ItemCallback<Fixture>() {
-    override fun areItemsTheSame(oldItem: Fixture, newItem: Fixture): Boolean =
-        oldItem.id == newItem.id
+class MatchItemUIStateDiffUtil : DiffUtil.ItemCallback<MatchItemUIState>() {
+    override fun areItemsTheSame(oldItem: MatchItemUIState, newItem: MatchItemUIState): Boolean =
+        oldItem == newItem
 
-    override fun areContentsTheSame(oldItem: Fixture, newItem: Fixture): Boolean =
+    override fun areContentsTheSame(oldItem: MatchItemUIState, newItem: MatchItemUIState): Boolean =
         oldItem == newItem
 
 }

@@ -4,15 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-        <import type="kotlin.Pair"/>
-        <import type="java.util.List"/>
-        <import type="java.util.Date"/>
-        <import type="com.cheesecake.domain.entity.Fixture"/>
-
         <variable
             name="item"
-            type="Pair&lt;Date,List&lt;Fixture&gt;&gt;" />
+            type="com.cheesecake.presentation.screens.league.leagueMatches.DateMatchesItemUIState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +18,7 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{String.valueOf(item.first)}"
+            android:text="@{item.date}"
             style="@style/SubtitleMedium"
             android:textColor="@color/fontHeavy"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +32,7 @@
             android:layout_marginTop="@dimen/spacing_4"
             android:overScrollMode="never"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:listItems="@{item.second}"
+            app:listItems="@{item.matches}"
             tools:listitem="@layout/item_head_to_head"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 

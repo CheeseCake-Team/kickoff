@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.cheesecake.domain.entity.Trophy" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/cardSurface"
+        style="@style/Widget.Material3.CardView.Filled"
+        android:layout_margin="@dimen/spacing_4"
+        app:cardCornerRadius="@dimen/spacing_8">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginVertical="@dimen/spacing_4"
+            android:background="@color/cardSurface">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textview_trophy_league_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_12"
+                android:layout_marginTop="@dimen/spacing_8"
+                android:drawableStart="@drawable/share"
+                android:drawablePadding="@dimen/spacing_8"
+                android:fontFamily="@font/lato"
+                android:text="@{item.league}"
+                android:textColor="@color/fontHeavy"
+                android:textSize="@dimen/font_size_14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="League" />
+
+            <View
+                android:id="@+id/divider_trophy"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginStart="@dimen/spacing_16"
+                android:layout_marginTop="@dimen/spacing_8"
+                android:layout_marginEnd="@dimen/spacing_16"
+                android:background="@color/lightGreyText"
+                app:layout_constraintTop_toBottomOf="@id/textview_trophy_league_name" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_view_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_4"
+                android:drawablePadding="@dimen/spacing_8"
+                android:fontFamily="@font/lato"
+                android:textColor="@color/fontLight"
+                android:textSize="@dimen/font_size_12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textview_trophy_league_name"
+                app:layout_constraintStart_toEndOf="@+id/textview_trophy_league_name"
+                app:layout_constraintTop_toTopOf="@+id/textview_trophy_league_name"
+                tools:text="-" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textview_trophy_country_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_4"
+                android:drawableStart="@drawable/location"
+                android:drawablePadding="@dimen/spacing_8"
+                android:fontFamily="@font/lato"
+                android:text="@{item.country}"
+                android:textColor="@color/fontHeavy"
+                android:textSize="@dimen/font_size_14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textview_trophy_league_name"
+                app:layout_constraintStart_toEndOf="@+id/text_view_line"
+                app:layout_constraintTop_toTopOf="@+id/textview_trophy_league_name"
+                tools:text="Germany" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textview_trophy_place_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_16"
+                android:layout_marginTop="@dimen/spacing_8"
+                android:layout_marginBottom="@dimen/spacing_8"
+                android:drawableStart="@drawable/cup"
+                android:drawablePadding="@dimen/spacing_8"
+                android:fontFamily="@font/lato"
+                android:text="@{item.place}"
+                android:textColor="@color/fontLight"
+                android:textSize="@dimen/font_size_12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider_trophy"
+                tools:text="Winner" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textview_trophy_season_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_16"
+                android:drawablePadding="@dimen/spacing_8"
+                android:fontFamily="@font/lato"
+                android:text="@{item.season}"
+                android:textColor="@color/fontLight"
+                android:textSize="@dimen/font_size_12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textview_trophy_place_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textview_trophy_place_name"
+                tools:text="2022/2023" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</layout>

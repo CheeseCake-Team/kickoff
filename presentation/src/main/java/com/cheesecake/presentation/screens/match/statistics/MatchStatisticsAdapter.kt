@@ -12,7 +12,7 @@ class MatchStatisticsAdapter : BaseAdapter<StatisticsItemUiState>(null) {
     override val layoutId = R.layout.item_statistics
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        val currentItem = itemss[position]
+        val currentItem = itemList[position]
         if (holder is ItemViewHolder) {
             with(holder.binding) {
                 setVariable(androidx.databinding.library.baseAdapters.BR.item, currentItem)
@@ -23,6 +23,12 @@ class MatchStatisticsAdapter : BaseAdapter<StatisticsItemUiState>(null) {
                         R.color.primaryColor
                     )
                 )
+                val fontLight = ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                        root.context,
+                        R.color.fontLight
+                    )
+                )
                 this as ItemStatisticsBinding
                 when {
                     currentItem.homeTeamPercentage == currentItem.awayTeamPercentage -> {
@@ -30,12 +36,19 @@ class MatchStatisticsAdapter : BaseAdapter<StatisticsItemUiState>(null) {
                         progressBarAwayTeam.progressTintList = primaryColor
                     }
 
-                    currentItem.homeTeamPercentage < currentItem.awayTeamPercentage -> progressBarAwayTeam.progressTintList =
-                        primaryColor
+                    currentItem.homeTeamPercentage < currentItem.awayTeamPercentage -> {
+                        progressBarHomeTeam.progressTintList = fontLight
+                        progressBarAwayTeam.progressTintList = primaryColor
+                    }
 
-                    else -> progressBarHomeTeam.progressTintList =
-                        primaryColor
+                    else ->{
+                        progressBarHomeTeam.progressTintList = primaryColor
+                        progressBarAwayTeam.progressTintList = fontLight
+                    }
                 }
+                val backgroundColors = listOf(R.color.cardSurface, R.color.transparent)
+                val setPositionBackgroundColor = backgroundColors[position % backgroundColors.size]
+                holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, setPositionBackgroundColor))
             }
         }
     }

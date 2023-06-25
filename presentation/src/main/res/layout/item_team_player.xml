@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.cheesecake.presentation.screens.team.teamPlayers.SquadPlayerItemUIState" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> item.onClick.invoke()}"
+        style="@style/Widget.Material3.CardView.Filled"
+        app:cardBackgroundColor="@color/cardSurface"
+        android:layout_marginBottom="@dimen/spacing_8"
+        app:cardCornerRadius="@dimen/spacing_8">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/spacing_16"
+            android:paddingVertical="@dimen/spacing_8">
+
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:id="@+id/image_player"
+                android:layout_width="@dimen/spacing_48"
+                android:layout_height="@dimen/spacing_48"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:round="100dp"
+                tools:src="@drawable/player"
+                app:imageUrl="@{item.imageUrl}"
+                />
+
+            <TextView
+                android:id="@+id/text_view_player_name"
+                style="@style/SubtitleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_8"
+                android:text="@{item.name}"
+                android:textColor="@color/fontHeavy"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/image_player"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/player_name" />
+
+            <TextView
+                style="@style/SubtitleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{`Player Number: ` + Integer.toString(item.number)}"
+                android:textColor="@color/fontLight"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/text_view_player_name"
+                app:layout_constraintTop_toBottomOf="@id/text_view_player_name"
+                tools:text="@string/player_country" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

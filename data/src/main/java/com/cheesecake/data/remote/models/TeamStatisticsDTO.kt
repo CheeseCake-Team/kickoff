@@ -11,7 +11,7 @@ data class TeamStatisticsDTO(
     @SerializedName("goals") val goals: Goals,
     @SerializedName("biggest") val biggest: Biggest,
     @SerializedName("clean_sheet") val cleanSheet: MatchesTotalDTO,
-    @SerializedName("failed_to_score") val failedToScore: FailedToScore,
+    @SerializedName("failed_to_score") val failedToScore: MatchesTotalDTO,
     @SerializedName("penalty") val penalty: Penalty,
     @SerializedName("lineups") val lineups: List<Lineup>,
     @SerializedName("cards") val cards: Cards
@@ -55,9 +55,7 @@ data class TeamStatisticsDTO(
         )
     }
 
-    data class FailedToScore(
-        @SerializedName("home") val away: Int, val total: Int
-    )
+
 
     data class Penalty(
         @SerializedName("scored") val scored: BasePenaltyDTO,

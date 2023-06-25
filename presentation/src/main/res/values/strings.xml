@@ -27,6 +27,8 @@
     <string name="search_here">Search here...</string>
     <string name="no_result_found_description">We couldn\'t find any results for your search\n Please check your input and try again</string>
     <string name="no_result_found">No Result Found</string>
+    <string name="no_data_found">No data found!</string>
+    <string name="chelsea">Chelsea</string>
     <string name="settings_more"><![CDATA[Settings & More]]></string>
     <string name="notifications_settings">Notifications Settings</string>
     <string name="time_settings">Time Settings</string>
@@ -43,11 +45,24 @@
     <string name="hyphen">-</string>
     <string name="team_logo">Team logo</string>
     <string name="premier_league">Premier League</string>
+    <string name="country_name">Egypt</string>
     <string name="your_favorites">Your Favorites</string>
     <string name="discover">Discover</string>
     <string name="settings">Settings</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
-    <string name="app_widget_description">This is an app widget description</string>
+    <string name="coach">Coach</string>
+    <string name="starter_players">Starter Players</string>
+    <string name="substitutes_players">substitutes players</string>
+    <string name="discover_teams">Discover teams</string>
+    <string name="explore_teams_from_around_the_world_based_on_their_countries">Explore teams from around the world based on their countries.</string>
+    <string name="view_more">View more</string>
+    <string name="leagues">Leagues</string>
+    <string name="recent_search">Recent Search</string>
+    <string name="delete_all">Delete all</string>
+    <string name="position">Position</string>
+    <string name="player_country">Player country</string>
+    <string name="league_image">League Image</string>
+    <string name="club_name">club name</string>
+    <string name="finished">Finished</string>
+    <string name="personal_info">Personal Info</string>
 
 </resources>

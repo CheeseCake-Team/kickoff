@@ -3,9 +3,7 @@ package com.cheesecake.presentation.screens.favorite
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
-
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.base.BaseFragmentsAdapter
@@ -28,7 +26,10 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
             FavoriteLeaguesFragment(),
             FavoriteTeamsFragment(),
         )
-        val fragmentsAdapter = BaseFragmentsAdapter((activity as AppCompatActivity), fragments)
+        val fragmentsAdapter = BaseFragmentsAdapter(
+            childFragmentManager,
+            requireActivity().lifecycle, fragments
+        )
         binding.favoriteViewPager.adapter = fragmentsAdapter
         TabLayoutMediator(binding.tabLayout, binding.favoriteViewPager) { tab, position ->
             when (position) {
