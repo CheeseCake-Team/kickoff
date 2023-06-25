@@ -60,5 +60,10 @@
     <string name="league_image">League Image</string>
     <string name="club_name">club name</string>
     <string name="finished">Finished</string>
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
+    <string name="search_your_favourite_competition">Search your favourite competition</string>
+    <string name="pick_your_preferred_competition_and_experience_the_real_live_scores_with_us">Pick your preferred competition and experience the real live scores with us</string>
+    <string name="welcome_to_kickoff">Welcome to KickOff</string>
 
 </resources>
