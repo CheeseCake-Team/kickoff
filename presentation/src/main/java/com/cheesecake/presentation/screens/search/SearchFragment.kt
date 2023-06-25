@@ -50,7 +50,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             is SearchEvents.ViewAllLClickEvent -> {
                 findNavController().navigate(
                     SearchFragmentDirections.actionSearchFragmentToLeaguesSearchFragment(
-                        viewModel.state.value.searchQuery,SearchType.LEAGUE
+                        viewModel.state.value.searchQuery
                     )
                 )
             }

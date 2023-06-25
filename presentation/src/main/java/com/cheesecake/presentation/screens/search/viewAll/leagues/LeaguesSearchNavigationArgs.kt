@@ -8,5 +8,4 @@ class LeaguesSearchNavigationArgs @Inject constructor(state: SavedStateHandle) {
         LeaguesSearchFragmentArgs.fromSavedStateHandle(it)
     }
     val searchQuery = args.searchQuery
-    val searchType = args.searchType
 }

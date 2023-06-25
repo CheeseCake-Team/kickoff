@@ -35,7 +35,7 @@ class LeaguesSearchViewModel @Inject constructor(
 
     private suspend fun getSearchResult(): List<LeagueSearchUIState> {
         _state.update { it.copy(isLoading = true) }
-        return getLeagueList(args.searchInput).toSearchUIState(::onLeagueClicked)
+        return getLeagueList(args.searchQuery).toSearchUIState(::onLeagueClicked)
     }
 
     private fun onSearchSuccess(items: List<LeagueSearchUIState>) {

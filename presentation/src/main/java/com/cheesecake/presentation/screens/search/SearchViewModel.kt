@@ -32,7 +32,7 @@ class SearchViewModel @Inject constructor(
     private val saveRecentSearch: SaveRecentSearchUseCase
 ) : BaseViewModel<SearchUIState, SearchEvents>(SearchUIState(), Event()) {
 
-    private val searchInput = MutableStateFlow(_state.value.searchInput)
+    private val searchInput = MutableStateFlow(_state.value.searchQuery)
 
     init {
         initSearchProperties()
@@ -87,7 +87,7 @@ class SearchViewModel @Inject constructor(
 
     fun onQueryChange(input: String) {
         viewModelScope.launch {
-            _state.update { it.copy(searchInput = input) }
+            _state.update { it.copy(searchQuery = input) }
             searchInput.emit(input)
         }
     }
@@ -101,11 +101,11 @@ class SearchViewModel @Inject constructor(
 
 
     private fun onClickViewAll(type: SearchType) {
-        _event.update { Event(SearchEvents.ViewAllLClickEvent(_state.value.searchInput,type)) }
+        _event.update { Event(SearchEvents.ViewAllLClickEvent(_state.value.searchQuery,type)) }
     }
 
     private fun onClickTeam(id: Int, season: Int) {
-        _event.update { Event(SearchEvents.TeamClickEvent(id, season)) }
+        _event.update { Event(SearchEvents.TeamClickEvent(id)) }
     }
 
     fun onClickBack() {
