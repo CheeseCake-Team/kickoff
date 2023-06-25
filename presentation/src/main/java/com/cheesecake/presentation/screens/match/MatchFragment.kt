@@ -1,7 +1,6 @@
 package com.cheesecake.presentation.screens.match
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -17,8 +16,6 @@ import com.cheesecake.presentation.screens.match.lineup.MatchLineupFragment
 import com.cheesecake.presentation.screens.match.statistics.MatchStatisticsFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -38,9 +35,9 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.args.observe(viewLifecycleOwner) {
 
-                val matchStatisticsFragment = MatchStatisticsFragment.newInstance(it.fixtureId)
-                val matchEventFragment = MatchEventFragment.newInstance(it.fixtureId, it.homeTeamId, it.awayTeamId)
-                val matchLineupFragment = MatchLineupFragment.newInstance(it.fixtureId)
+                val matchStatisticsFragment = MatchStatisticsFragment.newInstance(it.fixtureId,it.state)
+                val matchEventFragment = MatchEventFragment.newInstance(it.fixtureId, it.homeTeamId, it.awayTeamId,it.state)
+                val matchLineupFragment = MatchLineupFragment.newInstance(it.fixtureId,it.state)
 
                 fragments.addAll(
                     listOf(

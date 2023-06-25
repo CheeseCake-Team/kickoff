@@ -58,7 +58,7 @@ class MatchViewModel
             )
         }
         Log.d("TAG", "onSuccess match: $match")
-        _args.postValue(Args(match.fixtureId, match.homeTeamId, match.awayTeamId))
+        _args.postValue(Args(match.fixtureId, match.homeTeamId, match.awayTeamId,match.matchState))
     }
 
     private fun onError(e: Throwable) {
@@ -83,5 +83,6 @@ class MatchViewModel
 data class Args(
     val fixtureId: Int = 0,
     val homeTeamId: Int = 0,
-    val awayTeamId: Int = 0
+    val awayTeamId: Int = 0,
+    val state: String = ""
 )
