@@ -94,11 +94,12 @@ fun hideWhenLoadings(view: View, isVisible: Boolean) {
 //    else view.visibility = View.VISIBLE
 }
 
-@BindingAdapter(value = ["app:showNoResultFound"])
-fun <T> showWhenNoResult(view: FrameLayout, items: List<SearchResult>?) {
-    items?.let {
-        view.isVisible = it.isEmpty()
-    }
+@BindingAdapter(value = ["app:doNotShow"])
+fun doNotShow(view: View, doNotWantToShow: Boolean) {
+    view.isInvisible  = doNotWantToShow
+//    if (isVisible)
+//        view.visibility = View.INVISIBLE
+//    else view.visibility = View.VISIBLE
 }
 
 @BindingAdapter("app:onSearchTextChanged")
