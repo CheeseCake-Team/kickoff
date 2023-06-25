@@ -37,6 +37,18 @@
                 tools:node="remove" />
         </provider>
 
+        <receiver
+            android:name="com.cheesecake.presentation.widgets.MatchesWidgets"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.AppWidgetProvider"
+                android:resource="@xml/matches_widgets_info" />
+        </receiver>
+
     </application>
 
 </manifest>
