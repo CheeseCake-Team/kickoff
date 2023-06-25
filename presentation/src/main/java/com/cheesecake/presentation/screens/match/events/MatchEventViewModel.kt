@@ -19,6 +19,7 @@ class MatchEventViewModel @Inject constructor(
     Event()
 ) {
     val matchEventArgs = MatchEventArgs(savedStateHandle)
+    val matchState = matchEventArgs.state
 
     init {
         getMatchEvents()
