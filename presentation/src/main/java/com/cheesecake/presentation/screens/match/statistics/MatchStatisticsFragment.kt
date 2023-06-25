@@ -7,6 +7,7 @@ import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentMatchStatisticsBinding
  import com.cheesecake.presentation.screens.match.statistics.MatchStatisticsArgs.Companion.FIXTURE_ID_ARG
+ import com.cheesecake.presentation.screens.match.statistics.MatchStatisticsArgs.Companion.FIXTURE_STATUS
  import com.cheesecake.presentation.ui.match.statistics.MatchStatisticsAdapter
  import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,9 +23,10 @@ class MatchStatisticsFragment : BaseFragment<FragmentMatchStatisticsBinding>() {
 
     companion object {
         @JvmStatic
-        fun newInstance(fixtureId: Int) = MatchStatisticsFragment().apply {
+        fun newInstance(fixtureId: Int, state : String) = MatchStatisticsFragment().apply {
             arguments = Bundle().apply {
                 putInt(FIXTURE_ID_ARG, fixtureId)
+                putString(FIXTURE_STATUS,state)
             }
         }
     }

@@ -21,6 +21,7 @@ class MatchStatisticsViewModel @Inject constructor(
     Event()
 ) {
     private val matchStatisticsArgs = MatchStatisticsArgs(savedStateHandle)
+    val matchState = matchStatisticsArgs.state
 
     init {
         tryToExecute(
