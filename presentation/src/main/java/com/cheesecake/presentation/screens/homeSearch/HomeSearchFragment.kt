@@ -63,6 +63,10 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding>() {
                     event.recent.id, event.recent.id
                 )
             }
+
+            RecentSearchType.UNKNOWN -> {
+                throw Throwable("")
+            }
         }
     }
 
@@ -70,9 +74,6 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding>() {
         val statusBarColor = ContextCompat.getColor(requireContext(), R.color.cardSurface)
         requireActivity().window.statusBarColor = statusBarColor
     }
-
-
-
 
 
 }

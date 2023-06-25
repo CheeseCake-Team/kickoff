@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.cheesecake.domain.entity.Fixture" />
+            type="com.cheesecake.presentation.screens.team.teamMatches.TeamMatchItemUIState" />
     </data>
 
     <LinearLayout
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/spacing_8"
             android:layout_marginStart="@dimen/spacing_8"
-            android:text="@{item.matchDate.toString().substring(0, 11)}"
+            android:text="@{item.matchItemUIState.matchDate}"
             android:textColor="@color/fontHeavy"
             tools:text="today" />
 
@@ -47,7 +47,7 @@
                     android:layout_marginStart="@dimen/spacing_8"
                     android:contentDescription="@string/league_image"
                     android:src="@drawable/premier"
-                    app:imageUrl="@{item.leagueLogoUrl}"
+                    app:circularImageUrl="@{item.leagueImageUrl}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -81,7 +81,7 @@
                     android:layout_marginVertical="@dimen/spacing_8"
                     android:layout_marginEnd="@dimen/spacing_8"
                     android:maxLength="14"
-                    android:text="@{item.homeTeamName}"
+                    android:text="@{item.matchItemUIState.homeTeamName}"
                     android:textColor="@color/fontHeavy"
                     app:layout_constraintBottom_toBottomOf="@+id/image_home_team"
                     app:layout_constraintEnd_toStartOf="@+id/image_home_team"
@@ -94,7 +94,7 @@
                     android:layout_height="@dimen/spacing_24"
                     android:layout_marginEnd="@dimen/spacing_24"
                     android:contentDescription="@string/club_name"
-                    app:imageUrl="@{item.homeTeamLogoUrl}"
+                    app:imageUrl="@{item.matchItemUIState.homeTeamImageUrl}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/text_match_state"
                     app:layout_constraintTop_toBottomOf="@id/divider"
@@ -110,7 +110,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/divider"
-                    app:matchScore="@{item}"
+                    android:textAlignment="center"
+                    app:scoreOrTime="@{item.matchItemUIState}"
                     tools:text="TextView" />
 
                 <TextView
@@ -120,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_8"
                     android:maxLength="10"
-                    android:text="@{item.awayTeamName}"
+                    android:text="@{item.matchItemUIState.awayTeamName}"
                     android:textColor="@color/fontHeavy"
                     app:layout_constraintBottom_toBottomOf="@+id/image_away_team"
                     app:layout_constraintStart_toEndOf="@+id/image_away_team"
@@ -133,7 +134,7 @@
                     android:layout_height="@dimen/spacing_24"
                     android:layout_marginStart="@dimen/spacing_24"
                     android:contentDescription="@string/club_name"
-                    app:imageUrl="@{item.awayTeamLogoUrl}"
+                    app:imageUrl="@{item.matchItemUIState.awayTeamImageUrl}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/text_match_state"
                     app:layout_constraintTop_toBottomOf="@+id/divider"

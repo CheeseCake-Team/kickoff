@@ -8,5 +8,5 @@ data class RecentSearch(
     val type: RecentSearchType
 )
 enum class RecentSearchType {
-    TEAM, LEAGUE
+    TEAM,LEAGUE,UNKNOWN
 }

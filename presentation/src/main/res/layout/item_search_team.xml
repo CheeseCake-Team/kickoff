@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="item"
             type="com.cheesecake.presentation.screens.search.models.SearchResult.Team" />
@@ -13,9 +14,8 @@
         style="@style/Widget.Material3.CardView.Filled"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/spacing_8"
-        app:viewVisibilityOnItems="@{item.items}"
         android:layout_marginTop="@dimen/spacing_8"
+        android:padding="@dimen/spacing_8"
         app:cardBackgroundColor="@color/cardSurface">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,10 +26,10 @@
                 android:id="@+id/text_view_leagues_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_8"
+                android:layout_marginStart="@dimen/spacing_16"
                 android:layout_marginTop="@dimen/spacing_16"
-                android:text="@string/teams"
                 android:fontFamily="@font/lato"
+                android:text="@string/teams"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Teams" />
@@ -46,6 +46,18 @@
                 app:layout_constraintTop_toTopOf="@+id/text_view_leagues_label"
                 tools:text="(45)" />
 
+            <TextView
+                android:id="@+id/text_view_view_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_8"
+                android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+                android:gravity="center"
+                android:onClick="@{()-> item.onViewAllClick.invoke(item.type)}"
+                android:text="@string/view_more"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_leagues_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/text_view_leagues_label" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_search_leagues"
@@ -54,9 +66,9 @@
                 android:clipToPadding="false"
                 android:overScrollMode="never"
                 android:paddingVertical="@dimen/spacing_8"
+                app:items="@{item.items}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_leagues_label"
-                app:items="@{item.items}"
                 tools:listitem="@layout/item_team_search_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

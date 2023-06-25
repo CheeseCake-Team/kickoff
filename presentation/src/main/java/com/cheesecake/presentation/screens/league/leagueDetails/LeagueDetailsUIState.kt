@@ -9,6 +9,8 @@ data class LeagueDetailsUIState(
     val teamsCount: String = "",
     val teamsStanding: List<TeamStanding> = emptyList(),
     val topPlayers: List<PlayerStatistics> = emptyList(),
+    val isTopPlayersEmpty: Boolean = false,
+    val isTeamsStandingEmpty: Boolean = false,
     val isLoading: Boolean = true,
-    val errorMessage: Boolean = true
+    val errorMessage: String = ""
 )

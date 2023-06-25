@@ -1,37 +1,25 @@
 package com.cheesecake.presentation.screens.league.leagueMatches
 
-import android.util.Log
 import com.cheesecake.domain.entity.Fixture
+import com.cheesecake.presentation.screens.home.MatchItemUIState
 import com.cheesecake.presentation.utils.toStanderDateString
-import java.util.Date
+import com.cheesecake.presentation.utils.toStanderTimeString
 
 data class LeagueMatchesUIState(
-    val data: List<DateMatchesItem> = emptyList(),
+    val data: List<DateMatchesItemUIState> = emptyList(),
     val errorMessage: String = "",
     val isLoading: Boolean = true
 )
 
-data class MatchItemUIState(
-    val homeTeamName: String = "",
-    val homeTeamLogoUrl: String = "",
-    val homeTeamGoals: Int = 0,
-    val awayTeamName: String = "",
-    val awayTeamLogoUrl: String = "",
-    val awayTeamGoals: Int = 0,
-    val isFinished: Boolean = false,
-    val matchTime: String = "",
-    val onclick: () -> Unit = {}
-)
-
-data class DateMatchesItem(
+data class DateMatchesItemUIState(
     val date: String = "",
     val matches: List<MatchItemUIState> = emptyList()
 )
 
-fun List<Pair<String, List<Fixture>>>.toUIState(onclick: (Int,Int, String) -> Unit): List<DateMatchesItem> {
+fun List<Pair<String, List<Fixture>>>.toUIState(onclick: (Int,Int, String) -> Unit): List<DateMatchesItemUIState> {
     return map { (date, fixtures) ->
         val matches = fixtures.toUIState(onclick)
-        DateMatchesItem(date = date, matches = matches)
+        DateMatchesItemUIState(date = date, matches = matches)
     }
 }
 
@@ -39,14 +27,15 @@ fun List<Pair<String, List<Fixture>>>.toUIState(onclick: (Int,Int, String) -> Un
 fun List<Fixture>.toUIState(onclick: (Int,Int, String) -> Unit): List<MatchItemUIState> {
     return map { fixture ->
         MatchItemUIState(
+            fixture.matchState,
             homeTeamName = fixture.homeTeamName,
-            homeTeamLogoUrl = fixture.homeTeamLogoUrl,
-            homeTeamGoals = fixture.homeTeamGoals?.toIntOrNull() ?: 0,
+            homeTeamImageUrl = fixture.homeTeamLogoUrl,
+            homeTeamGoals = fixture.homeTeamGoals ?: "0",
             awayTeamName = fixture.awayTeamName,
-            awayTeamLogoUrl = fixture.awayTeamLogoUrl,
-            awayTeamGoals = fixture.awayTeamGoals?.toIntOrNull() ?: 0,
-            isFinished = fixture.isFinished,
-            matchTime = fixture.matchTime ?: "",
+            awayTeamImageUrl = fixture.awayTeamLogoUrl,
+            awayTeamGoals = fixture.awayTeamGoals ?: "0",
+            matchTime = fixture.matchDate.toStanderTimeString(),
+            matchDate = fixture.matchDate.toStanderDateString(),
             onclick = { onclick(fixture.homeTeamID, fixture.awayTeamID, fixture.matchDate.toStanderDateString()) }
         )
 

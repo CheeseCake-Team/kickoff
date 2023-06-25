@@ -1,5 +1,7 @@
 package com.cheesecake.presentation.screens.team
 
+import com.cheesecake.domain.entity.Team
+
 data class TeamUIState(
     val teamId: Int = 0,
     val errorMessage: String = "error",
@@ -9,5 +11,15 @@ data class TeamUIState(
     val country: String = "",
     val isFavourite: Boolean = false,
     val onBackClick: () -> Unit = {},
-    val onTeamFavoriteClick: (Int)-> Unit = {i-> }
+    val onTeamFavoriteClick: () -> Unit = { }
+)
+
+fun Team.toUiState(toggleFavourite: (Int) -> Unit, onBackClick: () -> Unit) = TeamUIState(
+    teamId = id,
+    teamName = name,
+    country = country,
+    imageUrl = imageUrl,
+    isFavourite = isFavourite,
+    onTeamFavoriteClick = { toggleFavourite(id) },
+    onBackClick = onBackClick
 )

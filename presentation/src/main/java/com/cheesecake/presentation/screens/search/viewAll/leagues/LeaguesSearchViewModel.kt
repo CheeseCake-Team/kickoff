@@ -1,6 +1,7 @@
 package com.cheesecake.presentation.screens.search.viewAll.leagues
 
 import androidx.lifecycle.SavedStateHandle
+import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.usecases.GetLeagueBySearchUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
@@ -14,13 +15,8 @@ import javax.inject.Inject
 @HiltViewModel
 class LeaguesSearchViewModel @Inject constructor(
     private val getLeagueList: GetLeagueBySearchUseCase,
-    state: SavedStateHandle
+    private val args: LeaguesSearchNavigationArgs
 ) : BaseViewModel<AllLeaguesUIState, SearchEvents>(AllLeaguesUIState(), Event()) {
-
-
-    private val args = state.let {
-        LeaguesSearchFragmentArgs.fromSavedStateHandle(it)
-    }
 
     init {
         initLeagueList()
@@ -34,7 +30,7 @@ class LeaguesSearchViewModel @Inject constructor(
 
     private suspend fun getSearchResult(): List<LeagueSearchUIState> {
         _state.update { it.copy(isLoading = true) }
-        return getLeagueList(args.searchInput).toSearchUIState(::onLeagueClicked)
+        return getLeagueList(args.searchQuery).toSearchUIState(::onLeagueClicked)
     }
 
     private fun onSearchSuccess(items: List<LeagueSearchUIState>) {
@@ -42,11 +38,11 @@ class LeaguesSearchViewModel @Inject constructor(
     }
 
     private fun onSearchError(throwable: Throwable) {
-        _state.update { it.copy(error = emptyList()) }
+        _state.update { it.copy(error = throwable.message.toString()) }
     }
 
-    private fun onLeagueClicked(league: LeagueSearchUIState) {
-        _event.update { Event(SearchEvents.LeagueClickEvent(league.leagueId,league.season)) }
+    private fun onLeagueClicked(league: League) {
+        _event.update { Event(SearchEvents.LeagueClickEvent(league.leagueId,league.season.toInt())) }
     }
 
 }

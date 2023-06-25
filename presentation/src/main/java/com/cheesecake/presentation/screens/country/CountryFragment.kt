@@ -26,8 +26,8 @@ class CountryFragment : BaseFragment<FragmentCountryBinding>() {
 
     private fun init() {
         val fragmentsAdapter = BaseFragmentsAdapter(
-            requireActivity(),
-            listOf(
+            childFragmentManager,
+            requireActivity().lifecycle, listOf(
                 CountryTeamsFragment.newInstance(viewModel.countryNavigationArgs.countryName),
                 CountryLeaguesFragment.newInstance(viewModel.countryNavigationArgs.countryName)
             )
@@ -37,7 +37,7 @@ class CountryFragment : BaseFragment<FragmentCountryBinding>() {
         TabLayoutMediator(binding.tabLayout, binding.countryViewPager) { tab, position ->
             when (position) {
                 0 -> tab.text = "Teams"
-                1 -> tab.text = "Leagues"
+                1 -> tab.text = "Championship"
             }
         }.attach()
     }

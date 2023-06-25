@@ -9,7 +9,7 @@ data class PlayerStatistics(
     val lastname: String,
     val age: Int,
     val date: String,
-    val place: String,
+    val place: String?,
     val country: String,
     val nationality: String,
     val height: String,

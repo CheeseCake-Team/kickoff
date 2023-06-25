@@ -1,6 +1,5 @@
 package com.cheesecake.presentation.screens.league.leagueMatches
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.usecases.GetPairsOfMatchesAndDateByLeagueIdAndSeasonUseCase

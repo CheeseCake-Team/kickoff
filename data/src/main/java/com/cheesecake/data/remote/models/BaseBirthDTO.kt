@@ -6,7 +6,7 @@ data class BaseBirthDTO(
     @SerializedName("date")
     val date: String,
     @SerializedName("place")
-    val place: String,
+    val place: String?,
     @SerializedName("country")
     val country: String
 )

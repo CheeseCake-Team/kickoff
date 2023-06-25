@@ -2,7 +2,6 @@ package com.cheesecake.presentation.screens.player
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.cheesecake.presentation.R
@@ -33,7 +32,8 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>() {
             PlayerStatisticsFragment.newInstance(viewModel.playerNavigationArgs.playerId),
             TrophyFragment(),
         )
-        val fragmentsAdapter = BaseFragmentsAdapter((activity as AppCompatActivity), fragments)
+        val fragmentsAdapter = BaseFragmentsAdapter(childFragmentManager,
+            requireActivity().lifecycle, fragments)
         binding.playerViewPager.adapter = fragmentsAdapter
         TabLayoutMediator(binding.tabLayout, binding.playerViewPager) { tab, position ->
             when (position) {

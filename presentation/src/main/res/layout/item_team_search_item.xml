@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="item"
-            type="com.cheesecake.presentation.models.TeamUIState" />
+            type="com.cheesecake.presentation.screens.search.models.TeamSearchUIState" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -16,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_margin="@dimen/spacing_4"
-        android:onClick="@{() -> item.onTeamClick.invoke()}"
+        android:onClick="@{() -> item.onClick.invoke()}"
         app:cardBackgroundColor="@color/cardSurface"
         app:cardCornerRadius="@dimen/spacing_8">
 

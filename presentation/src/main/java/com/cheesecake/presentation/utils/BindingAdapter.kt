@@ -9,6 +9,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.net.toUri
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -84,7 +85,17 @@ fun <T> hideIfItemsEmpty(view: View, items: List<T>) {
 
 @BindingAdapter(value = ["app:viewVisibility"])
 fun hideWhenLoading(view: View, isVisible: Boolean) {
-    if (isVisible) view.visibility = View.INVISIBLE else view.visibility = View.VISIBLE
+//    view.isInvisible  = !isVisible
+    if (isVisible)
+        view.visibility = View.INVISIBLE
+    else view.visibility = View.VISIBLE
+}
+@BindingAdapter(value = ["app:viewVisibilitysss"])
+fun hideWhenLoadings(view: View, isVisible: Boolean) {
+    view.isInvisible  = !isVisible
+//    if (isVisible)
+//        view.visibility = View.INVISIBLE
+//    else view.visibility = View.VISIBLE
 }
 
 @BindingAdapter(value = ["app:showNoResultFound"])
@@ -107,38 +118,6 @@ fun EditText.onSearchTextChanged(viewModel: SearchViewModel) {
     })
 }
 
-
-@SuppressLint("SetTextI18n")
-@BindingAdapter("app:matchScore")
-fun TextView.setMatchScore(fixture: Fixture?) {
-    fixture?.let {
-        if (it.isFinished) this.text = "Finished\n  ${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
-        else this.text = it.matchDate.toStanderTimeString()
-    }
-}
-
-@BindingAdapter("app:setMatchState")
-fun TextView.setMatchState(isFinished: Boolean) {
-    if (isFinished)
-        text = resources.getString(R.string.finished)
-    else isVisible = false
-}
-
-@BindingAdapter(
-    "app:isFinished", "app:time", "app:homeTeamGoals", "app:awayTeamGoals",
-    requireAll = true
-)
-fun TextView.setTimeOrResult(
-    isFinished: Boolean,
-    time: String,
-    homeTeamGoals: Int,
-    awayTeamGoals: Int
-) {
-    text = if (isFinished)
-        "$homeTeamGoals  -  $awayTeamGoals"
-    else time.substring(12,17)
-}
-
 @BindingAdapter(value = ["app:listItems"])
 fun <T> setItems(view: RecyclerView, items: List<T>?) {
     items?.let {
@@ -149,9 +128,14 @@ fun <T> setItems(view: RecyclerView, items: List<T>?) {
 @BindingAdapter("app:scoreOrTime")
 fun TextView.setMatchScore(item: MatchItemUIState?) {
     item?.let {
-        when (it.matchState) {
-            "FT" -> "Finished\n  ${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
-            else -> this.text = it.matchTime
+        this.text = when (it.matchState) {
+            "FT" -> "Finished\n${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
+            "LIVE" -> "Live\n${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
+            "CANC" -> "Match cancelled"
+            "2H" -> "Second half\n${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
+            "1H" -> "First half\n${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
+            "ET" -> "Extra time\n${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
+            else -> it.matchTime
         }
     }
 }

@@ -8,11 +8,13 @@ import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentSearchBinding
 import com.cheesecake.presentation.screens.search.adapters.SearchAdapter
+import com.cheesecake.presentation.screens.search.models.SearchType
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -47,19 +49,19 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             }
 
             is SearchEvents.ViewAllLClickEvent -> {
+                findNavController().navigate(getRecentSearchActionByType(event))
+            }
+
+            is SearchEvents.TeamClickEvent -> {
                 findNavController().navigate(
-                    SearchFragmentDirections.actionSearchFragmentToLeaguesSearchFragment(
-                        viewModel.state.value.searchInput
+                    SearchFragmentDirections.actionSearchFragmentToTeamFragment(
+                        event.teamId
                     )
                 )
             }
 
             is SearchEvents.BackClickEvent -> {
                 findNavController().navigateUp()
-            }
-
-            else -> {
-                throw (Throwable())
             }
         }
     }
@@ -87,6 +89,21 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         val inputManager =
             requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputManager.showSoftInput(searchEditText, InputMethodManager.SHOW_IMPLICIT)
+    }
+
+    private fun getRecentSearchActionByType(event: SearchEvents.ViewAllLClickEvent): NavDirections {
+        return when (event.type) {
+            SearchType.LEAGUE -> {
+                SearchFragmentDirections.actionSearchFragmentToLeaguesSearchFragment(
+                    viewModel.state.value.searchQuery
+                )
+            }
+            SearchType.TEAM -> {
+                SearchFragmentDirections.actionSearchFragmentToTeamsSearchFragment(
+                    viewModel.state.value.searchQuery
+                )
+            }
+        }
     }
 
 }

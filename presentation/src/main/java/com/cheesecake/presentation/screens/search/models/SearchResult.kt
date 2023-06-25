@@ -2,16 +2,19 @@ package com.cheesecake.presentation.screens.search.models
 
 import com.cheesecake.presentation.models.TeamUIState
 
-sealed class SearchResult {
+sealed class SearchResult(val list: List<Any>) {
     data class Team(
-        var items: List<TeamUIState>,
-        var itemsSize: Int
-    ) : SearchResult()
+        val onViewAllClick: (SearchType) -> Unit,
+        val items: List<TeamSearchUIState>,
+        val itemsSize: Int,
+        val type: SearchType = SearchType.TEAM,
+    ) : SearchResult(items)
 
     data class League(
-        val onViewAllClick: () -> Unit,
-        var items: List<LeagueSearchUIState>,
-        var itemsSize: Int
-    ) : SearchResult()
+        val onViewAllClick: (SearchType) -> Unit,
+        val items: List<LeagueSearchUIState>,
+        val itemsSize: Int,
+        val type: SearchType = SearchType.LEAGUE,
+    ) : SearchResult(items)
 
 }

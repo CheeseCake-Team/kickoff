@@ -2,13 +2,18 @@ package com.cheesecake.presentation.mapper
 
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.entity.Country
+import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.PlayerStatistics
 import com.cheesecake.domain.entity.SquadPlayer
 import com.cheesecake.presentation.models.CountryItemUIState
 import com.cheesecake.presentation.models.TeamUIState
+import com.cheesecake.presentation.screens.home.MatchItemUIState
 import com.cheesecake.presentation.screens.player.playerStatistics.PlayerDataItemUIState
 import com.cheesecake.presentation.screens.player.playerStatistics.PlayerSectionItemUIState
+import com.cheesecake.presentation.screens.team.teamMatches.TeamMatchItemUIState
 import com.cheesecake.presentation.screens.team.teamPlayers.SquadPlayerItemUIState
+import com.cheesecake.presentation.utils.toStanderDateString
+import com.cheesecake.presentation.utils.toStanderTimeString
 
 
 fun Team.toTeamUIState(onClick: () -> Unit): TeamUIState {
@@ -39,7 +44,7 @@ fun PlayerStatistics.toPlayerStatisticsUIModel(): List<PlayerSectionItemUIState>
                 PlayerDataItemUIState("Name", this.name),
                 PlayerDataItemUIState("Age", this.age.toString()),
                 PlayerDataItemUIState("Birth Date", this.date),
-                PlayerDataItemUIState("Birth Place", this.place),
+                PlayerDataItemUIState("Birth Place", this.place ?: "Not assigned"),
                 PlayerDataItemUIState("Birth Country", this.country),
                 PlayerDataItemUIState("Nationality", this.nationality),
                 PlayerDataItemUIState("Height", this.height),
@@ -68,6 +73,37 @@ fun PlayerStatistics.toPlayerStatisticsUIModel(): List<PlayerSectionItemUIState>
 
 fun SquadPlayer.mapIt(onClick: () -> Unit): SquadPlayerItemUIState {
     return SquadPlayerItemUIState(
-        name, ImageUrl ,number, onClick
+        name, ImageUrl, number, onClick
+    )
+}
+
+fun Fixture.toTeamMatchItemUIState(): TeamMatchItemUIState =
+    TeamMatchItemUIState(
+        MatchItemUIState(
+            matchState,
+            matchDate.toStanderDateString(),
+            matchDate.toStanderTimeString(),
+            homeTeamName,
+            awayTeamName,
+            homeTeamGoals ?: "0",
+            awayTeamGoals ?: "0",
+            homeTeamLogoUrl,
+            awayTeamLogoUrl
+        ),
+        leagueName,
+        leagueLogoUrl
+    )
+fun Fixture.toMatchUIState(onclick:() -> Unit): MatchItemUIState {
+    return MatchItemUIState(
+        matchState,
+        matchDate.toStanderDateString(),
+        matchDate.toStanderTimeString(),
+        homeTeamName,
+        awayTeamName,
+        homeTeamGoals ?: "0",
+        awayTeamGoals ?: "0",
+        homeTeamLogoUrl,
+        awayTeamLogoUrl,
+        onclick = onclick
     )
 }

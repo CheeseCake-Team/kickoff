@@ -31,6 +31,12 @@
         <action
             android:id="@+id/action_searchFragment_to_leaguesSearchFragment"
             app:destination="@id/leaguesSearchFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_teamsSearchFragment"
+            app:destination="@id/teamsSearchFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_teamFragment"
+            app:destination="@id/teamFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
@@ -78,7 +84,7 @@
         android:name="com.cheesecake.presentation.screens.search.viewAll.leagues.LeaguesSearchFragment"
         android:label="LeaguesSearchFragment" >
         <argument
-            android:name="searchInput"
+            android:name="searchQuery"
             app:argType="string" />
         <action
             android:id="@+id/action_leaguesSearchFragment_to_leagueFragment"
@@ -135,6 +141,9 @@
         <action
             android:id="@+id/action_teamFragment_to_playerFragment"
             app:destination="@id/playerFragment" />
+        <action
+            android:id="@+id/action_teamFragment_to_matchFragment"
+            app:destination="@id/matchFragment" />
     </fragment>
 
     <fragment
@@ -145,5 +154,16 @@
             android:name="playerId"
             app:argType="integer"
             android:defaultValue="276" />
+    </fragment>
+    <fragment
+        android:id="@+id/teamsSearchFragment"
+        android:name="com.cheesecake.presentation.screens.search.viewAll.teams.TeamsSearchFragment"
+        android:label="TeamsSearchFragment" >
+        <action
+            android:id="@+id/action_teamsSearchFragment_to_teamFragment"
+            app:destination="@id/teamFragment" />
+        <argument
+            android:name="searchQuery"
+            app:argType="string" />
     </fragment>
 </navigation>

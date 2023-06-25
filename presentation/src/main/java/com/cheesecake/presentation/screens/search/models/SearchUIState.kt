@@ -1,7 +1,7 @@
 package com.cheesecake.presentation.screens.search.models
 
 data class SearchUIState(
-    val searchInput: String = "",
+    val searchQuery: String = "",
     val searchTypes: SearchType? = null,
     val searchResult: List<SearchResult>? = null,
     val isResultEmpty: Boolean = false,
