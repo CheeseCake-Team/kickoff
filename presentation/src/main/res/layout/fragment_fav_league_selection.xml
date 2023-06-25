@@ -18,12 +18,12 @@
 
         <TextView
             android:id="@+id/title_text_view"
-            style="@style/SubtitleLarge"
+            style="@style/TitleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_16"
             android:layout_marginTop="@dimen/spacing_16"
-            android:text="Welcome to KickOff"
+            android:text="@string/welcome_to_kickoff"
             android:textColor="@color/fontHeavy"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_16"
             android:layout_marginTop="@dimen/spacing_8"
-            android:text="Pick your preferred competition and experience the real live scores with us"
+            android:text="@string/pick_your_preferred_competition_and_experience_the_real_live_scores_with_us"
             android:textColor="@color/backLighter"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title_text_view" />
@@ -46,14 +46,16 @@
             android:layout_height="48dp"
             android:layout_marginHorizontal="@dimen/spacing_16"
             android:layout_marginTop="@dimen/spacing_16"
-            android:background="@color/lightGrey"
+            android:inputType="text"
+            android:background="@drawable/edittext_background_round"
             android:drawableStart="@drawable/magnifer"
             android:drawablePadding="8dp"
             android:fontFamily="@font/lato"
-            app:onSearchTextChanged="@{viewModel}"
-            android:hint="Search your favourite competition"
+            android:hint="@string/search_your_favourite_competition"
+            android:text="@={viewModel.state.searchInput}"
             android:paddingHorizontal="@dimen/font_size_16sp"
             android:textColor="@color/fontHeavy"
+            android:drawableTint="@color/lightGreyText"
             android:textColorHint="@color/lightGreyText"
             android:textSize="@dimen/font_size_14sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -73,7 +75,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_bar"
-            app:listItems="@{viewModel.favLeagueSelectionUIState.leaguesItems}"
+            app:listItems="@{viewModel.state.leaguesItems}"
             app:spanCount="3"
             tools:listitem="@layout/item_select_fav" />
 
@@ -86,25 +88,27 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
+        <Button
             android:id="@+id/next_button"
-            style="@style/TitleMedium"
+            style="@style/Widget.Material3.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/spacing_16"
-            android:text="Next"
+            android:text="@string/next"
+            android:onClick="@{()-> viewModel.state.onNextClick.invoke()}"
             android:textColor="@color/primaryColor"
             app:layout_constraintBottom_toBottomOf="@id/view_frame"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/view_frame" />
 
-        <TextView
+        <Button
             android:id="@+id/skip_button"
-            style="@style/TitleMedium"
+            style="@style/Widget.Material3.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_16"
-            android:text="Skip"
+            android:text="@string/skip"
+            android:onClick="@{() -> viewModel.state.onSkipClick}"
             android:textColor="@color/backLighter"
             app:layout_constraintBottom_toBottomOf="@id/view_frame"
             app:layout_constraintStart_toStartOf="parent"
@@ -118,7 +122,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:showLoading="@{viewModel.favLeagueSelectionUIState.loading}" />
+            app:showLoading="@{viewModel.state.loading}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,9 @@
 package com.cheesecake.presentation.screens.favLeaguesSelection
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentFavLeagueSelectionBinding
@@ -16,11 +16,22 @@ class FavLeaguesSelectionFragment : BaseFragment<FragmentFavLeagueSelectionBindi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        handleNavigation()
         binding.allLeaguesRecyclerView.adapter = FavLeagueSelectionAdapter()
-
-        binding.nextButton.setOnClickListener {
-            viewModel.addToFavourite()
-        }
-
     }
+
+    private fun handleNavigation() {
+        collect(viewModel.event) { event ->
+            event.getContentIfNotHandled()?.let { onEvent(it) }
+        }
+    }
+
+    private fun onEvent(event: FavLeagueSelectionNavigationEvent) {
+        when (event) {
+            is FavLeagueSelectionNavigationEvent.NavigateToFavTeamsSelection ->
+                //findNavController().navigate()
+                TODO("The navigation to favoriteTeamSelectionFragment should be here")
+        }
+    }
+
 }
