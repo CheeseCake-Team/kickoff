@@ -33,7 +33,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingVertical="@dimen/spacing_4">
+                android:paddingVertical="@dimen/spacing_8">
 
                 <TextView
                     android:id="@+id/text_view_home_team_player_name"
@@ -121,7 +121,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingVertical="@dimen/spacing_4">
+                android:paddingVertical="@dimen/spacing_8">
 
                 <TextView
                     android:id="@+id/text_view_away_team_player_name"
