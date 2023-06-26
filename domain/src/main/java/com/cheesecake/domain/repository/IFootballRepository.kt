@@ -17,9 +17,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface IFootballRepository {
 
-    suspend fun getRemoteCountries():List<Country>
+    suspend fun getRemoteCountries(): List<Country>
 
-    suspend fun getLocalCountries() : List<Country>
+    suspend fun getLocalCountries(): List<Country>
 
     suspend fun getCountriesSearch(search: String): Flow<List<Country>>
 
@@ -35,7 +35,11 @@ interface IFootballRepository {
 
     suspend fun updateOrInsertLeague(league: League)
 
-    suspend fun getMatchesByLeagueIdAndSeason(timeZone: String, leagueId: Int, season: Int): List<Fixture>
+    suspend fun getMatchesByLeagueIdAndSeason(
+        timeZone: String,
+        leagueId: Int,
+        season: Int
+    ): List<Fixture>
 
     suspend fun deleteLeagueById(leagueId: Int)
 
@@ -67,7 +71,12 @@ interface IFootballRepository {
 
     suspend fun getCoachTrophy(coachId: Int): List<Trophy>
 
-    suspend fun getMatchDetails(homeTeamId: Int,awayTeamId: Int, date: String, timeZone: String): Match
+    suspend fun getMatchDetails(
+        homeTeamId: Int,
+        awayTeamId: Int,
+        date: String,
+        timeZone: String
+    ): Match
 
     suspend fun getFavoriteTeams(): Flow<List<Team>>
 
@@ -103,7 +112,11 @@ interface IFootballRepository {
 
     suspend fun getAllLeagues(): List<League>
 
-    suspend fun addLeagueList(leagues : List<League>)
+    suspend fun addLeagueList(leagues: List<League>)
+
+    suspend fun getTeamsForLeagues(leagueId: Int, leagueSeason: Int): List<Team>
+
+    suspend fun addTeamsList(teams: List<Team>)
 
     suspend fun shouldShowOnboarding(): Boolean
 

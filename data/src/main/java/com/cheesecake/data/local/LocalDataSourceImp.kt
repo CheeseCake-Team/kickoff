@@ -19,8 +19,8 @@ class LocalDataSourceImp @Inject constructor(
     private val searchDao: RecentSearchDao
 ) : LocalDataSource {
 
-    override fun getLocallyTeamsByIdAndSeason(leagueId: Int, season: Int): List<TeamLocalDTO> {
-        return teamsDao.getLocallyTeamsByIdAndSeason(leagueId, season)
+    override fun getLocallyTeamsByIdAndSeason(): List<TeamLocalDTO> {
+        return teamsDao.getLocallyTeamsByIdAndSeason()
     }
 
     override suspend fun updateOrInsertTeams(teams: List<TeamLocalDTO>) {
@@ -71,6 +71,10 @@ class LocalDataSourceImp @Inject constructor(
 
     override suspend fun getTeamById(teamId: Int): TeamLocalDTO? {
         return teamsDao.getTeamById(teamId)
+    }
+
+    override suspend fun addTeamsList(teams: List<TeamLocalDTO>) {
+        teamsDao.updateOrInsertTeams(teams)
     }
 
     override suspend fun getFavouriteLeagues(): Flow<List<LeagueLocalDTO>> {

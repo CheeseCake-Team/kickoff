@@ -96,7 +96,7 @@ class IFootballRepositoryImpl
         leagueId: Int,
         leagueSeason: Int
     ): List<Team> {
-        return localDataSource.getLocallyTeamsByIdAndSeason(leagueId, leagueSeason)
+        return localDataSource.getLocallyTeamsByIdAndSeason()
             .toEntity()
     }
 
@@ -113,7 +113,7 @@ class IFootballRepositoryImpl
         leagueId: Int,
         leagueSeason: Int
     ) {
-        localDataSource.updateOrInsertTeams(teamEntities.toLocal(leagueId, leagueSeason))
+        localDataSource.updateOrInsertTeams(teamEntities.toLocal())
     }
 
     override suspend fun updateOrInsertCountries(countries: List<Country>) {
@@ -229,10 +229,10 @@ class IFootballRepositoryImpl
     }
 
     override suspend fun updateOrInsertTeam(team: Team, leagueId: Int, season: Int) {
-        return localDataSource.updateOrInsertTeam(team.toLocal(leagueId, season))
+        return localDataSource.updateOrInsertTeam(team.toLocal())
     }
 
-    override suspend fun getLocallyTeamById(teamId: Int): Team?{
+    override suspend fun getLocallyTeamById(teamId: Int): Team? {
         return localDataSource.getTeamById(teamId)?.toEntity()
     }
 
@@ -253,6 +253,11 @@ class IFootballRepositoryImpl
         localDataSource.deleteRecentSearches()
     }
 
-
+    override suspend fun getTeamsForLeagues(leagueId: Int, leagueSeason: Int): List<Team> {
+        return remoteDataSource.getTeamsByLeagueAndSeason(leagueId, leagueSeason).toEntity()
+    }
+    override suspend fun addTeamsList(teams: List<Team>) {
+        localDataSource.addTeamsList(teams.map { it.toLocal() })
+    }
 
 }
