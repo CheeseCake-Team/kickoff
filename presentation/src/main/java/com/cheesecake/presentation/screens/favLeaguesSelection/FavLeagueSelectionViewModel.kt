@@ -72,10 +72,6 @@ class FavLeagueSelectionViewModel @Inject constructor(
         _event.update { Event(FavLeagueSelectionNavigationEvent.NavigateToFavTeamsSelection) }
     }
 
-    private fun onSkipClick() {
-        _event.update { Event(FavLeagueSelectionNavigationEvent.NavigateToFavTeamsSelection) }
-    }
-
     private fun onError(e: Throwable) {
         _state.update { it.copy(errorMessage = e.localizedMessage ?: "Unknown error.", isLoading = false) }
     }
