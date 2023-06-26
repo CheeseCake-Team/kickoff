@@ -3,7 +3,7 @@
     <style name="Theme.Kickoff" parent="Theme.Material3.DayNight.NoActionBar">
 
     </style>
-    
+
     <style name="Large">
         <item name="android:fontFamily">@font/lato_bold</item>
     </style>
@@ -19,6 +19,7 @@
         <item name="android:textSize">@dimen/font_size_12sp</item>
         <item name="android:textColor">@color/fontHeavy</item>
     </style>
+
     <style name="medium">
         <item name="android:fontFamily">@font/lato_medium</item>
     </style>
@@ -78,5 +79,21 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
-    
+
+    <style name="Theme.Kickoff.AppWidgetContainerParent" parent="@android:style/Theme.DeviceDefault">
+        <!-- Radius of the outer bound of widgets to make the rounded corners -->
+        <item name="appWidgetRadius">16dp</item>
+        <!--
+        Radius of the inner view's bound of widgets to make the rounded corners.
+        It needs to be 8dp or less than the value of appWidgetRadius
+        -->
+        <item name="appWidgetInnerRadius">8dp</item>
+    </style>
+
+    <style name="Theme.Kickoff.AppWidgetContainer" parent="Theme.Kickoff.AppWidgetContainerParent">
+        <!-- Apply padding to avoid the content of the widget colliding with the rounded corners -->
+        <item name="appWidgetPadding">16dp</item>
+        <item name="android:background">@color/background</item>
+    </style>
+
 </resources>

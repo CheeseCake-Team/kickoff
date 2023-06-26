@@ -20,7 +20,6 @@
     <dimen name="team_image_size_48dp">48dp</dimen>
 
 
-
     <!-- text sizes -->
     <dimen name="font_size_12sp">12sp</dimen>
     <dimen name="font_size_14sp">14sp</dimen>

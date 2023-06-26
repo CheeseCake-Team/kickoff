@@ -1,25 +1,16 @@
-package com.cheesecake.presentation.widgets
+package com.cheesecake.presentation.widgets.old
 
 import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import android.widget.EditText
-import android.widget.ListView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import com.cheesecake.domain.KickoffException
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.databinding.MatchesWidgetsConfigureBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 @AndroidEntryPoint
@@ -58,7 +49,7 @@ class MatchesWidgetsConfigureActivity : AppCompatActivity() {
         binding = MatchesWidgetsConfigureBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        appWidgetText = binding.appwidgetText as EditText
+        appWidgetText = binding.appwidgetText
         binding.addButton.setOnClickListener(onClickListener)
 
 
@@ -80,14 +71,14 @@ class MatchesWidgetsConfigureActivity : AppCompatActivity() {
 
     }
 
-    override fun onStart() {
+    /*override fun onStart() {
         super.onStart()
         lifecycleScope.launch {
             delay(1000)
             val matchList = viewModel.state.value.data
             withContext(Dispatchers.Main){
                 val listView = findViewById<ListView>(R.id.matches_widget_list)
-                val adapter = WidgetAdapter(this@MatchesWidgetsConfigureActivity, matchList)
+                val adapter = ArrayAdapter(this@MatchesWidgetsConfigureActivity,)
                 try{
                     adapter.let {
                         listView.adapter = it
@@ -97,11 +88,11 @@ class MatchesWidgetsConfigureActivity : AppCompatActivity() {
                 }
             }
         }
-    }
+    }*/
 
 }
 
-private const val PREFS_NAME = "com.cheesecake.presentation.widgets.MatchesWidgets"
+private const val PREFS_NAME = "com.cheesecake.presentation.widgets.old.MatchesWidgets"
 private const val PREF_PREFIX_KEY = "appwidget_"
 
 // Write the prefix to the SharedPreferences object for this widget

@@ -1,4 +1,4 @@
-package com.cheesecake.presentation.widgets
+package com.cheesecake.presentation.widgets.old
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager

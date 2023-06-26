@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:configure="com.cheesecake.presentation.widgets.MatchesWidgetsConfigureActivity"
+    android:configure="com.cheesecake.presentation.widgets.old.MatchesWidgetsConfigureActivity"
     android:description="@string/app_widget_description"
     android:initialKeyguardLayout="@layout/matches_widgets"
     android:initialLayout="@layout/matches_widgets"

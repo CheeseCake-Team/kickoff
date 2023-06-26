@@ -2,11 +2,11 @@
 
     <style name="Widget.Kickoff.AppWidget.Container" parent="android:Widget">
         <item name="android:id">@android:id/background</item>
-        <item name="android:background">?android:attr/colorBackground</item>
+        <item name="android:background">@color/background</item>
     </style>
 
     <style name="Widget.Kickoff.AppWidget.InnerView" parent="android:Widget">
-        <item name="android:background">?android:attr/colorBackground</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:background">@color/background</item>
+        <item name="android:textColor">@color/fontHeavy</item>
     </style>
 </resources>
