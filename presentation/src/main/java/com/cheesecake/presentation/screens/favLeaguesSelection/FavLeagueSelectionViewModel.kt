@@ -16,7 +16,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavLeagueSelectionViewModel @Inject constructor(
-    private val onboardingUseCase: OnboardingUseCase,
     private val getLeagueListUseCase: GetLeagueListUseCase,
     private val addFavouriteLeagueListUseCase: AddFavouriteLeagueListUseCase,
     private val getLeagueListBySearch: GetLeagueBySearchUseCase
@@ -37,9 +36,7 @@ class FavLeagueSelectionViewModel @Inject constructor(
     }
 
 
-    suspend fun shouldShowOnboarding(): Boolean = onboardingUseCase.shouldShowOnboarding()
 
-    suspend fun setOnboardingShown() { onboardingUseCase.setOnboardingShown() }
 
 
     private fun onLeaguesSuccess(leagues: List<League>) {
@@ -50,7 +47,7 @@ class FavLeagueSelectionViewModel @Inject constructor(
                 },
                 isLoading = false,
                 onNextClick = { addToFavourite() },
-                onSkipClick = { onSkipClick() }
+                onSkipClick = { addToFavourite() }
             )
         }
     }

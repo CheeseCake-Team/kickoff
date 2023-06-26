@@ -24,23 +24,14 @@ class OnboardingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        lifecycleScope.launch {
-            if (!favViewModel.shouldShowOnboarding()) {
-                favViewModel.setOnboardingShown()
-                binding = DataBindingUtil.setContentView(this@OnboardingActivity, R.layout.activity_onboarding)
-                binding.viewModel = favViewModel
-                // Set up your views and handle navigation here
-                handleNavigation()
-                binding.allLeaguesRecyclerView.adapter = FavLeagueSelectionAdapter()
-            } else {
-                navigateToHome()
-            }
-        }
+        binding = DataBindingUtil.setContentView(this@OnboardingActivity, R.layout.activity_onboarding)
+        binding.viewModel = favViewModel
+        handleNavigation()
+        binding.allLeaguesRecyclerView.adapter = FavLeagueSelectionAdapter()
     }
 
     private fun navigateToHome() {
-        val intent = Intent(this@OnboardingActivity, MainActivity::class.java)
-        startActivity(intent)
+
         finish()
     }
 
