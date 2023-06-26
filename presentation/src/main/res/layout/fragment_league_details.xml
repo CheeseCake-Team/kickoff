@@ -16,6 +16,7 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:doNotShow="@{viewModel.state.teamsStandingEmpty &amp;&amp; viewModel.state.topPlayersEmpty}"
             tools:context="com.cheesecake.league.LeagueDetailsFragment">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,7 +35,8 @@
                     app:layout_constraintEnd_toStartOf="@+id/text_view_rounds"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:doNotShow="@{(viewModel.state.country.isEmpty()) ? true : false }" />
 
                 <TextView
                     android:id="@+id/text_view_country_name"
@@ -42,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_8"
                     android:fontFamily="@font/lato_medium"
-                    android:text="@{viewModel.leagueDetailsUIState.country}"
+                    android:text="@{viewModel.state.country}"
                     android:textColor="@color/fontHeavy"
                     android:textSize="@dimen/font_size_14sp"
                     app:layout_constraintEnd_toEndOf="@+id/text_view_country"
@@ -71,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_8"
                     android:fontFamily="@font/lato_medium"
-                    android:text="@{viewModel.leagueDetailsUIState.round}"
+                    android:text="@{viewModel.state.round}"
                     android:textColor="@color/fontHeavy"
                     android:textSize="@dimen/font_size_14sp"
                     app:layout_constraintEnd_toEndOf="@+id/text_view_rounds"
@@ -91,7 +93,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/text_view_rounds"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:doNotShow="@{viewModel.state.teamsStandingEmpty}" />
 
                 <TextView
                     android:id="@+id/text_view_teams_numbers"
@@ -99,9 +102,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_8"
                     android:fontFamily="@font/lato_medium"
+                    android:text="@{viewModel.state.teamsCount}"
                     android:textColor="@color/fontHeavy"
                     android:textSize="@dimen/font_size_14sp"
-                    android:text="@{viewModel.leagueDetailsUIState.teamsCount}"
                     app:layout_constraintEnd_toEndOf="@+id/text_view_teams"
                     app:layout_constraintStart_toStartOf="@+id/text_view_teams"
                     app:layout_constraintTop_toBottomOf="@id/text_view_teams"
@@ -118,7 +121,8 @@
                     android:textColor="@color/fontHeavy"
                     android:textSize="@dimen/font_size_16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_view_country_name" />
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_country_name"
+                    app:doNotShow="@{viewModel.state.teamsStandingEmpty}" />
 
                 <TextView
                     android:id="@+id/text_view_standings_see_all"
@@ -131,7 +135,8 @@
                     android:textSize="@dimen/font_size_12sp"
                     app:layout_constraintBottom_toBottomOf="@+id/text_view_standing"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/text_view_standing" />
+                    app:layout_constraintTop_toTopOf="@+id/text_view_standing"
+                    app:doNotShow="@{viewModel.state.teamsStandingEmpty}" />
 
                 <TextView
                     android:id="@+id/text_view_club"
@@ -144,7 +149,8 @@
                     android:textSize="@dimen/font_size_12sp"
                     app:layout_constraintEnd_toEndOf="@+id/text_view_standing"
                     app:layout_constraintStart_toStartOf="@+id/text_view_standing"
-                    app:layout_constraintTop_toBottomOf="@+id/text_view_standing" />
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_standing"
+                    app:doNotShow="@{viewModel.state.teamsStandingEmpty}" />
 
 
                 <TextView
@@ -157,7 +163,8 @@
                     android:textSize="@dimen/font_size_12sp"
                     app:layout_constraintEnd_toEndOf="@+id/guideline5"
                     app:layout_constraintStart_toStartOf="@+id/guideline5"
-                    app:layout_constraintTop_toTopOf="@+id/text_view_club" />
+                    app:layout_constraintTop_toTopOf="@+id/text_view_club"
+                    app:doNotShow="@{viewModel.state.teamsStandingEmpty}" />
 
                 <TextView
                     android:id="@+id/text_view_wins"
@@ -169,7 +176,8 @@
                     android:textSize="@dimen/font_size_12sp"
                     app:layout_constraintEnd_toEndOf="@+id/guideline4"
                     app:layout_constraintStart_toStartOf="@+id/guideline4"
-                    app:layout_constraintTop_toTopOf="@+id/text_view_club" />
+                    app:layout_constraintTop_toTopOf="@+id/text_view_club"
+                    app:doNotShow="@{viewModel.state.teamsStandingEmpty}" />
 
                 <TextView
                     android:id="@+id/text_view_draws"
@@ -181,7 +189,8 @@
                     android:textSize="@dimen/font_size_12sp"
                     app:layout_constraintEnd_toEndOf="@+id/guideline3"
                     app:layout_constraintStart_toStartOf="@+id/guideline3"
-                    app:layout_constraintTop_toTopOf="@+id/text_view_club" />
+                    app:layout_constraintTop_toTopOf="@+id/text_view_club"
+                    app:doNotShow="@{viewModel.state.teamsStandingEmpty}" />
 
                 <TextView
                     android:id="@+id/text_view_loses"
@@ -193,7 +202,8 @@
                     android:textSize="@dimen/font_size_12sp"
                     app:layout_constraintEnd_toEndOf="@+id/guideline2"
                     app:layout_constraintStart_toStartOf="@+id/guideline2"
-                    app:layout_constraintTop_toTopOf="@+id/text_view_club" />
+                    app:layout_constraintTop_toTopOf="@+id/text_view_club"
+                    app:doNotShow="@{viewModel.state.teamsStandingEmpty}" />
 
                 <TextView
                     android:id="@+id/text_view_points"
@@ -206,7 +216,8 @@
                     app:layout_constraintBottom_toBottomOf="@+id/text_view_club"
                     app:layout_constraintEnd_toEndOf="@+id/guideline"
                     app:layout_constraintStart_toStartOf="@+id/guideline"
-                    app:layout_constraintTop_toTopOf="@+id/text_view_club" />
+                    app:layout_constraintTop_toTopOf="@+id/text_view_club"
+                    app:doNotShow="@{viewModel.state.teamsStandingEmpty}" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view_clubs_scores"
@@ -216,11 +227,12 @@
                     android:layout_marginTop="@dimen/spacing_8"
                     android:clipToPadding="false"
                     android:overScrollMode="never"
-                    app:items="@{viewModel.leagueDetailsUIState.teamsStanding}"
+                    app:items="@{viewModel.state.teamsStanding}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/text_view_club"
+                    app:doNotShow="@{viewModel.state.teamsStandingEmpty}"
                     tools:listitem="@layout/item_club_scores" />
 
                 <TextView
@@ -234,7 +246,8 @@
                     android:textColor="@color/fontHeavy"
                     android:textSize="@dimen/font_size_16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/recycler_view_clubs_scores" />
+                    app:layout_constraintTop_toBottomOf="@+id/recycler_view_clubs_scores"
+                    app:doNotShow="@{viewModel.state.topPlayersEmpty}" />
 
                 <TextView
                     android:id="@+id/text_view_goals_see_all"
@@ -247,7 +260,8 @@
                     android:textSize="@dimen/font_size_12sp"
                     app:layout_constraintBottom_toBottomOf="@+id/text_view_goals_scored"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/text_view_goals_scored" />
+                    app:layout_constraintTop_toTopOf="@+id/text_view_goals_scored"
+                    app:doNotShow="@{viewModel.state.topPlayersEmpty}" />
 
                 <TextView
                     android:id="@+id/text_view_player_name"
@@ -260,7 +274,8 @@
                     android:textSize="@dimen/font_size_12sp"
                     app:layout_constraintEnd_toEndOf="@+id/text_view_goals_scored"
                     app:layout_constraintStart_toStartOf="@+id/text_view_goals_scored"
-                    app:layout_constraintTop_toBottomOf="@+id/text_view_goals_scored" />
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_goals_scored"
+                    app:doNotShow="@{viewModel.state.topPlayersEmpty}" />
 
                 <TextView
                     android:id="@+id/text_view_goals"
@@ -273,7 +288,8 @@
                     app:layout_constraintBottom_toBottomOf="@+id/text_view_player_name"
                     app:layout_constraintEnd_toEndOf="@+id/guideline"
                     app:layout_constraintStart_toStartOf="@+id/guideline"
-                    app:layout_constraintTop_toTopOf="@+id/text_view_player_name" />
+                    app:layout_constraintTop_toTopOf="@+id/text_view_player_name"
+                    app:doNotShow="@{viewModel.state.topPlayersEmpty}" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view_players_goals"
@@ -283,12 +299,13 @@
                     android:layout_marginTop="@dimen/spacing_8"
                     android:clipToPadding="false"
                     android:overScrollMode="never"
-                    app:items="@{viewModel.leagueDetailsUIState.topPlayers}"
+                    app:items="@{viewModel.state.topPlayers}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/text_view_player_name"
+                    app:doNotShow="@{viewModel.state.topPlayersEmpty}"
                     tools:listitem="@layout/item_player_goals" />
 
 
@@ -340,7 +357,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:showLoading="@{viewModel.leagueDetailsUIState.loading}" />
+            app:showLoading="@{viewModel.state.loading}" />
+
+        <FrameLayout
+            android:id="@+id/frame_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:doNotShow="@{!(viewModel.state.teamsStandingEmpty &amp;&amp; viewModel.state.topPlayersEmpty)}">
+
+            <include layout="@layout/no_result_found" />
+
+        </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
