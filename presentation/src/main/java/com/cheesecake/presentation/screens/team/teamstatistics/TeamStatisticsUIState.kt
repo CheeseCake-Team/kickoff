@@ -28,15 +28,15 @@ data class TeamStatisticsUIState(
     val totalFailed: Int = 0,
     val totalGoalsFor: Int = 0,
     val totalGoalsAgainst: Int = 0,
-
     val isLoading: Boolean = true,
+
     val data: List<Team> = emptyList(),
     val errorMessage: String = "Error"
 )
 
 fun TeamStatisticsEntity.toUIState(): TeamStatisticsUIState {
     return TeamStatisticsUIState(
-        form=form,
+        form = form,
         homePlayed = played.home,
         homeWins = wins.home,
         homeLoses = loses.home,
