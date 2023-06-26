@@ -25,7 +25,14 @@ abstract class BaseAdapter<T>(private val listener: BaseInteractionListener?) :
 
     open fun setItems(newItems: List<T>) {
         val diffResult =
-            DiffUtil.calculateDiff(BaseDiffUtil(itemList, newItems, ::areItemsSame, ::areContentSame))
+            DiffUtil.calculateDiff(
+                BaseDiffUtil(
+                    itemList,
+                    newItems,
+                    ::areItemsSame,
+                    ::areContentSame
+                )
+            )
         itemList = newItems
         diffResult.dispatchUpdatesTo(this)
     }
@@ -53,10 +60,23 @@ abstract class BaseAdapter<T>(private val listener: BaseInteractionListener?) :
                     setVariable(BR.item, currentItem)
 
                     when (this) {
-                        is ItemMatchTeamLineupBinding ->{
+                        is ItemMatchTeamLineupBinding -> {
                             recyclerViewStarterPlayers.adapter = ItemMatchPlayersAdapter()
                             recyclerViewSubstitutesPlayers.adapter = ItemMatchPlayersAdapter()
                         }
+
+
+
+                        is ItemTeamFormBinding -> {
+                            val color = when (currentItem) {
+                                "L" -> R.color.red
+                                "W" -> R.color.green
+                                "D" -> R.color.yellow
+                                else -> R.color.cardSurface
+                            }
+                            imageViewCardImage.setCardBackgroundColor(color)
+                        }
+
 
                     }
                 }
