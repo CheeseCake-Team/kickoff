@@ -24,7 +24,7 @@ class MatchWorker @AssistedInject constructor(
 
     override suspend fun doWork(): Result {
         return try {
-            getMatchDetailsUseCase()
+//            getMatchDetailsUseCase()
             showNotification("1", "Match Started", " The Match You Fallowed Have Started")
             Result.success()
         } catch (e: Exception) {
