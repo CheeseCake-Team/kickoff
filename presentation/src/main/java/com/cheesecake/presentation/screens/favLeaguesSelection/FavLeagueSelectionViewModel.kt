@@ -4,6 +4,7 @@ import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.usecases.AddFavouriteLeagueListUseCase
 import com.cheesecake.domain.usecases.GetLeagueBySearchUseCase
 import com.cheesecake.domain.usecases.GetLeagueListUseCase
+import com.cheesecake.domain.usecases.OnboardingUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.mapper.toFavLeagueItemUIState
 import com.cheesecake.presentation.models.Event
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavLeagueSelectionViewModel @Inject constructor(
-    private val GetLeagueListUseCase: GetLeagueListUseCase,
+    private val onboardingUseCase: OnboardingUseCase,
+    private val getLeagueListUseCase: GetLeagueListUseCase,
     private val addFavouriteLeagueListUseCase: AddFavouriteLeagueListUseCase,
     private val getLeagueListBySearch: GetLeagueBySearchUseCase
 ) : BaseViewModel<FavLeagueSelectionUIState, FavLeagueSelectionNavigationEvent>(
@@ -26,13 +28,19 @@ class FavLeagueSelectionViewModel @Inject constructor(
     init {
         collectFlow(state.value.searchInput.debounce(1000).distinctUntilChanged()) {
             if (it.isBlank() || it.isEmpty()) {
-                tryToExecute({ GetLeagueListUseCase() }, ::onLeaguesSuccess, ::onLeagueError)
+                tryToExecute({ getLeagueListUseCase() }, ::onLeaguesSuccess, ::onLeagueError)
             } else {
                 tryToExecute({ getLeagueListBySearch(it) }, ::onSearchSuccess, ::onSearchError)
             }
             state.value
         }
     }
+
+
+    suspend fun shouldShowOnboarding(): Boolean = onboardingUseCase.shouldShowOnboarding()
+
+    suspend fun setOnboardingShown() { onboardingUseCase.setOnboardingShown() }
+
 
     private fun onLeaguesSuccess(leagues: List<League>) {
         _state.update {

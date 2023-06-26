@@ -15,8 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Kickoff"
         tools:targetApi="31">
+
         <activity
-            android:name="com.cheesecake.presentation.MainActivity"
+            android:name="com.cheesecake.presentation.screens.favLeaguesSelection.OnboardingActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name="com.cheesecake.presentation.screens.mainactivity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

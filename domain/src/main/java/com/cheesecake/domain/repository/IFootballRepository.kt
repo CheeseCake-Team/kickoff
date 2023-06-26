@@ -105,4 +105,8 @@ interface IFootballRepository {
 
     suspend fun addLeagueList(leagues : List<League>)
 
+    suspend fun shouldShowOnboarding(): Boolean
+
+    suspend fun setOnboardingShown()
+
 }

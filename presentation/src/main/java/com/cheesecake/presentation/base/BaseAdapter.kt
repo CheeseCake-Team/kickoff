@@ -20,8 +20,8 @@ abstract class BaseAdapter<T>(private val listener: BaseInteractionListener?) :
     abstract val layoutId: Int
 
     open fun setItems(newItems: List<T>) {
-        val diffResult =
-            DiffUtil.calculateDiff(BaseDiffUtil(itemList, newItems, ::areItemsSame, ::areContentSame))
+        val diffResult = DiffUtil
+            .calculateDiff(BaseDiffUtil(itemList, newItems, ::areItemsSame, ::areContentSame))
         itemList = newItems
         diffResult.dispatchUpdatesTo(this)
     }

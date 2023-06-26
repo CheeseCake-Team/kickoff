@@ -25,7 +25,8 @@ import javax.inject.Inject
 class IFootballRepositoryImpl
 @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
-    private val localDataSource: LocalDataSource
+    private val localDataSource: LocalDataSource,
+    private val onboardingDataSource: OnboardingDataSource,
 ) : IFootballRepository {
 
     override suspend fun getRemoteCountries(): List<Country> {
@@ -185,6 +186,15 @@ class IFootballRepositoryImpl
     override suspend fun addLeagueList(leagues: List<League>) {
         localDataSource.addLeaguesList(leagues.map { it.toLocal() })
     }
+
+    override suspend fun shouldShowOnboarding(): Boolean {
+       return onboardingDataSource.shouldShowOnboarding()
+    }
+
+    override suspend fun setOnboardingShown() {
+        onboardingDataSource.setOnboardingShown()
+    }
+
     override suspend fun getFixtureStatisticsByFixtureId(fixtureId: Int): List<FixtureStatistics> {
         return remoteDataSource.getFixtureStatisticsByFixtureId(fixtureId).toEntity()
     }
@@ -242,6 +252,7 @@ class IFootballRepositoryImpl
     override suspend fun deleteRecentSearches() {
         localDataSource.deleteRecentSearches()
     }
+
 
 
 }

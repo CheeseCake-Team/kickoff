@@ -25,11 +25,6 @@ class HomeViewModel @Inject constructor(
 ) : BaseViewModel<HomeUIState, HomeEvents>(HomeUIState(), Event()) {
 
     init {
-        viewModelScope.launch {
-            favouriteLeagueUseCase(39, 2023)
-            favouriteLeagueUseCase(39, 2022)
-            favouriteLeagueUseCase(75, 2023)
-        }
         getDateMatches(getNextThirtyDaysUseCase().first())
         tryToExecute({ getNextThirtyDaysUseCase() }, ::onSuccessDate, ::onError)
     }

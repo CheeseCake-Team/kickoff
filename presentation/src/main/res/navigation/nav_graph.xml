@@ -96,7 +96,11 @@
     <fragment
         android:id="@+id/favLeaguesSelectionFragment2"
         android:name="com.cheesecake.presentation.screens.favLeaguesSelection.FavLeaguesSelectionFragment"
-        android:label="FavLeaguesSelectionFragment" />
+        android:label="FavLeaguesSelectionFragment" >
+        <action
+            android:id="@+id/action_favLeaguesSelectionFragment2_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/discoverFragment"
         android:name="com.cheesecake.presentation.screens.discover.DiscoverFragment"
