@@ -28,7 +28,7 @@
 
 
         <activity
-            android:name="com.cheesecake.presentation.screens.favLeaguesSelection.OnboardingActivity"
+            android:name="com.cheesecake.presentation.screens.onboardingactivity.OnboardingActivity"
             android:exported="true">
         </activity>
 

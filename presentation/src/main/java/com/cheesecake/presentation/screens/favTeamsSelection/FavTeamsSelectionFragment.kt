@@ -27,9 +27,9 @@ class FavTeamsSelectionFragment : BaseFragment<FragmentFavTeamsSelectionBinding>
 
     private fun onEvent(event: FavTeamsSelectionNavigationEvent) {
         when (event) {
-            is FavTeamsSelectionNavigationEvent.NavigateToHome ->
-                //findNavController().navigate()
-                TODO("Navigate to Home Screen should be here")
+            is FavTeamsSelectionNavigationEvent.NavigateToHome -> {
+                requireActivity().finish()
+            }
         }
     }
 }

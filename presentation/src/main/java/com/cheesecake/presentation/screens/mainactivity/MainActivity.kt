@@ -13,7 +13,7 @@ import androidx.navigation.ui.NavigationUiSaveStateControl
 import androidx.navigation.ui.setupWithNavController
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.databinding.ActivityMainBinding
-import com.cheesecake.presentation.screens.favLeaguesSelection.OnboardingActivity
+import com.cheesecake.presentation.screens.onboardingactivity.OnboardingActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
