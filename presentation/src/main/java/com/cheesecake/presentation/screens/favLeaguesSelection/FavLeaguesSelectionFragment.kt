@@ -1,8 +1,10 @@
 package com.cheesecake.presentation.screens.favLeaguesSelection
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentFavLeagueSelectionBinding
@@ -26,11 +28,14 @@ class FavLeaguesSelectionFragment : BaseFragment<FragmentFavLeagueSelectionBindi
     }
 
     private fun onEvent(event: FavLeagueSelectionNavigationEvent) {
-        when (event) {
+        val action = when (event) {
             is FavLeagueSelectionNavigationEvent.NavigateToFavTeamsSelection -> {
                 FavLeaguesSelectionFragmentDirections.actionFavLeaguesSelectionFragment2ToFavTeamsSelectionFragment()
+
             }
         }
+        findNavController().navigate(action)
+
     }
 
 }

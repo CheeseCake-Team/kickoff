@@ -6,6 +6,7 @@ import com.cheesecake.domain.usecases.AddFavouriteTeamListUseCase
 import com.cheesecake.domain.usecases.GetFavoriteLeaguesUseCase
 import com.cheesecake.domain.usecases.GetTeamBySearchUseCase
 import com.cheesecake.domain.usecases.GetTeamListUseCase
+import com.cheesecake.domain.usecases.OnboardingUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.mapper.toFavTeamItemUIState
 import com.cheesecake.presentation.models.Event
@@ -19,6 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class FavTeamsSelectionViewModel @Inject constructor(
     private val getTeamListUseCase: GetTeamListUseCase,
+    private val onboardingUseCase: OnboardingUseCase,
     private val getAllFavouriteLeagues : GetFavoriteLeaguesUseCase,
     private val addFavouriteTeamListUseCase: AddFavouriteTeamListUseCase,
     private val getTeamBySearchUseCase: GetTeamBySearchUseCase
@@ -37,6 +39,12 @@ class FavTeamsSelectionViewModel @Inject constructor(
             state.value
         }
     }
+
+
+    suspend fun setOnboardingShown() {
+        onboardingUseCase.setOnboardingShown()
+    }
+
 
     private fun onLeaguesSuccess(leagues: Flow<List<League>>) {
         collectFlow(leagues){ favouriteLeagues->

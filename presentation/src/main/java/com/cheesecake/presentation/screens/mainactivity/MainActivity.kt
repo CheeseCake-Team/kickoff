@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             if (!mainActivityViewModel.shouldShowOnboarding()) {
-                mainActivityViewModel.setOnboardingShown()
                 navigateToOnboarding()
 
             } else {
@@ -52,7 +51,10 @@ class MainActivity : AppCompatActivity() {
     private fun navigateToOnboarding() {
         val intent = Intent(this@MainActivity, OnboardingActivity::class.java)
         startActivity(intent)
+        finish()
     }
+
+
 
 
 }

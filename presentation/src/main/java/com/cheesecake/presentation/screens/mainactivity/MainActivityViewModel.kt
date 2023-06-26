@@ -11,9 +11,4 @@ class MainActivityViewModel @Inject constructor(
     suspend fun shouldShowOnboarding() =
         onboardingUseCase.shouldShowOnboarding()
 
-
-    suspend fun setOnboardingShown() {
-        onboardingUseCase.setOnboardingShown()
-    }
-
 }
