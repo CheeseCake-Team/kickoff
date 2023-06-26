@@ -1,19 +1,24 @@
 package com.cheesecake.presentation.screens.search.viewAll.teams
 
+import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.usecases.GetTeamBySearchUseCase
+import com.cheesecake.domain.usecases.SaveRecentSearchUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import com.cheesecake.presentation.screens.search.SearchEvents
 import com.cheesecake.presentation.screens.search.models.TeamSearchUIState
+import com.cheesecake.presentation.screens.search.models.toRecentSearch
 import com.cheesecake.presentation.screens.search.models.toSearchUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class TeamsSearchViewModel @Inject constructor(
     private val getTeamsList: GetTeamBySearchUseCase,
+    private val saveRecentSearch: SaveRecentSearchUseCase,
     private val args: TeamsSearchNavigationArgs
 ) : BaseViewModel<TeamsUIState, SearchEvents>(TeamsUIState(), Event()) {
 
@@ -42,7 +47,10 @@ class TeamsSearchViewModel @Inject constructor(
     }
 
     private fun onTeamClicked(team: Team) {
-        _event.update { Event(SearchEvents.TeamClickEvent(team.id)) }
+        viewModelScope.launch {
+            saveRecentSearch(team.toRecentSearch())
+            _event.update { Event(SearchEvents.TeamClickEvent(team.id)) }
+        }
     }
 
 }

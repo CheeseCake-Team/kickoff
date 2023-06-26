@@ -37,10 +37,6 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding>() {
                 getRecentSearchActionByType(event)
             }
 
-            is HomeSearchEvent.PlayerClickEvent -> {
-                throw Throwable("")
-            }
-
             is HomeSearchEvent.SearchBarClick -> {
                 HomeSearchFragmentDirections.actionHomeSearchFragmentToSearchFragment()
             }
@@ -55,12 +51,14 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding>() {
     private fun getRecentSearchActionByType(event: HomeSearchEvent.RecentClickEvent): NavDirections {
         return when (event.recent.type) {
             RecentSearchType.TEAM -> {
-                throw Throwable("")
+                HomeSearchFragmentDirections.actionHomeSearchFragmentToTeamFragment(
+                    event.recent.id
+                )
             }
 
             RecentSearchType.LEAGUE -> {
                 HomeSearchFragmentDirections.actionHomeSearchFragmentToLeagueFragment(
-                    event.recent.id, event.recent.id
+                    event.recent.id
                 )
             }
 

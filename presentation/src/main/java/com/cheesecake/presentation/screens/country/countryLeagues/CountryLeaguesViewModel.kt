@@ -26,7 +26,7 @@ class CountryLeaguesViewModel @Inject constructor(
     private fun onSuccess(leagues: List<League>) {
         _state.update { countryLeaguesUIState ->
             countryLeaguesUIState.copy(
-                leagues = leagues.map { it.toLeagueUIState { onLeagueClick(it.leagueId, it.season.toInt()) } },
+                leagues = leagues.map { it.toLeagueUIState { onLeagueClick(it.leagueId, it.season) } },
                 isLoading = false
             )
         }

@@ -30,7 +30,6 @@ fun ImageView.setImageFromUrl(imageUri: String?) {
             .centerCrop()
             .into(this)
     }
-    //val imageUrl = imageUri.takeIf { !it.isNullOrEmpty() && !it.contains("image_not_available") } ?: R.drawable.no_image
 }
 
 @BindingAdapter("app:circularImageUrl")
@@ -42,7 +41,6 @@ fun ImageView.setCircularImageFromUrl(imageUri: String?) {
             .transform(CircleCrop())
             .into(this)
     }
-    //val imageUrl = imageUri.takeIf { !it.isNullOrEmpty() && !it.contains("image_not_available") } ?: R.drawable.no_image
 }
 
 @BindingAdapter("app:loadSVG")
@@ -81,25 +79,18 @@ fun <T> hideIfItemsEmpty(view: View, items: List<T>) {
 
 @BindingAdapter(value = ["app:viewVisibility"])
 fun hideWhenLoading(view: View, isVisible: Boolean) {
-//    view.isInvisible  = !isVisible
     if (isVisible)
         view.visibility = View.INVISIBLE
     else view.visibility = View.VISIBLE
 }
-@BindingAdapter(value = ["app:viewVisibilitysss"])
+@BindingAdapter(value = ["app:viewVisibilityProgressBar"])
 fun hideWhenLoadings(view: View, isVisible: Boolean) {
     view.isInvisible  = !isVisible
-//    if (isVisible)
-//        view.visibility = View.INVISIBLE
-//    else view.visibility = View.VISIBLE
 }
 
 @BindingAdapter(value = ["app:doNotShow"])
 fun doNotShow(view: View, doNotWantToShow: Boolean) {
     view.isInvisible  = doNotWantToShow
-//    if (isVisible)
-//        view.visibility = View.INVISIBLE
-//    else view.visibility = View.VISIBLE
 }
 
 @BindingAdapter("app:onSearchTextChanged")

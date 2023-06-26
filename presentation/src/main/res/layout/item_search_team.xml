@@ -52,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/spacing_8"
                 android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+                android:drawableTint="@color/fontLight"
                 android:gravity="center"
                 android:onClick="@{()-> item.onViewAllClick.invoke(item.type)}"
                 android:text="@string/view_more"

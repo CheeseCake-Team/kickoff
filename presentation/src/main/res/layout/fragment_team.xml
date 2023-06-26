@@ -22,6 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_16"
+            android:onClick="@{()-> viewModel.onBackClick()}"
             android:layout_marginTop="8dp"
             app:icon="@drawable/ic_back"
             app:iconTint="@color/fontHeavy"

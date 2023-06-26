@@ -66,7 +66,6 @@ class SearchAdapter : BaseAdapter<SearchResult>(null) {
     companion object {
         const val TYPE_LEAGUE = 0
         const val TYPE_TEAM = 1
-        const val TYPE_PLAYER = 2
     }
 }
 

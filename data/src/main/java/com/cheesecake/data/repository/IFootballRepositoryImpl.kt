@@ -55,9 +55,8 @@ class IFootballRepositoryImpl
 
     override suspend fun getLocallyLeagueByIdAndSeason(
         leagueId: Int,
-        leagueSeason: Int
     ): League? {
-        return localDataSource.getLeagueByIdAndSeason(leagueId, leagueSeason)
+        return localDataSource.getLeagueByIdAndSeason(leagueId)
             ?.toEntity()
     }
 
@@ -70,9 +69,8 @@ class IFootballRepositoryImpl
 
     override suspend fun getRemotelyLeagueByIdAndSeason(
         leagueId: Int,
-        leagueSeason: Int
     ): League {
-        return remoteDataSource.getLeagueByIdAndSeason(leagueId, leagueSeason).first()
+        return remoteDataSource.getLeagueByIdAndSeason(leagueId).first()
             .toEntity()
     }
 

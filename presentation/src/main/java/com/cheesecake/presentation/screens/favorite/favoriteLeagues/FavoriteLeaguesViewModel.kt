@@ -31,7 +31,7 @@ class FavoriteLeaguesViewModel @Inject constructor(
                 leagues = leagues.map { league ->
                     league.toLeaguesUIState({
                         toggleFavourite(
-                            league.leagueId, league.season.toInt()
+                            league.leagueId, league.season
                         )
                     }, { navigateToLeague(league.leagueId) })
                 }, isLeaguesIsEmpty = leagues.isEmpty(), isLoading = false

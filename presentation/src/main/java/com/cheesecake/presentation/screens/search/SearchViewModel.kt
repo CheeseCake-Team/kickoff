@@ -54,7 +54,7 @@ class SearchViewModel @Inject constructor(
     }
 
     private suspend fun getSearchResult(input: String): List<SearchResult> {
-        _state.update { it.copy(isLoading = true) }
+        _state.update { it.copy(isResultEmpty = false,isLoading = true ) }
         return mutableListOf<SearchResult>().apply {
             val leaguesItems = getLeagueList(input).toSearchUIState(::onClickLeague)
 
@@ -62,7 +62,7 @@ class SearchViewModel @Inject constructor(
             add(
                 SearchResult.League(::onClickViewAll, leaguesItems.take(6), leaguesItems.size)
             )
-            add(SearchResult.Team(::onClickViewAll,teamsItems.take(6), teamsItems.size))
+            add(SearchResult.Team(::onClickViewAll, teamsItems.take(6), teamsItems.size))
         }
     }
 
@@ -70,8 +70,8 @@ class SearchViewModel @Inject constructor(
         _state.update {
             it.copy(
                 searchResult = items,
+                isResultEmpty = getIfResultEmpty(items),
                 isLoading = false,
-                isResultEmpty = getIfResultEmpty(items)
             )
         }
     }
@@ -82,9 +82,8 @@ class SearchViewModel @Inject constructor(
     }
 
     private fun getIfResultEmpty(items: List<SearchResult>): Boolean {
-        return items.all {
-            it.list.isEmpty()
-        }
+        Log.i( "getIfResultEmpty: ",(items.all { it.list.isEmpty() }.toString()))
+        return (items.all { it.list.isEmpty() })
     }
 
     fun onQueryChange(input: String) {
@@ -95,17 +94,23 @@ class SearchViewModel @Inject constructor(
     }
 
     private fun onClickViewAll(type: SearchType) {
-        _event.update { Event(SearchEvents.ViewAllLClickEvent(_state.value.searchQuery,type)) }
+        _event.update { Event(SearchEvents.ViewAllLClickEvent(_state.value.searchQuery, type)) }
     }
 
     private fun onClickLeague(league: League) {
         viewModelScope.launch {
+            _event.update {
+                Event(
+                    SearchEvents.LeagueClickEvent(
+                        league.leagueId
+                    )
+                )
+            }
             saveRecentSearch(league.toRecentSearch())
-            _event.update { Event(SearchEvents.LeagueClickEvent(league.leagueId, league.season.toInt())) }
         }
     }
 
-    private fun onClickTeam(team:Team) {
+    private fun onClickTeam(team: Team) {
         viewModelScope.launch {
             saveRecentSearch(team.toRecentSearch())
             _event.update { Event(SearchEvents.TeamClickEvent(team.id)) }

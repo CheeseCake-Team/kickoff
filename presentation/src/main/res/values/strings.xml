@@ -64,5 +64,6 @@
     <string name="club_name">club name</string>
     <string name="finished">Finished</string>
     <string name="personal_info">Personal Info</string>
+    <string name="searchAlphaNumericInput">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890</string>
 
 </resources>

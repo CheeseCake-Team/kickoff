@@ -279,7 +279,7 @@ interface RemoteDataSource {
     ): List<LeagueDTO>
 
     suspend fun getLeagueByIdAndSeason(
-        season: Int, leagueId: Int
+        leagueId: Int
     ): List<LeagueDTO>
 
     suspend fun getLeaguesByType(

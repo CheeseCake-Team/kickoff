@@ -27,7 +27,7 @@ class LeagueViewModel @Inject constructor(
 
     init {
         tryToExecute(
-            { getLeagueByIdAndSeasonUseCase(leagueArgs.leagueId, leagueArgs.season) },
+            { getLeagueByIdAndSeasonUseCase(leagueArgs.leagueId) },
             ::onSuccess,
             ::onError
         )
@@ -47,7 +47,7 @@ class LeagueViewModel @Inject constructor(
             _state.update { leagueUiState ->
                 leagueUiState.copy(
                     leagueId = it.leagueId,
-                    leagueSeason = it.season.toInt(),
+                    leagueSeason = it.season,
                     leagueName = it.name,
                     seasonStartEndYear = "${it.seasonStartYear}/${it.seasonEndYear}",
                     imageUrl = it.imageUrl,

@@ -8,7 +8,7 @@ import com.cheesecake.domain.entity.League
 fun LeagueDTO.toEntity(): League = League(
     leagueId = this.league.id,
     name = this.league.name,
-    season = this.seasons.first().year.toString(),
+    season = this.seasons.first().year,
     imageUrl = this.league.logo,
     seasonStartYear = this.seasons.first().start.substring(0, 4),
     seasonEndYear = this.seasons.first().end.substring(0, 4),
@@ -22,7 +22,7 @@ fun LeagueDTO.toEntity(): League = League(
 fun LeagueDTO.toLocal(): LeagueLocalDTO = LeagueLocalDTO(
     leagueId = this.league.id,
     leagueName = this.league.name,
-    leagueSeason = this.seasons.first().year.toString(),
+    leagueSeason = this.seasons[seasons.size-2].year,
     leagueLogoUrl = this.league.logo,
     seasonStartYear = this.seasons.first().start,
     seasonEndYear = this.seasons.first().end,

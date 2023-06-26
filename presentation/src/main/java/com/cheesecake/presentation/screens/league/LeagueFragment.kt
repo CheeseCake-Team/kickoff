@@ -21,7 +21,6 @@ class LeagueFragment : BaseFragment<FragmentLeagueBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         handleNavigation()
         init()
     }

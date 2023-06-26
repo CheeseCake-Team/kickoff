@@ -36,7 +36,7 @@ class CountryLeaguesFragment : BaseFragment<FragmentCountryLeaguesBinding>() {
                 findNavController()
                     .navigate(
                         CountryFragmentDirections.actionCountryFragmentToLeagueFragment(
-                            event.leagueId, event.leagueSeason
+                            event.leagueId
                         )
                     )
             }

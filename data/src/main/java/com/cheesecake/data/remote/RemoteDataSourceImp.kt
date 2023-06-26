@@ -93,17 +93,6 @@ class RemoteDataSourceImp @Inject constructor(
         }
     }
 
-
-//    override suspend fun getFixtureRoundsCurrentOnly(
-//        seasonId: Int,
-//        leagueId: Int,
-//        current: Boolean
-//    ): List<String> {
-//        return wrapBaseResponse { service.getFixtureRoundsCurrentOnly(seasonId, leagueId, current) }
-//    }
-    //endregion
-
-    //region Fixtures
     override suspend fun getFixtureById(timeZone: String, fixtureId: Int): List<FixtureDTO> {
         return wrapBaseResponse {
             service.getFixtureById(timeZone, fixtureId)
@@ -425,8 +414,8 @@ class RemoteDataSourceImp @Inject constructor(
     }
 
 
-    override suspend fun getLeagueByIdAndSeason(season: Int, leagueId: Int): List<LeagueDTO> {
-        return wrapBaseResponse { service.getLeagueByIdBySeason(season, leagueId) }
+    override suspend fun getLeagueByIdAndSeason(leagueId: Int): List<LeagueDTO> {
+        return wrapBaseResponse { service.getLeagueByIdBySeason(leagueId) }
     }
 
     override suspend fun getLeaguesByType(type: LeagueType): List<LeagueDTO> {

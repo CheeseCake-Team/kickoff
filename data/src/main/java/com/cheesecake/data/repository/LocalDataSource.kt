@@ -24,7 +24,7 @@ interface LocalDataSource {
 
     suspend fun deleteAllTeams()
 
-    suspend fun getLeagueByIdAndSeason(leagueId: Int, leagueSeason: Int): LeagueLocalDTO?
+    suspend fun getLeagueByIdAndSeason(leagueId: Int): LeagueLocalDTO?
 
     suspend fun updateOrInsertLeague(league: LeagueLocalDTO)
 

@@ -18,7 +18,7 @@ interface RecentSearchDao {
     @Query("DELETE FROM recentSearch_table")
     suspend fun deleteRecentSearches()
 
-    @Query("SELECT * FROM recentSearch_table")
+    @Query("SELECT * FROM recentSearch_table ORDER BY rank DESC")
     fun getAllRecentSearches(): Flow<List<RecentSearchLocalDTO>>
 
 }

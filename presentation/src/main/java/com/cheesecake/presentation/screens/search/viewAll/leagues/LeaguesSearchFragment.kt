@@ -32,7 +32,7 @@ class LeaguesSearchFragment : BaseFragment<FragmentLeaguesSearchBinding>() {
     private fun onEvent(event: SearchEvents) {
         val action = (event as SearchEvents.LeagueClickEvent).let {
             LeaguesSearchFragmentDirections.actionLeaguesSearchFragmentToLeagueFragment(
-                event.leagueId, event.season
+                event.leagueId
             )
         }
         findNavController().navigate(action)

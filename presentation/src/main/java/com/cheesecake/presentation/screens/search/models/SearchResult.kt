@@ -1,7 +1,5 @@
 package com.cheesecake.presentation.screens.search.models
 
-import com.cheesecake.presentation.models.TeamUIState
-
 sealed class SearchResult(val list: List<Any>) {
     data class Team(
         val onViewAllClick: (SearchType) -> Unit,

@@ -38,7 +38,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 )
 
             is HomeEvents.LeagueClickEvent -> HomeFragmentDirections
-                .actionHomeFragmentToLeagueFragment(event.leagueId, event.season)
+                .actionHomeFragmentToLeagueFragment(event.leagueId)
         }
         findNavController().navigate(action)
     }
