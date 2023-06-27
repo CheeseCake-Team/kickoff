@@ -27,6 +27,7 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
         super.onViewCreated(view, savedInstanceState)
         changeStatusBarColor()
         handleNavigation()
+        handleOnError()
         init()
     }
 
@@ -68,6 +69,14 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
     private fun handleNavigation() {
         collect(viewModel.event) { event ->
             event.getContentIfNotHandled()?.let { onEvent(it) }
+        }
+    }
+
+    private fun handleOnError() {
+        lifecycleScope.launch {
+            viewModel.state.collect {
+                handleOnError(it.errorMessage)
+            }
         }
     }
 
