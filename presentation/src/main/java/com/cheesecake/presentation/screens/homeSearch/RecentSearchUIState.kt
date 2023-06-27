@@ -7,30 +7,20 @@ import com.cheesecake.presentation.screens.search.models.LeagueSearchUIState
 import java.net.Authenticator.RequestorType
 
 class RecentSearchUIState(
-    val id: Int,
     val imageUrl: String,
     val title: String,
     val type: RecentSearchType,
-//    val onClickItem: (RecentSearchUIState) -> Unit,
-//    val onClickDelete: () -> Unit
+    val onClick: () -> Unit,
 )
 
 fun RecentSearch.toUIState(
-//    onClickItem: (RecentSearchUIState) -> Unit,
-//    onClickDelete: () -> Unit
+    onClick: (RecentSearch) -> Unit
 ) = RecentSearchUIState(
-    id = this.id,
     title = this.title,
     imageUrl = this.imageUrl,
     type = this.type,
-//    onClickItem = onClickItem,
-//    onClickDelete = onClickDelete
+    onClick = {onClick(this)},
+
 )
 
-fun RecentSearchUIState.toEntity() = RecentSearch(
-    id = this.id,
-    title = this.title,
-    imageUrl = this.imageUrl,
-    type = this.type,
-)
 

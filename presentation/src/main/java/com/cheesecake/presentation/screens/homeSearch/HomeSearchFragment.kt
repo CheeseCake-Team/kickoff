@@ -20,7 +20,7 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupStatusBar()
+        changeStatusBarColor()
         binding.recyclerViewHomeSearch.adapter = HomeSearchAdapter()
         handleNavigation()
     }
@@ -37,10 +37,6 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding>() {
                 getRecentSearchActionByType(event)
             }
 
-            is HomeSearchEvent.PlayerClickEvent -> {
-                throw Throwable("")
-            }
-
             is HomeSearchEvent.SearchBarClick -> {
                 HomeSearchFragmentDirections.actionHomeSearchFragmentToSearchFragment()
             }
@@ -55,12 +51,14 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding>() {
     private fun getRecentSearchActionByType(event: HomeSearchEvent.RecentClickEvent): NavDirections {
         return when (event.recent.type) {
             RecentSearchType.TEAM -> {
-                throw Throwable("")
+                HomeSearchFragmentDirections.actionHomeSearchFragmentToTeamFragment(
+                    event.recent.id
+                )
             }
 
             RecentSearchType.LEAGUE -> {
                 HomeSearchFragmentDirections.actionHomeSearchFragmentToLeagueFragment(
-                    event.recent.id, event.recent.id
+                    event.recent.id
                 )
             }
 
@@ -70,9 +68,9 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding>() {
         }
     }
 
-    private fun setupStatusBar() {
-        val statusBarColor = ContextCompat.getColor(requireContext(), R.color.cardSurface)
-        requireActivity().window.statusBarColor = statusBarColor
+    override fun onPause() {
+        super.onPause()
+        resetStatusBarColor()
     }
 
 

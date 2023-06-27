@@ -3,6 +3,7 @@ package com.cheesecake.presentation.base
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
@@ -12,6 +13,7 @@ import com.cheesecake.presentation.R
 import com.cheesecake.presentation.databinding.ItemDateMatchesBinding
 import com.cheesecake.presentation.databinding.ItemMatchTeamLineupBinding
 import com.cheesecake.presentation.databinding.ItemTeamFormBinding
+import com.cheesecake.presentation.screens.league.leagueMatches.LeagueMatchesHeadToHeadAdapter
 import com.cheesecake.presentation.screens.match.lineup.ItemMatchPlayersAdapter
 
 
@@ -24,18 +26,16 @@ abstract class BaseAdapter<T>(private val listener: BaseInteractionListener?) :
     abstract val layoutId: Int
 
     open fun setItems(newItems: List<T>) {
-        val diffResult =
-            DiffUtil.calculateDiff(
-                BaseDiffUtil(
-                    itemList,
-                    newItems,
-                    ::areItemsSame,
-                    ::areContentSame
-                )
+        val diffResult = DiffUtil.calculateDiff(
+            BaseDiffUtil(
+                itemList, newItems, ::areItemsSame, ::areContentSame
             )
+        )
         itemList = newItems
         diffResult.dispatchUpdatesTo(this)
     }
+
+    override fun getItemCount(): Int = itemList.size
 
     open fun areItemsSame(oldItem: T, newItem: T) = oldItem?.equals(newItem) == true
     open fun areContentSame(oldPosition: T, newPosition: T) = true
@@ -44,10 +44,7 @@ abstract class BaseAdapter<T>(private val listener: BaseInteractionListener?) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return ItemViewHolder(
             DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context),
-                layoutId,
-                parent,
-                false
+                LayoutInflater.from(parent.context), layoutId, parent, false
             )
         )
     }
@@ -60,33 +57,20 @@ abstract class BaseAdapter<T>(private val listener: BaseInteractionListener?) :
                     setVariable(BR.item, currentItem)
 
                     when (this) {
+                        is ItemDateMatchesBinding -> {
+                            headToHeadRecyclerView.adapter = LeagueMatchesHeadToHeadAdapter()
+                            ContextCompat.getColor(this.root.context, R.color.fontHeavy)
+                        }
+
                         is ItemMatchTeamLineupBinding -> {
                             recyclerViewStarterPlayers.adapter = ItemMatchPlayersAdapter()
                             recyclerViewSubstitutesPlayers.adapter = ItemMatchPlayersAdapter()
                         }
-
-
-
-                        is ItemTeamFormBinding -> {
-                            val color = when (currentItem) {
-                                "L" -> R.color.red
-                                "W" -> R.color.green
-                                "D" -> R.color.yellow
-                                else -> R.color.cardSurface
-                            }
-                            imageViewCardImage.setCardBackgroundColor(color)
-                        }
-
-
                     }
                 }
             }
         }
     }
-
-    override fun getItemCount(): Int = itemList.size
-
-
     class ItemViewHolder(val binding: ViewDataBinding) : BaseViewHolder(binding)
     abstract class BaseViewHolder(binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root)
 

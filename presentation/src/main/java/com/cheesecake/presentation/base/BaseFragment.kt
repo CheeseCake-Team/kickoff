@@ -1,5 +1,8 @@
 package com.cheesecake.presentation.base
 
+import android.annotation.SuppressLint
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +11,7 @@ import android.view.Window
 import android.view.WindowManager
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -32,6 +36,7 @@ abstract class BaseFragment<VDB : ViewDataBinding> : Fragment() {
     protected val binding: VDB
         get() = _binding
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,12 +59,16 @@ abstract class BaseFragment<VDB : ViewDataBinding> : Fragment() {
         }
     }
 
-    protected fun changeStatusBarColor(@ColorRes color: Int) {
-        activity?.window?.let {
-            it.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-            it.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            it.statusBarColor = ContextCompat.getColor(requireContext(), color)
-        }
+    protected fun changeStatusBarColor() {
+        val statusBarColor = ContextCompat.getColor(requireContext(), R.color.cardSurface)
+        requireActivity().window.statusBarColor = statusBarColor
+    }
+
+    @SuppressLint("ResourceAsColor")
+    @RequiresApi(Build.VERSION_CODES.S)
+    protected fun resetStatusBarColor() {
+        val defaultStatusBarColor: Int = android.R.color.system_accent1_0
+        requireActivity().window.statusBarColor = defaultStatusBarColor
 
     }
 

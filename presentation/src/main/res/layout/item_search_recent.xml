@@ -19,19 +19,19 @@
             style="@style/Widget.Material3.CardView.Filled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="0dp"
             android:layout_marginTop="@dimen/spacing_16"
-            app:viewVisibilityOnItems="@{item.items}"
-            app:cardBackgroundColor="@color/cardSurface"
+            app:cardBackgroundColor="@color/transparent"
+            app:cardCornerRadius="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:viewVisibilityOnItems="@{item.items}">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="@dimen/spacing_8"
+                android:paddingHorizontal="@dimen/spacing_8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -44,19 +44,23 @@
                     android:layout_marginStart="@dimen/spacing_8"
                     android:fontFamily="@font/lato"
                     android:text="@string/recent_search"
+                    android:textColor="@color/fontLight"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
 
-                <TextView
+                <Button
                     android:id="@+id/text_view_view_more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/spacing_8"
+                    style="@style/Widget.Material3.Button.TextButton.Icon"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/lato"
                     android:gravity="center"
                     android:onClick="@{() -> item.onClickDeleteAll.invoke()}"
                     android:text="@string/delete_all"
+                    android:textColor="@color/fontLight"
                     app:layout_constraintBottom_toBottomOf="@+id/text_view_leagues_label"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/text_view_leagues_label" />

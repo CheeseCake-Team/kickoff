@@ -1,22 +1,26 @@
 package com.cheesecake.presentation.screens.search.viewAll.leagues
 
-import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.usecases.GetLeagueBySearchUseCase
+import com.cheesecake.domain.usecases.SaveRecentSearchUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import com.cheesecake.presentation.screens.search.models.LeagueSearchUIState
 import com.cheesecake.presentation.screens.search.SearchEvents
+import com.cheesecake.presentation.screens.search.models.toRecentSearch
 import com.cheesecake.presentation.screens.search.models.toSearchUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LeaguesSearchViewModel @Inject constructor(
     private val getLeagueList: GetLeagueBySearchUseCase,
+    private val saveRecentSearch: SaveRecentSearchUseCase,
     private val args: LeaguesSearchNavigationArgs
-) : BaseViewModel<AllLeaguesUIState, SearchEvents>(AllLeaguesUIState(), Event()) {
+) : BaseViewModel<LeaguesUIState, SearchEvents>(LeaguesUIState(), Event()) {
 
     init {
         initLeagueList()
@@ -29,12 +33,12 @@ class LeaguesSearchViewModel @Inject constructor(
     }
 
     private suspend fun getSearchResult(): List<LeagueSearchUIState> {
-        _state.update { it.copy(isLoading = true) }
+        _state.update { it.copy(isResultEmpty = false, isLoading = true) }
         return getLeagueList(args.searchQuery).toSearchUIState(::onLeagueClicked)
     }
 
     private fun onSearchSuccess(items: List<LeagueSearchUIState>) {
-        _state.update { it.copy(items = items, isLoading = false) }
+        _state.update { it.copy(items = items, isLoading = false, isResultEmpty = items.isEmpty()) }
     }
 
     private fun onSearchError(throwable: Throwable) {
@@ -42,7 +46,10 @@ class LeaguesSearchViewModel @Inject constructor(
     }
 
     private fun onLeagueClicked(league: League) {
-        _event.update { Event(SearchEvents.LeagueClickEvent(league.leagueId,league.season.toInt())) }
+        viewModelScope.launch {
+            saveRecentSearch(league.toRecentSearch())
+            _event.update { Event(SearchEvents.LeagueClickEvent(league.leagueId)) }
+        }
     }
 
 }

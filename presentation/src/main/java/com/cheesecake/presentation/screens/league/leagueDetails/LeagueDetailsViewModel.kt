@@ -25,16 +25,16 @@ class LeagueDetailsViewModel @Inject constructor(
     private val leagueArgs = LeagueArgs(savedStateHandle)
 
     init {
-        getLeague(leagueArgs.leagueId, leagueArgs.season)
+        getLeague(leagueArgs.leagueId,)
         getCurrentRound(leagueArgs.leagueId, leagueArgs.season)
         getTeamStanding(leagueArgs.leagueId, leagueArgs.season)
         getTopScorers(leagueArgs.leagueId, leagueArgs.season)
     }
 
-    private fun getLeague(leagueId: Int, season: Int) {
+    private fun getLeague(leagueId: Int,) {
         tryToExecute(
             {
-                getLeagueByLeagueIdAndSeasonUseCase(leagueId, season)
+                getLeagueByLeagueIdAndSeasonUseCase(leagueId,)
             },
             { league ->
                 _state.update { it.copy(country = league.countryName) }

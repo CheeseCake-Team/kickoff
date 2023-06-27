@@ -19,7 +19,7 @@ class LeaguesSearchFragment : BaseFragment<FragmentLeaguesSearchBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.searchRecyclerView.adapter = AllLeaguesAdapter()
+        binding.searchRecyclerView.adapter = LeaguesAdapter()
         handleNavigation()
     }
 
@@ -32,7 +32,7 @@ class LeaguesSearchFragment : BaseFragment<FragmentLeaguesSearchBinding>() {
     private fun onEvent(event: SearchEvents) {
         val action = (event as SearchEvents.LeagueClickEvent).let {
             LeaguesSearchFragmentDirections.actionLeaguesSearchFragmentToLeagueFragment(
-                event.leagueId, event.season
+                event.leagueId
             )
         }
         findNavController().navigate(action)

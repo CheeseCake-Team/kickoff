@@ -17,6 +17,7 @@
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_marginTop="@dimen/spacing_8"
+        android:onClick="@{() -> item.onClick.invoke()}"
         android:layout_marginEnd="@dimen/spacing_8"
         app:cardBackgroundColor="@color/cardSurface"
         app:cardCornerRadius="@dimen/spacing_8">

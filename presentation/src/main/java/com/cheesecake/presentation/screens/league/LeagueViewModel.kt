@@ -1,6 +1,6 @@
 package com.cheesecake.presentation.screens.league
 
-import androidx.lifecycle.SavedStateHandle
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.usecases.FavouriteLeagueUseCase
@@ -18,56 +18,45 @@ import javax.inject.Inject
 class LeagueViewModel @Inject constructor(
     private val getLeagueByIdAndSeasonUseCase: GetLeagueByIdAndSeasonUseCase,
     private val favouriteLeagueUseCase: FavouriteLeagueUseCase,
-    private val leagueArgs :LeagueNavigationArgs,
+    private val leagueArgs: LeagueNavigationArgs,
 ) : BaseViewModel<LeagueUIState, LeagueNavigationEvent>(LeagueUIState(), Event()) {
 
+    val args = leagueArgs.leagueId
+    private val _s = MutableStateFlow(state.value.leagueSeason)
+    val s: StateFlow<Int> = _s
 
-    private val _leagueId = MutableStateFlow(leagueArgs.leagueId)
-    val leagueId: StateFlow<Int> = _leagueId
+
 
     init {
+        initData()
+    }
+
+    private fun initData() {
         tryToExecute(
-            { getLeagueByIdAndSeasonUseCase(leagueArgs.leagueId, leagueArgs.season) },
+            { getLeagueByIdAndSeasonUseCase(leagueArgs.leagueId) },
             ::onSuccess,
             ::onError
         )
     }
 
-    private fun toggleFavourite(leagueId: Int, leagueSeason: Int) {
-        viewModelScope.launch {
-            favouriteLeagueUseCase(leagueId, leagueSeason).let {
-                _state.update { uiState -> uiState.copy(isFavourite = it.isFavourite) }
-            }
-        }
-    }
-
-
     private fun onSuccess(league: League) {
-        league.let {
-            _state.update { leagueUiState ->
-                leagueUiState.copy(
-                    leagueId = it.leagueId,
-                    leagueSeason = it.season.toInt(),
-                    leagueName = it.name,
-                    seasonStartEndYear = "${it.seasonStartYear}/${it.seasonEndYear}",
-                    imageUrl = it.imageUrl,
-                    isFavourite = it.isFavourite,
-                    onLeagueFavoriteClick = { leagueId, leagueSeason ->
-                        toggleFavourite(
-                            leagueId,
-                            leagueSeason
-                        )
-                    },
-                    onBackClick = { onBackClick() }
-                )
-            }
-
-
+        _state.update { leagueUiState ->
+            leagueUiState.copy(
+                leagueId = league.leagueId,
+                leagueSeason = league.season.last(),
+                leagueName = league.name,
+                seasonStartEndYear = "${league.seasonStartYear}/${league.seasonEndYear}",
+                imageUrl = league.imageUrl,
+                isFavourite = league.isFavourite,
+                onLeagueFavoriteClick = { leagueId ->
+                    toggleFavourite(
+                        leagueId,
+                    )
+                },
+                onBackClick = { onBackClick() }
+            )
         }
-    }
-
-    private fun onBackClick() {
-        _event.update { Event(LeagueNavigationEvent.NavigateBack) }
+        Log.i("initdscdsdcsdvvs: ", state.value.leagueSeason.toString())
     }
 
     private fun onError(e: Throwable) {
@@ -78,6 +67,18 @@ class LeagueViewModel @Inject constructor(
             )
         }
 
+    }
+
+    private fun toggleFavourite(leagueId: Int) {
+        viewModelScope.launch {
+            favouriteLeagueUseCase(leagueId).let {
+                _state.update { uiState -> uiState.copy(isFavourite = it.isFavourite) }
+            }
+        }
+    }
+
+    private fun onBackClick() {
+        _event.update { Event(LeagueNavigationEvent.NavigateBack) }
     }
 
 }

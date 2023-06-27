@@ -14,9 +14,6 @@
         <argument
             android:name="id"
             app:argType="integer" />
-        <argument
-            android:name="season"
-            app:argType="integer" />
         <action
             android:id="@+id/action_leagueFragment_to_teamFragment"
             app:destination="@id/teamFragment" />
@@ -100,12 +97,14 @@
         <action
             android:id="@+id/action_homeSearchFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_homeSearchFragment_to_teamFragment"
+            app:destination="@id/teamFragment" />
+        <action
+            android:id="@+id/action_homeSearchFragment_to_leagueFragment2"
+            app:destination="@id/leagueFragment" />
     </fragment>
 
-    <fragment
-        android:id="@+id/favLeaguesSelectionFragment2"
-        android:name="com.cheesecake.presentation.screens.favorite.favoriteLeagues.FavoriteLeaguesFragment"
-        android:label="FavLeaguesSelectionFragment" />
     <fragment
         android:id="@+id/discoverFragment"
         android:name="com.cheesecake.presentation.screens.discover.DiscoverFragment"
