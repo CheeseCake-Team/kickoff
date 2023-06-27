@@ -26,7 +26,7 @@ fun List<Pair<League, List<Fixture>>>.toHomeFavouriteUiState(
             title = it.first.name,
             imageUrl = it.first.imageUrl,
             leagueId = it.first.leagueId,
-            season = it.first.season.toInt(),
+            season = it.first.season.last(),
             onclick = onLeagueClick,
             matches = it.second.map { fixture ->
                 fixture.toMatchUIState {

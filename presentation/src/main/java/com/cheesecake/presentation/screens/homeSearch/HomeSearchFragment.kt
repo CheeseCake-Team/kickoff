@@ -1,7 +1,9 @@
 package com.cheesecake.presentation.screens.homeSearch
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
@@ -20,7 +22,7 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupStatusBar()
+        changeStatusBarColor()
         binding.recyclerViewHomeSearch.adapter = HomeSearchAdapter()
         handleNavigation()
     }
@@ -37,10 +39,6 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding>() {
                 getRecentSearchActionByType(event)
             }
 
-            is HomeSearchEvent.PlayerClickEvent -> {
-                throw Throwable("")
-            }
-
             is HomeSearchEvent.SearchBarClick -> {
                 HomeSearchFragmentDirections.actionHomeSearchFragmentToSearchFragment()
             }
@@ -55,12 +53,14 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding>() {
     private fun getRecentSearchActionByType(event: HomeSearchEvent.RecentClickEvent): NavDirections {
         return when (event.recent.type) {
             RecentSearchType.TEAM -> {
-                throw Throwable("")
+                HomeSearchFragmentDirections.actionHomeSearchFragmentToTeamFragment(
+                    event.recent.id
+                )
             }
 
             RecentSearchType.LEAGUE -> {
                 HomeSearchFragmentDirections.actionHomeSearchFragmentToLeagueFragment(
-                    event.recent.id, event.recent.id
+                    event.recent.id
                 )
             }
 
@@ -70,9 +70,10 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding>() {
         }
     }
 
-    private fun setupStatusBar() {
-        val statusBarColor = ContextCompat.getColor(requireContext(), R.color.cardSurface)
-        requireActivity().window.statusBarColor = statusBarColor
+    @RequiresApi(Build.VERSION_CODES.S)
+    override fun onPause() {
+        super.onPause()
+        resetStatusBarColor()
     }
 
 

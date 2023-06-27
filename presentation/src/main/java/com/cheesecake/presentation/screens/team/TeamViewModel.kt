@@ -49,7 +49,7 @@ class TeamViewModel @Inject constructor(
 
     }
 
-    private fun onBackClick() {
+    fun onBackClick() {
         _event.update { Event(TeamNavigationEvent.NavigateBack) }
     }
 

@@ -30,9 +30,7 @@ class FavoriteLeaguesViewModel @Inject constructor(
             copy(
                 leagues = leagues.map { league ->
                     league.toLeaguesUIState({
-                        toggleFavourite(
-                            league.leagueId, league.season.toInt()
-                        )
+                        toggleFavourite(league.leagueId)
                     }, { navigateToLeague(league.leagueId) })
                 }, isLeaguesIsEmpty = leagues.isEmpty(), isLoading = false
             )
@@ -49,8 +47,8 @@ class FavoriteLeaguesViewModel @Inject constructor(
         _event.update { Event(FavoriteLeaguesNavigationEvent.NavigateToLeague(leagueId)) }
     }
 
-    private fun toggleFavourite(leagueId: Int, leagueSeason: Int) {
-        viewModelScope.launch { favoriteLeagueUseCase(leagueId, leagueSeason) }
+    private fun toggleFavourite(leagueId: Int) {
+        viewModelScope.launch { favoriteLeagueUseCase(leagueId) }
     }
 
 }

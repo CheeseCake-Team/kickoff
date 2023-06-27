@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.cheesecake.presentation.R
@@ -15,8 +15,8 @@ import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentSearchBinding
 import com.cheesecake.presentation.screens.search.adapters.SearchAdapter
 import com.cheesecake.presentation.screens.search.models.SearchType
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>() {
@@ -26,9 +26,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupStatusBar()
-        setSearchFocus()
-        handleNavigation()
+        init()
         binding.recyclerViewSearch.adapter = SearchAdapter()
     }
 
@@ -43,7 +41,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             is SearchEvents.LeagueClickEvent -> {
                 findNavController().navigate(
                     SearchFragmentDirections.actionSearchFragmentToLeagueFragment(
-                        event.leagueId, event.season
+                        event.leagueId
                     )
                 )
             }
@@ -66,21 +64,41 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         }
     }
 
-    private fun setupStatusBar() {
-        val statusBarColor = ContextCompat.getColor(requireContext(), R.color.cardSurface)
-        requireActivity().window.statusBarColor = statusBarColor
+    private fun getRecentSearchActionByType(event: SearchEvents.ViewAllLClickEvent): NavDirections {
+        return when (event.type) {
+            SearchType.LEAGUE -> {
+                SearchFragmentDirections.actionSearchFragmentToLeaguesSearchFragment(
+                    viewModel.state.value.searchQuery
+                )
+            }
+
+            SearchType.TEAM -> {
+                SearchFragmentDirections.actionSearchFragmentToTeamsSearchFragment(
+                    viewModel.state.value.searchQuery
+                )
+            }
+        }
     }
 
-    override fun onResume() {
-        super.onResume()
-        requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav_bar).visibility =
-            View.GONE
+    private fun init() {
+        changeStatusBarColor()
+        setSearchFocus()
+        handleNavigation()
+        handleOnError()
     }
 
+    private fun handleOnError() {
+        lifecycleScope.launch {
+            viewModel.state.collect {
+                handleOnError(it.error)
+            }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
     override fun onPause() {
         super.onPause()
-        requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav_bar).visibility =
-            View.VISIBLE
+        resetStatusBarColor()
     }
 
     private fun setSearchFocus() {
@@ -91,20 +109,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         inputManager.showSoftInput(searchEditText, InputMethodManager.SHOW_IMPLICIT)
     }
 
-    private fun getRecentSearchActionByType(event: SearchEvents.ViewAllLClickEvent): NavDirections {
-        return when (event.type) {
-            SearchType.LEAGUE -> {
-                SearchFragmentDirections.actionSearchFragmentToLeaguesSearchFragment(
-                    viewModel.state.value.searchQuery
-                )
-            }
-            SearchType.TEAM -> {
-                SearchFragmentDirections.actionSearchFragmentToTeamsSearchFragment(
-                    viewModel.state.value.searchQuery
-                )
-            }
-        }
-    }
 
 }
 

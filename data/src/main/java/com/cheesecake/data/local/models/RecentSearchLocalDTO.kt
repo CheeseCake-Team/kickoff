@@ -8,7 +8,8 @@ import com.cheesecake.domain.entity.RecentSearchType
 
 @Entity(tableName = "recentSearch_table")
 class RecentSearchLocalDTO(
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
+    val rank: Int,
     val id: Int,
     val imageUrl: String,
     val title: String,

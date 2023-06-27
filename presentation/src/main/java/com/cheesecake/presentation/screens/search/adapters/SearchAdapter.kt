@@ -2,14 +2,10 @@ package com.cheesecake.presentation.screens.search.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.ViewDataBinding
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 import com.cheesecake.presentation.databinding.ItemSearchLeagueBinding
 import com.cheesecake.presentation.databinding.ItemSearchTeamBinding
 import androidx.databinding.library.baseAdapters.BR
 import com.cheesecake.presentation.base.BaseAdapter
-import com.cheesecake.presentation.base.BaseDiffUtil
 import com.cheesecake.presentation.screens.search.models.SearchResult
 
 
@@ -49,14 +45,14 @@ class SearchAdapter : BaseAdapter<SearchResult>(null) {
         }
     }
 
-    class LeagueViewHolder(private val binding: ItemSearchLeagueBinding) : BaseViewHolder(binding) {
+    class LeagueViewHolder( val binding: ItemSearchLeagueBinding) : BaseViewHolder(binding) {
         fun bind(league: SearchResult.League) {
             binding.setVariable(BR.item, league)
             binding.recyclerViewSearchLeagues.adapter = SearchLeagueAdapter()
         }
     }
 
-    class TeamViewHolder(private val binding: ItemSearchTeamBinding) : BaseViewHolder(binding) {
+    class TeamViewHolder( val binding: ItemSearchTeamBinding) : BaseViewHolder(binding) {
         fun bind(team: SearchResult.Team) {
             binding.setVariable(BR.item, team)
             binding.recyclerViewSearchLeagues.adapter = SearchTeamAdapter()
@@ -66,7 +62,6 @@ class SearchAdapter : BaseAdapter<SearchResult>(null) {
     companion object {
         const val TYPE_LEAGUE = 0
         const val TYPE_TEAM = 1
-        const val TYPE_PLAYER = 2
     }
 }
 

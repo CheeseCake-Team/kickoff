@@ -61,6 +61,7 @@
             android:id="@+id/recycler_view_search"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:overScrollMode="never"
             android:layout_marginTop="8dp"
             android:clipToPadding="false"
             android:padding="@dimen/spacing_12"
@@ -89,7 +90,7 @@
             android:id="@+id/frame_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:viewVisibilitysss="@{viewModel.state.resultEmpty}">
+            app:viewVisibilityNoResult="@{viewModel.state.resultEmpty}">
 
             <include layout="@layout/included_no_result_found" />
 

@@ -8,7 +8,7 @@ import com.cheesecake.data.remote.utils.LeagueType
 data class LeagueLocalDTO(
     @PrimaryKey val leagueId: Int,
     val leagueName: String,
-    val leagueSeason: String,
+    val leagueSeason: Int,
     val leagueLogoUrl: String,
     val seasonStartYear: String,
     val seasonEndYear: String,
