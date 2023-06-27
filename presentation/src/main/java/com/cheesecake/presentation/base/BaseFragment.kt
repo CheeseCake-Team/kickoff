@@ -22,6 +22,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.cheesecake.presentation.BR
 import com.cheesecake.presentation.R
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
@@ -69,7 +70,12 @@ abstract class BaseFragment<VDB : ViewDataBinding> : Fragment() {
     protected fun resetStatusBarColor() {
         val defaultStatusBarColor: Int = android.R.color.system_accent1_0
         requireActivity().window.statusBarColor = defaultStatusBarColor
+    }
 
+    protected fun handleOnError(message: String,) {
+        if (message.isNotEmpty()) {
+            Snackbar.make(binding.root,message, Snackbar.LENGTH_SHORT).show()
+        }
     }
 
 }

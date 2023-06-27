@@ -1,7 +1,9 @@
 package com.cheesecake.presentation.screens.homeSearch
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
@@ -68,6 +70,7 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding>() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.S)
     override fun onPause() {
         super.onPause()
         resetStatusBarColor()

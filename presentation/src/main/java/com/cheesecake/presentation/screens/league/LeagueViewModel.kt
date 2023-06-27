@@ -8,8 +8,6 @@ import com.cheesecake.domain.usecases.GetLeagueByIdAndSeasonUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,11 +19,7 @@ class LeagueViewModel @Inject constructor(
     private val leagueArgs: LeagueNavigationArgs,
 ) : BaseViewModel<LeagueUIState, LeagueNavigationEvent>(LeagueUIState(), Event()) {
 
-    val args = leagueArgs.leagueId
-    private val _s = MutableStateFlow(state.value.leagueSeason)
-    val s: StateFlow<Int> = _s
-
-
+    val leagueId = leagueArgs.leagueId
 
     init {
         initData()
@@ -62,7 +56,7 @@ class LeagueViewModel @Inject constructor(
     private fun onError(e: Throwable) {
         _state.update {
             it.copy(
-                errorMessage = e.localizedMessage ?: "Unknown error.",
+                errorMessage = e.message ?: "Unknown error.",
                 isLoading = false
             )
         }

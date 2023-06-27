@@ -31,6 +31,7 @@ import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.withTimeout
 import retrofit2.Response
 import java.net.ConnectException
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class RemoteDataSourceImp @Inject constructor(
@@ -593,7 +594,7 @@ class RemoteDataSourceImp @Inject constructor(
         return wrapBaseResponse { service.getTeamSeasons(teamId) }
     }
 
-    override suspend fun getTeamsByCountryName(countryName: String ): List<TeamDTO> {
+    override suspend fun getTeamsByCountryName(countryName: String): List<TeamDTO> {
         return wrapBaseResponse { service.getTeamsByCountryName(countryName) }
     }
 
@@ -666,9 +667,11 @@ class RemoteDataSourceImp @Inject constructor(
                 throw KickoffException.InternalServerErrorException()
             }
         } catch (e: TimeoutCancellationException) {
-            throw KickoffException.TimeoutException()
+            throw Throwable("Connection Timeout Error")
         } catch (e: ConnectException) {
-            throw KickoffException.NoInternetConnectionException()
+            throw Throwable("Internet Connection Error")
+        } catch (e: UnknownHostException) {
+            throw Throwable("No Internet Connection")
         }
     }
 
@@ -685,9 +688,11 @@ class RemoteDataSourceImp @Inject constructor(
                 throw KickoffException.InternalServerErrorException()
             }
         } catch (e: TimeoutCancellationException) {
-            throw KickoffException.TimeoutException()
+            throw Throwable("Connection Timeout Error")
         } catch (e: ConnectException) {
-            throw KickoffException.NoInternetConnectionException()
+            throw Throwable("Internet Connection Error")
+        } catch (e: UnknownHostException) {
+            throw Throwable("No Internet Connection")
         }
     }
 }
