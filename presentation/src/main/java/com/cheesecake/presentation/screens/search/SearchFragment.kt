@@ -26,7 +26,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupStatusBar()
+        changeStatusBarColor()
         setSearchFocus()
         handleNavigation()
         binding.recyclerViewSearch.adapter = SearchAdapter()
@@ -66,21 +66,25 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         }
     }
 
-    private fun setupStatusBar() {
-        val statusBarColor = ContextCompat.getColor(requireContext(), R.color.cardSurface)
-        requireActivity().window.statusBarColor = statusBarColor
-    }
+    private fun getRecentSearchActionByType(event: SearchEvents.ViewAllLClickEvent): NavDirections {
+        return when (event.type) {
+            SearchType.LEAGUE -> {
+                SearchFragmentDirections.actionSearchFragmentToLeaguesSearchFragment(
+                    viewModel.state.value.searchQuery
+                )
+            }
 
-    override fun onResume() {
-        super.onResume()
-        requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav_bar).visibility =
-            View.GONE
+            SearchType.TEAM -> {
+                SearchFragmentDirections.actionSearchFragmentToTeamsSearchFragment(
+                    viewModel.state.value.searchQuery
+                )
+            }
+        }
     }
 
     override fun onPause() {
         super.onPause()
-        requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav_bar).visibility =
-            View.VISIBLE
+        resetStatusBarColor()
     }
 
     private fun setSearchFocus() {
@@ -91,20 +95,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         inputManager.showSoftInput(searchEditText, InputMethodManager.SHOW_IMPLICIT)
     }
 
-    private fun getRecentSearchActionByType(event: SearchEvents.ViewAllLClickEvent): NavDirections {
-        return when (event.type) {
-            SearchType.LEAGUE -> {
-                SearchFragmentDirections.actionSearchFragmentToLeaguesSearchFragment(
-                    viewModel.state.value.searchQuery
-                )
-            }
-            SearchType.TEAM -> {
-                SearchFragmentDirections.actionSearchFragmentToTeamsSearchFragment(
-                    viewModel.state.value.searchQuery
-                )
-            }
-        }
-    }
+
 
 }
 

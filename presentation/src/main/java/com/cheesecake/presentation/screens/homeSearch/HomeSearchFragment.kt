@@ -20,7 +20,7 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupStatusBar()
+        changeStatusBarColor()
         binding.recyclerViewHomeSearch.adapter = HomeSearchAdapter()
         handleNavigation()
     }
@@ -68,9 +68,9 @@ class HomeSearchFragment : BaseFragment<FragmentHomeSearchBinding>() {
         }
     }
 
-    private fun setupStatusBar() {
-        val statusBarColor = ContextCompat.getColor(requireContext(), R.color.cardSurface)
-        requireActivity().window.statusBarColor = statusBarColor
+    override fun onPause() {
+        super.onPause()
+        resetStatusBarColor()
     }
 
 

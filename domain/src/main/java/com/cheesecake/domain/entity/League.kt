@@ -4,7 +4,7 @@ data class League(
     val leagueId: Int,
     val name: String,
     val imageUrl: String,
-    val season: Int,
+    val season: List<Int>,
     val countryName: String,
     val leagueTypeName: String,
     val seasonStartYear: String,

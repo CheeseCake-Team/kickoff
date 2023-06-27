@@ -26,14 +26,14 @@ class CountryLeaguesViewModel @Inject constructor(
     private fun onSuccess(leagues: List<League>) {
         _state.update { countryLeaguesUIState ->
             countryLeaguesUIState.copy(
-                leagues = leagues.map { it.toLeagueUIState { onLeagueClick(it.leagueId, it.season) } },
+                leagues = leagues.map { it.toLeagueUIState { onLeagueClick(it.leagueId) } },
                 isLoading = false
             )
         }
     }
 
-    private fun onLeagueClick(leagueId: Int, leagueSeason: Int) {
-        _event.update { Event(CountryLeaguesNavigationEvent.NavigateToLeague(leagueId, leagueSeason)) }
+    private fun onLeagueClick(leagueId: Int) {
+        _event.update { Event(CountryLeaguesNavigationEvent.NavigateToLeague(leagueId)) }
     }
 
     private fun onError(t: Throwable) {

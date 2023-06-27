@@ -24,7 +24,7 @@ class GetFavoriteLeaguesMatchesByDateUseCase @Inject constructor(
                 val matches = footballRepository.getMatchesByLeagueIdAndSeason(
                     timeZone,
                     league.leagueId,
-                    league.season
+                    league.season.last()
                 )
                     .filter { it.matchDate.isSameDay(date) }
                 league to matches

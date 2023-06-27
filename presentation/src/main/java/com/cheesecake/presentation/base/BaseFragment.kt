@@ -54,13 +54,14 @@ abstract class BaseFragment<VDB : ViewDataBinding> : Fragment() {
         }
     }
 
-    protected fun changeStatusBarColor(@ColorRes color: Int) {
-        activity?.window?.let {
-            it.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-            it.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            it.statusBarColor = ContextCompat.getColor(requireContext(), color)
-        }
+    protected fun changeStatusBarColor() {
+        val statusBarColor = ContextCompat.getColor(requireContext(), R.color.cardSurface)
+        requireActivity().window.statusBarColor = statusBarColor
+    }
 
+    protected fun resetStatusBarColor() {
+        val statusBarColor = ContextCompat.getColor(requireContext(), R.color.background)
+        requireActivity().window.statusBarColor = statusBarColor
     }
 
 }

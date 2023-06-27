@@ -22,7 +22,7 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        changeStatusBarColor(R.color.cardSurface)
+        changeStatusBarColor()
         handleNavigation()
         init()
     }
@@ -55,6 +55,11 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>() {
                 findNavController().navigateUp()
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        resetStatusBarColor()
     }
 
 }
