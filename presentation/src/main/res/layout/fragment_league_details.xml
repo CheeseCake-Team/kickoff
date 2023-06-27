@@ -250,7 +250,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/recycler_view_clubs_scores"
                     app:doNotShow="@{viewModel.state.topPlayersEmpty}" />
 
-                <Button
+                <!--<Button
                     android:id="@+id/text_view_goals_see_all"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -264,7 +264,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/text_view_goals_scored"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/text_view_goals_scored"
-                    app:doNotShow="@{viewModel.state.topPlayersEmpty}" />
+                    app:doNotShow="@{viewModel.state.topPlayersEmpty}" />-->
 
                 <TextView
                     android:id="@+id/text_view_player_name"
