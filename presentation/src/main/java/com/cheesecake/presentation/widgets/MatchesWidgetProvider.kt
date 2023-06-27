@@ -6,8 +6,8 @@ import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
-import com.cheesecake.presentation.MainActivity
 import com.cheesecake.presentation.R
+import com.cheesecake.presentation.screens.mainactivity.MainActivity
 
 class MatchesWidgetProvider: AppWidgetProvider() {
 
@@ -17,7 +17,7 @@ class MatchesWidgetProvider: AppWidgetProvider() {
         appWidgetIds: IntArray?
     ) {
         for (widgetId in appWidgetIds!!){
-            val intent = Intent(context,MainActivity::class.java)
+            val intent = Intent(context, MainActivity::class.java)
             val pendingIntent = PendingIntent.getActivity(
                 context,0,
                 intent,
@@ -32,7 +32,7 @@ class MatchesWidgetProvider: AppWidgetProvider() {
 
             views.setOnClickPendingIntent(R.id.widget_match_item_layout,pendingIntent)
             views.setRemoteAdapter(R.id.widget_list_holder,serviceIntent)
-            //views.setEmptyView(R.id.widget_list_holder,R.id.widget_empty_holder)
+            views.setEmptyView(R.id.widget_list_holder,R.id.widget_empty_holder)
             appWidgetManager?.updateAppWidget(widgetId,views)
         }
     }

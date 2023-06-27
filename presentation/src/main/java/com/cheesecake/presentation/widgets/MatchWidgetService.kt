@@ -11,7 +11,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-data class Item(val home: String, val time: String, val away: String)
 
 class MatchWidgetService : RemoteViewsService() {
     override fun onGetViewFactory(intent: Intent?): RemoteViewsFactory {
@@ -32,11 +31,11 @@ class MatchWidgetService : RemoteViewsService() {
         }
 
         override fun onDataSetChanged() {
-            TODO()
+
         }
 
         override fun onDestroy() {
-            TODO()
+
         }
 
         override fun getCount() = list.size
