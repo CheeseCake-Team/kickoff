@@ -32,6 +32,7 @@ abstract class BaseFragment<VDB : ViewDataBinding> : Fragment() {
     protected val binding: VDB
         get() = _binding
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

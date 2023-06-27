@@ -30,6 +30,7 @@ fun ImageView.setImageFromUrl(imageUri: String?) {
             .centerCrop()
             .into(this)
     }
+    //val imageUrl = imageUri.takeIf { !it.isNullOrEmpty() && !it.contains("image_not_available") } ?: R.drawable.no_image
 }
 
 @BindingAdapter("app:circularImageUrl")
@@ -41,6 +42,7 @@ fun ImageView.setCircularImageFromUrl(imageUri: String?) {
             .transform(CircleCrop())
             .into(this)
     }
+    //val imageUrl = imageUri.takeIf { !it.isNullOrEmpty() && !it.contains("image_not_available") } ?: R.drawable.no_image
 }
 
 @BindingAdapter("app:loadSVG")
@@ -49,7 +51,7 @@ fun ImageView.setSvgImageFromUrl(imageUri: String?) {
         GlideToVectorYou
             .init()
             .with(this.context)
-            .load(it.toUri(), this);
+            .load(it.toUri(), this)
     }
 }
 
@@ -109,6 +111,37 @@ fun EditText.onSearchTextChanged(viewModel: SearchViewModel) {
 
         override fun afterTextChanged(s: Editable?) {}
     })
+}
+
+@SuppressLint("SetTextI18n")
+@BindingAdapter("app:matchScore")
+fun TextView.setMatchScore(fixture: Fixture?) {
+    fixture?.let {
+        if (it.isFinished) this.text = "Finished\n  ${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
+        else this.text = it.matchTime.toString()
+    }
+}
+
+@BindingAdapter("app:setMatchState")
+fun TextView.setMatchState(isFinished: Boolean) {
+    if (isFinished)
+        text = resources.getString(R.string.finished)
+    else isVisible = false
+}
+
+@BindingAdapter(
+    "app:isFinished", "app:time", "app:homeTeamGoals", "app:awayTeamGoals",
+    requireAll = true
+)
+fun TextView.setTimeOrResult(
+    isFinished: Boolean,
+    time: String,
+    homeTeamGoals: Int,
+    awayTeamGoals: Int
+) {
+    text = if (isFinished)
+        "$homeTeamGoals  -  $awayTeamGoals"
+    else time
 }
 
 @BindingAdapter(value = ["app:listItems"])

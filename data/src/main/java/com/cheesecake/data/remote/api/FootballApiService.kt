@@ -497,6 +497,9 @@ interface FootballApiService {
     ): Response<BasePagingResponse<TeamDTO>>
 
     @GET("teams")
+    suspend fun getAllTeams(): Response<BasePagingResponse<TeamDTO>>
+
+    @GET("teams")
     suspend fun getTeamById(
         @Query("id") teamId: Int
     ): Response<BasePagingResponse<TeamDTO>>

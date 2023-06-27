@@ -27,7 +27,8 @@ import javax.inject.Inject
 class IFootballRepositoryImpl
 @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
-    private val localDataSource: LocalDataSource
+    private val localDataSource: LocalDataSource,
+    private val onboardingDataSource: OnboardingDataSource,
 ) : IFootballRepository {
 
     override suspend fun getRemoteCountries(): List<Country> {
@@ -95,7 +96,7 @@ class IFootballRepositoryImpl
         leagueId: Int,
         leagueSeason: Int
     ): List<Team> {
-        return localDataSource.getLocallyTeamsByIdAndSeason(leagueId, leagueSeason)
+        return localDataSource.getLocallyTeamsByIdAndSeason()
             .toEntity()
     }
 
@@ -112,7 +113,7 @@ class IFootballRepositoryImpl
         leagueId: Int,
         leagueSeason: Int
     ) {
-        localDataSource.updateOrInsertTeams(teamEntities.toLocal(leagueId, leagueSeason))
+        localDataSource.updateOrInsertTeams(teamEntities.toLocal())
     }
 
     override suspend fun updateOrInsertCountries(countries: List<Country>) {
@@ -178,6 +179,22 @@ class IFootballRepositoryImpl
         return remoteDataSource.getCoachTrophies(coachId).toEntity()
     }
 
+    override suspend fun getAllLeagues(): List<League> {
+        return remoteDataSource.getAllLeagues().toEntity()
+    }
+
+    override suspend fun addLeagueList(leagues: List<League>) {
+        localDataSource.addLeaguesList(leagues.map { it.toLocal() })
+    }
+
+    override suspend fun shouldShowOnboarding(): Boolean {
+       return onboardingDataSource.shouldShowOnboarding()
+    }
+
+    override suspend fun setOnboardingShown() {
+        onboardingDataSource.setOnboardingShown()
+    }
+
     override suspend fun getFixtureStatisticsByFixtureId(fixtureId: Int): List<FixtureStatistics> {
         return remoteDataSource.getFixtureStatisticsByFixtureId(fixtureId).toEntity()
     }
@@ -218,7 +235,7 @@ class IFootballRepositoryImpl
     }
 
     override suspend fun updateOrInsertTeam(team: Team, leagueId: Int, season: Int) {
-        return localDataSource.updateOrInsertTeam(team.toLocal(leagueId, season))
+        return localDataSource.updateOrInsertTeam(team.toLocal())
     }
 
     override suspend fun getFixtureLineupByFixtureId(fixtureId: Int): List<FixtureLineup> {
@@ -244,6 +261,14 @@ class IFootballRepositoryImpl
 
     override suspend fun deleteRecentSearches() {
         localDataSource.deleteRecentSearches()
+    }
+
+    override suspend fun getTeamsForLeagues(leagueId: Int, leagueSeason: Int): List<Team> {
+        return remoteDataSource.getTeamsByLeagueAndSeason(leagueId, leagueSeason).toEntity()
+    }
+
+    override suspend fun addTeamsList(teams: List<Team>) {
+        localDataSource.addTeamsList(teams.map { it.toLocal() })
     }
 
     override suspend fun getPlayerSingle(seasonId: Int, playerId: Int): Player {

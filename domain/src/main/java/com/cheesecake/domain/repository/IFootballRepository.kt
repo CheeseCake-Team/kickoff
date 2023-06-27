@@ -97,6 +97,7 @@ interface IFootballRepository {
     suspend fun getRemotelyTeam(teamId: Int): Team
 
     suspend fun updateOrInsertTeam(team: Team, leagueId: Int, season: Int)
+
     suspend fun getFixtureStatisticsByFixtureId(fixtureId: Int): List<FixtureStatistics>
 
     fun getRecentSearches(): Flow<List<RecentSearch>>
@@ -116,4 +117,17 @@ interface IFootballRepository {
     suspend fun getPlayerFullStatistics(seasonId: Int, playerId: Int): PlayerStatistics
 
     suspend fun getFixtureLineupByFixtureId(fixtureId: Int): List<FixtureLineup>
+
+    suspend fun getAllLeagues(): List<League>
+
+    suspend fun addLeagueList(leagues: List<League>)
+
+    suspend fun getTeamsForLeagues(leagueId: Int, leagueSeason: Int): List<Team>
+
+    suspend fun addTeamsList(teams: List<Team>)
+
+    suspend fun shouldShowOnboarding(): Boolean
+
+    suspend fun setOnboardingShown()
+
 }

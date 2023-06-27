@@ -16,7 +16,7 @@
         android:theme="@style/Theme.Kickoff"
         tools:targetApi="31">
         <activity
-            android:name="com.cheesecake.presentation.MainActivity"
+            android:name="com.cheesecake.presentation.screens.mainactivity.MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
@@ -24,6 +24,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name="com.cheesecake.presentation.screens.onboardingactivity.OnboardingActivity"
+            android:exported="true">
         </activity>
 
         <provider

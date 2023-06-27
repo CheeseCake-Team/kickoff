@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface TeamsDao {
 
-    @Query("SELECT * FROM team_table WHERE leagueId = :leagueId AND season = :season")
-    fun getLocallyTeamsByIdAndSeason(leagueId: Int, season: Int): List<TeamLocalDTO>
+    @Query("SELECT * FROM team_table ")
+    fun getLocallyTeamsByIdAndSeason(): List<TeamLocalDTO>
 
     @Upsert
     suspend fun updateOrInsertTeams(teams: List<TeamLocalDTO>)

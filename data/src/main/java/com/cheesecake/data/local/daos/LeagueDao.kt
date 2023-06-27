@@ -18,6 +18,10 @@ interface LeagueDao {
     @Query("SELECT * FROM league_table where leagueId = :leagueId ")
     suspend fun getLeagueByIdAndSeason(leagueId: Int, ): LeagueLocalDTO?
 
+    @Upsert
+    suspend fun insertLeagueList(LeaguesLocalDt0 : List<LeagueLocalDTO>)
+
+
     @Query("SELECT * FROM league_table WHERE isFavourite = 1")
     fun getFavouriteLeagues(): Flow<List<LeagueLocalDTO>>
 
