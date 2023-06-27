@@ -16,17 +16,8 @@ class TopScorersViewModel @Inject constructor(
     teamsStandingArgs: TeamsStandingArgs
 ) : BaseViewModel<TopScorersUiState, TopScorersNavigationEvent>(TopScorersUiState(), Event()) {
 
-
-
-    private fun onBackClick() {
-        _event.update { Event(TopScorersNavigationEvent.NavigateBack) }
-    }
-
-
     init {
-        tryToExecute(
-            { getTopScorers()
-        )
+        getTopScorers(teamsStandingArgs.leagueId, teamsStandingArgs.season)
     }
 
     private fun getTopScorers(leagueId: Int, season: Int) {
@@ -34,11 +25,10 @@ class TopScorersViewModel @Inject constructor(
             { getTopScorersByLeagueIdAndSeason(leagueId, season) },
             { scorers ->
                 _state.update { leagueDetailsUIState ->
-                    Log.e("getTopScorers: ", scorers.toString())
                     leagueDetailsUIState.copy(
-                        topPlayers = scorers.takeIf { it.isNotEmpty() }?.take(7) ?: emptyList(),
-                        isTopPlayersEmpty = scorers.isEmpty(),
-                        isLoading = false
+                        data = scorers,
+                        isLoading = false,
+                        onBackClick = { onBackClick() }
                     )
                 }
             },
@@ -46,7 +36,6 @@ class TopScorersViewModel @Inject constructor(
                 _state.update {
                     Log.e("getTopScorers: ", error.message.toString())
                     it.copy(
-                        isTopPlayersEmpty = true,
                         errorMessage = error.localizedMessage ?: "Unknown error",
                         isLoading = false
                     )
@@ -54,6 +43,10 @@ class TopScorersViewModel @Inject constructor(
 
             }
         )
+    }
+
+    private fun onBackClick() {
+        _event.update { Event(TopScorersNavigationEvent.NavigateBack) }
     }
 
 }

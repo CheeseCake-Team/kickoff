@@ -3,6 +3,7 @@ package com.cheesecake.presentation.screens.favorite.favoriteTeams
 
 import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.Team
+import com.cheesecake.domain.usecases.FavouriteTeamUseCase
 import com.cheesecake.domain.usecases.GetFavoriteTeamsUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.mapper.toUIState
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavoriteTeamsViewModel @Inject constructor(
-    private val getFavoriteTeamsUseCase: GetFavoriteTeamsUseCase
+    private val getFavoriteTeamsUseCase: GetFavoriteTeamsUseCase,
+    private val favoriteTeamUseCase: FavouriteTeamUseCase
 ) : BaseViewModel<FavoriteTeamUIState, FavoriteTeamsNavigationEvent>(FavoriteTeamUIState(), Event()) {
 
     init {
@@ -43,11 +45,10 @@ class FavoriteTeamsViewModel @Inject constructor(
     }
 
     private fun toggleFavorite(teamId: Int) {
-        viewModelScope.launch {
-            TODO("put favorite Team use case here")
-        }
+        tryToExecute({ favoriteTeamUseCase(teamId) }, ::onFavoriteSuccess, ::onError)
     }
 
+    private fun onFavoriteSuccess(team: Team) {}
 
     private fun onError(e: Throwable) {
         _state.update {

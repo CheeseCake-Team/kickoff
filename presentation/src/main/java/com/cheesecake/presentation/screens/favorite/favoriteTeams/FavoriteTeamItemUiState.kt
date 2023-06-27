@@ -6,6 +6,6 @@ data class FavoriteTeamItemUiState(
     val country: String,
     val imageUrl: String,
     val isFavorite: Boolean,
-    val onFavoriteClick: (Int) -> Unit,
-    val onFavoriteTeamClick: (teamId: Int) -> Unit
+    val onFavoriteClick: () -> Unit,
+    val onFavoriteTeamClick: () -> Unit
 )

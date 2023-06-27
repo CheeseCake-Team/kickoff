@@ -3,9 +3,11 @@ package com.cheesecake.presentation.screens.favorite.favoriteTeams
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentFavoriteTeamsBinding
+import com.cheesecake.presentation.screens.favorite.FavoriteFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,6 +18,7 @@ class FavoriteTeamsFragment : BaseFragment<FragmentFavoriteTeamsBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        handleNavigation()
         binding.favoriteTeamsRecyclerView.adapter = FavoriteTeamsAdapter()
     }
 
@@ -25,10 +28,13 @@ class FavoriteTeamsFragment : BaseFragment<FragmentFavoriteTeamsBinding>() {
         }
     }
 
-    private fun onEvent(favoriteTeamsNavigationEvent: FavoriteTeamsNavigationEvent) {
-        when(favoriteTeamsNavigationEvent) {
-            is FavoriteTeamsNavigationEvent.NavigateToTeam -> {}
-            else -> Unit
+    private fun onEvent(event: FavoriteTeamsNavigationEvent) {
+        when(event) {
+            is FavoriteTeamsNavigationEvent.NavigateToTeam -> {
+                findNavController().navigate(
+                    FavoriteFragmentDirections.actionFavoriteFragmentToTeamFragment(event.teamId)
+                )
+            }
         }
     }
 

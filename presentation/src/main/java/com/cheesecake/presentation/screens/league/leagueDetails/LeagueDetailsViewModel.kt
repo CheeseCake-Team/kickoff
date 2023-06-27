@@ -37,7 +37,8 @@ class LeagueDetailsViewModel @Inject constructor(
                 getLeagueByLeagueIdAndSeasonUseCase(leagueId,)
             },
             { league ->
-                _state.update { it.copy(country = league.countryName) }
+                _state.update { it.copy(country = league.countryName,
+                    onTopScorerClick = { onTopScorerClick(leagueId, league.season.last()) }) }
             },
             { error ->
                 _state.update {
@@ -59,7 +60,7 @@ class LeagueDetailsViewModel @Inject constructor(
                     leagueDetailsUIState.copy(
                         topPlayers = scorers.takeIf { it.isNotEmpty() }?.take(7) ?: emptyList(),
                         isTopPlayersEmpty = scorers.isEmpty(),
-                        isLoading = false
+                        isLoading = false,
                     )
                 }
             },
@@ -110,6 +111,10 @@ class LeagueDetailsViewModel @Inject constructor(
 
     private fun onStandingSeeAllClick(leagueId: Int, season: Int) {
         _event.update { Event(LeagueDetailsEvents.NavigateToTeamsStanding(leagueId, season)) }
+    }
+
+    private fun onTopScorerClick(leagueId: Int, season: Int) {
+        _event.update { Event(LeagueDetailsEvents.NavigateToTopPlayer(leagueId, season)) }
     }
 
     private fun getCurrentRound(leagueId: Int, season: Int) {

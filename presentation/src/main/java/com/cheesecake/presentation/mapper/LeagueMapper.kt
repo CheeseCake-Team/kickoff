@@ -15,5 +15,5 @@ fun League.toLeaguesUIState(
         imageUrl = this.imageUrl,
         isFavourite = this.isFavourite,
         onFavorite = onFavoriteButtonClick,
-        onFavoriteLeagueClick = onFavoriteLeagueClick,
+        onFavoriteLeagueClick = { onFavoriteLeagueClick(this.leagueId) },
     )

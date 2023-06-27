@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -29,43 +28,29 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textview_premier_league"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_16"
-            android:text="@string/premier_league"
-            android:textColor="@color/fontHeavy"
-            android:textSize="@dimen/font_size_20sp"
-            app:layout_constraintStart_toEndOf="@id/button_back"
-            app:layout_constraintTop_toTopOf="@+id/button_back" />
-
-        <TextView
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/goals_scored"
+            android:textAppearance="@style/TitleLarge"
             android:textColor="@color/fontHeavy"
-            android:textSize="@dimen/font_size_16sp"
-            app:layout_constraintStart_toStartOf="@id/textview_premier_league"
-            app:layout_constraintTop_toBottomOf="@id/textview_premier_league" />
+            android:layout_marginStart="@dimen/spacing_8"
+            app:layout_constraintBottom_toBottomOf="@+id/button_back"
+            app:layout_constraintStart_toEndOf="@+id/button_back"
+            app:layout_constraintTop_toTopOf="@+id/button_back"
+            app:layout_constraintVertical_bias="0.5" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_players_goals"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_16"
-            android:layout_marginTop="@dimen/spacing_8"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:clipToPadding="false"
-            android:overScrollMode="never"
-            app:items="@{viewModel.state.topPlayers}"
+            android:layout_marginTop="@dimen/spacing_8"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView11"
-            app:doNotShow="@{viewModel.state.topPlayersEmpty}"
+            app:layout_constraintTop_toBottomOf="@+id/button_back"
+            app:items="@{viewModel.state.data}"
             tools:listitem="@layout/item_player_goals" />
-
 
         <ProgressBar
             android:id="@+id/progressBar"
