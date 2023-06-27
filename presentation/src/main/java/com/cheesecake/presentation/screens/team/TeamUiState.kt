@@ -13,13 +13,3 @@ data class TeamUIState(
     val onBackClick: () -> Unit = {},
     val onTeamFavoriteClick: () -> Unit = { }
 )
-
-fun Team.toUiState(toggleFavourite: (Int) -> Unit, onBackClick: () -> Unit) = TeamUIState(
-    teamId = id,
-    teamName = name,
-    country = country,
-    imageUrl = imageUrl,
-    isFavourite = isFavourite,
-    onTeamFavoriteClick = { toggleFavourite(id) },
-    onBackClick = onBackClick
-)

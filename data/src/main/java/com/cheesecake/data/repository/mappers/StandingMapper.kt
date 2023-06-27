@@ -7,15 +7,16 @@ import com.cheesecake.domain.entity.TeamStanding
 fun StandingsDTO.League.Standing.toEntity(): TeamStanding {
     return TeamStanding(
         teamId = this.team.id,
-        form = this.form,
+        rank = this.rank,
+        form = this.form.map { it.toString() },
         logo = this.team.logo,
         name = this.team.name,
-        played = this.all.played.toString(),
-        won = this.all.win.toString(),
-        draw = this.all.draw.toString(),
-        lose = this.all.lose.toString(),
-        points = this.points.toString(),
-        goals = "${this.all.goals.forX}:${this.all.goals.against}"
+        played = this.all.played,
+        won = this.all.win,
+        draw = this.all.draw,
+        lose = this.all.lose,
+        points = this.points,
+        goalsForAgainst = "${this.all.goals.forX}:${this.all.goals.against}"
     )
 }
 

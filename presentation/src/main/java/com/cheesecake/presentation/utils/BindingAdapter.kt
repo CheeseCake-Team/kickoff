@@ -1,12 +1,12 @@
 package com.cheesecake.presentation.utils
 
-import android.annotation.SuppressLint
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.ColorRes
 import androidx.core.net.toUri
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
@@ -14,13 +14,13 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
-import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseAdapter
 import com.cheesecake.presentation.base.BaseListAdapter
 import com.cheesecake.presentation.screens.home.MatchItemUIState
 import com.cheesecake.presentation.screens.search.SearchViewModel
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
+import com.google.android.material.card.MaterialCardView
 
 
 @BindingAdapter("app:imageUrl")
@@ -99,6 +99,19 @@ fun showNoResult(view: View, isVisible: Boolean) {
 @BindingAdapter(value = ["app:doNotShow"])
 fun doNotShow(view: View, doNotWantToShow: Boolean) {
     view.isInvisible  = doNotWantToShow
+}
+
+@BindingAdapter("app:cardColor")
+fun MaterialCardView.setCardColor(item: String?) {
+    item.let {
+        @ColorRes val color = when (item) {
+            "L"  -> this.context.getColor(R.color.red)
+            "W" -> this.context.getColor(R.color.green)
+            "D" -> this.context.getColor(R.color.yellow)
+            else -> this.context.getColor(R.color.cardSurface)
+        }
+        this.setCardBackgroundColor(color)
+    }
 }
 
 @BindingAdapter("app:onSearchTextChanged")

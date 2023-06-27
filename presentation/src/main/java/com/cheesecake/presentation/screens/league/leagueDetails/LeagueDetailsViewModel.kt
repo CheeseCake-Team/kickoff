@@ -89,6 +89,7 @@ class LeagueDetailsViewModel @Inject constructor(
                         teamsStanding =  standings.take(4),
                         teamsCount = standings.size.toString(),
                         isTeamsStandingEmpty = standings.isEmpty(),
+                        onStandingSeeAllClick = { onStandingSeeAllClick(leagueId, season) },
                         isLoading = false
                     )
                 }
@@ -107,6 +108,9 @@ class LeagueDetailsViewModel @Inject constructor(
         )
     }
 
+    private fun onStandingSeeAllClick(leagueId: Int, season: Int) {
+        _event.update { Event(LeagueDetailsEvents.NavigateToTeamsStanding(leagueId, season)) }
+    }
 
     private fun getCurrentRound(leagueId: Int, season: Int) {
         tryToExecute(

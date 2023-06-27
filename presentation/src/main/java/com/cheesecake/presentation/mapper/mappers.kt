@@ -5,11 +5,13 @@ import com.cheesecake.domain.entity.Country
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.PlayerStatistics
 import com.cheesecake.domain.entity.SquadPlayer
+import com.cheesecake.domain.entity.TeamStanding
 import com.cheesecake.presentation.models.CountryItemUIState
 import com.cheesecake.presentation.models.TeamUIState
 import com.cheesecake.presentation.screens.home.MatchItemUIState
 import com.cheesecake.presentation.screens.player.playerStatistics.PlayerDataItemUIState
 import com.cheesecake.presentation.screens.player.playerStatistics.PlayerSectionItemUIState
+import com.cheesecake.presentation.screens.standings.TeamStandingItemUIState
 import com.cheesecake.presentation.screens.team.teamMatches.TeamMatchItemUIState
 import com.cheesecake.presentation.screens.team.teamPlayers.SquadPlayerItemUIState
 import com.cheesecake.presentation.utils.toStanderDateString
@@ -107,3 +109,18 @@ fun Fixture.toMatchUIState(onclick:() -> Unit): MatchItemUIState {
         onclick = onclick
     )
 }
+
+fun TeamStanding.toTeamStandingItemUIState(): TeamStandingItemUIState =
+    TeamStandingItemUIState(
+        form,
+        rank.toString(),
+        name,
+        logo,
+        String.format("%02d", played),
+        String.format("%02d", won),
+        String.format("%02d", draw),
+        String.format("%02d", lose),
+        String.format("%02d", points),
+        goalsForAgainst
+    )
+

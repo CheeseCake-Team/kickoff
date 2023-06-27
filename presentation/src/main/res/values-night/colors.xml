@@ -11,4 +11,7 @@
     <color name="lightGreyText">#66F6F6F6</color>
     <color name="date_item_background">#181928</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="red">#FA7F7F</color>
+    <color name="green">#7FFA9E</color>
+    <color name="yellow">#FBD380</color>
 </resources>

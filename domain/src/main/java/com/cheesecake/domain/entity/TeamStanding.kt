@@ -2,13 +2,14 @@ package com.cheesecake.domain.entity
 
 data class TeamStanding(
     val teamId: Int,
-    val form: String,
+    val rank: Int,
+    val form: List<String>,
     val name: String,
     val logo: String,
-    val played: String,
-    val won: String,
-    val draw: String,
-    val lose: String,
-    val points: String,
-    val goals: String
+    val played: Int,
+    val won: Int,
+    val draw: Int,
+    val lose: Int,
+    val points: Int,
+    val goalsForAgainst: String,
 )

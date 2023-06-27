@@ -12,5 +12,6 @@ data class LeagueDetailsUIState(
     val isTopPlayersEmpty: Boolean = false,
     val isTeamsStandingEmpty: Boolean = false,
     val isLoading: Boolean = true,
+    val onStandingSeeAllClick: () -> Unit = {},
     val errorMessage: String = ""
 )

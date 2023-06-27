@@ -124,13 +124,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/text_view_country_name"
                     app:doNotShow="@{viewModel.state.teamsStandingEmpty}" />
 
-                <TextView
+                <Button
                     android:id="@+id/text_view_standings_see_all"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/spacing_16"
-                    android:fontFamily="@font/lato_medium"
+                    style="@style/Widget.Material3.Button.TextButton"
                     android:text="@string/see_all"
+                    android:onClick="@{() -> viewModel.state.onStandingSeeAllClick.invoke()}"
                     android:textColor="@color/primaryColor"
                     android:textSize="@dimen/font_size_12sp"
                     app:layout_constraintBottom_toBottomOf="@+id/text_view_standing"

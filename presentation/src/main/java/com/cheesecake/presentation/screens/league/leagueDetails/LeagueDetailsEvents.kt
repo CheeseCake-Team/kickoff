@@ -1,8 +1,9 @@
 package com.cheesecake.presentation.screens.league.leagueDetails
 
+import com.cheesecake.presentation.screens.league.LeagueNavigationEvent
+
 sealed interface LeagueDetailsEvents {
-    object OnStandingEvent:LeagueDetailsEvents
-    object OnGoalsScoredEvent :LeagueDetailsEvents
-    data class OnLeagueClickedEvent(val leagueId:Int):LeagueDetailsEvents
-    data class OnPlayerClickedEvent(val playerId:Int):LeagueDetailsEvents
+
+    data class NavigateToTeamsStanding(val leagueId: Int ,val season: Int) : LeagueDetailsEvents
+
 }

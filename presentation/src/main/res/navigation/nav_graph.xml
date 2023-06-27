@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_leagueFragment_to_teamFragment"
             app:destination="@id/teamFragment" />
+        <action
+            android:id="@+id/action_leagueFragment_to_standingsFragment"
+            app:destination="@id/standingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -164,5 +167,16 @@
         <argument
             android:name="searchQuery"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/standingsFragment"
+        android:name="com.cheesecake.presentation.screens.standings.StandingsFragment"
+        android:label="StandingsFragment" >
+        <argument
+            android:name="leagueId"
+            app:argType="integer" />
+        <argument
+            android:name="season"
+            app:argType="integer" />
     </fragment>
 </navigation>
