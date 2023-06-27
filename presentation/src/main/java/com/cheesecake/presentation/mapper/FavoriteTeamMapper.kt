@@ -15,7 +15,7 @@ fun Team.toUIState(
         country = this.country ?: "Unknown",
         imageUrl = this.imageUrl,
         isFavorite = this.isFavourite,
-        onFavoriteClick = onFavoriteButtonClick,
-        onFavoriteTeamClick = onFavoriteLeagueClick,
+        onFavoriteClick = { onFavoriteButtonClick(this.id) },
+        onFavoriteTeamClick = { onFavoriteLeagueClick(this.id) },
     )
 }

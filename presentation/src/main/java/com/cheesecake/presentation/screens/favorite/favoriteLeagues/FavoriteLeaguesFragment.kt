@@ -19,21 +19,23 @@ class FavoriteLeaguesFragment : BaseFragment<FragmentFavoriteLeaguesBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.favoriteLeaguesRecyclerView.adapter = FavoriteLeaguesAdapter()
-//        handleNavigation()
+        handleNavigation()
     }
 
-//    private fun handleNavigation() {
-//        collect(viewModel.event) { event ->
-//            event.getContentIfNotHandled()?.let { onEvent(it) }
-//        }
-//    }
-//
-//    private fun onEvent(event: FavoriteLeaguesNavigationEvent) {
-//        when (event) {
-//            is FavoriteLeaguesNavigationEvent.NavigateToLeague ->
-//                findNavController().navigate(FavoriteFragmentDirections.actionFavoriteFragmentToLeagueFragment())
-//        }
-//    }
+    private fun handleNavigation() {
+        collect(viewModel.event) { event ->
+            event.getContentIfNotHandled()?.let { onEvent(it) }
+        }
+    }
+
+    private fun onEvent(event: FavoriteLeaguesNavigationEvent) {
+        when (event) {
+            is FavoriteLeaguesNavigationEvent.NavigateToLeague ->
+                findNavController().navigate(
+                    FavoriteFragmentDirections.actionFavoriteFragmentToLeagueFragment(event.leagueId)
+                )
+        }
+    }
 }
 
 

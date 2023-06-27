@@ -11,7 +11,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/background">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -249,19 +250,21 @@
                     app:layout_constraintTop_toBottomOf="@+id/recycler_view_clubs_scores"
                     app:doNotShow="@{viewModel.state.topPlayersEmpty}" />
 
-                <TextView
+                <!--<Button
                     android:id="@+id/text_view_goals_see_all"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/spacing_16"
                     android:fontFamily="@font/lato_medium"
                     android:text="@string/see_all"
+                    style="@style/Widget.Material3.Button.TextButton"
                     android:textColor="@color/primaryColor"
                     android:textSize="@dimen/font_size_12sp"
+                    android:onClick="@{()-> viewModel.state.onTopScorerClick.invoke()}"
                     app:layout_constraintBottom_toBottomOf="@+id/text_view_goals_scored"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/text_view_goals_scored"
-                    app:doNotShow="@{viewModel.state.topPlayersEmpty}" />
+                    app:doNotShow="@{viewModel.state.topPlayersEmpty}" />-->
 
                 <TextView
                     android:id="@+id/text_view_player_name"
@@ -344,6 +347,19 @@
                     android:orientation="vertical"
                     app:layout_constraintGuide_end="178dp" />
 
+                <include
+                    layout="@layout/no_result_found"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="-1dp" />
+
+                <FrameLayout
+                    android:id="@+id/frame_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:doNotShow="@{!(viewModel.state.teamsStandingEmpty &amp;&amp; viewModel.state.topPlayersEmpty)}">
+
+                </FrameLayout>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -358,16 +374,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:showLoading="@{viewModel.state.loading}" />
-
-        <FrameLayout
-            android:id="@+id/frame_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:doNotShow="@{!(viewModel.state.teamsStandingEmpty &amp;&amp; viewModel.state.topPlayersEmpty)}">
-
-            <include layout="@layout/no_result_found" />
-
-        </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

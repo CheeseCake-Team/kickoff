@@ -40,6 +40,13 @@ class LeagueDetailsFragment: BaseFragment<FragmentLeagueDetailsBinding>() {
                     )
                 )
             }
+            is LeagueDetailsEvents.NavigateToTopPlayer -> {
+                findNavController().navigate(
+                    LeagueFragmentDirections.actionLeagueFragmentToTopScorersFragment(
+                        event.leagueId, event.season
+                    )
+                )
+            }
         }
     }
 

@@ -15,13 +15,13 @@
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/cardSurface"
         style="@style/Widget.Material3.CardView.Filled"
-        android:layout_margin="@dimen/spacing_4"
         app:cardCornerRadius="@dimen/spacing_8">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="90dp"
+            android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/spacing_4"
+            android:paddingVertical="@dimen/spacing_4"
             android:background="@color/cardSurface">
 
             <com.google.android.material.textview.MaterialTextView
@@ -69,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/spacing_4"
-                android:drawableStart="@drawable/location"
+
                 android:drawablePadding="@dimen/spacing_8"
                 android:fontFamily="@font/lato"
                 android:text="@{item.country}"
@@ -85,8 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_16"
-                android:layout_marginTop="@dimen/spacing_8"
-                android:layout_marginBottom="@dimen/spacing_8"
+                android:layout_marginVertical="@dimen/spacing_8"
                 android:drawableStart="@drawable/cup"
                 android:drawablePadding="@dimen/spacing_8"
                 android:fontFamily="@font/lato"
@@ -107,7 +106,7 @@
                 android:fontFamily="@font/lato"
                 android:text="@{item.season}"
                 android:textColor="@color/fontLight"
-                android:textSize="@dimen/font_size_12sp"
+                style="@style/bodySmall"
                 app:layout_constraintBottom_toBottomOf="@+id/textview_trophy_place_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textview_trophy_place_name"

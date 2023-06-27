@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_leagueFragment_to_standingsFragment"
             app:destination="@id/standingsFragment" />
+        <action
+            android:id="@+id/action_leagueFragment_to_topScorersFragment"
+            app:destination="@id/topScorersFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -45,6 +48,9 @@
         <action
             android:id="@+id/action_favoriteFragment_to_leagueFragment"
             app:destination="@id/leagueFragment" />
+        <action
+            android:id="@+id/action_favoriteFragment_to_teamFragment"
+            app:destination="@id/teamFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -172,6 +178,17 @@
         android:id="@+id/standingsFragment"
         android:name="com.cheesecake.presentation.screens.standings.StandingsFragment"
         android:label="StandingsFragment" >
+        <argument
+            android:name="leagueId"
+            app:argType="integer" />
+        <argument
+            android:name="season"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/topScorersFragment"
+        android:name="com.cheesecake.presentation.screens.topscorers.TopScorersFragment"
+        android:label="TopScorersFragment" >
         <argument
             android:name="leagueId"
             app:argType="integer" />
