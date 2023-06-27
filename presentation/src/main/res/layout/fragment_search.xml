@@ -90,7 +90,7 @@
             android:id="@+id/frame_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:viewVisibilityProgressBar="@{viewModel.state.resultEmpty}">
+            app:viewVisibilityNoResult="@{viewModel.state.resultEmpty}">
 
             <include layout="@layout/included_no_result_found" />
 

@@ -19,7 +19,7 @@ class LeaguesSearchFragment : BaseFragment<FragmentLeaguesSearchBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.searchRecyclerView.adapter = AllLeaguesAdapter()
+        binding.searchRecyclerView.adapter = LeaguesAdapter()
         handleNavigation()
     }
 

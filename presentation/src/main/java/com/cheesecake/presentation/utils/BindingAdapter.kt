@@ -77,14 +77,19 @@ fun <T> hideIfItemsEmpty(view: View, items: List<T>) {
     view.isVisible = items.isNotEmpty()
 }
 
+@BindingAdapter(value = ["app:viewVisibilityOnItemsList"])
+fun <T> showIfItemsNotEmpty(view: View, items: List<T>) {
+    view.isVisible = items.isEmpty()
+}
+
 @BindingAdapter(value = ["app:viewVisibility"])
 fun hideWhenLoading(view: View, isVisible: Boolean) {
     if (isVisible)
         view.visibility = View.INVISIBLE
     else view.visibility = View.VISIBLE
 }
-@BindingAdapter(value = ["app:viewVisibilityProgressBar"])
-fun hideWhenLoadings(view: View, isVisible: Boolean) {
+@BindingAdapter(value = ["app:viewVisibilityNoResult"])
+fun showNoResult(view: View, isVisible: Boolean) {
     view.isInvisible  = !isVisible
 }
 

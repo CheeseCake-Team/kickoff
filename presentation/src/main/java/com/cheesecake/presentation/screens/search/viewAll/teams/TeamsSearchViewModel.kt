@@ -34,12 +34,12 @@ class TeamsSearchViewModel @Inject constructor(
     }
 
     private suspend fun getSearchResult(): List<TeamSearchUIState> {
-        _state.update { it.copy(isLoading = true) }
+        _state.update { it.copy(isResultEmpty = false, isLoading = true) }
         return getTeamsList(args.searchQuery).toSearchUIState(::onTeamClicked)
     }
 
     private fun onSearchSuccess(items: List<TeamSearchUIState>) {
-        _state.update { it.copy(items = items, isLoading = false) }
+        _state.update { it.copy(items = items, isLoading = false, isResultEmpty = items.isEmpty()) }
     }
 
     private fun onSearchError(throwable: Throwable) {

@@ -1,6 +1,5 @@
 package com.cheesecake.presentation.screens.search.viewAll.leagues
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.usecases.GetLeagueBySearchUseCase
@@ -21,7 +20,7 @@ class LeaguesSearchViewModel @Inject constructor(
     private val getLeagueList: GetLeagueBySearchUseCase,
     private val saveRecentSearch: SaveRecentSearchUseCase,
     private val args: LeaguesSearchNavigationArgs
-) : BaseViewModel<AllLeaguesUIState, SearchEvents>(AllLeaguesUIState(), Event()) {
+) : BaseViewModel<LeaguesUIState, SearchEvents>(LeaguesUIState(), Event()) {
 
     init {
         initLeagueList()
@@ -34,12 +33,12 @@ class LeaguesSearchViewModel @Inject constructor(
     }
 
     private suspend fun getSearchResult(): List<LeagueSearchUIState> {
-        _state.update { it.copy(isLoading = true) }
+        _state.update { it.copy(isResultEmpty = false, isLoading = true) }
         return getLeagueList(args.searchQuery).toSearchUIState(::onLeagueClicked)
     }
 
     private fun onSearchSuccess(items: List<LeagueSearchUIState>) {
-        _state.update { it.copy(items = items, isLoading = false) }
+        _state.update { it.copy(items = items, isLoading = false, isResultEmpty = items.isEmpty()) }
     }
 
     private fun onSearchError(throwable: Throwable) {
