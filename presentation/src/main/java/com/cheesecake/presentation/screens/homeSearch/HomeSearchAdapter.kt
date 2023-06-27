@@ -26,7 +26,7 @@ class HomeSearchAdapter : BaseAdapter<HomeSearchData>(null) {
 
     override fun getItemCount(): Int = itemList.size
 
-    class RecentSearchViewHolder(override val binding: ItemSearchRecentBinding) :
+    class RecentSearchViewHolder(val binding: ItemSearchRecentBinding) :
         BaseViewHolder(binding) {
         fun bind(recent: HomeSearchData.RecentSearches) {
             binding.setVariable(BR.item, recent)

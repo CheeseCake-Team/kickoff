@@ -1,5 +1,8 @@
 package com.cheesecake.presentation.base
 
+import android.annotation.SuppressLint
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +11,7 @@ import android.view.Window
 import android.view.WindowManager
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -60,9 +64,12 @@ abstract class BaseFragment<VDB : ViewDataBinding> : Fragment() {
         requireActivity().window.statusBarColor = statusBarColor
     }
 
+    @SuppressLint("ResourceAsColor")
+    @RequiresApi(Build.VERSION_CODES.S)
     protected fun resetStatusBarColor() {
-        val statusBarColor = ContextCompat.getColor(requireContext(), R.color.background)
-        requireActivity().window.statusBarColor = statusBarColor
+        val defaultStatusBarColor: Int = android.R.color.system_accent1_0
+        requireActivity().window.statusBarColor = defaultStatusBarColor
+
     }
 
 }

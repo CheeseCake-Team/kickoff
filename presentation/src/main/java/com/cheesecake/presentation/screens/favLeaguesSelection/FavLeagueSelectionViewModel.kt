@@ -42,7 +42,6 @@ class FavLeagueSelectionViewModel @Inject constructor(
                 },
                 isLoading = false,
                 onNextClick = { addToFavourite() },
-                onSkipClick = { onSkipClick() }
             )
         }
     }

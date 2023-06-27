@@ -45,14 +45,14 @@ class SearchAdapter : BaseAdapter<SearchResult>(null) {
         }
     }
 
-    class LeagueViewHolder(override val binding: ItemSearchLeagueBinding) : BaseViewHolder(binding) {
+    class LeagueViewHolder( val binding: ItemSearchLeagueBinding) : BaseViewHolder(binding) {
         fun bind(league: SearchResult.League) {
             binding.setVariable(BR.item, league)
             binding.recyclerViewSearchLeagues.adapter = SearchLeagueAdapter()
         }
     }
 
-    class TeamViewHolder(override val binding: ItemSearchTeamBinding) : BaseViewHolder(binding) {
+    class TeamViewHolder( val binding: ItemSearchTeamBinding) : BaseViewHolder(binding) {
         fun bind(team: SearchResult.Team) {
             binding.setVariable(BR.item, team)
             binding.recyclerViewSearchLeagues.adapter = SearchTeamAdapter()

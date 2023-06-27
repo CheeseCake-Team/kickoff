@@ -12,7 +12,7 @@ class GetTeamListUseCase @Inject constructor(
 
     suspend operator fun invoke(leagues: List<League>): List<Team> {
         return leagues.flatMap { league ->
-            Repository.getRemotelyTeamsByIdAndSeason(league.leagueId, league.season.toInt())
+            Repository.getRemotelyTeamsByIdAndSeason(league.leagueId, league.season.last())
         }
     }
 

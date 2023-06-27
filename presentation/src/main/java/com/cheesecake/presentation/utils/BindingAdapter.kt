@@ -1,10 +1,10 @@
 package com.cheesecake.presentation.utils
 
+import android.annotation.SuppressLint
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
-import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.net.toUri
@@ -14,11 +14,12 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.cheesecake.domain.entity.Fixture
+import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseAdapter
 import com.cheesecake.presentation.base.BaseListAdapter
 import com.cheesecake.presentation.screens.home.MatchItemUIState
 import com.cheesecake.presentation.screens.search.SearchViewModel
-import com.cheesecake.presentation.screens.search.models.SearchResult
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 
 
@@ -113,14 +114,14 @@ fun EditText.onSearchTextChanged(viewModel: SearchViewModel) {
     })
 }
 
-@SuppressLint("SetTextI18n")
-@BindingAdapter("app:matchScore")
-fun TextView.setMatchScore(fixture: Fixture?) {
-    fixture?.let {
-        if (it.isFinished) this.text = "Finished\n  ${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
-        else this.text = it.matchTime.toString()
-    }
-}
+//@SuppressLint("SetTextI18n")
+//@BindingAdapter("app:matchScore")
+//fun TextView.setMatchScore(fixture: Fixture?) {
+//    fixture?.let {
+//        if (it.isFinished) this.text = "Finished\n  ${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
+//        else this.text = it.matchTime.toString()
+//    }
+//}
 
 @BindingAdapter("app:setMatchState")
 fun TextView.setMatchState(isFinished: Boolean) {
