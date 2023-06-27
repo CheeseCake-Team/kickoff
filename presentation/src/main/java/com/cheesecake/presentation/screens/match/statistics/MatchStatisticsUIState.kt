@@ -5,7 +5,8 @@ import com.cheesecake.domain.entity.StatisticsType
 data class MatchStatisticsUIState(
     val statisticsItem: List<StatisticsItemUiState> = emptyList(),
     val errorMessage: String = "error",
-    val isLoading: Boolean = true
+    val isLoading: Boolean = true,
+    val noData: Boolean = false
 )
 
 data class StatisticsItemUiState(
