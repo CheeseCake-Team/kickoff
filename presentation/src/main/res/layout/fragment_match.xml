@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="false"
-        android:background="@color/appBar"
+        android:background="@color/cardSurface"
         app:layoutDescription="@xml/fragment_match_scene"
         tools:context=".screens.match.MatchFragment">
 
@@ -149,7 +149,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_40"
-            android:background="@color/appBar"
+            android:background="@color/cardSurface"
             app:tabIndicatorColor="@color/primaryColor"
             app:tabRippleColor="@color/onPrimaryColor"
             app:tabSelectedTextColor="@color/primaryColor"

@@ -128,7 +128,7 @@ class MatchStatisticsAdapter : BaseAdapter<StatisticsItemUiState>(null) {
                         }
                     }
                 }
-                val backgroundColors = listOf(R.color.tableLabel, R.color.transparent)
+                val backgroundColors = listOf(R.color.cardSurface, R.color.transparent)
                 val setPositionBackgroundColor = backgroundColors[position % backgroundColors.size]
                 holder.itemView.setBackgroundColor(
                     ContextCompat.getColor(
