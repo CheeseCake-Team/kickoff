@@ -13,13 +13,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/spacing_8"
+        android:backgroundTint="@color/cardSurface"
         android:onClick="@{() -> item.onFavoriteTeamClick.invoke(item.teamId)}"
         >
 
         <ImageView
             android:id="@+id/text_view_favorite_team_icon"
-            android:layout_width="@dimen/team_image_size_48dp"
-            android:layout_height="@dimen/team_image_size_48dp"
+            android:layout_width="@dimen/team_image_size_24dp"
+            android:layout_height="@dimen/team_image_size_24dp"
             android:layout_marginStart="16dp"
             app:imageUrl="@{item.imageUrl}"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -44,7 +46,7 @@
 
         <TextView
             android:id="@+id/text_view_team_contrary"
-            style="@style/SubtitleSmall"
+            style="@style/bodySmall"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{item.country}"
@@ -57,11 +59,11 @@
 
         <CheckBox
             android:id="@+id/button_favourites"
-            style="@style/Widget.Material3.Button.IconButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:layout_marginEnd="16dp"
-            android:button="@drawable/sl_favourite"
+            android:background="@drawable/sl_favourite"
+            android:buttonTint="@color/transparent"
             android:checked="@{item.isFavorite}"
             android:onClick="@{() -> item.onFavoriteClick.invoke(item.teamId)}"
             app:layout_constraintBottom_toBottomOf="parent"
