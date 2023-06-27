@@ -1,7 +1,9 @@
 package com.cheesecake.presentation.screens.match
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -23,10 +25,11 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
     override val viewModel: MatchViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        changeStatusBarColor(R.color.appBar)
+        changeStatusBarColor()
         handleNavigation()
         init()
     }
+
 
     private fun init() {
         val fragments = mutableListOf<Fragment>()
@@ -74,5 +77,11 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
                 findNavController().navigateUp()
             }
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
+    override fun onPause() {
+        super.onPause()
+        resetStatusBarColor()
     }
 }

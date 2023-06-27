@@ -52,20 +52,22 @@ class MatchViewModel
                 awayTeamLogoUrl = match.awayTeamLogoUrl,
                 awayTeamGoals = match.awayTeamGoals,
                 matchState = match.matchState,
-                onBackClick = { backClicked() }
+                onBackClick = { backClicked() },
+                noData = match.homeTeamName.isNullOrEmpty() && match.awayTeamName.isNullOrEmpty()
 
 
             )
         }
         Log.d("TAG", "onSuccess match: $match")
-        _args.postValue(Args(match.fixtureId, match.homeTeamId, match.awayTeamId,match.matchState))
+        _args.postValue(Args(match.fixtureId, match.homeTeamId, match.awayTeamId, match.matchState))
     }
 
     private fun onError(e: Throwable) {
         _state.update {
             it.copy(
                 errorMessage = e.localizedMessage ?: "Unknown error.",
-                isLoading = false
+                isLoading = false,
+                noData = true
 
             )
         }
@@ -74,7 +76,7 @@ class MatchViewModel
 
     private fun backClicked() {
         viewModelScope.launch {
-            _event.update{Event(MatchEvents.BackClickEvent)}
+            _event.update { Event(MatchEvents.BackClickEvent) }
         }
     }
 

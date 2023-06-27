@@ -1,7 +1,9 @@
 package com.cheesecake.presentation.screens.settings
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.cheesecake.presentation.R
@@ -16,7 +18,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        changeStatusBarColor(R.color.sitting_state_bar_color)
+        changeStatusBarColor()
 
         binding.cardViewThemeSettings.setOnClickListener {
             val darkThemeFragment = DarkTheme()
@@ -25,5 +27,11 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
         binding.cardViewFavourites.setOnClickListener {
             findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToFavoriteFragment())
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
+    override fun onPause() {
+        super.onPause()
+        resetStatusBarColor()
     }
 }
