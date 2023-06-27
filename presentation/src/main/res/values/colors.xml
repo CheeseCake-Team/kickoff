@@ -2,7 +2,9 @@
 <resources>
     <color name="primaryColor">#2A4A98</color>
     <color name="onPrimaryColor">#FFFFFF</color>
-    <color name="cardSurface">#EAEDF3</color>
+    <color name="cardSurface">#FFFFFF</color>
+    <color name="tableLabel">#EAEDF3</color>
+    <color name="appBar">#EAEDF3</color>
     <color name="background">#FAFAFA</color>
     <color name="fontHeavy">#E6272727</color>
     <color name="fontLight">#99272727</color>
@@ -14,5 +16,6 @@
     <color name="red">#FA7F7F</color>
     <color name="green">#7FFA9E</color>
     <color name="yellow">#FBD380</color>
+    <color name="sitting_state_bar_color">#FAFAFA</color>
 
 </resources>

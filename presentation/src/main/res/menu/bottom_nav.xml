@@ -14,6 +14,11 @@
         android:id="@+id/discoverFragment"
         android:title="Ball"
         android:icon="@drawable/ball"/>
+
+    <item
+        android:id="@+id/favoriteFragment"
+        android:title="Favorite"
+        android:icon="@drawable/ic_favourite_outlined"/>
     <item
         android:id="@+id/settingsFragment"
         android:title="@string/settings"

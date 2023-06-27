@@ -9,5 +9,7 @@ data class MatchUIState(
     val homeTeamGoals: Int? = 0,
     val awayTeamName: String = "",
     val awayTeamLogoUrl: String = "",
-    val awayTeamGoals: Int? = 0
+    val awayTeamGoals: Int? = 0,
+    val onBackClick: () -> Unit = {},
+    val noData: Boolean = false
 )

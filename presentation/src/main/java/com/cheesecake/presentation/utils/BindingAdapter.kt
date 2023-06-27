@@ -179,3 +179,19 @@ fun TextView.setMatchScore(item: MatchItemUIState?) {
         }
     }
 }
+
+@SuppressLint("SetTextI18n")
+@BindingAdapter("app:matchUpComing")
+fun matchUpComing(view: View, state: String?) {
+    state?.let {
+        when (it){
+            "Not Started"-> view.visibility = View.VISIBLE
+            else -> view.visibility = View.GONE
+        }
+    }
+}
+
+@BindingAdapter(value = ["app:noDataShow"])
+fun noDataShow(view: View, doNotWantToShow: Boolean) {
+    view.visibility = if (doNotWantToShow) View.VISIBLE else View.INVISIBLE
+}
