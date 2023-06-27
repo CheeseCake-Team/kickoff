@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.cheesecake.presentation.R
@@ -15,8 +15,8 @@ import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentSearchBinding
 import com.cheesecake.presentation.screens.search.adapters.SearchAdapter
 import com.cheesecake.presentation.screens.search.models.SearchType
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>() {
@@ -26,9 +26,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        changeStatusBarColor()
-        setSearchFocus()
-        handleNavigation()
+        init()
         binding.recyclerViewSearch.adapter = SearchAdapter()
     }
 
@@ -82,6 +80,22 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         }
     }
 
+    private fun init() {
+        changeStatusBarColor()
+        setSearchFocus()
+        handleNavigation()
+        handleOnError()
+    }
+
+    private fun handleOnError() {
+        lifecycleScope.launch {
+            viewModel.state.collect {
+                handleOnError(it.error)
+            }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
     override fun onPause() {
         super.onPause()
         resetStatusBarColor()
@@ -94,7 +108,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputManager.showSoftInput(searchEditText, InputMethodManager.SHOW_IMPLICIT)
     }
-
 
 
 }

@@ -13,11 +13,10 @@ import com.cheesecake.presentation.databinding.FragmentLeagueBinding
 import com.cheesecake.presentation.screens.league.leagueDetails.LeagueDetailsFragment
 import com.cheesecake.presentation.screens.league.leagueMatches.LeagueMatchesFragment
 import com.cheesecake.presentation.screens.league.leagueTeams.LeagueTeamsFragment
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -35,9 +34,9 @@ class LeagueFragment : BaseFragment<FragmentLeagueBinding>() {
         lifecycleScope.launch {
             viewModel.state.collectLatest { state ->
                 val fragments = listOf(
-                    LeagueDetailsFragment.newInstance(viewModel.args, state.leagueSeason),
-                    LeagueMatchesFragment.newInstance(viewModel.args, state.leagueSeason),
-                    LeagueTeamsFragment.newInstance(viewModel.args, state.leagueSeason)
+                    LeagueDetailsFragment.newInstance(viewModel.leagueId, state.leagueSeason),
+                    LeagueMatchesFragment.newInstance(viewModel.leagueId, state.leagueSeason),
+                    LeagueTeamsFragment.newInstance(viewModel.leagueId, state.leagueSeason)
                 )
                 val fragmentsAdapter = BaseFragmentsAdapter(
                     childFragmentManager,
@@ -52,7 +51,7 @@ class LeagueFragment : BaseFragment<FragmentLeagueBinding>() {
                         2 -> tab.text = "Teams"
                     }
                 }.attach()
-
+                handleOnError(state.errorMessage)
                 Log.i("initdscdsdcsdvvs: ", state.leagueSeason.toString())
             }
         }
@@ -71,5 +70,8 @@ class LeagueFragment : BaseFragment<FragmentLeagueBinding>() {
             }
         }
     }
+
+
+
 
 }
