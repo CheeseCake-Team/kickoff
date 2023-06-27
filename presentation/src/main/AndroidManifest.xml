@@ -2,41 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <application>
-        <receiver
-            android:name=".widgets.matches.ShowMatchesWidget"
-            android:exported="false" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/show_matches_widget_info" />
-        </receiver>
-
-        <activity
-            android:name=".widgets.old.MatchesWidgetsConfigureActivity"
-            android:exported="false" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Kickoff.MySplash" />
 
-        <receiver
-            android:name=".widgets.old.MatchesWidgets"
-            android:exported="false" >
+        <receiver android:name=".widgets.MatchesWidgetProvider"
+            android:exported="false">
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
             </intent-filter>
-
             <meta-data
-                android:name="android.appwidget.AppWidgetProvider"
-                android:resource="@xml/matches_widgets_info" />
+                android:name="android.appwidget.provider"
+                android:resource="@xml/matches_widget_info"
+                />
         </receiver>
+
+        <service android:name=".widgets.MatchWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
     </application>
 
 </manifest>
