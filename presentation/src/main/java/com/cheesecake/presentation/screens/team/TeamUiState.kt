@@ -1,7 +1,5 @@
 package com.cheesecake.presentation.screens.team
 
-import com.cheesecake.domain.entity.Team
-
 data class TeamUIState(
     val teamId: Int = 0,
     val errorMessage: String = "error",
