@@ -10,152 +10,163 @@
             type="com.cheesecake.presentation.screens.match.lineup.TeamData" />
     </data>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_8"
+        android:background="@drawable/item_match_team_lineup_background">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ImageView
+            android:id="@+id/image_view_team_image"
+            android:layout_width="@dimen/team_image_size_24dp"
+            android:layout_height="@dimen/team_image_size_24dp"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_16"
+            app:imageUrl="@{item.teamLogoUrl}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_team_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_8"
+            android:layout_marginEnd="@dimen/spacing_16"
+            android:text="@{item.teamName}"
+            app:layout_constraintBottom_toBottomOf="@+id/image_view_team_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image_view_team_image"
+            app:layout_constraintTop_toTopOf="@+id/image_view_team_image" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_8"
+            android:background="@color/cardSurface"
+            android:elevation="@dimen/spacing_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_team_name" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_coach"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:backgroundTint="@color/onPrimaryColor">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_12"
+            android:backgroundTint="@color/tableLabel"
+            app:cardCornerRadius="@dimen/spacing_4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider">
 
-            <ImageView
-                android:id="@+id/image_view_team_image"
-                android:layout_width="@dimen/team_image_size_24dp"
-                android:layout_height="@dimen/team_image_size_24dp"
-                android:layout_marginStart="@dimen/spacing_16"
-                android:layout_marginTop="@dimen/spacing_16"
-                app:imageUrl="@{item.teamLogoUrl}"
+            <TextView
+                style="@style/SubtitleSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_8"
+                android:text="@string/coach"
+                android:textColor="@color/fontHeavy"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/text_view_coach_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_8"
+            style="@style/SubtitleMedium"
+            android:textColor="@color/fontHeavy"
+            android:text="@{item.coachName}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_view_coach"
+            tools:text="Joachim Loew" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_starter_players"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_8"
+            android:backgroundTint="@color/tableLabel"
+            app:cardCornerRadius="@dimen/spacing_4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_coach_name">
 
             <TextView
-                android:id="@+id/text_view_team_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_8"
-                android:layout_marginEnd="@dimen/spacing_8"
-                android:text="@{item.teamName}"
-                app:layout_constraintBottom_toBottomOf="@+id/image_view_team_image"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/image_view_team_image"
-                app:layout_constraintTop_toTopOf="@+id/image_view_team_image" />
-
-            <View
-                android:id="@+id/divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/spacing_8"
-                android:background="@color/backLighter"
-                android:elevation="@dimen/spacing_1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_team_name" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_view_coach"
+                style="@style/SubtitleSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_12"
-                android:backgroundTint="@color/cardSurface"
+                android:layout_margin="@dimen/spacing_8"
+                android:text="@string/starter_players"
+                android:textColor="@color/fontHeavy"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider">
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.cardview.widget.CardView>
 
-                <TextView
-                    style="@style/SubtitleSmall"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/spacing_16"
-                    android:text="@string/coach"
-                    android:textColor="@color/fontHeavy"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.cardview.widget.CardView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_starter_players"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_8"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            app:items="@{item.playerItemUiState}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_view_starter_players"
+            tools:itemCount="2"
+            tools:listitem="@layout/item_match_players" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_substitutes_players"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_8"
+            android:backgroundTint="@color/tableLabel"
+            app:cardCornerRadius="@dimen/spacing_4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recycler_view_starter_players">
 
             <TextView
-                android:id="@+id/text_view_player_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_8"
-                android:layout_marginTop="@dimen/spacing_8"
-                android:text="@{item.coachName}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/card_view_coach"
-                tools:text="Joachim Loew" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_view_starter_players"
+                style="@style/SubtitleSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_16"
-                android:backgroundTint="@color/cardSurface"
+                android:layout_margin="@dimen/spacing_8"
+                android:text="@string/substitutes_players"
+                android:textColor="@color/fontHeavy"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_player_name">
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.cardview.widget.CardView>
 
-                <TextView
-                    style="@style/SubtitleSmall"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/spacing_16"
-                    android:text="@string/starter_players"
-                    android:textColor="@color/fontHeavy"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.cardview.widget.CardView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_substitutes_players"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_8"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            app:items="@{item.substitutesPlayers}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_view_substitutes_players"
+            tools:itemCount="2"
+            tools:listitem="@layout/item_match_players" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_starter_players"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_8"
-                app:items="@{item.playerItemUiState}"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/card_view_starter_players"
-                tools:itemCount="2"
-                tools:listitem="@layout/item_match_players" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_view_substitutes_players"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_16"
-                android:backgroundTint="@color/cardSurface"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_view_starter_players">
-
-                <TextView
-                    style="@style/SubtitleSmall"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/spacing_16"
-                    android:text="@string/substitutes_players"
-                    android:textColor="@color/fontHeavy"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.cardview.widget.CardView>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_substitutes_players"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_8"
-                app:items="@{item.substitutesPlayers}"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent"
-                tools:itemCount="2"
-                tools:listitem="@layout/item_match_players" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

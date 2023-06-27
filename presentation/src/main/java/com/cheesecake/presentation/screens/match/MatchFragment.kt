@@ -1,10 +1,13 @@
 package com.cheesecake.presentation.screens.match
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.base.BaseFragmentsAdapter
@@ -22,8 +25,12 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
     override val viewModel: MatchViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        changeStatusBarColor()
+        handleNavigation()
+        handleOnError()
         init()
     }
+
 
     private fun init() {
         val fragments = mutableListOf<Fragment>()
@@ -31,9 +38,9 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.args.observe(viewLifecycleOwner) {
 
-                val matchStatisticsFragment = MatchStatisticsFragment.newInstance(it.fixtureId)
-                val matchEventFragment = MatchEventFragment.newInstance(it.fixtureId,it.homeTeamId,it.awayTeamId)
-                val matchLineupFragment = MatchLineupFragment.newInstance(it.fixtureId)
+                val matchStatisticsFragment = MatchStatisticsFragment.newInstance(it.fixtureId,it.state)
+                val matchEventFragment = MatchEventFragment.newInstance(it.fixtureId, it.homeTeamId, it.awayTeamId,it.state)
+                val matchLineupFragment = MatchLineupFragment.newInstance(it.fixtureId,it.state)
 
                 fragments.addAll(
                     listOf(
@@ -51,11 +58,39 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
                 TabLayoutMediator(binding.tabLayout, binding.matchViewPager) { tab, position ->
                     when (position) {
                         0 -> tab.text = "Statistics"
-                        1 -> tab.text = "Events"
+                        1 -> tab.text = "Timeline"
                         2 -> tab.text = "Lineup"
                     }
                 }.attach()
             }
         }
+    }
+
+    private fun handleNavigation() {
+        collect(viewModel.event) { event ->
+            event.getContentIfNotHandled()?.let { onEvent(it) }
+        }
+    }
+
+    private fun handleOnError() {
+        lifecycleScope.launch {
+            viewModel.state.collect {
+                handleOnError(it.errorMessage)
+            }
+        }
+    }
+
+    private fun onEvent(event: MatchEvents) {
+        when (event) {
+            is MatchEvents.BackClickEvent -> {
+                findNavController().navigateUp()
+            }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
+    override fun onPause() {
+        super.onPause()
+        resetStatusBarColor()
     }
 }

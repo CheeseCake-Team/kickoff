@@ -12,19 +12,25 @@ import javax.inject.Inject
 @HiltViewModel
 class TeamStatisticsViewModel @Inject constructor(
     private val getTeamStatisticsUseCase: GetTeamStatisticsUseCase,
-    teamStatisticsArgs:TeamStatisticsArgs
+    teamStatisticsArgs: TeamStatisticsArgs
 ) : BaseViewModel<TeamStatisticsUIState, TeamStatisticsEvent?>(TeamStatisticsUIState(), Event()) {
 
     init {
         tryToExecute(
-            { getTeamStatisticsUseCase(leagueId = 39, season = 2022, teamId = teamStatisticsArgs.teamId) },
+            {
+                getTeamStatisticsUseCase(
+                    leagueId = 39,
+                    season = 2022,
+                    teamId = teamStatisticsArgs.teamId
+                )
+            },
             ::onSuccess,
             ::onError
         )
     }
 
     private fun onSuccess(teamStatistics: TeamStatisticsEntity?) {
-        teamStatistics?.let {entity->
+        teamStatistics?.let { entity ->
             _state.update {
                 entity.toUIState().copy(isLoading = false)
             }

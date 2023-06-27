@@ -16,7 +16,7 @@ class DiscoverFragment : BaseFragment<FragmentDiscoverBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        changeStatusBarColor(R.color.cardSurface)
+        changeStatusBarColor()
         handleNavigation()
         binding.recyclerViewTeamCountry.adapter = DiscoverCountryAdapter()
     }
@@ -34,6 +34,11 @@ class DiscoverFragment : BaseFragment<FragmentDiscoverBinding>() {
                     DiscoverFragmentDirections.actionDiscoverFragmentToCountryFragment(event.CountryName, event.imageUrl)
                 )
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        resetStatusBarColor()
     }
 
 }

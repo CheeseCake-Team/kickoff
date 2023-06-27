@@ -348,7 +348,7 @@ interface FootballApiService {
 
     @GET("leagues")
     suspend fun getLeagueByIdBySeason(
-        @Query("id") leagueId: Int, @Query("season") season: Int
+        @Query("id") leagueId: Int
     ): Response<BasePagingResponse<LeagueDTO>>
 
     @GET("leagues")
@@ -495,6 +495,9 @@ interface FootballApiService {
     suspend fun getTeamsBySearch(
         @Query("search") name: String,
     ): Response<BasePagingResponse<TeamDTO>>
+
+    @GET("teams")
+    suspend fun getAllTeams(): Response<BasePagingResponse<TeamDTO>>
 
     @GET("teams")
     suspend fun getTeamById(

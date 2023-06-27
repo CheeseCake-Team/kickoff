@@ -10,6 +10,7 @@ import com.cheesecake.presentation.databinding.FragmentMatchEventBinding
 import com.cheesecake.presentation.screens.match.events.MatchEventArgs.Companion.AWAY_TEAM_ID_ARG
 import com.cheesecake.presentation.screens.match.events.MatchEventArgs.Companion.HOME_TEAM_ID_ARG
 import com.cheesecake.presentation.screens.match.events.MatchEventArgs.Companion.MATCH_FIXTURE_ID_ARG
+import com.cheesecake.presentation.screens.match.statistics.MatchStatisticsArgs.Companion.FIXTURE_STATUS
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,12 +30,14 @@ class MatchEventFragment : BaseFragment<FragmentMatchEventBinding>() {
 
     companion object {
         @JvmStatic
-        fun newInstance(fixtureID: Int, homeTeamID: Int, awayTeamId: Int) =
+        fun newInstance(fixtureID: Int, homeTeamID: Int, awayTeamId: Int, state : String) =
             MatchEventFragment().apply {
                 arguments = Bundle().apply {
                     putInt(MATCH_FIXTURE_ID_ARG, fixtureID)
                     putInt(HOME_TEAM_ID_ARG, homeTeamID)
                     putInt(AWAY_TEAM_ID_ARG, awayTeamId)
+                    putString(FIXTURE_STATUS,state)
+
                 }
             }
     }

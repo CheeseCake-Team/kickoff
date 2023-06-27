@@ -8,9 +8,9 @@ class GetLeagueByIdAndSeasonUseCase @Inject constructor(
     private val footballRepository: IFootballRepository,
 ) {
 
-    suspend operator fun invoke(leagueId: Int, leagueSeason: Int): League {
-        return footballRepository.getLocallyLeagueByIdAndSeason(leagueId, leagueSeason)
-            ?: footballRepository.getRemotelyLeagueByIdAndSeason(leagueId, leagueSeason)
+    suspend operator fun invoke(leagueId: Int,): League {
+        return footballRepository.getLocallyLeagueByIdAndSeason(leagueId, )
+            ?: footballRepository.getRemotelyLeagueByIdAndSeason(leagueId, )
     }
 
 }

@@ -9,5 +9,5 @@ data class TeamUIState(
     val country: String = "",
     val isFavourite: Boolean = false,
     val onBackClick: () -> Unit = {},
-    val onTeamFavoriteClick: (Int)-> Unit = {i-> }
+    val onTeamFavoriteClick: () -> Unit = { }
 )

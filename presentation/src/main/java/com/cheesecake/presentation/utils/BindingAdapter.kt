@@ -1,12 +1,13 @@
 package com.cheesecake.presentation.utils
 
+import android.annotation.SuppressLint
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
-import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.ColorRes
 import androidx.core.net.toUri
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
@@ -14,12 +15,13 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseAdapter
 import com.cheesecake.presentation.base.BaseListAdapter
 import com.cheesecake.presentation.screens.home.MatchItemUIState
 import com.cheesecake.presentation.screens.search.SearchViewModel
-import com.cheesecake.presentation.screens.search.models.SearchResult
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
+import com.google.android.material.card.MaterialCardView
 
 
 @BindingAdapter("app:imageUrl")
@@ -51,7 +53,7 @@ fun ImageView.setSvgImageFromUrl(imageUri: String?) {
         GlideToVectorYou
             .init()
             .with(this.context)
-            .load(it.toUri(), this);
+            .load(it.toUri(), this)
     }
 }
 
@@ -79,27 +81,38 @@ fun <T> hideIfItemsEmpty(view: View, items: List<T>) {
     view.isVisible = items.isNotEmpty()
 }
 
+@BindingAdapter(value = ["app:viewVisibilityOnItemsList"])
+fun <T> showIfItemsNotEmpty(view: View, items: List<T>) {
+    view.isVisible = items.isEmpty()
+}
+
 @BindingAdapter(value = ["app:viewVisibility"])
 fun hideWhenLoading(view: View, isVisible: Boolean) {
-//    view.isInvisible  = !isVisible
     if (isVisible)
         view.visibility = View.INVISIBLE
     else view.visibility = View.VISIBLE
 }
-@BindingAdapter(value = ["app:viewVisibilitysss"])
-fun hideWhenLoadings(view: View, isVisible: Boolean) {
+@BindingAdapter(value = ["app:viewVisibilityNoResult"])
+fun showNoResult(view: View, isVisible: Boolean) {
     view.isInvisible  = !isVisible
-//    if (isVisible)
-//        view.visibility = View.INVISIBLE
-//    else view.visibility = View.VISIBLE
 }
 
 @BindingAdapter(value = ["app:doNotShow"])
 fun doNotShow(view: View, doNotWantToShow: Boolean) {
     view.isInvisible  = doNotWantToShow
-//    if (isVisible)
-//        view.visibility = View.INVISIBLE
-//    else view.visibility = View.VISIBLE
+}
+
+@BindingAdapter("app:cardColor")
+fun MaterialCardView.setCardColor(item: String?) {
+    item.let {
+        @ColorRes val color = when (item) {
+            "L"  -> this.context.getColor(R.color.red)
+            "W" -> this.context.getColor(R.color.green)
+            "D" -> this.context.getColor(R.color.yellow)
+            else -> this.context.getColor(R.color.cardSurface)
+        }
+        this.setCardBackgroundColor(color)
+    }
 }
 
 @BindingAdapter("app:onSearchTextChanged")
@@ -113,6 +126,37 @@ fun EditText.onSearchTextChanged(viewModel: SearchViewModel) {
 
         override fun afterTextChanged(s: Editable?) {}
     })
+}
+
+//@SuppressLint("SetTextI18n")
+//@BindingAdapter("app:matchScore")
+//fun TextView.setMatchScore(fixture: Fixture?) {
+//    fixture?.let {
+//        if (it.isFinished) this.text = "Finished\n  ${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
+//        else this.text = it.matchTime.toString()
+//    }
+//}
+
+@BindingAdapter("app:setMatchState")
+fun TextView.setMatchState(isFinished: Boolean) {
+    if (isFinished)
+        text = resources.getString(R.string.finished)
+    else isVisible = false
+}
+
+@BindingAdapter(
+    "app:isFinished", "app:time", "app:homeTeamGoals", "app:awayTeamGoals",
+    requireAll = true
+)
+fun TextView.setTimeOrResult(
+    isFinished: Boolean,
+    time: String,
+    homeTeamGoals: Int,
+    awayTeamGoals: Int
+) {
+    text = if (isFinished)
+        "$homeTeamGoals  -  $awayTeamGoals"
+    else time
 }
 
 @BindingAdapter(value = ["app:listItems"])
@@ -135,4 +179,20 @@ fun TextView.setMatchScore(item: MatchItemUIState?) {
             else -> it.matchTime
         }
     }
+}
+
+@SuppressLint("SetTextI18n")
+@BindingAdapter("app:matchUpComing")
+fun matchUpComing(view: View, state: String?) {
+    state?.let {
+        when (it){
+            "Not Started"-> view.visibility = View.VISIBLE
+            else -> view.visibility = View.GONE
+        }
+    }
+}
+
+@BindingAdapter(value = ["app:noDataShow"])
+fun noDataShow(view: View, doNotWantToShow: Boolean) {
+    view.visibility = if (doNotWantToShow) View.VISIBLE else View.INVISIBLE
 }

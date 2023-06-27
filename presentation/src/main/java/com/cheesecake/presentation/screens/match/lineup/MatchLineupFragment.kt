@@ -41,7 +41,11 @@ class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
     }
 
     private fun populateLineup(lineup: TeamData, container: LinearLayout) {
-        val formation = lineup.formation.split("-").map { it.toInt() }
+        val formation = if (lineup.formation.isBlank()) {
+            emptyList()
+        } else {
+            lineup.formation.split("-").map { it.toInt() }
+        }
         container.removeAllViews()
 
         val goalkeeper = lineup.playerItemUiState.firstOrNull { it.playerPosition == "G" }
@@ -72,7 +76,11 @@ class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
     }
 
     private fun populateLineupReverse(lineup: TeamData, container: LinearLayout) {
-        val formation = lineup.formation.split("-").map { it.toInt() }.reversed()
+        val formation = if (lineup.formation.isBlank()) {
+            emptyList()
+        } else {
+            lineup.formation.split("-").map { it.toInt() }.reversed()
+        }
         container.removeAllViews()
 
         var playerIndex = lineup.playerItemUiState.lastIndex
@@ -135,9 +143,10 @@ class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
 
     companion object {
         @JvmStatic
-        fun newInstance(fixtureId: Int) = MatchLineupFragment().apply {
+        fun newInstance(fixtureId: Int, state : String) = MatchLineupFragment().apply {
             arguments = Bundle().apply {
                 putInt(MatchLineupsArgs.FIXTURE_ID_ARG, fixtureId)
+                putString(MatchLineupsArgs.FIXTURE_STATUS,  state)
             }
         }
     }

@@ -3,7 +3,7 @@
 
     <application>
         <activity
-            android:name=".MainActivity"
+            android:name=".screens.mainactivity.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Kickoff.MySplash" />
 

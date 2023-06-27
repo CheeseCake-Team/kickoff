@@ -1,6 +1,6 @@
 package com.cheesecake.presentation.screens.league
 
-import androidx.lifecycle.SavedStateHandle
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.usecases.FavouriteLeagueUseCase
@@ -8,8 +8,6 @@ import com.cheesecake.domain.usecases.GetLeagueByIdAndSeasonUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,66 +16,63 @@ import javax.inject.Inject
 class LeagueViewModel @Inject constructor(
     private val getLeagueByIdAndSeasonUseCase: GetLeagueByIdAndSeasonUseCase,
     private val favouriteLeagueUseCase: FavouriteLeagueUseCase,
-    private val leagueArgs :LeagueNavigationArgs,
+    private val leagueArgs: LeagueNavigationArgs,
 ) : BaseViewModel<LeagueUIState, LeagueNavigationEvent>(LeagueUIState(), Event()) {
 
-
-    private val _leagueId = MutableStateFlow(leagueArgs.leagueId)
-    val leagueId: StateFlow<Int> = _leagueId
+    val leagueId = leagueArgs.leagueId
 
     init {
+        initData()
+    }
+
+    private fun initData() {
         tryToExecute(
-            { getLeagueByIdAndSeasonUseCase(leagueArgs.leagueId, leagueArgs.season) },
+            { getLeagueByIdAndSeasonUseCase(leagueArgs.leagueId) },
             ::onSuccess,
             ::onError
         )
     }
 
-    private fun toggleFavourite(leagueId: Int, leagueSeason: Int) {
-        viewModelScope.launch {
-            favouriteLeagueUseCase(leagueId, leagueSeason).let {
-                _state.update { uiState -> uiState.copy(isFavourite = it.isFavourite) }
-            }
-        }
-    }
-
-
     private fun onSuccess(league: League) {
-        league.let {
-            _state.update { leagueUiState ->
-                leagueUiState.copy(
-                    leagueId = it.leagueId,
-                    leagueSeason = it.season.toInt(),
-                    leagueName = it.name,
-                    seasonStartEndYear = "${it.seasonStartYear}/${it.seasonEndYear}",
-                    imageUrl = it.imageUrl,
-                    isFavourite = it.isFavourite,
-                    onLeagueFavoriteClick = { leagueId, leagueSeason ->
-                        toggleFavourite(
-                            leagueId,
-                            leagueSeason
-                        )
-                    },
-                    onBackClick = { onBackClick() }
-                )
-            }
-
-
+        _state.update { leagueUiState ->
+            leagueUiState.copy(
+                leagueId = league.leagueId,
+                leagueSeason = league.season.last(),
+                leagueName = league.name,
+                seasonStartEndYear = "${league.seasonStartYear}/${league.seasonEndYear}",
+                imageUrl = league.imageUrl,
+                isFavourite = league.isFavourite,
+                onLeagueFavoriteClick = { leagueId ->
+                    toggleFavourite(
+                        leagueId,
+                    )
+                },
+                onBackClick = { onBackClick() }
+            )
         }
-    }
-
-    private fun onBackClick() {
-        _event.update { Event(LeagueNavigationEvent.NavigateBack) }
+        Log.i("initdscdsdcsdvvs: ", state.value.leagueSeason.toString())
     }
 
     private fun onError(e: Throwable) {
         _state.update {
             it.copy(
-                errorMessage = e.localizedMessage ?: "Unknown error.",
+                errorMessage = e.message ?: "Unknown error.",
                 isLoading = false
             )
         }
 
+    }
+
+    private fun toggleFavourite(leagueId: Int) {
+        viewModelScope.launch {
+            favouriteLeagueUseCase(leagueId).let {
+                _state.update { uiState -> uiState.copy(isFavourite = it.isFavourite) }
+            }
+        }
+    }
+
+    private fun onBackClick() {
+        _event.update { Event(LeagueNavigationEvent.NavigateBack) }
     }
 
 }
