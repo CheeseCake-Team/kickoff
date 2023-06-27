@@ -20,6 +20,7 @@ class MatchLineupViewModel @Inject constructor(
 ) {
     private val matchLineupsArgs = MatchLineupsArgs(savedStateHandle)
     val matchState = matchLineupsArgs.state
+
     init {
         tryToExecute(
             { getFixtureLineupByFixtureId(matchLineupsArgs.fixtureId) },
@@ -34,7 +35,8 @@ class MatchLineupViewModel @Inject constructor(
             it.copy(
                 data = getFixtureId.toUIState(),
                 teams = getFixtureId.toTeamsUIState(),
-                isLoading = false
+                isLoading = false,
+                noData = getFixtureId.isEmpty()
             )
         }
 
@@ -44,7 +46,8 @@ class MatchLineupViewModel @Inject constructor(
         _state.update {
             it.copy(
                 errorMessage = e.localizedMessage ?: "Unknown error.",
-                isLoading = false
+                isLoading = false,
+                noData = true
             )
         }
 

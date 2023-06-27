@@ -8,6 +8,7 @@ data class MatchLineupUIState(
     val isLoading: Boolean = true,
     val teams: List<TeamData> = emptyList(),
     val data: TeamsLineups = TeamsLineups(),
+    val noData: Boolean = false
 )
 
 data class TeamsLineups(

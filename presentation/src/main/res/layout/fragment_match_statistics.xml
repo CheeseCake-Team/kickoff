@@ -29,6 +29,19 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/item_statistics" />
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/recyclerView"
+            app:showLoading="@{viewModel.state.loading}"
+            app:visibilityMode="ignore" />
+
+
         <com.airbnb.lottie.LottieAnimationView
 
             android:layout_width="wrap_content"
@@ -37,10 +50,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:matchUpComing="@{viewModel.matchState}"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/matchnotstartedlotti" />
+            app:lottie_rawRes="@raw/matchnotstartedlotti"
+            app:matchUpComing="@{viewModel.matchState}" />
+        <TextView
+            android:id="@+id/tvNoData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No data available"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:noDataShow="@{viewModel.state.noData}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

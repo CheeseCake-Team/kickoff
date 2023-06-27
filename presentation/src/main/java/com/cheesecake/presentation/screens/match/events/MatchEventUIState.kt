@@ -6,7 +6,8 @@ import com.cheesecake.domain.entity.FixtureEvents
 data class MatchEventUIState(
     val errorMessage: String = "error",
     val isLoading: Boolean = true,
-    val data: List<ItemEventUIState> = emptyList()
+    val data: List<ItemEventUIState> = emptyList(),
+    val noData: Boolean = false
 )
 
 data class ItemEventUIState(
