@@ -40,18 +40,20 @@ class MatchStatisticsViewModel @Inject constructor(
 
     private fun List<FixtureStatistics>.toUIState(): List<StatisticsItemUiState> =
         map { fixtureStatistics ->
-            val type: String = when(fixtureStatistics.statisticsType){
-                StatisticsType.ACCURATE_PASSES ->  "Accurate Passes"
-                StatisticsType.ACCURATE_PASSES_PERCENTAGE ->  "Passes Accuracy %"
-                StatisticsType.EXPECTED_GOALS ->  "Expected Goals"
-                else ->  fixtureStatistics.type
+            val type: String = when (fixtureStatistics.statisticsType) {
+                StatisticsType.ACCURATE_PASSES -> "Accurate Passes"
+                StatisticsType.ACCURATE_PASSES_PERCENTAGE -> "Passes Accuracy %"
+                StatisticsType.EXPECTED_GOALS -> "Expected Goals"
+                else -> fixtureStatistics.type
             }
-            val homeTeamPercentage: Int = when(fixtureStatistics.statisticsType){
-                StatisticsType.ACCURATE_PASSES_PERCENTAGE ->  fixtureStatistics.homeTeamValue
-                else ->  fixtureStatistics.getHomeTeamPercentage()}
-            val awayTeamPercentage: Int = when(fixtureStatistics.statisticsType){
-                StatisticsType.ACCURATE_PASSES_PERCENTAGE ->  fixtureStatistics.awayTeamValue
-                else ->  fixtureStatistics.getAwayTeamPercentage()}
+            val homeTeamPercentage: Int = when (fixtureStatistics.statisticsType) {
+                StatisticsType.ACCURATE_PASSES_PERCENTAGE -> fixtureStatistics.homeTeamValue
+                else -> fixtureStatistics.getHomeTeamPercentage()
+            }
+            val awayTeamPercentage: Int = when (fixtureStatistics.statisticsType) {
+                StatisticsType.ACCURATE_PASSES_PERCENTAGE -> fixtureStatistics.awayTeamValue
+                else -> fixtureStatistics.getAwayTeamPercentage()
+            }
             StatisticsItemUiState(
                 homeTeamValue = fixtureStatistics.homeTeamValue,
                 awayTeamValue = fixtureStatistics.awayTeamValue,
