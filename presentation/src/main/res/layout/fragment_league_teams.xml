@@ -5,4 +5,5 @@
     android:layout_height="match_parent"
     android:clipToPadding="false"
     android:padding="@dimen/spacing_12"
+    android:background="@color/background"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />

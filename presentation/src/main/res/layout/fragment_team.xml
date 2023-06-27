@@ -89,6 +89,7 @@
             android:id="@+id/team_view_pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:backgroundTint="@color/background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tab_layout"
             app:layout_constraintVertical_bias="1.0">

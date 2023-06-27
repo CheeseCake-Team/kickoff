@@ -70,6 +70,8 @@
             android:text="@={viewModel.state.searchInput}"
             android:textColor="@color/fontHeavy"
             android:textColorHint="@color/lightGreyText"
+            android:inputType="text"
+            android:textSize="@dimen/font_size_14sp"
             app:layout_constraintEnd_toEndOf="@+id/text_view_details"
             app:layout_constraintStart_toStartOf="@+id/text_view_details"
             app:layout_constraintTop_toBottomOf="@+id/text_view_details" />
