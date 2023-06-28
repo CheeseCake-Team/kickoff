@@ -8,7 +8,7 @@ data class DateItemUIState(
     val month: String = "",
     val day: String = "",
     val date: Date = Date(),
-    val isSelected: Boolean = false,
+    var isSelected: Boolean = false,
     val onClickDate: (date: Date) -> Unit
 )
 
@@ -19,10 +19,16 @@ fun Date.toDateUiState(onClickDate: (date: Date) -> Unit): DateItemUIState {
     val dayFormat = SimpleDateFormat("dd", Locale.ENGLISH)
     val day = dayFormat.format(this)
 
+    val currentDayFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+    val currentDay = currentDayFormat.format(Date())
+    val thisDay = currentDayFormat.format(this)
+
+    val isSelected = currentDay == thisDay
+
     return DateItemUIState(
         month = month,
         day = day,
-        isSelected = false,
+        isSelected = isSelected,
         onClickDate = onClickDate,
         date = this
     )

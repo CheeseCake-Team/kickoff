@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class GetNextThirtyDaysUseCase @Inject constructor() {
 
-    operator fun invoke(): List<Date> = (0 until 31).map {
+    operator fun invoke(): List<Date> = (-10 until 45).map {
         Calendar.getInstance().apply { add(Calendar.DAY_OF_MONTH, it) }.time
     }
 
