@@ -2,6 +2,8 @@ package com.cheesecake.domain.usecases
 
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.repository.IFootballRepository
+import java.text.SimpleDateFormat
+import java.util.Date
 import javax.inject.Inject
 
 class GetTeamMatchesByTeamIdAndSeasonUseCase @Inject constructor(
@@ -14,6 +16,9 @@ class GetTeamMatchesByTeamIdAndSeasonUseCase @Inject constructor(
         season: Int
     ): List<Fixture> {
         return footballRepository.getMatchesByTeamIdAndSeason(timeZone, season, teamId)
-           .toList().reversed()
+            .sortedBy { it.matchDate }
+            .toList()
+            .reversed()
+
     }
 }
