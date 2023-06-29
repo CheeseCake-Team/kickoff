@@ -667,11 +667,9 @@ class RemoteDataSourceImp @Inject constructor(
                 throw KickoffException.InternalServerErrorException()
             }
         } catch (e: TimeoutCancellationException) {
-            throw Throwable("Connection Timeout Error")
+            throw KickoffException.TimeoutException()
         } catch (e: ConnectException) {
-            throw Throwable("Internet Connection Error")
-        } catch (e: UnknownHostException) {
-            throw Throwable("No Internet Connection")
+            throw KickoffException.NoInternetConnectionException()
         }
     }
 
@@ -688,11 +686,9 @@ class RemoteDataSourceImp @Inject constructor(
                 throw KickoffException.InternalServerErrorException()
             }
         } catch (e: TimeoutCancellationException) {
-            throw Throwable("Connection Timeout Error")
+            throw KickoffException.TimeoutException()
         } catch (e: ConnectException) {
-            throw Throwable("Internet Connection Error")
-        } catch (e: UnknownHostException) {
-            throw Throwable("No Internet Connection")
+            throw KickoffException.NoInternetConnectionException()
         }
     }
 }
