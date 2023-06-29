@@ -92,21 +92,22 @@ fun hideWhenLoading(view: View, isVisible: Boolean) {
         view.visibility = View.INVISIBLE
     else view.visibility = View.VISIBLE
 }
+
 @BindingAdapter(value = ["app:viewVisibilityNoResult"])
 fun showNoResult(view: View, isVisible: Boolean) {
-    view.isInvisible  = !isVisible
+    view.isInvisible = !isVisible
 }
 
 @BindingAdapter(value = ["app:doNotShow"])
 fun doNotShow(view: View, doNotWantToShow: Boolean) {
-    view.isInvisible  = doNotWantToShow
+    view.isInvisible = doNotWantToShow
 }
 
 @BindingAdapter("app:cardColor")
 fun MaterialCardView.setCardColor(item: String?) {
     item.let {
         @ColorRes val color = when (item) {
-            "L"  -> this.context.getColor(R.color.red)
+            "L" -> this.context.getColor(R.color.red)
             "W" -> this.context.getColor(R.color.green)
             "D" -> this.context.getColor(R.color.yellow)
             else -> this.context.getColor(R.color.cardSurface)
@@ -181,18 +182,20 @@ fun TextView.setMatchScore(item: MatchItemUIState?) {
     }
 }
 
-@SuppressLint("SetTextI18n")
-@BindingAdapter("app:matchUpComing")
-fun matchUpComing(view: View, state: String?) {
-    state?.let {
-        when (it){
-            "Not Started"-> view.visibility = View.VISIBLE
-            else -> view.visibility = View.GONE
-        }
+@BindingAdapter(value = ["app:noDataShow"])
+fun noDataShow(view: View, doNotWantToShow: Boolean) {
+    if (doNotWantToShow) {
+        view.visibility = View.VISIBLE
+    } else {
+        view.visibility = View.GONE
     }
 }
 
-@BindingAdapter(value = ["app:noDataShow"])
-fun noDataShow(view: View, doNotWantToShow: Boolean) {
-    view.visibility = if (doNotWantToShow) View.VISIBLE else View.INVISIBLE
+@BindingAdapter(value = ["app:doNotShowWhenNoData"])
+fun doNotShowWhenNoData(view: View, doNotWantToShow: Boolean) {
+    if (!doNotWantToShow) {
+        view.visibility = View.VISIBLE
+    } else {
+        view.visibility = View.GONE
+    }
 }
