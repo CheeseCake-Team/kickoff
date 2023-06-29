@@ -41,6 +41,7 @@ class FavLeagueSelectionViewModel @Inject constructor(
                     league.toFavLeagueItemUIState { onFavouriteLeagueSelect(league) }
                 },
                 isLoading = false,
+                isNoResult = false,
                 onNextClick = { addToFavourite() },
             )
         }
@@ -81,6 +82,7 @@ class FavLeagueSelectionViewModel @Inject constructor(
                 leaguesItems = items.map { league ->
                     league.toFavLeagueItemUIState { onFavouriteLeagueSelect(league) }
                 },
+                isNoResult = items.isEmpty(),
                 isLoading = false
             )
         }

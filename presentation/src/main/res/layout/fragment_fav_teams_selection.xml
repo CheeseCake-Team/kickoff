@@ -111,6 +111,21 @@
             app:layout_constraintTop_toTopOf="parent"
             app:showLoading="@{viewModel.state.loading}" />
 
+        <FrameLayout
+            android:id="@+id/frame_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/view_frame"
+            app:layout_constraintTop_toTopOf="@id/all_teams_recycler_view"
+            app:viewVisibilityNoResult="@{viewModel.state.noResult}">
+
+            <include
+                android:id="@+id/layout_included_no_result"
+                layout="@layout/included_no_result_found"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
