@@ -7,6 +7,7 @@ data class FavLeagueSelectionUIState (
     val searchResult: List<FavLeagueItemUIState>? = emptyList(),
     val searchInput : MutableStateFlow<String> = MutableStateFlow(""),
     val isLoading: Boolean = true,
+    val isNoResult: Boolean = false,
     val errorMessage: String = "",
     val onNextClick: () -> Unit = { },
     val onSkipClick: () -> Unit = { }

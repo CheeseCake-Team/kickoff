@@ -68,6 +68,7 @@ class FavTeamsSelectionViewModel @Inject constructor(
                     team.toFavTeamItemUIState { onFavouriteTeamSelect(team) }
                 },
                 isLoading = false,
+                isNoResult = false,
                 onGetStartedClick = { addToFavourite() }
             )
         }
@@ -108,6 +109,7 @@ class FavTeamsSelectionViewModel @Inject constructor(
                 teamsItems = items.map { team ->
                     team.toFavTeamItemUIState { onFavouriteTeamSelect(team) }
                 },
+                isNoResult = items.isEmpty(),
                 isLoading = false
             )
         }

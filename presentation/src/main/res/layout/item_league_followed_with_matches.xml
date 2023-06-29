@@ -52,6 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/spacing_8"
+                app:doNotShow="@{item.noData}"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_leagues_label"
                 tools:layout_editor_absoluteX="1dp" />

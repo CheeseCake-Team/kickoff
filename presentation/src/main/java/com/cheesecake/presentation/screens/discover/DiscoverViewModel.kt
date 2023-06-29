@@ -44,7 +44,8 @@ class DiscoverViewModel @Inject constructor(
             _state.update { discoverTeamCountryUIState ->
                 discoverTeamCountryUIState.copy(
                     data = list.map { it.toUIModel { ::onClick.invoke(it.name, it.flag) } },
-                    isLoading = false
+                    isLoading = false,
+                    isNoResult = false
                 )
             }
         }
