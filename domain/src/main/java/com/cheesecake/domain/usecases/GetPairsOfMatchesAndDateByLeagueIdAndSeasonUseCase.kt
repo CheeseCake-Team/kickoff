@@ -14,7 +14,10 @@ class GetPairsOfMatchesAndDateByLeagueIdAndSeasonUseCase
         season: Int
     ): List<Pair<String, List<Fixture>>> {
         return footballRepository.getMatchesByLeagueIdAndSeason(timeZone, leagueId, season)
-            .groupBy { it.matchDate.toStanderDateString() }.toList().reversed()
+            .sortedBy { it.matchDate }
+            .groupBy { it.matchDate.toStanderDateString() }
+            .toList()
+            .reversed()
     }
 
     fun Date.toStanderDateString(): String {

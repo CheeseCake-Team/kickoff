@@ -51,7 +51,7 @@
             app:showLoading="@{viewModel.state.loading}" />
 
         <TextView
-            android:id="@+id/tvNoData"
+            android:id="@+id/text_view_no_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="No data available"
@@ -59,22 +59,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView2"
-            app:noDataShow="@{viewModel.state.noData}" />
-
-        <com.airbnb.lottie.LottieAnimationView
-
-            android:id="@+id/lottieAnimationView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/matchnotstartedlotti"
-            app:matchUpComing="@{viewModel.matchState}" />
+            app:noDataShow="@{viewModel.state.noData}" />
 
 
 

@@ -1,7 +1,6 @@
 package com.cheesecake.presentation.screens.home
 
 import android.util.Log
-import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.usecases.FavouriteLeagueUseCase
@@ -12,7 +11,6 @@ import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import java.util.Date
 import javax.inject.Inject
 
@@ -23,6 +21,7 @@ class HomeViewModel @Inject constructor(
     private val favouriteLeagueUseCase: FavouriteLeagueUseCase
 
 ) : BaseViewModel<HomeUIState, HomeEvents>(HomeUIState(), Event()) {
+
 
     init {
 
@@ -76,4 +75,6 @@ class HomeViewModel @Inject constructor(
     private fun onLeagueClicked(leagueId: Int, season: Int) {
         _event.update { Event(HomeEvents.LeagueClickEvent(leagueId, season)) }
     }
+
+
 }
