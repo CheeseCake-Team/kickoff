@@ -73,7 +73,7 @@
             android:layout_marginEnd="@dimen/spacing_16"
             android:button="@drawable/sl_favourite"
             android:checked="@{viewModel.state.isFavourite}"
-            android:onClick="@{() -> viewModel.state.onTeamFavoriteClick.invoke()}"
+            android:onClick="@{() -> viewModel.state.onTeamFavoriteClick}"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageView" />
