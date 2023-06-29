@@ -12,6 +12,7 @@ data class FavoriteHomeItemUIState(
     val title: String = "",
     val imageUrl: String = "",
     val leagueId: Int = 0,
+    val isNoData: Boolean = false,
     val season: Int = 0,
     val onclick: (leagueId: Int, season: Int) -> Unit = { _, _ -> },
     val matches: List<MatchItemUIState> = emptyList(),
@@ -28,6 +29,7 @@ fun List<Pair<League, List<Fixture>>>.toHomeFavouriteUiState(
             leagueId = it.first.leagueId,
             season = it.first.season.last(),
             onclick = onLeagueClick,
+            isNoData = it.second.isEmpty(),
             matches = it.second.map { fixture ->
                 fixture.toMatchUIState {
                     onMatchClick(
