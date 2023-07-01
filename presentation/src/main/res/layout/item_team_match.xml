@@ -33,6 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/spacing_8"
             style="@style/Widget.Material3.CardView.Filled"
+            android:onClick="@{() -> item.matchItemUIState.onclick.invoke()}"
             app:cardBackgroundColor="@color/cardSurface"
             app:cardCornerRadius="@dimen/spacing_8">
 

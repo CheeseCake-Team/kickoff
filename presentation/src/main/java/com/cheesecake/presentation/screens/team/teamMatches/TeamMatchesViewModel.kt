@@ -1,11 +1,11 @@
 package com.cheesecake.presentation.screens.team.teamMatches
 
+import android.util.Log
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.usecases.GetTeamMatchesByTeamIdAndSeasonUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.mapper.toTeamMatchItemUIState
 import com.cheesecake.presentation.models.Event
-import com.cheesecake.presentation.screens.home.HomeEvents
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
@@ -32,7 +32,7 @@ class TeamMatchesViewModel @Inject constructor(
         _state.update {
             it.copy(
                 data = result.map { fixture ->
-                    fixture.toTeamMatchItemUIState()
+                    fixture.toTeamMatchItemUIState(::onMatchClicked)
                 },
                 isLoading = false
             )
@@ -46,7 +46,9 @@ class TeamMatchesViewModel @Inject constructor(
     private fun onMatchClicked(homeTeamId: Int, awayTeamId: Int, date: String) {
         _event.update {
             Event(TeamMatchesNavigationEvent.MatchClickedEvent(homeTeamId, awayTeamId, date))
+
         }
+        Log.d("TAaaaaag","$homeTeamId $awayTeamId $date")
     }
 
 }

@@ -1,5 +1,6 @@
 package com.cheesecake.presentation.mapper
 
+import android.util.Log
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.entity.Country
 import com.cheesecake.domain.entity.Fixture
@@ -79,7 +80,7 @@ fun SquadPlayer.mapIt(onClick: () -> Unit): SquadPlayerItemUIState {
     )
 }
 
-fun Fixture.toTeamMatchItemUIState(): TeamMatchItemUIState =
+fun Fixture.toTeamMatchItemUIState(onClick: (Int, Int, String) -> Unit): TeamMatchItemUIState =
     TeamMatchItemUIState(
         MatchItemUIState(
             matchState,
@@ -90,12 +91,23 @@ fun Fixture.toTeamMatchItemUIState(): TeamMatchItemUIState =
             homeTeamGoals ?: "0",
             awayTeamGoals ?: "0",
             homeTeamLogoUrl,
-            awayTeamLogoUrl
+            awayTeamLogoUrl,
+
+            onclick = {
+                Log.d("TAaaaaag", "$homeTeamID $awayTeamID $matchDate")
+
+                onClick(
+                    homeTeamID,
+                    awayTeamID,
+                    matchDate.toStanderDateString()
+                )
+            }
         ),
         leagueName,
         leagueLogoUrl
     )
-fun Fixture.toMatchUIState(onclick:() -> Unit): MatchItemUIState {
+
+fun Fixture.toMatchUIState(onclick: () -> Unit): MatchItemUIState {
     return MatchItemUIState(
         matchState,
         matchDate.toStanderDateString(),
