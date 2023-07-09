@@ -1,10 +1,12 @@
 package com.cheesecake.data.repository.mappers
 
-import com.cheesecake.data.remote.response.PlayerResponse
-import com.cheesecake.domain.entity.PlayerStatisticsEntity
+import com.cheesecake.data.remote.models.PlayerDTO
+import com.cheesecake.domain.entity.Player
+import com.cheesecake.domain.entity.PlayerStatistics
 
-fun PlayerResponse.mapToDomain(): PlayerStatisticsEntity {
-    return PlayerStatisticsEntity(
+@JvmName("playerDTOToPlayerStatistics")
+fun PlayerDTO.toEntity(): PlayerStatistics {
+    return PlayerStatistics(
         id = this.player.id,
         name = this.player.name,
         firstname = this.player.firstname,
@@ -24,10 +26,22 @@ fun PlayerResponse.mapToDomain(): PlayerStatisticsEntity {
         position = this.statistics.first().games.position,
         rating = this.statistics.first().games.rating,
         captain = this.statistics.first().games.captain,
-        photo = this.player.photo
+        photo = this.player.photo,
+        goals = this.statistics.first().goals.total.toString()
     )
 }
 
-fun List<PlayerResponse>.mapToDomain():List<PlayerStatisticsEntity>{
-    return this.map { it.mapToDomain() }
+@JvmName("playerDTOsToPlayersStatistics")
+fun List<PlayerDTO>.toEntity():List<PlayerStatistics>{
+    return this.map { it.toEntity() }
+}
+
+@JvmName("playerDTOToPlayerSingle")
+fun PlayerDTO.toSinglePlayer(): Player {
+    return Player(
+        this.player.id,
+        this.player.name,
+        this.player.photo,
+        this.statistics[0].team.name
+    )
 }

@@ -5,25 +5,46 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".KickoffApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".KickoffApp"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
         android:theme="@style/Theme.Kickoff"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name="com.cheesecake.presentation.screens.mainactivity.MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <activity
+            android:name="com.cheesecake.presentation.screens.onboardingactivity.OnboardingActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+
+
+        <receiver android:name="com.cheesecake.presentation.widgets.MatchesWidgetProvider"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/matches_widget_info"
+                />
+        </receiver>
+        <service android:name="com.cheesecake.presentation.widgets.MatchWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
     </application>
 
 </manifest>

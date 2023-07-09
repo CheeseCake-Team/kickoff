@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.cheesecake.presentation.screens.search.SearchViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/cardSurface"
+        android:clipToPadding="false">
+
+        <View
+            android:id="@+id/view_search_background"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/cardSurface"
+            app:layout_constraintBottom_toTopOf="@id/recycler_view_search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/back_button"
+            style="?attr/materialIconButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_8"
+            android:layout_marginTop="@dimen/spacing_8"
+            android:onClick="@{() -> viewModel.onClickBack()}"
+            app:icon="@drawable/ic_back"
+            app:iconTint="@color/fontHeavy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edit_text_search"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="@dimen/spacing_8"
+            android:layout_marginEnd="@dimen/spacing_16"
+            android:background="@drawable/edittext_background_round"
+            android:focusable="true"
+            android:fontFamily="@font/lato"
+            android:paddingHorizontal="@dimen/spacing_16"
+            android:singleLine="true"
+            android:textColor="@color/fontHeavy"
+            android:textColorHint="@color/lightGreyText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/back_button"
+            app:layout_constraintTop_toTopOf="@+id/back_button"
+            app:onSearchTextChanged="@{viewModel}" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_search"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            android:layout_marginTop="8dp"
+            android:clipToPadding="false"
+            android:padding="@dimen/spacing_12"
+            app:items="@{viewModel.state.searchResult}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_search"
+            app:viewVisibility="@{viewModel.state.loading}"
+            tools:context="com.cheesecake.league.LeagueTeamsFragment"
+            tools:listitem="@layout/item_team" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showLoading="@{viewModel.state.loading}" />
+
+        <FrameLayout
+            android:id="@+id/frame_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:viewVisibilityNoResult="@{viewModel.state.resultEmpty}">
+
+            <include layout="@layout/included_no_result_found" />
+
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

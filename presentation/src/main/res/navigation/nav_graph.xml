@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/leagueFragment"
+        android:name="com.cheesecake.presentation.screens.league.LeagueFragment"
+        android:label="LeagueFragment" >
+        <action
+            android:id="@+id/action_leagueFragment_to_matchFragment"
+            app:destination="@id/matchFragment" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_leagueFragment_to_teamFragment"
+            app:destination="@id/teamFragment" />
+        <action
+            android:id="@+id/action_leagueFragment_to_standingsFragment"
+            app:destination="@id/standingsFragment" />
+        <action
+            android:id="@+id/action_leagueFragment_to_topScorersFragment"
+            app:destination="@id/topScorersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.cheesecake.presentation.screens.search.SearchFragment"
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_leagueFragment"
+            app:destination="@id/leagueFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_leaguesSearchFragment"
+            app:destination="@id/leaguesSearchFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_teamsSearchFragment"
+            app:destination="@id/teamsSearchFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_teamFragment"
+            app:destination="@id/teamFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.cheesecake.presentation.screens.favorite.FavoriteFragment"
+        android:label="FavoriteFragment" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_leagueFragment"
+            app:destination="@id/leagueFragment" />
+        <action
+            android:id="@+id/action_favoriteFragment_to_teamFragment"
+            app:destination="@id/teamFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.cheesecake.presentation.screens.home.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_leagueFragment"
+            app:destination="@id/leagueFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_matchFragment"
+            app:destination="@id/matchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/matchFragment"
+        android:name="com.cheesecake.presentation.screens.match.MatchFragment"
+        android:label="MatchFragment" >
+        <argument
+            android:name="homeTeamId"
+            app:argType="integer" />
+        <argument
+            android:name="awayTeamId"
+            app:argType="integer" />
+        <argument
+            android:name="data"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.cheesecake.presentation.screens.settings.SettingsFragment"
+        android:label="SettingsFragment" >
+        <action
+            android:id="@+id/action_settingsFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/leaguesSearchFragment"
+        android:name="com.cheesecake.presentation.screens.search.viewAll.leagues.LeaguesSearchFragment"
+        android:label="LeaguesSearchFragment" >
+        <argument
+            android:name="searchQuery"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_leaguesSearchFragment_to_leagueFragment"
+            app:destination="@id/leagueFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeSearchFragment"
+        android:name="com.cheesecake.presentation.screens.homeSearch.HomeSearchFragment"
+        android:label="HomeSearchFragment" >
+        <action
+            android:id="@+id/action_homeSearchFragment_to_leagueFragment"
+            app:destination="@id/leagueFragment" />
+        <action
+            android:id="@+id/action_homeSearchFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_homeSearchFragment_to_teamFragment"
+            app:destination="@id/teamFragment" />
+        <action
+            android:id="@+id/action_homeSearchFragment_to_leagueFragment2"
+            app:destination="@id/leagueFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/discoverFragment"
+        android:name="com.cheesecake.presentation.screens.discover.DiscoverFragment"
+        android:label="DiscoverFragment" >
+        <action
+            android:id="@+id/action_discoverFragment_to_countryFragment"
+            app:destination="@id/countryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/countryFragment"
+        android:name="com.cheesecake.presentation.screens.country.CountryFragment"
+        android:label="CountryFragment" >
+        <argument
+            android:name="countryName"
+            app:argType="string" />
+        <argument
+            android:name="imageUrl"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_countryFragment_to_leagueFragment"
+            app:destination="@id/leagueFragment" />
+        <action
+            android:id="@+id/action_countryFragment_to_teamFragment"
+            app:destination="@id/teamFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/teamFragment"
+        android:name="com.cheesecake.presentation.screens.team.TeamFragment"
+        android:label="TeamFragment" >
+        <argument
+            android:name="teamId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_teamFragment_to_playerFragment"
+            app:destination="@id/playerFragment" />
+        <action
+            android:id="@+id/action_teamFragment_to_matchFragment"
+            app:destination="@id/matchFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/playerFragment"
+        android:name="com.cheesecake.presentation.screens.player.PlayerFragment"
+        android:label="PlayerFragment" >
+        <argument
+            android:name="playerId"
+            app:argType="integer"
+            android:defaultValue="276" />
+    </fragment>
+    <fragment
+        android:id="@+id/teamsSearchFragment"
+        android:name="com.cheesecake.presentation.screens.search.viewAll.teams.TeamsSearchFragment"
+        android:label="TeamsSearchFragment" >
+        <action
+            android:id="@+id/action_teamsSearchFragment_to_teamFragment"
+            app:destination="@id/teamFragment" />
+        <argument
+            android:name="searchQuery"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/standingsFragment"
+        android:name="com.cheesecake.presentation.screens.standings.StandingsFragment"
+        android:label="StandingsFragment" >
+        <argument
+            android:name="leagueId"
+            app:argType="integer" />
+        <argument
+            android:name="season"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/topScorersFragment"
+        android:name="com.cheesecake.presentation.screens.topscorers.TopScorersFragment"
+        android:label="TopScorersFragment" >
+        <argument
+            android:name="leagueId"
+            app:argType="integer" />
+        <argument
+            android:name="season"
+            app:argType="integer" />
+    </fragment>
+</navigation>

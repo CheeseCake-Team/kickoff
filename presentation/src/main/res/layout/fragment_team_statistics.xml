@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.cheesecake.domain.entity.ScoreStats" />
+
+        <variable
+            name="viewModel"
+
+            type="com.cheesecake.presentation.screens.team.teamstatistics.TeamStatisticsViewModel" />
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragment.TeamStatistics">
+
+
+        <TextView
+            android:id="@+id/text_data"
+            style="@style/TitleMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/lato_bold"
+            android:text="Data"
+            android:textSize="@dimen/font_size_16sp"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/lato_bold"
+            android:text="Home"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/text_data"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_away"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/lato_bold"
+            android:text="Away"
+            android:textColor="@color/fontHeavy"
+
+            app:layout_constraintStart_toEndOf="@id/text_home"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/lato_bold"
+            android:text="Total"
+            android:textColor="@color/fontHeavy"
+
+            app:layout_constraintStart_toEndOf="@id/text_away"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_played"
+
+            style="@style/medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:text="Played"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_data" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_played"
+            android:layout_width="328dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="16dp"
+            app:dividerColor="@color/backLighter"
+            app:layout_constraintEnd_toEndOf="@id/text_total"
+            app:layout_constraintStart_toStartOf="@id/text_data"
+            app:layout_constraintTop_toBottomOf="@id/text_played" />
+
+        <TextView
+            android:id="@+id/text_wins"
+
+            style="@style/medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:text="Wins"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_played"
+
+            />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_wins"
+            android:layout_width="328dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="16dp"
+
+            app:dividerColor="@color/backLighter"
+            app:layout_constraintEnd_toEndOf="@id/text_total"
+            app:layout_constraintStart_toStartOf="@id/text_data"
+            app:layout_constraintTop_toBottomOf="@id/text_wins" />
+
+        <TextView
+            android:id="@+id/text_loses"
+
+            style="@style/medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:text="Loses"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_wins" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_loses"
+            android:layout_width="328dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="16dp"
+
+            app:dividerColor="@color/backLighter"
+            app:layout_constraintEnd_toEndOf="@id/text_total"
+            app:layout_constraintStart_toStartOf="@id/text_data"
+            app:layout_constraintTop_toBottomOf="@id/text_loses" />
+
+        <TextView
+            android:id="@+id/text_sheet"
+
+            style="@style/medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:text="Clean sheet"
+            android:textColor="@color/fontHeavy"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_loses" />
+
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_clean_sheet"
+            android:layout_width="328dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="16dp"
+            app:dividerColor="@color/backLighter"
+            app:layout_constraintEnd_toEndOf="@id/text_total"
+            app:layout_constraintStart_toStartOf="@id/text_data"
+            app:layout_constraintTop_toBottomOf="@id/text_sheet" />
+
+        <TextView
+            android:id="@+id/text_failed"
+
+            style="@style/medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:text="Failed to score"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_sheet" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_failed"
+            android:layout_width="328dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="16dp"
+
+            app:dividerColor="@color/backLighter"
+            app:layout_constraintEnd_toEndOf="@id/text_total"
+            app:layout_constraintStart_toStartOf="@id/text_data"
+            app:layout_constraintTop_toBottomOf="@id/text_failed" />
+
+        <TextView
+            android:id="@+id/text_goals_for"
+            style="@style/medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:text="Goals for"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_failed" />
+
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_goals_for"
+            android:layout_width="328dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="16dp"
+
+            app:dividerColor="@color/backLighter"
+            app:layout_constraintEnd_toEndOf="@id/text_total"
+            app:layout_constraintStart_toStartOf="@id/text_data"
+            app:layout_constraintTop_toBottomOf="@id/text_goals_for" />
+
+        <TextView
+            android:id="@+id/text_goals_against"
+            style="@style/medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:text="Goals against"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_goals_for" />
+
+
+        <TextView
+            android:id="@+id/text_played_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:text="@{String.valueOf(viewModel.state.homePlayed)}"
+
+            android:textColor="@color/fontHeavy"
+
+            app:layout_constraintEnd_toEndOf="@id/text_home"
+            app:layout_constraintStart_toStartOf="@id/text_home"
+
+            app:layout_constraintTop_toTopOf="@id/text_played" />
+
+        <TextView
+            android:id="@+id/text_wins_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:text="@{String.valueOf(viewModel.state.homeWins)}"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintEnd_toEndOf="@id/text_home"
+            app:layout_constraintStart_toStartOf="@id/text_home"
+
+            app:layout_constraintTop_toTopOf="@id/text_wins" />
+
+        <TextView
+            android:id="@+id/text_loses_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:text="@{String.valueOf(viewModel.state.homeLoses)}"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintEnd_toEndOf="@id/text_home"
+            app:layout_constraintStart_toStartOf="@id/text_home"
+            app:layout_constraintTop_toTopOf="@id/text_loses" />
+
+        <TextView
+            android:id="@+id/text_cleansheet_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:text="@{String.valueOf(viewModel.state.homeCleanSheet)}"
+            android:textColor="@color/fontHeavy"
+
+            app:layout_constraintEnd_toEndOf="@id/text_home"
+            app:layout_constraintStart_toStartOf="@id/text_home"
+            app:layout_constraintTop_toTopOf="@id/text_sheet" />
+
+        <TextView
+            android:id="@+id/text_failed_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:text="@{String.valueOf(viewModel.state.homeFailed)}"
+            android:textColor="@color/fontHeavy"
+
+            app:layout_constraintEnd_toEndOf="@id/text_home"
+            app:layout_constraintStart_toStartOf="@id/text_home"
+            app:layout_constraintTop_toTopOf="@id/text_failed" />
+
+        <TextView
+            android:id="@+id/text_goals_for_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:text="@{String.valueOf(viewModel.state.homeGoalsFor)}"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintEnd_toEndOf="@id/text_home"
+            app:layout_constraintStart_toStartOf="@id/text_home"
+
+            app:layout_constraintTop_toTopOf="@id/text_goals_for" />
+
+        <TextView
+            android:id="@+id/text_goals_against_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:text="@{String.valueOf(viewModel.state.homeGoalsAgainst)}"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintEnd_toEndOf="@id/text_home"
+            app:layout_constraintStart_toStartOf="@id/text_home"
+            app:layout_constraintTop_toTopOf="@id/text_goals_against" />
+
+
+        <TextView
+            android:id="@+id/text_played_away"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:text="@{String.valueOf(viewModel.state.awayPlayed)}"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintEnd_toEndOf="@id/text_away"
+            app:layout_constraintStart_toStartOf="@id/text_away"
+            app:layout_constraintTop_toTopOf="@id/text_played" />
+
+        <TextView
+            android:id="@+id/text_wins_away"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:text="@{String.valueOf(viewModel.state.awayWins)}"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintEnd_toEndOf="@id/text_away"
+            app:layout_constraintStart_toStartOf="@id/text_away"
+            app:layout_constraintTop_toTopOf="@id/text_wins" />
+
+        <TextView
+            android:id="@+id/text_loses_away"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:text="@{String.valueOf(viewModel.state.awayLoses)}"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintEnd_toEndOf="@id/text_away"
+            app:layout_constraintStart_toStartOf="@id/text_away"
+
+            app:layout_constraintTop_toTopOf="@id/text_loses" />
+
+        <TextView
+            android:id="@+id/text_cleansheet_away"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:text="@{String.valueOf(viewModel.state.awayCleanSheet)}"
+            android:textColor="@color/fontHeavy"
+
+            app:layout_constraintEnd_toEndOf="@id/text_away"
+            app:layout_constraintStart_toStartOf="@id/text_away"
+            app:layout_constraintTop_toTopOf="@id/text_sheet" />
+
+        <TextView
+            android:id="@+id/text_failed_away"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:text="@{String.valueOf(viewModel.state.awayFailed)}"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintEnd_toEndOf="@id/text_away"
+            app:layout_constraintStart_toStartOf="@id/text_away"
+
+            app:layout_constraintTop_toTopOf="@id/text_failed" />
+
+        <TextView
+            android:id="@+id/text_goals_for_away"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:text="@{String.valueOf(viewModel.state.awayGoalsFor)}"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintEnd_toEndOf="@id/text_away"
+            app:layout_constraintStart_toStartOf="@id/text_away"
+
+            app:layout_constraintTop_toTopOf="@id/text_goals_for" />
+
+        <TextView
+            android:id="@+id/text_goals_against_away"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:text="@{String.valueOf(viewModel.state.awayGoalsAgainst)}"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintEnd_toEndOf="@id/text_away"
+            app:layout_constraintStart_toStartOf="@id/text_away"
+
+            app:layout_constraintTop_toTopOf="@id/text_goals_against" />
+
+
+        <TextView
+            android:id="@+id/text_played_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:text="@{String.valueOf(viewModel.state.totalPlayed)}"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintEnd_toEndOf="@id/text_total"
+            app:layout_constraintStart_toStartOf="@id/text_total"
+
+            app:layout_constraintTop_toTopOf="@id/text_played" />
+
+        <TextView
+            android:id="@+id/text_wins_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:text="@{String.valueOf(viewModel.state.totalWins)}"
+            android:textColor="@color/fontHeavy"
+
+            app:layout_constraintEnd_toEndOf="@id/text_total"
+            app:layout_constraintStart_toStartOf="@id/text_total"
+
+            app:layout_constraintTop_toTopOf="@id/text_wins" />
+
+        <TextView
+            android:id="@+id/text_loses_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:text="@{String.valueOf(viewModel.state.totalLoses)}"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintEnd_toEndOf="@id/text_total"
+            app:layout_constraintStart_toStartOf="@id/text_total"
+
+
+            app:layout_constraintTop_toTopOf="@id/text_loses" />
+
+        <TextView
+            android:id="@+id/text_cleansheet_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:text="@{String.valueOf(viewModel.state.totalCleanSheet)}"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintEnd_toEndOf="@id/text_total"
+            app:layout_constraintStart_toStartOf="@id/text_total"
+
+            app:layout_constraintTop_toTopOf="@id/text_sheet" />
+
+        <TextView
+            android:id="@+id/text_failed_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:text="@{String.valueOf(viewModel.state.totalFailed)}"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintEnd_toEndOf="@id/text_total"
+            app:layout_constraintStart_toStartOf="@id/text_total"
+
+            app:layout_constraintTop_toTopOf="@id/text_failed" />
+
+        <TextView
+            android:id="@+id/text_goals_for_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:text="@{String.valueOf(viewModel.state.totalGoalsFor)}"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintEnd_toEndOf="@id/text_total"
+            app:layout_constraintStart_toStartOf="@id/text_total"
+
+
+            app:layout_constraintTop_toTopOf="@id/text_goals_for" />
+
+        <TextView
+            android:id="@+id/text_goals_against_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:text="@{String.valueOf(viewModel.state.totalGoalsAgainst)}"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintEnd_toEndOf="@id/text_total"
+            app:layout_constraintStart_toStartOf="@id/text_total"
+
+            app:layout_constraintTop_toTopOf="@id/text_goals_against" />
+        <TextView
+            android:id="@+id/text_form"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:text="Form"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintStart_toStartOf="@id/text_data"
+            app:layout_constraintTop_toBottomOf="@id/text_goals_against"
+            android:textSize="@dimen/font_size_16sp"
+
+            android:layout_marginTop="16dp"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/recycler_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:visibility="visible"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_form"
+            app:layout_constraintVertical_bias="0.0"
+            tools:listitem="@layout/item_team_form"
+            app:listItems="@{viewModel.state.form}"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

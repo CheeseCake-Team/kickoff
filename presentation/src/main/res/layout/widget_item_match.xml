@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/background"
+    android:id="@+id/widget_match_item_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/widget_home_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/spacing_48"
+        android:layout_marginTop="@dimen/spacing_8"
+        android:layout_marginBottom="@dimen/spacing_8"
+        android:fontFamily="@font/lato"
+        android:maxEms="24"
+        android:singleLine="true"
+        android:textSize="@dimen/font_size_14sp"
+        tools:text="LiverPool" />
+
+    <TextView
+        android:id="@+id/widget_away_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/spacing_8"
+        android:layout_marginEnd="@dimen/spacing_48"
+        android:layout_marginBottom="@dimen/spacing_8"
+        android:fontFamily="@font/lato"
+        android:maxEms="24"
+        android:singleLine="true"
+        android:textSize="@dimen/font_size_14sp"
+        tools:text="Manchester" />
+
+    <TextView
+        android:id="@+id/widget_match_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_16"
+        android:layout_marginTop="@dimen/spacing_8"
+        android:layout_marginEnd="@dimen/spacing_48"
+        android:layout_marginBottom="@dimen/spacing_8"
+        android:layout_toStartOf="@id/widget_away_team"
+        android:layout_toEndOf="@id/widget_home_team"
+        android:fontFamily="@font/lato"
+        android:gravity="center"
+        android:maxEms="6"
+        android:singleLine="true"
+        android:textSize="@dimen/font_size_12sp"
+        tools:text="09:10" />
+</RelativeLayout>

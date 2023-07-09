@@ -1,24 +1,51 @@
 package com.cheesecake.data.repository
 
-import com.cheesecake.data.local.models.LeagueLocalDto
-import com.cheesecake.data.local.models.TeamLocalDto
+import com.cheesecake.data.local.models.LeagueLocalDTO
+import com.cheesecake.data.local.models.RecentSearchLocalDTO
+import com.cheesecake.data.local.models.TeamCountriesLocalDTO
+import com.cheesecake.data.local.models.TeamLocalDTO
+import kotlinx.coroutines.flow.Flow
 
 interface LocalDataSource {
 
-    fun getLocallyTeamsByIdAndSeason(leagueId: Int, season: Int): List<TeamLocalDto>
+    fun getLocallyTeamsByIdAndSeason(): List<TeamLocalDTO>
 
-    suspend fun updateOrInsertTeams(teams: List<TeamLocalDto>)
+    suspend fun updateOrInsertTeams(teams: List<TeamLocalDTO>)
 
-    suspend fun updateOrInsertTeam(team: TeamLocalDto)
+    suspend fun addTeamCountries(teams: List<TeamCountriesLocalDTO>)
 
-    suspend fun getFavouriteTeams(): List<TeamLocalDto>
+    suspend fun updateOrInsertTeam(team: TeamLocalDTO)
+
+    suspend fun getFavouriteTeams(): Flow<List<TeamLocalDTO>>
+
+    suspend fun getFavouriteLeagues(): Flow<List<LeagueLocalDTO>>
 
     suspend fun deleteAllTeams()
 
-    suspend fun getLeagueByIdAndSeason(leagueId: Int, leagueSeason: Int): LeagueLocalDto?
+    suspend fun getLeagueByIdAndSeason(leagueId: Int): LeagueLocalDTO?
 
-    suspend fun updateOrInsertLeague(league: LeagueLocalDto)
+    suspend fun updateOrInsertLeague(league: LeagueLocalDTO)
 
     suspend fun deleteLeagueById(leagueId: Int)
+
+    suspend fun getLocalCountries(): List<TeamCountriesLocalDTO>
+
+    suspend fun getCountriesSearch(search: String): Flow<List<TeamCountriesLocalDTO>>
+
+    suspend fun addLeaguesList(leagues: List<LeagueLocalDTO>)
+
+    suspend fun deleteTeamById(teamId: Int)
+
+    fun getRecentSearches(): Flow<List<RecentSearchLocalDTO>>
+
+    suspend fun updateOrInsertRecentSearches(recent: RecentSearchLocalDTO)
+
+    suspend fun deleteRecentSearchById(recentId: Int)
+
+    suspend fun deleteRecentSearches()
+
+    suspend fun getTeamById(teamId: Int): TeamLocalDTO?
+
+    suspend fun addTeamsList(teams: List<TeamLocalDTO>)
 
 }

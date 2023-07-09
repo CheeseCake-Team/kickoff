@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="kotlin.Pair" />
+
+        <import type="java.util.List" />
+
+        <import type="com.cheesecake.presentation.screens.team.teamPlayers.SquadPlayerItemUIState" />
+
+        <variable
+            name="item"
+            type="Pair&lt;String,List&lt;SquadPlayerItemUIState&gt;&gt;" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text_position"
+            style="@style/SubtitleMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{item.first}"
+            android:textColor="@color/fontLight"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/position" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/players_position_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_8"
+            android:overScrollMode="never"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/text_position"
+            app:listItems="@{item.second}"
+            tools:listitem="@layout/item_team_player" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

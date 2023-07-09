@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/app_widget_background"
+    android:orientation="vertical">
+
+    <ListView
+        android:id="@+id/widget_list_holder"
+        tools:listitem="@layout/widget_item_match"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/widget_empty_holder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/lightGreyText"
+        android:fontFamily="@font/lato_medium"
+        android:gravity="center"
+        android:text="@string/no_matches_today"
+        android:textColor="@color/background"
+        android:textSize="@dimen/font_size_18sp" />
+
+</LinearLayout>

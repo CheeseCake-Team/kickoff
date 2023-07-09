@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/standard_bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_sheet_corners"
+        android:padding="@dimen/spacing_16">
+
+        <TextView
+            android:id="@+id/text_view_theme_settings"
+            style="@style/TitleMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_8"
+            android:text="@string/theme_settings"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintBottom_toTopOf="@+id/text_view_choose_the_theme_you_like_to_see"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_choose_the_theme_you_like_to_see"
+            style="@style/TitleMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_8"
+            android:layout_marginBottom="@dimen/spacing_24"
+            android:text="@string/choose_the_theme_you_like_to_see"
+            android:textColor="@color/fontLight"
+            app:layout_constraintBottom_toTopOf="@+id/light_mode_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_theme_settings" />
+
+        <Button
+            android:id="@+id/light_mode_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_56"
+            android:text="@string/light_mode"
+            android:textColor="@color/onPrimaryColor"
+            android:backgroundTint="@color/primaryColor"
+            app:layout_constraintBottom_toTopOf="@+id/dark_mode_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_choose_the_theme_you_like_to_see" />
+
+        <Button
+            android:id="@+id/dark_mode_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_56"
+            android:layout_marginTop="@dimen/spacing_8"
+            android:backgroundTint="@color/primaryColor"
+            android:text="@string/dark_mode"
+            android:textColor="@color/onPrimaryColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/light_mode_button" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

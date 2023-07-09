@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/textview_holder_person"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/spacing_32"
+    android:layout_marginTop="@dimen/spacing_8"
+    android:layout_marginStart="@dimen/spacing_24"
+    android:layout_marginEnd="@dimen/spacing_24">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textview_holder_person_name"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/spacing_12"
+        android:gravity="center_vertical"
+        android:textAllCaps="false"
+        android:textColor="@color/lightGreyText"
+        android:textSize="@dimen/font_size_14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/textview_holder_person_number"
+        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/lato_medium"
+        app:layout_goneMarginStart="@dimen/spacing_12"
+        tools:text="Hassan Wasfy" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textview_holder_person_number"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/spacing_8"
+        android:gravity="center_vertical"
+        android:textAllCaps="true"
+        android:layout_marginEnd="@dimen/spacing_12"
+        android:textColor="@color/lightGreyText"
+        android:textSize="@dimen/font_size_14sp"
+        android:fontFamily="@font/lato_medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/textview_holder_person_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="10" />
+
+    <View
+        android:id="@+id/view_divider_line"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/cardSurface"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_1"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

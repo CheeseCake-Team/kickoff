@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.cheesecake.presentation.screens.country.CountryViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_view_country_icon"
+            android:layout_width="@dimen/spacing_28"
+            android:layout_height="@dimen/spacing_28"
+            android:layout_marginVertical="@dimen/spacing_8"
+            android:layout_marginStart="8dp"
+            android:scaleType="centerCrop"
+            android:elevation="2dp"
+            app:layout_constraintBottom_toBottomOf="@+id/back_button"
+            app:layout_constraintStart_toEndOf="@+id/back_button"
+            app:layout_constraintTop_toTopOf="@+id/back_button"
+            app:loadSVG="@{viewModel.state.imageUrl}"
+            app:shapeAppearanceOverlay="@style/CircleImageView" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/cardSurface"
+            android:elevation="@dimen/spacing_1"
+            app:layout_constraintBottom_toBottomOf="@id/tab_layout"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <Button
+            android:id="@+id/back_button"
+            style="?attr/materialIconButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:elevation="@dimen/spacing_1"
+            android:onClick="@{() -> viewModel.state.onBackClick.invoke()}"
+            app:icon="@drawable/ic_back"
+            app:iconTint="@color/fontHeavy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_country_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:elevation="@dimen/spacing_1"
+            android:text="@{viewModel.state.countryName}"
+            android:textAppearance="@style/SubtitleLarge"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintStart_toEndOf="@id/image_view_country_icon"
+            app:layout_constraintTop_toTopOf="@+id/back_button" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/spacing_1"
+            android:layout_marginTop="@dimen/spacing_8"
+            android:text="@{`Explore teams and championship in ` + viewModel.state.countryName}"
+            android:textAppearance="@style/bodySmall"
+            android:textColor="@color/backLighter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="@id/text_view_country_name"
+            app:layout_constraintTop_toBottomOf="@id/text_view_country_name" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            style="@style/Widget.Material3.TabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:elevation="@dimen/spacing_1"
+            android:layout_marginTop="@dimen/spacing_16"
+            app:layout_constraintTop_toBottomOf="@+id/textView6"
+            app:tabGravity="fill"
+            app:tabMode="fixed" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/country_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tab_layout"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

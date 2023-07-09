@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.cheesecake.presentation.screens.player.PlayerViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/view_search_background"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/cardSurface"
+            android:elevation="1dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tab_layout"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/back_button"
+            style="?attr/materialIconButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:layout_marginTop="8dp"
+            android:elevation="1dp"
+            android:onClick="@{() -> viewModel.state.onBackClick.invoke()}"
+            app:icon="@drawable/ic_back"
+            app:iconTint="@color/fontHeavy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/image_view_player"
+            android:layout_width="@dimen/spacing_32"
+            android:layout_height="@dimen/spacing_32"
+            android:layout_marginStart="@dimen/spacing_8"
+            android:src="@drawable/ic_back"
+            android:elevation="1.1dp"
+            app:circularImageUrl="@{viewModel.state.playerImageUrl}"
+            app:layout_constraintBottom_toBottomOf="@+id/back_button"
+            app:layout_constraintStart_toEndOf="@id/back_button"
+            app:layout_constraintTop_toTopOf="@+id/back_button"
+            />
+
+        <TextView
+            android:id="@+id/text_view_player_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:text="@{viewModel.state.playerName}"
+            android:textColor="@color/fontHeavy"
+            android:textSize="@dimen/font_size_16sp"
+            android:elevation="1dp"
+            app:layout_constraintBottom_toBottomOf="@+id/image_view_player"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/image_view_player"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            style="@style/Widget.Material3.TabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:elevation="1dp"
+            android:backgroundTint="@color/cardSurface"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/back_button"
+            app:tabGravity="fill"
+            app:tabMode="fixed"/>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/player_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tab_layout"
+            app:layout_constraintVertical_bias="1.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

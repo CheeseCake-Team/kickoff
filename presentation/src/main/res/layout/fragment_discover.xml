@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.cheesecake.presentation.screens.discover.DiscoverViewModel" />
+    </data>
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/fragment_discover_scene">
+
+        <View
+            android:id="@+id/view_search_background"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/cardSurface"
+            android:elevation="1dp"
+            app:layout_constraintBottom_toBottomOf="@+id/divider3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/text_view_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:elevation="1dp"
+            android:text="@string/discover_teams"
+            android:textAppearance="@style/TitleMedium"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_details"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_8"
+            android:layout_marginEnd="@dimen/spacing_16"
+            android:elevation="2dp"
+            android:text="@string/explore_teams_from_around_the_world_based_on_their_countries"
+            android:textAppearance="@style/bodySmall"
+            android:textColor="@color/backLighter"
+            android:textSize="@dimen/font_size_12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/text_view_heading"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_heading" />
+
+        <EditText
+            android:id="@+id/edit_text_search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_48"
+            android:layout_margin="@dimen/spacing_16"
+            android:layout_marginHorizontal="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:background="@drawable/edittext_background_round"
+            android:drawableStart="@drawable/magnifer"
+            android:drawablePadding="@dimen/spacing_8"
+            android:drawableTint="@color/fontHeavy"
+            android:elevation="4dp"
+            android:hint="@string/search_here"
+            android:paddingHorizontal="@dimen/font_size_16sp"
+            android:text="@={viewModel.state.searchInput}"
+            android:textColor="@color/fontHeavy"
+            android:textColorHint="@color/lightGreyText"
+            android:inputType="text"
+            android:textSize="@dimen/font_size_14sp"
+            app:layout_constraintEnd_toEndOf="@+id/text_view_details"
+            app:layout_constraintStart_toStartOf="@+id/text_view_details"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_details" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_team_country"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:padding="@dimen/spacing_12"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider3"
+            app:listItems="@{viewModel.state.data}"
+            tools:listitem="@layout/item_country" />
+
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:background="?android:attr/listDivider"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@+id/edit_text_search_bar" />
+
+        <FrameLayout
+            android:id="@+id/frame_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/recycler_view_team_country"
+            app:showLoading="@{viewModel.state.noResult}"
+            app:visibilityMode="ignore">
+
+            <include
+                android:id="@+id/layout_included_no_result"
+                layout="@layout/included_no_result_found"
+                app:visibilityMode="ignore"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/recycler_view_team_country"
+            app:visibilityMode="ignore"
+            app:showLoading="@{viewModel.state.loading}" />
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+</layout>

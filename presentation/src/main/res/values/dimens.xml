@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- margins and paddings -->
+    <dimen name="spacing_1">1dp</dimen>
+    <dimen name="spacing_4">4dp</dimen>
+    <dimen name="spacing_8">8dp</dimen>
+    <dimen name="spacing_12">12dp</dimen>
+    <dimen name="spacing_16">16dp</dimen>
+    <dimen name="spacing_20">20dp</dimen>
+    <dimen name="spacing_24">24dp</dimen>
+    <dimen name="spacing_28">28dp</dimen>
+    <dimen name="spacing_32">32dp</dimen>
+    <dimen name="spacing_36">36dp</dimen>
+    <dimen name="spacing_40">40dp</dimen>
+    <dimen name="spacing_48">48dp</dimen>
+    <dimen name="spacing_56">56dp</dimen>
+    <dimen name="spacing_64">64dp</dimen>
+    <dimen name="spacing_100">100dp</dimen>
+    <dimen name="team_image_size_48dp">48dp</dimen>
+
+
+    <!-- text sizes -->
+    <dimen name="font_size_12sp">12sp</dimen>
+    <dimen name="font_size_14sp">14sp</dimen>
+    <dimen name="font_size_16sp">16sp</dimen>
+    <dimen name="font_size_18sp">18sp</dimen>
+    <dimen name="font_size_20sp">20sp</dimen>
+    <dimen name="team_image_size_24dp">24dp</dimen>
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">0dp</dimen>
+
+
+</resources>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.cheesecake.presentation.screens.search.models.LeagueSearchUIState" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view"
+        style="@style/Widget.Material3.CardView.Filled"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_margin="@dimen/spacing_4"
+        android:onClick="@{() -> item.onclick.invoke()}"
+        app:cardBackgroundColor="@color/cardSurface"
+        app:cardCornerRadius="@dimen/spacing_8">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/image_view_team_icon"
+                android:layout_width="@dimen/spacing_24"
+                android:layout_height="@dimen/spacing_24"
+                android:layout_marginStart="@dimen/spacing_16"
+                android:contentDescription="@string/team_logo"
+                app:imageUrl="@{item.imageUrl}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/text_view_team_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_16"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:fontFamily="@font/lato"
+                android:text="@{item.leagueName}"
+                android:textAppearance="@style/SubtitleMedium"
+                android:textColor="@color/fontHeavy"
+                app:layout_constraintBottom_toTopOf="@+id/text_view_league_type"
+                app:layout_constraintStart_toEndOf="@+id/image_view_team_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Laliga" />
+
+            <TextView
+                android:id="@+id/text_view_established"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_8"
+                android:layout_marginEnd="@dimen/spacing_16"
+                android:fontFamily="@font/lato"
+                android:text="@{item.countryName}"
+                android:textAppearance="@style/bodyMedium"
+                android:textColor="@color/fontLight"
+                app:layout_constraintBottom_toBottomOf="@id/text_view_team_name"
+                app:layout_constraintStart_toEndOf="@id/text_view_team_name"
+                app:layout_constraintTop_toTopOf="@id/text_view_team_name"
+                tools:text="Spain" />
+
+            <TextView
+                android:id="@+id/text_view_league_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="@dimen/spacing_16"
+                android:fontFamily="@font/lato"
+                android:text="@{item.leagueTypeName}"
+                android:textAppearance="@style/bodyMedium"
+                android:textColor="@color/fontLight"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_view_team_icon"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_team_name"
+                tools:text="league" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

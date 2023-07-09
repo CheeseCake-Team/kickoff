@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.cheesecake.domain.entity.PlayerStatistics" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_4">
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/player_icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:circularImageUrl="@{item.photo}"
+            android:layout_marginVertical="@dimen/spacing_8"
+            android:layout_marginStart="@dimen/spacing_16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/club_name_text_view"
+            style="@style/SubtitleSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_16"
+            android:textColor="@color/fontHeavy"
+            android:text="@{item.name}"
+            app:layout_constraintBottom_toBottomOf="@+id/player_icon"
+            app:layout_constraintEnd_toStartOf="@+id/total_number_text_view"
+            app:layout_constraintStart_toEndOf="@+id/player_icon"
+            app:layout_constraintTop_toTopOf="@+id/player_icon" />
+
+
+        <TextView
+            android:id="@+id/total_number_text_view"
+            style="@style/SubtitleMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/fontHeavy"
+            android:text="@{item.goals}"
+            app:layout_constraintBottom_toBottomOf="@+id/player_icon"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="@+id/player_icon" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="24dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

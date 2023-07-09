@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.cheesecake.presentation.screens.search.models.TeamSearchUIState" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view"
+        style="@style/Widget.Material3.CardView.Filled"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_margin="@dimen/spacing_4"
+        android:onClick="@{() -> item.onClick.invoke()}"
+        app:cardBackgroundColor="@color/cardSurface"
+        app:cardCornerRadius="@dimen/spacing_8">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/image_view_team_icon"
+                android:layout_width="@dimen/team_image_size_24dp"
+                android:layout_height="@dimen/team_image_size_24dp"
+                android:layout_marginStart="@dimen/spacing_16"
+                android:contentDescription="@string/team_logo"
+                app:imageUrl="@{item.imageUrl}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/text_view_team_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:fontFamily="@font/lato"
+                android:text="@{item.teamName}"
+                android:textAppearance="@style/SubtitleMedium"
+                android:textColor="@color/fontHeavy"
+                app:layout_constraintBottom_toTopOf="@+id/text_view_venue"
+                app:layout_constraintStart_toEndOf="@+id/image_view_team_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="spread_inside"
+                tools:text="Barcelona" />
+
+            <TextView
+                android:id="@+id/text_view_country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_8"
+                android:fontFamily="@font/lato"
+                android:text="@{item.teamCountry}"
+                android:textAppearance="@style/bodyMedium"
+                android:textColor="@color/fontLight"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_team_name"
+                app:layout_constraintStart_toEndOf="@id/text_view_team_name"
+                app:layout_constraintTop_toTopOf="@+id/text_view_team_name"
+                tools:text="Spain" />
+
+            <TextView
+                android:id="@+id/text_view_venue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="@dimen/spacing_16"
+                android:fontFamily="@font/lato"
+                android:text="@{item.venueName + `(Capacity : ` + item.venueCapacity + `)`}"
+                android:textAppearance="@style/bodyMedium"
+                android:textColor="@color/fontLight"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_view_team_icon"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_team_name"
+                tools:text="Campnou (Capacity 90000)" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

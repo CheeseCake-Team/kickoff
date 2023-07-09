@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+<variable
+    name="item"
+    type="com.cheesecake.presentation.screens.match.lineup.PlayerItemUiState" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/spacing_8"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text_view_player_number"
+            style="@style/SubtitleMedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(item.playerNumber) }"
+            android:textColor="@color/fontLight"
+            android:layout_marginEnd="@dimen/spacing_8"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/text_view_player_name"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1" />
+
+        <TextView
+            android:id="@+id/text_view_player_name"
+            style="@style/SubtitleMedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_16"
+            android:layout_marginStart="@dimen/spacing_32"
+            android:text="@{item.playerName}"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/text_view_player_position"
+            app:layout_constraintStart_toStartOf="@+id/text_view_player_number"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Joachim Loew" />
+
+        <TextView
+            android:id="@+id/text_view_player_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/SubtitleSmall"
+            android:textColor="@color/fontHeavy"
+            android:text="@{String.valueOf(item.playerPosition)}"
+            android:layout_marginEnd="@dimen/spacing_8"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

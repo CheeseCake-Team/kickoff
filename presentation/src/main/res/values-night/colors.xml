@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primaryColor">#2A4A98</color>
+    <color name="onPrimaryColor">#FFFFFF</color>
+    <color name="cardSurface">#2E2F3E</color>
+    <color name="background">#181928</color>
+    <color name="fontHeavy">#E6F6F6F6</color>
+    <color name="fontLight">#99F6F6F6</color>
+    <color name="backLighter">#66F6F6F6</color>
+    <color name="lightGrey">#1A1A1A</color>
+    <color name="lightGreyText">#66F6F6F6</color>
+    <color name="date_item_background">#181928</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="sitting_state_bar_color">#1c1b1f</color>
+    <color name="red">#FA7F7F</color>
+    <color name="green">#7FFA9E</color>
+    <color name="yellow">#FBD380</color>
+</resources>
