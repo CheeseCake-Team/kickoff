@@ -6,8 +6,6 @@ import okhttp3.Response
 import javax.inject.Inject
 
 class AuthInterceptor @Inject constructor() : Interceptor {
-
-
     override fun intercept(chain: Interceptor.Chain): Response {
         val original = chain.request()
         val request = original.newBuilder()
@@ -19,7 +17,7 @@ class AuthInterceptor @Inject constructor() : Interceptor {
 
     companion object {
         const val API_HOST_HEADER = "x-rapidapi-host"
-        const val API_HOST_VALUE = "api-football-v1.p.rapidapi.com/v3"
-        const val API_KEY_HEADER = "x-rapidapi-key"
+        const val API_HOST_VALUE = "v3.football.api-sports.io"
+        const val API_KEY_HEADER = "x-apisports-key"
     }
 }
