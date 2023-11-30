@@ -2,32 +2,49 @@ package com.cheesecake.presentation.mapper
 
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.entity.Team
-import com.cheesecake.presentation.screens.favLeaguesSelection.FavLeagueItemUIState
-import com.cheesecake.presentation.screens.favTeamsSelection.FavTeamItemUIState
+import com.cheesecake.presentation.screens.favoritecompetitionsselection.SelectedCompetitionItemUiState
+import com.cheesecake.presentation.screens.favoriteteamsselection.SelectedTeamItemUiState
 
-@JvmName("leagueToLeaguesUIState")
-fun League.toFavLeagueItemUIState(
-    onFavoriteLeagueClick: (Int) -> Unit
-): FavLeagueItemUIState {
-    return FavLeagueItemUIState(
-        leagueId = this.leagueId,
+@JvmName("competitionToCompetitionUIState")
+fun League.toUiState(
+    onCompetitionClick: () -> Unit
+): SelectedCompetitionItemUiState {
+    return SelectedCompetitionItemUiState(
+        competitionId = this.leagueId,
         imageUrl = this.imageUrl,
-        leagueName = this.name,
+        competitionName = this.name,
         isSelected = this.isFavourite,
-        onFavorite = { onFavoriteLeagueClick(this.leagueId) }
+        onClick = onCompetitionClick
     )
 }
 
-@JvmName("teamToTeamsUIState")
-fun Team.toFavTeamItemUIState(
-    onFavoriteTeamClick: (Int) -> Unit
-): FavTeamItemUIState {
-    return FavTeamItemUIState(
+@JvmName("competitionsToCompetitionsUIState")
+fun List<League>.toUiState(
+    onCompetitionClick: (League) -> Unit
+): List<SelectedCompetitionItemUiState> {
+    return this.map { competition ->
+        competition.toUiState { onCompetitionClick(competition) }
+    }
+}
+
+@JvmName("teamToTeamUiState")
+fun Team.toUiState(
+    onTeamClick: () -> Unit
+): SelectedTeamItemUiState {
+    return SelectedTeamItemUiState(
         teamId = this.id,
         imageUrl = this.imageUrl,
         teamName = this.name,
         isSelected = this.isFavourite,
-        onFavorite = { onFavoriteTeamClick(this.id) }
+        onClick = onTeamClick
     )
 }
 
+@JvmName("teamsToTeamsUiState")
+fun List<Team>.toUiState(
+    onTeamClick: (Team) -> Unit
+): List<SelectedTeamItemUiState> {
+    return this.map { team ->
+        team.toUiState { onTeamClick(team) }
+    }
+}

@@ -4,24 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="item"
-            type="com.cheesecake.presentation.screens.favLeaguesSelection.FavLeagueItemUIState" />
-
+            type="com.cheesecake.presentation.screens.favoriteteamsselection.SelectedTeamItemUiState" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_4"
         app:cardBackgroundColor="@color/cardSurface"
-        app:foreground="@{item.selected ? @drawable/selected_fav_item : @drawable/normal_fav_item }"
-        android:layout_margin="@dimen/spacing_8">
+        app:foreground="@{item.selected ? @drawable/selected_fav_item : @drawable/normal_fav_item }">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:onClick="@{() ->item.onClick.invoke()}"
             android:paddingHorizontal="@dimen/spacing_24"
-            android:onClick="@{() ->item.onFavorite.invoke()}"
             android:paddingVertical="@dimen/spacing_24">
 
             <com.google.android.material.imageview.ShapeableImageView
@@ -39,20 +39,20 @@
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             <TextView
+                style="@style/bodySmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_8"
-                android:gravity="center"
-                style="@style/bodySmall"
                 android:layout_marginHorizontal="@dimen/spacing_8"
-                android:text="@{item.leagueName}"
+                android:layout_marginTop="@dimen/spacing_8"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="2"
+                android:text="@{item.teamName}"
                 app:layout_constraintEnd_toEndOf="@+id/shapeableImageView"
                 app:layout_constraintStart_toStartOf="@+id/shapeableImageView"
                 app:layout_constraintTop_toBottomOf="@+id/shapeableImageView"
                 tools:text="Name" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </com.google.android.material.card.MaterialCardView>
 </layout>
