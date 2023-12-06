@@ -1,4 +1,4 @@
-package com.cheesecake.presentation.screens.favTeamsSelection
+package com.cheesecake.presentation.screens.favoriteteamsselection
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,20 +6,19 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
-import com.cheesecake.presentation.databinding.FragmentFavTeamsSelectionBinding
+import com.cheesecake.presentation.databinding.FragmentFavoriteTeamsSelectionBinding
 import com.cheesecake.presentation.screens.mainactivity.MainActivity
-import com.cheesecake.presentation.screens.onboardingactivity.OnboardingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FavTeamsSelectionFragment : BaseFragment<FragmentFavTeamsSelectionBinding>() {
-    override val layoutIdFragment: Int = R.layout.fragment_fav_teams_selection
-    override val viewModel: FavTeamsSelectionViewModel by viewModels()
+class FavoriteTeamsSelectionFragment : BaseFragment<FragmentFavoriteTeamsSelectionBinding>() {
+    override val layoutIdFragment: Int = R.layout.fragment_favorite_teams_selection
+    override val viewModel: FavoriteTeamsSelectionViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         handleNavigation()
-        binding.allTeamsRecyclerView.adapter = FavTeamsSelectionAdapter()
+        binding.allTeamsRecyclerView.adapter = FavoriteTeamsSelectionAdapter()
     }
 
     private fun handleNavigation() {
@@ -29,9 +28,9 @@ class FavTeamsSelectionFragment : BaseFragment<FragmentFavTeamsSelectionBinding>
         }
     }
 
-    private fun onEvent(event: FavTeamsSelectionNavigationEvent) {
+    private fun onEvent(event: FavoriteTeamsSelectionNavigationEvent) {
         when (event) {
-            is FavTeamsSelectionNavigationEvent.NavigateToHome -> {
+            is FavoriteTeamsSelectionNavigationEvent.NavigateToHome -> {
                 val intent = Intent(requireActivity(), MainActivity::class.java)
                 startActivity(intent)
                 requireActivity().finish()

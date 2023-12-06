@@ -2,19 +2,19 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/onboarding_nav"
-    app:startDestination="@id/favLeaguesSelectionFragment2">
+    app:startDestination="@id/favoriteCompetitionsSelectionFragment">
     <fragment
-        android:id="@+id/favLeaguesSelectionFragment2"
-        android:name="com.cheesecake.presentation.screens.favLeaguesSelection.FavLeaguesSelectionFragment"
-        android:label="FavLeaguesSelectionFragment">
+        android:id="@+id/favoriteCompetitionsSelectionFragment"
+        android:name="com.cheesecake.presentation.screens.favoritecompetitionsselection.FavoriteCompetitionsSelectionFragment"
+        android:label="FavoriteCompetitionsSelectionFragment">
         <action
-            android:id="@+id/action_favLeaguesSelectionFragment2_to_favTeamsSelectionFragment"
-            app:destination="@id/favTeamsSelectionFragment" />
+            android:id="@+id/action_favoriteCompetitionsSelectionFragment_to_favoriteTeamsSelectionFragment"
+            app:destination="@id/favoriteTeamsSelectionFragment" />
     </fragment>
     <fragment
-        android:id="@+id/favTeamsSelectionFragment"
-        android:name="com.cheesecake.presentation.screens.favTeamsSelection.FavTeamsSelectionFragment"
-        android:label="FavTeamsSelectionFragment" />
+        android:id="@+id/favoriteTeamsSelectionFragment"
+        android:name="com.cheesecake.presentation.screens.favoriteteamsselection.FavoriteTeamsSelectionFragment"
+        android:label="FavoriteTeamsSelectionFragment" />
 
 
 </navigation>

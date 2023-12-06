@@ -4,15 +4,14 @@ import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
-class AddFavouriteLeagueListUseCase @Inject constructor(
+class AddCompetitionsToFavoriteUseCase @Inject constructor(
     private val leagueRepository: IFootballRepository
 ) {
-
     private val selectedLeagues: MutableList<League> = mutableListOf()
 
     fun addLeague(league: League) {
-        selectedLeagues.find { it == league }?.let {
-            selectedLeagues.remove(league.copy(isFavourite = false))
+        selectedLeagues.find { it.leagueId == league.leagueId }?.let {
+            selectedLeagues.removeIf { it.leagueId == league.leagueId }
         } ?: run {
             selectedLeagues.add(league.copy(isFavourite = true))
         }
@@ -22,5 +21,4 @@ class AddFavouriteLeagueListUseCase @Inject constructor(
         leagueRepository.addLeagueList(selectedLeagues)
         return true
     }
-
 }

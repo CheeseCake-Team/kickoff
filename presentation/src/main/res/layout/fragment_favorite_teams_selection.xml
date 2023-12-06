@@ -7,13 +7,14 @@
 
         <variable
             name="viewModel"
-            type="com.cheesecake.presentation.screens.favTeamsSelection.FavTeamsSelectionViewModel" />
+            type="com.cheesecake.presentation.screens.favoriteteamsselection.FavoriteTeamsSelectionViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:backgroundTint="@color/background"
+        app:layoutDescription="@xml/fragment_favorite_teams_selection_scene"
         tools:context=".fragment.favLeagueSelection.FavLeagueSelectionFragment">
 
         <TextView
@@ -51,10 +52,10 @@
             android:drawablePadding="8dp"
             android:drawableTint="@color/lightGreyText"
             android:fontFamily="@font/lato"
-            android:hint="search your favourite team"
+            android:hint="@string/search_your_favourite_teams"
             android:inputType="text"
+            android:onTextChanged="@{(text, start, before, count) -> viewModel.onSearchQueryChanged(text)}"
             android:paddingHorizontal="@dimen/font_size_16sp"
-            android:text="@={viewModel.state.searchInput}"
             android:textColor="@color/fontHeavy"
             android:textColorHint="@color/lightGreyText"
             android:textSize="@dimen/font_size_14sp"
@@ -66,18 +67,18 @@
             android:id="@+id/all_teams_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginHorizontal="@dimen/spacing_8"
-            android:layout_marginTop="@dimen/spacing_16"
-            android:clipToPadding="true"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:padding="@dimen/spacing_12"
             android:scrollbars="none"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/view_frame"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_bar"
-            app:listItems="@{viewModel.state.teamsItems}"
+            app:listItems="@{viewModel.state.teamsItemsUiState}"
             app:spanCount="3"
-            tools:listitem="@layout/item_select_fav_team" />
+            tools:listitem="@layout/item_favorite_team_selection" />
 
         <View
             android:id="@+id/view_frame"
@@ -127,5 +128,5 @@
 
         </FrameLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
