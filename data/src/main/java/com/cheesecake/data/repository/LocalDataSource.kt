@@ -7,8 +7,7 @@ import com.cheesecake.data.local.models.TeamLocalDTO
 import kotlinx.coroutines.flow.Flow
 
 interface LocalDataSource {
-
-    fun getLocallyTeamsByIdAndSeason(): List<TeamLocalDTO>
+    fun getLocallyTeamsByIdAndSeason(leagueId: Int, season: Int): List<TeamLocalDTO>
 
     suspend fun updateOrInsertTeams(teams: List<TeamLocalDTO>)
 
@@ -47,5 +46,4 @@ interface LocalDataSource {
     suspend fun getTeamById(teamId: Int): TeamLocalDTO?
 
     suspend fun addTeamsList(teams: List<TeamLocalDTO>)
-
 }

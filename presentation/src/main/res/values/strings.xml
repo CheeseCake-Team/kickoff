@@ -67,7 +67,8 @@
     <string name="searchAlphaNumericInput">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890</string>
     <string name="skip">Skip</string>
     <string name="next">Next</string>
-    <string name="search_your_favourite_competition">Search your favourite competition</string>
+    <string name="search_your_favourite_competition">Search your favourite competitions</string>
+    <string name="search_your_favourite_teams">Search your favourite teams</string>
     <string name="pick_your_preferred_competition_and_experience_the_real_live_scores_with_us">Pick your preferred competition and experience the real live scores with us</string>
     <string name="welcome_to_kickoff">Welcome to KickOff</string>
     <string name="choose_your_favourite_teams">Choose Your Favourite Teams</string>

@@ -4,9 +4,6 @@ import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.League
 import com.cheesecake.presentation.mapper.toMatchUIState
 import com.cheesecake.presentation.utils.toStanderDateString
-import com.cheesecake.presentation.utils.toStanderTimeString
-import java.text.SimpleDateFormat
-import java.util.TimeZone
 
 data class FavoriteHomeItemUIState(
     val title: String = "",
@@ -15,7 +12,7 @@ data class FavoriteHomeItemUIState(
     val isNoData: Boolean = false,
     val season: Int = 0,
     val onclick: (leagueId: Int, season: Int) -> Unit = { _, _ -> },
-    val matches: List<MatchItemUIState> = emptyList(),
+    val matches: List<MatchItemUiState> = emptyList(),
 )
 
 fun List<Pair<League, List<Fixture>>>.toHomeFavouriteUiState(
