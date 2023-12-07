@@ -1,27 +1,25 @@
 package com.cheesecake.domain.usecases
 
-
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
 class AddFavouriteTeamListUseCase @Inject constructor(
-    private val Repository: IFootballRepository
+    private val repository: IFootballRepository
 ) {
+    private val selectedTeams: MutableList<Triple<Team, Int, Int>> = mutableListOf()
 
-    private val selectedTeams: MutableList<Team> = mutableListOf()
-
-    fun addTeam(team: Team) {
-        selectedTeams.find { it == team }?.let {
-            selectedTeams.remove(team.copy(isFavourite = false))
+    fun addTeam(team: Team, leagueId: Int, season: Int) {
+        selectedTeams.find { it.first == team }?.let { (team, leagueId, season) ->
+            selectedTeams.remove(Triple(team.copy(isFavourite = false), leagueId, season))
         } ?: run {
-            selectedTeams.add(team.copy(isFavourite = true))
+            selectedTeams.add(Triple(team.copy(isFavourite = true), leagueId, season))
         }
     }
 
     suspend fun execute(): Boolean {
-        Repository.addTeamsList(selectedTeams)
+        val triples = selectedTeams.toList()
+        repository.addTeamsList(triples)
         return true
     }
-
 }

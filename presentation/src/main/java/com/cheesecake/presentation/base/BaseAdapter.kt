@@ -1,6 +1,5 @@
 package com.cheesecake.presentation.base
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -12,8 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.databinding.ItemDateMatchesBinding
 import com.cheesecake.presentation.databinding.ItemMatchTeamLineupBinding
-import com.cheesecake.presentation.databinding.ItemTeamFormBinding
-import com.cheesecake.presentation.screens.league.leagueMatches.LeagueMatchesHeadToHeadAdapter
+import com.cheesecake.presentation.screens.competition.competitionmatches.CompetitionMatchesHeadToHeadAdapter
 import com.cheesecake.presentation.screens.match.lineup.ItemMatchPlayersAdapter
 
 
@@ -58,7 +56,7 @@ abstract class BaseAdapter<T>(private val listener: BaseInteractionListener?) :
 
                     when (this) {
                         is ItemDateMatchesBinding -> {
-                            headToHeadRecyclerView.adapter = LeagueMatchesHeadToHeadAdapter()
+                            headToHeadRecyclerView.adapter = CompetitionMatchesHeadToHeadAdapter()
                             ContextCompat.getColor(this.root.context, R.color.fontHeavy)
                         }
 

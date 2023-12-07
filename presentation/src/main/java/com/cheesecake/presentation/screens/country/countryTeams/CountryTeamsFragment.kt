@@ -9,7 +9,7 @@ import com.cheesecake.presentation.screens.country.countryTeams.CountryTeamsArgs
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentCountryTeamsBinding
 import com.cheesecake.presentation.screens.country.CountryFragmentDirections
-import com.cheesecake.presentation.screens.league.leagueTeams.TeamsAdapter
+import com.cheesecake.presentation.screens.competition.competitionteams.CompetitionTeamsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,7 +20,7 @@ class CountryTeamsFragment : BaseFragment<FragmentCountryTeamsBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         handleNavigation()
-        binding.teamsRecyclerView.adapter = TeamsAdapter()
+        binding.teamsRecyclerView.adapter = CompetitionTeamsAdapter()
     }
 
     private fun handleNavigation() {

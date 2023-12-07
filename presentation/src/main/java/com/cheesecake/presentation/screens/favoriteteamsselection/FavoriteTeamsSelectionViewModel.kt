@@ -57,21 +57,25 @@ class FavoriteTeamsSelectionViewModel @Inject constructor(
         }
     }
 
-    private fun onGettingTeamsSuccess(teams: List<Team>) {
-        val teamsItemsUiState = teams.toUiState { team -> onFavouriteTeamSelect(team) }
-        _state.update {
-            it.copy(
-                teamsItemsUiState = teamsItemsUiState,
-                displayedTeams = teamsItemsUiState,
-                isLoading = false,
-                isNoResult = teamsItemsUiState.isEmpty(),
-                onGetStartedClick = ::addTeamsToFavourite
-            )
+    private fun onGettingTeamsSuccess(triples: List<Triple<List<Team>, Int, Int>>) {
+        triples.flatMap {
+            it.first.toUiState { team -> onFavouriteTeamSelect(team, it.second, it.third) }
+        }.also { teamsItemsUiState ->
+            _state.update {
+                it.copy(
+                    teamsItemsUiState = teamsItemsUiState,
+                    displayedTeams = teamsItemsUiState,
+                    isLoading = false,
+                    isNoResult = teamsItemsUiState.isEmpty(),
+                    onGetStartedClick = ::addTeamsToFavourite
+                )
+            }
         }
+
     }
 
-    private fun onFavouriteTeamSelect(team: Team) {
-        addTeamsToFavouriteUseCase.addTeam(team)
+    private fun onFavouriteTeamSelect(team: Team, leagueId: Int, season: Int) {
+        addTeamsToFavouriteUseCase.addTeam(team, leagueId, season)
         _state.update { favTeamsSelectionUIState ->
             favTeamsSelectionUIState.copy(
                 teamsItemsUiState = favTeamsSelectionUIState.teamsItemsUiState.map {

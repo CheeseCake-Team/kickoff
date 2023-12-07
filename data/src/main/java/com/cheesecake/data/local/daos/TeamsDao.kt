@@ -3,16 +3,13 @@ package com.cheesecake.data.local.daos
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
-import com.cheesecake.data.local.models.LeagueLocalDTO
 import com.cheesecake.data.local.models.TeamLocalDTO
 import kotlinx.coroutines.flow.Flow
 
-
 @Dao
 interface TeamsDao {
-
-    @Query("SELECT * FROM team_table ")
-    fun getLocallyTeamsByIdAndSeason(): List<TeamLocalDTO>
+    @Query("SELECT * FROM team_table WHERE leagueId= :leagueId AND season = :season")
+    fun getLocallyTeamsByLeagueIdAndSeason(leagueId: Int, season: Int): List<TeamLocalDTO>
 
     @Upsert
     suspend fun updateOrInsertTeams(teams: List<TeamLocalDTO>)

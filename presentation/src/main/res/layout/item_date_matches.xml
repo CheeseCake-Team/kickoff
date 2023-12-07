@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.cheesecake.presentation.screens.league.leagueMatches.DateMatchesItemUIState" />
+            type="com.cheesecake.presentation.screens.competition.competitionmatches.DateMatchesItemUiState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

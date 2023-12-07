@@ -124,7 +124,7 @@ interface IFootballRepository {
 
     suspend fun getTeamsForLeagues(leagueId: Int, leagueSeason: Int): List<Team>
 
-    suspend fun addTeamsList(teams: List<Team>)
+    suspend fun addTeamsList(triples: List<Triple<Team, Int, Int>>)
 
     suspend fun shouldShowOnboarding(): Boolean
 

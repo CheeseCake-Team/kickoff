@@ -1,30 +1,25 @@
 package com.cheesecake.domain.entity
 
-
-
 data class PlayerStatistics(
     val id: Int,
     val name: String,
     val firstname: String,
     val lastname: String,
     val age: Int,
-    val date: String,
-    val place: String?,
-    val country: String,
+    val birthDate: String,
+    val birthPlace: String?,
+    val birthCountry: String,
     val nationality: String,
-    val height: String,
-    val weight: String,
-    val injured: Boolean,
-    val photo: String,
-    val appearences: Int,
+    val heightInCm: String,
+    val weightInKg: String,
+    val isInjured: Boolean,
+    val imageUrl: String,
+    val appearances: Int,
     val lineups: Int,
     val minutes: Int,
     val number: Any,
     val position: String,
     val rating: String,
-    val captain: Boolean,
-    val goals: String
+    val isCaptain: Boolean,
+    val goals: Int
 )
-
-
-

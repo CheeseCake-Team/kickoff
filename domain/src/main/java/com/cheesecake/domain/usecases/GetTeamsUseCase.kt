@@ -8,9 +8,9 @@ import javax.inject.Inject
 class GetTeamsUseCase @Inject constructor(
     private val repository: IFootballRepository
 ) {
-    suspend operator fun invoke(leagues: List<League>): List<Team> {
-        return leagues.flatMap { league ->
-            repository.getRemotelyTeamsByIdAndSeason(league.leagueId, league.season.last())
+    suspend operator fun invoke(leagues: List<League>): List<Triple<List<Team>, Int, Int>> {
+        return leagues.map { league ->
+            Triple(repository.getRemotelyTeamsByIdAndSeason(league.leagueId, league.season.last()), league.leagueId, league.season.last())
         }
     }
 }

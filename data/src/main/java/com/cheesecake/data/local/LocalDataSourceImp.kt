@@ -19,8 +19,8 @@ class LocalDataSourceImp @Inject constructor(
     private val searchDao: RecentSearchDao
 ) : LocalDataSource {
 
-    override fun getLocallyTeamsByIdAndSeason(): List<TeamLocalDTO> {
-        return teamsDao.getLocallyTeamsByIdAndSeason()
+    override fun getLocallyTeamsByIdAndSeason(leagueId: Int, season: Int): List<TeamLocalDTO> {
+        return teamsDao.getLocallyTeamsByLeagueIdAndSeason(leagueId, season)
     }
 
     override suspend fun updateOrInsertTeams(teams: List<TeamLocalDTO>) {
