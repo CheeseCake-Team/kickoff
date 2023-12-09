@@ -14,8 +14,8 @@
         style="@style/Widget.Material3.CardView.Filled"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{()-> item.onclick.invoke(item.leagueId,item.season)}"
         android:layout_margin="@dimen/spacing_4"
+        android:onClick="@{()-> item.onclick.invoke(item.competitionId,item.season)}"
         android:padding="@dimen/spacing_8"
         app:cardBackgroundColor="@color/cardSurface">
 
@@ -27,8 +27,8 @@
                 android:id="@+id/text_view_leagues_label"
                 android:layout_width="@dimen/team_image_size_24dp"
                 android:layout_height="@dimen/team_image_size_24dp"
-                android:layout_marginTop="@dimen/spacing_16"
                 android:layout_marginStart="@dimen/spacing_8"
+                android:layout_marginTop="@dimen/spacing_16"
                 app:circularImageUrl="@{item.imageUrl}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -52,8 +52,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/spacing_8"
-                app:doNotShow="@{item.noData}"
                 android:background="?android:attr/listDivider"
+                app:doNotShow="@{item.noData}"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_leagues_label"
                 tools:layout_editor_absoluteX="1dp" />
 
@@ -66,7 +66,7 @@
                 android:paddingVertical="@dimen/spacing_4"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@+id/divider2"
-                app:items="@{item.matches}"
+                app:listItems="@{item.matches}"
                 tools:listitem="@layout/item_match" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
