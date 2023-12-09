@@ -22,7 +22,7 @@ fun StandingsDTO.League.Standing.toEntity(): TeamStanding {
 
 @JvmName("teamStandingsDTOsToTeamsStanding")
 fun List<StandingsDTO>.toEntity(): List<TeamStanding> {
-    return this.first().league.standings.first().map { standingsResponse ->
+    return this.firstOrNull()?.league?.standings?.firstOrNull()?.map { standingsResponse ->
         standingsResponse.toEntity()
-    }
+    } ?: emptyList()
 }

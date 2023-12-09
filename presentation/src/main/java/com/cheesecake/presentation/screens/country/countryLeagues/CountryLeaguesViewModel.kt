@@ -5,7 +5,6 @@ import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.usecases.GetLeaguesByCountryName
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.*
-import com.cheesecake.presentation.screens.league.toLeagueUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject

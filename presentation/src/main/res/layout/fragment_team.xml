@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="false"
-        tools:context=".screens.league.LeagueFragment">
+        tools:context=".screens.competition.CompetitionFragment">
 
         <Button
             android:id="@+id/back_button"

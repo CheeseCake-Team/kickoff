@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.DiffUtil
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseListAdapter
 
-class StandingFormAdapter: BaseListAdapter<String>(FormItemDiffUtil()) {
+class StandingFormAdapter : BaseListAdapter<String>(FormItemDiffUtil()) {
     override val layoutId = R.layout.item_standing_form
 }
 

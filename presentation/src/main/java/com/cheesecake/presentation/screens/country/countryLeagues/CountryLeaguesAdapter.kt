@@ -3,20 +3,19 @@ package com.cheesecake.presentation.screens.country.countryLeagues
 import androidx.recyclerview.widget.DiffUtil
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseListAdapter
-import com.cheesecake.presentation.screens.league.LeagueItemUIState
 
-class CountryLeaguesAdapter: BaseListAdapter<LeagueItemUIState>(LeagueItemUIStateDiffUtil()) {
+class CountryLeaguesAdapter: BaseListAdapter<CompetitionItemUiState>(LeagueItemUIStateDiffUtil()) {
     override val layoutId = R.layout.item_league_for_country
 }
 
-class LeagueItemUIStateDiffUtil: DiffUtil.ItemCallback<LeagueItemUIState>() {
+class LeagueItemUIStateDiffUtil: DiffUtil.ItemCallback<CompetitionItemUiState>() {
 
-    override fun areItemsTheSame(oldItem: LeagueItemUIState, newItem: LeagueItemUIState): Boolean =
-        oldItem.leagueName == newItem.leagueName
+    override fun areItemsTheSame(oldItem: CompetitionItemUiState, newItem: CompetitionItemUiState): Boolean =
+        oldItem.competitionName == newItem.competitionName
 
     override fun areContentsTheSame(
-        oldItem: LeagueItemUIState,
-        newItem: LeagueItemUIState
+        oldItem: CompetitionItemUiState,
+        newItem: CompetitionItemUiState
     ): Boolean = oldItem == newItem
 
 }

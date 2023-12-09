@@ -6,8 +6,6 @@ import androidx.fragment.app.viewModels
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentPlayerStatisticsBinding
-import com.cheesecake.presentation.screens.league.LeagueArgs
-import com.cheesecake.presentation.screens.league.leagueMatches.LeagueMatchesFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
