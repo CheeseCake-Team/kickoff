@@ -1,7 +1,6 @@
 package com.cheesecake.presentation.screens.match.statistics
 
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.FixtureStatistics
 import com.cheesecake.domain.entity.StatisticsType
 import com.cheesecake.domain.entity.getAwayTeamPercentage
@@ -11,9 +10,7 @@ import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import javax.inject.Inject
-
 
 @HiltViewModel
 class MatchStatisticsViewModel @Inject constructor(
@@ -35,8 +32,8 @@ class MatchStatisticsViewModel @Inject constructor(
     }
 
     private fun onSuccess(statistics: List<FixtureStatistics>) {
-        _state.update { ms ->
-            ms.copy(
+        _state.update {
+            it.copy(
                 statisticsItem = statistics.toUIState(),
                 isLoading = false,
                 noData = statistics.isEmpty()
@@ -77,13 +74,9 @@ class MatchStatisticsViewModel @Inject constructor(
                 errorMessage = e.localizedMessage ?: "Unknown error.",
                 isLoading = false,
                 noData = true
-
-
-                )
+            )
         }
     }
-
-
 }
 
 

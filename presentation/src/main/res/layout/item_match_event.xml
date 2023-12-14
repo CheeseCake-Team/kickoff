@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.cheesecake.presentation.screens.match.events.ItemEventUIState" />
+            type="com.cheesecake.presentation.screens.match.events.EventItemUiState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
