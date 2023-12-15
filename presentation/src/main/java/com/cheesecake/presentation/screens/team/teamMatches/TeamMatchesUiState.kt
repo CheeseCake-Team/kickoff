@@ -1,9 +1,7 @@
 package com.cheesecake.presentation.screens.team.teamMatches
 
-import com.cheesecake.domain.entity.Fixture
-
-data class TeamMatchesUIState(
-    val data: List<TeamMatchItemUIState> = emptyList(),
+data class TeamMatchesUiState(
+    val data: List<TeamMatchItemUiState> = emptyList(),
     val errorMessage: String = "",
     val isLoading: Boolean = true
 )

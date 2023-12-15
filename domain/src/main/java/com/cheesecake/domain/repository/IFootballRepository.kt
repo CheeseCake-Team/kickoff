@@ -122,12 +122,9 @@ interface IFootballRepository {
 
     suspend fun addLeagueList(leagues: List<League>)
 
-    suspend fun getTeamsForLeagues(leagueId: Int, leagueSeason: Int): List<Team>
-
     suspend fun addTeamsList(triples: List<Triple<Team, Int, Int>>)
 
     suspend fun shouldShowOnboarding(): Boolean
 
     suspend fun setOnboardingShown()
-
 }

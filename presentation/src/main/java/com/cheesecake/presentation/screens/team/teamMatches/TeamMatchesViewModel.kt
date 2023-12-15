@@ -1,6 +1,5 @@
 package com.cheesecake.presentation.screens.team.teamMatches
 
-import android.util.Log
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.usecases.GetTeamMatchesByTeamIdAndSeasonUseCase
 import com.cheesecake.presentation.base.BaseViewModel
@@ -12,21 +11,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TeamMatchesViewModel @Inject constructor(
-    private val getPairsOfMatchesAndDateByTeamIdAndSeasonUseCase: GetTeamMatchesByTeamIdAndSeasonUseCase,
+    private val getTeamMatchesByTeamIdAndSeasonUseCase: GetTeamMatchesByTeamIdAndSeasonUseCase,
     teamMatchesArgs: TeamMatchesArgs
-) : BaseViewModel<TeamMatchesUIState, TeamMatchesNavigationEvent>(TeamMatchesUIState(), Event()) {
-
+) : BaseViewModel<TeamMatchesUiState, TeamMatchesNavigationEvent>(TeamMatchesUiState(), Event()) {
     init {
         tryToExecute(
             {
-                getPairsOfMatchesAndDateByTeamIdAndSeasonUseCase(
-                    "Africa/Cairo", teamMatchesArgs.teamId, 2022
+                getTeamMatchesByTeamIdAndSeasonUseCase(
+                    "Africa/Cairo", teamMatchesArgs.teamId, teamMatchesArgs.season
                 )
             }, ::onSuccess, ::onError
         )
 
     }
-
 
     private fun onSuccess(result: List<Fixture>) {
         _state.update {
@@ -46,9 +43,6 @@ class TeamMatchesViewModel @Inject constructor(
     private fun onMatchClicked(homeTeamId: Int, awayTeamId: Int, date: String) {
         _event.update {
             Event(TeamMatchesNavigationEvent.MatchClickedEvent(homeTeamId, awayTeamId, date))
-
         }
-        Log.d("TAaaaaag","$homeTeamId $awayTeamId $date")
     }
-
 }

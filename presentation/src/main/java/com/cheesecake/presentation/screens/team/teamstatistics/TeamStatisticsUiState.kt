@@ -3,7 +3,7 @@ package com.cheesecake.presentation.screens.team.teamstatistics
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.entity.TeamStatisticsEntity
 
-data class TeamStatisticsUIState(
+data class TeamStatisticsUiState(
     val form: List<String> = emptyList(),
     val homePlayed: Int = 0,
     val homeWins: Int = 0,
@@ -31,11 +31,13 @@ data class TeamStatisticsUIState(
     val isLoading: Boolean = true,
 
     val data: List<Team> = emptyList(),
-    val errorMessage: String = "Error"
+    val errorMessage: String = "Error",
+    val isFormEmpty: Boolean = false
 )
 
-fun TeamStatisticsEntity.toUIState(): TeamStatisticsUIState {
-    return TeamStatisticsUIState(
+fun TeamStatisticsEntity.toUIState(): TeamStatisticsUiState {
+    return TeamStatisticsUiState(
+        isFormEmpty = form.isEmpty(),
         form = form,
         homePlayed = played.home,
         homeWins = wins.home,

@@ -31,16 +31,20 @@ class CompetitionTeamsFragment : BaseFragment<FragmentCompetitionTeamsBinding>()
     private fun onEvent(event: CompetitionTeamsEvent) {
         val action = when (event) {
             is CompetitionTeamsEvent.TeamClickEvent ->
-                CompetitionFragmentDirections.actionLeagueFragmentToTeamFragment(event.teamId)
+                CompetitionFragmentDirections.actionLeagueFragmentToTeamFragment(
+                    event.teamId,
+                    event.season,
+                    event.competitionId
+                )
         }
         findNavController().navigate(action)
     }
 
     companion object {
         @JvmStatic
-        fun newInstance(leagueID: Int, season: Int) = CompetitionTeamsFragment().apply {
+        fun newInstance(competitionId: Int, season: Int) = CompetitionTeamsFragment().apply {
             arguments = Bundle().apply {
-                putInt(CompetitionArgs.COMPETITION_ID_ARG, leagueID)
+                putInt(CompetitionArgs.COMPETITION_ID_ARG, competitionId)
                 putInt(CompetitionArgs.SEASON_ARG, season)
             }
         }

@@ -7,11 +7,10 @@ import androidx.navigation.fragment.findNavController
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentTeamMatchesBinding
-import com.cheesecake.presentation.screens.home.HomeEvents
-import com.cheesecake.presentation.screens.home.HomeFragmentDirections
 import com.cheesecake.presentation.screens.team.TeamFragmentDirections
+import com.cheesecake.presentation.screens.team.teamMatches.TeamMatchesArgs.Companion.COMPETITION_ID_ARG
+import com.cheesecake.presentation.screens.team.teamMatches.TeamMatchesArgs.Companion.SEASON_ARG
 import com.cheesecake.presentation.screens.team.teamMatches.TeamMatchesArgs.Companion.TEAM_ID_ARG
-import com.cheesecake.presentation.screens.team.teamPlayers.TeamPlayersFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,7 +23,6 @@ class TeamMatchesFragment : BaseFragment<FragmentTeamMatchesBinding>() {
         binding.matchesRecyclerView.adapter = TeamMatchesAdapter()
         handleNavigation()
     }
-
 
     private fun handleNavigation() {
         collect(viewModel.event) { event ->
@@ -46,15 +44,13 @@ class TeamMatchesFragment : BaseFragment<FragmentTeamMatchesBinding>() {
 
     companion object {
         @JvmStatic
-        fun newInstance(teamId: Int) =
+        fun newInstance(teamId: Int, season: Int, competitionId: Int) =
             TeamMatchesFragment().apply {
                 arguments = Bundle().apply {
                     putInt(TEAM_ID_ARG, teamId)
-//                    putInt(MatchEventArgs.HOME_TEAM_ID_ARG, homeTeamID)
-//                    putInt(MatchEventArgs.AWAY_TEAM_ID_ARG, awayTeamId)
+                    putInt(SEASON_ARG, season)
+                    putInt(COMPETITION_ID_ARG, competitionId)
                 }
             }
     }
-
-
 }

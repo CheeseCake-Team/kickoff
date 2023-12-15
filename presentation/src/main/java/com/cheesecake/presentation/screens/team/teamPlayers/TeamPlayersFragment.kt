@@ -7,14 +7,12 @@ import androidx.navigation.fragment.findNavController
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentTeamPlayersBinding
-import com.cheesecake.presentation.screens.player.PlayerNavigationEvent
 import com.cheesecake.presentation.screens.team.TeamFragmentDirections
 import com.cheesecake.presentation.screens.team.teamPlayers.TeamPlayersArgs.Companion.TEAM_ID_ARG
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TeamPlayersFragment : BaseFragment<FragmentTeamPlayersBinding>() {
-
     override val layoutIdFragment = R.layout.fragment_team_players
     override val viewModel: TeamPlayersViewModel by viewModels()
 

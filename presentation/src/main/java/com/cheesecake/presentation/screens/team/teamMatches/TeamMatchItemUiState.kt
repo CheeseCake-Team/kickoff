@@ -2,9 +2,9 @@ package com.cheesecake.presentation.screens.team.teamMatches
 
 import com.cheesecake.presentation.screens.home.MatchItemUiState
 
-data class TeamMatchItemUIState(
+data class TeamMatchItemUiState(
     val matchItemUIState: MatchItemUiState,
-    val leagueName: String,
-    val leagueImageUrl: String,
+    val competitionName: String,
+    val competitionImageUrl: String,
     val onClick  : () -> Unit = { }
 )

@@ -11,8 +11,8 @@ import com.cheesecake.presentation.models.TeamUIState
 import com.cheesecake.presentation.screens.home.MatchItemUiState
 import com.cheesecake.presentation.screens.player.playerStatistics.PlayerDataItemUIState
 import com.cheesecake.presentation.screens.player.playerStatistics.PlayerSectionItemUIState
-import com.cheesecake.presentation.screens.team.teamMatches.TeamMatchItemUIState
-import com.cheesecake.presentation.screens.team.teamPlayers.SquadPlayerItemUIState
+import com.cheesecake.presentation.screens.team.teamMatches.TeamMatchItemUiState
+import com.cheesecake.presentation.screens.team.teamPlayers.SquadPlayerItemUiState
 import com.cheesecake.presentation.utils.toStanderDateString
 import com.cheesecake.presentation.utils.toStanderTimeString
 
@@ -72,14 +72,14 @@ fun PlayerStatistics.toPlayerStatisticsUIModel(): List<PlayerSectionItemUIState>
     )
 }
 
-fun SquadPlayer.mapIt(onClick: () -> Unit): SquadPlayerItemUIState {
-    return SquadPlayerItemUIState(
+fun SquadPlayer.mapIt(onClick: () -> Unit): SquadPlayerItemUiState {
+    return SquadPlayerItemUiState(
         name, ImageUrl, number, onClick
     )
 }
 
-fun Fixture.toTeamMatchItemUIState(onClick: (Int, Int, String) -> Unit): TeamMatchItemUIState =
-    TeamMatchItemUIState(
+fun Fixture.toTeamMatchItemUIState(onClick: (Int, Int, String) -> Unit): TeamMatchItemUiState =
+    TeamMatchItemUiState(
         MatchItemUiState(
             matchState,
             matchDate.toStanderDateString(),

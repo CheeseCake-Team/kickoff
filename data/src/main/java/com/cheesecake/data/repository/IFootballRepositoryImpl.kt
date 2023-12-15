@@ -262,10 +262,6 @@ class IFootballRepositoryImpl
         localDataSource.deleteRecentSearches()
     }
 
-    override suspend fun getTeamsForLeagues(leagueId: Int, leagueSeason: Int): List<Team> {
-        return remoteDataSource.getTeamsByLeagueAndSeason(leagueId, leagueSeason).toEntity()
-    }
-
     override suspend fun addTeamsList(triples: List<Triple<Team, Int, Int>>) {
         triples.map { triple ->
             triple.first.toLocal(triple.second, triple.third)

@@ -15,12 +15,20 @@ import javax.inject.Inject
 class CompetitionTeamsViewModel @Inject constructor(
     private val getAllTeamsInCompetitionWithSeasonUseCase: GetAllTeamsInCompetitionWithSeasonUseCase,
     savedStateHandle: SavedStateHandle,
-) : BaseViewModel<CompetitionTeamsUiState, CompetitionTeamsEvent>(CompetitionTeamsUiState(), Event()) {
+) : BaseViewModel<CompetitionTeamsUiState, CompetitionTeamsEvent>(
+    CompetitionTeamsUiState(),
+    Event()
+) {
     private val competitionArgs = CompetitionArgs(savedStateHandle)
 
     init {
         tryToExecute(
-            { getAllTeamsInCompetitionWithSeasonUseCase(competitionArgs.competitionId, competitionArgs.season) },
+            {
+                getAllTeamsInCompetitionWithSeasonUseCase(
+                    competitionArgs.competitionId,
+                    competitionArgs.season
+                )
+            },
             ::onSuccess,
             ::onError
         )
@@ -40,6 +48,14 @@ class CompetitionTeamsViewModel @Inject constructor(
     }
 
     private fun onTeamClicked(teamId: Int) {
-        _event.update { Event(CompetitionTeamsEvent.TeamClickEvent(teamId)) }
+        _event.update {
+            Event(
+                CompetitionTeamsEvent.TeamClickEvent(
+                    teamId,
+                    competitionArgs.competitionId,
+                    competitionArgs.season
+                )
+            )
+        }
     }
 }

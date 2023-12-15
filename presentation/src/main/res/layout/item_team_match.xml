@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.cheesecake.presentation.screens.team.teamMatches.TeamMatchItemUIState" />
+            type="com.cheesecake.presentation.screens.team.teamMatches.TeamMatchItemUiState" />
     </data>
 
     <LinearLayout
@@ -29,10 +29,10 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_view"
+            style="@style/Widget.Material3.CardView.Filled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/spacing_8"
-            style="@style/Widget.Material3.CardView.Filled"
             android:onClick="@{() -> item.matchItemUIState.onclick.invoke()}"
             app:cardBackgroundColor="@color/cardSurface"
             app:cardCornerRadius="@dimen/spacing_8">
@@ -49,7 +49,7 @@
                     android:layout_marginStart="@dimen/spacing_8"
                     android:contentDescription="@string/league_image"
                     android:src="@drawable/premier"
-                    app:circularImageUrl="@{item.leagueImageUrl}"
+                    app:circularImageUrl="@{item.competitionImageUrl}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -58,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_8"
-                    android:text="@{item.leagueName}"
+                    android:text="@{item.competitionName}"
                     android:textColor="@color/fontHeavy"
                     app:layout_constraintBottom_toBottomOf="@id/image_league"
                     app:layout_constraintStart_toEndOf="@id/image_league"
@@ -107,14 +107,16 @@
                     style="@style/SubtitleMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/spacing_8"
+                    android:gravity="center"
+                    android:textAlignment="center"
                     android:textColor="@color/fontHeavy"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/divider"
-                    android:textAlignment="center"
                     app:scoreOrTime="@{item.matchItemUIState}"
-                    tools:text="TextView" />
+                    tools:text="Finished\n 3 : 2" />
 
                 <TextView
                     android:id="@+id/text_away_team_name"
