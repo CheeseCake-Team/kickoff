@@ -14,5 +14,4 @@ class FavoriteHomeItemUIStateDiffUtil: DiffUtil.ItemCallback<FavoriteHomeItemUIS
 
     override fun areContentsTheSame(oldItem: FavoriteHomeItemUIState, newItem: FavoriteHomeItemUIState): Boolean =
         oldItem == newItem
-
 }

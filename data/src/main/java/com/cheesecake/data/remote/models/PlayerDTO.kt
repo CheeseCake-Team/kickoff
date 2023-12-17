@@ -25,9 +25,9 @@ data class PlayerDTO(
         @SerializedName("nationality")
         val nationality: String,
         @SerializedName("height")
-        val height: String,
+        val height: String?,
         @SerializedName("weight")
-        val weight: String,
+        val weight: String?,
         @SerializedName("injured")
         val injured: Boolean,
         @SerializedName("photo")
@@ -71,11 +71,11 @@ data class PlayerDTO(
             @SerializedName("minutes")
             val minutes: Int,
             @SerializedName("number")
-            val number: Int,
+            val number: Int?,
             @SerializedName("position")
             val position: String,
             @SerializedName("rating")
-            val rating: String,
+            val rating: String?,
             @SerializedName("captain")
             val captain: Boolean
         )

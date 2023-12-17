@@ -13,22 +13,18 @@ import javax.inject.Inject
 class TeamPlayersViewModel @Inject constructor(
     private val getTeamSquadByIdUseCase: GetTeamSquadByIdUseCase,
     teamPlayersArgs: TeamPlayersArgs
-) :
-    BaseViewModel<TeamPlayersUIState, TeamPLayerNavigationEvent>(TeamPlayersUIState(), Event()) {
-
+) : BaseViewModel<TeamPlayersUiState, TeamPLayerNavigationEvent>(TeamPlayersUiState(), Event()) {
     init {
         tryToExecute(
             { getTeamSquadByIdUseCase(teamPlayersArgs.teamId) },
-            ::onSuccess,
+            ::onGettingTeamSquadSuccess,
             ::onError
         )
-
     }
 
-
-    private fun onSuccess(result: List<Pair<String, List<SquadPlayer>>>) {
-        _state.update { team ->
-            team.copy(data = result.map { pair ->
+    private fun onGettingTeamSquadSuccess(result: List<Pair<String, List<SquadPlayer>>>) {
+        _state.update { teamPlayersUiState ->
+            teamPlayersUiState.copy(data = result.map { pair ->
                 Pair(pair.first, pair.second.map { squad ->
                     squad.mapIt {
                         onClick(squad.id)
@@ -46,5 +42,4 @@ class TeamPlayersViewModel @Inject constructor(
     private fun onError(error: Throwable) {
         _state.update { it.copy(errorMessage = error.message.toString(), isLoading = false) }
     }
-
 }

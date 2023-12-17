@@ -63,6 +63,7 @@ class MatchViewModel
     }
 
     private fun onError(e: Throwable) {
+        Log.e("onError: ", e.localizedMessage.toString())
         _state.update {
             it.copy(
                 errorMessage = e.localizedMessage ?: "Unknown error.",
@@ -76,7 +77,7 @@ class MatchViewModel
 
     private fun backClicked() {
         viewModelScope.launch {
-            _event.update { Event(MatchEvents.BackClickEvent) }
+            _event.update { Event(MatchEvents.onBackClick) }
         }
     }
 

@@ -17,11 +17,13 @@ fun TeamDTO.toEntity(): Team = Team(
 )
 
 @JvmName("teamToTeamLocalDTO")
-fun Team.toLocal(): TeamLocalDTO = TeamLocalDTO(
+fun Team.toLocal(leagueId: Int, season: Int): TeamLocalDTO = TeamLocalDTO(
     teamId = id,
+    leagueId = leagueId,
+    season = season,
     teamName = this.name,
     founded = this.yearFounded,
-    teamCountry = this.country ?: "Unknown",
+    teamCountry = this.country,
     venueCapacity = this.stadiumCapacity,
     venueName = this.stadiumName,
     imageUrl = this.imageUrl,
@@ -30,15 +32,23 @@ fun Team.toLocal(): TeamLocalDTO = TeamLocalDTO(
 
 @JvmName("teamLocalDTOToTeam")
 fun TeamLocalDTO.toEntity(): Team = Team(
-    teamId, teamName, founded, teamCountry, venueCapacity, venueName, imageUrl, isFavourite
+    teamId,
+    teamName,
+    founded,
+    teamCountry,
+    venueCapacity,
+    venueName,
+    imageUrl,
+    isFavourite
 )
 
 @JvmName("teamLocalDTOsToTeams")
-fun List<TeamLocalDTO>.toEntity(): List<Team> = map { it.toEntity() }
+fun List<TeamLocalDTO>.toEntity(): List<Team> =
+    map { it.toEntity() }
 
 @JvmName("teamsToTeamsLocalDTO")
-fun List<Team>.toLocal(): List<TeamLocalDTO> =
-    map { it.toLocal() }
+fun List<Team>.toLocal(leagueId: Int, season: Int): List<TeamLocalDTO> =
+    map { it.toLocal(leagueId, season) }
 
 @JvmName("teamDTOsToTeams")
 fun List<TeamDTO>.toEntity(): List<Team> =

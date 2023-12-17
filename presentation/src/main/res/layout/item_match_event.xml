@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.cheesecake.presentation.screens.match.events.ItemEventUIState" />
+            type="com.cheesecake.presentation.screens.match.events.EventItemUiState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -57,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_16"
                     android:layout_marginEnd="@dimen/spacing_16"
-                    android:text="@{String.valueOf(item.time)}"
+                    android:text="@{`'` + String.valueOf(item.time)}"
                     android:textColor="@color/fontHeavy"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -68,12 +68,14 @@
                 <TextView
                     android:id="@+id/text_view_home_team_substituent_player_name"
                     style="@style/bodyMedium"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_4"
                     android:text="@{item.substituentPlayerName}"
                     android:textColor="@color/backLighter"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/textView8"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@id/text_view_home_team_player_name"
                     app:layout_constraintTop_toBottomOf="@+id/text_view_home_team_player_name"
                     tools:text="D. Rodríguez" />
@@ -107,7 +109,6 @@
             android:id="@+id/card_view_away_team_event"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginVertical="@dimen/spacing_8"
             android:layout_marginStart="@dimen/spacing_32"
             android:layout_marginEnd="@dimen/spacing_12"
             android:background="@color/cardSurface"
@@ -133,7 +134,7 @@
                     android:textColor="@color/fontHeavy"
                     app:layout_constraintBottom_toTopOf="@+id/text_view_away_team_substituent_player_name"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/textView6"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="K. Mbappé" />
@@ -144,7 +145,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_16"
-                    android:text="@{String.valueOf(item.time)}"
+                    android:text="@{`'` + String.valueOf(item.time)}"
                     android:textColor="@color/fontHeavy"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -154,12 +155,14 @@
                 <TextView
                     android:id="@+id/text_view_away_team_substituent_player_name"
                     style="@style/bodyMedium"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_4"
                     android:text="@{item.substituentPlayerName}"
                     android:textColor="@color/backLighter"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/text_view_away_team_player_name"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@id/text_view_away_team_player_name"
                     app:layout_constraintTop_toBottomOf="@+id/text_view_away_team_player_name"
                     tools:text="D. Rodríguez" />

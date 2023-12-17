@@ -27,7 +27,6 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
         super.onViewCreated(view, savedInstanceState)
         changeStatusBarColor()
         handleNavigation()
-        handleOnError()
         init()
     }
 
@@ -72,17 +71,9 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
         }
     }
 
-    private fun handleOnError() {
-        lifecycleScope.launch {
-            viewModel.state.collect {
-                handleOnError(it.errorMessage)
-            }
-        }
-    }
-
     private fun onEvent(event: MatchEvents) {
         when (event) {
-            is MatchEvents.BackClickEvent -> {
+            is MatchEvents.onBackClick -> {
                 findNavController().navigateUp()
             }
         }

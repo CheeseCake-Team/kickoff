@@ -38,7 +38,7 @@ fun PlayerPosGridDTO.toEntity(): PlayerLineup {
         playerId = this.id,
         playerName = this.name,
         playerNumber = this.number,
-        playerPosition = this.pos,
+        playerPosition = this.pos ?: "NA",
         playerPositionGrid = this.grid
     )
 }

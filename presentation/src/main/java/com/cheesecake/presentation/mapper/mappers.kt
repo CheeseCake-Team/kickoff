@@ -1,20 +1,16 @@
 package com.cheesecake.presentation.mapper
 
-import android.util.Log
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.entity.Country
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.PlayerStatistics
 import com.cheesecake.domain.entity.SquadPlayer
-import com.cheesecake.domain.entity.TeamStanding
 import com.cheesecake.presentation.models.CountryItemUIState
 import com.cheesecake.presentation.models.TeamUIState
-import com.cheesecake.presentation.screens.home.MatchItemUIState
+import com.cheesecake.presentation.screens.home.MatchItemUiState
 import com.cheesecake.presentation.screens.player.playerStatistics.PlayerDataItemUIState
 import com.cheesecake.presentation.screens.player.playerStatistics.PlayerSectionItemUIState
-import com.cheesecake.presentation.screens.standings.TeamStandingItemUIState
-import com.cheesecake.presentation.screens.team.teamMatches.TeamMatchItemUIState
-import com.cheesecake.presentation.screens.team.teamPlayers.SquadPlayerItemUIState
+import com.cheesecake.presentation.screens.team.teamPlayers.SquadPlayerItemUiState
 import com.cheesecake.presentation.utils.toStanderDateString
 import com.cheesecake.presentation.utils.toStanderTimeString
 
@@ -46,20 +42,20 @@ fun PlayerStatistics.toPlayerStatisticsUIModel(): List<PlayerSectionItemUIState>
             "Personal Info", listOf(
                 PlayerDataItemUIState("Name", this.name),
                 PlayerDataItemUIState("Age", this.age.toString()),
-                PlayerDataItemUIState("Birth Date", this.date),
-                PlayerDataItemUIState("Birth Place", this.place ?: "Not assigned"),
-                PlayerDataItemUIState("Birth Country", this.country),
+                PlayerDataItemUIState("Birth Date", this.birthDate),
+                PlayerDataItemUIState("Birth Place", this.birthPlace ?: "Not assigned"),
+                PlayerDataItemUIState("Birth Country", this.birthCountry),
                 PlayerDataItemUIState("Nationality", this.nationality),
-                PlayerDataItemUIState("Height", this.height),
-                PlayerDataItemUIState("Weight", this.weight),
-                PlayerDataItemUIState("Injured", this.injured.toString()),
+                PlayerDataItemUIState("Height", this.heightInCm),
+                PlayerDataItemUIState("Weight", this.weightInKg),
+                PlayerDataItemUIState("Injured", this.isInjured.toString()),
                 PlayerDataItemUIState("Rating", this.rating),
-                PlayerDataItemUIState("Captain", this.country)
+                PlayerDataItemUIState("Captain", this.birthCountry)
             )
         ),
         PlayerSectionItemUIState(
             "Games Info", listOf(
-                PlayerDataItemUIState("Appearances", appearences.toString()),
+                PlayerDataItemUIState("Appearances", appearances.toString()),
                 PlayerDataItemUIState("Lineups", lineups.toString()),
                 PlayerDataItemUIState("Minutes", minutes.toString()),
                 PlayerDataItemUIState("Number", number.toString()),
@@ -68,47 +64,20 @@ fun PlayerStatistics.toPlayerStatisticsUIModel(): List<PlayerSectionItemUIState>
         ),
         PlayerSectionItemUIState(
             "Goals Info", listOf(
-                PlayerDataItemUIState("goals", goals),
+                PlayerDataItemUIState("goals", goals.toString()),
             )
         )
     )
 }
 
-fun SquadPlayer.mapIt(onClick: () -> Unit): SquadPlayerItemUIState {
-    return SquadPlayerItemUIState(
-        name, ImageUrl, number, onClick
+fun SquadPlayer.mapIt(onClick: () -> Unit): SquadPlayerItemUiState {
+    return SquadPlayerItemUiState(
+        name, ImageUrl, if(number == -1) "NA" else number.toString(), onClick
     )
 }
 
-fun Fixture.toTeamMatchItemUIState(onClick: (Int, Int, String) -> Unit): TeamMatchItemUIState =
-    TeamMatchItemUIState(
-        MatchItemUIState(
-            matchState,
-            matchDate.toStanderDateString(),
-            matchDate.toStanderTimeString(),
-            homeTeamName,
-            awayTeamName,
-            homeTeamGoals ?: "0",
-            awayTeamGoals ?: "0",
-            homeTeamLogoUrl,
-            awayTeamLogoUrl,
-
-            onclick = {
-                Log.d("TAaaaaag", "$homeTeamID $awayTeamID $matchDate")
-
-                onClick(
-                    homeTeamID,
-                    awayTeamID,
-                    matchDate.toStanderDateString()
-                )
-            }
-        ),
-        leagueName,
-        leagueLogoUrl
-    )
-
-fun Fixture.toMatchUIState(onclick: () -> Unit): MatchItemUIState {
-    return MatchItemUIState(
+fun Fixture.toMatchUIState(onclick: () -> Unit): MatchItemUiState {
+    return MatchItemUiState(
         matchState,
         matchDate.toStanderDateString(),
         matchDate.toStanderTimeString(),
@@ -118,21 +87,6 @@ fun Fixture.toMatchUIState(onclick: () -> Unit): MatchItemUIState {
         awayTeamGoals ?: "0",
         homeTeamLogoUrl,
         awayTeamLogoUrl,
-        onclick = onclick
+        onMatchClicked = onclick
     )
 }
-
-fun TeamStanding.toTeamStandingItemUIState(): TeamStandingItemUIState =
-    TeamStandingItemUIState(
-        form,
-        rank.toString(),
-        name,
-        logo,
-        String.format("%02d", played),
-        String.format("%02d", won),
-        String.format("%02d", draw),
-        String.format("%02d", lose),
-        String.format("%02d", points),
-        goalsForAgainst
-    )
-

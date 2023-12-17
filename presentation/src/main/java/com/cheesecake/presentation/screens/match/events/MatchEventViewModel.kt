@@ -19,7 +19,6 @@ class MatchEventViewModel @Inject constructor(
     Event()
 ) {
     val matchEventArgs = MatchEventArgs(savedStateHandle)
-    val matchState = matchEventArgs.state
 
     init {
         getMatchEvents()
@@ -35,16 +34,13 @@ class MatchEventViewModel @Inject constructor(
 
     private fun onSuccess(fixtureEvents: List<FixtureEvents>) {
         _state.update {
-            Log.e("TAG", "onSuccess:$it ")
             it.copy(
                 isLoading = false,
                 data = fixtureEvents.toUIState(),
                 noData = fixtureEvents.isEmpty()
-
             )
         }
     }
-
 
     private fun onError(e: Throwable) {
         _state.update {

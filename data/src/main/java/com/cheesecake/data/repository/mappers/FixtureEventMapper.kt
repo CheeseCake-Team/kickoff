@@ -38,7 +38,7 @@ fun toEventType(type: String, detail: String): EventType {
         "Card" -> {
             when (detail) {
                 "Yellow Card" -> EventType.YELLOW_CARD
-                "Red card" -> EventType.RED_CARD
+                "Red Card" -> EventType.RED_CARD
                 else -> throw IllegalArgumentException("Invalid event title: $detail")
             }
         }
