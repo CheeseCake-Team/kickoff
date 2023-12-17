@@ -160,6 +160,9 @@
             android:name="competitionId"
             android:defaultValue="39"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_teamFragment_to_leagueFragment"
+            app:destination="@id/leagueFragment" />
     </fragment>
 
     <fragment

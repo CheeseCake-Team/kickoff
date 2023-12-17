@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class TeamMatchesFragment : BaseFragment<FragmentTeamMatchesBinding>() {
     override val layoutIdFragment = R.layout.fragment_team_matches
-    override val viewModel : TeamMatchesViewModel by viewModels()
+    override val viewModel: TeamMatchesViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,6 +38,9 @@ class TeamMatchesFragment : BaseFragment<FragmentTeamMatchesBinding>() {
                     event.awayTeamId,
                     event.date
                 )
+
+            is TeamMatchesNavigationEvent.CompetitionClickedEvent ->
+                TeamFragmentDirections.actionTeamFragmentToLeagueFragment(event.competitionId)
         }
         findNavController().navigate(action)
     }

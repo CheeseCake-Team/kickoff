@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/spacing_4"
-        android:onClick="@{()-> item.onclick.invoke()}"
+        android:onClick="@{()-> item.onMatchClicked.invoke()}"
         android:padding="@dimen/spacing_8"
         app:cardBackgroundColor="@color/cardSurface"
         app:cardCornerRadius="4dp">

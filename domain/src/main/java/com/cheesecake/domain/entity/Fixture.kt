@@ -4,6 +4,7 @@ import java.util.Date
 
 data class Fixture(
     val id: Int,
+    val competitionId: Int,
     val leagueName: String,
     val homeTeamName: String,
     val homeTeamLogoUrl: String,

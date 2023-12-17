@@ -3,7 +3,6 @@ package com.cheesecake.presentation.screens.team.teamMatches
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.usecases.GetTeamMatchesByTeamIdAndSeasonUseCase
 import com.cheesecake.presentation.base.BaseViewModel
-import com.cheesecake.presentation.mapper.toTeamMatchItemUIState
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
@@ -22,15 +21,12 @@ class TeamMatchesViewModel @Inject constructor(
                 )
             }, ::onSuccess, ::onError
         )
-
     }
 
-    private fun onSuccess(result: List<Fixture>) {
+    private fun onSuccess(fixtures: List<Fixture>) {
         _state.update {
             it.copy(
-                data = result.map { fixture ->
-                    fixture.toTeamMatchItemUIState(::onMatchClicked)
-                },
+                data = fixtures.toUiState(::onMatchClicked, ::onCompetitionClicked),
                 isLoading = false
             )
         }
@@ -43,6 +39,12 @@ class TeamMatchesViewModel @Inject constructor(
     private fun onMatchClicked(homeTeamId: Int, awayTeamId: Int, date: String) {
         _event.update {
             Event(TeamMatchesNavigationEvent.MatchClickedEvent(homeTeamId, awayTeamId, date))
+        }
+    }
+
+    private fun onCompetitionClicked(competitionId: Int, season: Int) {
+        _event.update {
+            Event(TeamMatchesNavigationEvent.CompetitionClickedEvent(competitionId, season))
         }
     }
 }

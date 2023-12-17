@@ -1,6 +1,5 @@
 package com.cheesecake.presentation.mapper
 
-import android.util.Log
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.entity.Country
 import com.cheesecake.domain.entity.Fixture
@@ -11,7 +10,6 @@ import com.cheesecake.presentation.models.TeamUIState
 import com.cheesecake.presentation.screens.home.MatchItemUiState
 import com.cheesecake.presentation.screens.player.playerStatistics.PlayerDataItemUIState
 import com.cheesecake.presentation.screens.player.playerStatistics.PlayerSectionItemUIState
-import com.cheesecake.presentation.screens.team.teamMatches.TeamMatchItemUiState
 import com.cheesecake.presentation.screens.team.teamPlayers.SquadPlayerItemUiState
 import com.cheesecake.presentation.utils.toStanderDateString
 import com.cheesecake.presentation.utils.toStanderTimeString
@@ -74,36 +72,9 @@ fun PlayerStatistics.toPlayerStatisticsUIModel(): List<PlayerSectionItemUIState>
 
 fun SquadPlayer.mapIt(onClick: () -> Unit): SquadPlayerItemUiState {
     return SquadPlayerItemUiState(
-        name, ImageUrl, number, onClick
+        name, ImageUrl, if(number == -1) "NA" else number.toString(), onClick
     )
 }
-
-fun Fixture.toTeamMatchItemUIState(onClick: (Int, Int, String) -> Unit): TeamMatchItemUiState =
-    TeamMatchItemUiState(
-        MatchItemUiState(
-            matchState,
-            matchDate.toStanderDateString(),
-            matchDate.toStanderTimeString(),
-            homeTeamName,
-            awayTeamName,
-            homeTeamGoals ?: "0",
-            awayTeamGoals ?: "0",
-            homeTeamLogoUrl,
-            awayTeamLogoUrl,
-
-            onclick = {
-                Log.d("TAaaaaag", "$homeTeamID $awayTeamID $matchDate")
-
-                onClick(
-                    homeTeamID,
-                    awayTeamID,
-                    matchDate.toStanderDateString()
-                )
-            }
-        ),
-        leagueName,
-        leagueLogoUrl
-    )
 
 fun Fixture.toMatchUIState(onclick: () -> Unit): MatchItemUiState {
     return MatchItemUiState(
@@ -116,6 +87,6 @@ fun Fixture.toMatchUIState(onclick: () -> Unit): MatchItemUiState {
         awayTeamGoals ?: "0",
         homeTeamLogoUrl,
         awayTeamLogoUrl,
-        onclick = onclick
+        onMatchClicked = onclick
     )
 }

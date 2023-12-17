@@ -10,5 +10,5 @@ data class MatchItemUiState(
     val awayTeamGoals: String = "",
     val homeTeamImageUrl: String = "",
     val awayTeamImageUrl: String = "",
-    val onclick: () -> Unit = {},
+    val onMatchClicked: () -> Unit = {},
 )

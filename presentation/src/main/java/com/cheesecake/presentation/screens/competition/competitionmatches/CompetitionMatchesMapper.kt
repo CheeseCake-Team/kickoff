@@ -25,7 +25,7 @@ fun List<Fixture>.toUiState(onclick: (Int, Int, String) -> Unit): List<MatchItem
             awayTeamGoals = fixture.awayTeamGoals ?: "0",
             matchTime = fixture.matchDate.toStanderTimeString(),
             matchDate = fixture.matchDate.toStanderDateString(),
-            onclick = {
+            onMatchClicked = {
                 onclick(
                     fixture.homeTeamID,
                     fixture.awayTeamID,
