@@ -39,9 +39,9 @@ fun List<Date>.toUiState(onClickDate: (date: Date) -> Unit): List<DateItemUiStat
 fun List<Pair<League, List<Fixture>>>.toUiState(
     onMatchClick: (homeTeamId: Int, awayTeamId: Int, date: String) -> Unit,
     onCompetitionClick: (competitionId: Int, season: Int) -> Unit
-): List<FavoriteHomeItemUIState> {
+): List<FavoriteHomeItemUiState> {
     return map {
-        FavoriteHomeItemUIState(
+        FavoriteHomeItemUiState(
             title = it.first.name,
             imageUrl = it.first.imageUrl,
             competitionId = it.first.leagueId,

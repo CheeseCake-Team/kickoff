@@ -1,6 +1,6 @@
 package com.cheesecake.presentation.screens.player.playerStatistics
 
-data class PlayerSectionItemUIState(
+data class PlayerSectionItemUiState(
     val header: String,
-    val playerData: List<PlayerDataItemUIState>
+    val playerData: List<PlayerDataItemUiState>
 )

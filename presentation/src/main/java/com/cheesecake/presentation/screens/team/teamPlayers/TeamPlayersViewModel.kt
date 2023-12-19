@@ -12,7 +12,7 @@ import javax.inject.Inject
 @HiltViewModel
 class TeamPlayersViewModel @Inject constructor(
     private val getTeamSquadByIdUseCase: GetTeamSquadByIdUseCase,
-    teamPlayersArgs: TeamPlayersArgs
+    private val teamPlayersArgs: TeamPlayersArgs
 ) : BaseViewModel<TeamPlayersUiState, TeamPLayerNavigationEvent>(TeamPlayersUiState(), Event()) {
     init {
         tryToExecute(
@@ -36,7 +36,14 @@ class TeamPlayersViewModel @Inject constructor(
     }
 
     private fun onClick(playerId: Int) {
-        _event.update { Event(TeamPLayerNavigationEvent.NavigateToPlayer(playerId)) }
+        _event.update {
+            Event(
+                TeamPLayerNavigationEvent.NavigateToPlayer(
+                    playerId,
+                    teamPlayersArgs.season
+                )
+            )
+        }
     }
 
     private fun onError(error: Throwable) {

@@ -3,13 +3,10 @@ package com.cheesecake.presentation.mapper
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.entity.Country
 import com.cheesecake.domain.entity.Fixture
-import com.cheesecake.domain.entity.PlayerStatistics
 import com.cheesecake.domain.entity.SquadPlayer
 import com.cheesecake.presentation.models.CountryItemUIState
 import com.cheesecake.presentation.models.TeamUIState
 import com.cheesecake.presentation.screens.home.MatchItemUiState
-import com.cheesecake.presentation.screens.player.playerStatistics.PlayerDataItemUIState
-import com.cheesecake.presentation.screens.player.playerStatistics.PlayerSectionItemUIState
 import com.cheesecake.presentation.screens.team.teamPlayers.SquadPlayerItemUiState
 import com.cheesecake.presentation.utils.toStanderDateString
 import com.cheesecake.presentation.utils.toStanderTimeString
@@ -33,40 +30,6 @@ fun Country.toUIModel(onClick: () -> Unit): CountryItemUIState {
         name = name,
         flag = flag,
         onClick = onClick
-    )
-}
-
-fun PlayerStatistics.toPlayerStatisticsUIModel(): List<PlayerSectionItemUIState> {
-    return listOf(
-        PlayerSectionItemUIState(
-            "Personal Info", listOf(
-                PlayerDataItemUIState("Name", this.name),
-                PlayerDataItemUIState("Age", this.age.toString()),
-                PlayerDataItemUIState("Birth Date", this.birthDate),
-                PlayerDataItemUIState("Birth Place", this.birthPlace ?: "Not assigned"),
-                PlayerDataItemUIState("Birth Country", this.birthCountry),
-                PlayerDataItemUIState("Nationality", this.nationality),
-                PlayerDataItemUIState("Height", this.heightInCm),
-                PlayerDataItemUIState("Weight", this.weightInKg),
-                PlayerDataItemUIState("Injured", this.isInjured.toString()),
-                PlayerDataItemUIState("Rating", this.rating),
-                PlayerDataItemUIState("Captain", this.birthCountry)
-            )
-        ),
-        PlayerSectionItemUIState(
-            "Games Info", listOf(
-                PlayerDataItemUIState("Appearances", appearances.toString()),
-                PlayerDataItemUIState("Lineups", lineups.toString()),
-                PlayerDataItemUIState("Minutes", minutes.toString()),
-                PlayerDataItemUIState("Number", number.toString()),
-                PlayerDataItemUIState("Position", position),
-            )
-        ),
-        PlayerSectionItemUIState(
-            "Goals Info", listOf(
-                PlayerDataItemUIState("goals", goals.toString()),
-            )
-        )
     )
 }
 

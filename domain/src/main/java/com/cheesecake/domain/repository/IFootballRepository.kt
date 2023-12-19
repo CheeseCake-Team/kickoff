@@ -7,7 +7,6 @@ import com.cheesecake.domain.entity.FixtureLineup
 import com.cheesecake.domain.entity.FixtureStatistics
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.entity.Match
-import com.cheesecake.domain.entity.Player
 import com.cheesecake.domain.entity.PlayerStatistics
 import com.cheesecake.domain.entity.RecentSearch
 import com.cheesecake.domain.entity.SquadPlayer
@@ -18,7 +17,6 @@ import com.cheesecake.domain.entity.Trophy
 import kotlinx.coroutines.flow.Flow
 
 interface IFootballRepository {
-
     suspend fun getRemoteCountries(): List<Country>
 
     suspend fun getLocalCountries(): List<Country>
@@ -29,11 +27,11 @@ interface IFootballRepository {
 
     suspend fun getLeagueTopScorers(leagueId: Int, season: Int): List<PlayerStatistics>
 
-    suspend fun getLocallyLeagueByIdAndSeason(leagueId: Int, ): League?
+    suspend fun getLocallyLeagueByIdAndSeason(leagueId: Int): League?
 
     suspend fun getSinglePlayerCompact(season: String, teamId: Int): List<PlayerStatistics>
 
-    suspend fun getRemotelyLeagueByIdAndSeason(leagueId: Int, ): League
+    suspend fun getRemotelyLeagueByIdAndSeason(leagueId: Int): League
 
     suspend fun updateOrInsertLeague(league: League)
 
@@ -66,8 +64,6 @@ interface IFootballRepository {
     suspend fun getTeamsStandingByLeagueIdAndSeason(leagueId: Int, season: Int): List<TeamStanding>
 
     suspend fun getTeamStatistics(teamId: Int, season: Int, leagueId: Int): TeamStatisticsEntity
-
-    suspend fun getPlayerBySeasonByPlayerId(season: String, playerId: Int): PlayerStatistics
 
     suspend fun getPlayerTrophy(playerId: Int): List<Trophy>
 
@@ -112,9 +108,9 @@ interface IFootballRepository {
 
     suspend fun getFixtureEventByFixtureId(fixtureId: Int): List<FixtureEvents>
 
-    suspend fun getPlayerSingle(seasonId: Int, playerId: Int): Player
+    suspend fun getPlayerFullStatistics(season: Int, playerId: Int): PlayerStatistics
 
-    suspend fun getPlayerFullStatistics(seasonId: Int, playerId: Int): PlayerStatistics
+    suspend fun getPlayerSeasons(): List<Int>
 
     suspend fun getFixtureLineupByFixtureId(fixtureId: Int): List<FixtureLineup>
 

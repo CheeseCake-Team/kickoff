@@ -1,6 +1,6 @@
-package com.cheesecake.domain.entity
+package com.cheesecake.presentation.screens.player.trophyFragment
 
-data class Trophy(
+data class PlayerTrophyItemUiState(
     val competitionName: String,
     val country: String,
     val place: String,

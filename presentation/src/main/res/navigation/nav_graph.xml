@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/favoriteFragment">
 
     <fragment
         android:id="@+id/leagueFragment"
@@ -172,6 +172,9 @@
         <argument
             android:name="playerId"
             android:defaultValue="276"
+            app:argType="integer" />
+        <argument
+            android:name="season"
             app:argType="integer" />
     </fragment>
     <fragment

@@ -16,7 +16,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val dateManager: DateManager,
     private val getFavoriteLeagueMatchesByDate: GetFavoriteLeaguesMatchesByDateUseCase,
-) : BaseViewModel<HomeUIState, HomeEvents>(HomeUIState(), Event()) {
+) : BaseViewModel<HomeUiState, HomeEvents>(HomeUiState(), Event()) {
     init {
         getDates()
         getMatchesByDate(dateManager.getToday())

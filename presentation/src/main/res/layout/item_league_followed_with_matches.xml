@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.cheesecake.presentation.screens.home.FavoriteHomeItemUIState" />
+            type="com.cheesecake.presentation.screens.home.FavoriteHomeItemUiState" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

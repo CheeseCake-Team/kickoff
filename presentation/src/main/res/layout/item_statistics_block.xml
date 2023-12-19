@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.cheesecake.presentation.screens.player.playerStatistics.PlayerSectionItemUIState" />
+            type="com.cheesecake.presentation.screens.player.playerStatistics.PlayerSectionItemUiState" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

@@ -27,7 +27,10 @@ class TeamFragment : BaseFragment<FragmentTeamBinding>() {
 
     private fun initializeTabLayout() {
         val fragments = listOf(
-            TeamPlayersFragment.newInstance(viewModel.teamNavigationArgs.teamId),
+            TeamPlayersFragment.newInstance(
+                viewModel.teamNavigationArgs.teamId,
+                viewModel.teamNavigationArgs.season
+            ),
             TeamMatchesFragment.newInstance(
                 viewModel.teamNavigationArgs.teamId,
                 viewModel.teamNavigationArgs.season,

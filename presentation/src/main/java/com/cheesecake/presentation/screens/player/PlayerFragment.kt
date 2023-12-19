@@ -11,12 +11,10 @@ import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import com.cheesecake.presentation.databinding.FragmentPlayerBinding
 import com.cheesecake.presentation.screens.player.playerStatistics.PlayerStatisticsFragment
-import com.cheesecake.presentation.screens.player.trophyFragment.TrophyFragment
-
+import com.cheesecake.presentation.screens.player.trophyFragment.PlayerTrophyFragment
 
 @AndroidEntryPoint
 class PlayerFragment : BaseFragment<FragmentPlayerBinding>() {
-
     override val layoutIdFragment: Int = R.layout.fragment_player
     override val viewModel: PlayerViewModel by viewModels()
 
@@ -24,16 +22,21 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>() {
         super.onViewCreated(view, savedInstanceState)
         changeStatusBarColor()
         handleNavigation()
-        init()
+        initializeTabLayout()
     }
 
-    private fun init() {
+    private fun initializeTabLayout() {
         val fragments = listOf(
-            PlayerStatisticsFragment.newInstance(viewModel.playerNavigationArgs.playerId),
-            TrophyFragment(),
+            PlayerStatisticsFragment.newInstance(
+                viewModel.playerNavigationArgs.season,
+                viewModel.playerNavigationArgs.playerId
+            ),
+            PlayerTrophyFragment.newInstance(viewModel.playerNavigationArgs.playerId),
         )
-        val fragmentsAdapter = BaseFragmentsAdapter(childFragmentManager,
-            requireActivity().lifecycle, fragments)
+        val fragmentsAdapter = BaseFragmentsAdapter(
+            childFragmentManager,
+            requireActivity().lifecycle, fragments
+        )
         binding.playerViewPager.adapter = fragmentsAdapter
         TabLayoutMediator(binding.tabLayout, binding.playerViewPager) { tab, position ->
             when (position) {
@@ -56,10 +59,4 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>() {
             }
         }
     }
-
-    override fun onPause() {
-        super.onPause()
-        resetStatusBarColor()
-    }
-
 }

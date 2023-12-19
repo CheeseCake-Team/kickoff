@@ -5,8 +5,10 @@ import javax.inject.Inject
 
 class TeamPlayersArgs @Inject constructor(savedStateHandle: SavedStateHandle) {
     val teamId: Int = checkNotNull(savedStateHandle[TEAM_ID_ARG])
+    val season: Int = checkNotNull(savedStateHandle[SEASON_ARG])
 
     companion object {
         const val TEAM_ID_ARG = "TeamPlayersTeamID"
+        const val SEASON_ARG = "CompetitionSeason"
     }
 }

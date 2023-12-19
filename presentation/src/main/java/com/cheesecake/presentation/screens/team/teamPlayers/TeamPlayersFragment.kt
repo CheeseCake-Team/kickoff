@@ -8,6 +8,7 @@ import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentTeamPlayersBinding
 import com.cheesecake.presentation.screens.team.TeamFragmentDirections
+import com.cheesecake.presentation.screens.team.teamPlayers.TeamPlayersArgs.Companion.SEASON_ARG
 import com.cheesecake.presentation.screens.team.teamPlayers.TeamPlayersArgs.Companion.TEAM_ID_ARG
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,7 +32,12 @@ class TeamPlayersFragment : BaseFragment<FragmentTeamPlayersBinding>() {
     private fun onEvent(event: TeamPLayerNavigationEvent) {
         when (event) {
             is TeamPLayerNavigationEvent.NavigateToPlayer -> {
-                findNavController().navigate(TeamFragmentDirections.actionTeamFragmentToPlayerFragment(event.playerId))
+                findNavController().navigate(
+                    TeamFragmentDirections.actionTeamFragmentToPlayerFragment(
+                        event.season,
+                        event.playerId
+                    )
+                )
             }
 
             else -> {}
@@ -40,10 +46,11 @@ class TeamPlayersFragment : BaseFragment<FragmentTeamPlayersBinding>() {
 
     companion object {
         @JvmStatic
-        fun newInstance(teakId: Int) =
+        fun newInstance(teakId: Int, season: Int) =
             TeamPlayersFragment().apply {
                 arguments = Bundle().apply {
                     putInt(TEAM_ID_ARG, teakId)
+                    putInt(SEASON_ARG, season)
 //                    putInt(MatchEventArgs.HOME_TEAM_ID_ARG, homeTeamID)
 //                    putInt(MatchEventArgs.AWAY_TEAM_ID_ARG, awayTeamId)
                 }

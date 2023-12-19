@@ -11,9 +11,9 @@ fun LineupDTO.toEntity(): FixtureLineup {
         teamId = this.team.id,
         teamName = this.team.name,
         teamLogoUrl = this.team.logo,
-        coachId = this.coach.id,
-        coachName = this.coach.name,
-        coachImageUrl = this.coach.photo,
+        coachId = this.coach.id ?: -1,
+        coachName = this.coach.name ?: "NA",
+        coachImageUrl = this.coach.photo ?: "NA",
         formation = this.formation,
         playerLineup = this.startXI.toEntity(),
         substitutesPlayers = this.substitutes.toEntity()

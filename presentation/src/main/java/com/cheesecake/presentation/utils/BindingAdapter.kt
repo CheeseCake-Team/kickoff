@@ -177,11 +177,11 @@ fun TextView.setMatchScore(item: MatchItemUiState?) {
             "ET" -> "Extra time\n${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
             "BT" -> "Break Time\n${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
             "P" -> "Penalty\n${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
-            "SUSP" -> "Match suspended"
+            "SUSP" -> "Match\nsuspended"
             "INT" -> "Match interrupted\n${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
-            "PST" -> "Match postponed"
-            "ABD" -> "Match abandoned"
-            "AWD" -> "Technical loss"
+            "PST" -> "Match\npostponed"
+            "ABD" -> "Match\nabandoned"
+            "AWD" -> "Technical\nloss"
             else -> it.matchTime
         }
     }
