@@ -1,11 +1,11 @@
 package com.cheesecake.presentation.screens.match.lineup
 
+import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import com.cheesecake.domain.entity.FixtureLineup
 import com.cheesecake.domain.usecases.GetFixtureLineupByFixtureIdUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
-import com.cheesecake.presentation.screens.match.statistics.MatchStatisticsArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
@@ -43,6 +43,7 @@ class MatchLineupViewModel @Inject constructor(
     }
 
     private fun onError(e: Throwable) {
+        Log.e("onError: ", e.message.toString())
         _state.update {
             it.copy(
                 errorMessage = e.localizedMessage ?: "Unknown error.",

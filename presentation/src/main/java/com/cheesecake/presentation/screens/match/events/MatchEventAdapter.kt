@@ -7,7 +7,7 @@ import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseAdapter
 import com.cheesecake.presentation.databinding.ItemMatchEventBinding
 
-class MatchEventAdapter(private val homeTeamId: Int, private val awayTeamId: Int) : BaseAdapter<ItemEventUIState>(null) {
+class MatchEventAdapter(private val homeTeamId: Int, private val awayTeamId: Int) : BaseAdapter<EventItemUiState>(null) {
     override val layoutId = R.layout.item_match_event
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {

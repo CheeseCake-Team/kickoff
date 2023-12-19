@@ -6,5 +6,5 @@ import javax.inject.Inject
 class PlayerNavigationArgs @Inject constructor(savedStateHandle: SavedStateHandle) {
     private val playerArgs = PlayerFragmentArgs.fromSavedStateHandle(savedStateHandle)
     val playerId: Int = playerArgs.playerId
-
+    val season: Int = playerArgs.season
 }

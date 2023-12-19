@@ -16,37 +16,32 @@ class TeamViewModel @Inject constructor(
     private val favouriteTeamUseCase: FavouriteTeamUseCase,
     private val getTeamByIdUseCase: GetTeamByIdUseCase,
     val teamNavigationArgs: TeamNavigationArgs
-) : BaseViewModel<TeamUIState, TeamNavigationEvent>(TeamUIState(), Event()) {
-
+) : BaseViewModel<TeamUiState, TeamNavigationEvent>(TeamUiState(), Event()) {
     init {
         tryToExecute(
             { getTeamByIdUseCase(teamNavigationArgs.teamId) },
-            ::onSuccess,
+            ::onGettingTeamSuccess,
             ::onError
         )
     }
 
-    private fun toggleFavourite(teamId: Int) {
+    fun onFavoriteClick() {
         viewModelScope.launch {
-            favouriteTeamUseCase(teamId).let {
+            favouriteTeamUseCase(teamNavigationArgs.teamId).let {
                 _state.update { uiState -> uiState.copy(isFavourite = it.isFavourite) }
             }
         }
     }
 
-    private fun onSuccess(team: Team) {
+    private fun onGettingTeamSuccess(team: Team) {
         _state.update { teamUiState ->
             teamUiState.copy(
-                teamId = team.id,
                 teamName = team.name,
                 country = team.country,
                 imageUrl = team.imageUrl,
                 isFavourite = team.isFavourite,
-                onTeamFavoriteClick = { toggleFavourite(team.id) },
-                onBackClick = { onBackClick() }
             )
         }
-
     }
 
     fun onBackClick() {
@@ -60,6 +55,5 @@ class TeamViewModel @Inject constructor(
                 isLoading = false
             )
         }
-
     }
 }

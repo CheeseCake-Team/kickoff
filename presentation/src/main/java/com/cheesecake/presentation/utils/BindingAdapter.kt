@@ -1,6 +1,5 @@
 package com.cheesecake.presentation.utils
 
-import android.annotation.SuppressLint
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -18,11 +17,10 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseAdapter
 import com.cheesecake.presentation.base.BaseListAdapter
-import com.cheesecake.presentation.screens.home.MatchItemUIState
+import com.cheesecake.presentation.screens.home.MatchItemUiState
 import com.cheesecake.presentation.screens.search.SearchViewModel
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import com.google.android.material.card.MaterialCardView
-
 
 @BindingAdapter("app:imageUrl")
 fun ImageView.setImageFromUrl(imageUri: String?) {
@@ -168,15 +166,22 @@ fun <T> setItems(view: RecyclerView, items: List<T>?) {
 }
 
 @BindingAdapter("app:scoreOrTime")
-fun TextView.setMatchScore(item: MatchItemUIState?) {
+fun TextView.setMatchScore(item: MatchItemUiState?) {
     item?.let {
         this.text = when (it.matchState) {
-            "FT" -> "Finished\n${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
+            "FT", "PEN", "AET" -> "Finished\n${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
             "LIVE" -> "Live\n${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
             "CANC" -> "Match cancelled"
             "2H" -> "Second half\n${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
             "1H" -> "First half\n${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
             "ET" -> "Extra time\n${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
+            "BT" -> "Break Time\n${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
+            "P" -> "Penalty\n${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
+            "SUSP" -> "Match\nsuspended"
+            "INT" -> "Match interrupted\n${it.homeTeamGoals}  -  ${it.awayTeamGoals}"
+            "PST" -> "Match\npostponed"
+            "ABD" -> "Match\nabandoned"
+            "AWD" -> "Technical\nloss"
             else -> it.matchTime
         }
     }

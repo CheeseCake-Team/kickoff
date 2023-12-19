@@ -28,10 +28,8 @@ import com.cheesecake.data.remote.utils.LeagueType
 import com.cheesecake.data.repository.RemoteDataSource
 import com.cheesecake.domain.KickoffException
 import kotlinx.coroutines.TimeoutCancellationException
-import kotlinx.coroutines.withTimeout
 import retrofit2.Response
 import java.net.ConnectException
-import java.net.UnknownHostException
 import javax.inject.Inject
 
 class RemoteDataSourceImp @Inject constructor(
@@ -455,7 +453,7 @@ class RemoteDataSourceImp @Inject constructor(
 
     //region players
     override suspend fun getPlayerBySeasonByPlayerId(
-        season: String,
+        season: Int,
         playerId: Int
     ): List<PlayerDTO> {
         return wrapBaseResponse { service.getPlayerBySeasonByPlayerId(season, playerId) }
@@ -466,13 +464,6 @@ class RemoteDataSourceImp @Inject constructor(
         teamId: Int
     ): List<PlayerDTO> {
         return wrapBaseResponse { service.getPlayerBySeasonByTeamId(season, teamId) }
-    }
-
-    override suspend fun getPlayerBySeasonByLeagueId(
-        season: String,
-        leagueId: Int
-    ): List<PlayerDTO> {
-        return wrapBaseResponse { service.getPlayerBySeasonByLeagueId(season, leagueId) }
     }
 
     override suspend fun searchPlayerNameByTeamId(
@@ -659,7 +650,7 @@ class RemoteDataSourceImp @Inject constructor(
         response: suspend () -> Response<BasePagingResponse<T>>
     ): List<T> {
         return try {
-            val apiResponse = withTimeout(5000) { response() }
+            val apiResponse = response()
             if (apiResponse.isSuccessful) {
                 val responseBody = apiResponse.body()
                 responseBody?.response ?: throw KickoffException.NoDataFoundException()
@@ -673,12 +664,11 @@ class RemoteDataSourceImp @Inject constructor(
         }
     }
 
-
     private suspend fun <T> wrapBaseStaticResponse(
         response: suspend () -> Response<BasePagingForStaticResponse<T>>
     ): T {
         return try {
-            val apiResponse = withTimeout(5000) { response() }
+            val apiResponse = response()
             if (apiResponse.isSuccessful) {
                 val responseBody = apiResponse.body()
                 responseBody?.response ?: throw KickoffException.NoDataFoundException()

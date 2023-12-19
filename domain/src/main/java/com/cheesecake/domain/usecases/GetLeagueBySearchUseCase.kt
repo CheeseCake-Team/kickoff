@@ -7,10 +7,7 @@ import javax.inject.Inject
 class GetLeagueBySearchUseCase @Inject constructor(
     private val repository: IFootballRepository,
 ) {
-
     suspend operator fun invoke(leagueName: String): List<League> {
         return repository.getLeaguesBySearch(leagueName)
-
     }
-
 }

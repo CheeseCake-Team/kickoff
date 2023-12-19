@@ -6,12 +6,10 @@ import androidx.fragment.app.viewModels
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentPlayerStatisticsBinding
-import com.cheesecake.presentation.screens.league.LeagueArgs
-import com.cheesecake.presentation.screens.league.leagueMatches.LeagueMatchesFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PlayerStatisticsFragment : BaseFragment<FragmentPlayerStatisticsBinding>(){
+class PlayerStatisticsFragment : BaseFragment<FragmentPlayerStatisticsBinding>() {
     override val layoutIdFragment = R.layout.fragment_player_statistics
     override val viewModel: PlayerStatisticsViewModel by viewModels()
 
@@ -22,11 +20,11 @@ class PlayerStatisticsFragment : BaseFragment<FragmentPlayerStatisticsBinding>()
 
     companion object {
         @JvmStatic
-        fun newInstance(playerId: Int) = PlayerStatisticsFragment().apply {
+        fun newInstance(season: Int, playerId: Int) = PlayerStatisticsFragment().apply {
             arguments = Bundle().apply {
                 putInt(PlayerStatisticsArgs.PLAYER_ID, playerId)
+                putInt(PlayerStatisticsArgs.SEASON, season)
             }
         }
     }
-
 }

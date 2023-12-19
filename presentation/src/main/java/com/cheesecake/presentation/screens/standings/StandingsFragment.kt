@@ -2,15 +2,13 @@ package com.cheesecake.presentation.screens.standings
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
-import com.cheesecake.domain.usecases.GetAllTeamsInLeagueWithSeasonUseCase
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentStandingsBinding
-import com.cheesecake.presentation.screens.league.LeagueNavigationEvent
+import com.google.android.material.divider.MaterialDividerItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,7 +19,14 @@ class StandingsFragment : BaseFragment<FragmentStandingsBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         handleNavigation()
-        binding.recyclerviewStandings.adapter = StandingsAdapter()
+        binding.recyclerviewStandings.apply {
+            adapter = StandingsAdapter()
+            addItemDecoration(MaterialDividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+                .apply {
+                    isLastItemDecorated = false
+                }
+            )
+        }
     }
 
     private fun handleNavigation() {

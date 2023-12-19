@@ -313,7 +313,7 @@ interface RemoteDataSource {
 
     //region players
     suspend fun getPlayerBySeasonByPlayerId(
-        season: String,
+        season: Int,
         playerId: Int,
     ): List<PlayerDTO>
 
@@ -321,11 +321,6 @@ interface RemoteDataSource {
         season: String,
         teamId: Int,
     ): List<PlayerDTO>
-
-    suspend fun getPlayerBySeasonByLeagueId(
-        season: String, leagueId: Int
-    ): List<PlayerDTO>
-
 
     suspend fun searchPlayerNameByTeamId(
         playerName: String, teamId: Int

@@ -389,7 +389,7 @@ interface FootballApiService {
     //region players
     @GET("players")
     suspend fun getPlayerBySeasonByPlayerId(
-        @Query("season") season: String,
+        @Query("season") season: Int,
         @Query("id") playerId: Int,
     ): Response<BasePagingResponse<PlayerDTO>>
 
@@ -397,11 +397,6 @@ interface FootballApiService {
     suspend fun getPlayerBySeasonByTeamId(
         @Query("season") season: String,
         @Query("team") teamId: Int,
-    ): Response<BasePagingResponse<PlayerDTO>>
-
-    @GET("players")
-    suspend fun getPlayerBySeasonByLeagueId(
-        @Query("season") season: String, @Query("league") leagueId: Int
     ): Response<BasePagingResponse<PlayerDTO>>
 
     @GET("players")

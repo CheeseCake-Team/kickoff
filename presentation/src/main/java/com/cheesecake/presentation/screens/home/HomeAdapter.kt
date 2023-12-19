@@ -4,15 +4,14 @@ import androidx.recyclerview.widget.DiffUtil
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseListAdapter
 
-class HomeAdapter: BaseListAdapter<FavoriteHomeItemUIState>(FavoriteHomeItemUIStateDiffUtil()) {
+class HomeAdapter: BaseListAdapter<FavoriteHomeItemUiState>(FavoriteHomeItemUIStateDiffUtil()) {
     override val layoutId = R.layout.item_league_followed_with_matches
 }
 
-class FavoriteHomeItemUIStateDiffUtil: DiffUtil.ItemCallback<FavoriteHomeItemUIState>() {
-    override fun areItemsTheSame(oldItem: FavoriteHomeItemUIState, newItem: FavoriteHomeItemUIState): Boolean =
+class FavoriteHomeItemUIStateDiffUtil: DiffUtil.ItemCallback<FavoriteHomeItemUiState>() {
+    override fun areItemsTheSame(oldItem: FavoriteHomeItemUiState, newItem: FavoriteHomeItemUiState): Boolean =
         oldItem.title == newItem.title
 
-    override fun areContentsTheSame(oldItem: FavoriteHomeItemUIState, newItem: FavoriteHomeItemUIState): Boolean =
+    override fun areContentsTheSame(oldItem: FavoriteHomeItemUiState, newItem: FavoriteHomeItemUiState): Boolean =
         oldItem == newItem
-
 }

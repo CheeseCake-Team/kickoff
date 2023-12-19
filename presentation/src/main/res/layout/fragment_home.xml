@@ -34,11 +34,12 @@
             android:layout_height="0dp"
             android:clipToPadding="false"
             android:padding="@dimen/spacing_12"
+            app:viewVisibility="@{viewModel.state.loading}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/date_recycler_view"
-            tools:listitem="@layout/item_league_followed_with_matches"
-            app:listItems="@{viewModel.state.favoriteItems}" />
+            app:listItems="@{viewModel.state.favoriteItems}"
+            tools:listitem="@layout/item_league_followed_with_matches" />
 
         <ProgressBar
             android:id="@+id/progressBar"

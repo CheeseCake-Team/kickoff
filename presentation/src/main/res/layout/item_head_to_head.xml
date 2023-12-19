@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.cheesecake.presentation.screens.home.MatchItemUIState" />
+            type="com.cheesecake.presentation.screens.home.MatchItemUiState" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_marginVertical="@dimen/spacing_4"
-        android:onClick="@{()->item.onclick.invoke()}"
+        android:onClick="@{()->item.onMatchClicked.invoke()}"
         app:cardBackgroundColor="@color/cardSurface"
         app:cardCornerRadius="4dp">
 
@@ -44,8 +44,8 @@
                 android:id="@+id/imageView"
                 android:layout_width="@dimen/team_image_size_24dp"
                 android:layout_height="@dimen/team_image_size_24dp"
-                app:imageUrl="@{item.homeTeamImageUrl}"
                 android:layout_marginEnd="@dimen/spacing_8"
+                app:imageUrl="@{item.homeTeamImageUrl}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textView9"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -55,13 +55,13 @@
                 style="@style/SubtitleMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:textColor="@color/fontHeavy"
-                app:scoreOrTime="@{item}"
-                android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:scoreOrTime="@{item}"
                 tools:text="TextView" />
 
             <TextView
@@ -84,8 +84,8 @@
                 android:id="@+id/imageView2"
                 android:layout_width="@dimen/team_image_size_24dp"
                 android:layout_height="@dimen/team_image_size_24dp"
-                app:imageUrl="@{item.awayTeamImageUrl}"
                 android:layout_marginStart="@dimen/spacing_8"
+                app:imageUrl="@{item.awayTeamImageUrl}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView9"
                 app:layout_constraintTop_toTopOf="parent" />

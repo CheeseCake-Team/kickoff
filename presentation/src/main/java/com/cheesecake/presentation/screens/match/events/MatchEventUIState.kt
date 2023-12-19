@@ -6,11 +6,11 @@ import com.cheesecake.domain.entity.FixtureEvents
 data class MatchEventUIState(
     val errorMessage: String = "error",
     val isLoading: Boolean = true,
-    val data: List<ItemEventUIState> = emptyList(),
+    val data: List<EventItemUiState> = emptyList(),
     val noData: Boolean = false
 )
 
-data class ItemEventUIState(
+data class EventItemUiState(
     val time: Int? = 0,
     val teamId: Int= 0,
     val playerId: Int = 0,
@@ -21,8 +21,8 @@ data class ItemEventUIState(
     val detail: String? = ""
 )
 
-fun List<FixtureEvents>.toUIState(): List<ItemEventUIState>{
-    return map { ItemEventUIState(
+fun List<FixtureEvents>.toUIState(): List<EventItemUiState>{
+    return map { EventItemUiState(
         time = it.time,
         teamId = it.teamId,
         playerId = it.playerId,
