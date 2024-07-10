@@ -21,7 +21,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         Properties properties = new Properties()
         properties.load(project.rootProject.file('keys_properties.properties').newDataInputStream())
-        buildConfigField "String", "base_url", "\"${properties.getProperty('base_url')}\""
+        buildConfigField "String", "BASE_URL", "\"${properties.getProperty('BASE_URL')}\""
 
         javaCompileOptions {
             annotationProcessorOptions {

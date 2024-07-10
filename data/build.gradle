@@ -18,7 +18,7 @@ android {
 
         Properties properties = new Properties()
         properties.load(project.rootProject.file('keys_properties.properties').newDataInputStream())
-        buildConfigField "String", "my_private_key", "\"${properties.getProperty('my_private_key')}\""
+        buildConfigField "String", "PRIVATE_KEY", "\"${properties.getProperty('PRIVATE_KEY')}\""
     }
 
     buildTypes {
