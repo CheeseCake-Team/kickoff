@@ -8,7 +8,7 @@ fun StandingsDTO.League.Standing.toEntity(): TeamStanding {
     return TeamStanding(
         teamId = this.team.id,
         rank = this.rank,
-        form = this.form.map { it.toString() },
+        form = this.form?.map { it.toString() } ?: emptyList(),
         logo = this.team.logo,
         name = this.team.name,
         played = this.all.played,

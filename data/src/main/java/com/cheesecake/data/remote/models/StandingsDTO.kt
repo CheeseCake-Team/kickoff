@@ -1,6 +1,5 @@
 package com.cheesecake.data.remote.models
 
-import com.cheesecake.data.remote.models.*
 import com.google.gson.annotations.SerializedName
 
 data class StandingsDTO(
@@ -37,7 +36,7 @@ data class StandingsDTO(
             @SerializedName("group")
             val group: String,
             @SerializedName("form")
-            val form: String,
+            val form: String?,
             @SerializedName("status")
             val status: String,
             @SerializedName("description")
