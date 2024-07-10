@@ -38,7 +38,7 @@ abstract class BaseListAdapter<T>(
         holder.bind(currentItem)
     }
 
-    open class BaseViewHolder<T>(private val binding: ViewDataBinding) :
+    class BaseViewHolder<T>(private val binding: ViewDataBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(currentItem: T) {
             binding.setVariable(BR.item, currentItem)
