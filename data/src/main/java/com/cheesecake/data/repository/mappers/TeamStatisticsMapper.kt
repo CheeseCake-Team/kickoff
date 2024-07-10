@@ -5,8 +5,7 @@ import com.cheesecake.domain.entity.TeamStatisticsEntity
 @JvmName("teamStatisticsDTOToTeamStatisticsEntity")
 fun TeamStatisticsDTO.toEntity(): TeamStatisticsEntity =
     TeamStatisticsEntity(
-
-        form = this.form.map { it.toString() },
+        form = this.form?.let { form-> form.map { it.toString() } } ?: listOf(),
         played = scoreStats(
             this.fixtures.played.home,
             this.fixtures.played.away,

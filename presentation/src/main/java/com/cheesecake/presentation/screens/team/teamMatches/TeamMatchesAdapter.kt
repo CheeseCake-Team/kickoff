@@ -11,8 +11,7 @@ class TeamMatchesAdapter: BaseListAdapter<List<Fixture>>(
     override val layoutId = R.layout.item_team_match
 }
 
-class DateMatchesDiffUtil() : DiffUtil.ItemCallback<List<Fixture>>() {
-
+class DateMatchesDiffUtil : DiffUtil.ItemCallback<List<Fixture>>() {
     override fun areItemsTheSame(
         oldItem: List<Fixture>,
         newItem: List<Fixture>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.cheesecake.presentation.screens.favoritecompetitionsselection.FavoriteCompetitionSelectionViewModel" />
+    </data>
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/background"
+        app:layoutDescription="@xml/fragment_favorite_competitions_selection_scene"
+        tools:context=".fragment.favLeagueSelection.FavLeagueSelectionFragment">
+
+        <TextView
+            android:id="@+id/title_text_view"
+            style="@style/TitleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:elevation="1dp"
+            android:text="@string/welcome_to_kickoff"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/sub_title_text_view"
+            style="@style/SubtitleLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_8"
+            android:elevation="1dp"
+            android:text="@string/pick_your_preferred_competition_and_experience_the_real_live_scores_with_us"
+            android:textColor="@color/backLighter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/title_text_view"
+            app:layout_constraintTop_toBottomOf="@id/title_text_view" />
+
+        <EditText
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:background="@drawable/edittext_background_round"
+            android:drawableStart="@drawable/magnifer"
+            android:drawablePadding="8dp"
+            android:drawableTint="@color/lightGreyText"
+            android:elevation="1dp"
+            android:fontFamily="@font/lato"
+            android:hint="@string/search_your_favourite_competition"
+            android:inputType="text"
+            android:onTextChanged="@{(text, start, before, count) -> viewModel.onSearchQueryChanged(text)}"
+            android:paddingHorizontal="@dimen/font_size_16sp"
+            android:textColor="@color/fontHeavy"
+            android:textColorHint="@color/lightGreyText"
+            android:textSize="@dimen/font_size_14sp"
+            app:layout_constraintEnd_toEndOf="@+id/sub_title_text_view"
+            app:layout_constraintStart_toStartOf="@+id/sub_title_text_view"
+            app:layout_constraintTop_toBottomOf="@id/sub_title_text_view" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/competitions_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:padding="@dimen/spacing_12"
+            android:clipToPadding="false"
+            android:scrollbars="none"
+            android:overScrollMode="never"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/view_frame"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_bar"
+            app:listItems="@{viewModel.state.displayedCompetitions}"
+            app:spanCount="3"
+            tools:listitem="@layout/item_favorite_competition_selection" />
+
+        <View
+            android:id="@+id/view_frame"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/cardSurface"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/next_button"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_16"
+            android:onClick="@{()-> viewModel.state.onNextClick.invoke()}"
+            android:text="@string/next"
+            android:textColor="@color/primaryColor"
+            app:layout_constraintBottom_toBottomOf="@id/view_frame"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/view_frame" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/competitions_recycler_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/competitions_recycler_view"
+            app:showLoading="@{viewModel.state.loading}" />
+
+        <FrameLayout
+            android:id="@+id/frame_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/view_frame"
+            app:layout_constraintTop_toTopOf="@id/competitions_recycler_view"
+            app:viewVisibilityNoResult="@{viewModel.state.noResult}">
+
+            <include
+                android:id="@+id/layout_included_no_result"
+                layout="@layout/included_no_result_found"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+</layout>

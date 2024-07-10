@@ -1,11 +1,9 @@
 package com.cheesecake.presentation.screens.home
 
-import android.util.Log
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.League
-import com.cheesecake.domain.usecases.FavouriteLeagueUseCase
 import com.cheesecake.domain.usecases.GetFavoriteLeaguesMatchesByDateUseCase
-import com.cheesecake.domain.usecases.GetNextThirtyDaysUseCase
+import com.cheesecake.domain.usecases.DateManager
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,47 +14,56 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getNextThirtyDaysUseCase: GetNextThirtyDaysUseCase,
-    private val getFavoriteLeaguesMatchesByDateUseCase: GetFavoriteLeaguesMatchesByDateUseCase,
-    private val favouriteLeagueUseCase: FavouriteLeagueUseCase
-
-) : BaseViewModel<HomeUIState, HomeEvents>(HomeUIState(), Event()) {
-
-
+    private val dateManager: DateManager,
+    private val getFavoriteLeagueMatchesByDate: GetFavoriteLeaguesMatchesByDateUseCase,
+) : BaseViewModel<HomeUiState, HomeEvents>(HomeUiState(), Event()) {
     init {
-
-        getDateMatches(getNextThirtyDaysUseCase().first())
-        tryToExecute({ getNextThirtyDaysUseCase() }, ::onSuccessDate, ::onError)
+        getDates()
+        getMatchesByDate(dateManager.getToday())
     }
 
-    private fun onSuccessDate(dates: List<Date>) {
-        _state.update {
-            it.copy(dateItems = dates.map { date ->
-                date.toDateUiState { onClickDate(date) }
-            })
+    private fun getDates() {
+        dateManager.getDatesInRange(-30 until 30).toUiState { onDateClick(it) }.also {
+            _state.update { homeUiState ->
+                homeUiState.copy(
+                    dateItems = it,
+                    currentDatePosition = it.indexOfFirst { dateItemUIState -> dateItemUIState.isSelected })
+            }
         }
-        Log.i("onSuccessDate: ", _state.value.dateItems.toString())
     }
 
-    private fun onClickDate(date: Date) {
-        getDateMatches(date)
+    private fun onDateClick(date: Date) {
+        _state.update {
+            val dateItems = it.dateItems.map { dateItemUiState ->
+                if (dateItemUiState.date == date) {
+                    dateItemUiState.copy(isSelected = true)
+                } else {
+                    dateItemUiState.copy(isSelected = false)
+                }
+            }
+            it.copy(
+                isLoading = true,
+                dateItems = dateItems,
+                currentDatePosition = dateItems.indexOfFirst { dateItemUIState -> dateItemUIState.isSelected }
+            )
+        }
+        getMatchesByDate(date)
     }
 
-    private fun getDateMatches(date: Date) {
+    private fun getMatchesByDate(date: Date) {
         tryToExecute({
-            getFavoriteLeaguesMatchesByDateUseCase(date, "Africa/Cairo")
+            getFavoriteLeagueMatchesByDate(date, "Africa/Cairo")
         }, ::onSuccessFavourites, ::onError)
     }
-
 
     private fun onSuccessFavourites(f: Flow<List<Pair<League, List<Fixture>>>>) {
         collectFlow(f) { pair ->
             copy(
-                isLoading = false,
-                favoriteItems = pair.toHomeFavouriteUiState(
-                    onLeagueClick = ::onLeagueClicked,
+                favoriteItems = pair.toUiState(
+                    onCompetitionClick = ::onCompetitionClick,
                     onMatchClick = ::onMatchClicked
-                )
+                ),
+                isLoading = false,
             )
         }
     }
@@ -65,16 +72,13 @@ class HomeViewModel @Inject constructor(
         _state.update {
             it.copy(errorMessage = e.localizedMessage ?: "Unknown error.", isLoading = false)
         }
-        Log.d("TAG", e.message.toString())
     }
 
     private fun onMatchClicked(homeTeamId: Int, awayTeamId: Int, date: String) {
-        _event.update { Event(HomeEvents.MatchClickedEvent(homeTeamId, awayTeamId, date)) }
+        _event.update { Event(HomeEvents.NavigateToMatch(homeTeamId, awayTeamId, date)) }
     }
 
-    private fun onLeagueClicked(leagueId: Int, season: Int) {
-        _event.update { Event(HomeEvents.LeagueClickEvent(leagueId, season)) }
+    private fun onCompetitionClick(leagueId: Int, season: Int) {
+        _event.update { Event(HomeEvents.NavigateToCompetition(leagueId, season)) }
     }
-
-
 }

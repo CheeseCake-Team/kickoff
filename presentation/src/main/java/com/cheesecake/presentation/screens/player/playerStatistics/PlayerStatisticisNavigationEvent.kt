@@ -1,3 +1,0 @@
-package com.cheesecake.presentation.screens.player.playerStatistics
-
-sealed interface PlayerStatisticisNavigationEvent

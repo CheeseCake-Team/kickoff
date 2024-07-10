@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.cheesecake.presentation.screens.player.playerStatistics.PlayerDataItemUIState" />
+            type="com.cheesecake.presentation.screens.player.playerStatistics.PlayerDataItemUiState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,0 +1,3 @@
+package com.cheesecake.presentation.screens.player.trophyFragment
+
+sealed interface TrophyNavigationEvent

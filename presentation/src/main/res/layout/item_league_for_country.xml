@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.cheesecake.presentation.screens.league.LeagueItemUIState" />
+            type="com.cheesecake.presentation.screens.country.countryLeagues.CompetitionItemUiState" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:layout_margin="@dimen/spacing_4"
-        android:onClick="@{() -> item.onLeagueClick.invoke()}"
+        android:onClick="@{() -> item.onCompetitionClick.invoke()}"
         app:cardBackgroundColor="@color/cardSurface"
         app:cardCornerRadius="@dimen/spacing_8">
 
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_24"
                 android:layout_marginTop="@dimen/spacing_16"
-                android:text="@{item.leagueName}"
+                android:text="@{item.competitionName}"
                 android:textAppearance="@style/SubtitleMedium"
                 android:textColor="@color/fontHeavy"
                 app:layout_constraintBottom_toTopOf="@+id/text_view_established"

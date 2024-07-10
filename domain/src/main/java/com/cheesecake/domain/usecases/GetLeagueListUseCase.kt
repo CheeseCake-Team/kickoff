@@ -7,7 +7,6 @@ import javax.inject.Inject
 class GetLeagueListUseCase @Inject constructor(
     private val leagueRepository: IFootballRepository
 ) {
-
     suspend operator fun invoke(): List<League>{
         val leagues = leagueRepository.getAllLeagues()
         return leagues.shuffled()

@@ -17,7 +17,7 @@ data class SquadDTO(
         @SerializedName("age")
         val age: Int,
         @SerializedName("number")
-        val number: Int,
+        val number: Int?,
         @SerializedName("position")
         val position: String,
         @SerializedName("photo")

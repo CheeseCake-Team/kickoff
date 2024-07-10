@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class PersonPhotoDTO(
     @SerializedName("id")
-    val id: Int,
+    val id: Int?,
     @SerializedName("name")
-    val name: String,
+    val name: String?,
     @SerializedName("photo")
-    val photo: String
+    val photo: String?
 )

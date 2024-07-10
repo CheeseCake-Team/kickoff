@@ -12,8 +12,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:backgroundTint="@color/background"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/background">
 
         <Button
             android:id="@+id/button_back"
@@ -22,8 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_16"
             android:layout_marginTop="@dimen/spacing_8"
+            android:onClick="@{() -> viewModel.onBackClick()}"
             app:icon="@drawable/ic_back"
-            android:onClick="@{() -> viewModel.state.onBackClick.invoke()}"
             app:iconTint="@color/fontHeavy"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -54,16 +54,15 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView11"
-            app:layout_constraintVertical_bias="0.0"
-            tools:layout_editor_absoluteX="0dp">
+            app:layout_constraintVertical_bias="0.0">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/button_back"
                 android:layout_marginTop="@dimen/spacing_24"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/button_back">
 
                 <LinearLayout
                     android:id="@+id/titleLinearLayout"
@@ -121,7 +120,7 @@
 
                     <View
                         android:layout_width="175dp"
-                        android:layout_height="28dp"/>
+                        android:layout_height="28dp" />
 
                 </LinearLayout>
 

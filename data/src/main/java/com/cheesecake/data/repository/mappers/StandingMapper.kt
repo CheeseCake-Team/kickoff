@@ -8,7 +8,7 @@ fun StandingsDTO.League.Standing.toEntity(): TeamStanding {
     return TeamStanding(
         teamId = this.team.id,
         rank = this.rank,
-        form = this.form.map { it.toString() },
+        form = this.form?.map { it.toString() } ?: emptyList(),
         logo = this.team.logo,
         name = this.team.name,
         played = this.all.played,
@@ -22,7 +22,7 @@ fun StandingsDTO.League.Standing.toEntity(): TeamStanding {
 
 @JvmName("teamStandingsDTOsToTeamsStanding")
 fun List<StandingsDTO>.toEntity(): List<TeamStanding> {
-    return this.first().league.standings.first().map { standingsResponse ->
+    return this.firstOrNull()?.league?.standings?.firstOrNull()?.map { standingsResponse ->
         standingsResponse.toEntity()
-    }
+    } ?: emptyList()
 }

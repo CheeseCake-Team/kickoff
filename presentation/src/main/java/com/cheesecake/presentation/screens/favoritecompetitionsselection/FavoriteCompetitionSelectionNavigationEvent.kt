@@ -1,0 +1,5 @@
+package com.cheesecake.presentation.screens.favoritecompetitionsselection
+
+sealed interface FavoriteCompetitionSelectionNavigationEvent {
+    object NavigateToFavoriteTeamsSelection: FavoriteCompetitionSelectionNavigationEvent
+}

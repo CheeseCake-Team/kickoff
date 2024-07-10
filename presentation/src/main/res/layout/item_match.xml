@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="item"
-            type="com.cheesecake.presentation.screens.home.MatchItemUIState" />
+            type="com.cheesecake.presentation.screens.home.MatchItemUiState" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -15,8 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/spacing_4"
+        android:onClick="@{()-> item.onMatchClicked.invoke()}"
         android:padding="@dimen/spacing_8"
-        android:onClick="@{()-> item.onclick.invoke()}"
         app:cardBackgroundColor="@color/cardSurface"
         app:cardCornerRadius="4dp">
 
@@ -27,12 +28,14 @@
             <TextView
                 android:id="@+id/textView"
                 style="@style/bodyMedium"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/spacing_8"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:maxLength="14"
+                android:ellipsize="end"
+                android:gravity="end"
+                android:maxLines="1"
                 android:text="@{item.homeTeamName}"
                 android:textColor="@color/fontHeavy"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView"
@@ -40,7 +43,7 @@
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imageView"
-                tools:text="TextView" />
+                tools:text="real madrid" />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -57,23 +60,27 @@
                 style="@style/SubtitleMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_4"
+                android:gravity="center"
+                android:textAlignment="center"
                 android:textColor="@color/fontHeavy"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:scoreOrTime="@{item}"
-                android:textAlignment="center"
-                tools:text="TextView" />
+                tools:text="Match\npostpond" />
 
             <TextView
                 android:id="@+id/textView3"
                 style="@style/bodyMedium"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:maxLength="10"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:maxLines="1"
                 android:text="@{item.awayTeamName}"
                 android:textColor="@color/fontHeavy"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView2"
@@ -92,6 +99,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView2"
                 app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>

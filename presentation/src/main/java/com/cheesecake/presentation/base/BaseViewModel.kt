@@ -43,7 +43,7 @@ abstract class BaseViewModel<S, E>(uiState: S, uiEvent: Event<E>) : ViewModel() 
     ) {
         viewModelScope.launch(dispatcher) {
             try {
-                onSuccess(call.invoke())
+                onSuccess(call())
             } catch (throwable: Throwable) {
                 onError(throwable)
             }

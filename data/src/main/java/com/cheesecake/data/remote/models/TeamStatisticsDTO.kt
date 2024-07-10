@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 data class TeamStatisticsDTO(
     @SerializedName("league") val league: League,
     @SerializedName("team") val team:  TeamDataDTO,
-    @SerializedName("form") val form: String,
+    @SerializedName("form") val form: String?,
     @SerializedName("fixtures") val fixtures: Fixtures,
     @SerializedName("goals") val goals: Goals,
     @SerializedName("biggest") val biggest: Biggest,

@@ -7,7 +7,8 @@ import javax.inject.Inject
 class GetPlayerStatisticsUseCase @Inject constructor(
     private val iFootballRepository: IFootballRepository
 ) {
-    suspend operator fun invoke(seasonId: Int, playerId: Int): PlayerStatistics {
-        return iFootballRepository.getPlayerFullStatistics(seasonId,playerId)
+    suspend operator fun invoke(season: Int, playerId: Int): PlayerStatistics {
+
+        return iFootballRepository.getPlayerFullStatistics(season, playerId)
     }
 }

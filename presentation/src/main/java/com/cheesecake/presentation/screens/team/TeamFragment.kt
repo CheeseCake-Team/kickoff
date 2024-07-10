@@ -8,8 +8,6 @@ import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.base.BaseFragmentsAdapter
 import com.cheesecake.presentation.databinding.FragmentTeamBinding
-import com.cheesecake.presentation.screens.search.SearchEvents
-import com.cheesecake.presentation.screens.search.SearchFragmentDirections
 import com.cheesecake.presentation.screens.team.teamMatches.TeamMatchesFragment
 import com.cheesecake.presentation.screens.team.teamPlayers.TeamPlayersFragment
 import com.cheesecake.presentation.screens.team.teamstatistics.TeamStatisticsFragment
@@ -23,16 +21,26 @@ class TeamFragment : BaseFragment<FragmentTeamBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init()
+        initializeTabLayout()
         handleNavigation()
     }
 
-    private fun init() {
-        val teamId = viewModel.teamNavigationArgs.teamId
+    private fun initializeTabLayout() {
         val fragments = listOf(
-            TeamPlayersFragment.newInstance(teamId),
-            TeamMatchesFragment.newInstance(teamId),
-            TeamStatisticsFragment.newInstance(teamId),
+            TeamPlayersFragment.newInstance(
+                viewModel.teamNavigationArgs.teamId,
+                viewModel.teamNavigationArgs.season
+            ),
+            TeamMatchesFragment.newInstance(
+                viewModel.teamNavigationArgs.teamId,
+                viewModel.teamNavigationArgs.season,
+                viewModel.teamNavigationArgs.competitionId
+            ),
+            TeamStatisticsFragment.newInstance(
+                viewModel.teamNavigationArgs.teamId,
+                viewModel.teamNavigationArgs.competitionId,
+                viewModel.teamNavigationArgs.season,
+            ),
         )
         val fragmentsAdapter = BaseFragmentsAdapter(
             childFragmentManager,
@@ -50,12 +58,13 @@ class TeamFragment : BaseFragment<FragmentTeamBinding>() {
 
     private fun handleNavigation() {
         collect(viewModel.event) { event ->
-            event.getContentIfNotHandled()?.let { onEvent() }
+            event.getContentIfNotHandled()?.let { onEvent(it) }
         }
     }
 
-    private fun onEvent() {
-        findNavController().navigateUp()
+    private fun onEvent(event: TeamNavigationEvent) {
+        when (event) {
+            is TeamNavigationEvent.NavigateBack -> findNavController().navigateUp()
+        }
     }
-
 }

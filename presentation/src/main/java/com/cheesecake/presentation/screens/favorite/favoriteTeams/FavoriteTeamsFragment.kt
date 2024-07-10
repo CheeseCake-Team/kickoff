@@ -13,7 +13,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FavoriteTeamsFragment : BaseFragment<FragmentFavoriteTeamsBinding>() {
     override val layoutIdFragment = R.layout.fragment_favorite_teams
-
     override val viewModel: FavoriteTeamsViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

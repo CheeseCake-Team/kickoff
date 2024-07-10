@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/all_teams_recycler_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/all_teams_recycler_view"
+            app:visibilityMode="ignore" />
+
+        <Constraint
+            android:id="@+id/frame_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/view_frame"
+            app:layout_constraintTop_toTopOf="@id/all_teams_recycler_view"
+            app:visibilityMode="ignore" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/title_text_view"
+            style="@style/TitleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:layout_marginBottom="8dp"
+            android:elevation="1.01dp"
+            android:text="@string/welcome_to_kickoff"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintBottom_toTopOf="@+id/sub_title_text_view"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Constraint
+            android:id="@+id/sub_title_text_view"
+            style="@style/SubtitleLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:layout_marginEnd="@dimen/spacing_16"
+            android:layout_marginBottom="16dp"
+            android:elevation="1dp"
+            android:text="@string/pick_your_preferred_competition_and_experience_the_real_live_scores_with_us"
+            android:textColor="@color/backLighter"
+            app:layout_constraintBottom_toTopOf="@+id/search_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/title_text_view" />
+
+        <Constraint
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="@dimen/spacing_16"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="@dimen/spacing_16"
+            android:background="@drawable/edittext_background_round"
+            android:drawableStart="@drawable/magnifer"
+            android:drawablePadding="8dp"
+            android:drawableTint="@color/lightGreyText"
+            android:elevation="2dp"
+            android:fontFamily="@font/lato"
+            android:hint="@string/search_your_favourite_competition"
+            android:inputType="text"
+            android:paddingHorizontal="@dimen/font_size_16sp"
+            android:textColor="@color/fontHeavy"
+            android:textColorHint="@color/lightGreyText"
+            android:textSize="@dimen/font_size_14sp"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/sub_title_text_view"
+            app:layout_constraintStart_toStartOf="@+id/sub_title_text_view" />
+
+        <Constraint
+            android:id="@+id/frame_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/view_frame"
+            app:layout_constraintTop_toTopOf="@id/all_teams_recycler_view"
+            app:visibilityMode="ignore" />
+
+    </ConstraintSet>
+
+    <Transition
+        app:constraintSetEnd="@id/end"
+        app:constraintSetStart="@+id/start">
+        <OnSwipe app:touchAnchorId="@id/all_teams_recycler_view" />
+    </Transition>
+</MotionScene>
