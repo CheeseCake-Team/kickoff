@@ -47,7 +47,7 @@ class IFootballRepositoryImpl
         return remoteDataSource.getCurrentSeasonLeague(leagueId, current).toEntity()
     }
 
-    override suspend fun getLeagueTopScorers(leagueId: Int, season: Int): List<PlayerStatistics> {
+    override suspend fun getTopScorersInCompetition(leagueId: Int, season: Int): List<PlayerStatistics> {
         return remoteDataSource.getTopScorers(season, leagueId).toEntity()
     }
 

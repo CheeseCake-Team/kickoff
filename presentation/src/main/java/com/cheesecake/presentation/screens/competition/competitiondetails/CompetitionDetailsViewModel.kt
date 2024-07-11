@@ -5,10 +5,9 @@ import androidx.lifecycle.SavedStateHandle
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.entity.PlayerStatistics
 import com.cheesecake.domain.entity.TeamStanding
-import com.cheesecake.domain.usecases.GetCurrentRoundByLeagueIdAndSeasonUseCase
 import com.cheesecake.domain.usecases.GetTeamsStandingByLeagueIdAndSeasonUseCase
-import com.cheesecake.domain.usecases.GetTopScorersByLeagueIdAndSeasonUseCase
 import com.cheesecake.domain.usecases.ManageCompetitionUseCase
+import com.cheesecake.domain.usecases.ManagePlayerUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import com.cheesecake.presentation.screens.competition.CompetitionArgs
@@ -18,9 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CompetitionDetailsViewModel @Inject constructor(
-    private val getCurrentRoundByCompetitionIdAndSeason: GetCurrentRoundByLeagueIdAndSeasonUseCase,
     private val getTeamsStandingByCompetitionIdAndSeasonUseCase: GetTeamsStandingByLeagueIdAndSeasonUseCase,
-    private val getTopScorersByCompetitionIdAndSeason: GetTopScorersByLeagueIdAndSeasonUseCase,
+    private val managePlayerUseCase: ManagePlayerUseCase,
     private val manageCompetitionUseCase: ManageCompetitionUseCase,
     savedStateHandle: SavedStateHandle,
 ) : BaseViewModel<CompetitionDetailsUiState, CompetitionDetailsEvents>(
@@ -37,7 +35,7 @@ class CompetitionDetailsViewModel @Inject constructor(
         )
         tryToExecute(
             {
-                getCurrentRoundByCompetitionIdAndSeason(
+                manageCompetitionUseCase.getCurrentRoundByIdAndSeason(
                     competitionArgs.competitionId,
                     competitionArgs.season
                 )
@@ -54,7 +52,7 @@ class CompetitionDetailsViewModel @Inject constructor(
         )
         tryToExecute(
             {
-                getTopScorersByCompetitionIdAndSeason(
+                managePlayerUseCase.getTopScorersInCompetition(
                     competitionArgs.competitionId,
                     competitionArgs.season
                 )

@@ -1,7 +1,7 @@
 package com.cheesecake.presentation.screens.player.trophyFragment
 
 import com.cheesecake.domain.entity.Trophy
-import com.cheesecake.domain.usecases.GetPlayerTrophyUseCase
+import com.cheesecake.domain.usecases.ManagePlayerUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PlayerTrophyViewModel @Inject constructor(
-    private val getPlayerTrophyUseCase: GetPlayerTrophyUseCase,
+    private val managePlayerUseCase: ManagePlayerUseCase,
     playerTrophyArgs: PlayerTrophyArgs
 ) : BaseViewModel<PlayerTrophyUiState, Event<TrophyNavigationEvent>>(
     PlayerTrophyUiState(),
@@ -19,7 +19,7 @@ class PlayerTrophyViewModel @Inject constructor(
 
     init {
         tryToExecute(
-            { getPlayerTrophyUseCase(playerTrophyArgs.playerId) },
+            { managePlayerUseCase.getPlayerTrophy(playerTrophyArgs.playerId) },
             ::onGettingPlayerTrophySuccess,
             ::onError
         )

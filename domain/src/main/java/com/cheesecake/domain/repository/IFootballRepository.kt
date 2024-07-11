@@ -25,7 +25,7 @@ interface IFootballRepository {
 
     suspend fun getLeagueNameAndCountry(leagueId: Int, current: Boolean): List<League>
 
-    suspend fun getLeagueTopScorers(leagueId: Int, season: Int): List<PlayerStatistics>
+    suspend fun getTopScorersInCompetition(leagueId: Int, season: Int): List<PlayerStatistics>
 
     suspend fun getLocallyLeagueByIdAndSeason(leagueId: Int): League?
 
