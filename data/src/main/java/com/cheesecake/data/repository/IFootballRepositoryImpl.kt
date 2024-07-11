@@ -121,11 +121,11 @@ class IFootballRepositoryImpl
         return remoteDataSource.getLeaguesByName(leagueName).toEntity()
     }
 
-    override suspend fun getLeaguesBySearch(leagueName: String): List<League> {
+    override suspend fun searchForCompetitions(leagueName: String): List<League> {
         return remoteDataSource.getLeaguesBySearch(leagueName).toEntity()
     }
 
-    override suspend fun getLeaguesByCountryName(countryName: String): List<League> {
+    override suspend fun getCompetitionsByCountryName(countryName: String): List<League> {
         return remoteDataSource.getLeaguesByCountryName(countryName).toEntity()
     }
 
@@ -161,7 +161,7 @@ class IFootballRepositoryImpl
         return localDataSource.getFavouriteTeams().map { it.toEntity() }
     }
 
-    override suspend fun getFavoriteLeagues(): Flow<List<League>> {
+    override suspend fun getFavoriteCompetition(): Flow<List<League>> {
         return localDataSource.getFavouriteLeagues().map { it.toEntity() }
     }
 
@@ -169,7 +169,7 @@ class IFootballRepositoryImpl
         return remoteDataSource.getCoachTrophies(coachId).toEntity()
     }
 
-    override suspend fun getAllLeagues(): List<League> {
+    override suspend fun getCompetitions(): List<League> {
         return remoteDataSource.getAllLeagues().toEntity()
     }
 

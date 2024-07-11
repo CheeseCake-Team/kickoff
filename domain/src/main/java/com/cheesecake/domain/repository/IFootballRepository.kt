@@ -53,9 +53,9 @@ interface IFootballRepository {
 
     suspend fun getLeaguesByName(leagueName: String): List<League>
 
-    suspend fun getLeaguesBySearch(leagueName: String): List<League>
+    suspend fun searchForCompetitions(leagueName: String): List<League>
 
-    suspend fun getLeaguesByCountryName(countryName: String): List<League>
+    suspend fun getCompetitionsByCountryName(countryName: String): List<League>
 
     suspend fun getTeamsBySearch(teamName: String): List<Team>
 
@@ -78,7 +78,7 @@ interface IFootballRepository {
 
     suspend fun getFavoriteTeams(): Flow<List<Team>>
 
-    suspend fun getFavoriteLeagues(): Flow<List<League>>
+    suspend fun getFavoriteCompetition(): Flow<List<League>>
 
     suspend fun getSquadOfTeam(teamId: Int): List<SquadPlayer>
 
@@ -114,7 +114,7 @@ interface IFootballRepository {
 
     suspend fun getFixtureLineupByFixtureId(fixtureId: Int): List<FixtureLineup>
 
-    suspend fun getAllLeagues(): List<League>
+    suspend fun getCompetitions(): List<League>
 
     suspend fun addLeagueList(leagues: List<League>)
 

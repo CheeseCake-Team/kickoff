@@ -2,8 +2,7 @@ package com.cheesecake.presentation.screens.favorite.favoriteLeagues
 
 import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.League
-import com.cheesecake.domain.usecases.FavouriteLeagueUseCase
-import com.cheesecake.domain.usecases.GetFavoriteLeaguesUseCase
+import com.cheesecake.domain.usecases.ManageCompetitionUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.mapper.toLeaguesUIState
 import com.cheesecake.presentation.models.Event
@@ -15,14 +14,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavoriteLeaguesViewModel @Inject constructor(
-    private val getFavoriteLeaguesUseCase: GetFavoriteLeaguesUseCase,
-    private val favoriteLeagueUseCase: FavouriteLeagueUseCase,
-    ) : BaseViewModel<FavoriteLeaguesUIState, FavoriteLeaguesNavigationEvent>(
+    private val manageCompetitionUseCase: ManageCompetitionUseCase,
+) : BaseViewModel<FavoriteLeaguesUIState, FavoriteLeaguesNavigationEvent>(
     FavoriteLeaguesUIState(), Event()
 ) {
-
     init {
-        tryToExecute({ getFavoriteLeaguesUseCase() }, ::onSuccess, ::onError)
+        tryToExecute({ manageCompetitionUseCase.getFavoriteCompetition() }, ::onSuccess, ::onError)
     }
 
     private fun onSuccess(flow: Flow<List<League>>) {
@@ -48,7 +45,6 @@ class FavoriteLeaguesViewModel @Inject constructor(
     }
 
     private fun toggleFavourite(leagueId: Int) {
-        viewModelScope.launch { favoriteLeagueUseCase(leagueId) }
+        viewModelScope.launch { manageCompetitionUseCase.favoriteCompetition(leagueId) }
     }
-
 }

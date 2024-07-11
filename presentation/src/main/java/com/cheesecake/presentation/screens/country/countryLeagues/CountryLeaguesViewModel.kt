@@ -2,7 +2,7 @@ package com.cheesecake.presentation.screens.country.countryLeagues
 
 import android.util.Log
 import com.cheesecake.domain.entity.League
-import com.cheesecake.domain.usecases.GetLeaguesByCountryName
+import com.cheesecake.domain.usecases.ManageCompetitionUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.*
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,14 +12,17 @@ import javax.inject.Inject
 @HiltViewModel
 class CountryLeaguesViewModel @Inject constructor(
     countryLeaguesArgs: CountryLeaguesArgs,
-    private val getLeaguesByCountryName: GetLeaguesByCountryName
+    private val manageCompetitionUseCase: ManageCompetitionUseCase
 ) : BaseViewModel<CountryLeaguesUIState, CountryLeaguesNavigationEvent>(
-        CountryLeaguesUIState(),
-        Event()
-    ) {
-
+    CountryLeaguesUIState(),
+    Event()
+) {
     init {
-        tryToExecute({ getLeaguesByCountryName(countryLeaguesArgs.countryName) }, ::onSuccess, ::onError)
+        tryToExecute(
+            { manageCompetitionUseCase.getCompetitionsByCountryName(countryLeaguesArgs.countryName) },
+            ::onSuccess,
+            ::onError
+        )
     }
 
     private fun onSuccess(leagues: List<League>) {
@@ -38,5 +41,4 @@ class CountryLeaguesViewModel @Inject constructor(
     private fun onError(t: Throwable) {
         Log.e("onError: ", t.localizedMessage.toString())
     }
-
 }

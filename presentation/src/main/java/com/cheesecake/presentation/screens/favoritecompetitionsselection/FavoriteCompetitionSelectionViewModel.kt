@@ -1,8 +1,7 @@
 package com.cheesecake.presentation.screens.favoritecompetitionsselection
 
 import com.cheesecake.domain.entity.League
-import com.cheesecake.domain.usecases.AddCompetitionsToFavoriteUseCase
-import com.cheesecake.domain.usecases.GetLeagueListUseCase
+import com.cheesecake.domain.usecases.ManageCompetitionUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.mapper.toUiState
 import com.cheesecake.presentation.models.Event
@@ -12,14 +11,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavoriteCompetitionSelectionViewModel @Inject constructor(
-    private val getCompetitionsUseCase: GetLeagueListUseCase,
-    private val addCompetitionsToFavoriteUseCase: AddCompetitionsToFavoriteUseCase,
+    private val manageCompetitionUseCase: ManageCompetitionUseCase,
 ) : BaseViewModel<FavoriteCompetitionSelectionUiState, FavoriteCompetitionSelectionNavigationEvent>(
     FavoriteCompetitionSelectionUiState(),
     Event()
 ) {
     init {
-        tryToExecute({ getCompetitionsUseCase() }, ::onGettingCompetitionsSuccess, ::onError)
+        tryToExecute({ manageCompetitionUseCase.getCompetitions() }, ::onGettingCompetitionsSuccess, ::onError)
     }
 
     private fun onGettingCompetitionsSuccess(competitions: List<League>) {
@@ -36,7 +34,7 @@ class FavoriteCompetitionSelectionViewModel @Inject constructor(
     }
 
     private fun onCompetitionClick(competition: League) {
-        addCompetitionsToFavoriteUseCase.addLeague(competition)
+        manageCompetitionUseCase.addCompetition(competition)
         _state.update { favLeagueSelectionUIState ->
             favLeagueSelectionUIState.copy(
                 displayedCompetitions = state.value.displayedCompetitions.map {
@@ -66,7 +64,7 @@ class FavoriteCompetitionSelectionViewModel @Inject constructor(
     }
 
     private fun addCompetitionsToFavourite() {
-        tryToExecute({ addCompetitionsToFavoriteUseCase.execute() }, ::onAddingSuccess, ::onError)
+        tryToExecute({ manageCompetitionUseCase.saveCompetitions() }, ::onAddingSuccess, ::onError)
     }
 
     private fun onAddingSuccess(boolean: Boolean) {

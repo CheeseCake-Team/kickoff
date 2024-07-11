@@ -12,14 +12,14 @@ import javax.inject.Inject
 
 class GetFavoriteLeaguesMatchesByDateUseCase @Inject constructor(
     private val footballRepository: IFootballRepository,
-    private val getFavoriteLeaguesUseCase: GetFavoriteLeaguesUseCase
+    private val manageCompetitionUseCase: ManageCompetitionUseCase
 ) {
 
     suspend operator fun invoke(
         date: Date,
         timeZone: String,
     ): Flow<List<Pair<League, List<Fixture>>>> {
-        return getFavoriteLeaguesUseCase().map { list ->
+        return manageCompetitionUseCase.getFavoriteCompetition().map { list ->
             list.map { league ->
                 val matches = footballRepository.getMatchesByLeagueIdAndSeason(
                     timeZone,

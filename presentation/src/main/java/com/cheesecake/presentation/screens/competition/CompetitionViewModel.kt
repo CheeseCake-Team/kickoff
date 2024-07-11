@@ -2,8 +2,7 @@ package com.cheesecake.presentation.screens.competition
 
 import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.League
-import com.cheesecake.domain.usecases.FavouriteLeagueUseCase
-import com.cheesecake.domain.usecases.GetLeagueByIdAndSeasonUseCase
+import com.cheesecake.domain.usecases.ManageCompetitionUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,15 +12,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CompetitionViewModel @Inject constructor(
-    private val getLeagueByIdAndSeasonUseCase: GetLeagueByIdAndSeasonUseCase,
-    private val favouriteLeagueUseCase: FavouriteLeagueUseCase,
+    private val manageCompetitionUseCase: ManageCompetitionUseCase,
     private val competitionNavigationArgs: CompetitionNavigationArgs,
 ) : BaseViewModel<CompetitionUiState, CompetitionNavigationEvent>(CompetitionUiState(), Event()) {
     val competitionId = competitionNavigationArgs.competitionId
 
     init {
         tryToExecute(
-            { getLeagueByIdAndSeasonUseCase(competitionNavigationArgs.competitionId) },
+            { manageCompetitionUseCase.getCompetitionById(competitionNavigationArgs.competitionId) },
             ::onSuccess,
             ::onError
         )
@@ -50,7 +48,7 @@ class CompetitionViewModel @Inject constructor(
 
     fun onFavoriteClick() {
         viewModelScope.launch {
-            favouriteLeagueUseCase(competitionId).let {
+            manageCompetitionUseCase.favoriteCompetition(competitionId).let {
                 _state.update { uiState -> uiState.copy(isFavourite = it.isFavourite) }
             }
         }

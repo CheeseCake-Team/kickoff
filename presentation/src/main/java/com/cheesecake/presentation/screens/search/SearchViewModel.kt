@@ -4,18 +4,14 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.entity.Team
-import com.cheesecake.domain.usecases.GetLeagueBySearchUseCase
 import com.cheesecake.domain.usecases.GetTeamBySearchUseCase
+import com.cheesecake.domain.usecases.ManageCompetitionUseCase
 import com.cheesecake.domain.usecases.SaveRecentSearchUseCase
 import com.cheesecake.presentation.base.BaseViewModel
-import com.cheesecake.presentation.mapper.toTeamUIState
 import com.cheesecake.presentation.models.Event
-import com.cheesecake.presentation.models.TeamUIState
-import com.cheesecake.presentation.screens.search.models.LeagueSearchUIState
 import com.cheesecake.presentation.screens.search.models.SearchResult
 import com.cheesecake.presentation.screens.search.models.SearchType
 import com.cheesecake.presentation.screens.search.models.SearchUIState
-import com.cheesecake.presentation.screens.search.models.TeamSearchUIState
 import com.cheesecake.presentation.screens.search.models.toRecentSearch
 import com.cheesecake.presentation.screens.search.models.toSearchUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,7 +25,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val getLeagueList: GetLeagueBySearchUseCase,
+    private val manageCompetitionUseCase: ManageCompetitionUseCase,
     private val getTeamList: GetTeamBySearchUseCase,
     private val saveRecentSearch: SaveRecentSearchUseCase
 ) : BaseViewModel<SearchUIState, SearchEvents>(SearchUIState(), Event()) {
@@ -54,9 +50,10 @@ class SearchViewModel @Inject constructor(
     }
 
     private suspend fun getSearchResult(input: String): List<SearchResult> {
-        _state.update { it.copy(isResultEmpty = false,isLoading = true ) }
+        _state.update { it.copy(isResultEmpty = false, isLoading = true) }
         return mutableListOf<SearchResult>().apply {
-            val leaguesItems = getLeagueList(input).toSearchUIState(::onClickLeague)
+            val leaguesItems = manageCompetitionUseCase.searchForCompetitions(input)
+                .toSearchUIState(::onClickLeague)
 
             val teamsItems = getTeamList(input).toSearchUIState(::onClickTeam)
             add(
@@ -82,7 +79,7 @@ class SearchViewModel @Inject constructor(
     }
 
     private fun getIfResultEmpty(items: List<SearchResult>): Boolean {
-        Log.i( "getIfResultEmpty: ",(items.all { it.list.isEmpty() }.toString()))
+        Log.i("getIfResultEmpty: ", (items.all { it.list.isEmpty() }.toString()))
         return (items.all { it.list.isEmpty() })
     }
 
@@ -124,7 +121,6 @@ class SearchViewModel @Inject constructor(
     suspend fun onInternetDisconnected() {
         TODO()
     }
-
 }
 
 

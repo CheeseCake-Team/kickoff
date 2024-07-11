@@ -6,9 +6,9 @@ import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.entity.PlayerStatistics
 import com.cheesecake.domain.entity.TeamStanding
 import com.cheesecake.domain.usecases.GetCurrentRoundByLeagueIdAndSeasonUseCase
-import com.cheesecake.domain.usecases.GetLeagueByIdAndSeasonUseCase
 import com.cheesecake.domain.usecases.GetTeamsStandingByLeagueIdAndSeasonUseCase
 import com.cheesecake.domain.usecases.GetTopScorersByLeagueIdAndSeasonUseCase
+import com.cheesecake.domain.usecases.ManageCompetitionUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import com.cheesecake.presentation.screens.competition.CompetitionArgs
@@ -21,20 +21,26 @@ class CompetitionDetailsViewModel @Inject constructor(
     private val getCurrentRoundByCompetitionIdAndSeason: GetCurrentRoundByLeagueIdAndSeasonUseCase,
     private val getTeamsStandingByCompetitionIdAndSeasonUseCase: GetTeamsStandingByLeagueIdAndSeasonUseCase,
     private val getTopScorersByCompetitionIdAndSeason: GetTopScorersByLeagueIdAndSeasonUseCase,
-    private val getCompetitionByCompetitionIdAndSeasonUseCase: GetLeagueByIdAndSeasonUseCase,
+    private val manageCompetitionUseCase: ManageCompetitionUseCase,
     savedStateHandle: SavedStateHandle,
-) : BaseViewModel<CompetitionDetailsUiState, CompetitionDetailsEvents>(CompetitionDetailsUiState(), Event()) {
+) : BaseViewModel<CompetitionDetailsUiState, CompetitionDetailsEvents>(
+    CompetitionDetailsUiState(),
+    Event()
+) {
     private val competitionArgs = CompetitionArgs(savedStateHandle)
 
     init {
         tryToExecute(
             {
-                getCompetitionByCompetitionIdAndSeasonUseCase(competitionArgs.competitionId)
+                manageCompetitionUseCase.getCompetitionById(competitionArgs.competitionId)
             }, ::onGettingCompetitionSuccess, ::onError
         )
         tryToExecute(
             {
-                getCurrentRoundByCompetitionIdAndSeason(competitionArgs.competitionId, competitionArgs.season)
+                getCurrentRoundByCompetitionIdAndSeason(
+                    competitionArgs.competitionId,
+                    competitionArgs.season
+                )
             },
             ::onGettingRoundSuccess, ::onError,
         )

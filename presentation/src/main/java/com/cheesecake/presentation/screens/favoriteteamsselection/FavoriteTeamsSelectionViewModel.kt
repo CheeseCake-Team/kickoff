@@ -3,8 +3,8 @@ package com.cheesecake.presentation.screens.favoriteteamsselection
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.usecases.AddFavouriteTeamListUseCase
-import com.cheesecake.domain.usecases.GetFavoriteLeaguesUseCase
 import com.cheesecake.domain.usecases.GetTeamsUseCase
+import com.cheesecake.domain.usecases.ManageCompetitionUseCase
 import com.cheesecake.domain.usecases.OnboardingUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.mapper.toUiState
@@ -18,7 +18,7 @@ import javax.inject.Inject
 class FavoriteTeamsSelectionViewModel @Inject constructor(
     private val getTeamsUseCase: GetTeamsUseCase,
     private val onboardingUseCase: OnboardingUseCase,
-    private val getFavouriteCompetitions: GetFavoriteLeaguesUseCase,
+    private val manageCompetitionUseCase: ManageCompetitionUseCase,
     private val addTeamsToFavouriteUseCase: AddFavouriteTeamListUseCase,
 ) : BaseViewModel<FavoriteTeamsSelectionUiState, FavoriteTeamsSelectionNavigationEvent>(
     FavoriteTeamsSelectionUiState(),
@@ -26,7 +26,9 @@ class FavoriteTeamsSelectionViewModel @Inject constructor(
 ) {
     init {
         tryToExecute(
-            { getFavouriteCompetitions() }, ::onGettingFavoriteCompetitionsSuccess, ::onError
+            { manageCompetitionUseCase.getFavoriteCompetition() },
+            ::onGettingFavoriteCompetitionsSuccess,
+            ::onError
         )
     }
 
