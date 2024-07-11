@@ -86,4 +86,9 @@ class ManageCompetitionUseCase @Inject constructor(
         }
         return getCompetitionById(competitionId)
     }
+
+    suspend fun getCurrentRoundByIdAndSeason(leagueId: Int, season: Int): String {
+        return footballRepository.getCurrentRoundByIdAndSeason(leagueId, season)
+            ?: "Finished"
+    }
 }
