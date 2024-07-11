@@ -1,7 +1,7 @@
 package com.cheesecake.presentation.screens.favoritecompetitionsselection
 
 import com.cheesecake.domain.entity.League
-import com.cheesecake.domain.usecases.ManageCompetitionUseCase
+import com.cheesecake.domain.usecases.ManageCompetitionsUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.mapper.toUiState
 import com.cheesecake.presentation.models.Event
@@ -11,13 +11,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavoriteCompetitionSelectionViewModel @Inject constructor(
-    private val manageCompetitionUseCase: ManageCompetitionUseCase,
+    private val manageCompetitionsUseCase: ManageCompetitionsUseCase,
 ) : BaseViewModel<FavoriteCompetitionSelectionUiState, FavoriteCompetitionSelectionNavigationEvent>(
     FavoriteCompetitionSelectionUiState(),
     Event()
 ) {
     init {
-        tryToExecute({ manageCompetitionUseCase.getCompetitions() }, ::onGettingCompetitionsSuccess, ::onError)
+        tryToExecute({ manageCompetitionsUseCase.getCompetitions() }, ::onGettingCompetitionsSuccess, ::onError)
     }
 
     private fun onGettingCompetitionsSuccess(competitions: List<League>) {
@@ -34,7 +34,7 @@ class FavoriteCompetitionSelectionViewModel @Inject constructor(
     }
 
     private fun onCompetitionClick(competition: League) {
-        manageCompetitionUseCase.addCompetition(competition)
+        manageCompetitionsUseCase.addCompetition(competition)
         _state.update { favLeagueSelectionUIState ->
             favLeagueSelectionUIState.copy(
                 displayedCompetitions = state.value.displayedCompetitions.map {
@@ -64,7 +64,7 @@ class FavoriteCompetitionSelectionViewModel @Inject constructor(
     }
 
     private fun addCompetitionsToFavourite() {
-        tryToExecute({ manageCompetitionUseCase.saveCompetitions() }, ::onAddingSuccess, ::onError)
+        tryToExecute({ manageCompetitionsUseCase.saveCompetitions() }, ::onAddingSuccess, ::onError)
     }
 
     private fun onAddingSuccess(boolean: Boolean) {

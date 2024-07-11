@@ -1,7 +1,7 @@
 package com.cheesecake.presentation.screens.player.playerStatistics
 
 import com.cheesecake.domain.entity.PlayerStatistics
-import com.cheesecake.domain.usecases.ManagePlayerUseCase
+import com.cheesecake.domain.usecases.ManagePlayersUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -10,14 +10,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PlayerStatisticsViewModel @Inject constructor(
-    managePlayerUseCase: ManagePlayerUseCase,
+    managePlayersUseCase: ManagePlayersUseCase,
     playerStatisticsArgs: PlayerStatisticsArgs
 ) : BaseViewModel<PlayerStatisticsUIState, PlayerStatisticsNavigationEvent>
     (PlayerStatisticsUIState(), Event()) {
     init {
         tryToExecute(
             {
-                managePlayerUseCase.getPlayerStatistics(
+                managePlayersUseCase.getPlayerStatistics(
                     playerStatisticsArgs.season,
                     playerStatisticsArgs.playerId
                 )

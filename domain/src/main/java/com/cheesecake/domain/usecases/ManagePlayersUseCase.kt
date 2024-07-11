@@ -5,7 +5,7 @@ import com.cheesecake.domain.entity.Trophy
 import com.cheesecake.domain.repository.IFootballRepository
 import javax.inject.Inject
 
-class ManagePlayerUseCase @Inject constructor(
+class ManagePlayersUseCase @Inject constructor(
     private val footballRepository: IFootballRepository
 ) {
     /**

@@ -2,7 +2,7 @@ package com.cheesecake.presentation.screens.competition
 
 import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.League
-import com.cheesecake.domain.usecases.ManageCompetitionUseCase
+import com.cheesecake.domain.usecases.ManageCompetitionsUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,14 +12,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CompetitionViewModel @Inject constructor(
-    private val manageCompetitionUseCase: ManageCompetitionUseCase,
+    private val manageCompetitionsUseCase: ManageCompetitionsUseCase,
     private val competitionNavigationArgs: CompetitionNavigationArgs,
 ) : BaseViewModel<CompetitionUiState, CompetitionNavigationEvent>(CompetitionUiState(), Event()) {
     val competitionId = competitionNavigationArgs.competitionId
 
     init {
         tryToExecute(
-            { manageCompetitionUseCase.getCompetitionById(competitionNavigationArgs.competitionId) },
+            { manageCompetitionsUseCase.getCompetitionById(competitionNavigationArgs.competitionId) },
             ::onSuccess,
             ::onError
         )
@@ -48,7 +48,7 @@ class CompetitionViewModel @Inject constructor(
 
     fun onFavoriteClick() {
         viewModelScope.launch {
-            manageCompetitionUseCase.favoriteCompetition(competitionId).let {
+            manageCompetitionsUseCase.favoriteCompetition(competitionId).let {
                 _state.update { uiState -> uiState.copy(isFavourite = it.isFavourite) }
             }
         }

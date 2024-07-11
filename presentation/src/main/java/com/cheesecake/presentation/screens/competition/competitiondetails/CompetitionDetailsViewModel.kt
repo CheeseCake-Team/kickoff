@@ -6,8 +6,8 @@ import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.entity.PlayerStatistics
 import com.cheesecake.domain.entity.TeamStanding
 import com.cheesecake.domain.usecases.GetTeamsStandingByLeagueIdAndSeasonUseCase
-import com.cheesecake.domain.usecases.ManageCompetitionUseCase
-import com.cheesecake.domain.usecases.ManagePlayerUseCase
+import com.cheesecake.domain.usecases.ManageCompetitionsUseCase
+import com.cheesecake.domain.usecases.ManagePlayersUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import com.cheesecake.presentation.screens.competition.CompetitionArgs
@@ -18,8 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CompetitionDetailsViewModel @Inject constructor(
     private val getTeamsStandingByCompetitionIdAndSeasonUseCase: GetTeamsStandingByLeagueIdAndSeasonUseCase,
-    private val managePlayerUseCase: ManagePlayerUseCase,
-    private val manageCompetitionUseCase: ManageCompetitionUseCase,
+    private val managePlayersUseCase: ManagePlayersUseCase,
+    private val manageCompetitionsUseCase: ManageCompetitionsUseCase,
     savedStateHandle: SavedStateHandle,
 ) : BaseViewModel<CompetitionDetailsUiState, CompetitionDetailsEvents>(
     CompetitionDetailsUiState(),
@@ -30,12 +30,12 @@ class CompetitionDetailsViewModel @Inject constructor(
     init {
         tryToExecute(
             {
-                manageCompetitionUseCase.getCompetitionById(competitionArgs.competitionId)
+                manageCompetitionsUseCase.getCompetitionById(competitionArgs.competitionId)
             }, ::onGettingCompetitionSuccess, ::onError
         )
         tryToExecute(
             {
-                manageCompetitionUseCase.getCurrentRoundByIdAndSeason(
+                manageCompetitionsUseCase.getCurrentRoundByIdAndSeason(
                     competitionArgs.competitionId,
                     competitionArgs.season
                 )
@@ -52,7 +52,7 @@ class CompetitionDetailsViewModel @Inject constructor(
         )
         tryToExecute(
             {
-                managePlayerUseCase.getTopScorersInCompetition(
+                managePlayersUseCase.getTopScorersInCompetition(
                     competitionArgs.competitionId,
                     competitionArgs.season
                 )

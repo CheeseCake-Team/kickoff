@@ -5,7 +5,7 @@ import com.cheesecake.domain.repository.IFootballRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class ManageCompetitionUseCase @Inject constructor(
+class ManageCompetitionsUseCase @Inject constructor(
     private val footballRepository: IFootballRepository,
 ) {
     /**

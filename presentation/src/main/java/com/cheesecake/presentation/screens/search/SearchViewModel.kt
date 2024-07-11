@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.usecases.GetTeamBySearchUseCase
-import com.cheesecake.domain.usecases.ManageCompetitionUseCase
+import com.cheesecake.domain.usecases.ManageCompetitionsUseCase
 import com.cheesecake.domain.usecases.SaveRecentSearchUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
@@ -25,7 +25,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val manageCompetitionUseCase: ManageCompetitionUseCase,
+    private val manageCompetitionsUseCase: ManageCompetitionsUseCase,
     private val getTeamList: GetTeamBySearchUseCase,
     private val saveRecentSearch: SaveRecentSearchUseCase
 ) : BaseViewModel<SearchUIState, SearchEvents>(SearchUIState(), Event()) {
@@ -52,7 +52,7 @@ class SearchViewModel @Inject constructor(
     private suspend fun getSearchResult(input: String): List<SearchResult> {
         _state.update { it.copy(isResultEmpty = false, isLoading = true) }
         return mutableListOf<SearchResult>().apply {
-            val leaguesItems = manageCompetitionUseCase.searchForCompetitions(input)
+            val leaguesItems = manageCompetitionsUseCase.searchForCompetitions(input)
                 .toSearchUIState(::onClickLeague)
 
             val teamsItems = getTeamList(input).toSearchUIState(::onClickTeam)
