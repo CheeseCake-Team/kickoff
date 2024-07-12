@@ -5,9 +5,9 @@ import androidx.lifecycle.SavedStateHandle
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.entity.PlayerStatistics
 import com.cheesecake.domain.entity.TeamStanding
-import com.cheesecake.domain.usecases.GetTeamsStandingByLeagueIdAndSeasonUseCase
 import com.cheesecake.domain.usecases.ManageCompetitionsUseCase
 import com.cheesecake.domain.usecases.ManagePlayersUseCase
+import com.cheesecake.domain.usecases.ManageTeamsUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import com.cheesecake.presentation.screens.competition.CompetitionArgs
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CompetitionDetailsViewModel @Inject constructor(
-    private val getTeamsStandingByCompetitionIdAndSeasonUseCase: GetTeamsStandingByLeagueIdAndSeasonUseCase,
+    private val manageTeamsUseCase: ManageTeamsUseCase,
     private val managePlayersUseCase: ManagePlayersUseCase,
     private val manageCompetitionsUseCase: ManageCompetitionsUseCase,
     savedStateHandle: SavedStateHandle,
@@ -44,7 +44,7 @@ class CompetitionDetailsViewModel @Inject constructor(
         )
         tryToExecute(
             {
-                getTeamsStandingByCompetitionIdAndSeasonUseCase(
+                manageTeamsUseCase.getTeamStandingByCompetitionIdAndSeason(
                     competitionArgs.competitionId,
                     competitionArgs.season
                 )

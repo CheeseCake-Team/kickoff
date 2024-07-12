@@ -2,7 +2,7 @@ package com.cheesecake.presentation.screens.team.teamstatistics
 
 import android.util.Log
 import com.cheesecake.domain.entity.TeamStatisticsEntity
-import com.cheesecake.domain.usecases.GetTeamStatisticsUseCase
+import com.cheesecake.domain.usecases.ManageTeamsUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -11,14 +11,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TeamStatisticsViewModel @Inject constructor(
-    private val getTeamStatisticsUseCase: GetTeamStatisticsUseCase,
+    private val manageTeamsUseCase: ManageTeamsUseCase,
     teamStatisticsArgs: TeamStatisticsArgs
 ) : BaseViewModel<TeamStatisticsUiState, TeamStatisticsEvent?>(TeamStatisticsUiState(), Event()) {
     init {
         tryToExecute(
             {
-                getTeamStatisticsUseCase(
-                    leagueId = teamStatisticsArgs.competitionId,
+                manageTeamsUseCase.getTeamStatistics(
+                    competitionId = teamStatisticsArgs.competitionId,
                     season = teamStatisticsArgs.season,
                     teamId = teamStatisticsArgs.teamId
                 )

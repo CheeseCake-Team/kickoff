@@ -3,7 +3,7 @@ package com.cheesecake.presentation.screens.competition.competitionteams
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import com.cheesecake.domain.entity.Team
-import com.cheesecake.domain.usecases.GetAllTeamsInCompetitionWithSeasonUseCase
+import com.cheesecake.domain.usecases.ManageTeamsUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import com.cheesecake.presentation.screens.competition.CompetitionArgs
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CompetitionTeamsViewModel @Inject constructor(
-    private val getAllTeamsInCompetitionWithSeasonUseCase: GetAllTeamsInCompetitionWithSeasonUseCase,
+    private val manageTeamsUseCase: ManageTeamsUseCase,
     savedStateHandle: SavedStateHandle,
 ) : BaseViewModel<CompetitionTeamsUiState, CompetitionTeamsEvent>(
     CompetitionTeamsUiState(),
@@ -24,7 +24,7 @@ class CompetitionTeamsViewModel @Inject constructor(
     init {
         tryToExecute(
             {
-                getAllTeamsInCompetitionWithSeasonUseCase(
+                manageTeamsUseCase.getCompetitionTeams(
                     competitionArgs.competitionId,
                     competitionArgs.season
                 )

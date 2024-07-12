@@ -2,9 +2,8 @@ package com.cheesecake.presentation.screens.favoriteteamsselection
 
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.entity.Team
-import com.cheesecake.domain.usecases.AddFavouriteTeamListUseCase
-import com.cheesecake.domain.usecases.GetTeamsUseCase
 import com.cheesecake.domain.usecases.ManageCompetitionsUseCase
+import com.cheesecake.domain.usecases.ManageTeamsUseCase
 import com.cheesecake.domain.usecases.OnboardingUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.mapper.toUiState
@@ -16,10 +15,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavoriteTeamsSelectionViewModel @Inject constructor(
-    private val getTeamsUseCase: GetTeamsUseCase,
+    private val manageTeamsUseCase: ManageTeamsUseCase,
     private val onboardingUseCase: OnboardingUseCase,
     private val manageCompetitionsUseCase: ManageCompetitionsUseCase,
-    private val addTeamsToFavouriteUseCase: AddFavouriteTeamListUseCase,
 ) : BaseViewModel<FavoriteTeamsSelectionUiState, FavoriteTeamsSelectionNavigationEvent>(
     FavoriteTeamsSelectionUiState(),
     Event()
@@ -38,7 +36,11 @@ class FavoriteTeamsSelectionViewModel @Inject constructor(
 
     private fun onGettingFavoriteCompetitionsSuccess(favouriteCompetitions: Flow<List<League>>) {
         collectFlow(favouriteCompetitions) {
-            tryToExecute({ getTeamsUseCase(it) }, ::onGettingTeamsSuccess, ::onError)
+            tryToExecute(
+                { manageTeamsUseCase.getCompetitionTeams(it) },
+                ::onGettingTeamsSuccess,
+                ::onError
+            )
             this
         }
     }
@@ -73,11 +75,10 @@ class FavoriteTeamsSelectionViewModel @Inject constructor(
                 )
             }
         }
-
     }
 
     private fun onFavouriteTeamSelect(team: Team, leagueId: Int, season: Int) {
-        addTeamsToFavouriteUseCase.addTeam(team, leagueId, season)
+        manageTeamsUseCase.toggleTeamFavoriteStatus(team, leagueId, season)
         _state.update { favTeamsSelectionUIState ->
             favTeamsSelectionUIState.copy(
                 teamsItemsUiState = favTeamsSelectionUIState.teamsItemsUiState.map {
@@ -91,7 +92,7 @@ class FavoriteTeamsSelectionViewModel @Inject constructor(
     }
 
     private fun addTeamsToFavourite() {
-        tryToExecute({ addTeamsToFavouriteUseCase.execute() }, ::onAddSuccess, ::onError)
+        tryToExecute({ manageTeamsUseCase.saveSelectedTeams() }, ::onAddSuccess, ::onError)
     }
 
     private fun onAddSuccess(boolean: Boolean) {

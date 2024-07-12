@@ -2,8 +2,7 @@ package com.cheesecake.presentation.screens.team
 
 import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.Team
-import com.cheesecake.domain.usecases.FavouriteTeamUseCase
-import com.cheesecake.domain.usecases.GetTeamByIdUseCase
+import com.cheesecake.domain.usecases.ManageTeamsUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,13 +12,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TeamViewModel @Inject constructor(
-    private val favouriteTeamUseCase: FavouriteTeamUseCase,
-    private val getTeamByIdUseCase: GetTeamByIdUseCase,
+    private val manageTeamsUseCase: ManageTeamsUseCase,
     val teamNavigationArgs: TeamNavigationArgs
 ) : BaseViewModel<TeamUiState, TeamNavigationEvent>(TeamUiState(), Event()) {
     init {
         tryToExecute(
-            { getTeamByIdUseCase(teamNavigationArgs.teamId) },
+            { manageTeamsUseCase.getTeamById(teamNavigationArgs.teamId) },
             ::onGettingTeamSuccess,
             ::onError
         )
@@ -27,7 +25,7 @@ class TeamViewModel @Inject constructor(
 
     fun onFavoriteClick() {
         viewModelScope.launch {
-            favouriteTeamUseCase(teamNavigationArgs.teamId).let {
+            manageTeamsUseCase.favoriteTeam(teamNavigationArgs.teamId).let {
                 _state.update { uiState -> uiState.copy(isFavourite = it.isFavourite) }
             }
         }

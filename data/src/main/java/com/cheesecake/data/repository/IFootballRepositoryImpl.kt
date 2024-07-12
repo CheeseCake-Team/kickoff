@@ -134,14 +134,14 @@ class IFootballRepositoryImpl
             .firstOrNull()
     }
 
-    override suspend fun getTeamsStandingByLeagueIdAndSeason(
+    override suspend fun getTeamStandingByCompetitionIdAndSeason(
         leagueId: Int,
         season: Int
     ): List<TeamStanding> {
         return remoteDataSource.getStandingsByLeagueId(season, leagueId).toEntity()
     }
 
-    override suspend fun getTeamsBySearch(teamName: String): List<Team> {
+    override suspend fun searchForTeams(teamName: String): List<Team> {
         return remoteDataSource.getTeamsBySearch(teamName).toEntity()
     }
 

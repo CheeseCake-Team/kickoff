@@ -2,7 +2,7 @@ package com.cheesecake.presentation.screens.standings
 
 import android.util.Log
 import com.cheesecake.domain.entity.TeamStanding
-import com.cheesecake.domain.usecases.GetTeamsStandingByLeagueIdAndSeasonUseCase
+import com.cheesecake.domain.usecases.ManageTeamsUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -11,14 +11,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StandingsViewModel @Inject constructor(
-    private val getTeamsStandingByLeagueIdAndSeasonUseCase: GetTeamsStandingByLeagueIdAndSeasonUseCase,
+    private val manageTeamsUseCase: ManageTeamsUseCase,
     teamsStandingArgs: TeamsStandingArgs
 ) : BaseViewModel<StandingsUiState, StandingNavigationEvent>(StandingsUiState(), Event()) {
     init {
         tryToExecute(
             {
-                getTeamsStandingByLeagueIdAndSeasonUseCase(
-                    teamsStandingArgs.leagueId, teamsStandingArgs.season
+                manageTeamsUseCase.getTeamStandingByCompetitionIdAndSeason(
+                    teamsStandingArgs.competitionId, teamsStandingArgs.season
                 )
             }, ::onGettingTeamsStandingSuccess, ::onError
         )
