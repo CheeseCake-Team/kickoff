@@ -1,7 +1,7 @@
 package com.cheesecake.presentation.screens.team.teamPlayers
 
 import com.cheesecake.domain.entity.SquadPlayer
-import com.cheesecake.domain.usecases.GetTeamSquadByIdUseCase
+import com.cheesecake.domain.usecases.ManagePlayersUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.mapper.mapIt
 import com.cheesecake.presentation.models.Event
@@ -11,12 +11,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TeamPlayersViewModel @Inject constructor(
-    private val getTeamSquadByIdUseCase: GetTeamSquadByIdUseCase,
+    private val managePlayersUseCase: ManagePlayersUseCase,
     private val teamPlayersArgs: TeamPlayersArgs
 ) : BaseViewModel<TeamPlayersUiState, TeamPLayerNavigationEvent>(TeamPlayersUiState(), Event()) {
     init {
         tryToExecute(
-            { getTeamSquadByIdUseCase(teamPlayersArgs.teamId) },
+            { managePlayersUseCase.getTeamPlayersByTeamId(teamPlayersArgs.teamId) },
             ::onGettingTeamSquadSuccess,
             ::onError
         )
