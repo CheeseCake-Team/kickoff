@@ -5,8 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.usecases.ManageCompetitionsUseCase
+import com.cheesecake.domain.usecases.ManageRecentSearchUseCase
 import com.cheesecake.domain.usecases.ManageTeamsUseCase
-import com.cheesecake.domain.usecases.SaveRecentSearchUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import com.cheesecake.presentation.screens.search.models.SearchResult
@@ -27,9 +27,8 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(
     private val manageCompetitionsUseCase: ManageCompetitionsUseCase,
     private val manageTeamsUseCase: ManageTeamsUseCase,
-    private val saveRecentSearch: SaveRecentSearchUseCase
+    private val manageRecentSearchUseCase: ManageRecentSearchUseCase
 ) : BaseViewModel<SearchUIState, SearchEvents>(SearchUIState(), Event()) {
-
     private val searchInput = MutableStateFlow(_state.value.searchQuery)
 
     init {
@@ -103,13 +102,13 @@ class SearchViewModel @Inject constructor(
                     )
                 )
             }
-            saveRecentSearch(league.toRecentSearch())
+            manageRecentSearchUseCase.addOrUpdateRecentSearch(league.toRecentSearch())
         }
     }
 
     private fun onClickTeam(team: Team) {
         viewModelScope.launch {
-            saveRecentSearch(team.toRecentSearch())
+            manageRecentSearchUseCase.addOrUpdateRecentSearch(team.toRecentSearch())
             _event.update { Event(SearchEvents.TeamClickEvent(team.id)) }
         }
     }
@@ -122,10 +121,3 @@ class SearchViewModel @Inject constructor(
         TODO()
     }
 }
-
-
-
-
-
-
-

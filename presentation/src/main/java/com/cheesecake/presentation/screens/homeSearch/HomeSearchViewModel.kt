@@ -3,7 +3,7 @@ package com.cheesecake.presentation.screens.homeSearch
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.RecentSearch
-import com.cheesecake.domain.usecases.RecentSearchUseCase
+import com.cheesecake.domain.usecases.ManageRecentSearchUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,9 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeSearchViewModel @Inject constructor(
-    private val recentUseCase: RecentSearchUseCase,
+    private val manageRecentSearchUseCase: ManageRecentSearchUseCase,
 ) : BaseViewModel<HomeSearchUIState, HomeSearchEvent>(HomeSearchUIState(), Event()) {
-
     init {
         tryToGetData()
     }
@@ -28,7 +27,7 @@ class HomeSearchViewModel @Inject constructor(
     private fun getData(): SuccessData {
         _state.update { it.copy(isLoading = true) }
         return SuccessData(
-            recentUseCase.getRecentSearch(),
+            manageRecentSearchUseCase.getRecentSearches(),
         )
     }
 
@@ -61,11 +60,9 @@ class HomeSearchViewModel @Inject constructor(
 
     private fun onClickDeleteAll() {
         viewModelScope.launch {
-            recentUseCase.deleteRecentSearches()
+            manageRecentSearchUseCase.deleteRecentSearches()
         }
     }
-
-
 }
 
 

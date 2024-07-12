@@ -2,8 +2,8 @@ package com.cheesecake.presentation.screens.search.viewAll.teams
 
 import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.Team
+import com.cheesecake.domain.usecases.ManageRecentSearchUseCase
 import com.cheesecake.domain.usecases.ManageTeamsUseCase
-import com.cheesecake.domain.usecases.SaveRecentSearchUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import com.cheesecake.presentation.screens.search.SearchEvents
@@ -18,11 +18,9 @@ import javax.inject.Inject
 @HiltViewModel
 class TeamsSearchViewModel @Inject constructor(
     private val manageTeamsUseCase: ManageTeamsUseCase,
-    private val saveRecentSearch: SaveRecentSearchUseCase,
+    private val manageRecentSearchUseCase: ManageRecentSearchUseCase,
     private val args: TeamsSearchNavigationArgs
 ) : BaseViewModel<TeamsUIState, SearchEvents>(TeamsUIState(), Event()) {
-
-
     init {
         initTeamList()
     }
@@ -48,9 +46,8 @@ class TeamsSearchViewModel @Inject constructor(
 
     private fun onTeamClicked(team: Team) {
         viewModelScope.launch {
-            saveRecentSearch(team.toRecentSearch())
+            manageRecentSearchUseCase.addOrUpdateRecentSearch(team.toRecentSearch())
             _event.update { Event(SearchEvents.TeamClickEvent(team.id)) }
         }
     }
-
 }
