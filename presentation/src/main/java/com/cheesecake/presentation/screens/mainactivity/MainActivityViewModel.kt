@@ -9,6 +9,5 @@ class MainActivityViewModel @Inject constructor(
     private val onboardingUseCase: OnboardingUseCase
 ) : ViewModel() {
     suspend fun shouldShowOnboarding() =
-        onboardingUseCase.shouldShowOnboarding()
-
+        onboardingUseCase.readOnboardingState()
 }

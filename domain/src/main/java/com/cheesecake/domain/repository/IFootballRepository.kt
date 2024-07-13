@@ -35,7 +35,7 @@ interface IFootballRepository {
 
     suspend fun updateOrInsertLeague(league: League)
 
-    suspend fun getMatchesByLeagueIdAndSeason(
+    suspend fun getMatchesByCompetitionIdAndSeason(
         timeZone: String,
         leagueId: Int,
         season: Int
@@ -82,7 +82,7 @@ interface IFootballRepository {
 
     suspend fun getSquadOfTeam(teamId: Int): List<SquadPlayer>
 
-    suspend fun getMatchesByTeamIdAndSeason(
+    suspend fun getTeamMatchesByTeamIdAndSeason(
         timeZone: String,
         season: Int,
         teamId: Int
@@ -94,7 +94,7 @@ interface IFootballRepository {
 
     suspend fun updateOrInsertTeam(team: Team, leagueId: Int, season: Int)
 
-    suspend fun getFixtureStatisticsByFixtureId(fixtureId: Int): List<FixtureStatistics>
+    suspend fun getMatchStatisticsByMatchId(fixtureId: Int): List<FixtureStatistics>
 
     fun getRecentSearches(): Flow<List<RecentSearch>>
 
@@ -106,13 +106,13 @@ interface IFootballRepository {
 
     suspend fun getTeamsByCountryName(countryName: String): List<Team>
 
-    suspend fun getFixtureEventByFixtureId(fixtureId: Int): List<FixtureEvents>
+    suspend fun getMatchEventByMatchId(fixtureId: Int): List<FixtureEvents>
 
     suspend fun getPlayerFullStatistics(season: Int, playerId: Int): PlayerStatistics
 
     suspend fun getPlayerSeasons(): List<Int>
 
-    suspend fun getFixtureLineupByFixtureId(fixtureId: Int): List<FixtureLineup>
+    suspend fun getMatchLineupByMatchId(fixtureId: Int): List<FixtureLineup>
 
     suspend fun getCompetitions(): List<League>
 
@@ -120,7 +120,7 @@ interface IFootballRepository {
 
     suspend fun addTeamsList(triples: List<Triple<Team, Int, Int>>)
 
-    suspend fun shouldShowOnboarding(): Boolean
+    suspend fun readOnboardingState(): Boolean
 
-    suspend fun setOnboardingShown()
+    suspend fun saveOnboardingState(isCompleted: Boolean)
 }

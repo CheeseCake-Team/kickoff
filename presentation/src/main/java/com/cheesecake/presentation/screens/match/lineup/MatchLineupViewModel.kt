@@ -3,7 +3,7 @@ package com.cheesecake.presentation.screens.match.lineup
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import com.cheesecake.domain.entity.FixtureLineup
-import com.cheesecake.domain.usecases.GetFixtureLineupByFixtureIdUseCase
+import com.cheesecake.domain.usecases.ManageMatchesUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MatchLineupViewModel @Inject constructor(
-    private val getFixtureLineupByFixtureId: GetFixtureLineupByFixtureIdUseCase,
+    private val manageMatchesUseCase: ManageMatchesUseCase,
     savedStateHandle: SavedStateHandle,
 ) : BaseViewModel<MatchLineupUIState, MatchLineupEvents>(
     MatchLineupUIState(),
@@ -23,11 +23,10 @@ class MatchLineupViewModel @Inject constructor(
 
     init {
         tryToExecute(
-            { getFixtureLineupByFixtureId(matchLineupsArgs.fixtureId) },
+            { manageMatchesUseCase.getMatchLineupByMatchId(matchLineupsArgs.fixtureId) },
             ::onSuccess,
             ::onError
         )
-
     }
 
     private fun onSuccess(getFixtureId: List<FixtureLineup>) {
@@ -39,7 +38,6 @@ class MatchLineupViewModel @Inject constructor(
                 noData = getFixtureId.isEmpty()
             )
         }
-
     }
 
     private fun onError(e: Throwable) {
@@ -51,6 +49,5 @@ class MatchLineupViewModel @Inject constructor(
                 noData = true
             )
         }
-
     }
 }

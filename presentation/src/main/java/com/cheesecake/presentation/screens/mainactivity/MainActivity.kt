@@ -19,7 +19,6 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
     lateinit var binding: ActivityMainBinding
     private val mainActivityViewModel: MainActivityViewModel by viewModels()
 
@@ -38,14 +37,11 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             if (!mainActivityViewModel.shouldShowOnboarding()) {
                 navigateToOnboarding()
-
             } else {
                 binding.bottomNavBar.setupWithNavController(controller)
                 NavigationUI.setupWithNavController(binding.bottomNavBar, controller, false)
             }
         }
-
-
     }
 
     private fun navigateToOnboarding() {
@@ -53,8 +49,4 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-
-
-
-
 }

@@ -13,22 +13,19 @@ class OnboardingDataSourceImpl @Inject constructor(
     private val dataStore: DataStore<Preferences>,
 ) : OnboardingDataSource {
 
-    override suspend fun shouldShowOnboarding(): Boolean {
+    override suspend fun readOnboardingState(): Boolean {
         return dataStore.data.map { preferences ->
             preferences[booleanPreferencesKey(ONBOARDING_SHOWN)] == true
         }.first()
     }
 
-    override suspend fun setOnboardingShown() {
+    override suspend fun saveOnboardingState(isCompleted: Boolean) {
         dataStore.edit { preferences ->
-            preferences[booleanPreferencesKey(ONBOARDING_SHOWN)] = true
+            preferences[booleanPreferencesKey(ONBOARDING_SHOWN)] = isCompleted
         }
     }
 
     companion object{
-        const val ONBOARDING_SHOWN = "onboarding_shown"
-    }
-    private object PreferencesKeys {
-        val OnboardingShown = booleanPreferencesKey(ONBOARDING_SHOWN)
+        const val ONBOARDING_SHOWN = "onboarding_complete"
     }
 }

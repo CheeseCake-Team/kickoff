@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.Match
-import com.cheesecake.domain.usecases.GetMatchDetailsUseCase
+import com.cheesecake.domain.usecases.ManageMatchesUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,10 +18,9 @@ import javax.inject.Inject
 @HiltViewModel
 class MatchViewModel
 @Inject constructor(
-    private val getMatchDetailsUseCase: GetMatchDetailsUseCase,
+    private val manageMatchesUseCase: ManageMatchesUseCase,
     matchArgs: MatchNavigationArgs
 ) : BaseViewModel<MatchUIState, MatchEvents>(MatchUIState(), Event()) {
-
     private val _args = MutableLiveData<Args>()
     val args: LiveData<Args> = _args
     private val _events = MutableSharedFlow<Event<MatchEvents>>()
@@ -30,7 +29,7 @@ class MatchViewModel
     init {
         tryToExecute(
             {
-                getMatchDetailsUseCase(
+                manageMatchesUseCase.getMatchDetails(
                     matchArgs.homeTeamId,
                     matchArgs.awayTeamId,
                     matchArgs.date,
@@ -80,7 +79,6 @@ class MatchViewModel
             _event.update { Event(MatchEvents.onBackClick) }
         }
     }
-
 }
 
 data class Args(

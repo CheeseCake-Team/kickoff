@@ -5,7 +5,7 @@ import com.cheesecake.domain.entity.FixtureStatistics
 import com.cheesecake.domain.entity.StatisticsType
 import com.cheesecake.domain.entity.getAwayTeamPercentage
 import com.cheesecake.domain.entity.getHomeTeamPercentage
-import com.cheesecake.domain.usecases.GetFixtureStatisticsByFixtureIdUseCase
+import com.cheesecake.domain.usecases.ManageMatchesUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MatchStatisticsViewModel @Inject constructor(
-    private val getFixtureStatisticsByFixtureId: GetFixtureStatisticsByFixtureIdUseCase,
+    private val manageMatchesUseCase: ManageMatchesUseCase,
     savedStateHandle: SavedStateHandle,
 ) : BaseViewModel<MatchStatisticsUIState, MatchStatisticsEvents>(
     MatchStatisticsUIState(),
@@ -25,7 +25,7 @@ class MatchStatisticsViewModel @Inject constructor(
 
     init {
         tryToExecute(
-            { getFixtureStatisticsByFixtureId(matchStatisticsArgs.fixtureId) },
+            { manageMatchesUseCase.getMatchStatisticsByMatchId(matchStatisticsArgs.fixtureId) },
             ::onSuccess,
             ::onError
         )

@@ -1,7 +1,7 @@
 package com.cheesecake.presentation.screens.team.teamMatches
 
 import com.cheesecake.domain.entity.Fixture
-import com.cheesecake.domain.usecases.GetTeamMatchesByTeamIdAndSeasonUseCase
+import com.cheesecake.domain.usecases.ManageMatchesUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -10,13 +10,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TeamMatchesViewModel @Inject constructor(
-    private val getTeamMatchesByTeamIdAndSeasonUseCase: GetTeamMatchesByTeamIdAndSeasonUseCase,
+    private val manageMatchesUseCase: ManageMatchesUseCase,
     teamMatchesArgs: TeamMatchesArgs
 ) : BaseViewModel<TeamMatchesUiState, TeamMatchesNavigationEvent>(TeamMatchesUiState(), Event()) {
     init {
         tryToExecute(
             {
-                getTeamMatchesByTeamIdAndSeasonUseCase(
+                manageMatchesUseCase.getTeamMatchesByTeamIdAndSeason(
                     "Africa/Cairo", teamMatchesArgs.teamId, teamMatchesArgs.season
                 )
             }, ::onSuccess, ::onError

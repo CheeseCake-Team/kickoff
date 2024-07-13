@@ -3,7 +3,7 @@ package com.cheesecake.presentation.screens.match.events
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import com.cheesecake.domain.entity.FixtureEvents
-import com.cheesecake.domain.usecases.GetFixtureEventByFixtureIdUseCase
+import com.cheesecake.domain.usecases.ManageMatchesUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MatchEventViewModel @Inject constructor(
-    private val getFixtureEventByFixtureIdUseCase: GetFixtureEventByFixtureIdUseCase,
+    private val manageMatchesUseCase: ManageMatchesUseCase,
     savedStateHandle: SavedStateHandle,
 ) : BaseViewModel<MatchEventUIState, MatchEventEvents>(
     MatchEventUIState(),
@@ -26,7 +26,7 @@ class MatchEventViewModel @Inject constructor(
 
     private fun getMatchEvents() {
         tryToExecute(
-            { getFixtureEventByFixtureIdUseCase(matchEventArgs.fixtureId) },
+            { manageMatchesUseCase.getMatchEventByMatchId(matchEventArgs.fixtureId) },
             ::onSuccess,
             ::onError
         )
@@ -50,6 +50,6 @@ class MatchEventViewModel @Inject constructor(
                 noData = true
             )
         }
-        Log.e("TAG", "onError: ${e.message.toString()}", )
+        Log.e("TAG", "onError: ${e.message.toString()}")
     }
 }

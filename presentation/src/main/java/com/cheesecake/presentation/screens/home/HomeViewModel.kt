@@ -2,8 +2,8 @@ package com.cheesecake.presentation.screens.home
 
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.League
-import com.cheesecake.domain.usecases.GetFavoriteLeaguesMatchesByDateUseCase
 import com.cheesecake.domain.usecases.DateManager
+import com.cheesecake.domain.usecases.ManageMatchesUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val dateManager: DateManager,
-    private val getFavoriteLeagueMatchesByDate: GetFavoriteLeaguesMatchesByDateUseCase,
+    private val manageMatchesUseCase: ManageMatchesUseCase,
 ) : BaseViewModel<HomeUiState, HomeEvents>(HomeUiState(), Event()) {
     init {
         getDates()
@@ -52,7 +52,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getMatchesByDate(date: Date) {
         tryToExecute({
-            getFavoriteLeagueMatchesByDate(date, "Africa/Cairo")
+            manageMatchesUseCase.getFavoriteCompetitionsMatches(date, "Africa/Cairo")
         }, ::onSuccessFavourites, ::onError)
     }
 

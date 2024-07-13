@@ -31,7 +31,7 @@ class FavoriteTeamsSelectionViewModel @Inject constructor(
     }
 
     suspend fun setOnboardingShown() {
-        onboardingUseCase.setOnboardingShown()
+        onboardingUseCase.saveOnboardingState(isComplete = true)
     }
 
     private fun onGettingFavoriteCompetitionsSuccess(favouriteCompetitions: Flow<List<League>>) {

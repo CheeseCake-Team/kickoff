@@ -2,7 +2,7 @@ package com.cheesecake.presentation.screens.competition.competitionmatches
 
 import androidx.lifecycle.SavedStateHandle
 import com.cheesecake.domain.entity.Fixture
-import com.cheesecake.domain.usecases.GetPairsOfMatchesAndDateByLeagueIdAndSeasonUseCase
+import com.cheesecake.domain.usecases.ManageMatchesUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import com.cheesecake.presentation.screens.competition.CompetitionArgs
@@ -12,15 +12,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CompetitionMatchesViewModel @Inject constructor(
-    private val getPairsOfMatchesAndDateByLeagueIdAndSeasonUseCase: GetPairsOfMatchesAndDateByLeagueIdAndSeasonUseCase,
+    private val manageMatchesUseCase: ManageMatchesUseCase,
     savedStateHandle: SavedStateHandle
-) : BaseViewModel<CompetitionMatchesUiState, CompetitionMatchesEvent>(CompetitionMatchesUiState(), Event()) {
+) : BaseViewModel<CompetitionMatchesUiState, CompetitionMatchesEvent>(
+    CompetitionMatchesUiState(),
+    Event()
+) {
     private val competitionArgs = CompetitionArgs(savedStateHandle)
 
     init {
         tryToExecute(
             {
-                getPairsOfMatchesAndDateByLeagueIdAndSeasonUseCase(
+                manageMatchesUseCase.fetchAndGroupMatchesByDate(
                     "Africa/Cairo",
                     competitionArgs.competitionId,
                     competitionArgs.season
@@ -40,6 +43,14 @@ class CompetitionMatchesViewModel @Inject constructor(
     }
 
     private fun onMatchClicked(homeTeamId: Int, awayTeamId: Int, date: String) {
-        _event.update { Event(CompetitionMatchesEvent.MatchClickedEvent(homeTeamId, awayTeamId, date)) }
+        _event.update {
+            Event(
+                CompetitionMatchesEvent.MatchClickedEvent(
+                    homeTeamId,
+                    awayTeamId,
+                    date
+                )
+            )
+        }
     }
 }

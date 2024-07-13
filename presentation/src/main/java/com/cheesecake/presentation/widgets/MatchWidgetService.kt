@@ -5,7 +5,7 @@ import android.content.Intent
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import com.cheesecake.domain.entity.Fixture
-import com.cheesecake.domain.usecases.GetWidgetMatchesUseCase
+import com.cheesecake.domain.usecases.ManageMatchesUseCase
 import com.cheesecake.presentation.R
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -19,14 +19,18 @@ class MatchWidgetService : RemoteViewsService() {
 
     class MatchItemFactory @Inject constructor(
         private val context: Context,
-        private val getWidgetMatchesUseCase: GetWidgetMatchesUseCase?
+        private val manageMatchesUseCase: ManageMatchesUseCase?
     ) : RemoteViewsFactory {
 
         private lateinit var list: List<Fixture>
 
         override fun onCreate() {
             GlobalScope.launch {
-                list = getWidgetMatchesUseCase?.let { it("Afirca/Egypt", 39, 2022) }!!
+                list = manageMatchesUseCase?.getMatchesByCompetitionIdAndSeason(
+                    "Afirca/Egypt",
+                    39,
+                    2022
+                ) ?: emptyList()
             }
         }
 

@@ -76,7 +76,7 @@ class IFootballRepositoryImpl
         localDataSource.updateOrInsertLeague(league.toLocal())
     }
 
-    override suspend fun getMatchesByLeagueIdAndSeason(
+    override suspend fun getMatchesByCompetitionIdAndSeason(
         timeZone: String,
         leagueId: Int,
         season: Int
@@ -177,15 +177,15 @@ class IFootballRepositoryImpl
         localDataSource.addLeaguesList(leagues.map { it.toLocal() })
     }
 
-    override suspend fun shouldShowOnboarding(): Boolean {
-        return onboardingDataSource.shouldShowOnboarding()
+    override suspend fun readOnboardingState(): Boolean {
+        return onboardingDataSource.readOnboardingState()
     }
 
-    override suspend fun setOnboardingShown() {
-        onboardingDataSource.setOnboardingShown()
+    override suspend fun saveOnboardingState(isCompleted: Boolean) {
+        onboardingDataSource.saveOnboardingState(isCompleted)
     }
 
-    override suspend fun getFixtureStatisticsByFixtureId(fixtureId: Int): List<FixtureStatistics> {
+    override suspend fun getMatchStatisticsByMatchId(fixtureId: Int): List<FixtureStatistics> {
         return remoteDataSource.getFixtureStatisticsByFixtureId(fixtureId).toEntity()
     }
 
@@ -193,7 +193,7 @@ class IFootballRepositoryImpl
         return remoteDataSource.getTeamsByCountryName(countryName).toEntity()
     }
 
-    override suspend fun getFixtureEventByFixtureId(fixtureId: Int): List<FixtureEvents> {
+    override suspend fun getMatchEventByMatchId(fixtureId: Int): List<FixtureEvents> {
         return remoteDataSource.getFixtureEventsByFixtureId(fixtureId).toEntity()
     }
 
@@ -212,7 +212,7 @@ class IFootballRepositoryImpl
         return remoteDataSource.getSquadByTeamId(teamId).toEntity()
     }
 
-    override suspend fun getMatchesByTeamIdAndSeason(
+    override suspend fun getTeamMatchesByTeamIdAndSeason(
         timeZone: String,
         season: Int,
         teamId: Int
@@ -228,7 +228,7 @@ class IFootballRepositoryImpl
         return localDataSource.updateOrInsertTeam(team.toLocal(leagueId, season))
     }
 
-    override suspend fun getFixtureLineupByFixtureId(fixtureId: Int): List<FixtureLineup> {
+    override suspend fun getMatchLineupByMatchId(fixtureId: Int): List<FixtureLineup> {
         return remoteDataSource.getFixtureLineupsByFixtureId(fixtureId).toEntity()
     }
 
