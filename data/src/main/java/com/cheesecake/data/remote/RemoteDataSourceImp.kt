@@ -681,4 +681,20 @@ class RemoteDataSourceImp @Inject constructor(
             throw KickoffException.NoInternetConnectionException()
         }
     }
+
+    private fun handleError(error: BasePagingResponse.Error) {
+        when (val errorType = error.getErrorType()) {
+            ErrorType.DOMAIN_NOT_ALLOWED -> throw KickoffException.DomainNotAllowedException(
+                errorType.message
+            )
+            ErrorType.IP_NOT_ALLOWED -> throw KickoffException.IpNotAllowedException(errorType.message)
+            ErrorType.RATE_LIMIT_EXCEEDED_MINUTE -> throw KickoffException.RateLimitExceededMinuteException(
+                errorType.message
+            )
+            ErrorType.RATE_LIMIT_EXCEEDED_DAY -> throw KickoffException.RateLimitExceededDayException(
+                errorType.message
+            )
+            ErrorType.UNKNOWN_ERROR -> throw KickoffException.UnknownErrorException(errorType.message)
+        }
+    }
 }
