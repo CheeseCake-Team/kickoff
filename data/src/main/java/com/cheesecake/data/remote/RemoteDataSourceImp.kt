@@ -1,15 +1,13 @@
 package com.cheesecake.data.remote
 
 import com.cheesecake.data.remote.api.FootballApiService
+import com.cheesecake.data.remote.models.CoachDTO
 import com.cheesecake.data.remote.models.EventDTO
+import com.cheesecake.data.remote.models.FixtureDTO
 import com.cheesecake.data.remote.models.FixtureStatisticsDTO
+import com.cheesecake.data.remote.models.FixturesDTO
 import com.cheesecake.data.remote.models.HeadToHeadDTO
 import com.cheesecake.data.remote.models.InjuriesDTO
-import com.cheesecake.data.remote.response.BasePagingForStaticResponse
-import com.cheesecake.data.remote.response.BasePagingResponse
-import com.cheesecake.data.remote.models.CoachDTO
-import com.cheesecake.data.remote.models.FixtureDTO
-import com.cheesecake.data.remote.models.FixturesDTO
 import com.cheesecake.data.remote.models.LeagueDTO
 import com.cheesecake.data.remote.models.LineupDTO
 import com.cheesecake.data.remote.models.PlayerDTO
@@ -23,13 +21,14 @@ import com.cheesecake.data.remote.models.TeamStatisticsDTO
 import com.cheesecake.data.remote.models.TransferDTO
 import com.cheesecake.data.remote.models.TrophyDTO
 import com.cheesecake.data.remote.models.VenuesDTO
+import com.cheesecake.data.remote.response.BasePagingForStaticResponse
+import com.cheesecake.data.remote.response.BasePagingResponse
+import com.cheesecake.data.remote.utils.ErrorType
 import com.cheesecake.data.remote.utils.FixtureStatus
 import com.cheesecake.data.remote.utils.LeagueType
 import com.cheesecake.data.repository.RemoteDataSource
 import com.cheesecake.domain.KickoffException
-import kotlinx.coroutines.TimeoutCancellationException
 import retrofit2.Response
-import java.net.ConnectException
 import javax.inject.Inject
 
 class RemoteDataSourceImp @Inject constructor(
@@ -48,7 +47,6 @@ class RemoteDataSourceImp @Inject constructor(
     override suspend fun getCoachBySearch(getCoachName: String): List<CoachDTO> {
         return wrapBaseResponse { service.getCoachBySearch(getCoachName) }
     }
-
 
     //endregion
 
@@ -649,36 +647,25 @@ class RemoteDataSourceImp @Inject constructor(
     private suspend fun <T> wrapBaseResponse(
         response: suspend () -> Response<BasePagingResponse<T>>
     ): List<T> {
-        return try {
-            val apiResponse = response()
-            if (apiResponse.isSuccessful) {
-                val responseBody = apiResponse.body()
-                responseBody?.response ?: throw KickoffException.NoDataFoundException()
-            } else {
-                throw KickoffException.InternalServerErrorException()
-            }
-        } catch (e: TimeoutCancellationException) {
-            throw KickoffException.TimeoutException()
-        } catch (e: ConnectException) {
-            throw KickoffException.NoInternetConnectionException()
+        val apiResponse = response()
+        return if (apiResponse.isSuccessful) {
+            val responseBody = apiResponse.body()
+            responseBody?.error?.let { handleError(it) }
+            responseBody?.response ?: throw KickoffException.NoDataFoundException()
+        } else {
+            throw KickoffException.InternalServerErrorException()
         }
     }
 
     private suspend fun <T> wrapBaseStaticResponse(
         response: suspend () -> Response<BasePagingForStaticResponse<T>>
     ): T {
-        return try {
-            val apiResponse = response()
-            if (apiResponse.isSuccessful) {
-                val responseBody = apiResponse.body()
-                responseBody?.response ?: throw KickoffException.NoDataFoundException()
-            } else {
-                throw KickoffException.InternalServerErrorException()
-            }
-        } catch (e: TimeoutCancellationException) {
-            throw KickoffException.TimeoutException()
-        } catch (e: ConnectException) {
-            throw KickoffException.NoInternetConnectionException()
+        val apiResponse = response()
+        return if (apiResponse.isSuccessful) {
+            val responseBody = apiResponse.body()
+            responseBody?.response ?: throw KickoffException.NoDataFoundException()
+        } else {
+            throw KickoffException.InternalServerErrorException()
         }
     }
 
