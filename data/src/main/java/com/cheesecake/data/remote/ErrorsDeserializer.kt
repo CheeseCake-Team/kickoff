@@ -1,21 +1,30 @@
 package com.cheesecake.data.remote
 
+import com.cheesecake.data.remote.response.BasePagingResponse
 import com.google.gson.*
 import java.lang.reflect.Type
 
-class ErrorsDeserializer : JsonDeserializer<List<String>> {
-    override fun deserialize(json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext?): List<String> {
-        if (json == null) {
-            return emptyList()
+class ErrorsDeserializer : JsonDeserializer<BasePagingResponse.Error> {
+    override fun deserialize(json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext?): BasePagingResponse.Error {
+        if (json == null || json.isJsonNull) {
+            return BasePagingResponse.Error(rateLimit = null, ip = null)
         }
-        return if (json.isJsonArray) {
-            val jsonArray = json.asJsonArray
-            jsonArray.map { it.asString }
-        } else if (json.isJsonObject) {
+
+        if (json.isJsonObject) {
             val jsonObject = json.asJsonObject
-            jsonObject.entrySet().map { it.value.asString }
-        } else {
-            listOf(json.asString)
+            val rateLimit = if (jsonObject.has("rateLimit") && !jsonObject.get("rateLimit").isJsonNull) {
+                jsonObject.get("rateLimit").asString
+            } else {
+                null
+            }
+            val ip = if (jsonObject.has("Ip") && !jsonObject.get("Ip").isJsonNull) {
+                jsonObject.get("Ip").asString
+            } else {
+                null
+            }
+            return BasePagingResponse.Error(rateLimit = rateLimit, ip = ip)
         }
+
+        return BasePagingResponse.Error(rateLimit = null, ip = null)
     }
 }
