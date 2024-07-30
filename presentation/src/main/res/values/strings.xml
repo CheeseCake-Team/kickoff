@@ -79,5 +79,7 @@
     <string name="app_widget_description">This is an app widget description</string>
     <string name="configure">Configure</string>
     <string name="no_matches_today">No Matches Today</string>
+    <string name="retry">Retry</string>
+    <string name="learn_more">Learn More</string>
 
 </resources>
