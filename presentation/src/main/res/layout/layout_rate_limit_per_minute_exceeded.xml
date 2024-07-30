@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="inflatedVisibility"
+            type="Boolean" />
+
+        <variable
+            name="viewModel"
+            type="com.cheesecake.presentation.base.BaseViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/error_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_16"
+            app:imageResource="@{viewModel.errorUiState.imageResource}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3"
+            tools:background="@drawable/img_rate_limit_exceed_per_minute_error" />
+
+        <TextView
+            android:id="@+id/error_title"
+            style="@style/TitleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_24"
+            android:text="@{viewModel.errorUiState.errorTitle}"
+            android:textColor="@color/fontHeavy"
+            app:layout_constraintEnd_toEndOf="@+id/error_image"
+            app:layout_constraintStart_toStartOf="@+id/error_image"
+            app:layout_constraintTop_toBottomOf="@+id/error_image"
+            tools:text="Rate Limit Exceed !" />
+
+        <TextView
+            android:id="@+id/error_message"
+            style="@style/bodyMedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:text="@{viewModel.errorUiState.errorDescription}"
+            android:textColor="@color/fontLight"
+            app:layout_constraintEnd_toEndOf="@+id/error_image"
+            app:layout_constraintStart_toStartOf="@+id/error_image"
+            app:layout_constraintTop_toBottomOf="@+id/error_title"
+            tools:text="Too many requests. You have exceeded the limit of requests per minute of your subscription. You can try again after one minute." />
+
+        <Button
+            android:id="@+id/retry_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_8"
+            android:layout_marginTop="@dimen/spacing_24"
+            android:text="@string/retry"
+            app:backgroundTint="@color/primaryColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/error_message"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/outlinedButton"
+            app:layout_constraintTop_toBottomOf="@+id/error_message"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/outlinedButton"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_8"
+            android:text="@string/learn_more"
+            android:textColor="@color/primaryColor"
+            app:layout_constraintBottom_toBottomOf="@+id/retry_button"
+            app:layout_constraintEnd_toStartOf="@+id/retry_button"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/error_message"
+            app:layout_constraintTop_toTopOf="@+id/retry_button" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
