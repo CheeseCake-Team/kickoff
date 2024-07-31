@@ -81,5 +81,6 @@
     <string name="no_matches_today">No Matches Today</string>
     <string name="retry">Retry</string>
     <string name="learn_more">Learn More</string>
+    <string name="error_image">Error Image</string>
 
 </resources>
