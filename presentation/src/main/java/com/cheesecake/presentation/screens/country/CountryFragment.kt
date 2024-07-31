@@ -20,6 +20,7 @@ class CountryFragment : BaseFragment<FragmentCountryBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        changeStatusBarColor()
         handleNavigation()
         init()
     }
@@ -55,5 +56,4 @@ class CountryFragment : BaseFragment<FragmentCountryBinding>() {
             }
         }
     }
-
 }
