@@ -13,8 +13,8 @@ import javax.inject.Inject
 @HiltViewModel
 class DiscoverViewModel @Inject constructor(
     private val manageCountriesUseCase: ManageCountriesUseCase,
-) : BaseViewModel<DiscoverTeamCountryUIState, DiscoverTeamCountryEvents>(
-    DiscoverTeamCountryUIState(),
+) : BaseViewModel<DiscoverTeamCountryUiState, DiscoverTeamCountryEvents>(
+    DiscoverTeamCountryUiState(),
     Event()
 ) {
 

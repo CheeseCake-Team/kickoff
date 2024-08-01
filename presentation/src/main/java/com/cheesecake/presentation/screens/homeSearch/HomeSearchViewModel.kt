@@ -13,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeSearchViewModel @Inject constructor(
     private val manageRecentSearchUseCase: ManageRecentSearchUseCase,
-) : BaseViewModel<HomeSearchUIState, HomeSearchEvent>(HomeSearchUIState(), Event()) {
+) : BaseViewModel<HomeSearchUiState, HomeSearchEvent>(HomeSearchUiState(), Event()) {
     init {
         getData()
     }

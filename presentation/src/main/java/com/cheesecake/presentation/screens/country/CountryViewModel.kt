@@ -10,8 +10,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CountryViewModel @Inject constructor(
     val countryNavigationArgs: CountryNavigationArgs
-) : BaseViewModel<CountryUIState, CountryEvents>(
-    CountryUIState(),
+) : BaseViewModel<CountryUiState, CountryEvents>(
+    CountryUiState(),
     Event()
 ) {
 

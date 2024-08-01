@@ -12,8 +12,8 @@ import javax.inject.Inject
 class PlayerStatisticsViewModel @Inject constructor(
     private val managePlayersUseCase: ManagePlayersUseCase,
     private val playerStatisticsArgs: PlayerStatisticsArgs
-) : BaseViewModel<PlayerStatisticsUIState, PlayerStatisticsNavigationEvent>
-    (PlayerStatisticsUIState(), Event()) {
+) : BaseViewModel<PlayerStatisticsUiState, PlayerStatisticsNavigationEvent>
+    (PlayerStatisticsUiState(), Event()) {
     init {
         getData()
     }

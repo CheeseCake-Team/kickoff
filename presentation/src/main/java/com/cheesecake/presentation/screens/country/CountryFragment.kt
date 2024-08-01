@@ -8,8 +8,8 @@ import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.base.BaseFragmentsAdapter
 import com.cheesecake.presentation.databinding.FragmentCountryBinding
-import com.cheesecake.presentation.screens.country.countryLeagues.CountryLeaguesFragment
-import com.cheesecake.presentation.screens.country.countryTeams.CountryTeamsFragment
+import com.cheesecake.presentation.screens.country.countrycompetitions.CountryCompetitionsFragment
+import com.cheesecake.presentation.screens.country.countryteams.CountryTeamsFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,7 +30,7 @@ class CountryFragment : BaseFragment<FragmentCountryBinding>() {
             childFragmentManager,
             requireActivity().lifecycle, listOf(
                 CountryTeamsFragment.newInstance(viewModel.countryNavigationArgs.countryName),
-                CountryLeaguesFragment.newInstance(viewModel.countryNavigationArgs.countryName)
+                CountryCompetitionsFragment.newInstance(viewModel.countryNavigationArgs.countryName)
             )
         )
         binding.countryViewPager.adapter = fragmentsAdapter
