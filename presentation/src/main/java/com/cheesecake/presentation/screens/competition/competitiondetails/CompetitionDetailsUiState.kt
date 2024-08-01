@@ -8,6 +8,4 @@ data class CompetitionDetailsUiState(
     val topPlayers: List<PlayerStatisticsItemUiState> = emptyList(),
     val isTopPlayersEmpty: Boolean = false,
     val isTeamsStandingEmpty: Boolean = false,
-    val isLoading: Boolean = true,
-    val errorMessage: String = ""
 )

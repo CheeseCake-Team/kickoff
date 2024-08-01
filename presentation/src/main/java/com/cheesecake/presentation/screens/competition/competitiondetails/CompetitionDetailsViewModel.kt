@@ -31,12 +31,12 @@ class CompetitionDetailsViewModel @Inject constructor(
     }
 
     private fun onGettingTopScorersSuccess(playersStatistics: List<PlayerStatistics>) {
+        _isLoading.update { false }
         _state.update { competitionDetailsUiState ->
             competitionDetailsUiState.copy(
                 topPlayers = playersStatistics.toUiState().takeIf { it.isNotEmpty() }?.take(7)
                     ?: emptyList(),
                 isTopPlayersEmpty = playersStatistics.isEmpty(),
-                isLoading = false,
             )
         }
     }
@@ -50,17 +50,19 @@ class CompetitionDetailsViewModel @Inject constructor(
     }
 
     private fun onGettingTeamsStandingSuccess(standings: List<TeamStanding>) {
+        _isLoading.update { false }
         _state.update { competitionDetailsUiState ->
             competitionDetailsUiState.copy(
                 teamsStanding = standings.toUiState().take(4),
                 teamsCount = standings.size.toString(),
                 isTeamsStandingEmpty = standings.isEmpty(),
-                isLoading = false
             )
         }
     }
 
     override fun getData() {
+        _errorUiState.update { null }
+        _isLoading.update { true }
         tryToExecute(
             {
                 manageCompetitionsUseCase.getCompetitionById(competitionArgs.competitionId)
