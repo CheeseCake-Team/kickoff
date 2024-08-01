@@ -5,7 +5,7 @@ import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseListAdapter
 
 class FavoriteCompetitionsAdapter : BaseListAdapter<FavoriteCompetitionsUiState>(CompetitionsUIStateDiffUtil()) {
-    override val layoutId = R.layout.item_favorite_leagues
+    override val layoutId = R.layout.item_favorite_competitions
 }
 
 class CompetitionsUIStateDiffUtil : DiffUtil.ItemCallback<FavoriteCompetitionsUiState>() {
