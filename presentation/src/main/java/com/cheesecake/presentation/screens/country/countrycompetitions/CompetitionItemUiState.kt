@@ -9,7 +9,7 @@ data class CompetitionItemUiState(
     val onCompetitionClick: () -> Unit
 )
 
-fun League.toLeagueUIState(onLeagueClick: () -> Unit): CompetitionItemUiState =
+fun League.toCompetitionUIState(onLeagueClick: () -> Unit): CompetitionItemUiState =
     CompetitionItemUiState(
         this.name,
         this.imageUrl,

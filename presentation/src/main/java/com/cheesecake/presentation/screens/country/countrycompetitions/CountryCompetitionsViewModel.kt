@@ -20,20 +20,22 @@ class CountryCompetitionsViewModel @Inject constructor(
         getData()
     }
 
-    private fun onSuccess(leagues: List<League>) {
+    private fun onSuccess(competitions: List<League>) {
+        _isLoading.update { false }
+        _errorUiState.update { null }
         _state.update { countryLeaguesUIState ->
             countryLeaguesUIState.copy(
-                leagues = leagues.map { it.toLeagueUIState { onLeagueClick(it.leagueId) } },
-                isLoading = false
+                competitions = competitions.map { it.toCompetitionUIState { onCompetitionClicked(it.leagueId) } },
             )
         }
     }
 
-    private fun onLeagueClick(leagueId: Int) {
-        _event.update { Event(CountryCompetitionsNavigationEvent.NavigateToCompetition(leagueId)) }
+    private fun onCompetitionClicked(competitionId: Int) {
+        _event.update { Event(CountryCompetitionsNavigationEvent.NavigateToCompetition(competitionId)) }
     }
 
     override fun getData() {
+        _isLoading.update { true }
         tryToExecute(
             { manageCompetitionsUseCase.getCompetitionsByCountryName(countryCompetitionsArgs.countryName) },
             ::onSuccess,
