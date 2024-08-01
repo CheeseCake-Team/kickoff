@@ -21,10 +21,11 @@ class CountryTeamsViewModel @Inject constructor(
     }
 
     private fun onSuccess(teams: List<Team>) {
+        _isLoading.update { false }
+        _errorUiState.update { null }
         _state.update { countryTeamsUIState ->
             countryTeamsUIState.copy(
                 teams = teams.map { it.toTeamUIState { onTeamClick(it.id) } },
-                isLoading = false
             )
         }
     }
@@ -34,6 +35,7 @@ class CountryTeamsViewModel @Inject constructor(
     }
 
     override fun getData() {
+        _isLoading.update { true }
         tryToExecute(
             { manageTeamsUseCase.getTeamsByCountryName(countryTeamsArgs.countryName) }, ::onSuccess
         )
