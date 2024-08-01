@@ -21,15 +21,8 @@ class LeaguesSearchViewModel @Inject constructor(
     private val manageRecentSearchUseCase: ManageRecentSearchUseCase,
     private val args: LeaguesSearchNavigationArgs
 ) : BaseViewModel<LeaguesUIState, SearchEvents>(LeaguesUIState(), Event()) {
-
     init {
-        initLeagueList()
-    }
-
-    private fun initLeagueList() {
-        tryToExecute(
-            { getSearchResult() }, ::onSearchSuccess, (::onSearchError)
-        )
+        getData()
     }
 
     private suspend fun getSearchResult(): List<LeagueSearchUIState> {
@@ -42,14 +35,14 @@ class LeaguesSearchViewModel @Inject constructor(
         _state.update { it.copy(items = items, isLoading = false, isResultEmpty = items.isEmpty()) }
     }
 
-    private fun onSearchError(throwable: Throwable) {
-        _state.update { it.copy(error = throwable.message.toString()) }
-    }
-
     private fun onLeagueClicked(league: League) {
         viewModelScope.launch {
             manageRecentSearchUseCase.addOrUpdateRecentSearch(league.toRecentSearch())
             _event.update { Event(SearchEvents.LeagueClickEvent(league.leagueId)) }
         }
+    }
+
+    override fun getData() {
+        tryToExecute({ getSearchResult() }, ::onSearchSuccess)
     }
 }

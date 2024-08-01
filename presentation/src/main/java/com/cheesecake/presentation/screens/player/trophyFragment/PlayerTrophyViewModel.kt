@@ -11,25 +11,23 @@ import javax.inject.Inject
 @HiltViewModel
 class PlayerTrophyViewModel @Inject constructor(
     private val managePlayersUseCase: ManagePlayersUseCase,
-    playerTrophyArgs: PlayerTrophyArgs
+    private val playerTrophyArgs: PlayerTrophyArgs
 ) : BaseViewModel<PlayerTrophyUiState, Event<TrophyNavigationEvent>>(
     PlayerTrophyUiState(),
     Event()
 ) {
-
     init {
-        tryToExecute(
-            { managePlayersUseCase.getPlayerTrophy(playerTrophyArgs.playerId) },
-            ::onGettingPlayerTrophySuccess,
-            ::onError
-        )
+        getData()
     }
 
     private fun onGettingPlayerTrophySuccess(trophies: List<Trophy>) {
         _state.update { it.copy(data = trophies.toUiState(), isLoading = false) }
     }
 
-    private fun onError(e: Throwable) {
-        _state.update { it.copy(isLoading = false, errorMessage = e.message.toString()) }
+    override fun getData() {
+        tryToExecute(
+            { managePlayersUseCase.getPlayerTrophy(playerTrophyArgs.playerId) },
+            ::onGettingPlayerTrophySuccess,
+        )
     }
 }

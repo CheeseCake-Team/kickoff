@@ -1,6 +1,5 @@
 package com.cheesecake.presentation.screens.competition.competitionteams
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.usecases.ManageTeamsUseCase
@@ -22,16 +21,7 @@ class CompetitionTeamsViewModel @Inject constructor(
     private val competitionArgs = CompetitionArgs(savedStateHandle)
 
     init {
-        tryToExecute(
-            {
-                manageTeamsUseCase.getCompetitionTeams(
-                    competitionArgs.competitionId,
-                    competitionArgs.season
-                )
-            },
-            ::onSuccess,
-            ::onError
-        )
+        getData()
     }
 
     private fun onSuccess(teams: List<Team>) {
@@ -40,11 +30,16 @@ class CompetitionTeamsViewModel @Inject constructor(
         }
     }
 
-    private fun onError(e: Throwable) {
-        Log.e("onError: ", e.toString())
-        _state.update {
-            it.copy(isError = e.message.toString())
-        }
+    override fun getData() {
+        tryToExecute(
+            {
+                manageTeamsUseCase.getCompetitionTeams(
+                    competitionArgs.competitionId,
+                    competitionArgs.season
+                )
+            },
+            ::onSuccess,
+        )
     }
 
     private fun onTeamClicked(teamId: Int) {

@@ -10,21 +10,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PlayerStatisticsViewModel @Inject constructor(
-    managePlayersUseCase: ManagePlayersUseCase,
-    playerStatisticsArgs: PlayerStatisticsArgs
+    private val managePlayersUseCase: ManagePlayersUseCase,
+    private val playerStatisticsArgs: PlayerStatisticsArgs
 ) : BaseViewModel<PlayerStatisticsUIState, PlayerStatisticsNavigationEvent>
     (PlayerStatisticsUIState(), Event()) {
     init {
-        tryToExecute(
-            {
-                managePlayersUseCase.getPlayerStatistics(
-                    playerStatisticsArgs.season,
-                    playerStatisticsArgs.playerId
-                )
-            },
-            ::onGettingPlayerStatisticsSuccess,
-            ::onError
-        )
+        getData()
     }
 
     private fun onGettingPlayerStatisticsSuccess(playerStatistics: PlayerStatistics) {
@@ -36,7 +27,15 @@ class PlayerStatisticsViewModel @Inject constructor(
         }
     }
 
-    private fun onError(e: Throwable) {
-        _state.update { it.copy(errorMessage = e.localizedMessage.toString()) }
+    override fun getData() {
+        tryToExecute(
+            {
+                managePlayersUseCase.getPlayerStatistics(
+                    playerStatisticsArgs.season,
+                    playerStatisticsArgs.playerId
+                )
+            },
+            ::onGettingPlayerStatisticsSuccess,
+        )
     }
 }

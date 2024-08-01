@@ -32,19 +32,12 @@ class SearchViewModel @Inject constructor(
     private val searchInput = MutableStateFlow(_state.value.searchQuery)
 
     init {
-        initSearchProperties()
-    }
-
-    private fun initSearchProperties() {
-        viewModelScope.launch {
-            searchInput.debounce(1000).distinctUntilChanged().filter { it.isNotEmpty() }
-                .collect(::tryToSearch)
-        }
+        getData()
     }
 
     private suspend fun tryToSearch(input: String) {
         tryToExecute(
-            { getSearchResult(input) }, ::onSearchSuccess, ::onSearchError
+            { getSearchResult(input) }, ::onSearchSuccess
         )
     }
 
@@ -70,11 +63,6 @@ class SearchViewModel @Inject constructor(
                 isLoading = false,
             )
         }
-    }
-
-    private fun onSearchError(throwable: Throwable) {
-        _state.update { it.copy(error = throwable.message.toString(), isLoading = false) }
-        Log.i("onSearchError: ", _state.value.error)
     }
 
     private fun getIfResultEmpty(items: List<SearchResult>): Boolean {
@@ -119,5 +107,12 @@ class SearchViewModel @Inject constructor(
 
     suspend fun onInternetDisconnected() {
         TODO()
+    }
+
+    override fun getData() {
+        viewModelScope.launch {
+            searchInput.debounce(1000).distinctUntilChanged().filter { it.isNotEmpty() }
+                .collect(::tryToSearch)
+        }
     }
 }

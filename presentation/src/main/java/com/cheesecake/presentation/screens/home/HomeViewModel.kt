@@ -19,7 +19,7 @@ class HomeViewModel @Inject constructor(
 ) : BaseViewModel<HomeUiState, HomeEvents>(HomeUiState(), Event()) {
     init {
         getDates()
-        getMatchesByDate(dateManager.getToday())
+        getData()
     }
 
     private fun getDates() {
@@ -53,7 +53,7 @@ class HomeViewModel @Inject constructor(
     private fun getMatchesByDate(date: Date) {
         tryToExecute({
             manageMatchesUseCase.getFavoriteCompetitionsMatches(date, "Africa/Cairo")
-        }, ::onSuccessFavourites, ::onError)
+        }, ::onSuccessFavourites)
     }
 
     private fun onSuccessFavourites(f: Flow<List<Pair<League, List<Fixture>>>>) {
@@ -68,10 +68,8 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun onError(e: Throwable) {
-        _state.update {
-            it.copy(errorMessage = e.localizedMessage ?: "Unknown error.", isLoading = false)
-        }
+    override fun getData() {
+        getMatchesByDate(dateManager.getToday())
     }
 
     private fun onMatchClicked(homeTeamId: Int, awayTeamId: Int, date: String) {

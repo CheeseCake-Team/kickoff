@@ -1,6 +1,5 @@
 package com.cheesecake.presentation.screens.match
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -19,26 +18,15 @@ import javax.inject.Inject
 class MatchViewModel
 @Inject constructor(
     private val manageMatchesUseCase: ManageMatchesUseCase,
-    matchArgs: MatchNavigationArgs
-) : BaseViewModel<MatchUIState, MatchEvents>(MatchUIState(), Event()) {
+    private val matchArgs: MatchNavigationArgs
+) : BaseViewModel<MatchUiState, MatchEvents>(MatchUiState(), Event()) {
     private val _args = MutableLiveData<Args>()
     val args: LiveData<Args> = _args
     private val _events = MutableSharedFlow<Event<MatchEvents>>()
     val events: SharedFlow<Event<MatchEvents>> = _events
 
     init {
-        tryToExecute(
-            {
-                manageMatchesUseCase.getMatchDetails(
-                    matchArgs.homeTeamId,
-                    matchArgs.awayTeamId,
-                    matchArgs.date,
-                    "Africa/Cairo"
-                )
-            },
-            ::onSuccess,
-            ::onError
-        )
+        getData()
     }
 
     private fun onSuccess(match: Match) {
@@ -52,26 +40,24 @@ class MatchViewModel
                 awayTeamGoals = match.awayTeamGoals,
                 matchState = match.matchState,
                 onBackClick = { backClicked() },
-                noData = match.homeTeamName.isNullOrEmpty() && match.awayTeamName.isNullOrEmpty()
-
-
+                noData = match.homeTeamName.isEmpty() && match.awayTeamName.isEmpty()
             )
         }
-        Log.d("TAG", "onSuccess match: $match")
         _args.postValue(Args(match.fixtureId, match.homeTeamId, match.awayTeamId, match.matchState))
     }
 
-    private fun onError(e: Throwable) {
-        Log.e("onError: ", e.localizedMessage.toString())
-        _state.update {
-            it.copy(
-                errorMessage = e.localizedMessage ?: "Unknown error.",
-                isLoading = false,
-                noData = true
-
-            )
-        }
-
+    override fun getData() {
+        tryToExecute(
+            {
+                manageMatchesUseCase.getMatchDetails(
+                    matchArgs.homeTeamId,
+                    matchArgs.awayTeamId,
+                    matchArgs.date,
+                    "Africa/Cairo"
+                )
+            },
+            ::onSuccess,
+        )
     }
 
     private fun backClicked() {

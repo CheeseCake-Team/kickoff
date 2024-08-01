@@ -17,7 +17,7 @@ class FavoriteCompetitionSelectionViewModel @Inject constructor(
     Event()
 ) {
     init {
-        tryToExecute({ manageCompetitionsUseCase.getCompetitions() }, ::onGettingCompetitionsSuccess, ::onError)
+        getData()
     }
 
     private fun onGettingCompetitionsSuccess(competitions: List<League>) {
@@ -64,19 +64,17 @@ class FavoriteCompetitionSelectionViewModel @Inject constructor(
     }
 
     private fun addCompetitionsToFavourite() {
-        tryToExecute({ manageCompetitionsUseCase.saveCompetitions() }, ::onAddingSuccess, ::onError)
+        tryToExecute({ manageCompetitionsUseCase.saveCompetitions() }, ::onAddingSuccess)
     }
 
     private fun onAddingSuccess(boolean: Boolean) {
         _event.update { Event(FavoriteCompetitionSelectionNavigationEvent.NavigateToFavoriteTeamsSelection) }
     }
 
-    private fun onError(e: Throwable) {
-        _state.update {
-            it.copy(
-                errorMessage = e.localizedMessage ?: "Unknown error.",
-                isLoading = false
-            )
-        }
+    override fun getData() {
+        tryToExecute(
+            { manageCompetitionsUseCase.getCompetitions() },
+            ::onGettingCompetitionsSuccess
+        )
     }
 }

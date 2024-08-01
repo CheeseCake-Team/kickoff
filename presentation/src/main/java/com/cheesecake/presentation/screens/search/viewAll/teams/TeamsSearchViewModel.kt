@@ -22,13 +22,7 @@ class TeamsSearchViewModel @Inject constructor(
     private val args: TeamsSearchNavigationArgs
 ) : BaseViewModel<TeamsUIState, SearchEvents>(TeamsUIState(), Event()) {
     init {
-        initTeamList()
-    }
-
-    private fun initTeamList() {
-        tryToExecute(
-            { getSearchResult() }, (::onSearchSuccess), (::onSearchError)
-        )
+        getData()
     }
 
     private suspend fun getSearchResult(): List<TeamSearchUIState> {
@@ -40,14 +34,14 @@ class TeamsSearchViewModel @Inject constructor(
         _state.update { it.copy(items = items, isLoading = false, isResultEmpty = items.isEmpty()) }
     }
 
-    private fun onSearchError(throwable: Throwable) {
-        _state.update { it.copy(error = throwable.message.toString()) }
-    }
-
     private fun onTeamClicked(team: Team) {
         viewModelScope.launch {
             manageRecentSearchUseCase.addOrUpdateRecentSearch(team.toRecentSearch())
             _event.update { Event(SearchEvents.TeamClickEvent(team.id)) }
         }
+    }
+
+    override fun getData() {
+        tryToExecute({ getSearchResult() }, ::onSearchSuccess)
     }
 }

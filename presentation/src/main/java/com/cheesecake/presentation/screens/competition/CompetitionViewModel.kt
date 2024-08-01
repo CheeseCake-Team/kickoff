@@ -18,11 +18,7 @@ class CompetitionViewModel @Inject constructor(
     val competitionId = competitionNavigationArgs.competitionId
 
     init {
-        tryToExecute(
-            { manageCompetitionsUseCase.getCompetitionById(competitionNavigationArgs.competitionId) },
-            ::onSuccess,
-            ::onError
-        )
+        getData()
     }
 
     private fun onSuccess(competition: League) {
@@ -37,13 +33,11 @@ class CompetitionViewModel @Inject constructor(
         }
     }
 
-    private fun onError(e: Throwable) {
-        _state.update {
-            it.copy(
-                errorMessage = e.message ?: "Unknown error.",
-                isLoading = false
-            )
-        }
+    override fun getData() {
+        tryToExecute(
+            { manageCompetitionsUseCase.getCompetitionById(competitionNavigationArgs.competitionId) },
+            ::onSuccess,
+        )
     }
 
     fun onFavoriteClick() {

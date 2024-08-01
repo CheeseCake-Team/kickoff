@@ -1,6 +1,5 @@
 package com.cheesecake.presentation.screens.competition.competitiondetails
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.entity.PlayerStatistics
@@ -28,36 +27,7 @@ class CompetitionDetailsViewModel @Inject constructor(
     private val competitionArgs = CompetitionArgs(savedStateHandle)
 
     init {
-        tryToExecute(
-            {
-                manageCompetitionsUseCase.getCompetitionById(competitionArgs.competitionId)
-            }, ::onGettingCompetitionSuccess, ::onError
-        )
-        tryToExecute(
-            {
-                manageCompetitionsUseCase.getCurrentRoundByIdAndSeason(
-                    competitionArgs.competitionId,
-                    competitionArgs.season
-                )
-            },
-            ::onGettingRoundSuccess, ::onError,
-        )
-        tryToExecute(
-            {
-                manageTeamsUseCase.getTeamStandingByCompetitionIdAndSeason(
-                    competitionArgs.competitionId,
-                    competitionArgs.season
-                )
-            }, ::onGettingTeamsStandingSuccess, ::onError
-        )
-        tryToExecute(
-            {
-                managePlayersUseCase.getTopScorersInCompetition(
-                    competitionArgs.competitionId,
-                    competitionArgs.season
-                )
-            }, ::onGettingTopScorersSuccess, ::onError
-        )
+        getData()
     }
 
     private fun onGettingTopScorersSuccess(playersStatistics: List<PlayerStatistics>) {
@@ -90,14 +60,37 @@ class CompetitionDetailsViewModel @Inject constructor(
         }
     }
 
-    private fun onError(throwable: Throwable) {
-        Log.e("onError: ", throwable.localizedMessage ?: "Unknown error")
-        _state.update {
-            it.copy(
-                errorMessage = throwable.localizedMessage ?: "Unknown error",
-                isLoading = false
-            )
-        }
+    override fun getData() {
+        tryToExecute(
+            {
+                manageCompetitionsUseCase.getCompetitionById(competitionArgs.competitionId)
+            }, ::onGettingCompetitionSuccess
+        )
+        tryToExecute(
+            {
+                manageCompetitionsUseCase.getCurrentRoundByIdAndSeason(
+                    competitionArgs.competitionId,
+                    competitionArgs.season
+                )
+            },
+            ::onGettingRoundSuccess
+        )
+        tryToExecute(
+            {
+                manageTeamsUseCase.getTeamStandingByCompetitionIdAndSeason(
+                    competitionArgs.competitionId,
+                    competitionArgs.season
+                )
+            }, ::onGettingTeamsStandingSuccess
+        )
+        tryToExecute(
+            {
+                managePlayersUseCase.getTopScorersInCompetition(
+                    competitionArgs.competitionId,
+                    competitionArgs.season
+                )
+            }, ::onGettingTopScorersSuccess
+        )
     }
 
     fun onStandingSeeAllClick() {

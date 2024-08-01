@@ -1,6 +1,5 @@
 package com.cheesecake.presentation.screens.team.teamstatistics
 
-import android.util.Log
 import com.cheesecake.domain.entity.TeamStatisticsEntity
 import com.cheesecake.domain.usecases.ManageTeamsUseCase
 import com.cheesecake.presentation.base.BaseViewModel
@@ -12,9 +11,13 @@ import javax.inject.Inject
 @HiltViewModel
 class TeamStatisticsViewModel @Inject constructor(
     private val manageTeamsUseCase: ManageTeamsUseCase,
-    teamStatisticsArgs: TeamStatisticsArgs
+    private val teamStatisticsArgs: TeamStatisticsArgs
 ) : BaseViewModel<TeamStatisticsUiState, TeamStatisticsEvent?>(TeamStatisticsUiState(), Event()) {
     init {
+        getData()
+    }
+
+    override fun getData() {
         tryToExecute(
             {
                 manageTeamsUseCase.getTeamStatistics(
@@ -24,7 +27,6 @@ class TeamStatisticsViewModel @Inject constructor(
                 )
             },
             ::onSuccess,
-            ::onError
         )
     }
 
@@ -33,16 +35,6 @@ class TeamStatisticsViewModel @Inject constructor(
             _state.update {
                 entity.toUIState().copy(isLoading = false)
             }
-        }
-    }
-
-    private fun onError(e: Throwable) {
-        Log.e("onError: ", e.message.toString())
-        _state.update {
-            it.copy(
-                errorMessage = e.localizedMessage ?: "Unknown error.",
-                isLoading = false
-            )
         }
     }
 }

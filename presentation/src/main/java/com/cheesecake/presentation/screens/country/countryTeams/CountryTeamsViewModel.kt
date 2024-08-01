@@ -1,6 +1,5 @@
 package com.cheesecake.presentation.screens.country.countryTeams
 
-import android.util.Log
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.usecases.ManageTeamsUseCase
 import com.cheesecake.presentation.base.BaseViewModel
@@ -12,17 +11,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CountryTeamsViewModel @Inject constructor(
-    countryTeamsArgs: CountryTeamsArgs,
+    private val countryTeamsArgs: CountryTeamsArgs,
     private val manageTeamsUseCase: ManageTeamsUseCase
-) : BaseViewModel<CountyTeamsUIState, CountryTeamsNavigationEvent>(
-    CountyTeamsUIState(), Event()
+) : BaseViewModel<CountyTeamsUiState, CountryTeamsNavigationEvent>(
+    CountyTeamsUiState(), Event()
 ) {
     init {
-        tryToExecute(
-            { manageTeamsUseCase.getTeamsByCountryName(countryTeamsArgs.countryName) },
-            ::onSuccess,
-            ::onError
-        )
+        getData()
     }
 
     private fun onSuccess(teams: List<Team>) {
@@ -38,7 +33,9 @@ class CountryTeamsViewModel @Inject constructor(
         _event.update { Event(CountryTeamsNavigationEvent.NavigateToTeam(teamId)) }
     }
 
-    private fun onError(t: Throwable) {
-        Log.e("onError: ", t.localizedMessage.toString())
+    override fun getData() {
+        tryToExecute(
+            { manageTeamsUseCase.getTeamsByCountryName(countryTeamsArgs.countryName) }, ::onSuccess
+        )
     }
 }

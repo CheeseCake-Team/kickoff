@@ -21,6 +21,14 @@ class CompetitionMatchesViewModel @Inject constructor(
     private val competitionArgs = CompetitionArgs(savedStateHandle)
 
     init {
+        getData()
+    }
+
+    private fun onSuccess(result: List<Pair<String, List<Fixture>>>) {
+        _state.update { it.copy(data = result.toUiState(::onMatchClicked), isLoading = false) }
+    }
+
+    override fun getData() {
         tryToExecute(
             {
                 manageMatchesUseCase.fetchAndGroupMatchesByDate(
@@ -30,16 +38,7 @@ class CompetitionMatchesViewModel @Inject constructor(
                 )
             },
             ::onSuccess,
-            ::onError
         )
-    }
-
-    private fun onSuccess(result: List<Pair<String, List<Fixture>>>) {
-        _state.update { it.copy(data = result.toUiState(::onMatchClicked), isLoading = false) }
-    }
-
-    private fun onError(error: Throwable) {
-        _state.update { it.copy(errorMessage = error.message.toString(), isLoading = false) }
     }
 
     private fun onMatchClicked(homeTeamId: Int, awayTeamId: Int, date: String) {

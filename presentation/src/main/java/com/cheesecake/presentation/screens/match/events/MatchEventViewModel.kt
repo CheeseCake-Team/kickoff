@@ -1,6 +1,5 @@
 package com.cheesecake.presentation.screens.match.events
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import com.cheesecake.domain.entity.FixtureEvents
 import com.cheesecake.domain.usecases.ManageMatchesUseCase
@@ -21,15 +20,7 @@ class MatchEventViewModel @Inject constructor(
     val matchEventArgs = MatchEventArgs(savedStateHandle)
 
     init {
-        getMatchEvents()
-    }
-
-    private fun getMatchEvents() {
-        tryToExecute(
-            { manageMatchesUseCase.getMatchEventByMatchId(matchEventArgs.fixtureId) },
-            ::onSuccess,
-            ::onError
-        )
+        getData()
     }
 
     private fun onSuccess(fixtureEvents: List<FixtureEvents>) {
@@ -42,14 +33,10 @@ class MatchEventViewModel @Inject constructor(
         }
     }
 
-    private fun onError(e: Throwable) {
-        _state.update {
-            it.copy(
-                errorMessage = e.localizedMessage ?: "Unknown error.",
-                isLoading = false,
-                noData = true
-            )
-        }
-        Log.e("TAG", "onError: ${e.message.toString()}")
+    override fun getData() {
+        tryToExecute(
+            { manageMatchesUseCase.getMatchEventByMatchId(matchEventArgs.fixtureId) },
+            ::onSuccess,
+        )
     }
 }

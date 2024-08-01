@@ -19,7 +19,7 @@ class FavoriteLeaguesViewModel @Inject constructor(
     FavoriteLeaguesUIState(), Event()
 ) {
     init {
-        tryToExecute({ manageCompetitionsUseCase.getFavoriteCompetition() }, ::onSuccess, ::onError)
+        getData()
     }
 
     private fun onSuccess(flow: Flow<List<League>>) {
@@ -34,10 +34,8 @@ class FavoriteLeaguesViewModel @Inject constructor(
         }
     }
 
-    private fun onError(e: Throwable) {
-        _state.update {
-            it.copy(errorMessage = e.localizedMessage ?: "Unknown error.", isLoading = false)
-        }
+    override fun getData() {
+        tryToExecute({ manageCompetitionsUseCase.getFavoriteCompetition() }, ::onSuccess)
     }
 
     private fun navigateToLeague(leagueId: Int) {

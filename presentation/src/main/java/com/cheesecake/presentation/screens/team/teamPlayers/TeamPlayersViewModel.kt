@@ -15,11 +15,7 @@ class TeamPlayersViewModel @Inject constructor(
     private val teamPlayersArgs: TeamPlayersArgs
 ) : BaseViewModel<TeamPlayersUiState, TeamPLayerNavigationEvent>(TeamPlayersUiState(), Event()) {
     init {
-        tryToExecute(
-            { managePlayersUseCase.getTeamPlayersByTeamId(teamPlayersArgs.teamId) },
-            ::onGettingTeamSquadSuccess,
-            ::onError
-        )
+        getData()
     }
 
     private fun onGettingTeamSquadSuccess(result: List<Pair<String, List<SquadPlayer>>>) {
@@ -46,7 +42,10 @@ class TeamPlayersViewModel @Inject constructor(
         }
     }
 
-    private fun onError(error: Throwable) {
-        _state.update { it.copy(errorMessage = error.message.toString(), isLoading = false) }
+    override fun getData() {
+        tryToExecute(
+            { managePlayersUseCase.getTeamPlayersByTeamId(teamPlayersArgs.teamId) },
+            ::onGettingTeamSquadSuccess,
+        )
     }
 }

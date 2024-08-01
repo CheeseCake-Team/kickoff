@@ -11,16 +11,10 @@ import javax.inject.Inject
 @HiltViewModel
 class TeamMatchesViewModel @Inject constructor(
     private val manageMatchesUseCase: ManageMatchesUseCase,
-    teamMatchesArgs: TeamMatchesArgs
+    private val teamMatchesArgs: TeamMatchesArgs
 ) : BaseViewModel<TeamMatchesUiState, TeamMatchesNavigationEvent>(TeamMatchesUiState(), Event()) {
     init {
-        tryToExecute(
-            {
-                manageMatchesUseCase.getTeamMatchesByTeamIdAndSeason(
-                    "Africa/Cairo", teamMatchesArgs.teamId, teamMatchesArgs.season
-                )
-            }, ::onSuccess, ::onError
-        )
+        getData()
     }
 
     private fun onSuccess(fixtures: List<Fixture>) {
@@ -32,8 +26,14 @@ class TeamMatchesViewModel @Inject constructor(
         }
     }
 
-    private fun onError(error: Throwable) {
-        _state.update { it.copy(errorMessage = error.message.toString(), isLoading = false) }
+    override fun getData() {
+        tryToExecute(
+            {
+                manageMatchesUseCase.getTeamMatchesByTeamIdAndSeason(
+                    "Africa/Cairo", teamMatchesArgs.teamId, teamMatchesArgs.season
+                )
+            }, ::onSuccess
+        )
     }
 
     private fun onMatchClicked(homeTeamId: Int, awayTeamId: Int, date: String) {

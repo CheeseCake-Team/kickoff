@@ -24,11 +24,7 @@ class MatchStatisticsViewModel @Inject constructor(
     val matchState = matchStatisticsArgs.state
 
     init {
-        tryToExecute(
-            { manageMatchesUseCase.getMatchStatisticsByMatchId(matchStatisticsArgs.fixtureId) },
-            ::onSuccess,
-            ::onError
-        )
+        getData()
     }
 
     private fun onSuccess(statistics: List<FixtureStatistics>) {
@@ -68,16 +64,10 @@ class MatchStatisticsViewModel @Inject constructor(
             )
         }
 
-    private fun onError(e: Throwable) {
-        _state.update {
-            it.copy(
-                errorMessage = e.localizedMessage ?: "Unknown error.",
-                isLoading = false,
-                noData = true
-            )
-        }
+    override fun getData() {
+        tryToExecute(
+            { manageMatchesUseCase.getMatchStatisticsByMatchId(matchStatisticsArgs.fixtureId) },
+            ::onSuccess,
+        )
     }
 }
-
-
-

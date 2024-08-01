@@ -1,6 +1,5 @@
 package com.cheesecake.presentation.screens.homeSearch
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.RecentSearch
 import com.cheesecake.domain.usecases.ManageRecentSearchUseCase
@@ -16,19 +15,16 @@ class HomeSearchViewModel @Inject constructor(
     private val manageRecentSearchUseCase: ManageRecentSearchUseCase,
 ) : BaseViewModel<HomeSearchUIState, HomeSearchEvent>(HomeSearchUIState(), Event()) {
     init {
-        tryToGetData()
+        getData()
     }
 
-    private fun tryToGetData() {
-        tryToExecuteSuspend(::getData, ::onGetDataSuccess, ::onGetDataError)
-    }
-
-
-    private fun getData(): SuccessData {
+    override fun getData() {
         _state.update { it.copy(isLoading = true) }
-        return SuccessData(
-            manageRecentSearchUseCase.getRecentSearches(),
-        )
+        tryToExecuteSuspend( {
+            SuccessData(
+                manageRecentSearchUseCase.getRecentSearches(),
+            )
+        }, ::onGetDataSuccess)
     }
 
     private suspend fun onGetDataSuccess(data: SuccessData) {
@@ -43,11 +39,6 @@ class HomeSearchViewModel @Inject constructor(
                 )
             }
         }
-    }
-
-    private fun onGetDataError(throwable: Throwable) {
-        _state.update { it.copy(error = throwable.message.toString()) }
-        Log.i("onSearchError: ", _state.value.error)
     }
 
     fun onClickSearchBar() {

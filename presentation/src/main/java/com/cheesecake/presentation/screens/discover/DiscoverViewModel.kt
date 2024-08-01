@@ -26,14 +26,13 @@ class DiscoverViewModel @Inject constructor(
         tryToExecute(
             { manageCountriesUseCase.searchForCountries(searchQuery) },
             ::onSearchSuccess,
-            ::onError
         )
     }
 
-    private fun getData() {
+    override fun getData() {
         collectFlow(state.value.searchInput) {
             if (it.isBlank() || it.isEmpty()) {
-                tryToExecute({ manageCountriesUseCase.getCountries() }, ::onSuccess, ::onError)
+                tryToExecute({ manageCountriesUseCase.getCountries() }, ::onSuccess)
             } else {
                 applySearch(it)
             }
@@ -63,12 +62,6 @@ class DiscoverViewModel @Inject constructor(
                 data = list.map { it.toUIModel { ::onClick.invoke(it.name, it.flag) } },
                 isLoading = false, isNoResult = list.isEmpty()
             )
-        }
-    }
-
-    private fun onError(e: Throwable) {
-        _state.update {
-            it.copy(isError = e.message.toString())
         }
     }
 }

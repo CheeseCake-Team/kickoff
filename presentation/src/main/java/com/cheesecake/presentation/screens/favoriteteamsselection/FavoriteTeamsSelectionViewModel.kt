@@ -23,11 +23,7 @@ class FavoriteTeamsSelectionViewModel @Inject constructor(
     Event()
 ) {
     init {
-        tryToExecute(
-            { manageCompetitionsUseCase.getFavoriteCompetition() },
-            ::onGettingFavoriteCompetitionsSuccess,
-            ::onError
-        )
+        getData()
     }
 
     suspend fun setOnboardingShown() {
@@ -39,7 +35,6 @@ class FavoriteTeamsSelectionViewModel @Inject constructor(
             tryToExecute(
                 { manageTeamsUseCase.getCompetitionTeams(it) },
                 ::onGettingTeamsSuccess,
-                ::onError
             )
             this
         }
@@ -92,19 +87,17 @@ class FavoriteTeamsSelectionViewModel @Inject constructor(
     }
 
     private fun addTeamsToFavourite() {
-        tryToExecute({ manageTeamsUseCase.saveSelectedTeams() }, ::onAddSuccess, ::onError)
+        tryToExecute({ manageTeamsUseCase.saveSelectedTeams() }, ::onAddSuccess)
     }
 
     private fun onAddSuccess(boolean: Boolean) {
         _event.update { Event(FavoriteTeamsSelectionNavigationEvent.NavigateToHome) }
     }
 
-    private fun onError(e: Throwable) {
-        _state.update {
-            it.copy(
-                errorMessage = e.localizedMessage ?: "Unknown error.",
-                isLoading = false
-            )
-        }
+    override fun getData() {
+        tryToExecute(
+            { manageCompetitionsUseCase.getFavoriteCompetition() },
+            ::onGettingFavoriteCompetitionsSuccess
+        )
     }
 }

@@ -19,11 +19,7 @@ class FavoriteTeamsViewModel @Inject constructor(
     Event()
 ) {
     init {
-        getFavoriteTeams()
-    }
-
-    private fun getFavoriteTeams() {
-        tryToExecute({ manageTeamsUseCase.getFavoriteTeams() }, ::onSuccess, ::onError)
+        getData()
     }
 
     private fun onSuccess(flow: Flow<List<Team>>) {
@@ -43,17 +39,12 @@ class FavoriteTeamsViewModel @Inject constructor(
     }
 
     private fun toggleFavorite(teamId: Int) {
-        tryToExecute({ manageTeamsUseCase.favoriteTeam(teamId) }, ::onFavoriteSuccess, ::onError)
+        tryToExecute({ manageTeamsUseCase.favoriteTeam(teamId) }, ::onFavoriteSuccess)
     }
 
     private fun onFavoriteSuccess(team: Team) {}
 
-    private fun onError(e: Throwable) {
-        _state.update {
-            it.copy(
-                errorMessage = e.localizedMessage ?: "Unknown error.",
-                isLoading = false
-            )
-        }
+    override fun getData() {
+        tryToExecute({ manageTeamsUseCase.getFavoriteTeams() }, ::onSuccess)
     }
 }

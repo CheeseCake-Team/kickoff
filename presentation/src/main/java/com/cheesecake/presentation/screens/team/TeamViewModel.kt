@@ -16,11 +16,7 @@ class TeamViewModel @Inject constructor(
     val teamNavigationArgs: TeamNavigationArgs
 ) : BaseViewModel<TeamUiState, TeamNavigationEvent>(TeamUiState(), Event()) {
     init {
-        tryToExecute(
-            { manageTeamsUseCase.getTeamById(teamNavigationArgs.teamId) },
-            ::onGettingTeamSuccess,
-            ::onError
-        )
+        getData()
     }
 
     fun onFavoriteClick() {
@@ -46,12 +42,9 @@ class TeamViewModel @Inject constructor(
         _event.update { Event(TeamNavigationEvent.NavigateBack) }
     }
 
-    private fun onError(e: Throwable) {
-        _state.update {
-            it.copy(
-                errorMessage = e.localizedMessage ?: "Unknown error.",
-                isLoading = false
-            )
-        }
+    override fun getData() {
+        tryToExecute(
+            { manageTeamsUseCase.getTeamById(teamNavigationArgs.teamId) }, ::onGettingTeamSuccess
+        )
     }
 }
