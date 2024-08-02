@@ -25,12 +25,15 @@ class CompetitionTeamsViewModel @Inject constructor(
     }
 
     private fun onSuccess(teams: List<Team>) {
+        _isLoading.update { false }
         _state.update { teamUIState ->
-            teamUIState.copy(data = teams.toUiState(::onTeamClicked), isLoading = false)
+            teamUIState.copy(teams = teams.toUiState(::onTeamClicked))
         }
     }
 
     override fun getData() {
+        _isLoading.update { true }
+        _errorUiState.update { null }
         tryToExecute(
             {
                 manageTeamsUseCase.getCompetitionTeams(
