@@ -25,10 +25,13 @@ class CompetitionMatchesViewModel @Inject constructor(
     }
 
     private fun onSuccess(result: List<Pair<String, List<Fixture>>>) {
-        _state.update { it.copy(data = result.toUiState(::onMatchClicked), isLoading = false) }
+        _isLoading.update { false }
+        _errorUiState.update { null }
+        _state.update { it.copy(data = result.toUiState(::onMatchClicked)) }
     }
 
     override fun getData() {
+        _isLoading.update { true }
         tryToExecute(
             {
                 manageMatchesUseCase.fetchAndGroupMatchesByDate(

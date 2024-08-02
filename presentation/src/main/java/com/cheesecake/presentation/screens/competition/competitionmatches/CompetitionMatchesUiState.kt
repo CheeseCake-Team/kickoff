@@ -4,8 +4,6 @@ import com.cheesecake.presentation.screens.home.MatchItemUiState
 
 data class CompetitionMatchesUiState(
     val data: List<DateMatchesItemUiState> = emptyList(),
-    val errorMessage: String = "",
-    val isLoading: Boolean = true
 )
 
 data class DateMatchesItemUiState(
