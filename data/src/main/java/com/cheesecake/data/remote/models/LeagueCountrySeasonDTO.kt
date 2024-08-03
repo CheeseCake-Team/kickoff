@@ -14,5 +14,5 @@ data class LeagueCountrySeasonDTO(
     @SerializedName("name")
     val name: String,
     @SerializedName("season")
-    val season: Int
+    val season: String
 )
