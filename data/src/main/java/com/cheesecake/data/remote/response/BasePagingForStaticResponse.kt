@@ -8,7 +8,7 @@ data class BasePagingForStaticResponse<T>(
     @SerializedName("paging")
     val paging: Paging,
     @SerializedName("response")
-    val response: T
+    val response: T?
 ) {
     data class Paging(
         @SerializedName("current")
