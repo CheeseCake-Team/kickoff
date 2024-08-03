@@ -27,19 +27,19 @@ class TeamFragment : BaseFragment<FragmentTeamBinding>() {
 
     private fun initializeTabLayout() {
         val fragments = listOf(
-            TeamPlayersFragment.newInstance(
+            TeamStatisticsFragment.newInstance(
                 viewModel.teamNavigationArgs.teamId,
-                viewModel.teamNavigationArgs.season
+                viewModel.teamNavigationArgs.competitionId,
+                viewModel.teamNavigationArgs.season,
             ),
             TeamMatchesFragment.newInstance(
                 viewModel.teamNavigationArgs.teamId,
                 viewModel.teamNavigationArgs.season,
                 viewModel.teamNavigationArgs.competitionId
             ),
-            TeamStatisticsFragment.newInstance(
+            TeamPlayersFragment.newInstance(
                 viewModel.teamNavigationArgs.teamId,
-                viewModel.teamNavigationArgs.competitionId,
-                viewModel.teamNavigationArgs.season,
+                viewModel.teamNavigationArgs.season
             ),
         )
         val fragmentsAdapter = BaseFragmentsAdapter(
@@ -49,9 +49,9 @@ class TeamFragment : BaseFragment<FragmentTeamBinding>() {
         binding.teamViewPager.adapter = fragmentsAdapter
         TabLayoutMediator(binding.tabLayout, binding.teamViewPager) { tab, position ->
             when (position) {
-                0 -> tab.text = "Players"
+                0 -> tab.text = "Statistic"
                 1 -> tab.text = "Matches"
-                2 -> tab.text = "Statistic"
+                2 -> tab.text = "Players"
             }
         }.attach()
     }

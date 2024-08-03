@@ -18,6 +18,7 @@ class TeamStatisticsViewModel @Inject constructor(
     }
 
     override fun getData() {
+        _isLoading.update { true }
         tryToExecute(
             {
                 manageTeamsUseCase.getTeamStatistics(
@@ -31,10 +32,8 @@ class TeamStatisticsViewModel @Inject constructor(
     }
 
     private fun onSuccess(teamStatistics: TeamStatisticsEntity?) {
-        teamStatistics?.let { entity ->
-            _state.update {
-                entity.toUIState().copy(isLoading = false)
-            }
-        }
+        _isLoading.update { false }
+        _errorUiState.update { null }
+        teamStatistics?.let { entity -> _state.update { entity.toUIState() } }
     }
 }

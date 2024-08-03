@@ -3,7 +3,7 @@ package com.cheesecake.kickoff.di
 import com.cheesecake.data.remote.AuthInterceptor
 import com.cheesecake.data.remote.deserializers.ErrorsDeserializer
 import com.cheesecake.data.remote.api.FootballApiService
-import com.cheesecake.data.remote.deserializers.BasePagingForStaticResponseDeserializer
+import com.cheesecake.data.remote.deserializers.TeamStatisticsBaseResponseDeserializer
 import com.cheesecake.data.remote.response.BasePagingForStaticResponse
 import com.cheesecake.data.remote.response.Error
 import com.cheesecake.kickoff.BuildConfig
@@ -68,7 +68,7 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideGson(): Gson = GsonBuilder()
-        .registerTypeAdapter(BasePagingForStaticResponse::class.java, BasePagingForStaticResponseDeserializer<Any>())
+        .registerTypeAdapter(BasePagingForStaticResponse::class.java, TeamStatisticsBaseResponseDeserializer())
         .registerTypeAdapter(Error::class.java, ErrorsDeserializer())
         .create()
 }
