@@ -23,6 +23,7 @@ import com.cheesecake.data.remote.models.TrophyDTO
 import com.cheesecake.data.remote.models.VenuesDTO
 import com.cheesecake.data.remote.response.BasePagingForStaticResponse
 import com.cheesecake.data.remote.response.BasePagingResponse
+import com.cheesecake.data.remote.response.Error
 import com.cheesecake.data.remote.utils.ErrorType
 import com.cheesecake.data.remote.utils.FixtureStatus
 import com.cheesecake.data.remote.utils.LeagueType
@@ -663,13 +664,14 @@ class RemoteDataSourceImp @Inject constructor(
         val apiResponse = response()
         return if (apiResponse.isSuccessful) {
             val responseBody = apiResponse.body()
+            responseBody?.errors?.let { handleError(it) }
             responseBody?.response ?: throw KickoffException.NoDataFoundException()
         } else {
             throw KickoffException.InternalServerErrorException()
         }
     }
 
-    private fun handleError(error: BasePagingResponse.Error) {
+    private fun handleError(error: Error) {
         when (val errorType = error.getErrorType()) {
             ErrorType.DOMAIN_NOT_ALLOWED -> throw KickoffException.DomainNotAllowedException(
                 errorType.message

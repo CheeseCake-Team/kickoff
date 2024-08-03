@@ -1,15 +1,15 @@
-package com.cheesecake.data.remote
+package com.cheesecake.data.remote.deserializers
 
-import com.cheesecake.data.remote.response.BasePagingResponse
+import com.cheesecake.data.remote.response.Error
 import com.google.gson.*
 import java.lang.reflect.Type
 
-class ErrorsDeserializer : JsonDeserializer<BasePagingResponse.Error> {
+class ErrorsDeserializer : JsonDeserializer<Error> {
     override fun deserialize(
         json: JsonElement?,
         typeOfT: Type?,
         context: JsonDeserializationContext?
-    ): BasePagingResponse.Error? {
+    ): Error? {
         if (json == null || json.isJsonNull) {
             return null
         }
@@ -27,7 +27,7 @@ class ErrorsDeserializer : JsonDeserializer<BasePagingResponse.Error> {
             } else {
                 null
             }
-            return BasePagingResponse.Error(rateLimit = rateLimit, ip = ip)
+            return Error(rateLimit = rateLimit, ip = ip)
         }
 
         return null
