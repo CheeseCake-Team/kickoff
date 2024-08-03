@@ -18,15 +18,16 @@ class TeamMatchesViewModel @Inject constructor(
     }
 
     private fun onSuccess(fixtures: List<Fixture>) {
+        _isLoading.update { false }
+        _errorUiState.update { null }
         _state.update {
-            it.copy(
-                data = fixtures.toUiState(::onMatchClicked, ::onCompetitionClicked),
-                isLoading = false
-            )
+            it.copy(data = fixtures.toUiState(::onMatchClicked, ::onCompetitionClicked))
         }
     }
 
     override fun getData() {
+        _isLoading.update { true }
+        _errorUiState.update { null }
         tryToExecute(
             {
                 manageMatchesUseCase.getTeamMatchesByTeamIdAndSeason(
