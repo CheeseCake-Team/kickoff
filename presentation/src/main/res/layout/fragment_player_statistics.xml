@@ -11,25 +11,38 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/background"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/background">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/player_statistics_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:padding="@dimen/spacing_12"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:padding="@dimen/spacing_12"
-            android:clipToPadding="false"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
             app:listItems="@{viewModel.state.data}"
             tools:listitem="@layout/item_statistics_block" />
+
+        <ViewStub
+            android:id="@+id/error_stub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout="@layout/screen_error"
+            android:visibility="@{viewModel.errorUiState != null}"
+            app:inflatedVisibility="@{viewModel.errorUiState != null}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:viewModel="@{viewModel}" />
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -39,7 +52,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:showLoading="@{viewModel.state.loading}" />
+            app:showLoading="@{viewModel.loading}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -19,15 +19,14 @@ class PlayerStatisticsViewModel @Inject constructor(
     }
 
     private fun onGettingPlayerStatisticsSuccess(playerStatistics: PlayerStatistics) {
-        _state.update { playerStatisticsUIState ->
-            playerStatisticsUIState.copy(
-                isLoading = false,
-                data = playerStatistics.toUiState()
-            )
-        }
+        _errorUiState.update { null }
+        _isLoading.update { false }
+        _state.update { it.copy(data = playerStatistics.toUiState()) }
     }
 
     override fun getData() {
+        _errorUiState.update { null }
+        _isLoading.update { true }
         tryToExecute(
             {
                 managePlayersUseCase.getPlayerStatistics(
