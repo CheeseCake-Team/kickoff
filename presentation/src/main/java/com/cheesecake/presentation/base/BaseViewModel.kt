@@ -42,7 +42,7 @@ abstract class BaseViewModel<S, E>(uiState: S, uiEvent: Event<E>) : ViewModel() 
         }
     }
 
-    protected fun onError(throwable: Throwable) {
+    protected open fun onError(throwable: Throwable) {
         _isLoading.update { false }
         when (throwable) {
             is KickoffException.IpNotAllowedException -> {
