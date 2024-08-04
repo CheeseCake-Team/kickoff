@@ -18,12 +18,13 @@ class PlayerViewModel @Inject constructor(
     }
 
     private fun onSuccess(playerStatistics: PlayerStatistics) {
+        _isLoading.update { false }
+        _errorUiState.update { null }
         _state.update {
             it.copy(
                 playerName = playerStatistics.name,
                 playerImageUrl = playerStatistics.imageUrl,
-                teamCountry = playerStatistics.competitionCountry,
-                teamName = playerStatistics.teamName
+                teamData = "${playerStatistics.teamName} - ${playerStatistics.competitionCountry}",
             )
         }
     }
@@ -33,6 +34,8 @@ class PlayerViewModel @Inject constructor(
     }
 
     override fun getData() {
+        _isLoading.update { true }
+        _errorUiState.update { null }
         tryToExecute(
             {
                 managePlayersUseCase.getPlayerStatistics(
@@ -42,5 +45,10 @@ class PlayerViewModel @Inject constructor(
             },
             ::onSuccess,
         )
+    }
+
+    override fun onError(throwable: Throwable) {
+        super.onError(throwable)
+        _state.update { it.copy(playerName = "Error", teamData = "Try again") }
     }
 }

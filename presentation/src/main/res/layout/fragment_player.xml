@@ -37,12 +37,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <Button
+            android:id="@+id/retry_button"
+            style="?attr/materialIconButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_8"
+            android:layout_marginEnd="@dimen/spacing_16"
+            android:elevation="1dp"
+            android:onClick="@{() -> viewModel.getData()}"
+            android:visibility="@{viewModel.errorUiState != null}"
+            app:icon="@drawable/ic_refresh"
+            app:iconSize="@dimen/spacing_16"
+            app:iconTint="@color/fontHeavy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             android:id="@+id/image_view_player"
             android:layout_width="@dimen/spacing_32"
             android:layout_height="@dimen/spacing_32"
             android:layout_marginStart="@dimen/spacing_8"
             android:elevation="1.1dp"
+            android:contentDescription="@string/player_image"
             app:circularImageUrl="@{viewModel.state.playerImageUrl}"
             app:layout_constraintBottom_toBottomOf="@+id/back_button"
             app:layout_constraintStart_toEndOf="@id/back_button"
@@ -70,7 +87,7 @@
             android:layout_marginTop="@dimen/spacing_4"
             android:elevation="1dp"
             android:fontFamily="@font/lato"
-            android:text="@{viewModel.state.teamName + ` - ` + viewModel.state.teamCountry}"
+            android:text="@{viewModel.state.teamData}"
             android:textAppearance="@style/SubtitleMedium"
             android:textColor="@color/fontLight"
             app:layout_constraintBottom_toBottomOf="@+id/image_view_player"
@@ -101,5 +118,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tab_layout"
             app:layout_constraintVertical_bias="1.0" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
