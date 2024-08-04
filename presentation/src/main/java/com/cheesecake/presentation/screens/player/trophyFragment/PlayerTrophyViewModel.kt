@@ -21,10 +21,14 @@ class PlayerTrophyViewModel @Inject constructor(
     }
 
     private fun onGettingPlayerTrophySuccess(trophies: List<Trophy>) {
-        _state.update { it.copy(data = trophies.toUiState(), isLoading = false) }
+        _isLoading.update { false }
+        _errorUiState.update { null }
+        _state.update { it.copy(data = trophies.toUiState()) }
     }
 
     override fun getData() {
+        _isLoading.update { true }
+        _errorUiState.update { null }
         tryToExecute(
             { managePlayersUseCase.getPlayerTrophy(playerTrophyArgs.playerId) },
             ::onGettingPlayerTrophySuccess,
