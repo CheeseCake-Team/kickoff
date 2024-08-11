@@ -1,7 +1,9 @@
 package com.cheesecake.data.remote.deserializers
 
 import com.cheesecake.data.remote.response.Error
-import com.google.gson.*
+import com.google.gson.JsonDeserializationContext
+import com.google.gson.JsonDeserializer
+import com.google.gson.JsonElement
 import java.lang.reflect.Type
 
 class ErrorsDeserializer : JsonDeserializer<Error> {
@@ -34,7 +36,14 @@ class ErrorsDeserializer : JsonDeserializer<Error> {
                 null
             }
 
-            return Error(rateLimit = rateLimit, ip = ip, search = search)
+            val requests =
+                if (jsonObject.has("requests") && !jsonObject.get("requests").isJsonNull) {
+                    jsonObject.get("requests").asString
+                } else {
+                    null
+                }
+
+            return Error(rateLimit = rateLimit, ip = ip, search = search, requests = requests)
         }
 
         return null
