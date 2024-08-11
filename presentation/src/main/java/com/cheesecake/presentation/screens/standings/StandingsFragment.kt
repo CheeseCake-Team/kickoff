@@ -35,9 +35,9 @@ class StandingsFragment : BaseFragment<FragmentStandingsBinding>() {
         }
     }
 
-    private fun onEvent(event: StandingNavigationEvent) {
+    private fun onEvent(event: StandingEvents) {
         when (event) {
-            is StandingNavigationEvent.NavigateBack -> {
+            is StandingEvents.NavigateBack -> {
                 findNavController().navigateUp()
             }
         }
