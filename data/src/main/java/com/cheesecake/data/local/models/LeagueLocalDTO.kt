@@ -2,7 +2,6 @@ package com.cheesecake.data.local.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.cheesecake.data.remote.utils.LeagueType
 
 @Entity("league_table")
 data class LeagueLocalDTO(

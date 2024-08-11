@@ -1,10 +1,8 @@
 package com.cheesecake.presentation.screens.search.models
 
 import com.cheesecake.domain.entity.League
-import com.cheesecake.domain.entity.RecentSearch
-import com.cheesecake.domain.entity.RecentSearchType
 
-data class LeagueSearchUIState(
+data class CompetitionSearchUiState(
     val leagueTypeName: String = "Unknown",
     val imageUrl: String = "",
     val leagueName: String = "Unknown",
@@ -15,11 +13,9 @@ data class LeagueSearchUIState(
     val leagueCount: Int = 0
 )
 
-
-
-fun List<League>.toSearchUIState(onclick: (League) -> Unit): List<LeagueSearchUIState> {
+fun List<League>.toSearchUIState(onclick: (League) -> Unit): List<CompetitionSearchUiState> {
     return map {
-        LeagueSearchUIState(
+        CompetitionSearchUiState(
             leagueTypeName = it.leagueTypeName,
             imageUrl = it.imageUrl,
             leagueName = it.name,

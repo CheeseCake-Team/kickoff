@@ -1,9 +1,5 @@
 package com.cheesecake.presentation.models
 
-import com.cheesecake.domain.entity.RecentSearch
-import com.cheesecake.domain.entity.RecentSearchType
-import com.cheesecake.presentation.screens.search.models.LeagueSearchUIState
-
 data class TeamUIState(
     val teamName: String,
     val founded: Int,

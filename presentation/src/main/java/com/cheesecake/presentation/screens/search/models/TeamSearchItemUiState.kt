@@ -1,9 +1,8 @@
 package com.cheesecake.presentation.screens.search.models
 
 import com.cheesecake.domain.entity.Team
-import com.cheesecake.presentation.models.TeamUIState
 
-data class TeamSearchUIState(
+data class TeamSearchItemUiState(
     val teamName: String,
     val founded: Int,
     val teamCountry: String,
@@ -13,8 +12,8 @@ data class TeamSearchUIState(
     val onClick: () -> Unit ,
 )
 
-fun Team.toSearchUIState(onClick: () -> Unit): TeamSearchUIState {
-    return TeamSearchUIState(
+fun Team.toSearchUIState(onClick: () -> Unit): TeamSearchItemUiState {
+    return TeamSearchItemUiState(
         teamName = this.name,
         founded = this.yearFounded,
         teamCountry = this.country,
@@ -25,12 +24,12 @@ fun Team.toSearchUIState(onClick: () -> Unit): TeamSearchUIState {
     )
 }
 
-fun List<Team>.toSearchUIState(onClick: (Team) -> Unit): List<TeamSearchUIState> {
+fun List<Team>.toSearchUIState(onClick: (Team) -> Unit): List<TeamSearchItemUiState> {
     return this.map {it.toSearchUIState { onClick(it)}}
 }
 
-fun Team.toTeamUIState(onClick: () -> Unit): TeamSearchUIState {
-    return TeamSearchUIState(
+fun Team.toTeamUIState(onClick: () -> Unit): TeamSearchItemUiState {
+    return TeamSearchItemUiState(
         teamName = this.name,
         founded = this.yearFounded,
         teamCountry = this.country,

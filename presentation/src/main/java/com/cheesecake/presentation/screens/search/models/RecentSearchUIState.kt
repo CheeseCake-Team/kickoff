@@ -23,7 +23,7 @@ fun League.toRecentSearch() = RecentSearch(
     id = this.leagueId,
     title = this.name,
     imageUrl = this.imageUrl,
-    type = RecentSearchType.LEAGUE,
+    type = RecentSearchType.COMPETITION,
 )
 
 fun Team.toRecentSearch() = RecentSearch(

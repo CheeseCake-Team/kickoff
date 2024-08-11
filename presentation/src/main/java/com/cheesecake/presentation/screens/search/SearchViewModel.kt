@@ -44,18 +44,24 @@ class SearchViewModel @Inject constructor(
     private suspend fun getSearchResult(input: String): List<SearchResult> {
         _state.update { it.copy(isResultEmpty = false, isLoading = true) }
         return mutableListOf<SearchResult>().apply {
-            val leaguesItems = manageCompetitionsUseCase.searchForCompetitions(input)
-                .toSearchUIState(::onClickLeague)
-
+            val competitionsItems = manageCompetitionsUseCase.searchForCompetitions(input)
+                .toSearchUIState(::onCompetitionClicked)
             val teamsItems = manageTeamsUseCase.searchForTeams(input).toSearchUIState(::onClickTeam)
             add(
-                SearchResult.League(::onClickViewAll, leaguesItems.take(6), leaguesItems.size)
+                SearchResult.Competition(
+                    ::onClickViewAll,
+                    competitionsItems.take(6),
+                    competitionsItems.size
+                )
             )
             add(SearchResult.Team(::onClickViewAll, teamsItems.take(6), teamsItems.size))
         }
     }
 
     private fun onSearchSuccess(items: List<SearchResult>) {
+        _isLoading.update { false }
+        _errorUiState.update { null }
+        Log.e("onSearchSuccess: ", "called")
         _state.update {
             it.copy(
                 searchResult = items,
@@ -81,16 +87,16 @@ class SearchViewModel @Inject constructor(
         _event.update { Event(SearchEvents.ViewAllLClickEvent(_state.value.searchQuery, type)) }
     }
 
-    private fun onClickLeague(league: League) {
+    private fun onCompetitionClicked(competition: League) {
         viewModelScope.launch {
             _event.update {
                 Event(
-                    SearchEvents.LeagueClickEvent(
-                        league.leagueId
+                    SearchEvents.CompetitionClickEvent(
+                        competition.leagueId
                     )
                 )
             }
-            manageRecentSearchUseCase.addOrUpdateRecentSearch(league.toRecentSearch())
+            manageRecentSearchUseCase.addOrUpdateRecentSearch(competition.toRecentSearch())
         }
     }
 
@@ -105,11 +111,9 @@ class SearchViewModel @Inject constructor(
         _event.update { Event(SearchEvents.BackClickEvent) }
     }
 
-    suspend fun onInternetDisconnected() {
-        TODO()
-    }
-
     override fun getData() {
+        _isLoading.update { true }
+        _errorUiState.update { null }
         viewModelScope.launch {
             searchInput.debounce(1000).distinctUntilChanged().filter { it.isNotEmpty() }
                 .collect(::tryToSearch)

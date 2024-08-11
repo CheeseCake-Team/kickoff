@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.cheesecake.presentation.screens.search.models.SearchResult.League" />
+            type="com.cheesecake.presentation.screens.search.models.SearchResult.Competition" />
     </data>
 
 
@@ -34,7 +34,7 @@
                 android:layout_marginStart="@dimen/spacing_8"
                 android:layout_marginTop="@dimen/spacing_8"
                 android:fontFamily="@font/lato"
-                android:text="@string/leagues"
+                android:text="@string/competitions"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Leagues" />
@@ -76,7 +76,7 @@
                 app:items="@{item.items}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_leagues_label"
-                tools:listitem="@layout/item_league" />
+                tools:listitem="@layout/item_competition" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

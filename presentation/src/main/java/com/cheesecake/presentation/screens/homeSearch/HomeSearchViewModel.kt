@@ -1,5 +1,6 @@
 package com.cheesecake.presentation.screens.homeSearch
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.RecentSearch
 import com.cheesecake.domain.usecases.ManageRecentSearchUseCase
@@ -47,6 +48,7 @@ class HomeSearchViewModel @Inject constructor(
 
     private fun onClickRecent(recent: RecentSearch) {
         _event.update { Event(HomeSearchEvent.RecentClickEvent(recent)) }
+        Log.e("onClickRecent: ", recent.toString())
     }
 
     private fun onClickDeleteAll() {

@@ -1,7 +1,6 @@
 package com.cheesecake.presentation.screens.search.viewAll.teams
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -13,14 +12,12 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TeamsSearchFragment : BaseFragment<FragmentTeamsSearchBinding>() {
-
     override val layoutIdFragment: Int = R.layout.fragment_teams_search
-
     override val viewModel: TeamsSearchViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.searchRecyclerView.adapter = TeamsAdapter()
+        binding.searchRecyclerView.adapter = TeamsSearchAdapter()
         handleNavigation()
     }
 
@@ -36,6 +33,4 @@ class TeamsSearchFragment : BaseFragment<FragmentTeamsSearchBinding>() {
         }
         findNavController().navigate(action)
     }
-
-
 }

@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.cheesecake.presentation.screens.search.models.LeagueSearchUIState" />
+            type="com.cheesecake.presentation.screens.search.models.CompetitionSearchUiState" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

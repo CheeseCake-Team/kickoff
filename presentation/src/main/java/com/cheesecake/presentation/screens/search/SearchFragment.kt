@@ -23,6 +23,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     override val layoutIdFragment = R.layout.fragment_search
     override val viewModel: SearchViewModel by viewModels()
 
+    override fun onResume() {
+        super.onResume()
+        changeStatusBarColor()
+    }
+
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,10 +43,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     private fun onEvent(event: SearchEvents) {
         when (event) {
-            is SearchEvents.LeagueClickEvent -> {
+            is SearchEvents.CompetitionClickEvent -> {
                 findNavController().navigate(
                     SearchFragmentDirections.actionSearchFragmentToLeagueFragment(
-                        event.leagueId
+                        event.competitionId
                     )
                 )
             }
@@ -66,7 +71,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     private fun getRecentSearchActionByType(event: SearchEvents.ViewAllLClickEvent): NavDirections {
         return when (event.type) {
-            SearchType.LEAGUE -> {
+            SearchType.COMPETITION -> {
                 SearchFragmentDirections.actionSearchFragmentToLeaguesSearchFragment(
                     viewModel.state.value.searchQuery
                 )
@@ -81,7 +86,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     }
 
     private fun init() {
-        changeStatusBarColor()
         setSearchFocus()
         handleNavigation()
         handleOnError()
@@ -108,8 +112,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputManager.showSoftInput(searchEditText, InputMethodManager.SHOW_IMPLICIT)
     }
-
-
 }
 
 

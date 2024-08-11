@@ -1,6 +1,5 @@
 package com.cheesecake.domain.entity
 
-
 data class RecentSearch(
     val id: Int,
     val imageUrl: String,
@@ -8,5 +7,5 @@ data class RecentSearch(
     val type: RecentSearchType
 )
 enum class RecentSearchType {
-    TEAM,LEAGUE,UNKNOWN
+    TEAM, COMPETITION, UNKNOWN
 }

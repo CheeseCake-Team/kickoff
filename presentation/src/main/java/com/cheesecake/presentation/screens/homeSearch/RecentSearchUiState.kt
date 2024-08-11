@@ -3,7 +3,7 @@ package com.cheesecake.presentation.screens.homeSearch
 import com.cheesecake.domain.entity.RecentSearch
 import com.cheesecake.domain.entity.RecentSearchType
 
-class RecentSearchUIState(
+class RecentSearchUiState(
     val imageUrl: String,
     val title: String,
     val type: RecentSearchType,
@@ -12,12 +12,11 @@ class RecentSearchUIState(
 
 fun RecentSearch.toUIState(
     onClick: (RecentSearch) -> Unit
-) = RecentSearchUIState(
+) = RecentSearchUiState(
     title = this.title,
     imageUrl = this.imageUrl,
     type = this.type,
     onClick = {onClick(this)},
-
 )
 
 

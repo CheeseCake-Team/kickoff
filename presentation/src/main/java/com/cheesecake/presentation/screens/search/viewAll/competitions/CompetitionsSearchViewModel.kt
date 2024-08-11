@@ -1,13 +1,13 @@
-package com.cheesecake.presentation.screens.search.viewAll.teams
+package com.cheesecake.presentation.screens.search.viewAll.competitions
 
 import androidx.lifecycle.viewModelScope
-import com.cheesecake.domain.entity.Team
+import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.usecases.ManageCompetitionsUseCase
 import com.cheesecake.domain.usecases.ManageRecentSearchUseCase
-import com.cheesecake.domain.usecases.ManageTeamsUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import com.cheesecake.presentation.screens.search.SearchEvents
-import com.cheesecake.presentation.screens.search.models.TeamSearchItemUiState
+import com.cheesecake.presentation.screens.search.models.CompetitionSearchUiState
 import com.cheesecake.presentation.screens.search.models.toRecentSearch
 import com.cheesecake.presentation.screens.search.models.toSearchUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,25 +16,25 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TeamsSearchViewModel @Inject constructor(
-    private val manageTeamsUseCase: ManageTeamsUseCase,
+class CompetitionsSearchViewModel @Inject constructor(
+    private val manageCompetitionsUseCase: ManageCompetitionsUseCase,
     private val manageRecentSearchUseCase: ManageRecentSearchUseCase,
-    private val args: TeamsSearchNavigationArgs
-) : BaseViewModel<TeamsSearchUiState, SearchEvents>(TeamsSearchUiState(), Event()) {
+    private val args: CompetitionsSearchNavigationArgs
+) : BaseViewModel<CompetitionsSearchUiState, SearchEvents>(CompetitionsSearchUiState(), Event()) {
     init {
         getData()
     }
 
-    private fun onSearchSuccess(items: List<TeamSearchItemUiState>) {
+    private fun onSearchSuccess(items: List<CompetitionSearchUiState>) {
         _isLoading.update { false }
         _errorUiState.update { null }
         _state.update { it.copy(items = items, isResultEmpty = items.isEmpty()) }
     }
 
-    private fun onTeamClicked(team: Team) {
+    private fun onCompetitionClicked(competition: League) {
         viewModelScope.launch {
-            manageRecentSearchUseCase.addOrUpdateRecentSearch(team.toRecentSearch())
-            _event.update { Event(SearchEvents.TeamClickEvent(team.id)) }
+            manageRecentSearchUseCase.addOrUpdateRecentSearch(competition.toRecentSearch())
+            _event.update { Event(SearchEvents.CompetitionClickEvent(competition.leagueId)) }
         }
     }
 
@@ -42,7 +42,8 @@ class TeamsSearchViewModel @Inject constructor(
         _isLoading.update { true }
         _errorUiState.update { null }
         tryToExecute({
-            manageTeamsUseCase.searchForTeams(args.searchQuery).toSearchUIState(::onTeamClicked)
+            manageCompetitionsUseCase.searchForCompetitions(args.searchQuery)
+                .toSearchUIState(::onCompetitionClicked)
         }, ::onSearchSuccess)
     }
 }
