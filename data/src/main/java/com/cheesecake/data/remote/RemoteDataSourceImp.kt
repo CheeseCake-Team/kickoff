@@ -683,6 +683,7 @@ class RemoteDataSourceImp @Inject constructor(
             ErrorType.RATE_LIMIT_EXCEEDED_DAY -> throw KickoffException.RateLimitExceededDayException(
                 errorType.message
             )
+            ErrorType.SHORT_SEARCH_QUERY -> throw KickoffException.ShortSearchQueryException(errorType.message)
             ErrorType.UNKNOWN_ERROR -> throw KickoffException.UnknownErrorException(errorType.message)
         }
     }

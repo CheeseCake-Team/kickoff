@@ -85,6 +85,16 @@ abstract class BaseViewModel<S, E>(uiState: S, uiEvent: Event<E>) : ViewModel() 
                 }
             }
 
+            is KickoffException.ShortSearchQueryException -> {
+                _errorUiState.update {
+                    ErrorUiState(
+                        R.drawable.img_short_search_query_error,
+                        "Short Search Query !",
+                        throwable.message.toString()
+                    )
+                }
+            }
+
             else -> {
                 _errorUiState.update {
                     ErrorUiState(

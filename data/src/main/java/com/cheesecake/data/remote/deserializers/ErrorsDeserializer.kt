@@ -27,7 +27,14 @@ class ErrorsDeserializer : JsonDeserializer<Error> {
             } else {
                 null
             }
-            return Error(rateLimit = rateLimit, ip = ip)
+
+            val search = if (jsonObject.has("search") && !jsonObject.get("search").isJsonNull) {
+                jsonObject.get("search").asString
+            } else {
+                null
+            }
+
+            return Error(rateLimit = rateLimit, ip = ip, search = search)
         }
 
         return null
