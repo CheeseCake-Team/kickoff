@@ -20,6 +20,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="@{viewModel.errorUiState == null &amp;&amp; !viewModel.loading}"
             app:doNotShow="@{viewModel.state.isFormEmpty}"
             tools:context=".fragment.TeamStatistics">
 
