@@ -12,25 +12,24 @@ import javax.inject.Inject
 class StandingsViewModel @Inject constructor(
     private val manageTeamsUseCase: ManageTeamsUseCase,
     private val teamsStandingArgs: TeamsStandingArgs
-) : BaseViewModel<StandingsUiState, StandingNavigationEvent>(StandingsUiState(), Event()) {
+) : BaseViewModel<StandingsUiState, StandingEvents>(StandingsUiState(), Event()) {
     init {
         getData()
     }
 
     private fun onGettingTeamsStandingSuccess(teamsStanding: List<TeamStanding>) {
-        _state.update { standingUIState ->
-            standingUIState.copy(
-                data = teamsStanding.toUiState(),
-                isLoading = false,
-            )
-        }
+        _isLoading.update { false }
+        _errorUiState.update { null }
+        _state.update { standingUIState -> standingUIState.copy(data = teamsStanding.toUiState()) }
     }
 
     fun onBackClick() {
-        _event.update { Event(StandingNavigationEvent.NavigateBack) }
+        _event.update { Event(StandingEvents.NavigateBack) }
     }
 
     override fun getData() {
+        _isLoading.update { true }
+        _errorUiState.update { null }
         tryToExecute(
             {
                 manageTeamsUseCase.getTeamStandingByCompetitionIdAndSeason(
