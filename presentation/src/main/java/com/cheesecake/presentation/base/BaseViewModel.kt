@@ -11,11 +11,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 abstract class BaseViewModel<S, E>(uiState: S, uiEvent: Event<E>) : ViewModel() {
-
     protected val _state: MutableStateFlow<S> by lazy { MutableStateFlow(uiState) }
     val state: StateFlow<S> by lazy { _state.asStateFlow() }
 
@@ -126,10 +126,10 @@ abstract class BaseViewModel<S, E>(uiState: S, uiEvent: Event<E>) : ViewModel() 
         updateState: S.(T) -> S
     ) {
         viewModelScope.launch {
-            flow.collect { value ->
-                _state.update { currentState ->
-                    currentState.updateState(value)
-                }
+            flow.catch { exception ->
+                onError(exception)
+            }.collect { value ->
+                _state.update { currentState -> currentState.updateState(value) }
             }
         }
     }
