@@ -41,22 +41,26 @@ class FavoriteTeamsSelectionViewModel @Inject constructor(
     }
 
     fun onSearchQueryChanged(searchQuery: CharSequence) {
-        val displayedTeams = if (searchQuery.isNotBlank())
+        _isLoading.update { true }
+        val displayedTeams = if (searchQuery.isNotBlank()) {
             state.value.teamsItemsUiState.filter {
                 it.teamName.contains(searchQuery, true)
             }
-        else
+        } else {
             state.value.teamsItemsUiState
+        }
         _state.update {
             it.copy(
-                isLoading = false,
                 isNoResult = displayedTeams.isEmpty(),
                 displayedTeams = displayedTeams,
             )
         }
+        _isLoading.update { false }
     }
 
     private fun onGettingTeamsSuccess(triples: List<Triple<List<Team>, Int, Int>>) {
+        _isLoading.update { false }
+        _errorUiState.update { null }
         triples.flatMap {
             it.first.toUiState { team -> onFavouriteTeamSelect(team, it.second, it.third) }
         }.also { teamsItemsUiState ->
@@ -64,7 +68,6 @@ class FavoriteTeamsSelectionViewModel @Inject constructor(
                 it.copy(
                     teamsItemsUiState = teamsItemsUiState,
                     displayedTeams = teamsItemsUiState,
-                    isLoading = false,
                     isNoResult = teamsItemsUiState.isEmpty(),
                     onGetStartedClick = ::addTeamsToFavourite
                 )
@@ -79,7 +82,7 @@ class FavoriteTeamsSelectionViewModel @Inject constructor(
                 teamsItemsUiState = favTeamsSelectionUIState.teamsItemsUiState.map {
                     if (it.teamId == team.id) it.copy(isSelected = !it.isSelected) else it
                 },
-                displayedTeams = favTeamsSelectionUIState.teamsItemsUiState.map {
+                displayedTeams = favTeamsSelectionUIState.displayedTeams.map {
                     if (it.teamId == team.id) it.copy(isSelected = !it.isSelected) else it
                 }
             )
@@ -95,6 +98,9 @@ class FavoriteTeamsSelectionViewModel @Inject constructor(
     }
 
     override fun getData() {
+        _isLoading.update { true }
+        _errorUiState.update { null }
+        _state.update { it.copy(isNoResult = false) }
         tryToExecute(
             { manageCompetitionsUseCase.getFavoriteCompetition() },
             ::onGettingFavoriteCompetitionsSuccess
