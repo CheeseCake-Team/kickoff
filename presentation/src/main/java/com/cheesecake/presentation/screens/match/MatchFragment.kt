@@ -23,6 +23,12 @@ import kotlinx.coroutines.launch
 class MatchFragment : BaseFragment<FragmentMatchBinding>() {
     override val layoutIdFragment = R.layout.fragment_match
     override val viewModel: MatchViewModel by viewModels()
+
+    override fun onResume() {
+        super.onResume()
+        changeStatusBarColor()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         changeStatusBarColor()
@@ -30,16 +36,21 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
         init()
     }
 
-
     private fun init() {
         val fragments = mutableListOf<Fragment>()
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.args.observe(viewLifecycleOwner) {
 
-                val matchStatisticsFragment = MatchStatisticsFragment.newInstance(it.fixtureId,it.state)
-                val matchEventFragment = MatchEventFragment.newInstance(it.fixtureId, it.homeTeamId, it.awayTeamId,it.state)
-                val matchLineupFragment = MatchLineupFragment.newInstance(it.fixtureId,it.state)
+                val matchStatisticsFragment =
+                    MatchStatisticsFragment.newInstance(it.fixtureId, it.state)
+                val matchEventFragment = MatchEventFragment.newInstance(
+                    it.fixtureId,
+                    it.homeTeamId,
+                    it.awayTeamId,
+                    it.state
+                )
+                val matchLineupFragment = MatchLineupFragment.newInstance(it.fixtureId, it.state)
 
                 fragments.addAll(
                     listOf(
@@ -73,7 +84,7 @@ class MatchFragment : BaseFragment<FragmentMatchBinding>() {
 
     private fun onEvent(event: MatchEvents) {
         when (event) {
-            is MatchEvents.onBackClick -> {
+            is MatchEvents.NavigateBack -> {
                 findNavController().navigateUp()
             }
         }
