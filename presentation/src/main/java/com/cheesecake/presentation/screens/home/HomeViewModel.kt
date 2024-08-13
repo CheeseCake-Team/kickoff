@@ -16,7 +16,10 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val dateManager: DateManager,
     private val manageMatchesUseCase: ManageMatchesUseCase,
-) : BaseViewModel<HomeUiState, HomeEvents>(HomeUiState(), Event()) {
+) : BaseViewModel<HomeUiState, HomeEvents>(
+    HomeUiState(selectedDate = dateManager.getToday()),
+    Event()
+) {
     init {
         getDates()
         getData()
@@ -42,12 +45,15 @@ class HomeViewModel @Inject constructor(
                 }
             }
             it.copy(
-                isLoading = true,
                 dateItems = dateItems,
-                currentDatePosition = dateItems.indexOfFirst { dateItemUIState -> dateItemUIState.isSelected }
+                currentDatePosition = dateItems.indexOfFirst { dateItemUIState -> dateItemUIState.isSelected },
+                selectedDate = date,
+                favoriteItems = emptyList()
             )
         }
-        getMatchesByDate(date)
+        _isLoading.update { true }
+        _errorUiState.update { null }
+        getMatchesByDate(state.value.selectedDate)
     }
 
     private fun getMatchesByDate(date: Date) {
@@ -62,14 +68,17 @@ class HomeViewModel @Inject constructor(
                 favoriteItems = pair.toUiState(
                     onCompetitionClick = ::onCompetitionClick,
                     onMatchClick = ::onMatchClicked
-                ),
-                isLoading = false,
+                )
             )
         }
+        _isLoading.update { false }
+        _errorUiState.update { null }
     }
 
     override fun getData() {
-        getMatchesByDate(dateManager.getToday())
+        _isLoading.update { true }
+        _errorUiState.update { null }
+        getMatchesByDate(state.value.selectedDate)
     }
 
     private fun onMatchClicked(homeTeamId: Int, awayTeamId: Int, date: String) {
