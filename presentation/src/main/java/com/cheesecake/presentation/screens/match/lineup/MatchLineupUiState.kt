@@ -3,9 +3,7 @@ package com.cheesecake.presentation.screens.match.lineup
 import com.cheesecake.domain.entity.FixtureLineup
 import com.cheesecake.domain.entity.PlayerLineup
 
-data class MatchLineupUIState(
-    val errorMessage: String = "error",
-    val isLoading: Boolean = true,
+data class MatchLineupUiState(
     val teams: List<TeamData> = emptyList(),
     val data: TeamsLineups = TeamsLineups(),
     val noData: Boolean = false

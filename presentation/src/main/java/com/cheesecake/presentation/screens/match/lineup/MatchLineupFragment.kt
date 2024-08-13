@@ -1,7 +1,6 @@
 package com.cheesecake.presentation.screens.match.lineup
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -24,14 +23,13 @@ class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
         binding.recyclerViewTeamsLineup.adapter = ItemMatchTeamLineupAdapter()
 
         collect(viewModel.state) {
-            if (!it.isLoading) {
+            if (!viewModel.isLoading.value) {
                 val firstTeamLineup = it.data.awayTeamLineup
                 populateLineup(firstTeamLineup, binding.awayTeamContainer)
                 rotateLineup(binding.awayTeamContainer, 90f)
                 val secondTeamLineup = it.data.homeTeamLineup
                 populateLineupReverse(secondTeamLineup, binding.homeTeamContainer)
                 rotateLineup(binding.homeTeamContainer, 90f)
-
             }
         }
     }

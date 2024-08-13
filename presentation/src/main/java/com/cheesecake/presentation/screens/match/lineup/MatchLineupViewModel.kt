@@ -1,6 +1,7 @@
 package com.cheesecake.presentation.screens.match.lineup
 
 import androidx.lifecycle.SavedStateHandle
+import com.cheesecake.domain.KickoffException
 import com.cheesecake.domain.entity.FixtureLineup
 import com.cheesecake.domain.usecases.ManageMatchesUseCase
 import com.cheesecake.presentation.base.BaseViewModel
@@ -13,8 +14,8 @@ import javax.inject.Inject
 class MatchLineupViewModel @Inject constructor(
     private val manageMatchesUseCase: ManageMatchesUseCase,
     savedStateHandle: SavedStateHandle,
-) : BaseViewModel<MatchLineupUIState, MatchLineupEvents>(
-    MatchLineupUIState(),
+) : BaseViewModel<MatchLineupUiState, MatchLineupEvents>(
+    MatchLineupUiState(),
     Event()
 ) {
     private val matchLineupsArgs = MatchLineupsArgs(savedStateHandle)
@@ -25,17 +26,20 @@ class MatchLineupViewModel @Inject constructor(
     }
 
     private fun onSuccess(getFixtureId: List<FixtureLineup>) {
+        _errorUiState.update { null }
+        _isLoading.update { false }
         _state.update {
             it.copy(
                 data = getFixtureId.toUIState(),
                 teams = getFixtureId.toTeamsUIState(),
-                isLoading = false,
                 noData = getFixtureId.isEmpty()
             )
         }
     }
 
     override fun getData() {
+        _errorUiState.update { null }
+        _isLoading.update { true }
         tryToExecute(
             { manageMatchesUseCase.getMatchLineupByMatchId(matchLineupsArgs.fixtureId) },
             ::onSuccess,
