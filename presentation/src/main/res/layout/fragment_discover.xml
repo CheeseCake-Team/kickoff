@@ -125,7 +125,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/recycler_view_team_country"
             app:visibilityMode="ignore"
-            app:showLoading="@{viewModel.state.loading}" />
+            app:showLoading="@{viewModel.loading}" />
+
+        <FrameLayout
+            android:id="@+id/error_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/recycler_view_team_country"
+            app:visibilityMode="ignore">
+
+            <ViewStub
+                android:id="@+id/error_stub"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout="@layout/screen_error"
+                android:visibility="@{viewModel.errorUiState != null}"
+                app:inflatedVisibility="@{viewModel.errorUiState != null}"
+                app:viewModel="@{viewModel}"
+                app:errorUiState="@{viewModel.errorUiState}"/>
+
+        </FrameLayout>
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>

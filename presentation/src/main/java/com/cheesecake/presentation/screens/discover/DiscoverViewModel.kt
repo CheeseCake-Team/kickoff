@@ -17,12 +17,13 @@ class DiscoverViewModel @Inject constructor(
     DiscoverTeamCountryUiState(),
     Event()
 ) {
-
     init {
         getData()
     }
 
     private fun applySearch(searchQuery: String) {
+        _isLoading.update { true }
+        _errorUiState.update { null }
         tryToExecute(
             { manageCountriesUseCase.searchForCountries(searchQuery) },
             ::onSearchSuccess,
@@ -30,8 +31,10 @@ class DiscoverViewModel @Inject constructor(
     }
 
     override fun getData() {
+        _isLoading.update { true }
+        _errorUiState.update { null }
         collectFlow(state.value.searchInput) {
-            if (it.isBlank() || it.isEmpty()) {
+            if (it.isBlank()) {
                 tryToExecute({ manageCountriesUseCase.getCountries() }, ::onSuccess)
             } else {
                 applySearch(it)
@@ -41,11 +44,12 @@ class DiscoverViewModel @Inject constructor(
     }
 
     private fun onSuccess(result: List<Country>) {
+        _isLoading.update { false }
+        _errorUiState.update { null }
         result.let { list ->
             _state.update { discoverTeamCountryUIState ->
                 discoverTeamCountryUIState.copy(
                     data = list.map { it.toUIModel { ::onClick.invoke(it.name, it.flag) } },
-                    isLoading = false,
                     isNoResult = false
                 )
             }
@@ -57,10 +61,12 @@ class DiscoverViewModel @Inject constructor(
     }
 
     private fun onSearchSuccess(flow: Flow<List<Country>>) {
+        _isLoading.update { false }
+        _errorUiState.update { null }
         collectFlow(flow) { list ->
             copy(
                 data = list.map { it.toUIModel { ::onClick.invoke(it.name, it.flag) } },
-                isLoading = false, isNoResult = list.isEmpty()
+                isNoResult = list.isEmpty()
             )
         }
     }
