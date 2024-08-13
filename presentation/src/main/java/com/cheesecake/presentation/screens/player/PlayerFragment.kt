@@ -7,11 +7,11 @@ import androidx.navigation.fragment.findNavController
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.base.BaseFragmentsAdapter
-import com.google.android.material.tabs.TabLayoutMediator
-import dagger.hilt.android.AndroidEntryPoint
 import com.cheesecake.presentation.databinding.FragmentPlayerBinding
 import com.cheesecake.presentation.screens.player.playerStatistics.PlayerStatisticsFragment
 import com.cheesecake.presentation.screens.player.trophyFragment.PlayerTrophyFragment
+import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PlayerFragment : BaseFragment<FragmentPlayerBinding>() {

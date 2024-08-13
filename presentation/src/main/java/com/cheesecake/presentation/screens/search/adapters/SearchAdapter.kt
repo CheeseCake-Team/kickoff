@@ -2,10 +2,10 @@ package com.cheesecake.presentation.screens.search.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.cheesecake.presentation.databinding.ItemSearchCompetitionBinding
-import com.cheesecake.presentation.databinding.ItemSearchTeamBinding
 import androidx.databinding.library.baseAdapters.BR
 import com.cheesecake.presentation.base.BaseAdapter
+import com.cheesecake.presentation.databinding.ItemSearchCompetitionBinding
+import com.cheesecake.presentation.databinding.ItemSearchTeamBinding
 import com.cheesecake.presentation.screens.search.models.SearchResult
 
 class SearchAdapter : BaseAdapter<SearchResult>(null) {
