@@ -1,7 +1,6 @@
 package com.cheesecake.presentation.screens.match.statistics
 
 import androidx.lifecycle.SavedStateHandle
-import com.cheesecake.domain.entity.FixtureStatistics
 
 class MatchStatisticsArgs(savedStateHandle: SavedStateHandle) {
     val fixtureId: Int = savedStateHandle[FIXTURE_ID_ARG] ?: 215662

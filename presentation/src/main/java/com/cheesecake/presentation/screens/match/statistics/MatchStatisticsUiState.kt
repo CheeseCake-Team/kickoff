@@ -2,10 +2,8 @@ package com.cheesecake.presentation.screens.match.statistics
 
 import com.cheesecake.domain.entity.StatisticsType
 
-data class MatchStatisticsUIState(
+data class MatchStatisticsUiState(
     val statisticsItem: List<StatisticsItemUiState> = emptyList(),
-    val errorMessage: String = "error",
-    val isLoading: Boolean = true,
     val noData: Boolean = false
 )
 

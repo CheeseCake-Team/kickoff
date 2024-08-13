@@ -1,7 +1,8 @@
 package com.cheesecake.presentation.screens.match.statistics
 
  import android.os.Bundle
-import android.view.View
+ import android.util.Log
+ import android.view.View
 import androidx.fragment.app.viewModels
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
@@ -18,6 +19,7 @@ class MatchStatisticsFragment : BaseFragment<FragmentMatchStatisticsBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.e("onViewCreated: ", "called")
         binding.recyclerView.adapter = MatchStatisticsAdapter()
     }
 

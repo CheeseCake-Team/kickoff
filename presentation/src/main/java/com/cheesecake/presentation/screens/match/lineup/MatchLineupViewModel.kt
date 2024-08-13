@@ -1,7 +1,6 @@
 package com.cheesecake.presentation.screens.match.lineup
 
 import androidx.lifecycle.SavedStateHandle
-import com.cheesecake.domain.KickoffException
 import com.cheesecake.domain.entity.FixtureLineup
 import com.cheesecake.domain.usecases.ManageMatchesUseCase
 import com.cheesecake.presentation.base.BaseViewModel
