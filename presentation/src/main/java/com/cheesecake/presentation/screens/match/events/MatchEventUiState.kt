@@ -3,9 +3,7 @@ package com.cheesecake.presentation.screens.match.events
 import com.cheesecake.domain.entity.EventType
 import com.cheesecake.domain.entity.FixtureEvents
 
-data class MatchEventUIState(
-    val errorMessage: String = "error",
-    val isLoading: Boolean = true,
+data class MatchEventUiState(
     val data: List<EventItemUiState> = emptyList(),
     val noData: Boolean = false
 )

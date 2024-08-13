@@ -13,8 +13,8 @@ import javax.inject.Inject
 class MatchEventViewModel @Inject constructor(
     private val manageMatchesUseCase: ManageMatchesUseCase,
     savedStateHandle: SavedStateHandle,
-) : BaseViewModel<MatchEventUIState, MatchEventEvents>(
-    MatchEventUIState(),
+) : BaseViewModel<MatchEventUiState, MatchEventEvents>(
+    MatchEventUiState(),
     Event()
 ) {
     val matchEventArgs = MatchEventArgs(savedStateHandle)
@@ -24,9 +24,10 @@ class MatchEventViewModel @Inject constructor(
     }
 
     private fun onSuccess(fixtureEvents: List<FixtureEvents>) {
+        _isLoading.update { false }
+        _errorUiState.update { null }
         _state.update {
             it.copy(
-                isLoading = false,
                 data = fixtureEvents.toUIState(),
                 noData = fixtureEvents.isEmpty()
             )
@@ -34,6 +35,8 @@ class MatchEventViewModel @Inject constructor(
     }
 
     override fun getData() {
+        _isLoading.update { true }
+        _errorUiState.update { null }
         tryToExecute(
             { manageMatchesUseCase.getMatchEventByMatchId(matchEventArgs.fixtureId) },
             ::onSuccess,

@@ -34,11 +34,10 @@
             android:layout_height="0dp"
             android:background="@color/backLighter"
             android:elevation="@dimen/spacing_1"
+            app:layout_constraintBottom_toBottomOf="@+id/matches_events_recycler_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/matches_events_recycler_view"
-            app:layout_constraintBottom_toBottomOf="@+id/matches_events_recycler_view"/>
-
+            app:layout_constraintTop_toTopOf="@+id/matches_events_recycler_view" />
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -48,7 +47,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:showLoading="@{viewModel.state.loading}" />
+            app:showLoading="@{viewModel.loading}" />
 
         <TextView
             android:id="@+id/text_view_no_data"
@@ -62,7 +61,21 @@
             app:layout_constraintTop_toTopOf="parent"
             app:noDataShow="@{viewModel.state.noData}" />
 
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <ViewStub
+                android:id="@+id/error_stub"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout="@layout/screen_error"
+                android:visibility="@{viewModel.errorUiState != null}"
+                app:errorUiState="@{viewModel.errorUiState}"
+                app:inflatedVisibility="@{viewModel.errorUiState != null}"
+                app:viewModel="@{viewModel}" />
+
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
