@@ -34,8 +34,8 @@ class TeamPlayersFragment : BaseFragment<FragmentTeamPlayersBinding>() {
             is TeamPLayerNavigationEvent.NavigateToPlayer -> {
                 findNavController().navigate(
                     TeamFragmentDirections.actionTeamFragmentToPlayerFragment(
-                        event.season,
-                        event.playerId
+                        event.playerId,
+                        event.season
                     )
                 )
             }
