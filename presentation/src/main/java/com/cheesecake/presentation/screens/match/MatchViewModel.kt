@@ -30,10 +30,10 @@ class MatchViewModel
             uiState.copy(
                 homeTeamName = match.homeTeamName,
                 homeTeamLogoUrl = match.homeTeamLogoUrl,
-                homeTeamGoals = match.homeTeamGoals.toString(),
+                homeTeamGoals = (match.homeTeamGoals ?: 0).toString(),
                 awayTeamName = match.awayTeamName,
                 awayTeamLogoUrl = match.awayTeamLogoUrl,
-                awayTeamGoals = match.awayTeamGoals.toString(),
+                awayTeamGoals = (match.awayTeamGoals ?: 0).toString(),
                 matchState = match.matchState,
                 onBackClick = { backClicked() },
             )
