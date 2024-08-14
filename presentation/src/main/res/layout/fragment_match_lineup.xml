@@ -19,8 +19,8 @@
             android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:fillViewport="true">
+            android:fillViewport="true"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -32,9 +32,9 @@
                     android:layout_height="wrap_content"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:showLoading="@{viewModel.loading}" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -122,6 +122,14 @@
                     tools:listitem="@layout/item_match_team_lineup" />
 
                 <ViewStub
+                    android:id="@+id/no_data_stub"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout="@layout/no_result_found"
+                    android:visibility="@{viewModel.state.noData}"
+                    app:inflatedVisibility="@{viewModel.state.noData}" />
+
+                <ViewStub
                     android:id="@+id/error_stub"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -135,18 +143,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
-
-        <TextView
-            android:id="@+id/text_view_no_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="No data available"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:noDataShow="@{viewModel.state.noData}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

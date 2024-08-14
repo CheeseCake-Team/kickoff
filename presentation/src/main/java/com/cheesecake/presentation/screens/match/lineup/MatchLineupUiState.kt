@@ -33,10 +33,10 @@ data class PlayerItemUiState(
 
 fun List<FixtureLineup>.toUIState(): TeamsLineups {
     return TeamsLineups(
-        homeTeamLineup = first().toUIState(),
-        awayTeamLineup = last().toUIState(),
-        homeTeamSubstitutesPlayers = first().substitutesPlayers.toUIState(),
-        awayTeamSubstitutesPlayers = last().substitutesPlayers.toUIState()
+        homeTeamLineup = firstOrNull()?.toUIState()?: TeamData(),
+        awayTeamLineup = lastOrNull()?.toUIState() ?: TeamData(),
+        homeTeamSubstitutesPlayers = firstOrNull()?.substitutesPlayers?.toUIState() ?: emptyList(),
+        awayTeamSubstitutesPlayers = lastOrNull()?.substitutesPlayers?.toUIState() ?: emptyList()
     )
 }
 

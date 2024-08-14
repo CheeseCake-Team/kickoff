@@ -17,6 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
     override val layoutIdFragment = R.layout.fragment_match_lineup
     override val viewModel: MatchLineupViewModel by viewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -69,8 +70,6 @@ class MatchLineupFragment : BaseFragment<FragmentMatchLineupBinding>() {
             }
             container.addView(playerRow)
         }
-
-
     }
 
     private fun populateLineupReverse(lineup: TeamData, container: LinearLayout) {
