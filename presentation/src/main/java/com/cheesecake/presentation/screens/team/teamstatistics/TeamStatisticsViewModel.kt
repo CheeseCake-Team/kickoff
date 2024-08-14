@@ -19,6 +19,7 @@ class TeamStatisticsViewModel @Inject constructor(
 
     override fun getData() {
         _isLoading.update { true }
+        _errorUiState.update { null }
         tryToExecute(
             {
                 manageTeamsUseCase.getTeamStatistics(

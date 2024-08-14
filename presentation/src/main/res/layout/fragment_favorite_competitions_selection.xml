@@ -146,6 +146,7 @@
                 android:layout_height="match_parent"
                 android:layout="@layout/screen_error"
                 android:visibility="@{viewModel.errorUiState != null}"
+                app:errorUiState="@{viewModel.errorUiState}"
                 app:inflatedVisibility="@{viewModel.errorUiState != null}"
                 app:viewModel="@{viewModel}" />
 

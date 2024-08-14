@@ -36,6 +36,7 @@ class CountryTeamsViewModel @Inject constructor(
 
     override fun getData() {
         _isLoading.update { true }
+        _errorUiState.update { null }
         tryToExecute(
             { manageTeamsUseCase.getTeamsByCountryName(countryTeamsArgs.countryName) }, ::onSuccess
         )

@@ -25,19 +25,6 @@
             app:listItems="@{viewModel.state.data}"
             tools:listitem="@layout/item_team_players_positions" />
 
-        <ViewStub
-            android:id="@+id/error_stub"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout="@layout/screen_error"
-            android:visibility="@{viewModel.errorUiState != null}"
-            app:inflatedVisibility="@{viewModel.errorUiState != null}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:viewModel="@{viewModel}" />
-
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
@@ -47,5 +34,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:showLoading="@{viewModel.loading}" />
+
+        <ViewStub
+            android:id="@+id/error_stub"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout="@layout/screen_error"
+            android:visibility="@{viewModel.errorUiState != null}"
+            app:errorUiState="@{viewModel.errorUiState}"
+            app:inflatedVisibility="@{viewModel.errorUiState != null}"
+            app:viewModel="@{viewModel}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

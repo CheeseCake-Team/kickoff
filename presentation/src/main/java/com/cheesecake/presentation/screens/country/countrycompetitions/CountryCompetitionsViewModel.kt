@@ -36,6 +36,7 @@ class CountryCompetitionsViewModel @Inject constructor(
 
     override fun getData() {
         _isLoading.update { true }
+        _errorUiState.update { null }
         tryToExecute(
             { manageCompetitionsUseCase.getCompetitionsByCountryName(countryCompetitionsArgs.countryName) },
             ::onSuccess,
