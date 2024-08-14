@@ -49,17 +49,13 @@
             app:layout_constraintTop_toTopOf="parent"
             app:showLoading="@{viewModel.loading}" />
 
-        <TextView
-            android:id="@+id/text_view_no_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="No data available"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:noDataShow="@{viewModel.state.noData}" />
+        <ViewStub
+            android:id="@+id/no_data_stub"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout="@layout/no_result_found"
+            android:visibility="@{viewModel.state.noData}"
+            app:inflatedVisibility="@{viewModel.state.noData}" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
