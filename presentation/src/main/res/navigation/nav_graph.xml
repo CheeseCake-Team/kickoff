@@ -13,16 +13,14 @@
             app:destination="@id/matchFragment" />
         <argument
             android:name="id"
-            app:argType="integer" />
+            app:argType="integer"
+            android:defaultValue="39" />
         <action
             android:id="@+id/action_leagueFragment_to_teamFragment"
             app:destination="@id/teamFragment" />
         <action
             android:id="@+id/action_leagueFragment_to_standingsFragment"
             app:destination="@id/standingsFragment" />
-        <action
-            android:id="@+id/action_leagueFragment_to_topScorersFragment"
-            app:destination="@id/topScorersFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -69,25 +67,20 @@
         android:label="MatchFragment">
         <argument
             android:name="homeTeamId"
-            app:argType="integer" />
+            app:argType="integer"
+            android:defaultValue="1037" />
         <argument
             android:name="awayTeamId"
-            app:argType="integer" />
+            app:argType="integer"
+            android:defaultValue="1577" />
         <argument
             android:name="data"
-            app:argType="string" />
-    </fragment>
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.cheesecake.presentation.screens.settings.SettingsFragment"
-        android:label="SettingsFragment">
-        <action
-            android:id="@+id/action_settingsFragment_to_favoriteFragment"
-            app:destination="@id/favoriteFragment" />
+            app:argType="string"
+            android:defaultValue="2024-08-14" />
     </fragment>
     <fragment
         android:id="@+id/leaguesSearchFragment"
-        android:name="com.cheesecake.presentation.screens.search.viewAll.leagues.LeaguesSearchFragment"
+        android:name="com.cheesecake.presentation.screens.search.viewAll.competitions.CompetitionsSearchFragment"
         android:label="LeaguesSearchFragment">
         <argument
             android:name="searchQuery"
@@ -145,7 +138,8 @@
         android:label="TeamFragment">
         <argument
             android:name="teamId"
-            app:argType="integer" />
+            app:argType="integer"
+            android:defaultValue="40" />
         <action
             android:id="@+id/action_teamFragment_to_playerFragment"
             app:destination="@id/playerFragment" />
@@ -154,11 +148,10 @@
             app:destination="@id/matchFragment" />
         <argument
             android:name="season"
-            android:defaultValue="2023"
+            android:defaultValue="2024"
             app:argType="integer" />
         <argument
             android:name="competitionId"
-            android:defaultValue="39"
             app:argType="integer" />
         <action
             android:id="@+id/action_teamFragment_to_leagueFragment"
@@ -175,7 +168,8 @@
             app:argType="integer" />
         <argument
             android:name="season"
-            app:argType="integer" />
+            app:argType="integer"
+            android:defaultValue="2023" />
     </fragment>
     <fragment
         android:id="@+id/teamsSearchFragment"
@@ -194,20 +188,11 @@
         android:label="StandingsFragment">
         <argument
             android:name="leagueId"
-            app:argType="integer" />
+            app:argType="integer"
+            android:defaultValue="39" />
         <argument
             android:name="season"
-            app:argType="integer" />
-    </fragment>
-    <fragment
-        android:id="@+id/topScorersFragment"
-        android:name="com.cheesecake.presentation.screens.topscorers.TopScorersFragment"
-        android:label="TopScorersFragment">
-        <argument
-            android:name="leagueId"
-            app:argType="integer" />
-        <argument
-            android:name="season"
-            app:argType="integer" />
+            app:argType="integer"
+            android:defaultValue="2023" />
     </fragment>
 </navigation>
