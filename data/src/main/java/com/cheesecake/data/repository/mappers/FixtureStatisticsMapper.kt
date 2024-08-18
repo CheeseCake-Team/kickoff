@@ -12,7 +12,7 @@ fun List<FixtureStatisticsDTO>.toEntity(): List<FixtureStatistics> {
         val type = this.first().statistics[i].type
         val statisticsType = toStatisticsType(type)
         val homeTeamValue = this.first().statistics[i].value.percentageToInt()
-        val awayTeamValue = this.first().statistics[i].value.percentageToInt()
+        val awayTeamValue = this.last().statistics[i].value.percentageToInt()
 
         FixtureStatistics(type, statisticsType, homeTeamValue, awayTeamValue)
     }
