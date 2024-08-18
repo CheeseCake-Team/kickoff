@@ -73,6 +73,13 @@ class MatchEventAdapter(private val homeTeamId: Int, private val awayTeamId: Int
 
                     }
 
+                    EventType.PENALTY_CANCELLED -> {
+                        imageViewEventType.setImageResource(R.drawable.ic_penalty_cancelled)
+                        textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
+                        textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
+
+                    }
+
                     else -> {
                         imageViewEventType.setImageResource(R.drawable.ic_football)
                         textViewHomeTeamSubstituentPlayerName.visibility = View.GONE

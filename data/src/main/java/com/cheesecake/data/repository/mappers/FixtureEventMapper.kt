@@ -47,6 +47,7 @@ fun toEventType(type: String, detail: String): EventType {
             when (detail) {
                 "Goal cancelled" -> EventType.GOAL_CANCELLED
                 "Penalty confirmed" -> EventType.PENALTY_CONFIRMED
+                "Penalty cancelled" -> EventType.PENALTY_CANCELLED
                 else -> throw IllegalArgumentException("Invalid event title: $detail")
             }
         }
