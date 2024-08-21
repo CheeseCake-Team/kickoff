@@ -195,4 +195,8 @@
             app:argType="integer"
             android:defaultValue="2023" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.cheesecake.presentation.screens.settings.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

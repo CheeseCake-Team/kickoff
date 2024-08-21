@@ -20,4 +20,9 @@
         android:title="Favorite"
         android:icon="@drawable/ic_favourite_outlined"/>
 
+    <item
+        android:id="@+id/settingFragment"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings"/>
+
 </menu>
