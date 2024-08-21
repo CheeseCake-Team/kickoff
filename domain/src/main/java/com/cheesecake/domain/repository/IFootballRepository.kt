@@ -127,4 +127,6 @@ interface IFootballRepository {
     fun getSeason(): Flow<String>
 
     suspend fun setSeason(season: String)
+
+    suspend fun getAllSeasons(): List<String>
 }

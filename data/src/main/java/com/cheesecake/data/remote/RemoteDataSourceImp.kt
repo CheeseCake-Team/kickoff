@@ -440,8 +440,8 @@ class RemoteDataSourceImp @Inject constructor(
         return wrapBaseResponse { service.searchByLeagueName(name) }
     }
 
-    override suspend fun getLeaguesSeasons(): List<LeagueDTO> {
-        return wrapBaseResponse { service.getLeaguesSeasons() }
+    override suspend fun getAllSeasons(): List<String> {
+        return wrapBaseResponse { service.getAllSeasons() }
     }
 
     override suspend fun getCurrentSeasonLeague(id: Int, current: Boolean): List<LeagueDTO> {

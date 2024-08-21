@@ -193,6 +193,10 @@ class IFootballRepositoryImpl
         localDataSource.setSeason(season)
     }
 
+    override suspend fun getAllSeasons(): List<String> {
+        return remoteDataSource.getAllSeasons()
+    }
+
     override suspend fun getMatchStatisticsByMatchId(fixtureId: Int): List<FixtureStatistics> {
         return remoteDataSource.getFixtureStatisticsByFixtureId(fixtureId).toEntity()
     }

@@ -377,7 +377,7 @@ interface FootballApiService {
     ): Response<BasePagingResponse<LeagueDTO>>
 
     @GET("leagues/seasons")
-    suspend fun getLeaguesSeasons(): Response<BasePagingResponse<LeagueDTO>>
+    suspend fun getAllSeasons(): Response<BasePagingResponse<String>>
 
     @GET("leagues")
     suspend fun getCurrentSeasonLeague(
