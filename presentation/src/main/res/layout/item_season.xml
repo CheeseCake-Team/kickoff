@@ -9,7 +9,9 @@
             type="com.cheesecake.presentation.screens.season.SeasonItemUiState" />
     </data>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
+        app:cardBackgroundColor="@android:color/transparent"
+        style="@style/Widget.Material3.CardView.Filled"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="@{() -> item.onClicked.invoke()}"
@@ -44,5 +46,5 @@
                 app:layout_constraintTop_toTopOf="@+id/season_text_view"
                 app:srcCompat="@drawable/ic_selected" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </layout>
