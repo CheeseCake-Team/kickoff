@@ -123,4 +123,8 @@ interface IFootballRepository {
     suspend fun readOnboardingState(): Boolean
 
     suspend fun saveOnboardingState(isCompleted: Boolean)
+
+    fun getSeason(): Flow<String>
+
+    suspend fun setSeason(season: String)
 }

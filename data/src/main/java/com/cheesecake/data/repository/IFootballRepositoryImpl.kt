@@ -185,6 +185,14 @@ class IFootballRepositoryImpl
         onboardingDataSource.saveOnboardingState(isCompleted)
     }
 
+    override fun getSeason(): Flow<String> {
+        return localDataSource.getSeason()
+    }
+
+    override suspend fun setSeason(season: String) {
+        localDataSource.setSeason(season)
+    }
+
     override suspend fun getMatchStatisticsByMatchId(fixtureId: Int): List<FixtureStatistics> {
         return remoteDataSource.getFixtureStatisticsByFixtureId(fixtureId).toEntity()
     }
