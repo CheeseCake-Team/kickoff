@@ -61,11 +61,7 @@ class CompetitionDetailsFragment : BaseFragment<FragmentCompetitionDetailsBindin
             }
 
             is CompetitionDetailsEvents.NavigateToTopPlayer -> {
-                findNavController().navigate(
-                    CompetitionFragmentDirections.actionLeagueFragmentToTopScorersFragment(
-                        event.leagueId, event.season
-                    )
-                )
+
             }
         }
     }
