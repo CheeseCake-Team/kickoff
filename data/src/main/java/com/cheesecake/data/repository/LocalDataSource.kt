@@ -46,4 +46,9 @@ interface LocalDataSource {
     suspend fun getTeamById(teamId: Int): TeamLocalDTO?
 
     suspend fun addTeamsList(teams: List<TeamLocalDTO>)
+
+    fun getSeason(): Flow<String>
+
+    suspend fun setSeason(season: String)
+
 }
