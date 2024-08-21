@@ -198,5 +198,13 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.cheesecake.presentation.screens.settings.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="SettingsFragment" >
+        <action
+            android:id="@+id/action_settingsFragment_to_seasonFragment"
+            app:destination="@id/seasonFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/seasonFragment"
+        android:name="com.cheesecake.presentation.screens.season.SeasonFragment"
+        android:label="SeasonFragment" />
 </navigation>
