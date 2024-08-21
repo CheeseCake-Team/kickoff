@@ -9,6 +9,7 @@ import com.cheesecake.data.local.models.RecentSearchLocalDTO
 import com.cheesecake.data.local.models.TeamCountriesLocalDTO
 import com.cheesecake.data.local.models.TeamLocalDTO
 import com.cheesecake.data.repository.LocalDataSource
+import com.cheesecake.data.repository.SeasonLocalDataSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -17,7 +18,7 @@ class LocalDataSourceImp @Inject constructor(
     private val leagueDao: LeagueDao,
     private val teamCountriesDao: TeamCountriesDao,
     private val searchDao: RecentSearchDao,
-    private val seasonLocalDataSource: LocalDataSource,
+    private val seasonLocalDataSource: SeasonLocalDataSource,
 ) : LocalDataSource {
 
     override fun getLocallyTeamsByIdAndSeason(leagueId: Int, season: Int): List<TeamLocalDTO> {
