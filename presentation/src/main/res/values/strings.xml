@@ -84,5 +84,9 @@
     <string name="error_image">Error Image</string>
     <string name="player_image">Player Image</string>
     <string name="competitions">Competitions</string>
+    <string name="season_image">Season image</string>
+    <string name="season">Season</string>
+    <string name="time_zone">Time-Zone</string>
+    <string name="seasons">seasons</string>
 
 </resources>
