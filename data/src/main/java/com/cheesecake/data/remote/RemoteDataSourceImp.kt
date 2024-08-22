@@ -592,8 +592,8 @@ class RemoteDataSourceImp @Inject constructor(
 
     //region timezone
 
-    override suspend fun getTimezoneList(): List<String> {
-        return wrapBaseResponse { service.getTimezoneList() }
+    override suspend fun getTimezones(): List<String> {
+        return wrapBaseResponse { service.getTimezones() }
     }
 
     //endregion

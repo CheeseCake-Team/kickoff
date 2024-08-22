@@ -419,7 +419,7 @@ interface RemoteDataSource {
     //endregion
 
     //region timezone
-    suspend fun getTimezoneList(): List<String>
+    suspend fun getTimezones(): List<String>
     //endregion
 
     //region transfers
