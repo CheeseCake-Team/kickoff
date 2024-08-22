@@ -33,8 +33,7 @@ class SeasonViewModel @Inject constructor(
     }
 
     private fun onSeasonClicked(season: String) {
-        tryToExecute({manageSeasonUseCase.setSeason(season)}, ::onUpdatingSeasonSuccess)
-
+        tryToExecute({ manageSeasonUseCase.setSeason(season) }, ::onUpdatingSeasonSuccess)
     }
 
     private fun onUpdatingSeasonSuccess(selectedSeason: String) {
