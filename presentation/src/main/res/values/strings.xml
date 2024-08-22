@@ -86,7 +86,8 @@
     <string name="competitions">Competitions</string>
     <string name="season_image">Season image</string>
     <string name="season">Season</string>
-    <string name="time_zone">Time-Zone</string>
+    <string name="time_zone">Timezone</string>
+    <string name="timezones">Timezones</string>
     <string name="seasons">seasons</string>
 
 </resources>
