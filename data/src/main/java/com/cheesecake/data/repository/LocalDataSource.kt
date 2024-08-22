@@ -51,4 +51,7 @@ interface LocalDataSource {
 
     suspend fun setSeason(season: String)
 
+    fun getTimezone(): Flow<String>
+
+    suspend fun setTimezone(timezone: String)
 }
