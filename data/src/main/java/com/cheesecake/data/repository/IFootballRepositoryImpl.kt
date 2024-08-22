@@ -197,6 +197,18 @@ class IFootballRepositoryImpl
         return remoteDataSource.getAllSeasons()
     }
 
+    override suspend fun getTimezones(): List<String> {
+        return remoteDataSource.getTimezones()
+    }
+
+    override suspend fun setTimezone(timezone: String) {
+        localDataSource.setTimezone(timezone)
+    }
+
+    override fun getTimezone(): Flow<String> {
+        return localDataSource.getTimezone()
+    }
+
     override suspend fun getMatchStatisticsByMatchId(fixtureId: Int): List<FixtureStatistics> {
         return remoteDataSource.getFixtureStatisticsByFixtureId(fixtureId).toEntity()
     }

@@ -129,4 +129,10 @@ interface IFootballRepository {
     suspend fun setSeason(season: String)
 
     suspend fun getAllSeasons(): List<String>
+
+    suspend fun getTimezones(): List<String>
+
+    suspend fun setTimezone(timezone: String)
+
+    fun getTimezone(): Flow<String>
 }
