@@ -96,6 +96,7 @@
                     style="@style/Widget.Material3.CardView.Filled"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="@{() -> viewModel.onTimezoneClicked()}"
                     app:cardBackgroundColor="@android:color/transparent"
                     app:cardCornerRadius="0dp">
 
@@ -131,7 +132,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/spacing_16"
                                 android:layout_marginTop="@dimen/spacing_8"
-                                android:text="Europe/Barcelona"
+                                android:text="@{viewModel.state.selectedTimeZone}"
                                 android:textColor="@color/fontLight" />
 
                         </LinearLayout>

@@ -202,9 +202,16 @@
         <action
             android:id="@+id/action_settingsFragment_to_seasonFragment"
             app:destination="@id/seasonFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_timezoneFragment"
+            app:destination="@id/timezoneFragment" />
     </fragment>
     <fragment
         android:id="@+id/seasonFragment"
         android:name="com.cheesecake.presentation.screens.season.SeasonFragment"
         android:label="SeasonFragment" />
+    <fragment
+        android:id="@+id/timezoneFragment"
+        android:name="com.cheesecake.presentation.screens.timezone.TimezoneFragment"
+        android:label="TimezoneFragment" />
 </navigation>

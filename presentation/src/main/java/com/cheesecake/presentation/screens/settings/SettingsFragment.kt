@@ -34,11 +34,13 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
 
     private fun onEvent(settingsEvent: SettingsEvent) {
         when (settingsEvent) {
-            is SettingsEvent.OnSeasonClicked -> {
-                findNavController().navigate(
-                    SettingsFragmentDirections.actionSettingsFragmentToSeasonFragment()
-                )
-            }
+            is SettingsEvent.OnSeasonClicked -> findNavController().navigate(
+                SettingsFragmentDirections.actionSettingsFragmentToSeasonFragment()
+            )
+
+            is SettingsEvent.OnTimezoneClicked -> findNavController().navigate(
+                SettingsFragmentDirections.actionSettingsFragmentToTimezoneFragment()
+            )
         }
     }
 
