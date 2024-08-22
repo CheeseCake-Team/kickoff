@@ -15,7 +15,8 @@ class ManageTimezoneUseCase @Inject constructor(
         return repository.getTimezone()
     }
 
-    suspend fun setTimezone(timezone: String) {
-        return repository.setTimezone(timezone)
+    suspend fun setTimezone(timezone: String): String {
+        repository.setTimezone(timezone)
+        return timezone
     }
 }
