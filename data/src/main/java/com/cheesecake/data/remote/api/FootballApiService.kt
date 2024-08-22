@@ -516,7 +516,7 @@ interface FootballApiService {
 
     //region timezone
     @GET("timezone")
-    suspend fun getTimezoneList(): Response<BasePagingResponse<String>>
+    suspend fun getTimezones(): Response<BasePagingResponse<String>>
     //endregion
 
     //region transfers
