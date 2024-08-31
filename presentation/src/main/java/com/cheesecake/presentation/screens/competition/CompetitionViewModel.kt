@@ -1,19 +1,19 @@
 package com.cheesecake.presentation.screens.competition
 
-import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.usecases.ManageCompetitionsUseCase
+import com.cheesecake.domain.usecases.ManageSeasonUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class CompetitionViewModel @Inject constructor(
     private val manageCompetitionsUseCase: ManageCompetitionsUseCase,
     private val competitionNavigationArgs: CompetitionNavigationArgs,
+    private val manageSeasonUseCase: ManageSeasonUseCase,
 ) : BaseViewModel<CompetitionUiState, CompetitionNavigationEvent>(CompetitionUiState(), Event()) {
     val competitionId = competitionNavigationArgs.competitionId
 
@@ -24,7 +24,6 @@ class CompetitionViewModel @Inject constructor(
     private fun onSuccess(competition: League) {
         _state.update { competitionUiState ->
             competitionUiState.copy(
-                competitionSeason = competition.season.last(),
                 competitionName = competition.name,
                 seasonStartEndYear = "${competition.seasonStartYear}/${competition.seasonEndYear}",
                 imageUrl = competition.imageUrl,
@@ -34,18 +33,30 @@ class CompetitionViewModel @Inject constructor(
     }
 
     override fun getData() {
+        collectFlow(manageSeasonUseCase.getSeason()) { season ->
+            copy(competitionSeason = season.toInt())
+        }
         tryToExecute(
-            { manageCompetitionsUseCase.getCompetitionById(competitionNavigationArgs.competitionId) },
+            {
+                manageCompetitionsUseCase.getCompetitionByIdAndSeason(
+                    competitionNavigationArgs.competitionId,
+                    state.value.competitionSeason.toString()
+                )
+            },
             ::onSuccess,
         )
     }
 
     fun onFavoriteClick() {
-        viewModelScope.launch {
-            manageCompetitionsUseCase.favoriteCompetition(competitionId).let {
-                _state.update { uiState -> uiState.copy(isFavourite = it.isFavourite) }
-            }
-        }
+        tryToExecute({manageCompetitionsUseCase.favoriteCompetition(
+            competitionId,
+            state.value.competitionSeason.toString()
+        )
+        }, ::onFavoriteSuccess)
+    }
+
+    private fun onFavoriteSuccess(competition: League) {
+        _state.update { uiState -> uiState.copy(isFavourite = competition.isFavourite) }
     }
 
     fun onBackClick() {

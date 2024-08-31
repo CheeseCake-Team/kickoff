@@ -10,7 +10,7 @@ fun League.toUiState(
     onCompetitionClick: () -> Unit
 ): SelectedCompetitionItemUiState {
     return SelectedCompetitionItemUiState(
-        competitionId = this.leagueId,
+        competitionId = this.competitionId,
         imageUrl = this.imageUrl,
         competitionName = this.name,
         isSelected = this.isFavourite,

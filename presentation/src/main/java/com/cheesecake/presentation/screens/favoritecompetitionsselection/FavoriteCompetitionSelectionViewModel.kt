@@ -39,10 +39,10 @@ class FavoriteCompetitionSelectionViewModel @Inject constructor(
         _state.update { favLeagueSelectionUIState ->
             favLeagueSelectionUIState.copy(
                 displayedCompetitions = state.value.displayedCompetitions.map {
-                    if (it.competitionId == competition.leagueId) it.copy(isSelected = !it.isSelected) else it
+                    if (it.competitionId == competition.competitionId) it.copy(isSelected = !it.isSelected) else it
                 },
                 competitionsItemUiState = state.value.competitionsItemUiState.map {
-                    if (it.competitionId == competition.leagueId) it.copy(isSelected = !it.isSelected) else it
+                    if (it.competitionId == competition.competitionId) it.copy(isSelected = !it.isSelected) else it
                 },
             )
         }

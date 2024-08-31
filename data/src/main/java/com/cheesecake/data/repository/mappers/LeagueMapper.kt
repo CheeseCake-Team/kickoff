@@ -6,7 +6,7 @@ import com.cheesecake.domain.entity.League
 
 
 fun LeagueDTO.toEntity(): League = League(
-    leagueId = this.league.id,
+    competitionId = this.league.id,
     name = this.league.name,
     season = this.seasons.map { it.year },
     imageUrl = this.league.logo,
@@ -33,7 +33,7 @@ fun LeagueDTO.toLocal(): LeagueLocalDTO = LeagueLocalDTO(
 
 @JvmName("leagueLocalDTOToLeague")
 fun LeagueLocalDTO.toEntity(): League = League(
-    leagueId = leagueId,
+    competitionId = leagueId,
     name = leagueName,
     season = listOf(leagueSeason) ,
     imageUrl = leagueLogoUrl,
@@ -47,7 +47,7 @@ fun LeagueLocalDTO.toEntity(): League = League(
 
 @JvmName("leagueToLeagueLocalDTO")
 fun League.toLocal(): LeagueLocalDTO = LeagueLocalDTO(
-    leagueId = leagueId,
+    leagueId = competitionId,
     leagueName = name,
     leagueSeason = season.last(),
     leagueLogoUrl = imageUrl,

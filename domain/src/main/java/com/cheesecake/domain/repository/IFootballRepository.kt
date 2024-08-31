@@ -31,7 +31,7 @@ interface IFootballRepository {
 
     suspend fun getSinglePlayerCompact(season: String, teamId: Int): List<PlayerStatistics>
 
-    suspend fun getRemotelyLeagueByIdAndSeason(leagueId: Int): League
+    suspend fun getRemotelyLeagueByIdAndSeason(competitionId: Int, season: String): League
 
     suspend fun updateOrInsertLeague(league: League)
 

@@ -65,7 +65,9 @@ class CompetitionDetailsViewModel @Inject constructor(
         _isLoading.update { true }
         tryToExecute(
             {
-                manageCompetitionsUseCase.getCompetitionById(competitionArgs.competitionId)
+                manageCompetitionsUseCase.getCompetitionByIdAndSeason(competitionArgs.competitionId,
+                    competitionArgs.season.toString()
+                )
             }, ::onGettingCompetitionSuccess
         )
         tryToExecute(

@@ -22,7 +22,7 @@ fun List<League>.toSearchUIState(onclick: (League) -> Unit): List<CompetitionSea
             countryName = it.countryName,
             onclick = { onclick(it) },
             season = it.season.last(),
-            leagueId = it.leagueId,
+            leagueId = it.competitionId,
             leagueCount = size
         )
     }

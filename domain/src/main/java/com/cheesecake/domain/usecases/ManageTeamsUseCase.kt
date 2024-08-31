@@ -27,9 +27,9 @@ class ManageTeamsUseCase @Inject constructor(
         return competitions.map { league ->
             Triple(
                 footballRepository.getRemotelyTeamsByIdAndSeason(
-                    league.leagueId,
+                    league.competitionId,
                     league.season.last()
-                ), league.leagueId, league.season.last()
+                ), league.competitionId, league.season.last()
             )
         }
     }

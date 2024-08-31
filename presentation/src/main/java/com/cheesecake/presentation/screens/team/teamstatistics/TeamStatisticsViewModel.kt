@@ -23,7 +23,7 @@ class TeamStatisticsViewModel @Inject constructor(
         tryToExecute(
             {
                 manageTeamsUseCase.getTeamStatistics(
-                    competitionId = teamStatisticsArgs.competitionId,
+                    competitionId = 40,
                     season = teamStatisticsArgs.season,
                     teamId = teamStatisticsArgs.teamId
                 )

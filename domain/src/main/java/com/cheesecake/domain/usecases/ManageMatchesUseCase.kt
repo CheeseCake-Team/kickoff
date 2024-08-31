@@ -54,7 +54,7 @@ class ManageMatchesUseCase @Inject constructor(
             list.map { league ->
                 val matches = footballRepository.getMatchesByCompetitionIdAndSeason(
                     timeZone,
-                    league.leagueId,
+                    league.competitionId,
                     league.season.last()
                 )
                     .filter { dateManager.isSameDay(it.matchDate, date) }

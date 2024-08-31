@@ -25,7 +25,7 @@ class CountryCompetitionsViewModel @Inject constructor(
         _errorUiState.update { null }
         _state.update { countryLeaguesUIState ->
             countryLeaguesUIState.copy(
-                competitions = competitions.map { it.toCompetitionUIState { onCompetitionClicked(it.leagueId) } },
+                competitions = competitions.map { it.toCompetitionUIState { onCompetitionClicked(it.competitionId) } },
             )
         }
     }

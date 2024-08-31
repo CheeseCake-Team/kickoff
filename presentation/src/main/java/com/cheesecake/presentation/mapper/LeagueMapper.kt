@@ -9,11 +9,11 @@ fun League.toLeaguesUIState(
     onFavoriteLeagueClick: (Int) -> Unit
 ): FavoriteCompetitionsUiState =
     FavoriteCompetitionsUiState(
-        id = this.leagueId,
+        id = this.competitionId,
         leagueName = this.name,
         leagueCountry = this.countryName,
         imageUrl = this.imageUrl,
         isFavourite = this.isFavourite,
         onFavorite = onFavoriteButtonClick,
-        onFavoriteLeagueClick = { onFavoriteLeagueClick(this.leagueId) },
+        onFavoriteLeagueClick = { onFavoriteLeagueClick(this.competitionId) },
     )

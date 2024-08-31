@@ -6,6 +6,7 @@ import com.cheesecake.domain.entity.League
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.usecases.ManageCompetitionsUseCase
 import com.cheesecake.domain.usecases.ManageRecentSearchUseCase
+import com.cheesecake.domain.usecases.ManageSeasonUseCase
 import com.cheesecake.domain.usecases.ManageTeamsUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
@@ -16,6 +17,7 @@ import com.cheesecake.presentation.screens.search.models.toRecentSearch
 import com.cheesecake.presentation.screens.search.models.toSearchUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
@@ -27,9 +29,12 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(
     private val manageCompetitionsUseCase: ManageCompetitionsUseCase,
     private val manageTeamsUseCase: ManageTeamsUseCase,
-    private val manageRecentSearchUseCase: ManageRecentSearchUseCase
+    private val manageRecentSearchUseCase: ManageRecentSearchUseCase,
+    private val manageSeasonUseCase: ManageSeasonUseCase,
 ) : BaseViewModel<SearchUIState, SearchEvents>(SearchUIState(), Event()) {
     private val searchInput = MutableStateFlow(_state.value.searchQuery)
+    private val _season = MutableStateFlow("2024")
+    val season = _season.asStateFlow()
 
     init {
         getData()
@@ -92,7 +97,8 @@ class SearchViewModel @Inject constructor(
             _event.update {
                 Event(
                     SearchEvents.CompetitionClickEvent(
-                        competition.leagueId
+                        competitionId = competition.competitionId,
+                        season = season.value
                     )
                 )
             }
@@ -103,7 +109,7 @@ class SearchViewModel @Inject constructor(
     private fun onClickTeam(team: Team) {
         viewModelScope.launch {
             manageRecentSearchUseCase.addOrUpdateRecentSearch(team.toRecentSearch())
-            _event.update { Event(SearchEvents.TeamClickEvent(team.id)) }
+            _event.update { Event(SearchEvents.TeamClickEvent(team.id, season.value)) }
         }
     }
 
@@ -114,6 +120,10 @@ class SearchViewModel @Inject constructor(
     override fun getData() {
         _isLoading.update { true }
         _errorUiState.update { null }
+        collectFlow(manageSeasonUseCase.getSeason()) { season ->
+            _season.update { season }
+            copy()
+        }
         viewModelScope.launch {
             searchInput.debounce(1000).distinctUntilChanged().filter { it.isNotEmpty() }
                 .collect(::tryToSearch)

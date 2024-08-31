@@ -2,10 +2,14 @@ package com.cheesecake.presentation.screens.team
 
 import androidx.lifecycle.viewModelScope
 import com.cheesecake.domain.entity.Team
+import com.cheesecake.domain.usecases.ManageSeasonUseCase
 import com.cheesecake.domain.usecases.ManageTeamsUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -13,8 +17,12 @@ import javax.inject.Inject
 @HiltViewModel
 class TeamViewModel @Inject constructor(
     private val manageTeamsUseCase: ManageTeamsUseCase,
+    private val manageSeasonUseCase: ManageSeasonUseCase,
     val teamNavigationArgs: TeamNavigationArgs
 ) : BaseViewModel<TeamUiState, TeamNavigationEvent>(TeamUiState(), Event()) {
+    private val _season: MutableStateFlow<String> = MutableStateFlow("2024")
+    val season: StateFlow<String> = _season.asStateFlow()
+
     init {
         getData()
     }
@@ -43,6 +51,10 @@ class TeamViewModel @Inject constructor(
     }
 
     override fun getData() {
+        collectFlow(manageSeasonUseCase.getSeason()) { season ->
+            _season.update { season }
+            copy()
+        }
         tryToExecute(
             { manageTeamsUseCase.getTeamById(teamNavigationArgs.teamId) }, ::onGettingTeamSuccess
         )

@@ -66,9 +66,10 @@ class IFootballRepositoryImpl
     }
 
     override suspend fun getRemotelyLeagueByIdAndSeason(
-        leagueId: Int,
+        competitionId: Int,
+        season: String
     ): League {
-        return remoteDataSource.getLeagueByIdAndSeason(leagueId).first()
+        return remoteDataSource.getCompetitionByIdAndSeason(competitionId, season).first()
             .toEntity()
     }
 

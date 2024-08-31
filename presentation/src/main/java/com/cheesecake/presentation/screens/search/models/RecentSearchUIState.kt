@@ -20,7 +20,7 @@ fun RecentSearch.toUIState(onclick: (Int) -> Unit): RecentSearchUIState = Recent
 )
 
 fun League.toRecentSearch() = RecentSearch(
-    id = this.leagueId,
+    id = this.competitionId,
     title = this.name,
     imageUrl = this.imageUrl,
     type = RecentSearchType.COMPETITION,

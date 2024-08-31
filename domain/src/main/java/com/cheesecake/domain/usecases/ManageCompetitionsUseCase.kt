@@ -25,9 +25,8 @@ class ManageCompetitionsUseCase @Inject constructor(
     /**
      * @author Shehab
      * */
-    suspend fun getCompetitionById(leagueId: Int): League {
-        return footballRepository.getLocallyLeagueByIdAndSeason(leagueId)
-            ?: footballRepository.getRemotelyLeagueByIdAndSeason(leagueId)
+    suspend fun getCompetitionByIdAndSeason(competitionId: Int, season: String): League {
+        return footballRepository.getRemotelyLeagueByIdAndSeason(competitionId, season)
     }
 
     /**
@@ -49,8 +48,8 @@ class ManageCompetitionsUseCase @Inject constructor(
      * @author Abdurrahman & Najeia
      * */
     fun addCompetition(competition: League) {
-        selectedCompetitions.find { it.leagueId == competition.leagueId }?.let {
-            selectedCompetitions.removeIf { it.leagueId == competition.leagueId }
+        selectedCompetitions.find { it.competitionId == competition.competitionId }?.let {
+            selectedCompetitions.removeIf { it.competitionId == competition.competitionId }
         } ?: run {
             selectedCompetitions.add(competition.copy(isFavourite = true))
         }
@@ -67,11 +66,11 @@ class ManageCompetitionsUseCase @Inject constructor(
     /**
      * @author Abdurrahman & Mujtaba & Shehab
      * */
-    suspend fun favoriteCompetition(competitionId: Int): League {
-        getCompetitionById(competitionId).let {
+    suspend fun favoriteCompetition(competitionId: Int, season: String): League {
+        getCompetitionByIdAndSeason(competitionId, season).let {
             footballRepository.updateOrInsertLeague(
                 League(
-                    leagueId = it.leagueId,
+                    competitionId = it.competitionId,
                     name = it.name,
                     imageUrl = it.imageUrl,
                     season = it.season,
@@ -84,7 +83,7 @@ class ManageCompetitionsUseCase @Inject constructor(
                 )
             )
         }
-        return getCompetitionById(competitionId)
+        return getCompetitionByIdAndSeason(competitionId, season)
     }
 
     suspend fun getCurrentRoundByIdAndSeason(leagueId: Int, season: Int): String {

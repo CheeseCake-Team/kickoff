@@ -58,7 +58,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             is SearchEvents.TeamClickEvent -> {
                 findNavController().navigate(
                     SearchFragmentDirections.actionSearchFragmentToTeamFragment(
-                        event.teamId
+                        teamId = event.teamId,
+                        season = event.season.toInt()
                     )
                 )
             }
@@ -79,7 +80,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
             SearchType.TEAM -> {
                 SearchFragmentDirections.actionSearchFragmentToTeamsSearchFragment(
-                    viewModel.state.value.searchQuery
+                    viewModel.state.value.searchQuery,
+                    viewModel.season.value
                 )
             }
         }

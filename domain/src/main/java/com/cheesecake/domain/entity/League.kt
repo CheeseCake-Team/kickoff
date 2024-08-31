@@ -1,7 +1,7 @@
 package com.cheesecake.domain.entity
 
 data class League(
-    val leagueId: Int,
+    val competitionId: Int,
     val name: String,
     val imageUrl: String,
     val season: List<Int>,

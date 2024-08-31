@@ -34,7 +34,14 @@ class CompetitionsSearchViewModel @Inject constructor(
     private fun onCompetitionClicked(competition: League) {
         viewModelScope.launch {
             manageRecentSearchUseCase.addOrUpdateRecentSearch(competition.toRecentSearch())
-            _event.update { Event(SearchEvents.CompetitionClickEvent(competition.leagueId)) }
+            _event.update {
+                Event(
+                    SearchEvents.CompetitionClickEvent(
+                        competition.competitionId,
+                        competition.season.last().toString()
+                    )
+                )
+            }
         }
     }
 

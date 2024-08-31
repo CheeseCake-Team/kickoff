@@ -34,7 +34,7 @@ class TeamsSearchViewModel @Inject constructor(
     private fun onTeamClicked(team: Team) {
         viewModelScope.launch {
             manageRecentSearchUseCase.addOrUpdateRecentSearch(team.toRecentSearch())
-            _event.update { Event(SearchEvents.TeamClickEvent(team.id)) }
+            _event.update { Event(SearchEvents.TeamClickEvent(team.id, args.season)) }
         }
     }
 

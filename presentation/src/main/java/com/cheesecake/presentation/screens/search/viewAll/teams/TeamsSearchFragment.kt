@@ -29,7 +29,7 @@ class TeamsSearchFragment : BaseFragment<FragmentTeamsSearchBinding>() {
 
     private fun onEvent(event: SearchEvents) {
         val action = (event as SearchEvents.TeamClickEvent).let {
-            TeamsSearchFragmentDirections.actionTeamsSearchFragmentToTeamFragment(event.teamId)
+            TeamsSearchFragmentDirections.actionTeamsSearchFragmentToTeamFragment(teamId = event.teamId, season = event.season.toInt())
         }
         findNavController().navigate(action)
     }

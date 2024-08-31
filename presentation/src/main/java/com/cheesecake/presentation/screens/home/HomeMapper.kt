@@ -44,7 +44,7 @@ fun List<Pair<League, List<Fixture>>>.toUiState(
         FavoriteHomeItemUiState(
             title = it.first.name,
             imageUrl = it.first.imageUrl,
-            competitionId = it.first.leagueId,
+            competitionId = it.first.competitionId,
             season = it.first.season.last(),
             onclick = onCompetitionClick,
             isNoData = it.second.isEmpty(),

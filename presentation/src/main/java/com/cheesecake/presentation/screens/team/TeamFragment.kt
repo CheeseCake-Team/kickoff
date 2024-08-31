@@ -29,17 +29,15 @@ class TeamFragment : BaseFragment<FragmentTeamBinding>() {
         val fragments = listOf(
             TeamStatisticsFragment.newInstance(
                 viewModel.teamNavigationArgs.teamId,
-                viewModel.teamNavigationArgs.competitionId,
-                viewModel.teamNavigationArgs.season,
+                viewModel.season.value.toInt(),
             ),
             TeamMatchesFragment.newInstance(
                 viewModel.teamNavigationArgs.teamId,
-                viewModel.teamNavigationArgs.season,
-                viewModel.teamNavigationArgs.competitionId
+                viewModel.season.value.toInt(),
             ),
             TeamPlayersFragment.newInstance(
                 viewModel.teamNavigationArgs.teamId,
-                viewModel.teamNavigationArgs.season
+                viewModel.season.value.toInt()
             ),
         )
         val fragmentsAdapter = BaseFragmentsAdapter(
