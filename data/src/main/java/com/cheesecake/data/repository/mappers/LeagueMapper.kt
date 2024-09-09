@@ -1,11 +1,11 @@
 package com.cheesecake.data.repository.mappers
 
-import com.cheesecake.data.local.models.LeagueLocalDTO
+import com.cheesecake.data.local.models.CompetitionLocalDto
 import com.cheesecake.data.remote.models.LeagueDTO
-import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.Competition
 
 
-fun LeagueDTO.toEntity(): League = League(
+fun LeagueDTO.toEntity(): Competition = Competition(
     competitionId = this.league.id,
     name = this.league.name,
     season = this.seasons.map { it.year },
@@ -13,57 +13,51 @@ fun LeagueDTO.toEntity(): League = League(
     seasonStartYear = this.seasons.last().start.substring(0, 4),
     seasonEndYear = this.seasons.last().end.substring(0, 4),
     countryName = this.country.name,
-    isFavourite = false,
     leagueTypeName = this.league.type,
-    leagueCount = 1
 )
 
 @JvmName("leagueDTOToLeagueLocalDTO")
-fun LeagueDTO.toLocal(): LeagueLocalDTO = LeagueLocalDTO(
-    leagueId = this.league.id,
-    leagueName = this.league.name,
-    leagueSeason = this.seasons.map { it.year }.last(),
-    leagueLogoUrl = this.league.logo,
+fun LeagueDTO.toLocal(): CompetitionLocalDto = CompetitionLocalDto(
+    id = this.league.id,
+    name = this.league.name,
+    season = this.seasons.map { it.year }.last(),
+    imageUrl = this.league.logo,
     seasonStartYear = this.seasons.last().start,
     seasonEndYear = this.seasons.last().end,
     country = this.country.name,
-    isFavourite = false,
     typeName = league.type
 )
 
 @JvmName("leagueLocalDTOToLeague")
-fun LeagueLocalDTO.toEntity(): League = League(
-    competitionId = leagueId,
-    name = leagueName,
-    season = listOf(leagueSeason) ,
-    imageUrl = leagueLogoUrl,
+fun CompetitionLocalDto.toEntity(): Competition = Competition(
+    competitionId = id,
+    name = name,
+    season = listOf(season) ,
+    imageUrl = imageUrl,
     seasonStartYear = seasonStartYear,
     seasonEndYear = seasonEndYear,
     countryName = country,
-    isFavourite = isFavourite,
-    leagueTypeName = typeName,
-    leagueCount = 1
+    leagueTypeName = typeName
 )
 
 @JvmName("leagueToLeagueLocalDTO")
-fun League.toLocal(): LeagueLocalDTO = LeagueLocalDTO(
-    leagueId = competitionId,
-    leagueName = name,
-    leagueSeason = season.last(),
-    leagueLogoUrl = imageUrl,
+fun Competition.toLocal(): CompetitionLocalDto = CompetitionLocalDto(
+    id = competitionId,
+    name = name,
+    season = season.last(),
+    imageUrl = imageUrl,
     seasonStartYear = seasonStartYear,
     seasonEndYear = seasonEndYear,
     country = countryName,
-    isFavourite = isFavourite,
     typeName = leagueTypeName
 )
 
 @JvmName("leagueLocalDTOsToLeagues")
-fun List<LeagueLocalDTO>.toEntity(): List<League> = map { it.toEntity() }
+fun List<CompetitionLocalDto>.toEntity(): List<Competition> = map { it.toEntity() }
 
 @JvmName("leagueDTOsToLeagueLocalDTOs")
-fun List<LeagueDTO>.toLocal(): List<LeagueLocalDTO> = map { it.toLocal() }
+fun List<LeagueDTO>.toLocal(): List<CompetitionLocalDto> = map { it.toLocal() }
 
 @JvmName("leagueDTOsToLeagues")
-fun List<LeagueDTO>.toEntity(): List<League> = map { it.toEntity() }
+fun List<LeagueDTO>.toEntity(): List<Competition> = map { it.toEntity() }
 

@@ -1,7 +1,7 @@
 package com.cheesecake.presentation.screens.home
 
 import com.cheesecake.domain.entity.Fixture
-import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.Competition
 import com.cheesecake.domain.usecases.DateManager
 import com.cheesecake.domain.usecases.ManageMatchesUseCase
 import com.cheesecake.presentation.base.BaseViewModel
@@ -62,7 +62,7 @@ class HomeViewModel @Inject constructor(
         }, ::onSuccessFavourites)
     }
 
-    private fun onSuccessFavourites(f: Flow<List<Pair<League, List<Fixture>>>>) {
+    private fun onSuccessFavourites(f: Flow<List<Pair<Competition, List<Fixture>>>>) {
         collectFlow(f) { pair ->
             copy(
                 favoriteItems = pair.toUiState(

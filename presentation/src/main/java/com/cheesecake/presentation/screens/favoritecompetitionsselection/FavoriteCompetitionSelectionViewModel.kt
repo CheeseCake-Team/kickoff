@@ -1,6 +1,6 @@
 package com.cheesecake.presentation.screens.favoritecompetitionsselection
 
-import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.Competition
 import com.cheesecake.domain.usecases.ManageCompetitionsUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.mapper.toUiState
@@ -20,7 +20,7 @@ class FavoriteCompetitionSelectionViewModel @Inject constructor(
         getData()
     }
 
-    private fun onGettingCompetitionsSuccess(competitions: List<League>) {
+    private fun onGettingCompetitionsSuccess(competitions: List<Competition>) {
         _isLoading.update { false }
         _errorUiState.update { null }
         val competitionsUiState = competitions.toUiState { onCompetitionClick(it) }
@@ -34,7 +34,7 @@ class FavoriteCompetitionSelectionViewModel @Inject constructor(
         }
     }
 
-    private fun onCompetitionClick(competition: League) {
+    private fun onCompetitionClick(competition: Competition) {
         manageCompetitionsUseCase.addCompetition(competition)
         _state.update { favLeagueSelectionUIState ->
             favLeagueSelectionUIState.copy(

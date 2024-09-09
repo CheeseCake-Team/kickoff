@@ -1,12 +1,14 @@
 package com.cheesecake.presentation.screens.competition
 
-import com.cheesecake.domain.entity.League
+import androidx.lifecycle.viewModelScope
+import com.cheesecake.domain.entity.Competition
 import com.cheesecake.domain.usecases.ManageCompetitionsUseCase
 import com.cheesecake.domain.usecases.ManageSeasonUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,13 +23,12 @@ class CompetitionViewModel @Inject constructor(
         getData()
     }
 
-    private fun onSuccess(competition: League) {
+    private fun onSuccess(competition: Competition) {
         _state.update { competitionUiState ->
             competitionUiState.copy(
                 competitionName = competition.name,
                 seasonStartEndYear = "${competition.seasonStartYear}/${competition.seasonEndYear}",
                 imageUrl = competition.imageUrl,
-                isFavourite = competition.isFavourite,
             )
         }
     }
@@ -45,18 +46,28 @@ class CompetitionViewModel @Inject constructor(
             },
             ::onSuccess,
         )
+        viewModelScope.launch {
+            collectFlow(manageCompetitionsUseCase.isCompetitionFavorite(competitionNavigationArgs.competitionId)) { isFavorite ->
+                copy(isFavourite = isFavorite)
+            }
+        }
     }
 
     fun onFavoriteClick() {
-        tryToExecute({manageCompetitionsUseCase.favoriteCompetition(
-            competitionId,
-            state.value.competitionSeason.toString()
-        )
-        }, ::onFavoriteSuccess)
+        if (state.value.isFavourite) {
+            viewModelScope.launch { manageCompetitionsUseCase.removeFavoriteCompetition(competitionId) }
+        } else {
+            tryToExecute({
+                manageCompetitionsUseCase.favoriteCompetition(
+                    competitionId,
+                    state.value.competitionSeason.toString()
+                )
+            }, ::onFavoriteSuccess)
+        }
     }
 
-    private fun onFavoriteSuccess(competition: League) {
-        _state.update { uiState -> uiState.copy(isFavourite = competition.isFavourite) }
+    private fun onFavoriteSuccess(unit: Unit) {
+        _state.update { uiState -> uiState.copy(isFavourite = !state.value.isFavourite) }
     }
 
     fun onBackClick() {

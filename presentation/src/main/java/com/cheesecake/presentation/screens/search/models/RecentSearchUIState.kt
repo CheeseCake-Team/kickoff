@@ -1,6 +1,6 @@
 package com.cheesecake.presentation.screens.search.models
 
-import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.Competition
 import com.cheesecake.domain.entity.RecentSearch
 import com.cheesecake.domain.entity.RecentSearchType
 import com.cheesecake.domain.entity.Team
@@ -19,7 +19,7 @@ fun RecentSearch.toUIState(onclick: (Int) -> Unit): RecentSearchUIState = Recent
     onclick = { onclick(id) }
 )
 
-fun League.toRecentSearch() = RecentSearch(
+fun Competition.toRecentSearch() = RecentSearch(
     id = this.competitionId,
     title = this.name,
     imageUrl = this.imageUrl,

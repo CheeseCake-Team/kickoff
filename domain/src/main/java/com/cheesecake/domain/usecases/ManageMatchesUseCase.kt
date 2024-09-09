@@ -1,7 +1,7 @@
 package com.cheesecake.domain.usecases
 
 import com.cheesecake.domain.entity.Fixture
-import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.Competition
 import com.cheesecake.domain.entity.Match
 import com.cheesecake.domain.repository.IFootballRepository
 import kotlinx.coroutines.flow.Flow
@@ -49,7 +49,7 @@ class ManageMatchesUseCase @Inject constructor(
     suspend fun getFavoriteCompetitionsMatches(
         date: Date,
         timeZone: String,
-    ): Flow<List<Pair<League, List<Fixture>>>> {
+    ): Flow<List<Pair<Competition, List<Fixture>>>> {
         return footballRepository.getFavoriteCompetition().map { list ->
             list.map { league ->
                 val matches = footballRepository.getMatchesByCompetitionIdAndSeason(

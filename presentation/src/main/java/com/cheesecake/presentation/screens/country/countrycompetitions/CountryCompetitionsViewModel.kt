@@ -1,6 +1,6 @@
 package com.cheesecake.presentation.screens.country.countrycompetitions
 
-import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.Competition
 import com.cheesecake.domain.usecases.ManageCompetitionsUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
@@ -20,7 +20,7 @@ class CountryCompetitionsViewModel @Inject constructor(
         getData()
     }
 
-    private fun onSuccess(competitions: List<League>) {
+    private fun onSuccess(competitions: List<Competition>) {
         _isLoading.update { false }
         _errorUiState.update { null }
         _state.update { countryLeaguesUIState ->

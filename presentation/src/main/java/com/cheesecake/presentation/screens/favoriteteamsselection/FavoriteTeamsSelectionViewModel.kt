@@ -1,6 +1,6 @@
 package com.cheesecake.presentation.screens.favoriteteamsselection
 
-import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.Competition
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.usecases.ManageCompetitionsUseCase
 import com.cheesecake.domain.usecases.ManageTeamsUseCase
@@ -30,7 +30,7 @@ class FavoriteTeamsSelectionViewModel @Inject constructor(
         onboardingUseCase.saveOnboardingState(isComplete = true)
     }
 
-    private fun onGettingFavoriteCompetitionsSuccess(favouriteCompetitions: Flow<List<League>>) {
+    private fun onGettingFavoriteCompetitionsSuccess(favouriteCompetitions: Flow<List<Competition>>) {
         collectFlow(favouriteCompetitions) {
             tryToExecute(
                 { manageTeamsUseCase.getCompetitionTeams(it) },

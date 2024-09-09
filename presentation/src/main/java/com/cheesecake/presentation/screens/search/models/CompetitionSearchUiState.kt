@@ -1,6 +1,6 @@
 package com.cheesecake.presentation.screens.search.models
 
-import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.Competition
 
 data class CompetitionSearchUiState(
     val leagueTypeName: String = "Unknown",
@@ -13,7 +13,7 @@ data class CompetitionSearchUiState(
     val leagueCount: Int = 0
 )
 
-fun List<League>.toSearchUIState(onclick: (League) -> Unit): List<CompetitionSearchUiState> {
+fun List<Competition>.toSearchUIState(onclick: (Competition) -> Unit): List<CompetitionSearchUiState> {
     return map {
         CompetitionSearchUiState(
             leagueTypeName = it.leagueTypeName,

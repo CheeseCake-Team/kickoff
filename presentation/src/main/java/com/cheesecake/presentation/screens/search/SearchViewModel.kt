@@ -2,7 +2,7 @@ package com.cheesecake.presentation.screens.search
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.Competition
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.usecases.ManageCompetitionsUseCase
 import com.cheesecake.domain.usecases.ManageRecentSearchUseCase
@@ -92,7 +92,7 @@ class SearchViewModel @Inject constructor(
         _event.update { Event(SearchEvents.ViewAllLClickEvent(_state.value.searchQuery, type)) }
     }
 
-    private fun onCompetitionClicked(competition: League) {
+    private fun onCompetitionClicked(competition: Competition) {
         viewModelScope.launch {
             _event.update {
                 Event(

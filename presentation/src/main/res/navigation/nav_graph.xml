@@ -150,9 +150,6 @@
             android:name="season"
             android:defaultValue="2024"
             app:argType="integer" />
-        <argument
-            android:name="competitionId"
-            app:argType="integer" />
         <action
             android:id="@+id/action_teamFragment_to_leagueFragment"
             app:destination="@id/leagueFragment" />
@@ -180,6 +177,9 @@
             app:destination="@id/teamFragment" />
         <argument
             android:name="searchQuery"
+            app:argType="string" />
+        <argument
+            android:name="season"
             app:argType="string" />
     </fragment>
     <fragment

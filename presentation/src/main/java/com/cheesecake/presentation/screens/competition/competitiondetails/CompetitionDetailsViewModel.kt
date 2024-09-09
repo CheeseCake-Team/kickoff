@@ -1,7 +1,7 @@
 package com.cheesecake.presentation.screens.competition.competitiondetails
 
 import androidx.lifecycle.SavedStateHandle
-import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.Competition
 import com.cheesecake.domain.entity.PlayerStatistics
 import com.cheesecake.domain.entity.TeamStanding
 import com.cheesecake.domain.usecases.ManageCompetitionsUseCase
@@ -45,7 +45,7 @@ class CompetitionDetailsViewModel @Inject constructor(
         _state.update { it.copy(round = round) }
     }
 
-    private fun onGettingCompetitionSuccess(competition: League) {
+    private fun onGettingCompetitionSuccess(competition: Competition) {
         _state.update { it.copy(countryName = competition.countryName) }
     }
 

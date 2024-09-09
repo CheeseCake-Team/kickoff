@@ -1,6 +1,6 @@
 package com.cheesecake.presentation.screens.country.countrycompetitions
 
-import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.Competition
 
 data class CompetitionItemUiState(
     val competitionName: String = "",
@@ -9,7 +9,7 @@ data class CompetitionItemUiState(
     val onCompetitionClick: () -> Unit
 )
 
-fun League.toCompetitionUIState(onLeagueClick: () -> Unit): CompetitionItemUiState =
+fun Competition.toCompetitionUIState(onLeagueClick: () -> Unit): CompetitionItemUiState =
     CompetitionItemUiState(
         this.name,
         this.imageUrl,

@@ -1,10 +1,10 @@
 package com.cheesecake.presentation.mapper
 
-import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.Competition
 import com.cheesecake.presentation.screens.favorite.favoritecompetitions.FavoriteCompetitionsUiState
 
 @JvmName("leagueToLeaguesUIState")
-fun League.toLeaguesUIState(
+fun Competition.toLeaguesUIState(
     onFavoriteButtonClick: () -> Unit,
     onFavoriteLeagueClick: (Int) -> Unit
 ): FavoriteCompetitionsUiState =
@@ -13,7 +13,6 @@ fun League.toLeaguesUIState(
         leagueName = this.name,
         leagueCountry = this.countryName,
         imageUrl = this.imageUrl,
-        isFavourite = this.isFavourite,
         onFavorite = onFavoriteButtonClick,
         onFavoriteLeagueClick = { onFavoriteLeagueClick(this.competitionId) },
     )

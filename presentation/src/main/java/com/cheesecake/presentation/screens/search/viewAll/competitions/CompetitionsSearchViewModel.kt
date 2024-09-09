@@ -1,7 +1,7 @@
 package com.cheesecake.presentation.screens.search.viewAll.competitions
 
 import androidx.lifecycle.viewModelScope
-import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.Competition
 import com.cheesecake.domain.usecases.ManageCompetitionsUseCase
 import com.cheesecake.domain.usecases.ManageRecentSearchUseCase
 import com.cheesecake.presentation.base.BaseViewModel
@@ -31,7 +31,7 @@ class CompetitionsSearchViewModel @Inject constructor(
         _state.update { it.copy(items = items, isResultEmpty = items.isEmpty()) }
     }
 
-    private fun onCompetitionClicked(competition: League) {
+    private fun onCompetitionClicked(competition: Competition) {
         viewModelScope.launch {
             manageRecentSearchUseCase.addOrUpdateRecentSearch(competition.toRecentSearch())
             _event.update {
