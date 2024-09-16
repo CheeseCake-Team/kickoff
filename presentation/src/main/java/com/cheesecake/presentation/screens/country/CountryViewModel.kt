@@ -10,23 +10,22 @@ import javax.inject.Inject
 @HiltViewModel
 class CountryViewModel @Inject constructor(
     val countryNavigationArgs: CountryNavigationArgs
-) : BaseViewModel<CountryUIState, CountryEvents>(
-        CountryUIState(),
-        Event()
-    ) {
-
+) : BaseViewModel<CountryUiState, CountryEvents>(CountryUiState(), Event()) {
     init {
-        _state.update {
-            it.copy(
-                countryName = countryNavigationArgs.countryName,
-                imageUrl = countryNavigationArgs.imageUrl,
-                onBackClick = {onBackClick()}
-            )
-        }
+        getData()
     }
 
     private fun onBackClick() {
         _event.update { Event(CountryEvents.NavigateBack) }
     }
 
+    override fun getData() {
+        _state.update {
+            it.copy(
+                countryName = countryNavigationArgs.countryName,
+                imageUrl = countryNavigationArgs.imageUrl,
+                onBackClick = { onBackClick() }
+            )
+        }
+    }
 }

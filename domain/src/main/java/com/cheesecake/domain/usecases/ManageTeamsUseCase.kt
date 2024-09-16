@@ -1,6 +1,6 @@
 package com.cheesecake.domain.usecases
 
-import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.Competition
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.entity.TeamStanding
 import com.cheesecake.domain.entity.TeamStatisticsEntity
@@ -23,13 +23,13 @@ class ManageTeamsUseCase @Inject constructor(
     /**
      * @author Abdurrahman & Najeia
      * */
-    suspend fun getCompetitionTeams(competitions: List<League>): List<Triple<List<Team>, Int, Int>> {
+    suspend fun getCompetitionTeams(competitions: List<Competition>): List<Triple<List<Team>, Int, Int>> {
         return competitions.map { league ->
             Triple(
                 footballRepository.getRemotelyTeamsByIdAndSeason(
-                    league.leagueId,
+                    league.competitionId,
                     league.season.last()
-                ), league.leagueId, league.season.last()
+                ), league.competitionId, league.season.last()
             )
         }
     }

@@ -347,8 +347,9 @@ interface FootballApiService {
     ): Response<BasePagingResponse<LeagueDTO>>
 
     @GET("leagues")
-    suspend fun getLeagueByIdBySeason(
-        @Query("id") leagueId: Int
+    suspend fun getCompetitionByIdAndSeason(
+        @Query("id") competitionId: Int,
+        @Query("season") season: String
     ): Response<BasePagingResponse<LeagueDTO>>
 
     @GET("leagues")
@@ -377,7 +378,7 @@ interface FootballApiService {
     ): Response<BasePagingResponse<LeagueDTO>>
 
     @GET("leagues/seasons")
-    suspend fun getLeaguesSeasons(): Response<BasePagingResponse<LeagueDTO>>
+    suspend fun getAllSeasons(): Response<BasePagingResponse<String>>
 
     @GET("leagues")
     suspend fun getCurrentSeasonLeague(
@@ -516,7 +517,7 @@ interface FootballApiService {
 
     //region timezone
     @GET("timezone")
-    suspend fun getTimezoneList(): Response<BasePagingResponse<String>>
+    suspend fun getTimezones(): Response<BasePagingResponse<String>>
     //endregion
 
     //region transfers

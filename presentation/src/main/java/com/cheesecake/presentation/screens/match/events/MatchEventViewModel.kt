@@ -1,6 +1,5 @@
 package com.cheesecake.presentation.screens.match.events
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import com.cheesecake.domain.entity.FixtureEvents
 import com.cheesecake.domain.usecases.ManageMatchesUseCase
@@ -14,42 +13,33 @@ import javax.inject.Inject
 class MatchEventViewModel @Inject constructor(
     private val manageMatchesUseCase: ManageMatchesUseCase,
     savedStateHandle: SavedStateHandle,
-) : BaseViewModel<MatchEventUIState, MatchEventEvents>(
-    MatchEventUIState(),
+) : BaseViewModel<MatchEventUiState, MatchEventEvents>(
+    MatchEventUiState(),
     Event()
 ) {
     val matchEventArgs = MatchEventArgs(savedStateHandle)
 
     init {
-        getMatchEvents()
-    }
-
-    private fun getMatchEvents() {
-        tryToExecute(
-            { manageMatchesUseCase.getMatchEventByMatchId(matchEventArgs.fixtureId) },
-            ::onSuccess,
-            ::onError
-        )
+        getData()
     }
 
     private fun onSuccess(fixtureEvents: List<FixtureEvents>) {
+        _isLoading.update { false }
+        _errorUiState.update { null }
         _state.update {
             it.copy(
-                isLoading = false,
                 data = fixtureEvents.toUIState(),
                 noData = fixtureEvents.isEmpty()
             )
         }
     }
 
-    private fun onError(e: Throwable) {
-        _state.update {
-            it.copy(
-                errorMessage = e.localizedMessage ?: "Unknown error.",
-                isLoading = false,
-                noData = true
-            )
-        }
-        Log.e("TAG", "onError: ${e.message.toString()}")
+    override fun getData() {
+        _isLoading.update { true }
+        _errorUiState.update { null }
+        tryToExecute(
+            { manageMatchesUseCase.getMatchEventByMatchId(matchEventArgs.fixtureId) },
+            ::onSuccess,
+        )
     }
 }

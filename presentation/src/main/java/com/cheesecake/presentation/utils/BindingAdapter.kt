@@ -11,6 +11,7 @@ import androidx.core.net.toUri
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
+import androidx.databinding.BindingConversion
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
@@ -82,6 +83,11 @@ fun <T> hideIfItemsEmpty(view: View, items: List<T>) {
 @BindingAdapter(value = ["app:viewVisibilityOnItemsList"])
 fun <T> showIfItemsNotEmpty(view: View, items: List<T>) {
     view.isVisible = items.isEmpty()
+}
+
+@BindingConversion
+fun convertBooleanToVisibility(isVisible: Boolean): Int {
+    return if (isVisible) View.VISIBLE else View.GONE
 }
 
 @BindingAdapter(value = ["app:viewVisibility"])

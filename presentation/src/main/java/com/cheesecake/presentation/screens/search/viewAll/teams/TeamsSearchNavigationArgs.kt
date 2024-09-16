@@ -8,4 +8,5 @@ class TeamsSearchNavigationArgs @Inject constructor(state: SavedStateHandle) {
         TeamsSearchFragmentArgs.fromSavedStateHandle(it)
     }
     val searchQuery = args.searchQuery
+    val season = args.season
 }

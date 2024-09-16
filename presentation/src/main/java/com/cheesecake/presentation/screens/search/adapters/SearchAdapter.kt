@@ -2,12 +2,11 @@ package com.cheesecake.presentation.screens.search.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.cheesecake.presentation.databinding.ItemSearchLeagueBinding
-import com.cheesecake.presentation.databinding.ItemSearchTeamBinding
 import androidx.databinding.library.baseAdapters.BR
 import com.cheesecake.presentation.base.BaseAdapter
+import com.cheesecake.presentation.databinding.ItemSearchCompetitionBinding
+import com.cheesecake.presentation.databinding.ItemSearchTeamBinding
 import com.cheesecake.presentation.screens.search.models.SearchResult
-
 
 class SearchAdapter : BaseAdapter<SearchResult>(null) {
 
@@ -16,7 +15,7 @@ class SearchAdapter : BaseAdapter<SearchResult>(null) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return when (viewType) {
             TYPE_LEAGUE -> LeagueViewHolder(
-                ItemSearchLeagueBinding.inflate(
+                ItemSearchCompetitionBinding.inflate(
                     LayoutInflater.from(parent.context), parent, false
                 )
             )
@@ -31,7 +30,7 @@ class SearchAdapter : BaseAdapter<SearchResult>(null) {
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         when (holder) {
-            is LeagueViewHolder -> holder.bind(itemList[position] as SearchResult.League)
+            is LeagueViewHolder -> holder.bind(itemList[position] as SearchResult.Competition)
             is TeamViewHolder -> holder.bind(itemList[position] as SearchResult.Team)
         }
     }
@@ -41,13 +40,13 @@ class SearchAdapter : BaseAdapter<SearchResult>(null) {
     override fun getItemViewType(position: Int): Int {
         return when (itemList[position]) {
             is SearchResult.Team -> TYPE_TEAM
-            is SearchResult.League -> TYPE_LEAGUE
+            is SearchResult.Competition -> TYPE_LEAGUE
         }
     }
 
-    class LeagueViewHolder( val binding: ItemSearchLeagueBinding) : BaseViewHolder(binding) {
-        fun bind(league: SearchResult.League) {
-            binding.setVariable(BR.item, league)
+    class LeagueViewHolder( val binding: ItemSearchCompetitionBinding) : BaseViewHolder(binding) {
+        fun bind(competition: SearchResult.Competition) {
+            binding.setVariable(BR.item, competition)
             binding.recyclerViewSearchLeagues.adapter = SearchLeagueAdapter()
         }
     }

@@ -14,21 +14,18 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeSearchViewModel @Inject constructor(
     private val manageRecentSearchUseCase: ManageRecentSearchUseCase,
-) : BaseViewModel<HomeSearchUIState, HomeSearchEvent>(HomeSearchUIState(), Event()) {
+) : BaseViewModel<HomeSearchUiState, HomeSearchEvent>(HomeSearchUiState(), Event()) {
     init {
-        tryToGetData()
+        getData()
     }
 
-    private fun tryToGetData() {
-        tryToExecuteSuspend(::getData, ::onGetDataSuccess, ::onGetDataError)
-    }
-
-
-    private fun getData(): SuccessData {
+    override fun getData() {
         _state.update { it.copy(isLoading = true) }
-        return SuccessData(
-            manageRecentSearchUseCase.getRecentSearches(),
-        )
+        tryToExecuteSuspend( {
+            SuccessData(
+                manageRecentSearchUseCase.getRecentSearches(),
+            )
+        }, ::onGetDataSuccess)
     }
 
     private suspend fun onGetDataSuccess(data: SuccessData) {
@@ -45,17 +42,13 @@ class HomeSearchViewModel @Inject constructor(
         }
     }
 
-    private fun onGetDataError(throwable: Throwable) {
-        _state.update { it.copy(error = throwable.message.toString()) }
-        Log.i("onSearchError: ", _state.value.error)
-    }
-
     fun onClickSearchBar() {
         _event.update { Event(HomeSearchEvent.SearchBarClick) }
     }
 
     private fun onClickRecent(recent: RecentSearch) {
         _event.update { Event(HomeSearchEvent.RecentClickEvent(recent)) }
+        Log.e("onClickRecent: ", recent.toString())
     }
 
     private fun onClickDeleteAll() {

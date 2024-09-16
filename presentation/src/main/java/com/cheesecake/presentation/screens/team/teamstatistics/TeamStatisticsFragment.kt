@@ -6,7 +6,6 @@ import androidx.fragment.app.viewModels
 import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentTeamStatisticsBinding
-import com.cheesecake.presentation.screens.team.teamstatistics.TeamStatisticsArgs.Companion.COMPETITION_ID_ARG
 import com.cheesecake.presentation.screens.team.teamstatistics.TeamStatisticsArgs.Companion.SEASON_ARG
 
 import com.cheesecake.presentation.screens.team.teamstatistics.TeamStatisticsArgs.Companion.TEAM_ID_ARG
@@ -24,11 +23,10 @@ class TeamStatisticsFragment : BaseFragment<FragmentTeamStatisticsBinding>() {
 
     companion object {
         @JvmStatic
-        fun newInstance(teamId: Int, competitionId: Int, season: Int) =
+        fun newInstance(teamId: Int, season: Int) =
             TeamStatisticsFragment().apply {
                 arguments = Bundle().apply {
                     putInt(TEAM_ID_ARG, teamId)
-                    putInt(COMPETITION_ID_ARG, competitionId)
                     putInt(SEASON_ARG, season)
                 }
             }

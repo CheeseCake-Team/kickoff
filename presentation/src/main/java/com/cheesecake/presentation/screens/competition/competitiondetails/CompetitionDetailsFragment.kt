@@ -61,20 +61,16 @@ class CompetitionDetailsFragment : BaseFragment<FragmentCompetitionDetailsBindin
             }
 
             is CompetitionDetailsEvents.NavigateToTopPlayer -> {
-                findNavController().navigate(
-                    CompetitionFragmentDirections.actionLeagueFragmentToTopScorersFragment(
-                        event.leagueId, event.season
-                    )
-                )
+
             }
         }
     }
 
     companion object {
         @JvmStatic
-        fun newInstance(leagueID: Int, season: Int) = CompetitionDetailsFragment().apply {
+        fun newInstance(competitionId: Int, season: Int) = CompetitionDetailsFragment().apply {
             arguments = Bundle().apply {
-                putInt(COMPETITION_ID_ARG, leagueID)
+                putInt(COMPETITION_ID_ARG, competitionId)
                 putInt(SEASON_ARG, season)
             }
         }

@@ -1,7 +1,7 @@
 package com.cheesecake.presentation.screens.home
 
 import com.cheesecake.domain.entity.Fixture
-import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.Competition
 import com.cheesecake.presentation.mapper.toMatchUIState
 import com.cheesecake.presentation.utils.toStanderDateString
 import java.text.SimpleDateFormat
@@ -36,7 +36,7 @@ fun List<Date>.toUiState(onClickDate: (date: Date) -> Unit): List<DateItemUiStat
     this.map { it.toUiState { date -> onClickDate(date) } }
 
 @JvmName("pairsOfCompetitionsAndMatchesToUiState")
-fun List<Pair<League, List<Fixture>>>.toUiState(
+fun List<Pair<Competition, List<Fixture>>>.toUiState(
     onMatchClick: (homeTeamId: Int, awayTeamId: Int, date: String) -> Unit,
     onCompetitionClick: (competitionId: Int, season: Int) -> Unit
 ): List<FavoriteHomeItemUiState> {
@@ -44,7 +44,7 @@ fun List<Pair<League, List<Fixture>>>.toUiState(
         FavoriteHomeItemUiState(
             title = it.first.name,
             imageUrl = it.first.imageUrl,
-            competitionId = it.first.leagueId,
+            competitionId = it.first.competitionId,
             season = it.first.season.last(),
             onclick = onCompetitionClick,
             isNoData = it.second.isEmpty(),

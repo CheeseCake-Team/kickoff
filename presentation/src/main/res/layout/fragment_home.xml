@@ -34,7 +34,7 @@
             android:layout_height="0dp"
             android:clipToPadding="false"
             android:padding="@dimen/spacing_12"
-            app:viewVisibility="@{viewModel.state.loading}"
+            app:viewVisibility="@{viewModel.loading}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/date_recycler_view"
@@ -49,7 +49,22 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/date_recycler_view"
-            app:showLoading="@{viewModel.state.loading}" />
+            app:showLoading="@{viewModel.loading}" />
+
+        <ViewStub
+            android:id="@+id/error_stub"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout="@layout/screen_error"
+            android:paddingTop="@dimen/spacing_12"
+            android:visibility="@{viewModel.errorUiState != null}"
+            app:inflatedVisibility="@{viewModel.errorUiState != null}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/date_recycler_view"
+            app:viewModel="@{viewModel}"
+            app:errorUiState="@{viewModel.errorUiState}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

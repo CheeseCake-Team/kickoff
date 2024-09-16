@@ -10,10 +10,32 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PlayerViewModel @Inject constructor(
-    managePlayersUseCase: ManagePlayersUseCase,
+    private val managePlayersUseCase: ManagePlayersUseCase,
     val playerNavigationArgs: PlayerNavigationArgs
 ) : BaseViewModel<PlayerUiState, PlayerNavigationEvent>(PlayerUiState(), Event()) {
     init {
+        getData()
+    }
+
+    private fun onSuccess(playerStatistics: PlayerStatistics) {
+        _isLoading.update { false }
+        _errorUiState.update { null }
+        _state.update {
+            it.copy(
+                playerName = playerStatistics.name,
+                playerImageUrl = playerStatistics.imageUrl,
+                teamData = "${playerStatistics.teamName} - ${playerStatistics.competitionCountry}",
+            )
+        }
+    }
+
+    fun onBackClick() {
+        _event.update { Event(PlayerNavigationEvent.NavigateBack) }
+    }
+
+    override fun getData() {
+        _isLoading.update { true }
+        _errorUiState.update { null }
         tryToExecute(
             {
                 managePlayersUseCase.getPlayerStatistics(
@@ -22,28 +44,11 @@ class PlayerViewModel @Inject constructor(
                 )
             },
             ::onSuccess,
-            ::onError
         )
     }
 
-    private fun onSuccess(playerStatistics: PlayerStatistics) {
-        _state.update {
-            it.copy(
-                playerName = playerStatistics.name,
-                playerImageUrl = playerStatistics.imageUrl,
-                teamCountry = playerStatistics.competitionCountry,
-                teamName = playerStatistics.teamName
-            )
-        }
-    }
-
-    private fun onError(e: Throwable) {
-        _state.update { playerUIState ->
-            playerUIState.copy(errorMessage = e.localizedMessage.toString())
-        }
-    }
-
-    fun onBackClick() {
-        _event.update { Event(PlayerNavigationEvent.NavigateBack) }
+    override fun onError(throwable: Throwable) {
+        super.onError(throwable)
+        _state.update { it.copy(playerName = "Error", teamData = "Try again") }
     }
 }

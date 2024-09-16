@@ -5,7 +5,7 @@ import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.FixtureEvents
 import com.cheesecake.domain.entity.FixtureLineup
 import com.cheesecake.domain.entity.FixtureStatistics
-import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.Competition
 import com.cheesecake.domain.entity.Match
 import com.cheesecake.domain.entity.PlayerStatistics
 import com.cheesecake.domain.entity.RecentSearch
@@ -23,17 +23,17 @@ interface IFootballRepository {
 
     suspend fun getCountriesSearch(search: String): Flow<List<Country>>
 
-    suspend fun getLeagueNameAndCountry(leagueId: Int, current: Boolean): List<League>
+    suspend fun getLeagueNameAndCountry(leagueId: Int, current: Boolean): List<Competition>
 
     suspend fun getTopScorersInCompetition(leagueId: Int, season: Int): List<PlayerStatistics>
 
-    suspend fun getLocallyLeagueByIdAndSeason(leagueId: Int): League?
+    suspend fun getLocallyLeagueByIdAndSeason(leagueId: Int): Competition?
 
     suspend fun getSinglePlayerCompact(season: String, teamId: Int): List<PlayerStatistics>
 
-    suspend fun getRemotelyLeagueByIdAndSeason(leagueId: Int): League
+    suspend fun getRemotelyLeagueByIdAndSeason(competitionId: Int, season: String): Competition
 
-    suspend fun updateOrInsertLeague(league: League)
+    suspend fun updateOrInsertLeague(competition: Competition)
 
     suspend fun getMatchesByCompetitionIdAndSeason(
         timeZone: String,
@@ -51,11 +51,11 @@ interface IFootballRepository {
 
     suspend fun updateOrInsertCountries(countries: List<Country>)
 
-    suspend fun getLeaguesByName(leagueName: String): List<League>
+    suspend fun getLeaguesByName(leagueName: String): List<Competition>
 
-    suspend fun searchForCompetitions(leagueName: String): List<League>
+    suspend fun searchForCompetitions(leagueName: String): List<Competition>
 
-    suspend fun getCompetitionsByCountryName(countryName: String): List<League>
+    suspend fun getCompetitionsByCountryName(countryName: String): List<Competition>
 
     suspend fun searchForTeams(teamName: String): List<Team>
 
@@ -78,7 +78,7 @@ interface IFootballRepository {
 
     suspend fun getFavoriteTeams(): Flow<List<Team>>
 
-    suspend fun getFavoriteCompetition(): Flow<List<League>>
+    suspend fun getFavoriteCompetition(): Flow<List<Competition>>
 
     suspend fun getSquadOfTeam(teamId: Int): List<SquadPlayer>
 
@@ -114,13 +114,25 @@ interface IFootballRepository {
 
     suspend fun getMatchLineupByMatchId(fixtureId: Int): List<FixtureLineup>
 
-    suspend fun getCompetitions(): List<League>
+    suspend fun getCompetitions(): List<Competition>
 
-    suspend fun addLeagueList(leagues: List<League>)
+    suspend fun addLeagueList(competitions: List<Competition>)
 
     suspend fun addTeamsList(triples: List<Triple<Team, Int, Int>>)
 
     suspend fun readOnboardingState(): Boolean
 
     suspend fun saveOnboardingState(isCompleted: Boolean)
+
+    fun getSeason(): Flow<String>
+
+    suspend fun setSeason(season: String)
+
+    suspend fun getAllSeasons(): List<String>
+
+    suspend fun getTimezones(): List<String>
+
+    suspend fun setTimezone(timezone: String)
+
+    fun getTimezone(): Flow<String>
 }

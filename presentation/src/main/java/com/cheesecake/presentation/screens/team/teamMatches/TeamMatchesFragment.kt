@@ -8,7 +8,6 @@ import com.cheesecake.presentation.R
 import com.cheesecake.presentation.base.BaseFragment
 import com.cheesecake.presentation.databinding.FragmentTeamMatchesBinding
 import com.cheesecake.presentation.screens.team.TeamFragmentDirections
-import com.cheesecake.presentation.screens.team.teamMatches.TeamMatchesArgs.Companion.COMPETITION_ID_ARG
 import com.cheesecake.presentation.screens.team.teamMatches.TeamMatchesArgs.Companion.SEASON_ARG
 import com.cheesecake.presentation.screens.team.teamMatches.TeamMatchesArgs.Companion.TEAM_ID_ARG
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,12 +46,11 @@ class TeamMatchesFragment : BaseFragment<FragmentTeamMatchesBinding>() {
 
     companion object {
         @JvmStatic
-        fun newInstance(teamId: Int, season: Int, competitionId: Int) =
+        fun newInstance(teamId: Int, season: Int) =
             TeamMatchesFragment().apply {
                 arguments = Bundle().apply {
                     putInt(TEAM_ID_ARG, teamId)
                     putInt(SEASON_ARG, season)
-                    putInt(COMPETITION_ID_ARG, competitionId)
                 }
             }
     }

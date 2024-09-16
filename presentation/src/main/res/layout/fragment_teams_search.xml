@@ -26,7 +26,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:items="@{viewModel.state.items}"
-            app:viewVisibility="@{viewModel.state.loading}"
+            app:viewVisibility="@{viewModel.loading}"
             tools:context="com.cheesecake.league.LeagueTeamsFragment"
             tools:listitem="@layout/item_team" />
 
@@ -39,7 +39,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:showLoading="@{viewModel.state.loading}" />
+            app:showLoading="@{viewModel.loading}" />
 
         <FrameLayout
             android:id="@+id/frame_container"
@@ -50,6 +50,19 @@
             <include layout="@layout/included_no_result_found" />
 
         </FrameLayout>
+
+        <ViewStub
+            android:id="@+id/error_stub"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout="@layout/screen_error"
+            android:visibility="@{viewModel.errorUiState != null}"
+            app:inflatedVisibility="@{viewModel.errorUiState != null}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/search_recycler_view"
+            app:viewModel="@{viewModel}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

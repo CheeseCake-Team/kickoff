@@ -20,9 +20,26 @@
             app:layout_constraintBottom_toTopOf="@id/view_frame"
             app:layout_constraintTop_toTopOf="@id/competitions_recycler_view"
             app:visibilityMode="ignore" />
+
+        <Constraint
+            android:id="@+id/error_stub"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/view_frame"
+            app:layout_constraintTop_toTopOf="@id/competitions_recycler_view"
+            app:visibilityMode="ignore" />
+
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/error_stub"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/view_frame"
+            app:layout_constraintTop_toTopOf="@id/competitions_recycler_view"
+            app:visibilityMode="ignore" />
+
         <Constraint
             android:id="@+id/title_text_view"
             style="@style/TitleLarge"
@@ -71,9 +88,9 @@
             android:textColor="@color/fontHeavy"
             android:textColorHint="@color/lightGreyText"
             android:textSize="@dimen/font_size_14sp"
+            app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/sub_title_text_view"
-            app:layout_constraintStart_toStartOf="@+id/sub_title_text_view"
-            app:layout_constraintBottom_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="@+id/sub_title_text_view" />
 
         <Constraint
             android:id="@+id/frame_container"

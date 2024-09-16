@@ -1,6 +1,6 @@
 package com.cheesecake.presentation.screens.favoriteteamsselection
 
-import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.Competition
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.usecases.ManageCompetitionsUseCase
 import com.cheesecake.domain.usecases.ManageTeamsUseCase
@@ -23,45 +23,44 @@ class FavoriteTeamsSelectionViewModel @Inject constructor(
     Event()
 ) {
     init {
-        tryToExecute(
-            { manageCompetitionsUseCase.getFavoriteCompetition() },
-            ::onGettingFavoriteCompetitionsSuccess,
-            ::onError
-        )
+        getData()
     }
 
     suspend fun setOnboardingShown() {
         onboardingUseCase.saveOnboardingState(isComplete = true)
     }
 
-    private fun onGettingFavoriteCompetitionsSuccess(favouriteCompetitions: Flow<List<League>>) {
+    private fun onGettingFavoriteCompetitionsSuccess(favouriteCompetitions: Flow<List<Competition>>) {
         collectFlow(favouriteCompetitions) {
             tryToExecute(
                 { manageTeamsUseCase.getCompetitionTeams(it) },
                 ::onGettingTeamsSuccess,
-                ::onError
             )
             this
         }
     }
 
     fun onSearchQueryChanged(searchQuery: CharSequence) {
-        val displayedTeams = if (searchQuery.isNotBlank())
+        _isLoading.update { true }
+        val displayedTeams = if (searchQuery.isNotBlank()) {
             state.value.teamsItemsUiState.filter {
                 it.teamName.contains(searchQuery, true)
             }
-        else
+        } else {
             state.value.teamsItemsUiState
+        }
         _state.update {
             it.copy(
-                isLoading = false,
                 isNoResult = displayedTeams.isEmpty(),
                 displayedTeams = displayedTeams,
             )
         }
+        _isLoading.update { false }
     }
 
     private fun onGettingTeamsSuccess(triples: List<Triple<List<Team>, Int, Int>>) {
+        _isLoading.update { false }
+        _errorUiState.update { null }
         triples.flatMap {
             it.first.toUiState { team -> onFavouriteTeamSelect(team, it.second, it.third) }
         }.also { teamsItemsUiState ->
@@ -69,7 +68,6 @@ class FavoriteTeamsSelectionViewModel @Inject constructor(
                 it.copy(
                     teamsItemsUiState = teamsItemsUiState,
                     displayedTeams = teamsItemsUiState,
-                    isLoading = false,
                     isNoResult = teamsItemsUiState.isEmpty(),
                     onGetStartedClick = ::addTeamsToFavourite
                 )
@@ -84,7 +82,7 @@ class FavoriteTeamsSelectionViewModel @Inject constructor(
                 teamsItemsUiState = favTeamsSelectionUIState.teamsItemsUiState.map {
                     if (it.teamId == team.id) it.copy(isSelected = !it.isSelected) else it
                 },
-                displayedTeams = favTeamsSelectionUIState.teamsItemsUiState.map {
+                displayedTeams = favTeamsSelectionUIState.displayedTeams.map {
                     if (it.teamId == team.id) it.copy(isSelected = !it.isSelected) else it
                 }
             )
@@ -92,19 +90,20 @@ class FavoriteTeamsSelectionViewModel @Inject constructor(
     }
 
     private fun addTeamsToFavourite() {
-        tryToExecute({ manageTeamsUseCase.saveSelectedTeams() }, ::onAddSuccess, ::onError)
+        tryToExecute({ manageTeamsUseCase.saveSelectedTeams() }, ::onAddSuccess)
     }
 
     private fun onAddSuccess(boolean: Boolean) {
         _event.update { Event(FavoriteTeamsSelectionNavigationEvent.NavigateToHome) }
     }
 
-    private fun onError(e: Throwable) {
-        _state.update {
-            it.copy(
-                errorMessage = e.localizedMessage ?: "Unknown error.",
-                isLoading = false
-            )
-        }
+    override fun getData() {
+        _isLoading.update { true }
+        _errorUiState.update { null }
+        _state.update { it.copy(isNoResult = false) }
+        tryToExecute(
+            { manageCompetitionsUseCase.getFavoriteCompetition() },
+            ::onGettingFavoriteCompetitionsSuccess
+        )
     }
 }

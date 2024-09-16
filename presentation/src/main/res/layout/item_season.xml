@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="item"
+            type="com.cheesecake.presentation.screens.season.SeasonItemUiState" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        app:cardBackgroundColor="@android:color/transparent"
+        style="@style/Widget.Material3.CardView.Filled"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> item.onClicked.invoke()}"
+        app:cardCornerRadius="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/season_text_view"
+                style="@style/SubtitleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_16"
+                android:text="@{item.season}"
+                android:textColor="@color/fontHeavy"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="2024" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="@dimen/spacing_16"
+                android:layout_height="@dimen/spacing_16"
+                android:layout_margin="@dimen/spacing_16"
+                android:visibility="@{item.selected}"
+                app:layout_constraintBottom_toBottomOf="@+id/season_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/season_text_view"
+                app:srcCompat="@drawable/ic_selected" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

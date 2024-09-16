@@ -16,28 +16,24 @@ import javax.inject.Inject
 class MatchStatisticsViewModel @Inject constructor(
     private val manageMatchesUseCase: ManageMatchesUseCase,
     savedStateHandle: SavedStateHandle,
-) : BaseViewModel<MatchStatisticsUIState, MatchStatisticsEvents>(
-    MatchStatisticsUIState(),
+) : BaseViewModel<MatchStatisticsUiState, MatchStatisticsEvents>(
+    MatchStatisticsUiState(),
     Event()
 ) {
     private val matchStatisticsArgs = MatchStatisticsArgs(savedStateHandle)
     val matchState = matchStatisticsArgs.state
 
     init {
-        tryToExecute(
-            { manageMatchesUseCase.getMatchStatisticsByMatchId(matchStatisticsArgs.fixtureId) },
-            ::onSuccess,
-            ::onError
-        )
+        getData()
     }
 
     private fun onSuccess(statistics: List<FixtureStatistics>) {
+        _isLoading.update { false }
+        _errorUiState.update { null }
         _state.update {
             it.copy(
                 statisticsItem = statistics.toUIState(),
-                isLoading = false,
                 noData = statistics.isEmpty()
-
             )
         }
     }
@@ -68,16 +64,12 @@ class MatchStatisticsViewModel @Inject constructor(
             )
         }
 
-    private fun onError(e: Throwable) {
-        _state.update {
-            it.copy(
-                errorMessage = e.localizedMessage ?: "Unknown error.",
-                isLoading = false,
-                noData = true
-            )
-        }
+    override fun getData() {
+        _isLoading.update { true }
+        _errorUiState.update { null }
+        tryToExecute(
+            { manageMatchesUseCase.getMatchStatisticsByMatchId(matchStatisticsArgs.fixtureId) },
+            ::onSuccess,
+        )
     }
 }
-
-
-

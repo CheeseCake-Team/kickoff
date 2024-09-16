@@ -1,26 +1,25 @@
 package com.cheesecake.presentation.mapper
 
-import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.Competition
 import com.cheesecake.domain.entity.Team
 import com.cheesecake.presentation.screens.favoritecompetitionsselection.SelectedCompetitionItemUiState
 import com.cheesecake.presentation.screens.favoriteteamsselection.SelectedTeamItemUiState
 
 @JvmName("competitionToCompetitionUIState")
-fun League.toUiState(
+fun Competition.toUiState(
     onCompetitionClick: () -> Unit
 ): SelectedCompetitionItemUiState {
     return SelectedCompetitionItemUiState(
-        competitionId = this.leagueId,
+        competitionId = this.competitionId,
         imageUrl = this.imageUrl,
         competitionName = this.name,
-        isSelected = this.isFavourite,
         onClick = onCompetitionClick
     )
 }
 
 @JvmName("competitionsToCompetitionsUIState")
-fun List<League>.toUiState(
-    onCompetitionClick: (League) -> Unit
+fun List<Competition>.toUiState(
+    onCompetitionClick: (Competition) -> Unit
 ): List<SelectedCompetitionItemUiState> {
     return this.map { competition ->
         competition.toUiState { onCompetitionClick(competition) }

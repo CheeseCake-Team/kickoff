@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class BasePagingForStaticResponse<T>(
     @SerializedName("errors")
-    val errors: List<String>,
+    val errors: Error?,
     @SerializedName("paging")
     val paging: Paging,
     @SerializedName("response")
-    val response: T
+    val response: T?
 ) {
     data class Paging(
         @SerializedName("current")

@@ -32,9 +32,8 @@ class CompetitionTeamsFragment : BaseFragment<FragmentCompetitionTeamsBinding>()
         val action = when (event) {
             is CompetitionTeamsEvent.TeamClickEvent ->
                 CompetitionFragmentDirections.actionLeagueFragmentToTeamFragment(
-                    event.teamId,
-                    event.season,
-                    event.competitionId
+                    teamId = event.teamId,
+                    season =  event.season,
                 )
         }
         findNavController().navigate(action)

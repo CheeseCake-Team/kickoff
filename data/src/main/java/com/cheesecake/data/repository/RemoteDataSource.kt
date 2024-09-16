@@ -278,8 +278,9 @@ interface RemoteDataSource {
         season: Int
     ): List<LeagueDTO>
 
-    suspend fun getLeagueByIdAndSeason(
-        leagueId: Int
+    suspend fun getCompetitionByIdAndSeason(
+        competitionId: Int,
+        season: String
     ): List<LeagueDTO>
 
     suspend fun getLeaguesByType(
@@ -302,9 +303,7 @@ interface RemoteDataSource {
         name: String
     ): List<LeagueDTO>
 
-    suspend fun getLeaguesSeasons(
-
-    ): List<LeagueDTO>
+    suspend fun getAllSeasons(): List<String>
 
     suspend fun getCurrentSeasonLeague(
         id: Int, current: Boolean
@@ -421,7 +420,7 @@ interface RemoteDataSource {
     //endregion
 
     //region timezone
-    suspend fun getTimezoneList(): List<String>
+    suspend fun getTimezones(): List<String>
     //endregion
 
     //region transfers

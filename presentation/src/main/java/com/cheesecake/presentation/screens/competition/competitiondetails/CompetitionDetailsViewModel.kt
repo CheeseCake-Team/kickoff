@@ -1,8 +1,7 @@
 package com.cheesecake.presentation.screens.competition.competitiondetails
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
-import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.Competition
 import com.cheesecake.domain.entity.PlayerStatistics
 import com.cheesecake.domain.entity.TeamStanding
 import com.cheesecake.domain.usecases.ManageCompetitionsUseCase
@@ -28,45 +27,16 @@ class CompetitionDetailsViewModel @Inject constructor(
     private val competitionArgs = CompetitionArgs(savedStateHandle)
 
     init {
-        tryToExecute(
-            {
-                manageCompetitionsUseCase.getCompetitionById(competitionArgs.competitionId)
-            }, ::onGettingCompetitionSuccess, ::onError
-        )
-        tryToExecute(
-            {
-                manageCompetitionsUseCase.getCurrentRoundByIdAndSeason(
-                    competitionArgs.competitionId,
-                    competitionArgs.season
-                )
-            },
-            ::onGettingRoundSuccess, ::onError,
-        )
-        tryToExecute(
-            {
-                manageTeamsUseCase.getTeamStandingByCompetitionIdAndSeason(
-                    competitionArgs.competitionId,
-                    competitionArgs.season
-                )
-            }, ::onGettingTeamsStandingSuccess, ::onError
-        )
-        tryToExecute(
-            {
-                managePlayersUseCase.getTopScorersInCompetition(
-                    competitionArgs.competitionId,
-                    competitionArgs.season
-                )
-            }, ::onGettingTopScorersSuccess, ::onError
-        )
+        getData()
     }
 
     private fun onGettingTopScorersSuccess(playersStatistics: List<PlayerStatistics>) {
+        _isLoading.update { false }
         _state.update { competitionDetailsUiState ->
             competitionDetailsUiState.copy(
                 topPlayers = playersStatistics.toUiState().takeIf { it.isNotEmpty() }?.take(7)
                     ?: emptyList(),
                 isTopPlayersEmpty = playersStatistics.isEmpty(),
-                isLoading = false,
             )
         }
     }
@@ -75,29 +45,56 @@ class CompetitionDetailsViewModel @Inject constructor(
         _state.update { it.copy(round = round) }
     }
 
-    private fun onGettingCompetitionSuccess(competition: League) {
+    private fun onGettingCompetitionSuccess(competition: Competition) {
         _state.update { it.copy(countryName = competition.countryName) }
     }
 
     private fun onGettingTeamsStandingSuccess(standings: List<TeamStanding>) {
+        _isLoading.update { false }
         _state.update { competitionDetailsUiState ->
             competitionDetailsUiState.copy(
                 teamsStanding = standings.toUiState().take(4),
                 teamsCount = standings.size.toString(),
                 isTeamsStandingEmpty = standings.isEmpty(),
-                isLoading = false
             )
         }
     }
 
-    private fun onError(throwable: Throwable) {
-        Log.e("onError: ", throwable.localizedMessage ?: "Unknown error")
-        _state.update {
-            it.copy(
-                errorMessage = throwable.localizedMessage ?: "Unknown error",
-                isLoading = false
-            )
-        }
+    override fun getData() {
+        _errorUiState.update { null }
+        _isLoading.update { true }
+        tryToExecute(
+            {
+                manageCompetitionsUseCase.getCompetitionByIdAndSeason(competitionArgs.competitionId,
+                    competitionArgs.season.toString()
+                )
+            }, ::onGettingCompetitionSuccess
+        )
+        tryToExecute(
+            {
+                manageCompetitionsUseCase.getCurrentRoundByIdAndSeason(
+                    competitionArgs.competitionId,
+                    competitionArgs.season
+                )
+            },
+            ::onGettingRoundSuccess
+        )
+        tryToExecute(
+            {
+                manageTeamsUseCase.getTeamStandingByCompetitionIdAndSeason(
+                    competitionArgs.competitionId,
+                    competitionArgs.season
+                )
+            }, ::onGettingTeamsStandingSuccess
+        )
+        tryToExecute(
+            {
+                managePlayersUseCase.getTopScorersInCompetition(
+                    competitionArgs.competitionId,
+                    competitionArgs.season
+                )
+            }, ::onGettingTopScorersSuccess
+        )
     }
 
     fun onStandingSeeAllClick() {

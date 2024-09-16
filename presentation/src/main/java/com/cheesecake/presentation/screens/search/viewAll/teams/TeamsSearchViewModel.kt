@@ -7,7 +7,7 @@ import com.cheesecake.domain.usecases.ManageTeamsUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.models.Event
 import com.cheesecake.presentation.screens.search.SearchEvents
-import com.cheesecake.presentation.screens.search.models.TeamSearchUIState
+import com.cheesecake.presentation.screens.search.models.TeamSearchItemUiState
 import com.cheesecake.presentation.screens.search.models.toRecentSearch
 import com.cheesecake.presentation.screens.search.models.toSearchUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,34 +20,29 @@ class TeamsSearchViewModel @Inject constructor(
     private val manageTeamsUseCase: ManageTeamsUseCase,
     private val manageRecentSearchUseCase: ManageRecentSearchUseCase,
     private val args: TeamsSearchNavigationArgs
-) : BaseViewModel<TeamsUIState, SearchEvents>(TeamsUIState(), Event()) {
+) : BaseViewModel<TeamsSearchUiState, SearchEvents>(TeamsSearchUiState(), Event()) {
     init {
-        initTeamList()
+        getData()
     }
 
-    private fun initTeamList() {
-        tryToExecute(
-            { getSearchResult() }, (::onSearchSuccess), (::onSearchError)
-        )
-    }
-
-    private suspend fun getSearchResult(): List<TeamSearchUIState> {
-        _state.update { it.copy(isResultEmpty = false, isLoading = true) }
-        return manageTeamsUseCase.searchForTeams(args.searchQuery).toSearchUIState(::onTeamClicked)
-    }
-
-    private fun onSearchSuccess(items: List<TeamSearchUIState>) {
-        _state.update { it.copy(items = items, isLoading = false, isResultEmpty = items.isEmpty()) }
-    }
-
-    private fun onSearchError(throwable: Throwable) {
-        _state.update { it.copy(error = throwable.message.toString()) }
+    private fun onSearchSuccess(items: List<TeamSearchItemUiState>) {
+        _isLoading.update { false }
+        _errorUiState.update { null }
+        _state.update { it.copy(items = items, isResultEmpty = items.isEmpty()) }
     }
 
     private fun onTeamClicked(team: Team) {
         viewModelScope.launch {
             manageRecentSearchUseCase.addOrUpdateRecentSearch(team.toRecentSearch())
-            _event.update { Event(SearchEvents.TeamClickEvent(team.id)) }
+            _event.update { Event(SearchEvents.TeamClickEvent(team.id, args.season)) }
         }
+    }
+
+    override fun getData() {
+        _isLoading.update { true }
+        _errorUiState.update { null }
+        tryToExecute({
+            manageTeamsUseCase.searchForTeams(args.searchQuery).toSearchUIState(::onTeamClicked)
+        }, ::onSearchSuccess)
     }
 }

@@ -66,11 +66,11 @@
             android:drawableTint="@color/fontHeavy"
             android:elevation="4dp"
             android:hint="@string/search_here"
+            android:inputType="text"
             android:paddingHorizontal="@dimen/font_size_16sp"
             android:text="@={viewModel.state.searchInput}"
             android:textColor="@color/fontHeavy"
             android:textColorHint="@color/lightGreyText"
-            android:inputType="text"
             android:textSize="@dimen/font_size_14sp"
             app:layout_constraintEnd_toEndOf="@+id/text_view_details"
             app:layout_constraintStart_toStartOf="@+id/text_view_details"
@@ -109,9 +109,9 @@
             <include
                 android:id="@+id/layout_included_no_result"
                 layout="@layout/included_no_result_found"
-                app:visibilityMode="ignore"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                app:visibilityMode="ignore" />
 
         </FrameLayout>
 
@@ -124,8 +124,28 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/recycler_view_team_country"
-            app:visibilityMode="ignore"
-            app:showLoading="@{viewModel.state.loading}" />
+            app:showLoading="@{viewModel.loading}"
+            app:visibilityMode="ignore" />
+
+        <FrameLayout
+            android:id="@+id/error_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/recycler_view_team_country"
+            app:visibilityMode="ignore">
+
+            <ViewStub
+                android:id="@+id/error_stub"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout="@layout/screen_error"
+                android:visibility="@{viewModel.errorUiState != null}"
+                app:errorUiState="@{viewModel.errorUiState}"
+                app:inflatedVisibility="@{viewModel.errorUiState != null}"
+                app:viewModel="@{viewModel}" />
+
+        </FrameLayout>
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>

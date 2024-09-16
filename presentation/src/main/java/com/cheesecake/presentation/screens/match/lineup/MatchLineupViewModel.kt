@@ -1,6 +1,5 @@
 package com.cheesecake.presentation.screens.match.lineup
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import com.cheesecake.domain.entity.FixtureLineup
 import com.cheesecake.domain.usecases.ManageMatchesUseCase
@@ -14,40 +13,35 @@ import javax.inject.Inject
 class MatchLineupViewModel @Inject constructor(
     private val manageMatchesUseCase: ManageMatchesUseCase,
     savedStateHandle: SavedStateHandle,
-) : BaseViewModel<MatchLineupUIState, MatchLineupEvents>(
-    MatchLineupUIState(),
+) : BaseViewModel<MatchLineupUiState, MatchLineupEvents>(
+    MatchLineupUiState(),
     Event()
 ) {
     private val matchLineupsArgs = MatchLineupsArgs(savedStateHandle)
     val matchState = matchLineupsArgs.state
 
     init {
-        tryToExecute(
-            { manageMatchesUseCase.getMatchLineupByMatchId(matchLineupsArgs.fixtureId) },
-            ::onSuccess,
-            ::onError
-        )
+        getData()
     }
 
     private fun onSuccess(getFixtureId: List<FixtureLineup>) {
+        _errorUiState.update { null }
+        _isLoading.update { false }
         _state.update {
             it.copy(
                 data = getFixtureId.toUIState(),
                 teams = getFixtureId.toTeamsUIState(),
-                isLoading = false,
                 noData = getFixtureId.isEmpty()
             )
         }
     }
 
-    private fun onError(e: Throwable) {
-        Log.e("onError: ", e.message.toString())
-        _state.update {
-            it.copy(
-                errorMessage = e.localizedMessage ?: "Unknown error.",
-                isLoading = false,
-                noData = true
-            )
-        }
+    override fun getData() {
+        _errorUiState.update { null }
+        _isLoading.update { true }
+        tryToExecute(
+            { manageMatchesUseCase.getMatchLineupByMatchId(matchLineupsArgs.fixtureId) },
+            ::onSuccess,
+        )
     }
 }

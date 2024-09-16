@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.cheesecake.presentation.screens.settings.SettingsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".screens.settings.SettingsFragment">
+
+        <View
+            android:id="@+id/top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_56"
+            android:background="@color/cardSurface"
+            android:elevation="1dp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/TitleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:elevation="1dp"
+            android:text="@string/settings"
+            app:layout_constraintBottom_toBottomOf="@+id/top_bar"
+            app:layout_constraintStart_toStartOf="@+id/top_bar"
+            app:layout_constraintTop_toTopOf="@+id/top_bar" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_bar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/Widget.Material3.CardView.Filled"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> viewModel.onSeasonClicked()}"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardCornerRadius="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/spacing_16"
+                        android:paddingVertical="@dimen/spacing_8">
+
+                        <ImageView
+                            android:layout_width="@dimen/spacing_24"
+                            android:layout_height="@dimen/spacing_24"
+                            android:contentDescription="@string/season_image"
+                            android:src="@drawable/ic_football_season" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/SubtitleMedium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/spacing_16"
+                                android:text="@string/season"
+                                android:textColor="@color/fontHeavy" />
+
+                            <TextView
+                                style="@style/bodyMedium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/spacing_16"
+                                android:layout_marginTop="@dimen/spacing_8"
+                                android:text="@{viewModel.state.selectedSeason}"
+                                android:textColor="@color/fontLight" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/Widget.Material3.CardView.Filled"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> viewModel.onTimezoneClicked()}"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardCornerRadius="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/spacing_16"
+                        android:paddingVertical="@dimen/spacing_8">
+
+                        <ImageView
+                            android:layout_width="@dimen/spacing_24"
+                            android:layout_height="@dimen/spacing_24"
+                            android:contentDescription="@string/time_zone"
+                            android:src="@drawable/ic_time_zone" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/SubtitleMedium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/spacing_16"
+                                android:text="@string/time_zone"
+                                android:textColor="@color/fontHeavy" />
+
+                            <TextView
+                                style="@style/bodyMedium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/spacing_16"
+                                android:layout_marginTop="@dimen/spacing_8"
+                                android:text="@{viewModel.state.selectedTimeZone}"
+                                android:textColor="@color/fontLight" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

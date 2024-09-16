@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.cheesecake.presentation.screens.search.models.TeamSearchUIState" />
+            type="com.cheesecake.presentation.screens.search.models.TeamSearchItemUiState" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

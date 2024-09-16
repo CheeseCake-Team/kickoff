@@ -1,8 +1,14 @@
 package com.cheesecake.kickoff.di
 
 import com.cheesecake.data.remote.AuthInterceptor
+import com.cheesecake.data.remote.deserializers.ErrorsDeserializer
 import com.cheesecake.data.remote.api.FootballApiService
+import com.cheesecake.data.remote.deserializers.TeamStatisticsBaseResponseDeserializer
+import com.cheesecake.data.remote.response.BasePagingForStaticResponse
+import com.cheesecake.data.remote.response.Error
 import com.cheesecake.kickoff.BuildConfig
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,7 +22,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-
     @Singleton
     @Provides
     fun provideRetrofitService(retrofit: Retrofit): FootballApiService {
@@ -27,12 +32,12 @@ object NetworkModule {
     @Provides
     fun provideRetrofitBuilder(
         client: OkHttpClient,
-        factory: GsonConverterFactory
+        gsonConverterFactory: GsonConverterFactory
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BuildConfig.base_url)
+            .baseUrl(BuildConfig.BASE_URL)
             .client(client)
-            .addConverterFactory(factory)
+            .addConverterFactory(gsonConverterFactory)
             .build()
     }
 
@@ -48,7 +53,6 @@ object NetworkModule {
             .build()
     }
 
-
     @Singleton
     @Provides
     fun provideLoggingInterceptor(): HttpLoggingInterceptor =
@@ -58,7 +62,13 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideGson(): GsonConverterFactory =
-        GsonConverterFactory.create()
+    fun provideGsonConverterFactory(gson: Gson): GsonConverterFactory =
+        GsonConverterFactory.create(gson)
 
+    @Singleton
+    @Provides
+    fun provideGson(): Gson = GsonBuilder()
+        .registerTypeAdapter(BasePagingForStaticResponse::class.java, TeamStatisticsBaseResponseDeserializer())
+        .registerTypeAdapter(Error::class.java, ErrorsDeserializer())
+        .create()
 }

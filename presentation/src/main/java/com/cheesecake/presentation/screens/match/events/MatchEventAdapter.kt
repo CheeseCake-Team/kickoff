@@ -24,32 +24,29 @@ class MatchEventAdapter(private val homeTeamId: Int, private val awayTeamId: Int
                         textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
                         textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
                     }
+
                     EventType.PENALTY -> {
                         imageViewEventType.setImageResource(R.drawable.ic_penalty)
                         textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
                         textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
-
                     }
 
                     EventType.MISSED_PENALTY -> {
                         imageViewEventType.setImageResource(R.drawable.ic_missed_penalty)
                         textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
                         textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
-
                     }
 
                     EventType.YELLOW_CARD -> {
                         imageViewEventType.setImageResource(R.drawable.ic_yellow_card)
                         textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
                         textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
-
                     }
 
                     EventType.RED_CARD -> {
                         imageViewEventType.setImageResource(R.drawable.ic_red_card)
                         textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
                         textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
-
                     }
 
                     EventType.SUBST -> {
@@ -63,14 +60,24 @@ class MatchEventAdapter(private val homeTeamId: Int, private val awayTeamId: Int
                         imageViewEventType.setImageResource(R.drawable.ic_goal_cancelled)
                         textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
                         textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
+                    }
 
+                    EventType.GOAL_CONFIRMED -> {
+                        imageViewEventType.setImageResource(R.drawable.ic_goal_confirmed)
+                        textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
+                        textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
                     }
 
                     EventType.PENALTY_CONFIRMED -> {
                         imageViewEventType.setImageResource(R.drawable.ic_penalty_confirmed)
                         textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
                         textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
+                    }
 
+                    EventType.PENALTY_CANCELLED -> {
+                        imageViewEventType.setImageResource(R.drawable.ic_penalty_cancelled)
+                        textViewHomeTeamSubstituentPlayerName.visibility = View.GONE
+                        textViewAwayTeamSubstituentPlayerName.visibility = View.GONE
                     }
 
                     else -> {
@@ -91,12 +98,6 @@ class MatchEventAdapter(private val homeTeamId: Int, private val awayTeamId: Int
                     }
                 }
             }
-
-
         }
-
-
     }
-
-
 }

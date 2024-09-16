@@ -1,9 +1,9 @@
 package com.cheesecake.presentation.mapper
 
-import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.entity.Country
 import com.cheesecake.domain.entity.Fixture
 import com.cheesecake.domain.entity.SquadPlayer
+import com.cheesecake.domain.entity.Team
 import com.cheesecake.presentation.models.CountryItemUIState
 import com.cheesecake.presentation.models.TeamUIState
 import com.cheesecake.presentation.screens.home.MatchItemUiState

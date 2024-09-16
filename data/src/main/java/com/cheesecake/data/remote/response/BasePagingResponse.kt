@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class BasePagingResponse<T>(
     @SerializedName("errors")
-    val errors: List<String>,
+    val error: Error,
     @SerializedName("paging")
     val paging: Paging,
     @SerializedName("response")
@@ -19,4 +19,5 @@ data class BasePagingResponse<T>(
         @SerializedName("total")
         val total: Int
     )
+
 }

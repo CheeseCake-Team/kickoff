@@ -1,8 +1,9 @@
 package com.cheesecake.domain.usecases
 
-import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.Competition
 import com.cheesecake.domain.repository.IFootballRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class ManageCompetitionsUseCase @Inject constructor(
@@ -11,7 +12,7 @@ class ManageCompetitionsUseCase @Inject constructor(
     /**
      * @author Najeia
      * */
-    suspend fun getCompetitions(): List<League> {
+    suspend fun getCompetitions(): List<Competition> {
         val competitions = footballRepository.getCompetitions()
         return competitions.shuffled()
     }
@@ -19,40 +20,49 @@ class ManageCompetitionsUseCase @Inject constructor(
     /**
      * @author Abdurrahman
      * */
-    suspend fun getCompetitionsByCountryName(countryName: String): List<League> =
+    suspend fun getCompetitionsByCountryName(countryName: String): List<Competition> =
         footballRepository.getCompetitionsByCountryName(countryName)
 
     /**
      * @author Shehab
      * */
-    suspend fun getCompetitionById(leagueId: Int): League {
-        return footballRepository.getLocallyLeagueByIdAndSeason(leagueId)
-            ?: footballRepository.getRemotelyLeagueByIdAndSeason(leagueId)
+    suspend fun getCompetitionByIdAndSeason(competitionId: Int, season: String): Competition {
+        return footballRepository.getRemotelyLeagueByIdAndSeason(competitionId, season)
     }
 
     /**
      * @author Shehab
      * */
-    suspend fun searchForCompetitions(competitionName: String): List<League> {
+    suspend fun searchForCompetitions(competitionName: String): List<Competition> {
         return footballRepository.searchForCompetitions(competitionName)
     }
 
     /**
      * @author Abdurrahman
      * */
-    suspend fun getFavoriteCompetition(): Flow<List<League>> =
+    suspend fun getFavoriteCompetition(): Flow<List<Competition>> =
         footballRepository.getFavoriteCompetition()
 
-    private val selectedCompetitions: MutableList<League> = mutableListOf()
+    /**
+     * @author Abdurrahman
+     * */
+    suspend fun isCompetitionFavorite(competitionId: Int): Flow<Boolean> {
+        return footballRepository.getFavoriteCompetition()
+            .map { favoriteCompetitions ->
+                favoriteCompetitions.any { it.competitionId == competitionId }
+            }
+    }
+
+    private val selectedCompetitions: MutableList<Competition> = mutableListOf()
 
     /**
      * @author Abdurrahman & Najeia
      * */
-    fun addCompetition(competition: League) {
-        selectedCompetitions.find { it.leagueId == competition.leagueId }?.let {
-            selectedCompetitions.removeIf { it.leagueId == competition.leagueId }
+    fun addCompetition(competition: Competition) {
+        selectedCompetitions.find { it.competitionId == competition.competitionId }?.let {
+            selectedCompetitions.removeIf { it.competitionId == competition.competitionId }
         } ?: run {
-            selectedCompetitions.add(competition.copy(isFavourite = true))
+            selectedCompetitions.add(competition)
         }
     }
 
@@ -67,28 +77,18 @@ class ManageCompetitionsUseCase @Inject constructor(
     /**
      * @author Abdurrahman & Mujtaba & Shehab
      * */
-    suspend fun favoriteCompetition(competitionId: Int): League {
-        getCompetitionById(competitionId).let {
-            footballRepository.updateOrInsertLeague(
-                League(
-                    leagueId = it.leagueId,
-                    name = it.name,
-                    imageUrl = it.imageUrl,
-                    season = it.season,
-                    seasonStartYear = it.seasonStartYear,
-                    seasonEndYear = it.seasonEndYear,
-                    isFavourite = !it.isFavourite,
-                    countryName = it.countryName,
-                    leagueTypeName = it.leagueTypeName,
-                    leagueCount = 1
-                )
-            )
+    suspend fun favoriteCompetition(competitionId: Int, season: String) {
+        getCompetitionByIdAndSeason(competitionId, season).let {
+            footballRepository.updateOrInsertLeague(it)
         }
-        return getCompetitionById(competitionId)
     }
 
     suspend fun getCurrentRoundByIdAndSeason(leagueId: Int, season: Int): String {
         return footballRepository.getCurrentRoundByIdAndSeason(leagueId, season)
             ?: "Finished"
+    }
+
+    suspend fun removeFavoriteCompetition(competitionId: Int) {
+        return footballRepository.deleteLeagueById(competitionId)
     }
 }

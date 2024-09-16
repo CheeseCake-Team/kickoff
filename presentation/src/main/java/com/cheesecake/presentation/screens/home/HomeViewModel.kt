@@ -1,7 +1,7 @@
 package com.cheesecake.presentation.screens.home
 
 import com.cheesecake.domain.entity.Fixture
-import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.Competition
 import com.cheesecake.domain.usecases.DateManager
 import com.cheesecake.domain.usecases.ManageMatchesUseCase
 import com.cheesecake.presentation.base.BaseViewModel
@@ -16,10 +16,13 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val dateManager: DateManager,
     private val manageMatchesUseCase: ManageMatchesUseCase,
-) : BaseViewModel<HomeUiState, HomeEvents>(HomeUiState(), Event()) {
+) : BaseViewModel<HomeUiState, HomeEvents>(
+    HomeUiState(selectedDate = dateManager.getToday()),
+    Event()
+) {
     init {
         getDates()
-        getMatchesByDate(dateManager.getToday())
+        getData()
     }
 
     private fun getDates() {
@@ -42,36 +45,40 @@ class HomeViewModel @Inject constructor(
                 }
             }
             it.copy(
-                isLoading = true,
                 dateItems = dateItems,
-                currentDatePosition = dateItems.indexOfFirst { dateItemUIState -> dateItemUIState.isSelected }
+                currentDatePosition = dateItems.indexOfFirst { dateItemUIState -> dateItemUIState.isSelected },
+                selectedDate = date,
+                favoriteItems = emptyList()
             )
         }
-        getMatchesByDate(date)
+        _isLoading.update { true }
+        _errorUiState.update { null }
+        getMatchesByDate(state.value.selectedDate)
     }
 
     private fun getMatchesByDate(date: Date) {
         tryToExecute({
             manageMatchesUseCase.getFavoriteCompetitionsMatches(date, "Africa/Cairo")
-        }, ::onSuccessFavourites, ::onError)
+        }, ::onSuccessFavourites)
     }
 
-    private fun onSuccessFavourites(f: Flow<List<Pair<League, List<Fixture>>>>) {
+    private fun onSuccessFavourites(f: Flow<List<Pair<Competition, List<Fixture>>>>) {
         collectFlow(f) { pair ->
             copy(
                 favoriteItems = pair.toUiState(
                     onCompetitionClick = ::onCompetitionClick,
                     onMatchClick = ::onMatchClicked
-                ),
-                isLoading = false,
+                )
             )
         }
+        _isLoading.update { false }
+        _errorUiState.update { null }
     }
 
-    private fun onError(e: Throwable) {
-        _state.update {
-            it.copy(errorMessage = e.localizedMessage ?: "Unknown error.", isLoading = false)
-        }
+    override fun getData() {
+        _isLoading.update { true }
+        _errorUiState.update { null }
+        getMatchesByDate(state.value.selectedDate)
     }
 
     private fun onMatchClicked(homeTeamId: Int, awayTeamId: Int, date: String) {

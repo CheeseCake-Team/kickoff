@@ -1,6 +1,6 @@
 package com.cheesecake.presentation.screens.favoritecompetitionsselection
 
-import com.cheesecake.domain.entity.League
+import com.cheesecake.domain.entity.Competition
 import com.cheesecake.domain.usecases.ManageCompetitionsUseCase
 import com.cheesecake.presentation.base.BaseViewModel
 import com.cheesecake.presentation.mapper.toUiState
@@ -17,46 +17,48 @@ class FavoriteCompetitionSelectionViewModel @Inject constructor(
     Event()
 ) {
     init {
-        tryToExecute({ manageCompetitionsUseCase.getCompetitions() }, ::onGettingCompetitionsSuccess, ::onError)
+        getData()
     }
 
-    private fun onGettingCompetitionsSuccess(competitions: List<League>) {
+    private fun onGettingCompetitionsSuccess(competitions: List<Competition>) {
+        _isLoading.update { false }
+        _errorUiState.update { null }
         val competitionsUiState = competitions.toUiState { onCompetitionClick(it) }
         _state.update {
             it.copy(
                 displayedCompetitions = competitionsUiState,
                 competitionsItemUiState = competitionsUiState,
-                isLoading = false,
                 isNoResult = competitions.isEmpty(),
                 onNextClick = { addCompetitionsToFavourite() },
             )
         }
     }
 
-    private fun onCompetitionClick(competition: League) {
+    private fun onCompetitionClick(competition: Competition) {
         manageCompetitionsUseCase.addCompetition(competition)
         _state.update { favLeagueSelectionUIState ->
             favLeagueSelectionUIState.copy(
                 displayedCompetitions = state.value.displayedCompetitions.map {
-                    if (it.competitionId == competition.leagueId) it.copy(isSelected = !it.isSelected) else it
+                    if (it.competitionId == competition.competitionId) it.copy(isSelected = !it.isSelected) else it
                 },
                 competitionsItemUiState = state.value.competitionsItemUiState.map {
-                    if (it.competitionId == competition.leagueId) it.copy(isSelected = !it.isSelected) else it
+                    if (it.competitionId == competition.competitionId) it.copy(isSelected = !it.isSelected) else it
                 },
             )
         }
     }
 
     fun onSearchQueryChanged(searchQuery: CharSequence) {
-        val displayedCompetitions = if (searchQuery.isNotBlank())
+        val displayedCompetitions = if (searchQuery.isNotBlank()) {
             state.value.competitionsItemUiState.filter {
                 it.competitionName.contains(searchQuery, true)
             }
-        else
+        } else {
             state.value.competitionsItemUiState
+        }
+        _isLoading.update { false }
         _state.update {
             it.copy(
-                isLoading = false,
                 isNoResult = displayedCompetitions.isEmpty(),
                 displayedCompetitions = displayedCompetitions,
             )
@@ -64,19 +66,20 @@ class FavoriteCompetitionSelectionViewModel @Inject constructor(
     }
 
     private fun addCompetitionsToFavourite() {
-        tryToExecute({ manageCompetitionsUseCase.saveCompetitions() }, ::onAddingSuccess, ::onError)
+        tryToExecute({ manageCompetitionsUseCase.saveCompetitions() }, ::onAddingSuccess)
     }
 
     private fun onAddingSuccess(boolean: Boolean) {
         _event.update { Event(FavoriteCompetitionSelectionNavigationEvent.NavigateToFavoriteTeamsSelection) }
     }
 
-    private fun onError(e: Throwable) {
-        _state.update {
-            it.copy(
-                errorMessage = e.localizedMessage ?: "Unknown error.",
-                isLoading = false
-            )
-        }
+    override fun getData() {
+        _isLoading.update { true }
+        _errorUiState.update { null }
+        _state.update { it.copy(isNoResult = false) }
+        tryToExecute(
+            { manageCompetitionsUseCase.getCompetitions() },
+            ::onGettingCompetitionsSuccess
+        )
     }
 }

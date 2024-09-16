@@ -5,7 +5,7 @@ sealed class HomeSearchData{
 
     data class RecentSearches(
         val onClickDeleteAll: () -> Unit,
-        val items: List<RecentSearchUIState> = emptyList(),
+        val items: List<RecentSearchUiState> = emptyList(),
     ):HomeSearchData()
 
     data class PlayersTopScorers(

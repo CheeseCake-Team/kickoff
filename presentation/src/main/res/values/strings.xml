@@ -27,7 +27,7 @@
     <string name="search_here">Search here...</string>
     <string name="no_result_found_description">We couldn\'t find any results for your search\n Please check your input and try again</string>
     <string name="no_result_found">No Result Found</string>
-    <string name="no_data_found">No data found!</string>
+    <string name="no_data_found">No data found !</string>
     <string name="chelsea">Chelsea</string>
     <string name="settings_more"><![CDATA[Settings & More]]></string>
     <string name="notifications_settings">Notifications Settings</string>
@@ -79,5 +79,15 @@
     <string name="app_widget_description">This is an app widget description</string>
     <string name="configure">Configure</string>
     <string name="no_matches_today">No Matches Today</string>
+    <string name="retry">Retry</string>
+    <string name="learn_more">Learn More</string>
+    <string name="error_image">Error Image</string>
+    <string name="player_image">Player Image</string>
+    <string name="competitions">Competitions</string>
+    <string name="season_image">Season image</string>
+    <string name="season">Season</string>
+    <string name="time_zone">Timezone</string>
+    <string name="timezones">Timezones</string>
+    <string name="seasons">seasons</string>
 
 </resources>

@@ -1,16 +1,11 @@
 package com.cheesecake.presentation.base
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import android.view.WindowManager
-import androidx.annotation.ColorRes
-import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -27,7 +22,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 abstract class BaseFragment<VDB : ViewDataBinding> : Fragment() {
-
     protected abstract val layoutIdFragment: Int
 
     protected abstract val viewModel: ViewModel
@@ -36,7 +30,6 @@ abstract class BaseFragment<VDB : ViewDataBinding> : Fragment() {
 
     protected val binding: VDB
         get() = _binding
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -77,5 +70,4 @@ abstract class BaseFragment<VDB : ViewDataBinding> : Fragment() {
             Snackbar.make(binding.root,message, Snackbar.LENGTH_SHORT).show()
         }
     }
-
 }

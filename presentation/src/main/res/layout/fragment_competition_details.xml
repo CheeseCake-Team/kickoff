@@ -15,8 +15,10 @@
         android:background="@color/background">
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="@{viewModel.errorUiState == null &amp;&amp; !viewModel.loading}"
             app:doNotShow="@{viewModel.state.teamsStandingEmpty &amp;&amp; viewModel.state.topPlayersEmpty}"
             tools:context="com.cheesecake.league.LeagueDetailsFragment">
 
@@ -347,6 +349,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layout_constraintGuide_end="178dp" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
@@ -369,7 +372,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:showLoading="@{viewModel.state.loading}" />
+            app:showLoading="@{viewModel.loading}" />
+
+        <ViewStub
+            android:id="@+id/error_stub"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout="@layout/screen_error"
+            android:visibility="@{viewModel.errorUiState != null}"
+            app:errorUiState="@{viewModel.errorUiState}"
+            app:inflatedVisibility="@{viewModel.errorUiState != null}"
+            app:viewModel="@{viewModel}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -11,29 +11,30 @@ import javax.inject.Inject
 @HiltViewModel
 class TeamMatchesViewModel @Inject constructor(
     private val manageMatchesUseCase: ManageMatchesUseCase,
-    teamMatchesArgs: TeamMatchesArgs
+    private val teamMatchesArgs: TeamMatchesArgs
 ) : BaseViewModel<TeamMatchesUiState, TeamMatchesNavigationEvent>(TeamMatchesUiState(), Event()) {
     init {
+        getData()
+    }
+
+    private fun onSuccess(fixtures: List<Fixture>) {
+        _isLoading.update { false }
+        _errorUiState.update { null }
+        _state.update {
+            it.copy(data = fixtures.toUiState(::onMatchClicked, ::onCompetitionClicked))
+        }
+    }
+
+    override fun getData() {
+        _isLoading.update { true }
+        _errorUiState.update { null }
         tryToExecute(
             {
                 manageMatchesUseCase.getTeamMatchesByTeamIdAndSeason(
                     "Africa/Cairo", teamMatchesArgs.teamId, teamMatchesArgs.season
                 )
-            }, ::onSuccess, ::onError
+            }, ::onSuccess
         )
-    }
-
-    private fun onSuccess(fixtures: List<Fixture>) {
-        _state.update {
-            it.copy(
-                data = fixtures.toUiState(::onMatchClicked, ::onCompetitionClicked),
-                isLoading = false
-            )
-        }
-    }
-
-    private fun onError(error: Throwable) {
-        _state.update { it.copy(errorMessage = error.message.toString(), isLoading = false) }
     }
 
     private fun onMatchClicked(homeTeamId: Int, awayTeamId: Int, date: String) {

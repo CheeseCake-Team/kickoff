@@ -1,6 +1,5 @@
 package com.cheesecake.presentation.screens.team.teamstatistics
 
-import com.cheesecake.domain.entity.Team
 import com.cheesecake.domain.entity.TeamStatisticsEntity
 
 data class TeamStatisticsUiState(
@@ -28,10 +27,7 @@ data class TeamStatisticsUiState(
     val totalFailed: Int = 0,
     val totalGoalsFor: Int = 0,
     val totalGoalsAgainst: Int = 0,
-    val isLoading: Boolean = true,
 
-    val data: List<Team> = emptyList(),
-    val errorMessage: String = "Error",
     val isFormEmpty: Boolean = false
 )
 

@@ -13,27 +13,29 @@ import javax.inject.Inject
 @HiltViewModel
 class DiscoverViewModel @Inject constructor(
     private val manageCountriesUseCase: ManageCountriesUseCase,
-) : BaseViewModel<DiscoverTeamCountryUIState, DiscoverTeamCountryEvents>(
-    DiscoverTeamCountryUIState(),
+) : BaseViewModel<DiscoverTeamCountryUiState, DiscoverTeamCountryEvents>(
+    DiscoverTeamCountryUiState(),
     Event()
 ) {
-
     init {
         getData()
     }
 
     private fun applySearch(searchQuery: String) {
+        _isLoading.update { true }
+        _errorUiState.update { null }
         tryToExecute(
             { manageCountriesUseCase.searchForCountries(searchQuery) },
             ::onSearchSuccess,
-            ::onError
         )
     }
 
-    private fun getData() {
+    override fun getData() {
+        _isLoading.update { true }
+        _errorUiState.update { null }
         collectFlow(state.value.searchInput) {
-            if (it.isBlank() || it.isEmpty()) {
-                tryToExecute({ manageCountriesUseCase.getCountries() }, ::onSuccess, ::onError)
+            if (it.isBlank()) {
+                tryToExecute({ manageCountriesUseCase.getCountries() }, ::onSuccess)
             } else {
                 applySearch(it)
             }
@@ -42,11 +44,12 @@ class DiscoverViewModel @Inject constructor(
     }
 
     private fun onSuccess(result: List<Country>) {
+        _isLoading.update { false }
+        _errorUiState.update { null }
         result.let { list ->
             _state.update { discoverTeamCountryUIState ->
                 discoverTeamCountryUIState.copy(
                     data = list.map { it.toUIModel { ::onClick.invoke(it.name, it.flag) } },
-                    isLoading = false,
                     isNoResult = false
                 )
             }
@@ -58,17 +61,13 @@ class DiscoverViewModel @Inject constructor(
     }
 
     private fun onSearchSuccess(flow: Flow<List<Country>>) {
+        _isLoading.update { false }
+        _errorUiState.update { null }
         collectFlow(flow) { list ->
             copy(
                 data = list.map { it.toUIModel { ::onClick.invoke(it.name, it.flag) } },
-                isLoading = false, isNoResult = list.isEmpty()
+                isNoResult = list.isEmpty()
             )
-        }
-    }
-
-    private fun onError(e: Throwable) {
-        _state.update {
-            it.copy(isError = e.message.toString())
         }
     }
 }
